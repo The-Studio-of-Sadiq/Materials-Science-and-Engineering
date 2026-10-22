@@ -1,450 +1,817 @@
-# Chapter 44 — In-Situ, Operando and Correlative Methods
+# Chapter 44 — Degradation and Failure Analysis
 
-*Part X · Characterization, Computation and Design*
+*Part IX · Corrosion, Degradation and Surfaces*
 
-An electric-vehicle battery pack is returned after 1,200 fast-charge cycles with 22 % of its capacity gone. The cells are opened in a glovebox and the cathode is sectioned. The scanning electron microscope shows what everyone expected: the polycrystalline nickel-rich oxide particles are full of intergranular cracks, and electrolyte has crept into them. But the micrograph cannot say *when* the particles cracked. They could have cracked in the first formation cycle and done little harm afterwards; they could have cracked gradually, each crack exposing fresh surface that consumed lithium; or they could have cracked only during the drying and sectioning that prepared the sample for the microscope. Those three histories call for three different remedies — a new particle morphology, a surface coating, or a different sample-preparation protocol — and a post-mortem image cannot distinguish them. The same dilemma appears wherever materials change under load: a nickel superalloy whose dislocation structure at 900 °C relaxes on cooling, a catalyst that is metallic under reaction gas and oxidized by the time it reaches the microscope, a cement paste whose hydrates dehydrate in vacuum.
+On 3 June 1998 a high-speed train passing Eschede in northern Germany at about 200 km/h derailed and struck a road bridge; 101 people died. The cause was a steel wheel tyre, part of a rubber-sprung wheel design adopted to reduce vibration. Each revolution flexed the tyre; over years of service a fatigue crack grew from its inner surface, helped by the tyre's wear to a thinner section that raised the cyclic stress. The crack grew silently until the remaining ligament broke. No single property of the steel was inadequate on the day the wheel entered service. What failed was the link between a degradation mechanism (fatigue crack growth), its rate under real service loads, and the inspection that should have caught it. This chapter is about that link: how materials of every class lose their properties in service, how the rate of loss is modelled and extrapolated, how failures are statistically distributed, and how an engineer reconstructs a failure from the broken parts to a root cause that can be corrected.
 
-This chapter is about the methods that watch materials *while* they change, and about the methods that see what diffraction and imaging cannot: open volume, valence and local coordination. It ends with the problem these methods create — data volumes so large that analysis, not acquisition, becomes the bottleneck.
-
-> **How can a material be observed while it is heated, strained, biased or reacting, without the observation itself changing the result?**
-> **Which techniques detect vacancies, oxidation states and local atomic environments that conventional microscopy misses, and how are several techniques combined on the same region of the same sample?**
+> **By what mechanisms do metals, ceramics, polymers, composites and concrete degrade in service, and what do those mechanisms have in common?**
+> **Why do life laws (Paris, Coffin–Manson, Larson–Miller, Arrhenius, square-root ingress) take the forms they do, and how far can they be extrapolated?**
+> **How are failures statistically described, and how does an investigation get from fracture surfaces to a root cause?**
 
 | Concept | Engineering destination |
 |---|---|
-| In-situ TEM/SEM heating | Precipitation and grain growth in alloys, sintering of ceramics, recrystallization during annealing |
-| In-situ straining | Dislocation sources, crack-tip plasticity, twinning in Mg and Ti, fracture of thin films and coatings |
-| In-situ biasing | Electromigration in interconnects, resistive switching, ferroelectric domain motion |
-| Micropillar compression | Single-phase properties for crystal-plasticity models, irradiated-steel testing, coating and phase strength |
-| In-situ nanoindentation | Hardness and modulus of thin films, weld zones, individual grains and phases |
-| Operando battery studies | Phase transitions, particle cracking, lithium plating, solid-electrolyte interphase growth |
-| Operando catalysis | Active oxidation state of catalysts in reactors, fuel-cell and electrolyser electrodes |
-| Positron annihilation | Vacancies in quenched and irradiated metals, free volume in polymers, voids in semiconductors |
-| Mössbauer spectroscopy | Retained austenite in steel, iron corrosion products, Fe valence in cathodes and catalysts |
-| Solid-state NMR | Silicate connectivity in cement and glass, Al sites in zeolites, Li environments in electrolytes |
-| Correlative workflows | Linking crack initiation to microstructure, composition to structure in the same feature |
-| Automated analysis | High-throughput EBSD, 4D-STEM, segmentation of tomograms, self-driving experiments |
+| Driving force, mechanism, rate, end-of-life criterion | A common template for any life prediction |
+| Carbonation and chloride ingress, Tuutti model | Concrete cover and durability design of bridges, tunnels, marine structures |
+| Slow crack growth, hydrothermal aging of zirconia | Glass panels, ceramic implants, ceramic turbine and armour components |
+| Moisture uptake, matrix cracking, delamination | Composite airframes, wind-turbine blades, pressure vessels |
+| Thermo-oxidation, photo-oxidation, hydrolysis, stabilizers | Outdoor plastics, pipes, cable insulation, medical polymers |
+| Arrhenius extrapolation of oven aging | Thermal ratings and service lives of polymers and adhesives |
+| Paris law, Miner's rule, Larson–Miller | Inspection intervals in aircraft, rail, bridges; creep life of boilers and turbines |
+| Weibull distribution, bathtub curve, B10 life | Maintenance intervals, warranty, spare-part planning, ceramic design |
+| Fractography: dimples, cleavage, striations, beach marks, mirror–mist–hackle | Identifying the failure mechanism from broken parts |
+| 5-why, fishbone, fault tree, 8D, FMEA | Turning a failure into a design, material or process change |
 
-**Roadmap.** Why observing during change matters and what the observer does to the sample (44.1) → in-situ heating, straining and biasing in electron microscopes (44.2) → small-scale mechanical testing: micropillars and in-situ nanoindentation (44.3) → operando studies of batteries and catalysts (44.4) → positron annihilation for open-volume defects (44.5) → Mössbauer and solid-state NMR for local environment and valence (44.6) → correlating techniques on the same volume (44.7) → big data and automated analysis (44.8).
+**Roadmap.** A common framework (44.1) → degradation in each material class, with concrete as a worked case (44.2) → polymer aging and weathering, with Arrhenius extrapolation (44.3) → wear-out laws and life prediction (44.4) → reliability statistics: Weibull and the bathtub curve (44.5) → failure-analysis methodology, fractography and root cause (44.6) → case studies across industries (44.7).
 
 ---
 
-## 44.1 From post-mortem to operando
+## 44.1 A common framework for degradation
 
-### Three words, three levels of ambition
+Every degradation process, whatever the material, can be described by the same four questions:
 
-Conventional characterization (Chapters 42 and 43) is mostly **ex situ**: a sample is prepared, transferred to the instrument and examined in a state that has been frozen, cooled, dried or unloaded. Three more ambitious modes are distinguished:
+1. **Driving force.** What free energy or mechanical energy is being released? Chemical potential differences drive corrosion and oxidation (Chapter 42); stored elastic energy drives crack growth (Chapter 14); interfacial and grain-boundary energy drive coarsening (Chapter 9); photon energy drives photo-oxidation.
+2. **Mechanism and rate-controlling step.** Diffusion, an interfacial reaction, dislocation motion, bond rupture at a crack tip. The slowest step sets the rate, and its dependence on temperature, stress and environment sets the form of the life law.
+3. **Damage variable.** What accumulates: crack length, pit depth, carbonation depth, wall loss, oxidized fraction, molecular weight, inelastic strain.
+4. **End-of-life criterion.** The damage at which the component no longer performs: crack length at which $K=K_{\rm Ic}$, depth at which rebar depassivates, elongation at break falling to 50 % of its initial value, wall thickness at the pressure-design minimum.
 
-- **In situ** ("in place"): the stimulus — temperature, stress, electric field, gas, liquid — is applied inside the instrument, and the material is observed while it acts. A TEM specimen heated on a chip in the microscope is in situ.
-- **Operando** ("working"): the material is observed inside a functioning device under realistic operating conditions, *and* the device's performance is measured at the same time. A battery cycled in a synchrotron beam while its voltage and capacity are logged is operando; a catalyst bed whose product stream is analysed by mass spectrometry while X-ray absorption is measured is operando.
-- **Correlative**: two or more techniques are applied to the *same* region of the *same* specimen, so that, for example, a crystal orientation from one method, a composition from another and a defect density from a third refer to the same grain.
+Most life laws then take one of a few mathematical forms:
 
-The distinction between in situ and operando matters because many experiments that call themselves operando are not. A thin electrode in a specially built cell with a beryllium window, cycled at a slow rate, may not behave like the same electrode in a commercial pouch cell; the experiment is honest only if the electrochemical response of the special cell matches that of the real one.
-
-### Time and length resolution
-
-Every in-situ experiment is a trade between spatial resolution, time resolution and field of view. Table 44.1 sets out representative numbers.
-
-| Method | Typical spatial resolution | Typical time resolution | Typical field of view |
-|---|---|---|---|
-| In-situ TEM imaging (direct electron camera) | 0.1–1 nm | 0.1–10 ms per frame | 0.01–5 μm |
-| In-situ SEM imaging and EBSD | 2–50 nm (imaging), 20–100 nm (EBSD) | 0.1–60 s per frame or map | 1 μm – 1 mm |
-| Synchrotron powder diffraction | averages over beam (μm–mm) | 0.01–10 s per pattern | 0.01–1 mm³ |
-| Synchrotron X-ray tomography | 0.3–5 μm voxels | 0.1 s – 10 min per volume | 0.5–5 mm |
-| Neutron diffraction (operando cell) | averages over cm³ | 1–30 min per pattern | whole cell |
-| Positron lifetime (²²Na source) | averages over ~0.1 mm depth | hours per spectrum | mm² |
-| Mössbauer spectroscopy | bulk average | hours to days per spectrum | cm² absorber |
-
-The table shows why no single method wins: the techniques that resolve individual dislocations see a few micrometres for a few seconds; the techniques that see a whole battery cell need minutes per measurement and average over billions of particles.
-
-### The observer effect
-
-The probe is never neutral. Three effects recur.
-
-**Beam damage.** A 200–300 keV electron can transfer enough energy to a nucleus to displace it (knock-on damage) when the maximum transferred energy exceeds the displacement threshold of 15–40 eV; for carbon in graphene this happens above roughly 80 keV, for aluminium above about 170 keV, for copper above about 400 keV. Electrons also ionize and break bonds (radiolysis), which is why polymers, hydrates, zeolites and organic electrolytes degrade within seconds under a focused beam, and why water in a liquid cell decomposes into hydrogen, hydroxyl radicals and hydrated electrons that change pH and can deposit or etch metal. Synchrotron X-rays, more gently, heat and can reduce transition-metal ions in battery electrodes over tens of minutes of exposure.
-
-**Geometry.** A TEM foil 50–200 nm thick has two free surfaces within a few hundred atomic spacings of every point. Dislocations feel image forces that pull them out of the foil, vacancies escape to the surfaces, and the stress state in a thin foil under tension is nearly plane stress. A process observed in a foil is therefore a valid analogue of the bulk only when its characteristic length — a dislocation-source size, a diffusion distance, a precipitate spacing — is much smaller than the foil thickness.
-
-**Environment.** Most electron microscopes operate at $10^{-5}$ Pa or better. Hydrates lose water, catalysts reduce, lithium reacts with residual gas. Environmental TEM (differentially pumped, up to about 20 mbar of gas at the sample) and windowed gas and liquid cells (up to about 1 bar with silicon-nitride membranes 20–50 nm thick) push this limit, at the cost of resolution lost to scattering in the gas, the liquid and the windows.
-
-> **Status of the principle: Representativeness of in-situ experiments**
-> *Approximate.* An in-situ observation predicts bulk or device behaviour only when the dose, geometry and environment perturb the process less than the stimulus being studied; this must be checked by dose series, thickness series and comparison with ex-situ or bulk measurements, not assumed.
-
----
-
-## 44.2 In-situ heating, straining and biasing in TEM and SEM
-
-### Specimen holders and MEMS chips
-
-The enabling technology of modern in-situ electron microscopy is the **MEMS chip**: a silicon die a few millimetres across carrying a suspended silicon-nitride membrane with a patterned metal or ceramic heater, electrodes, or a mechanical actuator. Because the heated volume is tiny (a membrane of a few hundred micrometres), a chip can reach 1,000–1,300 °C in milliseconds, cool equally fast, and drift by less than a nanometre per minute — a furnace-type holder that heats the whole specimen cup takes minutes to stabilize and drifts by tens of nanometres. Figure 44.1 shows the main holder types.
-
-<!-- FIGURE 44.1 | figures/ch44/fig-44-1-insitu-holder-types.png | schematic | Four families of in-situ TEM specimen holders and the stimulus each applies. | Content: four panels in a row, each showing the holder tip in side view with the electron beam as a vertical arrow. (a) MEMS heating chip: Si frame, SiN membrane with spiral heater, specimen on electron-transparent windows, label "up to ~1,300 °C, ~10^6 °C/s". (b) Straining holder: push-to-pull MEMS device with a dog-bone specimen bridging a gap, actuator arrow, label "tension, ~nm displacement control". (c) Biasing chip: two electrodes contacting a lamella, voltage source symbol, label "field, current, electromigration". (d) Closed gas/liquid cell: two SiN windows (20–50 nm) enclosing fluid layer, inlet and outlet tubes, label "≤1 bar gas or liquid flow". Common style, grey silicon, orange heaters, blue fluid. -->
-
-### Heating experiments
-
-Heating in the microscope addresses three classes of question.
-
-**Phase transformations and precipitation.** Ageing of an Al–Cu–Mg or Al–Zn–Mg alloy can be followed from Guinier–Preston zones to semi-coherent precipitates; the dissolution of carbides in a tool steel and the reversion of martensite to austenite in a maraging steel can be watched at the scale of individual laths. The kinetics measured in a foil are faster than in bulk when surfaces act as vacancy sinks or as nucleation sites, so quantitative rates are normally checked against differential scanning calorimetry (Chapter 42) on bulk samples.
-
-**Grain growth, recrystallization and sintering.** The migration of individual grain boundaries in nanocrystalline metals, the necking between ceramic powder particles during sintering (Chapter 38), and the coarsening of supported catalyst nanoparticles can all be imaged directly. In-situ observation of sintering of zirconia and alumina nanopowders has shown, for example, that particle rotation and coalescence contribute to early-stage densification, a mechanism invisible to dilatometry.
-
-**Thermal stability of devices and coatings.** Interdiffusion at metal–silicide contacts, crystallization of amorphous phase-change films, and the oxidation of thermal-barrier bond coats can be followed on cross-sectional lamellae.
-
-The biggest practical uncertainty in heating experiments is the specimen temperature. The chip calibrates the heater, not the specimen; a lamella that is poorly attached, or a gas environment that cools the membrane, can sit tens of degrees below the nominal value. Good practice uses an internal standard — the melting of a small tin or aluminium particle, a known phase transition, or the thermal expansion of a reference lattice measured by electron diffraction.
-
-### Straining experiments
-
-Straining holders apply tension, compression or bending to a thin specimen while it is imaged. Early holders pulled a 3 mm disc mechanically; modern push-to-pull MEMS devices convert the compression of an indenter tip into tension of a small dog-bone specimen and measure both force and displacement, giving a stress–strain curve synchronized with the video.
-
-Such experiments delivered much of the direct evidence behind the dislocation theory of Chapters 12 and 13:
-
-- the operation of Frank–Read and single-arm (spiral) sources, and the pile-up of dislocations at grain boundaries;
-- the transmission, absorption or reflection of dislocations at grain and twin boundaries, which underlies the Hall–Petch effect and the high strength of nanotwinned copper;
-- the screw-dislocation motion by kink-pair nucleation that makes body-centred cubic metals strongly temperature-sensitive;
-- the nucleation and growth of deformation twins in magnesium and titanium alloys, important for the formability of lightweight automotive sheet and aerospace forgings;
-- the crack-tip plasticity and the formation of dislocation-free zones ahead of cracks.
-
-In-situ straining in the **SEM** works at a coarser scale with much larger specimens. Tensile stages carrying millimetre-scale specimens with loads up to a few kilonewtons can be combined with electron backscatter diffraction (EBSD), which maps lattice rotation, and with digital image correlation (DIC) of a fine surface speckle pattern, which maps strain at the micrometre scale. The combination identifies which grain orientations and which grain-boundary types concentrate strain first — the starting point for fatigue-crack initiation in titanium aerospace alloys, nickel superalloys and dual-phase automotive steels. Heated SEM stages extend this to creep and to the high-temperature deformation of superalloys.
-
-### Biasing experiments
-
-Biasing chips carry electrodes that apply voltage and measure current while the specimen is imaged. Representative studies:
-
-- **Electromigration** in copper and aluminium interconnects: void nucleation at the cathode end and hillock growth at the anode under current densities of order $10^{10}$–$10^{11}\ \mathrm{A\,m^{-2}}$, with void motion along grain boundaries and interfaces directly observed (Chapter 41).
-- **Resistive switching** in oxide memory cells (HfO₂, TaOₓ): formation and rupture of conducting filaments of oxygen-deficient oxide or metal.
-- **Ferroelectric and ferroelastic domain switching** in thin-film PbTiO₃ and BiFeO₃, with domain walls pinned and released by defects.
-- **Solid-state batteries** in miniature: lithium plating at a solid electrolyte interface imaged in a lamella cut from a full cell.
-
-A recurring caution: a lamella carries current through a cross-section of perhaps $5\ \mu\mathrm{m}\times100\ \mathrm{nm}$, and Joule heating in so small a conductor is removed efficiently, so electrothermal coupling can be weaker than in the real device.
-
-> **Boundary.** The physics of electromigration, ferroelectric switching and resistive memory is treated at device depth in the *Materials Core (EEE)* book; here these are examples of what in-situ biasing can observe.
-
-### The liquid cell
-
-Liquid-cell TEM encloses a liquid layer, typically 50 nm – 1 μm thick, between two silicon-nitride windows. It has imaged nanoparticle nucleation and growth from solution, electrochemical deposition and dissolution of lithium and zinc, corrosion pit initiation at inclusions in stainless steel (Chapter 35) and the biomineralization of calcium phosphates relevant to bone and dental implants (Chapter 31). Resolution degrades with liquid thickness (from a few angstroms in very thin layers to a few nanometres in micrometre layers), and radiolysis must be controlled by keeping the dose rate low and, where possible, quantifying its chemistry.
-
----
-
-## 44.3 Micropillar compression and in-situ nanoindentation
-
-### Why test small volumes
-
-Many engineering questions are about properties that cannot be measured on a conventional test bar because the material exists only in a small volume: a single grain of a coarse-grained casting, one phase of a two-phase titanium alloy, a 5 μm thermal-barrier coating, the heat-affected zone of a spot weld, the 100 μm surface layer of a reactor component damaged by ion irradiation. Small-scale mechanical testing measures those properties directly, and when performed inside an SEM or TEM it shows what the material does at the same time.
-
-### Nanoindentation and the Oliver–Pharr method
-
-Instrumented indentation pushes a sharp diamond tip into a surface while recording load $P$ and displacement $h$. The standard three-sided **Berkovich** pyramid has a projected contact area related to the contact depth $h_c$ by
-
-$$
-A = 24.5\,h_c^{2}
-$$
-
-for an ideal tip; real tips are blunted and calibrated on fused silica with an area function. The **Oliver–Pharr method** treats the initial unloading as elastic. Its slope, the contact stiffness $S=dP/dh$, gives the reduced modulus
-
-$$
-E_r=\frac{\sqrt{\pi}}{2\beta}\,\frac{S}{\sqrt{A}},\qquad \frac{1}{E_r}=\frac{1-\nu^{2}}{E}+\frac{1-\nu_i^{2}}{E_i}
-$$
-
-with $\beta\approx1.034$ for a Berkovich tip and $E_i=1141$ GPa, $\nu_i=0.07$ for diamond. The contact depth comes from the maximum depth corrected for elastic sink-in, $h_c=h_{max}-\epsilon P_{max}/S$ with $\epsilon=0.75$, and the hardness is
-
-$$
-H=\frac{P_{max}}{A}
-$$
-
-> **Status of the principle: Oliver–Pharr analysis**
-> *Approximate.* Derived from elastic contact of a rigid axisymmetric punch on a half-space; accurate to a few percent for materials that sink in, but overestimates area-corrected hardness and modulus by up to 20–30 % in work-hardened metals that pile up around the indenter, and fails when the indent is deeper than about 10 % of a film's thickness so that the substrate contributes.
-
-**Worked example — nanoindentation of cold-worked copper.** A Berkovich indentation into a cold-rolled copper busbar (illustrative values, typical of published measurements) reaches $P_{max}=10.0$ mN at $h_{max}=543$ nm. The unloading stiffness is $S=0.360\ \mathrm{mN\,nm^{-1}}=3.60\times10^{5}\ \mathrm{N\,m^{-1}}$. The contact depth is
-
-$$
-h_c=543-0.75\times\frac{10.0}{0.360}=543-20.8=522\ \mathrm{nm}
-$$
-
-The projected area is $A=24.5\times(522\times10^{-9})^2=6.68\times10^{-12}\ \mathrm{m^2}=6.68\ \mu\mathrm{m^2}$, and the hardness
-
-$$
-H=\frac{10.0\times10^{-3}}{6.68\times10^{-12}}=1.50\times10^{9}\ \mathrm{Pa}=1.50\ \mathrm{GPa}
-$$
-
-The reduced modulus is
-
-$$
-E_r=\frac{\sqrt{\pi}}{2\times1.034}\times\frac{3.60\times10^{5}}{\sqrt{6.68\times10^{-12}}}=0.857\times1.393\times10^{11}=1.19\times10^{11}\ \mathrm{Pa}
-$$
-
-Removing the diamond compliance, $(1-0.07^2)/1141=8.72\times10^{-4}\ \mathrm{GPa^{-1}}$ from $1/E_r=8.37\times10^{-3}\ \mathrm{GPa^{-1}}$ leaves $7.50\times10^{-3}\ \mathrm{GPa^{-1}}$, so $E=(1-0.34^2)/7.50\times10^{-3}=118$ GPa — close to the 110–130 GPa expected for polycrystalline copper. The hardness of 1.5 GPa corresponds, by the rule of thumb $H\approx3\sigma_y$ (Chapter 11), to a flow stress near 500 MPa, typical of heavily cold-worked copper. If the indent showed significant pile-up in the SEM, both numbers would be revised downward.
-
-### In-situ indentation
-
-Inside an SEM, the indenter can be positioned on a chosen grain or phase identified by EBSD, and the formation of slip traces, pile-up, cracks or delamination watched as the load rises. Inside a TEM, a nanoindenter pressed into the edge of a wedge-shaped specimen reveals the first dislocation nucleation event — the **pop-in** seen as a sudden displacement burst on the load–displacement curve — and the formation of cracks in hard coatings such as TiN, CrN and diamond-like carbon. The maximum shear stress beneath the tip at pop-in in a defect-free volume approaches $G/10$ to $G/20$, close to the theoretical shear strength, confirming that small enough volumes are strong because they contain no dislocation sources (Chapter 12).
-
-### Micropillar compression
-
-A **micropillar** is a cylinder milled by a focused ion beam (FIB) from the surface of a bulk sample or from a single grain, typically 0.2–10 μm in diameter with a height-to-diameter ratio of 2–3. A flat-ended diamond punch compresses it inside a nanoindenter or an SEM. The engineering stress is load over top cross-sectional area, and the stress–strain curve can be recorded while slip steps form on the pillar surface (Figure 44.2a).
-
-The first such experiments, on nickel and gold single crystals around 2004–2005, revealed a striking **size effect**: pillars of identical crystals and orientations grew stronger as they got smaller, and their stress–strain curves became staircases of discrete strain bursts rather than smooth curves. Across face-centred cubic metals the flow stress follows approximately
-
-$$
-\sigma = A\,D^{-n}
-$$
-
-with $n$ typically 0.5–0.8 for FCC metals and smaller (0.2–0.5) for BCC metals at room temperature, where the intrinsic lattice friction of screw dislocations is already high. Two mechanisms explain it: **source truncation**, where Frank–Read sources in a small pillar are shorter (the pillar diameter limits their length, and the source-operation stress scales as $\mu b/L$), and **dislocation starvation**, where mobile dislocations leave through the free surface faster than they multiply.
-
-> **Status of the principle: Power-law size effect in micropillars**
-> *Empirical.* The exponent is fitted to data for each material; it applies to initially dislocated single crystals between roughly 0.1 and 20 μm, saturates towards bulk behaviour at large diameters, and depends on the initial dislocation density and on FIB damage.
-
-<!-- FIGURE 44.2 | figures/ch44/fig-44-2-micropillar-size-effect.png | plot | Micropillar compression of single-crystal nickel: staircase stress–strain curves and the power-law size effect. | Content: (a) engineering stress (0–700 MPa) vs engineering strain (0–0.10) for pillar diameters 5, 2, 1 and 0.5 μm; the 5 μm curve smooth, flowing near 150 MPa; smaller pillars with flat strain bursts and flow stresses near 260, 390 and 600 MPa. Inset sketch of a tapered pillar with slip steps. (b) log–log plot of flow stress at 5 % strain (100–1,000 MPa) vs diameter (0.1–10 μm), points at 5, 2, 1, 0.5, 0.2 μm on a line of slope −0.6 (150 MPa at 5 μm to ~1,030 MPa at 0.2 μm); bulk single-crystal level as horizontal dashed line labelled "bulk". -->
-
-**Worked example — designing a micropillar test.** A 5 μm nickel pillar flows at 150 MPa at 5 % strain (an illustrative value, typical of published tests). Assume $n=0.6$. The flow stress expected at other diameters is $\sigma(D)=150\,(D/5\ \mu\mathrm{m})^{-0.6}$:
-
-| Diameter (μm) | 5 | 2 | 1 | 0.5 | 0.2 |
-|---|---|---|---|---|---|
-| Predicted flow stress (MPa) | 150 | 260 | 394 | 597 | 1035 |
-
-A 0.5 μm pillar at 597 MPa carries a load $F=\sigma\pi D^2/4=597\times10^{6}\times\pi\times(0.5\times10^{-6})^2/4=1.17\times10^{-4}$ N $=117\ \mu$N, well within a nanoindenter's range (resolution near 0.1 μN) but small enough that a 1 μN offset in the zero-load reference would change the stress by about 1 %. The experimental design consequences follow from the numbers: (1) the punch must be flat and aligned to better than about 0.5° or the pillar bends; (2) the FIB-damaged surface layer, about 10–20 nm deep for 30 kV gallium ions, is 4–8 % of the radius of a 0.5 μm pillar and contributes measurably, so small pillars are finished at low ion energy or milled with a xenon plasma FIB; (3) a taper of 2–3° makes the top stress higher than the base stress by an amount comparable to the scatter. These are the reasons that small-scale strength data should always be quoted with diameter, taper and preparation route.
-
-### Engineering uses
-
-Micropillars and microcantilevers have become a production tool in three areas. **Nuclear materials:** ion irradiation damages only the top 1–5 μm of a steel or tungsten sample, so the change of strength with dose can be measured only by small-scale tests, avoiding months of reactor exposure and the handling of activated specimens (Chapter 33). **Microstructure-informed modelling:** the critical resolved shear stresses of individual slip systems in α and β titanium, or of the γ and γ′ phases of a superalloy, are input parameters for the crystal-plasticity simulations of Chapter 46. **Coatings and interfaces:** notched microcantilevers milled across a coating–substrate interface give the fracture toughness of the interface, and micropillars with an inclined interface give its shear strength — the quantities that decide whether a thermal-barrier coating spalls or a hard coating on a cutting tool chips.
-
----
-
-## 44.4 Operando battery and catalyst studies
-
-### Why batteries need operando methods
-
-A lithium-ion cell is a closed, reactive system. Its active materials change phase with every cycle; its graphite anode can plate lithium metal at high charge rates and low temperatures; its electrolyte decomposes into a solid-electrolyte interphase (SEI) a few tens of nanometres thick; and nearly all of these states are metastable. Opening the cell relaxes concentration gradients, lets lithiated graphite react with air, and dissolves part of the SEI in washing solvent. Operando methods avoid this, and they deliver information that ex-situ work cannot: which phase is present at *which* state of charge, and how inhomogeneous the electrode is during fast charge (Chapter 32).
-
-### The toolkit
-
-**Operando X-ray diffraction** in coin or pouch cells with X-ray-transparent windows (beryllium, Kapton, or simply the thin aluminium pouch at high synchrotron energies) records the evolution of phases and lattice parameters. With a laboratory diffractometer a pattern takes minutes; at a synchrotron, seconds or less. Typical observables:
-
-- Graphite stages: lithium intercalates first into dilute stages, then forms LiC₁₂ and finally LiC₆, the (002) interlayer spacing expanding from 3.35 Å to about 3.70 Å (Figure 44.3).
-- Two-phase reactions such as LiFePO₄ ↔ FePO₄ (6.5 % volume change), where the phase fractions vary linearly with charge passed.
-- Solid-solution reactions in layered oxides (LiNiₓMnᵧCo_zO₂, "NMC"), where lattice parameters vary continuously. In nickel-rich NMC the $c$ parameter expands and then collapses abruptly above about 4.1 V vs Li/Li⁺, an anisotropic contraction of several percent in unit-cell volume that drives the intergranular cracking described in the opening of this chapter.
-
-**Operando X-ray absorption spectroscopy** (XANES and EXAFS, Chapter 43) tracks the oxidation state of each transition metal separately — whether nickel, cobalt or manganese, or the oxygen sublattice, provides the charge compensation.
-
-**Operando tomography** at micrometre resolution follows particle cracking, gas evolution, electrode swelling and lithium dendrite growth in three dimensions; in silicon anodes, which expand by about 280 % to Li₁₅Si₄, it shows how particles detach from the conductive network.
-
-**Operando neutron diffraction** sees lithium (which scatters X-rays weakly) and probes whole commercial cells, because neutrons penetrate steel cans. **Operando ⁷Li NMR** (Section 44.6) distinguishes lithium in the electrolyte, in intercalated graphite and in metallic deposits by their chemical or Knight shifts, so it quantifies lithium plating directly.
-
-<!-- FIGURE 44.3 | figures/ch44/fig-44-3-operando-xrd-graphite.png | plot | Operando X-ray diffraction of a graphite anode during the first lithiation, showing staging transitions alongside the voltage profile. | Content: left panel: colour contour map, x-axis 2θ-equivalent interlayer spacing d(00l) from 3.30 to 3.75 Å, y-axis time 0–5 h (C/5 lithiation); intensity bands shifting from 3.35 Å (graphite) through ~3.47–3.52 Å (dilute stages) to 3.53 Å (LiC12, stage 2) and abrupt jump to 3.70 Å (LiC6, stage 1) in the last ~45 % of capacity. Right panel sharing y-axis: cell voltage vs Li/Li+ 0.0–0.3 V with plateaus at ~0.21, ~0.12 and ~0.085 V labelled. Annotation: "one pattern every 5 min = 1.7 % state of charge". -->
-
-**Worked example — time resolution of an operando experiment.** A pouch cell of 3.0 mAh capacity with a graphite anode is charged at C/5, so the current is $3.0/5=0.60$ mA and a full lithiation takes 5 h. A laboratory diffractometer needs 5 min per pattern. Each pattern therefore averages over a change of state of charge of
-
-$$
-\frac{5\ \mathrm{min}}{5\times60\ \mathrm{min}}=0.0167=1.7\ \%
-$$
-
-and a full lithiation yields 60 patterns — enough to resolve the main staging transitions. Fast charging at 3C changes the picture: the full lithiation takes 20 min, so the same 5 min pattern would average over 25 % of the charge and blur the LiC₁₂ → LiC₆ transition entirely. To keep 1.7 % per pattern the acquisition must fall to 20 s, which demands a synchrotron. As a check on the capacity: the theoretical capacity of graphite, one lithium per six carbons, is
-
-$$
-\frac{F}{3.6\,M_{\mathrm{C_6}}}=\frac{96485}{3.6\times72.07}=372\ \mathrm{mAh\,g^{-1}}
-$$
-
-so a 3.0 mAh anode needs only about 8 mg of graphite when fully used — illustrating how little material an operando cell contains and how carefully it must be built to represent a commercial electrode.
-
-> **Status of the principle: Linear lattice-parameter–composition relations (Vegard's law) in operando analysis**
-> *Empirical.* Converting a measured lattice parameter to lithium content assumes a calibrated, approximately linear relation within a single-phase field; it fails across phase transitions, in strained or defective particles, and where several phases overlap, so it must be calibrated with ex-situ reference compositions.
-
-### Operando catalysis
-
-In heterogeneous catalysis the active state of a catalyst is often not the state that is loaded into the reactor. Copper–zinc oxide methanol-synthesis catalysts, platinum fuel-cell electrocatalysts and iridium oxide electrolyser anodes all reconstruct under reaction conditions, and their surfaces are covered by adsorbates that disappear on cooling. Operando catalysis studies therefore combine a structural or spectroscopic probe with simultaneous activity measurement — gas chromatography or mass spectrometry of the product stream, or the current of an electrochemical cell:
-
-| Probe | What it reveals | Typical conditions |
+| Rate-controlling physics | Typical life law | Examples |
 |---|---|---|
-| XAS (XANES, EXAFS) | Oxidation state and coordination of the metal under reaction | Fixed-bed capillary reactors, up to tens of bar and 500 °C |
-| Ambient-pressure XPS | Surface composition and oxidation states of the outer 1–3 nm | Up to about 20–100 mbar gas |
-| Infrared (DRIFTS, ATR) and Raman | Adsorbed intermediates, surface oxides, coke | Reactor cells at full pressure |
-| Environmental TEM | Particle shape, sintering, surface faceting | ≤ 20 mbar (ETEM) or ≤ 1 bar (closed cell) |
-| X-ray diffraction and PDF analysis | Bulk and nanoparticle phase, size | Capillary reactors |
+| Thermally activated reaction | $t\propto\exp(E_a/RT)$ | Polymer oxidation, intermetallic growth, Arrhenius aging |
+| Diffusion through a growing layer | $x\propto\sqrt{t}$ | Carbonation of concrete, parabolic oxidation, case depth |
+| Cyclic damage accumulation | $N\propto(\Delta\sigma)^{-m}$ or $(\Delta\varepsilon_p)^{-1/c}$ | Basquin, Coffin–Manson, Paris |
+| Stress-assisted activated flow | $\dot\varepsilon\propto\sigma^n\exp(-Q/RT)$ | Creep, stress relaxation |
+| Sliding contact | $V\propto Fs/H$ | Archard wear (Chapter 45) |
+| Weakest-link initiation | Weibull distribution of lives | Ceramic strength, dielectric breakdown, bearing fatigue |
 
-A recurring lesson is the **pressure gap**: surface-science studies at ultra-high vacuum often find surface states that are not present at industrial pressures, and the active phase identified under realistic conditions may be minority, transient or amorphous. Operando studies of platinum alloy cathode catalysts in fuel cells, for example, showed that the less noble metal leaches from the particle surface during potential cycling, leaving a platinum-rich shell whose strained lattice raises activity — and that the same leaching later drives particle coarsening and loss of surface area.
+The power of the framework is diagnostic as much as predictive. If accelerated tests at two temperatures fail by different mechanisms, no extrapolation from one to the other is valid. If a failure shows a mechanism the design never considered, the life model was never the problem; the list of mechanisms was.
 
 ---
 
-## 44.5 Positron annihilation spectroscopy
+## 44.2 Degradation across material classes
 
-### Positrons as defect probes
+### Metals
 
-Diffraction is blind to isolated vacancies at concentrations below about $10^{-3}$, and even atom-resolved microscopy sees them only in favourable cases. The **positron**, the antiparticle of the electron, is a uniquely sensitive vacancy detector. Positrons from a radioactive source (usually ²²Na) or a positron beam enter the sample, slow to thermal energies within a few picoseconds, diffuse about 100 nm, and annihilate with an electron, emitting two photons of 511 keV.
+Corrosion in all its forms (Chapters 42–43), fatigue, creep (Chapter 14) and wear (Chapter 45) are the dominant mechanisms. Less visible but equally important are **microstructural changes in service**, where the material slowly moves toward equilibrium at its operating temperature:
 
-A thermalized positron is repelled by the positive ion cores. In a perfect lattice it occupies the interstitial region; at a vacancy, a vacancy cluster, a dislocation core or a void, where an ion core is missing, it sees an attractive potential well of about 1 eV and becomes **trapped**. Because the electron density at the open-volume site is lower, the trapped positron lives longer before annihilating. Three measurable quantities follow:
+- **Coarsening of strengthening precipitates**: γ′ in nickel superalloy turbine blades coarsens and rafts under stress, lowering creep strength (Chapter 41); precipitation-hardened aluminium over-ages if run warm.
+- **Spheroidization and graphitization** of carbon steel boiler and refinery tubes held for decades near 450–550 °C: lamellar pearlite turns into spheroidal carbides or graphite nodules, lowering strength and creep resistance.
+- **Embrittling precipitation**: temper embrittlement of Cr–Mo steels (impurity segregation to grain boundaries around 350–575 °C); 475 °C embrittlement and sigma-phase formation in ferritic and duplex stainless steels; irradiation hardening and embrittlement of reactor-pressure-vessel steels (Chapter 41).
+- **Hydrogen and liquid-metal embrittlement** (Chapter 43), and strain aging that raises yield strength and lowers toughness after cold forming.
 
-- **Positron lifetime**. The ²²Na decay emits a 1.27 MeV gamma ray almost simultaneously with the positron, which serves as a start signal; the 511 keV annihilation photon is the stop signal. The lifetime spectrum is a sum of exponentials, one per positron state.
-- **Doppler broadening** of the 511 keV line, caused by the momentum of the annihilating electron. Annihilation with low-momentum valence electrons (typical of vacancies) gives a narrower line, measured by the shape parameter $S$; annihilation with high-momentum core electrons gives intensity in the wings, measured by $W$, which also carries a chemical fingerprint of the atoms surrounding the defect.
-- **Angular correlation** of the two photons, a more detailed momentum measurement.
+The common consequence of most embrittling processes is a rise in the ductile–brittle transition temperature (Chapter 14), monitored in nuclear plants by surveillance Charpy specimens irradiated alongside the vessel.
 
-Table 44.2 gives representative lifetimes.
+### Ceramics and glasses
 
-| Material | Bulk lifetime (ps) | Monovacancy lifetime (ps) | Notes |
+Ceramics do not creep or corrode much at ambient temperature, but they are brittle and therefore sensitive to anything that extends existing flaws.
+
+- **Slow crack growth (static fatigue).** Water molecules react with strained Si–O–Si bonds at a crack tip in silicate glass, breaking them at stresses below the fast-fracture value. Crack velocity follows an empirical power law, $v=v_0(K_{\rm I}/K_{\rm Ic})^{n}$, with $n$ about 15–20 for soda-lime glass in water and 30–60 for alumina and silicon nitride. A large $n$ means strength depends weakly on load duration; a small $n$ means a glass panel under permanent load (aquarium, glass floor, façade under snow) must be designed to a stress well below its short-term strength, typically a third to a half.
+- **Hydrothermal aging of zirconia.** Yttria-stabilized tetragonal zirconia (3Y-TZP) can transform spontaneously to monoclinic at body or room temperature in the presence of water, starting at the surface and spreading inward with a volume increase that roughens and microcracks it. In 2001 a batch of zirconia femoral heads for hip replacements failed in vivo after a change in the sintering process accelerated this aging; zirconia-toughened alumina composites largely replaced monolithic zirconia for that application.
+- **Thermal shock** (Chapter 24), **erosion** by particles, and **chemical attack** of refractories by slags and of glass by alkaline solutions.
+
+### Polymers
+
+Polymers degrade chemically (oxidation, hydrolysis, photolysis), physically (physical aging below $T_g$, plasticizer loss, swelling) and mechanically (creep, crazing, environmental stress cracking). Section 44.3 treats them in detail because their aging is the most strongly temperature- and environment-dependent of all classes.
+
+### Composites
+
+Fibre composites degrade at three length scales (Chapters 22–23):
+
+- **Matrix.** Epoxy matrices absorb 1–6 wt % water at saturation, which plasticizes them and lowers $T_g$, roughly 10–20 °C per percent of absorbed water. The design allowables of aircraft structures are therefore set at "hot/wet" conditions. Ultraviolet light degrades unprotected matrix surfaces, which is why composite surfaces are painted or gel-coated.
+- **Interface.** Water and cyclic loading weaken the fibre–matrix bond; glass fibres themselves suffer stress corrosion in water and acids (the reason for corrosion-resistant E-CR glass in chemical pipes).
+- **Laminate.** Under fatigue, damage progresses through transverse matrix cracking, then delamination between plies, then fibre breakage. Stiffness falls progressively (often by 10–20 % before final failure) rather than staying constant until a single crack runs, which makes stiffness monitoring useful. Low-velocity impact can create **barely visible impact damage** (BVID), internal delaminations that reduce compressive strength by up to half; design allowables assume such damage is present and undetected.
+
+Wind-turbine blades, where root and spar-cap laminates see about $10^8$–$10^9$ load cycles in a 20–25-year life, are the most demanding fatigue application of composites; leading-edge erosion by rain at tip speeds near 90 m/s is their main surface degradation.
+
+### Concrete
+
+Reinforced concrete degrades mainly through its steel. Concrete pore solution has a pH of about 12.5–13.5, which keeps the rebar passive (Chapter 42). Two processes destroy that passivity:
+
+- **Carbonation**: atmospheric CO$_2$ diffuses in and reacts with calcium hydroxide, lowering the pH to about 9. The carbonation front advances approximately as
+
+$$
+x=k\sqrt{t}
+$$
+
+because the rate is controlled by diffusion of CO$_2$ through the already carbonated layer. The coefficient $k$ is typically 2–6 mm/year$^{1/2}$ for structural concretes sheltered from rain, lower for dense, low water–cement-ratio concrete and in permanently wet conditions.
+- **Chloride ingress** from seawater or de-icing salt, described by Fick's second law with an apparent diffusion coefficient of order $10^{-12}$–$10^{-11}$ m$^2$/s. When the chloride content at the rebar exceeds a critical value, commonly taken as about 0.4 % by mass of cement, the passive film breaks down locally, giving pitting of the rebar.
+
+> **Status of the principle: Square-root-of-time carbonation law**
+> *Approximate.* Derived from diffusion through a carbonated layer with a sharp reaction front and constant boundary conditions; real coefficients are fitted to exposure data and vary with moisture, cement type and curing, and the law overestimates penetration where wetting and drying alternate.
+
+Tuutti's model divides the service life of a reinforced-concrete element into an **initiation period**, while the carbonation or chloride front travels through the cover, and a **propagation period**, while the rebar corrodes until cracking, spalling or loss of section reaches an unacceptable level (Figure 44.1). Rust occupies two to six times the volume of the steel it replaces, so only a few tens of micrometres of corrosion are needed to crack the cover.
+
+<!-- FIGURE 44.1 | figures/ch44/fig-44-1-tuutti-concrete-life.png | plot | Tuutti's two-stage service-life model for reinforced concrete, with square-root carbonation fronts for two concretes. | Content: left panel: x-axis time 0–100 years; y-axis carbonation depth 0–50 mm; curves x = k√t for k = 4 and k = 2 mm/yr^0.5; horizontal dashed lines at cover 20 mm and 30 mm; intersections marked at 25 y (k = 4, 20 mm), 56 y (k = 4, 30 mm), 225 y off-scale arrow (k = 2, 30 mm). Right panel: schematic damage (corrosion, cracking) versus time: flat 'initiation' segment until depassivation, then rising 'propagation' line with thresholds 'cracking', 'spalling', 'collapse risk'; CO2 and Cl⁻ labelled as initiation agents, O2 and H2O and temperature as propagation rate factors. -->
+
+![Figure 44.1 — Tuutti's two-stage service-life model for reinforced concrete, with square-root carbonation fronts for two concretes](../figures/ch44/fig-44-1-tuutti-concrete-life.png)
+
+*Figure 44.1 — Tuutti's two-stage service-life model for reinforced concrete, with square-root carbonation fronts for two concretes.*
+
+**Worked example — cover depth for carbonation.** A bridge pier in a sheltered urban location is made of concrete with a measured carbonation coefficient $k=4$ mm/year$^{1/2}$. How long before the carbonation front reaches the reinforcement for covers of 20 mm and 30 mm, and what does a denser concrete with $k=2$ mm/year$^{1/2}$ achieve?
+
+$$
+t=\left(\frac{c}{k}\right)^{2}:\qquad t_{20}=\left(\frac{20}{4}\right)^2=25\ \text{years},\qquad t_{30}=\left(\frac{30}{4}\right)^2=56\ \text{years}
+$$
+
+With $k=2$ mm/year$^{1/2}$ and 30 mm cover, $t=(30/2)^2=225$ years. Because time scales with the square of the cover and inversely with the square of $k$, a 50 % increase in cover more than doubles the initiation period, and halving $k$ quadruples it. This is why durability codes (EN 206 and EN 1992, ACI 318) specify both minimum cover and maximum water–cement ratio for each exposure class, and why construction tolerance on cover, often ±10 mm, is a durability parameter: a 30 mm nominal cover placed at 20 mm loses more than half its life.
+
+Other concrete degradation mechanisms are chemical attack of the paste: **sulfate attack** (expansive ettringite and gypsum, resisted by low-C$_3$A cements), **alkali–silica reaction** (reactive silica aggregate swelling as an alkali silicate gel, which has cracked dams and bridges worldwide), **freeze–thaw damage** of saturated paste (resisted by 4–7 % entrained air), and acid and seawater attack (Chapter 18).
+
+---
+
+## 44.3 Polymer aging and weathering
+
+### Thermo-oxidation
+
+Most polymers in service oxidize. The process is a free-radical chain reaction, **autoxidation**:
+
+- Initiation: heat, light, residual catalyst or mechanical stress generates a polymer radical, $\mathrm{RH\to R^{\bullet}}$.
+- Propagation: $\mathrm{R^{\bullet}+O_2\to ROO^{\bullet}}$, then $\mathrm{ROO^{\bullet}+RH\to ROOH+R^{\bullet}}$.
+- Branching: hydroperoxides decompose, $\mathrm{ROOH\to RO^{\bullet}+{}^{\bullet}OH}$, each producing two new radicals, so the reaction accelerates after an induction period.
+- Termination: radicals combine.
+
+The radicals cause **chain scission** (molecular weight falls, polymer becomes brittle: polypropylene, polyethylene) or **cross-linking** (polymer hardens and cracks: many rubbers), and they create carbonyl groups detectable by infrared spectroscopy (Chapter 52). Polypropylene, with a tertiary hydrogen on every repeat unit, oxidizes much faster than polyethylene and is useless outdoors or hot without stabilization.
+
+**Stabilizers** interrupt the cycle: primary antioxidants (hindered phenols, aromatic amines) donate hydrogen to peroxy radicals; secondary antioxidants (phosphites, thioesters) decompose hydroperoxides harmlessly. Their consumption defines an **induction period**, during which properties barely change, followed by rapid embrittlement once the stabilizer is depleted. The remaining stabilizer is measured by the **oxidation induction time** (OIT), the time to the onset of the oxidation exotherm in a DSC at, for example, 200 °C in oxygen, a routine test for polyethylene pipes and geomembranes.
+
+### Photo-oxidation and weathering
+
+Solar ultraviolet radiation between 290 and 400 nm carries 300–410 kJ/mol per photon, comparable to C–C and C–H bond energies. Chromophores (carbonyl groups, catalyst residues, aromatic rings) absorb it and initiate radicals, so photo-oxidation adds to thermo-oxidation at the surface. Outdoor plastics chalk, yellow, lose gloss and develop surface microcracks that act as notches; garden furniture and unprotected polypropylene ropes embrittle in a few summers. Weathering adds moisture, temperature cycling and pollutants.
+
+Protection comes from **UV absorbers** (benzotriazoles, benzophenones), **hindered-amine light stabilizers** (HALS), which scavenge radicals regeneratively and are the most effective for polyolefins, and **pigments**: 2–3 % of well-dispersed carbon black makes polyethylene pipe and cable jacket essentially UV-proof for decades. Accelerated weathering uses xenon-arc or fluorescent UV lamps with water spray (ISO 4892, ASTM G154/G155), but because the lamp spectrum, temperature and wetting differ from sunlight, results rank materials rather than predict outdoor life; reference outdoor sites in Florida (hot, humid) and Arizona (hot, high UV) remain the benchmarks.
+
+### Hydrolysis, environmental stress cracking and physical aging
+
+- **Hydrolysis** breaks ester, amide, carbonate and urethane linkages: PET and polycarbonate lose molecular weight in hot water or steam; polyester polyurethanes crumble in humid tropical climates; polyamides absorb water and some hydrolyse in hot glycol coolants. In biomedical PLA and PLGA, hydrolysis is the designed degradation route (Chapter 39).
+- **Environmental stress cracking (ESC)** is the polymer analogue of SCC: a liquid that does not dissolve the polymer (detergent on polyethylene, alcohols or oils on polycarbonate and ABS, cleaning agents on medical housings) plasticizes the craze fibrils at a stressed surface and allows cracks to grow at stresses far below those needed in air. It is the most common cause of plastic part failures in practice. Slow crack growth of polyethylene pipe under internal pressure is the related long-term mechanism, which is why modern PE100 and PE100-RC pipe resins are rated for resistance to it.
+- **Physical aging** of glassy polymers below $T_g$: the non-equilibrium glass slowly densifies (Chapter 20), raising modulus and yield stress and lowering toughness and creep rate, with no chemical change. It is reversible by heating above $T_g$.
+- **Loss of plasticizer** from flexible PVC (cables, hoses, medical tubing) by evaporation or migration into contacting materials leaves it stiff and cracked.
+
+### Arrhenius extrapolation
+
+Thermal life is estimated by aging specimens in ovens at several elevated temperatures until a property (commonly elongation at break) falls to an end-of-life value, often 50 % of its initial value. If one reaction controls the rate at all test temperatures, the life follows
+
+$$
+L(T)=L_0\exp\!\left(\frac{E_a}{RT}\right)
+$$
+
+and a plot of $\ln L$ against $1/T$ (Figure 44.2) is a straight line that can be extrapolated to the service temperature. Standards such as IEC 60216 and UL 746B use this procedure to define thermal indices: the temperature at which life reaches a reference value such as 20 000 h. A useful consequence is the rule that life roughly halves for every 10 °C rise near the test temperature; with $E_a=113$ kJ/mol it halves every 6.7 K near 90 °C.
+
+> **Status of the principle: Arrhenius aging extrapolation**
+> *Empirical.* Its form follows from thermally activated reaction kinetics, but applied to the property loss of a real material it is a fit valid only while one mechanism dominates. Extrapolation across a glass transition or melting range, across a change from stabilizer-controlled to oxidation-controlled behaviour, or from diffusion-limited oxidation in thick specimens at high temperature (where oxygen cannot reach the interior fast enough) to homogeneous oxidation at service temperature, is unsafe.
+
+<!-- FIGURE 44.2 | figures/ch44/fig-44-2-arrhenius-polymer-aging.png | plot | Arrhenius plot of oven-aging life of a polyolefin cable jacket with extrapolation to service temperatures, showing the sensitivity to activation energy. | Content: x-axis 1000/T in K⁻¹ from 2.3 to 3.0 with a secondary top axis in °C (160, 150, 135, 120, 100, 90, 70, 60); y-axis time to 50 % retained elongation in hours, log scale 1e2 to 1e7. Three data points: 150 °C 300 h, 135 °C 1000 h, 120 °C 3500 h. Solid fitted line Ea = 113 kJ/mol extrapolated (dashed) to 70 °C giving 5.4e5 h; second dashed line from the 150 °C point with Ea = 80 kJ/mol giving 6.0e4 h at 70 °C. Horizontal reference line at 20 000 h 'thermal index'. Shaded band beyond the data labelled 'extrapolation: mechanism must not change'. -->
+
+![Figure 44.2 — Arrhenius plot of oven-aging life of a polyolefin cable jacket with extrapolation to service temperatures, showing the sensitivity to activation energy](../figures/ch44/fig-44-2-arrhenius-polymer-aging.png)
+
+*Figure 44.2 — Arrhenius plot of oven-aging life of a polyolefin cable jacket with extrapolation to service temperatures, showing the sensitivity to activation energy.*
+
+**Worked example — service life of a cable jacket from oven aging.** A polyolefin cable jacket compound is aged at three temperatures, and the time for the elongation at break to fall to 50 % of its initial value is recorded:
+
+| Aging temperature | 150 °C (423.15 K) | 135 °C (408.15 K) | 120 °C (393.15 K) |
 |---|---|---|---|
-| Aluminium | 160–165 | 240–250 | quenched-in vacancies, Al alloy clustering |
-| Copper | 110–120 | 175–180 | |
-| α-iron | 105–110 | 170–175 | irradiation damage in reactor steels |
-| Nickel | 105–110 | 170–180 | |
-| Silicon | 218–222 | 250–270 (divacancy ~300) | implantation damage |
-| Large voids (> 1 nm) | — | 400–500 | vacancy clusters, swelling |
-| Polymers (ortho-positronium) | — | 1,000–4,000 | free volume holes 0.2–0.5 nm radius |
+| Time to end of life | 300 h | 1000 h | 3500 h |
 
-In polymers, porous silica and other insulators, the positron binds with an electron to form **positronium**. Its long-lived ortho state is localized in free-volume holes, and its lifetime is related to hole size by the Tao–Eldrup model; positron lifetime is a standard measurement of free volume across the glass transition of polymers (Chapter 20) and of pore sizes in low-dielectric-constant films and membranes.
-
-### The trapping model
-
-The simplest analysis treats one defect type with trapping rate $\kappa$, a bulk annihilation rate $\lambda_b=1/\tau_b$ and a defect annihilation rate $\lambda_v=1/\tau_v$. The rate equations predict a two-component spectrum with
+A least-squares fit of $\ln L$ against $1/T$ gives a slope $E_a/R=1.362\times10^4$ K, so $E_a=1.362\times10^4\times8.314=113$ kJ/mol (1.17 eV). The fitted line reproduces the data to within 2 % (302, 986 and 3523 h). Extrapolating from 150 °C:
 
 $$
-\tau_1=\frac{1}{\lambda_b+\kappa},\qquad \tau_2=\tau_v,\qquad \kappa=\frac{I_2}{I_1}\left(\lambda_b-\lambda_v\right)
+L(70\ ^\circ\mathrm C)=300\times\exp\!\left[1.362\times10^4\left(\frac{1}{343.15}-\frac{1}{423.15}\right)\right]=300\times\exp(7.50)\approx5.4\times10^{5}\ \mathrm h\approx62\ \text{years}
 $$
 
-and the trapping rate is proportional to defect concentration, $\kappa=\mu c_v$, with a specific trapping coefficient $\mu$ of order $10^{14}$–$10^{15}\ \mathrm{s^{-1}}$ for vacancies in metals. A consistency check is that the bulk lifetime recomputed from the components, $1/\tau_b=I_1/\tau_1+I_2/\tau_2$, matches the known defect-free value.
+At 90 °C the same calculation gives about $6.1\times10^4$ h, roughly 7 years: a 20 K rise in conductor temperature cuts the life ninefold.
 
-> **Status of the principle: Two-state positron trapping model**
-> *Approximate.* Derived from first-order rate equations assuming one defect type, no detrapping and spatially uniform defects; it holds for vacancies in metals at low temperature and moderate concentration, fails when several defect types or shallow traps (such as dislocations with thermal detrapping) are present, and saturates when nearly every positron is trapped (vacancy fractions above roughly $10^{-4}$).
-
-**Worked example — vacancies in an irradiated iron alloy.** A ferritic steel specimen irradiated with neutrons gives a positron lifetime spectrum (illustrative values, typical of published measurements) decomposed into $\tau_1=88$ ps with intensity $I_1=60\ \%$ and $\tau_2=175$ ps with $I_2=40\ \%$ (Figure 44.4). The second lifetime matches the iron monovacancy. Check consistency first: $1/\tau_b=0.60/88+0.40/175=6.82\times10^{-3}+2.29\times10^{-3}=9.10\times10^{-3}\ \mathrm{ps^{-1}}$, so $\tau_b=110$ ps, the value for defect-free iron — the one-defect model is consistent. The trapping rate is
-
-$$
-\kappa=\frac{0.40}{0.60}\left(\frac{1}{110\ \mathrm{ps}}-\frac{1}{175\ \mathrm{ps}}\right)=0.667\times(9.09-5.71)\times10^{9}\ \mathrm{s^{-1}}=2.25\times10^{9}\ \mathrm{s^{-1}}
-$$
-
-With $\mu\approx1.1\times10^{15}\ \mathrm{s^{-1}}$, the vacancy-type defect fraction is $c_v=2.25\times10^{9}/1.1\times10^{15}=2.0\times10^{-6}$, or two vacant sites per million — far below anything diffraction or electron microscopy could detect, yet enough to influence radiation-enhanced diffusion and embrittlement (Chapters 8 and 33). The fraction of positrons that annihilate in traps is $\kappa/(\lambda_b+\kappa)=2.25/(9.09+2.25)=0.20$, which shows the method is far from saturation; the mean lifetime $\bar\tau=I_1\tau_1+I_2\tau_2=123$ ps is the robust number to monitor during post-irradiation annealing.
-
-<!-- FIGURE 44.4 | figures/ch44/fig-44-4-positron-lifetime-spectrum.png | plot | Positron lifetime spectra of well-annealed and irradiated iron, with the two-component decomposition. | Content: semi-log plot, counts (10^0 to 10^6) vs time after start signal (0–2 ns). Annealed Fe: single exponential with τ = 110 ps after the instrument resolution peak (FWHM ~200 ps). Irradiated Fe: two components, τ1 = 88 ps (60 %) and τ2 = 175 ps (40 %), each drawn as a dashed line, sum as solid line; constant background ~10 counts. Inset: schematic of a positron (red) trapped at a vacancy in a square lattice, with potential-energy well sketch (~1 eV). -->
-
-### Variable-energy beams and uses
-
-A radioactive source gives positrons with a broad energy spectrum that penetrate about 0.1 mm into metals, so it measures bulk averages. **Slow positron beams**, moderated and re-accelerated to 0.1–30 keV, implant positrons at controlled depths from a few nanometres to a few micrometres; depth-profiled Doppler broadening reveals ion-implantation damage in silicon, porosity in low-$k$ dielectrics, and the defect layer beneath machined or shot-peened surfaces. Large-facility beams (reactor- or accelerator-based) give enough intensity for lifetime measurement with a beam.
-
-Engineering applications include:
-
-- tracking quenched-in vacancies and early solute clustering in age-hardening aluminium alloys, which controls natural ageing of automotive 6xxx sheet between stamping and paint bake;
-- following radiation damage and its recovery in reactor-pressure-vessel steels and fusion materials;
-- characterizing free volume, physical ageing and gas permeability in polymer membranes and packaging films;
-- detecting vacancy-type defects in compound semiconductors and oxides (Ga vacancies in GaN, Zn vacancies in ZnO), which act as compensating acceptors.
+The fragility of the extrapolation is the real lesson. Three points spanning 30 K are being projected 50 K beyond the data, across more than two decades of time. If the true activation energy at lower temperatures were 80 kJ/mol rather than 113 kJ/mol (a common situation when a different, lower-barrier process dominates at low temperature), the life at 70 °C would be about $6\times10^4$ h, about 7 years instead of 62. That is why long-life ratings require test temperatures as close to service as practical, at least four temperatures, a check for linearity, and confirmation by OIT or infrared spectroscopy that the same chemistry is occurring at each temperature.
 
 ---
 
-## 44.6 Mössbauer spectroscopy and solid-state NMR
+## 44.4 Wear-out mechanisms and life prediction
 
-Both techniques probe the nucleus as a sensor of its immediate electronic and magnetic environment. Neither needs long-range order, so they work equally well on crystals, glasses, nanoparticles, corrosion products and hydrated cements — materials that defeat diffraction.
+### The catalogue of life laws
 
-### Mössbauer spectroscopy
+Wear-out failures are those whose probability rises with age because damage accumulates. The laws that predict them have appeared in earlier chapters; collected here, they form the toolkit of life prediction:
 
-**Principle.** A ⁵⁷Co source decays to an excited ⁵⁷Fe nucleus that emits a 14.4 keV gamma ray. In a solid, a fraction of these emissions occur with no recoil energy lost to the lattice (the **recoil-free fraction**, the Mössbauer effect), so the gamma ray carries the full transition energy with an extremely narrow natural width. An absorber containing ⁵⁷Fe (natural abundance 2.1 %) absorbs it resonantly only if its nuclear levels match. They are scanned by moving the source at a few millimetres per second, Doppler-shifting the gamma energy by
+| Mechanism | Life law | Typical parameters | Status |
+|---|---|---|---|
+| High-cycle fatigue | Basquin: $\sigma_a=\sigma_f'(2N_f)^b$ | $b\approx-0.05$ to $-0.12$ | Empirical |
+| Low-cycle fatigue | Coffin–Manson: $\Delta\varepsilon_p/2=\varepsilon_f'(2N_f)^c$ | $c\approx-0.5$ to $-0.7$ | Empirical |
+| Fatigue crack growth | Paris: $da/dN=C(\Delta K)^m$ | $m\approx3$ (steels), 3–4 (Al alloys) | Empirical |
+| Variable-amplitude fatigue | Miner: $\sum n_i/N_i=1$ | failure at sum 0.3–3 in practice | Empirical |
+| Creep rupture | Larson–Miller: $P=T(C+\log_{10}t_r)$ | $C\approx20$ ($t_r$ in h, $T$ in K) | Empirical |
+| Thermally activated aging | Arrhenius: $L\propto\exp(E_a/RT)$ | $E_a$ 50–150 kJ/mol for polymers | Empirical |
+| Humidity-driven corrosion | Peck: $L\propto\mathrm{RH}^{-n}\exp(E_a/kT)$ | $n\approx2.7$, $E_a\approx0.8$ eV | Empirical |
+| Diffusion-controlled ingress | $x=k\sqrt t$ | carbonation $k$ 2–6 mm/year$^{1/2}$ | Approximate |
+| Sliding wear | Archard: $V=KFs/H$ | $K$ from $10^{-8}$ to $10^{-2}$ | Empirical |
+
+The electronic-specific laws (Black's equation for electromigration, TDDB models for dielectrics, Norris–Landzberg for solder joints) are applied to their mechanisms in Chapters 34, 50 and 51.
+
+Each law is used in the same way: measure its parameters under accelerated conditions, compute an **acceleration factor** between test and service, and convert test life to service life. Each carries the same caveat: the mechanism must be the same in test and service.
+
+### Damage-tolerant design with the Paris law
+
+For safety-critical structures that cannot be guaranteed crack-free (airframes, rail axles and wheels, pressure vessels, bridges), the design philosophy is **damage tolerance**: assume a crack of the largest size that inspection could miss, calculate how long it takes to grow to a critical size, and inspect at a fraction (typically half or a third) of that interval. With $\Delta K=Y\Delta\sigma\sqrt{\pi a}$ and constant $Y$, integrating the Paris law from initial size $a_0$ to critical size $a_c$ gives, for $m\neq2$,
 
 $$
-\Delta E=E_\gamma\frac{v}{c}
+N_f=\frac{2}{(m-2)\,C\,(Y\Delta\sigma\sqrt{\pi})^{m}}\left[a_0^{(2-m)/2}-a_c^{(2-m)/2}\right]
 $$
 
-> **Status of the principle: Doppler energy shift**
-> *Fundamental.* First-order Doppler shift of photon energy, exact to order $v/c$; at mm/s velocities the second-order term is negligible except as a small temperature-dependent shift.
+> **Status of the principle: Paris-law crack-growth integration**
+> *Empirical.* The Paris law is a fit to the intermediate (stage II) region of crack-growth data; it ignores the threshold below which cracks do not grow, the acceleration near $K_{\rm Ic}$, load-sequence effects (overload retardation) and short-crack behaviour, so lives computed from it are reliable only for long cracks under roughly constant-amplitude loading.
 
-For $E_\gamma=14.4$ keV and $v=1\ \mathrm{mm\,s^{-1}}$, $\Delta E=14.4\times10^{3}\times(10^{-3}/2.998\times10^{8})=4.80\times10^{-8}$ eV. The natural linewidth, set by the 141 ns mean lifetime of the excited state, is $\Gamma=\hbar/\tau=6.58\times10^{-16}/1.41\times10^{-7}=4.67\times10^{-9}$ eV, equivalent to 0.097 mm/s; the narrowest observable line (source plus absorber) is about 0.19 mm/s. An energy resolution of a few parts in $10^{13}$ is what lets the spectrometer read the tiny hyperfine interactions of the nucleus with its surroundings.
+**Worked example — inspection interval for a cracked steel plate.** A ferrite–pearlite steel plate in a crane girder carries a constant-amplitude stress range $\Delta\sigma=100$ MPa ($R=0$, so $\sigma_{\max}=100$ MPa). Ultrasonic inspection can reliably find edge cracks of 2 mm and larger. Paris constants are $C=6.9\times10^{-12}$ m/cycle and $m=3$ (with $\Delta K$ in MPa√m), $K_{\rm Ic}=100$ MPa√m, and $Y=1.12$.
 
-**Hyperfine parameters.** Three quantities are extracted:
+*Critical crack size:*
 
-- **Isomer shift** $\delta$, from the s-electron density at the nucleus, which depends on oxidation and spin state: high-spin Fe³⁺ typically 0.3–0.5 mm/s, high-spin Fe²⁺ 0.9–1.3 mm/s (relative to α-Fe at room temperature).
-- **Quadrupole splitting** $\Delta E_Q$, a doublet from an electric-field gradient at a non-cubic site; large for high-spin Fe²⁺ (often 1.5–3 mm/s).
-- **Magnetic hyperfine field** $B_{hf}$, splitting the line into a sextet in magnetically ordered phases: 33.0 T for α-Fe (outer lines at ±5.3 mm/s), about 51.7 T for hematite, about 49 and 46 T for the two magnetite sites at room temperature.
+$$
+a_c=\frac{1}{\pi}\left(\frac{K_{\rm Ic}}{Y\sigma_{\max}}\right)^2=\frac{1}{\pi}\left(\frac{100}{112}\right)^2=0.254\ \mathrm m
+$$
 
-Relative areas of subspectra give phase fractions, after correction for differences in recoil-free fraction.
+(in practice the plate width or net-section yielding would limit this first; we keep it to see its influence).
 
-<!-- FIGURE 44.5 | figures/ch44/fig-44-5-mossbauer-steel-rust.png | plot | Room-temperature ⁵⁷Fe Mössbauer spectra of a quenched steel and of an atmospheric corrosion product. | Content: two stacked panels, transmission (normalized, 0.90–1.00) vs source velocity −10 to +10 mm/s. (a) Quenched and tempered steel: six-line sextet of ferrite/martensite (B_hf ≈ 33 T, outer lines ±5.3 mm/s) plus a single central line of paramagnetic retained austenite at δ ≈ −0.09 mm/s, area ~8 %, labelled. (b) Rust layer on weathering steel: broad sextet of goethite (B_hf ~ 38 T reduced by small particle size) plus central Fe3+ doublet (δ ≈ 0.37 mm/s, ΔEQ ≈ 0.6 mm/s) of superparamagnetic or lepidocrocite fraction. Velocity axis ticks every 2 mm/s. -->
+*Cycles from 2 mm to $a_c$:* with $m=3$, the bracket is $a_0^{-1/2}-a_c^{-1/2}=22.36-1.99=20.37$ m$^{-1/2}$, and $(Y\Delta\sigma\sqrt\pi)^3=(112\times1.7725)^3=(198.5)^3=7.82\times10^6$:
 
-**Engineering uses.** Mössbauer spectroscopy measures **retained austenite** in quenched and carburized steels, which is paramagnetic and gives a single line distinct from the sextet of ferrite and martensite (Figure 44.5a); retained austenite in bearing and gear steels governs dimensional stability and contact fatigue (Chapter 15). It identifies the iron oxyhydroxides in corrosion products (goethite, lepidocrocite, akaganeite, magnetite), including nanocrystalline forms that give no X-ray diffraction pattern, which is how the protective patina on weathering steels was characterized (Chapter 35). It measures the Fe²⁺/Fe³⁺ ratio in glasses (which sets their colour and redox state), in iron-phosphate battery cathodes during cycling, and in iron-containing catalysts and minerals. Other Mössbauer isotopes — ¹¹⁹Sn for tin-based anodes and solders, ¹⁵¹Eu, ¹²¹Sb — extend the method to further systems. Its limitations are low count rates (hours to days per spectrum), the need for a suitable isotope, and bulk averaging over the absorber.
+$$
+N_f=\frac{2\times20.37}{6.9\times10^{-12}\times7.82\times10^{6}}=7.5\times10^{5}\ \text{cycles}
+$$
 
-### Solid-state NMR
+Three sensitivities follow directly. Taking $a_c=50$ mm instead of 254 mm reduces $N_f$ only to $6.6\times10^5$ cycles: almost all the life is spent while the crack is small, so the critical size hardly matters. Halving the detectable crack to 1 mm raises $N_f$ to $1.10\times10^6$ cycles: better inspection buys life directly. Raising the stress range by 25 % to 125 MPa cuts $N_f$ to $3.8\times10^5$ cycles (and $a_c$ to 0.16 m), because life scales as $\Delta\sigma^{-3}$. At 300 lifts a day the 2 mm case allows about 7 years of crack growth, so an inspection every two to three years gives two chances to find the crack before it is critical. The Eschede tyre of the opening was an object lesson in the last sensitivity: wear thinned the section, raising the stress range in service beyond what the original assessment had assumed.
 
-**Principle.** Nuclei with spin (¹H, ⁷Li, ¹³C, ¹⁹F, ²³Na, ²⁷Al, ²⁹Si, ³¹P, ⁸⁹Y and many more) precess in a strong magnetic field (typically 9–23 T, proton frequencies of 400–1,000 MHz). Their exact resonance frequency, expressed as the **chemical shift** in parts per million, reflects the local electron distribution and therefore the coordination and bonding of the atom. In liquids rapid tumbling averages away anisotropic interactions and gives sharp lines; in solids, chemical-shift anisotropy, dipolar coupling and, for spins above 1/2, quadrupolar coupling broaden lines to kilohertz or more.
+### Variable loads and Miner's rule
 
-**Magic-angle spinning (MAS).** Spinning the sample rapidly about an axis inclined at $\theta_m=54.74°$ to the field, where $3\cos^2\theta_m-1=0$, averages the first-order anisotropic interactions that share this angular dependence. Rotor speeds of 10–60 kHz are routine and above 100 kHz are possible for small rotors. Quadrupolar nuclei such as ²⁷Al and ²³Na retain a second-order broadening that requires higher fields or multiple-quantum techniques.
+Real loads vary. **Miner's rule** assumes that each cycle at amplitude $\sigma_i$ consumes a fraction $1/N_i$ of life, where $N_i$ is the constant-amplitude life at that amplitude, and that failure occurs when $\sum n_i/N_i=1$. Load histories are reduced to counts of cycles by rainflow counting. The rule ignores load sequence (a high-low sequence is more damaging than low-high) and the fact that small cycles below the endurance limit become damaging once a crack exists, so design codes often limit the damage sum to 0.5 or less, or extend S–N curves below the endurance limit with a shallower slope.
 
-**What it delivers.** Solid-state NMR is quantitative (peak areas count nuclei, given full relaxation) and works on amorphous as well as crystalline solids. Characteristic uses:
+### Creep life and the Larson–Miller parameter
 
-| Nucleus | Material | What the shift distinguishes |
+Creep-rupture data are extrapolated with time–temperature parameters (Chapter 14). With the Larson–Miller parameter, a stress that causes rupture in 1000 h at 650 °C (923.15 K) has $P=923.15\times(20+3)=2.123\times10^4$; at the same stress and 600 °C (873.15 K), $\log_{10}t_r=2.123\times10^4/873.15-20=4.32$, so $t_r\approx2.1\times10^4$ h. A 50 K reduction in temperature buys a factor of 21 in life. Power-plant steam pipes and reformer tubes are managed this way, with remaining-life assessment by replica metallography of creep cavities on the outer surface.
+
+---
+
+## 44.5 Reliability statistics
+
+### Describing a population of lives
+
+Nominally identical components fail at different times, because flaws, loads and environments vary. Reliability engineering describes the population by:
+
+- the cumulative failure probability $F(t)$ and the **reliability** $R(t)=1-F(t)$;
+- the probability density $f(t)=dF/dt$;
+- the **hazard rate** $h(t)=f(t)/R(t)$, the instantaneous failure rate of survivors, which tells whether old components are more or less likely to fail than new ones.
+
+### The Weibull distribution
+
+The most widely used life distribution in mechanical and materials reliability is the two-parameter Weibull:
+
+$$
+F(t)=1-\exp\!\left[-\left(\frac{t}{\eta}\right)^{\beta}\right],\qquad h(t)=\frac{\beta}{\eta}\left(\frac{t}{\eta}\right)^{\beta-1}
+$$
+
+where $\eta$ is the **characteristic life** (63.2 % failed) and $\beta$ the **shape parameter**. Its flexibility comes from $\beta$: $\beta<1$ gives a falling hazard (infant mortality from manufacturing defects), $\beta=1$ a constant hazard (random failures, the exponential distribution), and $\beta>1$ a rising hazard (wear-out; $\beta\approx2$–4 for fatigue and wear, larger for tightly controlled processes). Its physical justification is the weakest-link argument already used for ceramic strength (Chapter 14): a component that fails when its worst element fails follows Weibull statistics. Mean life is $\mathrm{MTTF}=\eta\,\Gamma(1+1/\beta)$. The **B10 life**, the time by which 10 % have failed, is standard for bearings and many mechanical parts:
+
+$$
+t_{B10}=\eta\left[-\ln(0.9)\right]^{1/\beta}
+$$
+
+The **lognormal** distribution is an alternative when damage grows multiplicatively (fatigue lives of many metals, electromigration); with limited data the two are hard to distinguish, but they diverge in the low-percentile tail that matters for safety.
+
+> **Status of the principle: Weibull life distribution**
+> *Empirical.* Justified by weakest-link reasoning where failure starts at the worst of many independent flaws, but in reliability practice it is a flexible fit; extrapolation to failure fractions far below those observed is sensitive to the fitted $\beta$, and mixed populations (defective plus sound) need separate distributions.
+
+### The bathtub curve
+
+Over the life of a product population, the hazard rate typically follows the **bathtub curve** (Figure 44.3): a falling early-failure region (defective units failing; addressed by burn-in, proof testing and process control), a flat region of random failures (overloads, accidents; addressed by margins), and a rising wear-out region (fatigue, wear, aging; addressed by life prediction and preventive replacement). The curve is a composite: each region is a different population or mechanism, and each has its own Weibull $\beta$. Many well-designed mechanical products show little flat region at all, and electronic products often wear out only after obsolescence.
+
+<!-- FIGURE 44.3 | figures/ch44/fig-44-3-bathtub-curve.png | plot | The bathtub curve as the sum of three Weibull hazard populations. | Content: x-axis time (normalized, 0 to 1.2 of design life, linear); y-axis hazard rate h(t) (arbitrary units, linear, 0 to 5). Three dashed component hazards: infant mortality Weibull β = 0.5 decaying; random β = 1 constant at 0.5; wear-out β = 4 rising from about 0.6 of life. Solid total curve as their sum showing the bathtub. Shaded regions labelled 'early failures: burn-in, proof test, process control', 'random failures: design margin', 'wear-out: preventive replacement'. Vertical dashed line at 'design life'. -->
+
+![Figure 44.3 — The bathtub curve as the sum of three Weibull hazard populations](../figures/ch44/fig-44-3-bathtub-curve.png)
+
+*Figure 44.3 — The bathtub curve as the sum of three Weibull hazard populations.*
+
+### Fitting data and reading the result
+
+Failure times are ranked, each is assigned an estimated cumulative probability by **median ranks**, $F_i\approx(i-0.3)/(n+0.4)$ (Bernard's approximation), and $\ln[-\ln(1-F)]$ is plotted against $\ln t$. A straight line confirms the Weibull form; its slope is $\beta$ and its intercept gives $\eta$ (Figure 44.4). Maximum-likelihood estimation is preferred for censored data (units still running when the test ends).
+
+**Worked example — Weibull analysis of hydraulic pump seals.** Ten seals from a test rig fail at 410, 620, 780, 900, 1020, 1130, 1260, 1400, 1590 and 1900 h. Median ranks run from $F_1=0.7/10.4=0.067$ to $F_{10}=9.7/10.4=0.933$. A least-squares fit of $\ln[-\ln(1-F_i)]$ on $\ln t_i$ gives
+
+$$
+\beta=2.42,\qquad \eta=1252\ \mathrm h
+$$
+
+The shape parameter well above 1 identifies wear-out. The B10 life is
+
+$$
+t_{B10}=1252\times(0.1054)^{1/2.42}=1252\times0.395=495\ \mathrm h
+$$
+
+and the mean life is $\mathrm{MTTF}=1252\times\Gamma(1.413)=1252\times0.887=1110$ h (the sample mean is 1101 h). The hazard rate rises from $5.2\times10^{-4}$ per hour at 500 h to $2.5\times10^{-3}$ per hour at 1500 h, nearly fivefold. Because failures are wear-out, preventive replacement pays: replacing seals at 500 h accepts about a 10 % chance of an in-service failure per seal, whereas running to failure would see half of them fail before 1080 h. If instead $\beta$ had come out near 1, preventive replacement would be pointless, since a new seal would be no more reliable than an old one. Ten failures give $\beta$ with a 90 % confidence interval of roughly ±40 %, so a decision that depends on the B1 life rather than the B10 would need more data.
+
+<!-- FIGURE 44.4 | figures/ch44/fig-44-4-weibull-seals.png | plot | Weibull probability plot of ten pump-seal failures with the fitted line, characteristic life and B10 life. | Content: x-axis time to failure in h, log scale 200–3000; y-axis ln(−ln(1−F)) from −3 to 1.5 with right-hand labels F = 5 %, 10 %, 20 %, 50 %, 63.2 %, 90 %, 95 %. Ten data points at t = 410, 620, 780, 900, 1020, 1130, 1260, 1400, 1590, 1900 h with median ranks (i−0.3)/10.4. Fitted line β = 2.42, η = 1252 h. Horizontal dashed lines at F = 10 % and 63.2 % with vertical drops at 495 h (B10) and 1252 h (η). Text box 'β = 2.42: wear-out'. -->
+
+![Figure 44.4 — Weibull probability plot of ten pump-seal failures with the fitted line, characteristic life and B10 life](../figures/ch44/fig-44-4-weibull-seals.png)
+
+*Figure 44.4 — Weibull probability plot of ten pump-seal failures with the fitted line, characteristic life and B10 life.*
+
+---
+
+## 44.6 Failure analysis: methodology, fractography and root cause
+
+### Principles
+
+Failure analysis is the systematic reconstruction of how and why a component failed. Three principles govern it:
+
+1. **Preserve evidence.** Fracture surfaces are damaged by fitting broken halves together, by cleaning, by corrosion after the event and by careless sectioning. Every destructive step removes information; proceed from non-destructive to destructive and document each step.
+2. **Collect the history.** Design drawings, material certificates, manufacturing and repair records, operating loads and environment, time in service and similar failures elsewhere. Clustering of failures by production lot, supplier, site or season points directly to a class of causes.
+3. **Distinguish mechanism from root cause.** "Fatigue crack from a weld toe" is a mechanism. The root cause is why the conditions for it existed: a weld detail with a high stress concentration, a change in welding procedure, a load spectrum underestimated in design, an inspection that missed the crack. Only a root cause can be corrected.
+
+### The workflow
+
+Figure 44.5 summarizes the standard sequence.
+
+<!-- FIGURE 44.5 | figures/ch44/fig-44-5-failure-analysis-workflow.png | flowchart | Failure-analysis workflow from the failed part to verified corrective action. | Content: top-to-bottom flowchart: (1) 'Background: service history, loads, environment, drawings, material certificates, similar failures'; (2) 'Preserve and document: photographs, chain of custody, protect fracture surfaces'; (3) 'Non-destructive examination: visual, stereo microscope, dye penetrant, magnetic particle, ultrasonic, eddy current, X-ray CT'; (4) 'Fractography: macro (origin, beach marks, chevrons, shear lips) and SEM (dimples, cleavage, striations, intergranular)'; (5) 'Metallography and testing: sections, hardness, chemistry (OES, EDS), tensile and Charpy, FTIR/DSC for polymers'; (6) 'Mechanism identified'; (7) 'Root cause: 5-why, fishbone, fault tree' with side input 'compare with sound parts and design assumptions'; (8) 'Verify: stress analysis, reproduce failure'; (9) 'Corrective action: design, material, process, inspection; 8D report, FMEA update'. Dashed feedback arrow from 9 to 'design and specifications'. Non-destructive steps green, destructive orange, reasoning steps blue. -->
+
+![Figure 44.5 — Failure-analysis workflow from the failed part to verified corrective action](../figures/ch44/fig-44-5-failure-analysis-workflow.png)
+
+*Figure 44.5 — Failure-analysis workflow from the failed part to verified corrective action.*
+
+Non-destructive examination comes first: visual inspection and stereo microscopy to locate the origin and the sequence of fracture; dye-penetrant and magnetic-particle inspection to find other cracks; ultrasonic, eddy-current and radiographic or CT inspection to find subsurface defects. Then the fracture surfaces are examined macroscopically and in the SEM, sections are cut through the origin for metallography (Chapter 52), hardness and chemical composition are checked against specification, and mechanical tests on material from the failed part confirm or exclude a materials deficiency. For polymers, FTIR, DSC and molecular-weight measurements reveal oxidation, wrong grade or degradation in moulding. Stress analysis, by hand or finite elements, checks whether the loads the evidence implies are consistent with the design.
+
+### Reading fracture surfaces
+
+Fractography is the most powerful single tool, because the fracture surface records how the crack grew (Figure 44.6).
+
+| Feature | Scale | Meaning |
 |---|---|---|
-| ²⁹Si | Glasses, cement, zeolites | $Q^n$ species (Si bonded through $n$ bridging oxygens): $Q^0$ about −71 ppm, $Q^2$ about −85 ppm, $Q^3$ about −95 to −100 ppm, $Q^4$ about −105 to −115 ppm |
-| ²⁷Al | Zeolites, C–A–S–H, glasses | tetrahedral Al (about 50–80 ppm) vs octahedral Al (about 0–15 ppm) |
-| ⁷Li, ⁶Li | Electrodes, solid electrolytes | Li sites, Li-ion hopping rates; metallic Li (Knight shift about 260 ppm) |
-| ¹³C, ¹H | Polymers, composites | tacticity, crystallinity, chain dynamics, cure of resins |
-| ³¹P, ¹⁹F | Bioglasses, phosphates, fluoropolymers | network connectivity, local order |
+| Beach marks (clamshell marks) | Macroscopic | Successive positions of a fatigue crack front, from changes in load or environment; they point back to the origin |
+| Ratchet marks | Macroscopic | Steps between multiple fatigue origins; many ratchets indicate high stress or a stress concentration |
+| Chevron (herringbone) marks | Macroscopic | Fast brittle fracture in plate; the chevrons point back toward the origin |
+| Shear lips | Macroscopic | Ductile final fracture under plane stress near free surfaces; small lips mean low toughness or high constraint |
+| Dimples (microvoid coalescence) | SEM, 1–50 µm | Ductile overload; elongated or parabolic dimples indicate shear or tearing |
+| Cleavage facets with river patterns | SEM | Brittle transgranular fracture in BCC metals below the transition temperature |
+| Intergranular facets | SEM | Weak grain boundaries: temper embrittlement, hydrogen, SCC, creep cavitation, sensitization |
+| Fatigue striations | SEM, 0.1–1 µm spacing | One striation per load cycle in ductile metals; spacing gives local crack growth rate |
+| Branched cracks | Section | Stress-corrosion cracking |
+| Mirror, mist and hackle | Glass, ceramics | Smooth mirror around the origin, then misty and rough hackle zones as the crack accelerates and branches |
+| Crazes, stretched fibrils, slow-crack-growth bands | Polymers | Environmental stress cracking or slow crack growth |
 
-In **cement** (Chapter 18), ²⁹Si MAS NMR follows the conversion of the $Q^0$ silicate monomers of clinker to the $Q^1$ and $Q^2$ chains of calcium silicate hydrate, giving the degree of hydration and the mean silicate chain length — a structure that is nanocrystalline and essentially invisible to diffraction. In **zeolite catalysts**, ²⁷Al NMR distinguishes framework from extra-framework aluminium after steaming, which controls acid-site density. In **glasses** for displays and bioactive implants, ²⁹Si and ³¹P NMR quantify network connectivity, which controls dissolution rate (Chapter 31). In **battery materials**, ⁷Li operando NMR quantifies metallic lithium deposits during fast charge, and relaxation measurements give lithium-ion hopping rates in solid electrolytes. Dynamic nuclear polarization (DNP) boosts sensitivity by orders of magnitude for surface sites, such as the active sites of supported catalysts.
+Two quantitative readings are routine. Striation spacing measured at several distances from the origin, compared with the Paris law, estimates the stress range that grew the crack. In glasses and ceramics, the mirror radius $r_m$ is related to the fracture stress by $\sigma_f\sqrt{r_m}=A$, with mirror constant $A\approx2$ MPa√m for soda-lime glass; a mirror of radius 0.5 mm therefore indicates a fracture stress of about $2/\sqrt{5\times10^{-4}}\approx89$ MPa, which tells the analyst whether the pane broke at a normal service load from a damaged edge or under an abnormal load.
 
-The limitations are sensitivity (many interesting nuclei have low abundance or low gyromagnetic ratio), paramagnetic broadening in materials containing unpaired electrons (many cathode oxides), and the need for complementary modelling: assigning shifts in complex structures increasingly relies on the first-principles calculations of Chapter 45.
+<!-- FIGURE 44.6 | figures/ch44/fig-44-6-fractography-features.png | micrograph-style | Characteristic fracture-surface features used to identify failure mechanisms. | Content: six-panel montage of stylized SEM/macro views, each with a scale bar and label: (a) macro view of a fatigued shaft cross-section with origin at a keyway, beach marks and a final-overload zone (scale 10 mm); (b) fatigue striations, spacing ~0.5 µm (scale 2 µm); (c) equiaxed ductile dimples with inclusions at their bottoms (scale 10 µm); (d) cleavage facets with river patterns converging in the propagation direction (scale 20 µm); (e) intergranular facets showing smooth grain faces (scale 20 µm); (f) glass fracture origin with mirror, mist and hackle zones and the mirror radius r_m marked (scale 0.5 mm). -->
 
----
+![Figure 44.6 — Characteristic fracture-surface features used to identify failure mechanisms](../figures/ch44/fig-44-6-fractography-features.png)
 
-## 44.7 Correlative multimodal workflows
+*Figure 44.6 — Characteristic fracture-surface features used to identify failure mechanisms.*
 
-### Why one technique is never enough
+> **Status of the principle: Fracture-mirror relation**
+> *Empirical.* The relation $\sigma_f\sqrt{r_m}=A$ follows dimensionally from crack-branching at a critical stress intensity, but $A$ is measured for each material and the relation assumes a sharp origin and nearly uniform stress over the mirror.
 
-Each method answers a narrow question. EBSD gives crystal orientation but not composition below a few percent; atom-probe tomography (Chapter 43) gives composition with near-atomic resolution but poor crystallography; X-ray tomography sees a whole component but not its grain structure; TEM sees dislocations but in a foil whose location in the part is often unknown. The scientifically interesting events — the grain where a fatigue crack started, the inclusion where a pit nucleated, the particle that cracked in a battery — are rare, and statistics on one population and mechanism on another do not combine. Correlative workflows apply several techniques to the same feature, usually across scales.
+### Root-cause tools
 
-<!-- FIGURE 44.6 | figures/ch44/fig-44-6-correlative-workflow.png | flowchart | A correlative multiscale workflow from a whole component to atomic resolution, with registration at each step. | Content: left-to-right chain of five boxes with characteristic voxel/pixel size and field of view: (1) lab X-ray CT of component, 10 μm voxels, cm field — "locate crack or defect"; (2) synchrotron or lab nano-CT of extracted region, 0.5 μm, mm — "3D context"; (3) SEM/EBSD/EDS of section, 50 nm, 100 μm — "grain orientation, phases"; (4) FIB-SEM lift-out and TEM/4D-STEM, 0.1–1 nm, μm — "dislocations, interfaces"; (5) atom-probe tomography, ~0.3 nm, 100 nm — "solute segregation". Between boxes: arrows labelled "fiducial marks / registration / transfer under inert gas or cryo". Bottom bar: arrow labelled "increasing resolution, decreasing volume (≈10^12 ×)". Side box: "shared data model and coordinate system". -->
+- **5-why analysis**: asking *why* repeatedly until a controllable cause is reached. For a fatigued pump shaft: Why did it break? Fatigue from the keyway. Why? Rotating bending stress above the fatigue strength at the keyway corner. Why? The corner radius was 0.1 mm instead of the drawn 0.5 mm. Why? A worn cutter was used and the radius is not inspected. Why? The inspection plan lists the radius as non-critical. The last answer is actionable.
+- **Ishikawa (fishbone) diagrams**: candidate causes grouped under materials, methods, machines, measurement, environment and people, so none is overlooked.
+- **Fault-tree analysis**: top-down logical decomposition of the failure into AND/OR combinations of basic events, used where several conditions must coincide (SCC needs stress AND environment AND susceptible material).
+- **8D** (eight disciplines): team, problem description, containment, root cause and escape point, corrective action, validation, prevention of recurrence, closure. The materials engineer's work concentrates in root cause and validation.
+- **FMEA**: the forward-looking counterpart, listing for a new design each potential failure mode, its effect, cause and controls, and ranking it before release. The mechanisms of Chapters 42–45 are the vocabulary of a good FMEA, and lessons from failure analysis feed back into it.
 
-### Building blocks
-
-**Scale bridging.** A typical chain (Figure 44.6) begins with X-ray computed tomography of a whole component or coupon, which locates a crack, pore or inclusion of interest. A section is cut through that location for SEM, EDS and EBSD. A focused-ion-beam lift-out then extracts a TEM lamella or an atom-probe needle from a chosen grain boundary or interface. The volume examined shrinks by about twelve orders of magnitude from first to last step.
-
-**Registration.** Data sets must be mapped into a common coordinate frame. This uses fiducial marks (FIB-milled crosses, deposited platinum markers, deliberate indents), features present in both data sets (pores, grain boundaries) and image-registration algorithms that compute the transformation — rigid, affine or non-linear to account for distortion in each instrument.
-
-**Transfer.** Air-sensitive, hydrated or beam-sensitive samples — lithium metal, magnesium alloys exposed to hydrogen, hydrated tissue, cement pastes — need inert-gas or vacuum transfer shuttles, or cryogenic transfer that keeps them frozen between instruments.
-
-**Same-specimen, sequential stimulus.** A powerful variant repeats observation after each increment of a stimulus: the same region of a dual-phase steel is mapped by EBSD and DIC after 0, 2, 5 and 10 % strain, or the same battery particle is imaged after each cycle.
-
-### Examples across engineering
-
-- **Aerospace fatigue.** In titanium alloy Ti-6Al-4V, fatigue cracks initiate in "macrozones" of similarly oriented α grains. Correlating fractography, EBSD of the initiation site, and HR-EBSD or TEM of slip activity has shown that facets form on basal planes of grains loaded nearly perpendicular to their $c$-axis — a finding that changed forging-route specifications for jet-engine discs.
-- **Additive manufacturing.** X-ray CT finds lack-of-fusion pores in a laser-powder-bed part; sectioning and EBSD show the columnar grains and melt-pool boundaries around them; fatigue testing of the same coupons links pore size and location to life (Chapter 40).
-- **Corrosion.** Pit initiation sites on stainless steel are located by in-situ optical or electrochemical microscopy; SEM-EDS and TEM identify the manganese sulfide inclusions at their centres; atom-probe tomography reveals the chromium-depleted zone around the inclusion.
-- **Biomaterials.** Correlative light and electron microscopy (CLEM) locates fluorescently labelled cells on an implant surface by light microscopy, then images the same cell–implant interface by FIB-SEM tomography, linking biological response to surface topography and chemistry (Chapter 31).
-- **Batteries.** Operando X-ray tomography locates particles that crack early; the same electrode is then sectioned for EBSD and TEM of those particles, distinguishing cracks along grain boundaries of particular misorientation.
-
-### Pitfalls
-
-Correlation multiplies the uncertainty of registration with the uncertainties of each technique. Preparation for one method may alter the feature before the next: FIB lift-out introduces gallium, ion milling heats, polishing removes the surface oxide that XPS should have seen. The order of techniques must therefore be planned from least damaging to most damaging, and every step documented so that an artefact introduced in step 3 is not mistaken for a material feature in step 5.
+> **Boundary.** Formal reliability engineering (confidence bounds, accelerated-test planning, system reliability block diagrams) and the statistics behind it belong to The Mathematics Universe and engineering-management courses.
 
 ---
 
-## 44.8 Big data and automated analysis
+## 44.7 Case studies across industries
 
-### The data deluge
+The value of case studies is in the pattern. In almost every major materials failure the mechanism was known at the time; what failed was the recognition that the mechanism applied, the estimate of its rate, or the inspection meant to catch it.
 
-Modern detectors produce data faster than people can look at it. A **4D-STEM** experiment records a full two-dimensional diffraction pattern at each point of a two-dimensional scan (Chapter 43). With a $256\times256$ scan, a $256\times256$-pixel detector and 16-bit pixels, one data set is
+| Case | Industry | Mechanism | Root cause and lesson |
+|---|---|---|---|
+| Liberty ships and T2 tankers (1940s) | Marine | Brittle fracture of welded hulls in cold seas | Steel with high ductile–brittle transition temperature, welded continuous hulls letting cracks run between plates, square hatch corners; led to Charpy toughness requirements and modern fracture mechanics |
+| de Havilland Comet (1954) | Aerospace | Fatigue of pressurized fuselage | Cyclic pressurization stresses at cut-out corners underestimated; led to full-scale fatigue testing and fail-safe design |
+| Silver Bridge, Ohio (1967) | Civil | Brittle fracture of an eyebar from a small crack grown by stress corrosion and corrosion fatigue | Non-redundant eyebar chain, a crack hidden in an uninspectable location; led to US national bridge inspection standards |
+| Aloha Airlines 243 (1988) | Aerospace | Multiple-site fatigue at fuselage lap joints after disbonding and corrosion | High-cycle, humid, salt environment; inspection intervals based on flight hours not cycles; led to aging-aircraft programmes |
+| Space Shuttle Challenger (1986) | Aerospace | Loss of elastomer resilience at low temperature in field-joint O-rings | Seals operated far below qualified temperature; viscoelastic recovery too slow to follow joint opening (Chapter 14) |
+| Eschede ICE (1998) | Rail | Fatigue fracture of a resilient wheel tyre | Cyclic stresses in a thinning tyre underestimated; inspection unable to detect internal cracks |
+| Zirconia femoral heads (2001) | Biomedical | Hydrothermal aging and fracture of 3Y-TZP | Process change in sintering altered microstructure in some batches; showed that a processing change can create a new degradation mechanism |
+| Davis-Besse reactor head (2002) | Energy | Boric-acid wastage of carbon-steel head, after PWSCC of a nozzle let coolant leak | Leak indications missed for years; only the stainless cladding held pressure |
+| Metal-on-metal hip implants (2010 recalls) | Biomedical | Wear and corrosion debris causing tissue reactions | Wear in edge-loading conditions not captured by standard simulator tests (Chapter 45) |
+| Silver-sulfide resistor failures | Electronics | Sulfidation of silver electrodes through termination gaps | Office-environment components used in sulfur-rich industrial air |
+
+Three lessons recur.
+
+**First, interactions defeat single-mechanism analysis.** Silver Bridge needed a stress-corrosion crack to start a brittle fracture; Davis-Besse needed SCC to create the leak that drove wastage; Aloha needed disbonding to load the rivets that fatigued. Fault trees with AND gates describe these failures better than any single life law.
+
+**Second, the service condition, not the material, was usually misjudged.** Comet's designers knew about fatigue; they underestimated the stress at the corners. Challenger's O-ring compound was suitable within its qualified temperature range. Eschede's tyre steel was adequate for the stress the design assumed. The engineering response is a materials engineer's insistence on the real environment, real loads and real temperature, measured not assumed.
+
+**Third, processing changes are silent design changes.** A sintering change made zirconia heads age; a welding procedure change or a new supplier's steel can move a transition temperature. Every process change to a safety-critical part therefore needs the same qualification as the original design.
+
+> **Status of the principle: Case-study lessons**
+> *Empirical.* Generalizations drawn from investigated failures; they are heuristics for where to look, not laws, and each case report should be read in its original investigation for the details that matter.
+
+---
+
+## 44.8 Wear-out of electronic materials
+
+Electronic assemblies add wear-out mechanisms of their own: current densities high enough to move atoms, fields close to breakdown in nanometre-thin dielectrics, hot carriers in transistor channels, moisture in plastic packages and contacts that carry current through a few microscopic spots. The life laws below follow the same pattern as Section 44.4 — a driving force, an Arrhenius temperature dependence and a fitted exponent — and are the ones Chapters 34, 50 and 51 rely on.
+
+### Translating test cycles to the field: Norris–Landzberg
+
+Thermal-cycling tests are run with larger temperature swings and shorter cycles than the field to obtain failures in weeks. The **acceleration factor** $AF=N_{\rm field}/N_{\rm test}$ relates the two. Norris and Landzberg extended Coffin–Manson to include the effects of frequency and peak temperature (which control creep during each cycle):
 
 $$
-256^4\times2\ \mathrm{bytes}=8.59\times10^{9}\ \mathrm{bytes}\approx8.6\ \mathrm{GB}
+AF=\frac{N_{\rm field}}{N_{\rm test}}=\left(\frac{\Delta T_{\rm test}}{\Delta T_{\rm field}}\right)^{n}\left(\frac{f_{\rm field}}{f_{\rm test}}\right)^{m}\exp\!\left[\frac{E_a}{k}\left(\frac{1}{T_{\max,\rm field}}-\frac{1}{T_{\max,\rm test}}\right)\right]
 $$
 
-At 10,000 frames per second the scan takes 6.6 s and the camera streams 1.3 GB/s. A series of in-situ heating experiments repeating such scans every minute fills tens of terabytes in a day. Synchrotron tomography beamlines produce volumes of $2048^3$ voxels (about 17 GB at 16 bit) every second in fast mode. EBSD systems index more than 3,000 patterns per second. In-situ TEM video at 400 frames per second from a 4k camera overwhelms any manual analysis.
+The first factor is Coffin–Manson ($n$ about 2 for SnPb, 2–2.7 for SAC). The second says that slower field cycles give more time for creep per cycle and hence *fewer* cycles to failure ($m\approx1/3$ for SnPb, smaller for SAC). The third says that a hotter peak temperature causes more damage per cycle.
 
-**Worked example — 4D-STEM data budget.** A group plans in-situ heating of a precipitation-hardening aluminium alloy, recording a $256\times256$ 4D-STEM scan every 30 s for a 2-hour anneal at 180 °C. The number of scans is $7200/30=240$, and the total data is $240\times8.59\ \mathrm{GB}=2.06\times10^{12}$ bytes ≈ 2.1 TB. Saving full patterns is possible but analysis on a workstation reading at 1 GB/s would take $2.06\times10^{12}/10^{9}\approx2{,}060$ s just to read once; any iterative fitting needs many passes. Two common decisions follow. Either reduce data at acquisition (compute strain maps or virtual images on the fly and keep only those, about 0.5 MB each instead of 8.6 GB), or bin the detector to $128\times128$, cutting the volume fourfold at some cost in angular resolution. The point is that the data plan must be designed with the experiment, not after it.
+> **Status of the principle: Norris–Landzberg acceleration factor**
+> *Empirical.* Fitted to thermal-cycling data for specific solder alloys and package types; parameters differ between SnPb and SAC and between studies, and the model assumes the same failure mechanism in test and field (it fails if test temperatures exceed a laminate $T_g$ or cause a different crack path).
 
-### Automated analysis
+**Worked example — field life of a BGA from a thermal-cycling test.** A SAC BGA assembly survives a characteristic life of $N_{\rm test}=2000$ cycles in a −40/+125 °C test ($\Delta T=165$ K, $T_{\max}=398$ K) at 24 cycles/day. In the field it sees $\Delta T=50$ K with $T_{\max}=75$ °C (348 K), twice a day. Using SAC parameters reported by Pan and co-workers ($n=2.65$, $m=0.136$, $E_a/k=2185$ K):
 
-Three families of tools make such data useful.
+$$
+\left(\frac{165}{50}\right)^{2.65}=3.3^{2.65}=23.7
+$$
 
-**Physics-based processing pipelines.** Drift correction, background subtraction, pattern indexing, strain mapping by template matching, Rietveld refinement of thousands of diffraction patterns in sequence, and principal-component or non-negative matrix factorization of spectral images. **Dictionary indexing** of EBSD patterns compares each measured pattern with a library of simulated ones, recovering orientations from noisy patterns of deformed or fine-grained material where conventional Hough-based indexing fails.
+$$
+\left(\frac{2}{24}\right)^{0.136}=0.713
+$$
 
-**Machine-learning segmentation and classification.** Convolutional neural networks (the U-Net architecture is the workhorse) segment grains, pores, cracks, phases and precipitates in micrographs and tomograms after being trained on a few dozen annotated images; they classify dislocation types, identify defects in atomic-resolution images, and flag the rare frames of an in-situ video where something happens. Chapter 47 develops these methods.
+$$
+\exp\!\left[2185\left(\frac{1}{348.15}-\frac{1}{398.15}\right)\right]=\exp(2185\times3.607\times10^{-4})=\exp(0.788)=2.20
+$$
 
-**Autonomous and adaptive experiments.** When analysis runs as fast as acquisition, the instrument can decide what to measure next: a microscope that scans at low resolution, identifies grain boundaries or interfaces, and returns for high-resolution spectroscopy only there; a beamline that adapts the temperature ramp of an operando experiment to where a phase transition appears; a robot that synthesizes, characterizes and reformulates samples in a closed loop. These are the "self-driving laboratories" of Chapter 47.
+$$
+AF=23.7\times0.713\times2.20=37.1
+$$
 
-Put side by side, these rates show that nearly every modern in-situ method produces data faster than a person, and many faster than a single workstation, can process.
+The expected field characteristic life is $2000\times37.1\approx74\,000$ cycles, which at two cycles per day is about 100 years. The margin is comfortable, but notice which term dominates: the $\Delta T$ ratio. If the field swing were 80 K instead of 50 K (an outdoor enclosure in sunlight), the first factor would fall to $(165/80)^{2.65}=6.8$ and the field life to roughly 30 years. The model is only as good as the field temperature profile, which is often the least known input.
 
-### Reproducibility and data stewardship
 
-Large automated data sets raise their own risks. Machine-learning segmentations can be confidently wrong on images unlike their training set; a pipeline with an undocumented threshold makes a result impossible to reproduce; and the selection of "representative" frames from terabytes of video can turn a rare event into an apparent rule. Good practice now includes:
+### Electromigration
 
-- recording metadata (instrument, calibration, dose, temperature, timestamps) automatically with the data;
-- following **FAIR** principles — data Findable, Accessible, Interoperable and Reusable — with open formats and persistent identifiers;
-- publishing analysis code and trained models alongside results;
-- reporting uncertainties, including those of the model (Chapter 47), and validating automated results against a manually analysed subset.
+#### The mechanism
 
-> **Status of the principle: Automated, data-driven analysis of characterization data**
-> *Empirical.* Machine-learned segmentations and classifications are only as reliable as their training data and validation; they interpolate well within the conditions they were trained on and can fail silently outside them, so they need explicit uncertainty estimates and spot-checks against physics-based analysis.
+A copper interconnect on a modern chip carries current densities of order 1 MA/cm$^2$ ($10^{10}$ A/m$^2$), a million times the density in household wiring. At these densities, conduction electrons transfer momentum to metal ions as they scatter, producing a net force on the ions in the direction of electron flow, the **electron wind**. Writing it as an effective charge,
+
+$$
+F=Z^*e\,E=Z^*e\,\rho j
+$$
+
+where $\rho j$ is the local electric field and $Z^*$ is an effective valence (negative, of magnitude of a few to tens, because the wind force exceeds the direct electrostatic force on the ion). The force biases the random diffusion of atoms, giving an atomic flux, by the Nernst–Einstein relation,
+
+$$
+J_a=\frac{C\,D}{kT}\,Z^*e\rho j
+$$
+
+with $C$ the atomic concentration and $D$ the diffusivity along the fastest path (grain boundaries in aluminium, the top interface with the capping dielectric in copper damascene lines).
+
+A uniform flux does no harm: atoms leave one end and arrive at the other. Damage occurs where the flux is **divergent**: where more atoms leave a region than arrive, a void forms; where more arrive than leave, material piles up as a hillock or extrusion (Figure 44.7). Flux divergences occur at grain-boundary triple points, at changes in grain structure, at the ends of lines where they meet tungsten or copper vias (which act as blocking boundaries), and wherever temperature or current density changes. A void that grows across the line, or under a via, opens the circuit; an extrusion can short to a neighbour.
+
+<!-- FIGURE 44.7 | figures/ch44/fig-44-7-electromigration-blech.png | schematic | Electromigration in an interconnect line: void at the cathode end, hillock at the anode end, and the back-stress that defines the Blech length. | Content: top panel: side view of a metal line between two vias embedded in dielectric; electron flow arrow e⁻ from left (cathode) to right (anode); void drawn at the left via interface, hillock/extrusion at the right end; grain boundaries drawn as vertical lines with a triple point labelled 'flux divergence'. Bottom panel: plot of hydrostatic stress σ along the line x from 0 to L: linear from −Δσ/2 (tensile, void side) to +Δσ/2 (compressive, hillock side) at steady state; annotation 'back-stress gradient Ω dσ/dx balances Z*eρj'; caption formula (jL)_c = ΩΔσ_max/(Z*eρ). -->
+
+![Figure 44.7 — Electromigration in an interconnect line: void at the cathode end, hillock at the anode end, and the back-stress that defines the Blech length](../figures/ch44/fig-44-7-electromigration-blech.png)
+
+*Figure 44.7 — Electromigration in an interconnect line: void at the cathode end, hillock at the anode end, and the back-stress that defines the Blech length.*
+
+#### Black's equation
+
+The median time to failure of a population of test lines is described by Black's equation:
+
+$$
+t_{50}=A\,j^{-n}\exp\!\left(\frac{E_a}{kT}\right)
+$$
+
+The temperature term reflects thermally activated diffusion, and $E_a$ identifies the dominant path: about 0.5–0.7 eV for grain-boundary diffusion in pure aluminium, 0.7–0.9 eV for Al–0.5 % Cu (copper segregates to grain boundaries and blocks them, the original materials fix for electromigration), 0.8–1.0 eV for copper lines with a SiN cap (interface diffusion), and above 1.5 eV for copper with metallic caps (CoWP or cobalt) that strengthen the weakest interface. The current exponent $n$ is about 2 when lifetime is controlled by void nucleation (which requires a critical stress to build up) and about 1 when it is controlled by void growth. Failure times of a population follow a lognormal distribution, with shape parameter $\sigma$ typically 0.3–0.6.
+
+> **Status of the principle: Black's equation**
+> *Empirical.* The Arrhenius factor reflects diffusion, and the current exponent can be rationalized by nucleation and growth models, but $A$, $n$ and $E_a$ are fitted for each metallization; Joule heating in the test (which raises the true line temperature above the oven temperature) and a change of mechanism between test and use invalidate extrapolation.
+
+**Worked example — extrapolating an electromigration test.** Copper test lines with a SiN cap are stressed at $T_{\rm test}=300$ °C (573 K) and $j_{\rm test}=2$ MA/cm$^2$, giving $t_{50}=150$ h with lognormal $\sigma=0.5$. The design must guarantee that fewer than 0.1 % of lines fail in 10 years at $T_{\rm use}=105$ °C (378 K) and $j_{\rm use}=1$ MA/cm$^2$. Take $E_a=0.90$ eV and $n=2$.
+
+$$
+\frac{E_a}{k}=\frac{0.90}{8.617\times10^{-5}}=1.044\times10^{4}\ \mathrm K
+$$
+
+$$
+AF=\left(\frac{j_{\rm test}}{j_{\rm use}}\right)^{2}\exp\!\left[1.044\times10^{4}\left(\frac{1}{378.15}-\frac{1}{573.15}\right)\right]=4\times\exp(9.40)=4\times1.20\times10^{4}=4.8\times10^{4}
+$$
+
+So $t_{50,\rm use}=150\times4.8\times10^4=7.2\times10^6$ h. For a lognormal distribution, the 0.1 % point lies 3.09 standard deviations below the median in $\ln t$:
+
+$$
+t_{0.1\%}=t_{50}\,e^{-3.09\sigma}=7.2\times10^{6}\times e^{-1.545}=7.2\times10^{6}\times0.213=1.5\times10^{6}\ \mathrm h\approx175\ \text{years}
+$$
+
+The requirement (87 600 h) is met with a large margin. Two sensitivities deserve attention. If the true activation energy were 0.75 eV, the temperature factor would drop from $1.2\times10^4$ to about 2500 and the 0.1 % life to about 37 years: still acceptable, but the margin depends heavily on an uncertain parameter. And a chip has millions of lines, not one; the allowed failure fraction per line is correspondingly far smaller (Section 44.5), pushing further into the tail where the lognormal assumption is least tested.
+
+#### The Blech length: short lines are immune
+
+Blech observed that short aluminium stripes did not electromigrate at all below a critical length. The reason is mechanical. As atoms pile up at the anode end of a line confined by stiff dielectric, they create compressive stress there, while the cathode end goes into tension. The stress gradient pushes atoms back, a **back-stress** flux opposing the wind. Steady state is reached when the two forces on an atom balance:
+
+$$
+Z^*e\rho j=\Omega\frac{d\sigma}{dx}\approx\Omega\frac{\Delta\sigma}{L}
+$$
+
+where $\Omega$ is the atomic volume and $\Delta\sigma$ the stress difference between the line ends. If $\Delta\sigma$ needed for balance is less than the stress that nucleates a void or cracks the dielectric, $\Delta\sigma_{\max}$, the line never fails. This gives a critical **current-density–length product**:
+
+$$
+(jL)_c=\frac{\Omega\,\Delta\sigma_{\max}}{Z^*e\rho}
+$$
+
+> **Status of the principle: Blech criterion**
+> *Derived.* Follows from a force balance between electron wind and stress gradient in a confined line at steady state; the critical stress and effective $Z^*$ are measured, so $(jL)_c$ is in practice an empirically determined material-and-process parameter.
+
+Measured values for passivated aluminium and copper lines are typically a few thousand A/cm. For example, with $(jL)_c=3000$ A/cm and $j=2$ MA/cm$^2$, segments shorter than $L_c=3000/(2\times10^{6})$ cm $=15$ µm are immune. Design rules exploit this: wiring is broken into short segments between vias, and electromigration checks credit "Blech-short" segments.
+
+#### Other electromigration sites
+
+- **Grain structure**: when the line width is smaller than the grain size, grains span the line like bamboo, eliminating continuous grain-boundary paths. Bamboo aluminium lines last far longer; in copper, the interface dominates instead.
+- **Solder bumps and microbumps**: flip-chip bumps carry 10$^4$ A/cm$^2$ on average, but **current crowding** where the thin on-chip trace enters the bump raises the local density by an order of magnitude. Tin's anisotropic diffusion (much faster along the c-axis) makes bump life depend on tin grain orientation (EBSD, Chapter 52), and electromigration dissolves the under-bump metallization into the solder.
+- **Joule heating**: current also heats the line; temperature enters exponentially, so thermal design and electromigration design cannot be separated.
+
+
+### Dielectric breakdown
+
+#### Instantaneous versus time-dependent breakdown
+
+Chapter 26 described dielectric strength: the field at which an insulator breaks down within a short ramp test, by electronic avalanche, thermal runaway, electromechanical collapse or discharge. Most real insulation operates far below that strength but still fails eventually. **Time-dependent dielectric breakdown (TDDB)** is the wear-out of an insulator under a constant field below its short-term strength.
+
+For thin gate oxides the mechanism is understood in outline. Under field and current, defects (electron traps) are generated at random positions in the oxide. When enough defects line up to form a conducting chain between the electrodes, the oxide breaks down (the **percolation model**). The random positions explain why breakdown times are statistically distributed and why thinner oxides, needing fewer defects to bridge, have broader distributions. How the defect generation rate depends on field is contested, which produces competing lifetime models.
+
+#### Field-acceleration models
+
+**E model (thermochemical).** Defects are created by field-enhanced breaking of weak bonds, with an activation barrier lowered linearly by the field acting on the bond dipole:
+
+$$
+t_{\rm BD}=A_E\exp(-\gamma E)\exp\!\left(\frac{E_a}{kT}\right)
+$$
+
+**1/E model (anode hole injection).** Defects are created by charge injection: electrons tunnelling through the oxide (Fowler–Nordheim current, exponential in $-B/E$) create holes at the anode that return and damage the oxide:
+
+$$
+t_{\rm BD}=A_G\exp\!\left(\frac{G}{E}\right)
+$$
+
+**Power-law (voltage) model.** For ultrathin oxides (below about 5 nm) at low voltage, $t_{\rm BD}\propto V^{-N}$ with $N$ of 40 or more fits data better than either.
+
+> **Status of the principle: E and 1/E TDDB models**
+> *Empirical.* Each has a physical motivation, but both fit accelerated data equally well over the narrow range of fields that can be tested; they diverge by orders of magnitude when extrapolated to use fields. The E model predicts shorter life at low field and is therefore the conservative choice for qualification.
+
+#### Weibull statistics and area scaling
+
+Breakdown times of nominally identical capacitors scatter. They are described by the **Weibull distribution**, the statistics of the weakest link:
+
+$$
+F(t)=1-\exp\!\left[-\left(\frac{t}{\eta}\right)^{\beta}\right]
+$$
+
+where $F$ is the cumulative fraction failed, $\eta$ the characteristic life (63.2 % failed) and $\beta$ the shape parameter (Weibull slope). Plotting $\ln[-\ln(1-F)]$ against $\ln t$ gives a straight line of slope $\beta$ (Figure 44.8). Weibull statistics are derived in more detail in Section 44.5.
+
+The weakest-link character gives a powerful scaling law. A capacitor of area $A$ can be viewed as $A/A_0$ independent elements of area $A_0$, and it survives only if all survive: $1-F_A=(1-F_{A_0})^{A/A_0}$. Substituting the Weibull form,
+
+$$
+\eta_{A_2}=\eta_{A_1}\left(\frac{A_1}{A_2}\right)^{1/\beta}
+$$
+
+Larger areas fail sooner. A product chip has far more total gate area than a test capacitor, so test data must be scaled down. Because $\beta$ falls with oxide thickness (percolation needs fewer defects in thin oxides), area scaling is most severe for the thinnest oxides.
+
+<!-- FIGURE 44.8 | figures/ch44/fig-44-8-tddb-weibull-area.png | plot | Weibull plot of time-dependent dielectric breakdown for test capacitors of two areas, showing area scaling. | Content: x-axis ln(time) labelled time to breakdown in s from 1e2 to 1e6 (log scale); y-axis Weibull scale ln(−ln(1−F)) from −7 to 2 with right-hand labels F = 0.1%, 1%, 10%, 63.2%, 99%. Two parallel straight lines of slope β = 3: 'small capacitor A₁ = 1e-4 cm²' with η = 2e4 s; 'large capacitor A₂ = 100 A₁' shifted left by factor 100^(1/3) = 4.6 (η ≈ 4.3e3 s). Scattered data points around each line. Horizontal dashed line at F = 63.2% intersecting lines at η values. Annotation arrow 'area scaling: η ∝ A^(−1/β)'. -->
+
+![Figure 44.8 — Weibull plot of time-dependent dielectric breakdown for test capacitors of two areas, showing area scaling](../figures/ch44/fig-44-8-tddb-weibull-area.png)
+
+*Figure 44.8 — Weibull plot of time-dependent dielectric breakdown for test capacitors of two areas, showing area scaling.*
+
+**Worked example — gate-oxide lifetime for a power MOSFET.** Test capacitors with the same thick SiO$_2$ as a power MOSFET's gate, area $A_1=10^{-3}$ cm$^2$, are stressed at 9 MV/cm and 150 °C, giving $\eta=2.0\times10^4$ s and $\beta=3$. The product has total gate-oxide area $A_2=0.2$ cm$^2$ and operates at 4 MV/cm at 150 °C. The requirement is a cumulative failure fraction below 100 ppm ($F=10^{-4}$) after 20 years ($6.3\times10^8$ s). Use the E model with an assumed field acceleration of 1.5 decades per MV/cm.
+
+*Field extrapolation:* $5$ MV/cm × 1.5 decades = $10^{7.5}=3.16\times10^7$, so $\eta=2.0\times10^4\times3.16\times10^7=6.3\times10^{11}$ s for the test area.
+
+*Area scaling:* $(A_1/A_2)^{1/\beta}=(1/200)^{1/3}=0.171$, so $\eta_{\rm chip}=1.08\times10^{11}$ s.
+
+*Low-percentile life:* inverting the Weibull distribution, $t_F=\eta[-\ln(1-F)]^{1/\beta}\approx\eta F^{1/\beta}$ for small $F$. With $F=10^{-4}$, $F^{1/3}=0.0464$:
+
+$$
+t_{100\ \mathrm{ppm}}=1.08\times10^{11}\times0.0464=5.0\times10^{9}\ \mathrm s\approx160\ \text{years}
+$$
+
+The design passes. But had the field acceleration been 1.0 rather than 1.5 decades per MV/cm, the extrapolation factor would be $10^5$ instead of $10^{7.5}$, and the 100 ppm life would be 0.5 years. The lifetime prediction is dominated by a parameter that is extracted from a few points at high field and extrapolated over five orders of magnitude in time. This is why gate-oxide qualification uses several stress fields, prefers the conservative E model, and is followed by burn-in screening of extrinsic (defect-related) failures, which form a separate, shallower Weibull population that intrinsic models do not describe.
+
+#### Breakdown and aging in polymer and ceramic insulation
+
+Thick insulation degrades by different mechanisms, introduced in Chapter 26:
+
+- **Partial discharge (PD)**: discharges in gas-filled voids or at electrode edges erode polymer surfaces each cycle. PD inception voltage is set by Paschen's law in the void; eroded channels grow into **electrical trees**, branched hollow channels that bridge the insulation and cause breakdown. In inverter-fed motors, fast voltage edges and overshoot raise PD activity in winding insulation, which is why inverter-duty wire uses PD-resistant enamels filled with nanoparticles.
+- **Water treeing**: in polymeric cable insulation (XLPE) with moisture and AC field, diffuse, bush-shaped water-filled microvoid structures grow over years at fields far below PD inception. Water trees reduce breakdown strength and can convert into electrical trees.
+- **Ceramic capacitor degradation**: in multilayer ceramic capacitors (MLCCs) with BaTiO$_3$ dielectrics, oxygen vacancies migrate under DC bias at elevated temperature, piling up at the cathode and degrading insulation resistance. Rare-earth and acceptor dopants slow the migration. Highly accelerated life tests at 125–150 °C and multiples of rated voltage are standard for MLCCs.
+- **Film capacitors** degrade by self-healing: a local breakdown vaporizes the thin metallization around the fault, isolating it. The capacitor survives but loses a little capacitance each time; capacitance loss is the end-of-life criterion.
+
+
+### Semiconductor defect generation
+
+Semiconductor devices degrade because their operation itself creates defects in the semiconductor, in the gate dielectric, or at the interface between them (Chapter 34). Device operation and circuit consequences belong to the Electronics & Computing core; here the focus is the material damage.
+
+#### Hot-carrier degradation
+
+In a MOSFET, carriers accelerated by the high lateral field near the drain gain kinetic energies well above the thermal value (Chapter 32, high-field transport). These **hot carriers** can (a) break Si–H bonds that passivate dangling bonds at the Si/SiO$_2$ interface, creating interface traps, and (b) be injected over the barrier into the oxide and trapped. Both shift the threshold voltage, reduce mobility near the drain and degrade transconductance. The damage is localized near the drain, which is why lightly doped drain extensions (spreading the field) were introduced. Lifetime is commonly correlated with the substrate current (a measure of impact ionization by hot carriers) in a power-law form, $\tau\propto(I_{\rm sub}/I_d)^{-m}$, and is worst at a gate bias where the lateral field and carrier flux are both large.
+
+Replacing hydrogen with deuterium at the interface improves hot-carrier resistance markedly, because the heavier isotope makes the Si–D bond harder to excite vibrationally to dissociation: a clean demonstration that the mechanism is bond breaking.
+
+#### Bias–temperature instability (NBTI and PBTI)
+
+**Negative-bias temperature instability (NBTI)** affects p-channel MOSFETs held with negative gate voltage at elevated temperature, even with no drain current. The threshold voltage magnitude increases with time, following roughly $\Delta V_{\rm th}\propto t^{\,n}$ with $n\approx0.15$–0.25, and partially recovers when the stress is removed, which complicates measurement (a slow measurement records less damage than was present). The reaction–diffusion picture attributes it to electrochemical breaking of interface Si–H bonds by holes, with the released hydrogen diffusing away; trapping in pre-existing oxide defects also contributes. NBTI became a leading reliability limit when nitrogen was added to gate oxides and when operating fields rose. With high-k metal-gate stacks, **PBTI** (positive bias, n-channel) appears as well, through electron trapping in the high-k layer.
+
+In SiC MOSFETs the Si/SiO$_2$-like interface is replaced by a SiC/SiO$_2$ interface with far higher trap densities (carbon-related defects), and threshold drift under gate bias and switching is a major qualification topic. Gate-bias stress tests at high temperature with periodic threshold measurement, and switching-mode gate stress, are standard.
+
+#### Radiation damage
+
+Electronics in space, aircraft, accelerators, medical equipment and nuclear facilities, and even at sea level, are exposed to ionizing radiation and energetic particles. Three classes of effect follow from different material damage:
+
+- **Total ionizing dose (TID)**: ionization in oxides creates electron–hole pairs; electrons escape quickly but holes are trapped in the oxide (positive charge) and released protons create interface traps. Threshold voltages shift and leakage paths open, especially along thick field and isolation oxides. Dose is quoted in rad(Si) or gray; commercial CMOS typically tolerates 10–100 krad(Si), while radiation-hardened parts reach several hundred krad to Mrad.
+- **Displacement damage**: energetic protons, neutrons and electrons knock atoms off lattice sites, creating vacancy–interstitial pairs and clusters that act as recombination centres. Minority-carrier lifetime falls (Chapter 32), degrading bipolar transistor gain, solar-cell output (space solar arrays are rated in equivalent 1 MeV electron fluence), photodetectors and LEDs. Damage scales with the non-ionizing energy loss (NIEL) of the particle.
+- **Single-event effects (SEE)**: a single heavy ion, or the recoil from a neutron reaction, deposits a dense column of charge. In memory it flips a bit (single-event upset); in CMOS it can trigger parasitic thyristor latch-up; in power devices it can cause **single-event burnout**, in which the charge triggers avalanche multiplication under high blocking voltage. At sea level the flux of cosmic-ray neutrons above 10 MeV is about 13 n/(cm$^2$ h); because burnout rates rise steeply with blocking voltage, high-voltage silicon IGBTs and SiC MOSFETs are derated (typically operated at well below their rated voltage) in traction and grid converters.
+
+#### Bipolar degradation in SiC
+
+A materials-specific degradation mode illustrates how crystal defects (Chapter 5) become device failures. 4H-SiC epitaxial layers can contain basal-plane dislocations. When electron–hole pairs recombine near such a dislocation (for example during conduction of a MOSFET's body diode), the recombination energy drives the partial dislocations to glide, expanding a **Shockley stacking fault** across the drift layer. The fault acts as a quantum-well-like barrier and recombination plane, raising the forward voltage and on-resistance. The cure was in materials growth: buffer layers that convert basal-plane dislocations into harmless threading edge dislocations before they reach the drift layer, and screening by forward-current stress.
+
+#### Trapping in GaN devices
+
+GaN HEMTs show **current collapse** or dynamic on-resistance: after high-voltage off-state stress, electrons trapped at surface states or in the carbon- or iron-doped buffer deplete the channel, so the on-resistance immediately after switching is higher than its DC value. Surface passivation (SiN), field plates and buffer engineering control it. Under long-term high-field stress, GaN can also suffer inverse-piezoelectric cracking at the gate edge, where the strong electric field adds strain to the already strained AlGaN barrier.
+
+
+### Moisture ingress
+
+#### Diffusion into polymers
+
+Every polymer absorbs water. A mould compound reaches equilibrium moisture contents of roughly 0.1–0.5 wt % in humid air; a PCB laminate somewhat more; polyimide films up to about 3 %. Transport is diffusion (Fick's laws), so the time to approach saturation through a thickness $L$ (for one-sided exposure; half-thickness for two-sided) scales as
+
+$$
+t_{\rm sat}\sim\frac{L^2}{D}
+$$
+
+With $D\approx2\times10^{-12}$ m$^2$/s for a typical mould compound at 85 °C and a half-thickness of 0.5 mm, $t\sim(5\times10^{-4})^2/(2\times10^{-12})=1.25\times10^5$ s, about 35 h. A package therefore saturates within days in a humid environment, and no plastic package is hermetic. Hermetic packages (metal or ceramic, sealed with glass or welds) exclude moisture for decades and are used where that matters: military, space, implantable medical devices.
+
+#### Popcorn cracking and moisture sensitivity levels
+
+During reflow soldering, a package is heated to 245–260 °C in a minute or two. Absorbed water vaporizes into any gap or delaminated interface. The saturated vapour pressure of water at 260 °C is about 4.7 MPa, enough to bulge and crack the mould compound outward, often with an audible "pop" (Figure 44.9). **Popcorn cracking** breaks wire bonds and opens paths for later corrosion.
+
+<!-- FIGURE 44.9 | figures/ch44/fig-44-9-popcorn-cracking.png | schematic | Sequence of popcorn cracking during reflow of a moisture-saturated plastic package. | Content: four cross-section panels of a leadframe package (die on die pad, wire bonds, mould compound). (a) 'Moisture absorption in storage': blue dots diffusing into mould compound. (b) 'Reflow heating 25 → 260 °C': delamination at die-pad underside, small gap. (c) 'Vapour pressure up to ~4.7 MPa': gap inflates into a dome, package bottom bulges. (d) 'Crack': crack from dome corner to the package surface, pressure vents. Small temperature-time reflow profile inset with peak 260 °C. -->
+
+![Figure 44.9 — Sequence of popcorn cracking during reflow of a moisture-saturated plastic package](../figures/ch44/fig-44-9-popcorn-cracking.png)
+
+*Figure 44.9 — Sequence of popcorn cracking during reflow of a moisture-saturated plastic package.*
+
+Packages are classified by their **moisture sensitivity level (MSL)** according to joint IPC/JEDEC standards, which set the allowed floor life after removal from dry packing before they must be baked:
+
+| MSL | Floor life at ≤ 30 °C / 60 % RH (MSL 1: ≤ 85 % RH) |
+|---|---|
+| 1 | Unlimited |
+| 2 | 1 year |
+| 2a | 4 weeks |
+| 3 | 168 h |
+| 4 | 72 h |
+| 5 | 48 h |
+| 5a | 24 h |
+| 6 | Mandatory bake before use; time on label |
+
+The classification is a materials result: it depends on moisture uptake and diffusivity of the mould compound, its adhesion to the die and leadframe, and its high-temperature strength. Larger, thinner packages and those with large die pads are more sensitive.
+
+#### Corrosion under moisture and bias
+
+Once moisture reaches a chip surface, metallization can corrode. Aluminium bond pads are vulnerable to chloride and other ions from mould compound, flux or the environment, especially under bias. **Conductive anodic filament (CAF)** formation inside PCBs is the board-level equivalent: moisture travels along the glass-fibre/resin interface, and under bias between adjacent plated holes, copper ions migrate along the fibres from anode to cathode, forming a conducting filament inside the laminate where no inspection can see it. Resistance to CAF depends on laminate chemistry, glass-fibre sizing and drilling damage, and is improved by larger hole-to-hole spacing.
+
+#### The Peck model
+
+Humidity tests accelerate moisture-driven failure with both temperature and humidity. The most widely used acceleration model is Peck's:
+
+$$
+t_f=A\,(\mathrm{RH})^{-n}\exp\!\left(\frac{E_a}{kT}\right)
+$$
+
+with $n\approx2.7$ (often 2.66) and $E_a\approx0.79$ eV in Peck's original fit to aluminium corrosion data for plastic packages. The acceleration factor between test and use is
+
+$$
+AF=\left(\frac{\mathrm{RH_{test}}}{\mathrm{RH_{use}}}\right)^{n}\exp\!\left[\frac{E_a}{k}\left(\frac1{T_{\rm use}}-\frac1{T_{\rm test}}\right)\right]
+$$
+
+> **Status of the principle: Peck humidity model**
+> *Empirical.* Fitted to temperature–humidity–bias failure data of plastic-encapsulated aluminium metallization; the humidity exponent and activation energy vary with mechanism and package, and the model presumes the same mechanism at test and use (it fails if test temperatures exceed the mould compound $T_g$ or if condensation occurs).
+
+**Worked example — field equivalent of an 85/85 test.** A product passes 1000 h of biased 85 °C/85 % RH testing without failure. What field exposure does this represent at 30 °C/60 % RH?
+
+$$
+\left(\frac{85}{60}\right)^{2.66}=1.417^{2.66}=2.53
+$$
+
+$$
+\exp\!\left[\frac{0.79}{8.617\times10^{-5}}\left(\frac{1}{303.15}-\frac{1}{358.15}\right)\right]=\exp(9168\times5.066\times10^{-4})=\exp(4.64)=104
+$$
+
+$$
+AF=2.53\times104=263
+$$
+
+So 1000 h of test corresponds to about $2.6\times10^5$ h, or 30 years, of field exposure at those conditions, provided the mechanism is the same. Notice that temperature contributes a factor of 100 and humidity only 2.5; in this model, heat is the main accelerator. The accelerated aging tests at the end of this section use the same model to relate highly accelerated stress tests at 130 °C to 85/85 testing.
+
+
+### Contact degradation
+
+#### Why contacts are delicate
+
+A separable contact (connector, relay, switch, battery terminal, test socket) touches only at a few microscopic asperities. Current must squeeze through these **a-spots**, adding a **constriction resistance**. For a single circular a-spot of radius $a$ in a metal of resistivity $\rho$ (Holm's result, Chapter 25),
+
+$$
+R_c=\frac{\rho}{2a}
+$$
+
+If the asperities deform plastically, the real contact area is approximately the normal force divided by the hardness, $\pi a^2\approx F/H$. For a gold contact with $F=1$ N and $H\approx1$ GPa, $a=\sqrt{F/\pi H}=\sqrt{1/(\pi\times10^9)}=17.8$ µm and $R_c=2.2\times10^{-8}/(2\times1.78\times10^{-5})=0.62$ mΩ. Real contacts have many a-spots in parallel (which lowers the resistance) and surface films in series (which can raise it by orders of magnitude). Degradation is anything that reduces the conducting area or thickens the films.
+
+> **Status of the principle: Holm constriction resistance**
+> *Approximate.* Exact for a single circular spot between two semi-infinite bodies of the same metal with no surface film; multiple-spot, film and thin-plating effects require extensions.
+
+#### Contact finishes
+
+| Finish | Typical use | Strength | Weakness |
+|---|---|---|---|
+| Hard gold (Au–Co, 0.4–1.3 µm over Ni) | Signal connectors, high mating cycles | Noble, no insulating film | Cost; pores expose Ni/Cu; needs lubricant against wear |
+| Silver | Power contacts, relays | Highest conductivity, soft | Sulfide films (tarnish), ECM |
+| Tin (over Ni or Cu) | Power and automotive connectors, low cost | Cheap, solderable | Oxide film, fretting, whiskers; needs high contact force |
+| Palladium–nickel | Gold substitute | Hard, durable | Catalyses polymer films (frictional polymerization) |
+| Ag–SnO$_2$ composite | Relay and contactor switching contacts | Arc-erosion and welding resistance | Higher resistance than pure Ag |
+
+The last row is a materials-and-regulation story: Ag–CdO was the standard switching contact material for decades, prized for arc-quenching cadmium oxide, but cadmium restrictions (Section 58.1) drove a change to Ag–SnO$_2$.
+
+#### Fretting corrosion
+
+Fretting is small-amplitude relative motion (1–100 µm) between contact surfaces, caused by vibration or by thermal expansion differences during temperature changes. With noble metals it causes only wear. With tin, each motion cycle breaks the oxide film and exposes fresh metal, which oxidizes; the oxide debris accumulates in the contact zone, and after thousands of cycles the a-spots are buried in insulating debris and the resistance rises from milliohms to ohms, often intermittently. Fretting is the dominant failure mode of tin-plated automotive connectors.
+
+Defences follow from the mechanism: higher contact force (to prevent motion and to break films; tin contacts typically need substantially more normal force than gold), noble finishes, contact lubricants that exclude oxygen and trap debris, and mechanical design to eliminate relative motion.
+
+#### Other contact degradation modes
+
+- **Stress relaxation of the spring**: the contact force comes from a deflected spring; at elevated temperature the spring material relaxes (Section 44.8) and force falls. Copper–beryllium and Cu–Ni–Si alloys retain force at 125–150 °C where brass and phosphor bronze relax.
+- **Intermetallic growth**: tin plating on copper is gradually consumed by Cu$_6$Sn$_5$, which is hard and oxidizes, and grows faster at high temperature; nickel underplate slows it.
+- **Tin whiskers**: compressive stress in electroplated tin (from intermetallic growth at the copper interface, from mechanical load, or from thermal mismatch) is relieved by the extrusion of single-crystal tin filaments, a few micrometres in diameter and up to millimetres long. They can bridge closely spaced leads. Lead additions suppressed whiskers in SnPb; lead-free practice uses matte tin with a nickel underlayer, annealing and conformal coating. Whiskers are a reminder that a compressive film stress, measured by XRD (Chapter 52), can be a reliability parameter.
+- **Arc erosion and material transfer** in switching contacts, governed by arc energy, contact material vapour pressure and the oxide additives above.
+
+
+### Accelerated aging tests
+
+#### Why acceleration, and its single rule
+
+A component specified for 15 years cannot be tested for 15 years. Accelerated tests apply higher temperature, humidity, voltage, current or temperature swing to produce, in weeks, the same failures that would occur in years. The acceleration factors come from the models of Chapter 44. There is one overriding rule: **the stress must accelerate the same mechanism that occurs in the field, without introducing a new one.** A humidity test above the $T_g$ of the mould compound, a temperature cycle that melts a solder phase, a voltage that causes avalanche instead of oxide wear: each produces failures with no field meaning, or masks the real ones.
+
+#### Standard tests
+
+| Test | Typical conditions | Stresses | Mechanisms accelerated | Acceleration model |
+|---|---|---|---|---|
+| HTOL (high-temperature operating life) | $T_j\ge125$ °C, max operating voltage, 1000 h | Temperature, bias | Oxide wear-out, BTI, hot carriers, EM, ionic drift | Arrhenius, voltage models |
+| HTSL (high-temperature storage) | 150 °C, 1000 h, unbiased | Temperature | Intermetallic growth, Kirkendall voids, bond degradation | Arrhenius |
+| THB (temperature–humidity–bias) | 85 °C / 85 % RH, bias, 1000 h | Moisture, bias, temperature | Corrosion, ECM, leakage, delamination | Peck |
+| HAST (highly accelerated stress test) | 130 °C / 85 % RH, bias, 96 h (or 110 °C, 264 h) | As THB, pressurized | As THB, faster | Peck |
+| Autoclave / unbiased HAST | 121 °C / 100 % RH or 130 °C / 85 % RH, unbiased | Moisture | Package integrity, corrosion without bias | Peck |
+| Temperature cycling | e.g. −55/+125 °C, −40/+125 °C, 0/+100 °C; 15–30 min dwells | Thermal strain | Solder fatigue, die and substrate cracking, bond-wire fatigue, delamination | Coffin–Manson, Norris–Landzberg |
+| Power cycling | Self-heating on/off, $\Delta T_j$ 60–120 K | Local thermal strain | Wire-bond lift-off, die-attach fatigue in power modules | Coffin–Manson with $T_j$ terms |
+| Preconditioning | Moisture soak per MSL, then 3× reflow | Moisture + heat | Popcorn, delamination before other tests | — |
+
+These are defined in JEDEC and IEC standards and bundled into qualification specifications such as the AEC-Q series for automotive components, which typically require three production lots of 77 units each to pass each test with zero failures.
+
+#### Interpreting a zero-failure test
+
+A qualification test that ends with no failures still gives quantitative information. For a constant failure rate and total equivalent device-hours $D$, the upper confidence limit on $\lambda$ with zero failures is
+
+$$
+\lambda_{\rm upper}=\frac{\chi^2_{\rm CL,\,2}}{2D}
+$$
+
+where $\chi^2_{\mathrm{CL},2}$ is the chi-squared value for confidence level CL with 2 degrees of freedom ($=-2\ln(1-\mathrm{CL})$: 1.83 at 60 %, 4.61 at 90 %). With $r$ failures, the degrees of freedom become $2r+2$.
+
+**Worked example — FIT rate from HTOL.** A total of 1000 devices pass 1000 h of HTOL at $T_j=125$ °C with zero failures. Estimate the failure rate at a use junction temperature of 55 °C with 60 % confidence, assuming an activation energy of 0.7 eV for the dominant mechanisms.
+
+$$
+AF=\exp\!\left[\frac{0.7}{8.617\times10^{-5}}\left(\frac1{328.15}-\frac1{398.15}\right)\right]=\exp(8123\times5.358\times10^{-4})=\exp(4.352)=77.6
+$$
+
+Equivalent device-hours at use conditions: $D=1000\times1000\times77.6=7.76\times10^7$ h.
+
+$$
+\lambda_{60\%}=\frac{1.833}{2\times7.76\times10^7}=1.18\times10^{-8}\ \mathrm h^{-1}=11.8\ \mathrm{FIT}
+$$
+
+At 90 % confidence, $\chi^2=4.61$ and $\lambda_{90\%}=29.7$ FIT. The result depends linearly on the number of device-hours and exponentially on the assumed activation energy: with 0.5 eV instead of 0.7 eV, $AF$ falls to about 22 and the 60 % FIT bound rises to about 41. Assumed activation energies should therefore be justified by mechanism, not chosen for convenience.
+
+#### HAST versus THB
+
+The Peck model of Chapter 44 shows why a 96 h HAST is accepted as a substitute for 1000 h of THB. At the same 85 % RH, only temperature differs:
+
+$$
+AF_{\rm HAST/THB}=\exp\!\left[\frac{0.79}{8.617\times10^{-5}}\left(\frac1{358.15}-\frac1{403.15}\right)\right]=\exp(2.857)=17.4
+$$
+
+so 1000 h at 85 °C corresponds to about $1000/17.4=57$ h at 130 °C; 96 h of HAST gives margin. HAST's validity depends on the mould compound and other polymers behaving the same way at 130 °C as at 85 °C. For packages with low-$T_g$ materials, HAST can produce unrepresentative failures, and THB remains the reference.
+
+#### Pitfalls
+
+- **Mechanism change**: exceeding $T_g$, melting points, phase transitions; triggering a different breakdown mode at high voltage.
+- **Masking**: a fast new mechanism (e.g. corrosion of a test-board connector) that fails units before the mechanism of interest can show.
+- **Wrong use profile**: the acceleration factor is only as good as the field conditions assumed (Chapter 44 example). Mission profiles (time at temperature, number and depth of cycles, humidity exposure) should come from measurement, not assumption.
+- **Sample size**: zero failures in 231 units demonstrates, at 90 % confidence, only that the lot failure fraction is below about 1 % for that stress. Rare defects need screening, not qualification.
+- **Test to pass versus test to fail**: passing a fixed-duration qualification says the product is at least that good; testing to failure (to obtain Weibull parameters, Section 44.5) says how good it is and how much margin remains.
+
 
 ---
 
@@ -452,16 +819,17 @@ Large automated data sets raise their own risks. Machine-learning segmentations 
 
 | Open question | Where it is answered |
 |---|---|
-| How do the laboratory techniques (SEM, EBSD, TEM, XRD, DSC) used as the ex-situ baseline work? | Chapter 42 |
-| How do synchrotron, neutron, atom-probe and aberration-corrected STEM methods produce the data used operando? | Chapter 43 |
-| How are Mössbauer, NMR and positron parameters computed from first principles to assign spectra? | Chapter 45 |
-| How are micropillar and in-situ straining results simulated with molecular dynamics, dislocation dynamics and crystal plasticity? | Chapter 46 |
-| How are machine-learning models trained, validated and used for autonomous experiments? | Chapter 47 |
-| What dislocation mechanisms do in-situ straining experiments reveal, and how do they set strength? | Chapters 12 and 13 |
-| How do vacancies and their concentrations govern diffusion and ageing? | Chapters 5 and 8 |
-| How do the battery and catalyst materials studied operando work and degrade? | Chapter 32 |
-| How does irradiation damage form in reactor materials? | Chapter 33 |
-| How are corrosion products and passive films formed and identified? | Chapters 34 and 35 |
-| How are failures diagnosed in service by combining these methods? | Chapter 36 |
+| Electrochemical thermodynamics and kinetics behind corrosion damage | Chapter 42 |
+| Forms of corrosion, hydrogen embrittlement and corrosion fatigue in detail | Chapter 43 |
+| Fracture mechanics, fatigue laws, creep and Weibull strength of ceramics | Chapter 14 |
+| Composition, curing and durability design of concrete | Chapter 18 |
+| Molecular structure behind polymer oxidation and physical aging | Chapters 19 and 20 |
+| Moisture and fatigue damage in laminates; composite design allowables | Chapters 22 and 23 |
+| Wear, friction and surface fatigue as life-limiting mechanisms | Chapter 45 |
+| Radiation, high-temperature and cryogenic degradation | Chapter 41 |
+| Weld defects and residual stresses as origins of failure | Chapter 47 |
+| Characterization tools used in failure analysis (SEM, EDS, XRD, FTIR, DSC) | Chapter 52 |
+| Choosing materials so that the dominant degradation mechanism is slow enough; lifecycle impact of replacement | Chapters 58 and 59 |
+| Electromigration, dielectric breakdown and solder-joint life in electronics | Chapters 26, 34, 50 and 51 |
 
-**Next:** Chapter 45 turns from measurement to calculation, showing how electronic-structure methods — density-functional theory above all — compute energies, structures and spectra from the Schrödinger equation, and where those calculations can and cannot be trusted.
+**Next:** Chapter 45 turns to the surface itself, where adhesion, friction and wear are decided, and to the engineering of surfaces that resist them.

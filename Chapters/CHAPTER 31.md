@@ -1,356 +1,648 @@
-# Chapter 31 — Biomaterials
+# Chapter 31 — Solid-State Foundations for Materials Engineering
 
-*Part VII · Advanced and Emerging Materials*
+*Part VII · Semiconductor and Photonic Materials*
 
-In 2010 a large orthopaedic manufacturer recalled a metal-on-metal hip replacement worldwide. Its cobalt–chromium ball and cup had been designed to eliminate the plastic wear debris that had loosened earlier hips, and in a hip simulator it wore far less than polyethylene. In patients it behaved differently. A cup set at a steep angle let the ball ride on its edge, the lubricating film broke down, and the joint shed billions of nanometre-sized metal particles and cobalt and chromium ions. Some patients developed soft-tissue masses, destroyed muscle and raised blood cobalt; within five years about a quarter to a third of the devices had to be revised, against a few percent for conventional hips. Nothing in the alloy's datasheet was wrong. Its hardness, strength and corrosion resistance were excellent. The failure came from the interaction of the material with a living host: how the body responded to particles and ions of a size, number and chemistry that the design had not anticipated. Biomaterials engineering is the discipline of anticipating that interaction. This chapter describes how the body responds to an implanted material, surveys the metals, ceramics, polymers and hydrogels that are used, follows them into hips, knees, teeth and arteries, and ends with drug delivery and the sterilization, testing and regulation that stand between a material and a patient.
+An automotive supplier qualifies a silicon pressure-sensor interface chip for an engine-bay module. At 25 °C the chip's input leakage current is a few picoamperes and invisible. At 125 °C the same leakage is several hundred times larger, the sensor offset drifts out of specification, and the module fails its qualification test. Nothing in the chip was damaged. No bond broke, no metal melted, no dielectric failed. The silicon simply did what silicon does: the number of electrons that heat lifts across its band gap increased by a factor of about 500 over those 100 kelvin. A colleague proposes moving the sensor interface to silicon carbide, in which the same effect at 125 °C is smaller by about thirteen orders of magnitude. A second colleague asks why, if silicon carbide is so much better, the indicator LED on the same board is made of neither silicon nor silicon carbide but of a III–V compound. Both answers come from the electronic structure of the crystal, which is the subject of this chapter.
 
-> **What makes a material acceptable to the body, and why is "biocompatibility" a property of a material in an application rather than of the material alone?**
-> **How do the stiffness, corrosion, wear and degradation of implant materials decide whether an implant lasts five years or thirty?**
+> **Why do electrons in a crystal occupy bands of allowed energy separated by forbidden gaps, and what sets the size of the gap?**
+> **How many electrons and holes are available to carry current at a given temperature, and why does that number change so steeply with temperature and band gap?**
+> **Why does silicon absorb light well but hardly emit it, while gallium arsenide does both?**
 
 | Concept | Engineering destination |
 |---|---|
-| Protein adsorption, inflammation, foreign-body response | Surface design of implants, sensors, catheters and encapsulated cells |
-| Stress shielding, modulus mismatch | Hip-stem and bone-plate design, porous and low-modulus titanium |
-| Passivity and corrosion in body fluid | Alloy selection, modular junctions, ion release limits |
-| Bioinert, bioactive and resorbable ceramics | Joint bearings, bone-graft substitutes, coatings, dental crowns |
-| Hydrolytic degradation of PLA, PGA, PCL | Resorbable sutures, screws, stents and drug-release matrices |
-| Hydrogels and scaffolds | Wound dressings, contact lenses, tissue engineering, cell therapy |
-| Wear and particle-induced osteolysis | Bearing couples in hips and knees, crosslinked polyethylene |
-| Controlled-release kinetics | Drug-eluting stents, depot injections, lipid nanoparticles |
-| Sterilization, ISO 10993, device classes | Getting a material into a regulated product |
+| Bloch states, wavevector $k$ | The language of every band diagram, datasheet and simulator |
+| Band formation (tight binding, nearly free electron) | Why gaps exist; why narrow bands mean heavy carriers |
+| Valence and conduction bands, holes | Two-carrier conduction; p-type and n-type material (Chapter 32) |
+| Band gap $E_g$ and its trends | Operating temperature, breakdown field, emission wavelength, leakage |
+| Density of states $g(E)$, $N_c$, $N_v$ | Carrier counting; quantum wells and 2D materials (Chapters 34, 38) |
+| Fermi level and Fermi–Dirac statistics | Contacts, junctions, work functions; equilibrium band diagrams |
+| Effective mass | Mobility, saturation velocity, donor binding energy, tunnelling |
+| $n_i(T)$ and the law of mass action | Leakage, maximum junction temperature, intrinsic limits |
+| Direct and indirect gaps | LEDs and lasers versus photodetectors and solar cells (Chapter 35) |
 
-**Roadmap.** The host response (31.1) → metallic biomaterials and corrosion in the body (31.2) → ceramics and glasses (31.3) → polymers and biodegradable polymers (31.4) → hydrogels, scaffolds and tissue engineering (31.5) → implants as material systems: hips, knees, teeth, stents (31.6) → drug delivery (31.7) → sterilization, testing and regulation (31.8).
+**Roadmap.** Electronic states in a periodic crystal (31.1) → how bands form, from two pictures (31.2) → which bands are full and which are empty (31.3) → the band gap and its trends (31.4) → how many states there are (31.5) → how they are filled (31.6) → how carriers respond to forces (31.7) → how carrier populations change with temperature (31.8) → how the shape of the bands controls light absorption and emission (31.9).
 
-> **Boundary.** The biology of inflammation and wound healing is summarised only as far as it sets materials requirements; physiology and immunology belong to the life sciences. Electrochemistry fundamentals belong to Advanced Chemistry; the corrosion mechanisms used here are developed in Chapters 34 and 35.
-
----
-
-## 31.1 The host response
-
-### 31.1.1 What biocompatibility means
-
-A **biomaterial** is a material intended to interface with biological systems to evaluate, treat, augment or replace a tissue, organ or function. The classic definition of **biocompatibility** (Williams) is "the ability of a material to perform with an appropriate host response in a specific application". Every word matters. *Perform*: the material must do its job, so a perfectly inert material that breaks is not biocompatible. *Appropriate host response*: the body always responds; the question is whether the response suits the purpose. A bone screw should be incorporated into bone, a blood-contacting catheter should not trigger clotting, a degradable suture should be resorbed without inflammation, and an encapsulated islet-cell device should be ignored by the immune system yet let insulin out. *Specific application*: the same material can be excellent in one site and unacceptable in another. Cobalt–chromium is a fine femoral head against polyethylene and a poor one against itself under edge loading; polyethylene is a durable bearing in a knee and a source of osteolysis when it wears quickly in a hip.
-
-### 31.1.2 The sequence of events
-
-When any material is implanted, the body responds in a sequence that is broadly the same for every material (Figure 31.1); what differs is the intensity and the end-point.
-
-1. **Protein adsorption (seconds to minutes).** Before any cell arrives, the surface is coated by a layer of proteins from blood and tissue fluid: albumin, fibrinogen, fibronectin, vitronectin, immunoglobulins, complement proteins. Small, abundant proteins arrive first and are displaced over minutes to hours by larger proteins with higher affinity (the **Vroman effect**). Adsorption often unfolds the proteins, exposing binding sites. Cells never see the material itself, only this conditioned protein layer, whose composition and conformation are set by the surface chemistry, charge, hydrophobicity and roughness (the surface science of Chapter 37). Hydrophobic surfaces adsorb and denature more protein; highly hydrated, neutral surfaces (polyethylene glycol brushes, zwitterionic polymers) resist adsorption.
-2. **Blood–material interactions (minutes to hours).** On blood-contacting surfaces, adsorbed fibrinogen binds platelets, the coagulation cascade and complement are activated, and a provisional matrix (a clot) forms around tissue implants. For devices in flowing blood, such as stents, valves and catheters, this **thrombogenicity** is the dominant concern and is controlled by surface chemistry (heparin coatings), surface smoothness and flow design.
-3. **Acute inflammation (hours to days).** Neutrophils migrate to the site, attracted by the injury of implantation itself, and release enzymes and reactive oxygen species. This phase subsides within days if the implant is clean and sterile.
-4. **Chronic inflammation and the foreign-body reaction (days to weeks).** Macrophages adhere to the protein layer. If they cannot phagocytose the material (anything larger than about 10 µm), they fuse into **foreign-body giant cells** that sit on the surface for the life of the implant, releasing degradative agents. Small particles (0.1–10 µm), such as wear debris, are engulfed and activate macrophages to release cytokines that recruit bone-resorbing osteoclasts.
-5. **Fibrous encapsulation (weeks to months).** Fibroblasts lay down a collagen capsule, typically 50–200 µm thick, that walls off the implant. For a soft-tissue implant such as a pacemaker can, this is acceptable; for a glucose sensor it blocks diffusion and degrades the signal within weeks; for a breast implant, contraction of the capsule is the main complication.
-
-Against bone, a different end-point is possible. If the implant is stable (micromotion below about 50–150 µm) and the surface is suitable, bone forms directly on it without an intervening fibrous layer: **osseointegration**, discovered by Brånemark with titanium in the 1950s–60s and the basis of dental implants and cementless joint replacements.
-
-<!-- FIGURE 31.1 | figures/ch31/fig-31-1-host-response-timeline.png | flowchart | The host response to an implanted material follows a common sequence from protein adsorption to fibrous encapsulation or, against bone, osseointegration. | Content: horizontal logarithmic time axis from 1 s to 1 year (labels: seconds, minutes, hours, days, weeks, months). Bands stacked vertically: protein adsorption and Vroman exchange (1 s-1 h); platelet adhesion and coagulation (minutes-hours); acute inflammation with neutrophils (hours-3 days); chronic inflammation, macrophages and foreign-body giant cells (3 days-weeks, continuing faintly); fibrous capsule 50-200 um (weeks-months). At right, two alternative end-points drawn as small cross-sections: soft tissue: implant + giant cells + collagen capsule; bone: implant in direct contact with bone (osseointegration, requires micromotion < ~50-150 um). Side panel: particle-size scale showing phagocytosed particles 0.1-10 um leading to osteolysis. -->
-
-### 31.1.3 Classes of tissue–material response
-
-Hench's classification of how bone responds to a material, extended to tissue in general, is a useful vocabulary:
-
-| Response | Interface | Examples |
-|---|---|---|
-| Toxic | Surrounding tissue dies | Released Cd, Pb, V in high doses; unreacted monomers |
-| Bioinert (nearly inert) | Thin fibrous layer; no bond | Alumina, zirconia, UHMWPE, PEEK, CoCr |
-| Osseointegrating | Direct bone apposition, mechanical interlock | Titanium and its alloys, tantalum |
-| Bioactive | Chemical bond to bone (and some to soft tissue) | Hydroxyapatite, bioactive glasses, glass-ceramics |
-| Resorbable | Material replaced by tissue | Tricalcium phosphate, PLA/PGA, Mg alloys |
-
-The material's chemistry sets which column it falls into; its form (particles or a solid, smooth or porous, stable or moving) decides how strong the response is. Wear debris of an inert polymer can provoke a stronger reaction than a bulk implant of a less inert metal, which is the central lesson of joint replacement (Section 31.6).
-
-> **Status of the principle: Biocompatibility as an application-specific response**
-> *Empirical.* It is a definition grounded in clinical experience, not a derived law; materials cannot be ranked by a single biocompatibility number, and every claim must be supported by testing in a relevant model (Section 31.8).
+> **Boundary.** This chapter gives the material-level picture of electronic structure: enough quantum mechanics to see why bands and gaps exist and to calculate with them. The Schrödinger equation, its solution for model potentials and the formal theory of crystal momentum belong in the Engineering Physics core. Atomic orbitals and chemical bonding are covered in the Advanced Chemistry core and are only referenced here. Diodes, transistors and their operation belong in the Electronics & Computing core.
 
 ---
 
-## 31.2 Metallic biomaterials
+## 31.1 Electronic states in solids
 
-Metals carry load: hip stems, bone plates and screws, spinal rods, dental implants, stents, pacemaker cases and guidewires. Three alloy families dominate (Table 31.1), all relying on a passive oxide film for corrosion resistance.
+### From the free atom to the crystal
 
-**Table 31.1 — Metallic and reference materials for implants (typical values)**
+An isolated silicon atom has fourteen electrons in sharp, discrete energy levels: the familiar $1s^2\,2s^2\,2p^6\,3s^2\,3p^2$ configuration from the Advanced Chemistry core. The ten core electrons are bound by tens to thousands of electron-volts and play no part in conduction. The four outer electrons, in the $3s$ and $3p$ levels, are bound by only a few electron-volts, and they decide everything electrical.
 
-| Material | Standard (typical) | Young's modulus (GPa) | Yield strength (MPa) | Main uses |
+Bring $N$ silicon atoms together into a crystal. The outer orbitals of neighbouring atoms overlap, and the electrons can no longer be assigned to a single atom. Two consequences follow at once.
+
+1. **The Pauli principle still applies to the whole crystal.** No two electrons can occupy the same quantum state. Each atomic level, which could hold two electrons in one atom, must become $N$ distinct levels holding $2N$ electrons in the crystal. With $N\approx5\times10^{22}$ atoms per cubic centimetre, those levels lie so close together that they form an effectively continuous **band**.
+2. **The width of each band is set by the overlap.** Strongly overlapping outer orbitals spread into bands several electron-volts wide. Core orbitals, which barely overlap, remain essentially sharp atomic levels.
+
+The energy ranges between bands, which no extended state occupies, are the **band gaps**. Figure 31.1 shows this evolution as the interatomic spacing is reduced from infinity to the equilibrium value.
+
+<!-- FIGURE 31.1 | figures/ch31/fig-31-1-level-splitting-to-bands.png | schematic | Atomic 3s and 3p levels of silicon broaden into bands as the atoms are brought together; at the equilibrium spacing the sp3 levels split into a filled bonding (valence) band and an empty antibonding (conduction) band separated by the gap. | Content: x axis interatomic spacing from about 0.2 nm to 1.0 nm (decreasing to the left), y axis electron energy in eV (schematic, about -15 to +5 eV). At large spacing two sharp levels, 3s (2N states, 2N electrons) and 3p (6N states, 2N electrons). As spacing falls the levels broaden into shaded bands, merge, and then split again into a lower band of 4N states (labelled valence band, filled, 4N electrons) and an upper band of 4N states (labelled conduction band, empty). Vertical dashed line at the equilibrium spacing 0.235 nm (Si–Si bond length) labelled; the vertical gap at that line labelled Eg = 1.12 eV. Inset at right: H2-like bonding and antibonding pair for two atoms. -->
+
+![Figure 31.1 — Atomic 3s and 3p levels of silicon broaden into bands as the atoms are brought together; at the equilibrium spacing the sp3 levels split into a filled bonding (valence) band and an empty antibonding (conduction) band separated by the gap](../figures/ch31/fig-31-1-level-splitting-to-bands.png)
+
+*Figure 31.1 — Atomic 3s and 3p levels of silicon broaden into bands as the atoms are brought together; at the equilibrium spacing the sp3 levels split into a filled bonding (valence) band and an empty antibonding (conduction) band separated by the gap.*
+
+### The periodic crystal and Bloch's theorem
+
+In a crystal the potential energy $U(\mathbf r)$ that an electron feels repeats with the lattice (Chapter 2): $U(\mathbf r+\mathbf R)=U(\mathbf r)$ for every lattice vector $\mathbf R$. This one symmetry fixes the form of every electron state. Translating the crystal by $\mathbf R$ cannot change any measurable property, so the electron probability density $\lvert\psi\rvert^2$ must also repeat, and the wavefunction itself can change only by a phase factor. The result is **Bloch's theorem**:
+
+$$
+\psi_{n\mathbf k}(\mathbf r)=e^{i\mathbf k\cdot\mathbf r}\,u_{n\mathbf k}(\mathbf r),\qquad u_{n\mathbf k}(\mathbf r+\mathbf R)=u_{n\mathbf k}(\mathbf r)
+$$
+
+Every electron state in a perfect crystal is a plane wave $e^{i\mathbf k\cdot\mathbf r}$ modulated by a function $u$ that has the periodicity of the lattice. Two labels identify each state: the **wavevector** $\mathbf k$, and a **band index** $n$ that counts the solutions with the same $\mathbf k$. The allowed energies $E_n(\mathbf k)$, plotted against $\mathbf k$, form the **band structure** of the material.
+
+> **Status of the principle: Bloch's theorem**
+> *Fundamental.* It follows from the translational symmetry of a perfect, infinite crystal. Real crystals have surfaces, defects and thermal vibrations, and these act as perturbations that scatter electrons between Bloch states (Chapter 32).
+
+Three consequences matter for engineering.
+
+**A Bloch electron is not scattered by the perfect lattice.** A plane wave in a periodic potential propagates forever. The ions do not "get in the way" of the electron, as the classical Drude picture of Chapter 25 assumed. Resistance comes only from departures from perfect periodicity: lattice vibrations (phonons), impurities, defects, alloy disorder and surfaces. This is why the mobility of a semiconductor depends so strongly on temperature and on impurity concentration, and why it is a material property that processing can change.
+
+**$\mathbf k$ is defined only within the Brillouin zone.** Adding a reciprocal-lattice vector $\mathbf G$ to $\mathbf k$ gives the same set of states, so all distinct states lie in one primitive cell of reciprocal space, the **first Brillouin zone**. For a one-dimensional lattice of period $a$ this is $-\pi/a<k\le\pi/a$. For the face-centred cubic lattice of Si, Ge and GaAs it is a truncated octahedron, and its high-symmetry points carry standard labels: $\Gamma$ at the centre, X at the centre of the square faces (along $\langle100\rangle$), L at the centre of the hexagonal faces (along $\langle111\rangle$). Band diagrams in datasheets and papers plot $E(\mathbf k)$ along lines joining these points.
+
+**$\hbar\mathbf k$ behaves like momentum.** Under an external force $\mathbf F$, such as an electric field, the wavevector of an electron changes as
+
+$$
+\hbar\frac{d\mathbf k}{dt}=\mathbf F
+$$
+
+The quantity $\hbar\mathbf k$ is called the **crystal momentum**. It is not the mechanical momentum of the electron, because the lattice also exchanges momentum with it, but it is conserved in collisions and optical transitions (up to a reciprocal-lattice vector). Section 31.9 shows that this conservation law decides whether a material can emit light efficiently.
+
+### Counting states
+
+Apply periodic boundary conditions to a crystal of $N$ primitive cells. The allowed $\mathbf k$ values form a fine grid with exactly $N$ points in the Brillouin zone. Each band therefore holds $N$ orbital states, or $2N$ electrons including spin.
+
+> **Status of the principle: 2N states per band**
+> *Derived.* It follows from Bloch's theorem with periodic boundary conditions and the two spin states. It is the counting rule that decides, in Section 31.3, whether a crystal is a metal or an insulator.
+
+---
+
+## 31.2 Energy-band formation
+
+Two complementary models explain why bands form and gaps open. The first starts from atoms and lets them interact. The second starts from free electrons and switches on the lattice. Each is approximate. Together they explain every qualitative feature of real band structures.
+
+### The tight-binding picture: from bonds to bands
+
+Start with two atoms, each with one orbital of energy $\varepsilon_0$. When they approach, the orbitals combine into a bonding state at $\varepsilon_0-t$ and an antibonding state at $\varepsilon_0+t$, where $t$ is the **hopping** or transfer energy, which measures how strongly an electron on one atom couples to the orbital on its neighbour (the molecular-orbital result of the Advanced Chemistry core).
+
+Now take a long chain of $N$ atoms with spacing $a$, each coupled to its two neighbours. By Bloch's theorem each state is a combination of atomic orbitals with phase $e^{ikna}$ on atom $n$, and its energy is
+
+$$
+E(k)=\varepsilon_0-2t\cos(ka),\qquad -\frac{\pi}{a}<k\le\frac{\pi}{a}
+$$
+
+The two-atom bonding–antibonding pair has become a band of $N$ states running from $\varepsilon_0-2t$ at $k=0$ to $\varepsilon_0+2t$ at the zone boundary. Figure 31.2(a) shows this cosine band. Three features generalise to real crystals.
+
+- **Bandwidth is proportional to overlap.** The width $4t$ (in general $2zt$ for $z$ nearest neighbours) grows as the atoms come closer. Strongly bonded, short-bond crystals have wide bands.
+- **Each atomic orbital gives one band.** With several orbitals per atom ($s$, $p_x$, $p_y$, $p_z$) one obtains several bands. Where those bands do not overlap in energy, gaps remain between them.
+- **Narrow bands mean heavy electrons.** Near the band bottom, $\cos(ka)\approx1-(ka)^2/2$, so $E\approx\varepsilon_0-2t+ta^2k^2$. This has the free-electron form $\hbar^2k^2/2m^*$ with an **effective mass**
+
+$$
+m^*=\frac{\hbar^2}{2ta^2}
+$$
+
+A small hopping energy, a narrow band and a heavy carrier go together. This anticipates Section 31.7.
+
+**Worked example — effective mass from a tight-binding band.** Take $t=1.0$ eV and $a=0.25$ nm, typical of a covalent solid. Then $\hbar^2=(1.0546\times10^{-34})^2=1.112\times10^{-68}\ \mathrm{J^2\,s^2}$ and $2ta^2=2\times1.602\times10^{-19}\times(2.5\times10^{-10})^2=2.003\times10^{-38}\ \mathrm{J\,m^2}$, so $m^*=5.55\times10^{-31}$ kg $=0.61\,m_0$. The bandwidth is $4t=4$ eV. Halving the hopping energy to 0.5 eV, as in a weakly coupled organic crystal or a transition-metal oxide $d$ band, doubles the mass to $1.2\,m_0$ and halves the bandwidth. In organic semiconductors (Chapter 33) the intermolecular $t$ is only 0.05–0.1 eV, the bands are a few tenths of an electron-volt wide, and band transport gives way to hopping between molecules.
+
+**Silicon in the tight-binding picture.** Each Si atom forms four $sp^3$ hybrid bonds to its tetrahedral neighbours in the diamond structure (Chapter 2). Each bond splits into a bonding and an antibonding combination. The $4N$ bonding states broaden into the **valence band**, the $4N$ antibonding states into the **conduction band**, and the gap between them is, roughly, the bonding–antibonding splitting minus the broadening of the two bands. Silicon has $4N$ valence electrons, exactly enough to fill the bonding band. This "chemist's band structure" is the origin of Figure 31.1. It explains at once why stronger, shorter bonds give wider gaps (C > Si > Ge), and why a gap exists even in an amorphous solid (Chapter 33), which has bonds but no long-range order.
+
+### The nearly-free-electron picture: gaps from Bragg reflection
+
+Now start from the opposite limit. An electron in an empty box has $E=\hbar^2k^2/2m_0$, a single parabola. Switch on a weak periodic potential $U(x)=\sum_G U_G e^{iGx}$, with reciprocal-lattice vectors $G=2\pi m/a$.
+
+Away from the zone boundaries the parabola is barely changed. At $k=\pm\pi/a$, however, the electron wavelength is $\lambda=2a$, which satisfies the **Bragg condition** for reflection from the lattice planes, the same condition that governs X-ray diffraction (Chapter 52). The forward wave $e^{i\pi x/a}$ and the reflected wave $e^{-i\pi x/a}$ have equal energies and mix into two standing waves:
+
+- $\psi_-\propto\cos(\pi x/a)$ piles charge on the ion cores, where the potential energy is low, and its energy is lowered.
+- $\psi_+\propto\sin(\pi x/a)$ piles charge between the ions, and its energy is raised.
+
+The two standing waves differ in energy by
+
+$$
+E_g=2\lvert U_G\rvert
+$$
+
+where $U_G$ is the Fourier component of the crystal potential at the reciprocal-lattice vector that connects $k=-\pi/a$ to $+\pi/a$. A gap opens at every zone boundary, and the parabola breaks into bands, as Figure 31.2(b) shows. The scale is right: for $a=0.543$ nm the free-electron energy at $k=\pi/a$ is $\hbar^2(\pi/a)^2/2m_0=1.27$ eV, and Fourier components of a few electron-volts are typical of real crystal potentials.
+
+> **Status of the principle: band gaps from Bragg reflection**
+> *Approximate.* The result $E_g=2\lvert U_G\rvert$ is first-order perturbation theory in a weak periodic potential. It is close to quantitative for simple metals such as Al and Na, whose potentials are weak. For covalent semiconductors the potential is strong and the tight-binding picture is more natural, but the conclusion that gaps open where electron waves Bragg-reflect holds in general.
+
+<!-- FIGURE 31.2 | figures/ch31/fig-31-2-tight-binding-and-nfe-bands.png | band-diagram | Two routes to a band gap: (a) a tight-binding cosine band of width 4t formed from one atomic level; (b) the free-electron parabola split by Bragg reflection into bands with gaps 2 abs(U_G) at the zone boundaries. | Content: two side-by-side panels sharing the horizontal axis k from -pi/a to +pi/a (extended to -2pi/a..2pi/a in panel b). Panel (a): E(k) = eps0 - 2t cos(ka), with eps0 and the band edges eps0 - 2t and eps0 + 2t marked; a dashed parabola fitted at k = 0 labelled m* = hbar^2/(2ta^2). Panel (b): dashed free-electron parabola hbar^2 k^2/2m0; solid bands flattening near k = +/- pi/a with a gap 2 abs(U_1) and at +/- 2pi/a a smaller gap 2 abs(U_2); vertical dotted lines at the zone boundaries; inset sketch of the cos and sin standing waves against a row of ion cores. -->
+
+![Figure 31.2 — Two routes to a band gap: (a) a tight-binding cosine band of width 4t formed from one atomic level; (b) the free-electron parabola split by Bragg reflection into bands with gaps 2 abs(U_G) at the zone boundaries](../figures/ch31/fig-31-2-tight-binding-and-nfe-bands.png)
+
+*Figure 31.2 — Two routes to a band gap: (a) a tight-binding cosine band of width 4t formed from one atomic level; (b) the free-electron parabola split by Bragg reflection into bands with gaps 2 abs(U_G) at the zone boundaries.*
+
+### What real band structures look like
+
+Real band structures, computed numerically and confirmed by photoemission and optical spectroscopy, combine both pictures. Figure 31.3 sketches those of silicon and gallium arsenide along the L–Γ–X directions. Three features dominate the engineering behaviour.
+
+- The **valence-band maximum** of all the common cubic semiconductors lies at $\Gamma$ ($k=0$), where three $p$-like bands meet: the heavy-hole, light-hole and (slightly lower) split-off bands.
+- The **conduction-band minimum** lies wherever the lowest antibonding band dips lowest. In GaAs it is at $\Gamma$. In Si it lies along the six equivalent $\langle100\rangle$ directions, about 85 % of the way to X, giving six equivalent **valleys**. In Ge it lies at the eight L points, giving four full valleys (each L point is shared between neighbouring zones).
+- **Secondary valleys** lie a few tenths of an electron-volt higher. In GaAs the L valleys lie about 0.29 eV above the $\Gamma$ minimum. Electrons heated by strong fields transfer into them, which produces the negative differential mobility of Chapter 32.
+
+<!-- FIGURE 31.3 | figures/ch31/fig-31-3-si-gaas-band-structures.png | band-diagram | Simplified band structures of silicon (indirect gap) and gallium arsenide (direct gap) along L–Γ–X, with the band extrema that matter for transport and optics. | Content: two panels, energy axis -3 eV to +4 eV with zero at the valence-band maximum, wavevector axis from L through Γ to X. Silicon: valence bands (heavy hole, light hole, split-off 44 meV below) peaking at Γ; conduction-band minimum near 0.85 of the way Γ to X at 1.12 eV (marked Eg indirect); local minimum at L about 2.0 eV; direct gap at Γ about 3.4 eV; dashed arrow for the indirect transition with a phonon. Gallium arsenide: valence bands at Γ (split-off 0.34 eV down); conduction minimum at Γ at 1.42 eV with strong curvature (m* = 0.067 m0); L valley at 1.71 eV (0.29 eV above Γ) and X valley at about 1.90 eV; vertical arrow for the direct transition. -->
+
+![Figure 31.3 — Simplified band structures of silicon (indirect gap) and gallium arsenide (direct gap) along L–Γ–X, with the band extrema that matter for transport and optics](../figures/ch31/fig-31-3-si-gaas-band-structures.png)
+
+*Figure 31.3 — Simplified band structures of silicon (indirect gap) and gallium arsenide (direct gap) along L–Γ–X, with the band extrema that matter for transport and optics.*
+
+---
+
+## 31.3 Valence and conduction bands
+
+### Filled bands, empty bands and conduction
+
+Whether a crystal conducts depends on how its electrons fill the available bands. Two facts settle the question.
+
+**A completely filled band carries no current.** For every state $\mathbf k$ in a band there is a state $-\mathbf k$ with opposite velocity. When the band is full, the velocities cancel exactly. An electric field shifts every electron's $\mathbf k$ at the same rate, but a full band remains full and the sum is still zero. An empty band trivially carries no current. **Only partly filled bands conduct.**
+
+> **Status of the principle: full bands are inert**
+> *Derived.* It follows from the symmetry $E(\mathbf k)=E(-\mathbf k)$ and the Pauli principle. It is why insulators insulate even though they contain about $10^{23}$ electrons per cubic centimetre.
+
+**Electron counting decides the filling.** With $2N$ electrons per band (Section 31.1), a crystal with an even number of valence electrons per primitive cell can fill an integer number of bands exactly.
+
+| Case | Valence electrons per primitive cell | Highest occupied band | Result | Examples |
 |---|---|---|---|---|
-| Cortical bone (reference) | — | 15–20 (longitudinal) | 100–150 (tension) | — |
-| Cancellous bone (reference) | — | 0.1–2 | 2–20 (compression) | — |
-| 316L stainless steel | ASTM F138 | 193 | 170 (annealed) to 690 (cold-worked) | Fracture plates, screws, temporary devices |
-| CoCrMo, cast | ASTM F75 | 210–230 | 450–520 | Knee femoral components, hip cups |
-| CoCrMo, wrought/forged | ASTM F1537 | 210–230 | 830–1000 | Femoral heads, hip stems |
-| CP titanium grade 4 | ASTM F67 | 105 | 480 | Dental implants, porous coatings |
-| Ti-6Al-4V ELI | ASTM F136 | 110–114 | 795–880 | Hip stems, spinal implants, bone plates |
-| β-Ti alloys (Ti-13Nb-13Zr, Ti-35Nb-7Zr-5Ta) | ASTM F1713, F1813 | 55–85 | 500–900 | Low-modulus stems, research |
-| NiTi (superelastic) | ASTM F2063 | 40–75 (austenite) | Plateau 350–550 | Self-expanding stents, orthodontic wires |
-| Tantalum (porous trabecular) | — | 1.5–3 (porous) | 35–50 (compression) | Acetabular augments, bone ingrowth |
-| Magnesium alloys (WE43-type) | — | 45 | 150–250 | Resorbable screws, stents |
+| Odd count | 1, 3, ... | Half-filled | Metal | Na, Cu, Al |
+| Even count, bands overlap in energy | 2, ... | Two partly filled bands | Metal or semimetal | Mg, Ca, Zn; Bi, graphite |
+| Even count, gap between bands | 8 (two atoms × 4) | Full valence band, empty conduction band | Semiconductor or insulator | Si, Ge, GaAs, diamond, Al$_2$O$_3$ |
 
-### 31.2.1 Stainless steel
+Silicon has two atoms per primitive cell and eight valence electrons, exactly enough to fill four bands. These are the valence bands. The next band up, empty at absolute zero, is the conduction band. At $T=0$ pure silicon is a perfect insulator.
 
-Austenitic **316L** (Fe–17Cr–12Ni–2.5Mo, carbon below 0.03 % to avoid sensitization, Chapter 15) is cheap, easy to form, and strong when cold-worked. Its passive Cr₂O₃-rich film is less stable in chloride than titanium's oxide, and pitting and crevice corrosion under screw heads and plate contacts are well documented; it also contains nickel, a common sensitizer. It is therefore used mainly for temporary devices (fracture fixation removed after healing, surgical instruments) and in low-cost settings. Nitrogen-strengthened, nickel-free austenitic steels (Fe–Cr–Mn–Mo–N) address both concerns.
+The distinction between a **semiconductor** and an **insulator** is not one of kind but of degree, set by the gap and the temperature. At 300 K a material with $E_g\lesssim3$ eV contains enough thermally excited or dopant-supplied carriers to be called a semiconductor. Diamond (5.5 eV) and alumina (about 8.8 eV) are insulators in their pure form, but diamond can be doped and is treated as an ultra-wide-gap semiconductor in Chapter 33. Silicon carbide and gallium nitride, at 3.2–3.4 eV, are semiconductors that behave as near-insulators unless they are doped.
 
-### 31.2.2 Cobalt–chromium alloys
+### Holes
 
-**CoCrMo** (Co–28Cr–6Mo) is hard, wear resistant and strong, with a stable chromium-oxide film. Cast F75 is used for complex shapes such as knee femoral components; wrought and forged F1537 for femoral heads and highly loaded stems. Carbides (M₂₃C₆) at grain boundaries harden the cast alloy and, at bearing surfaces, influence wear. CoCr's high modulus contributes to stress shielding (below), and its wear and corrosion products (Co²⁺, Cr³⁺, chromium-oxide particles) are the concern exposed by metal-on-metal hips. **CoNiCrMo** (MP35N) and **CoCrWNi** (L605) are used for thin-strut cardiovascular stents and pacemaker leads, where their strength and radiopacity allow struts of 60–90 µm.
+When an electron is excited from the valence band to the conduction band, it leaves a single empty state in an otherwise full band. The response of the remaining $2N-1$ electrons to a field is awkward to describe directly. It is exactly equivalent, however, to the motion of a single fictitious particle, the **hole**, with these properties:
 
-### 31.2.3 Titanium and its alloys
+- charge $+q$,
+- wavevector $\mathbf k_h=-\mathbf k_e$ of the missing electron,
+- energy measured *downward* on the electron energy axis (a hole deeper in the valence band has more energy),
+- a positive effective mass at the top of the valence band, where the electron effective mass is negative (Section 31.7).
 
-Titanium (Chapter 16) combines low density (4.5 g/cm³), the lowest modulus of the common implant metals, good fatigue strength and an exceptionally stable TiO₂ passive film that reforms in milliseconds when scratched. Bone grows directly on it. **CP titanium** (grade 4, strengthened by oxygen) is used for dental implants; **Ti-6Al-4V ELI** (extra-low interstitials, for fracture toughness) is the workhorse for hip stems and spinal devices. Concern about aluminium and vanadium release led to vanadium-free α+β alloys (Ti-6Al-7Nb) and to **β alloys** of Ti with Nb, Zr, Ta and Mo, which are free of toxic elements and have moduli as low as 55 GPa. Additive manufacturing (Chapter 40) now builds titanium acetabular cups and spinal cages with integral porous lattices (pore sizes 300–700 µm, porosity 60–80 %) into which bone grows.
+The hole is not a book-keeping trick. Its positive charge is measured directly by the Hall effect (Chapter 52), which in p-type material gives a Hall voltage of the opposite sign to that in n-type material, something the free-electron model of metals cannot explain.
 
-Titanium's weaknesses are tribological: it galls and wears badly in sliding contact and is never used as a bearing surface without a hard coating; and its notch sensitivity in fatigue means that surface treatments for bone ingrowth (grit blasting, porous coatings sintered at high temperature) can reduce fatigue strength by 50 % or more, which must be allowed for in stem design.
-
-### 31.2.4 Stress shielding
-
-Bone is a living material that adapts its density to the stresses it carries (an observation summarised as **Wolff's law**): underloaded bone is resorbed. A stiff stem inside a femur carries a large part of the load that bone used to carry, and the bone around the upper part of the stem thins over years, which can loosen the implant and complicate revision surgery.
-
-**Worked example — load sharing between a femoral stem and bone.** Model the femoral shaft as a cortical-bone tube with outer diameter 28 mm and inner diameter 15 mm, so its area is $A_b=\tfrac{\pi}{4}(28^2-15^2)=439$ mm², and a solid stem of diameter 14 mm, $A_s=154$ mm², bonded to it and loaded axially. The two deform together (equal strain), so each carries load in proportion to its axial stiffness $EA$. The fraction of the load carried by bone is
+A semiconductor therefore has **two** kinds of carrier: electrons in the conduction band (concentration $n$) and holes in the valence band (concentration $p$). Its conductivity is
 
 $$
-f_b=\frac{E_bA_b}{E_bA_b+E_sA_s}
+\sigma=q\left(n\mu_n+p\mu_p\right)
 $$
 
-With $E_b=17$ GPa: for Ti-6Al-4V ($E_s=110$ GPa), $f_b=17\times439/(17\times439+110\times154)=7463/(7463+16\,940)=0.31$; for CoCr (210 GPa), $f_b=0.19$; for a β-titanium alloy (60 GPa), $f_b=0.45$; and for a carbon-fibre-reinforced PEEK stem (18 GPa), $f_b=0.73$. A titanium stem thus leaves the bone at this section with about one third of its natural strain, a CoCr stem with about a fifth. The calculation explains why low-modulus alloys, hollow stems and porous structures are pursued (Figure 31.2).
-
-> **Status of the principle: Equal-strain load sharing (stress shielding estimate)**
-> *Approximate.* Assumes a perfectly bonded, axially loaded, uniform composite section; real stems are tapered, bending-loaded and partly bonded, and load transfer is concentrated near the ends. The trend with modulus is right; the absolute numbers come from finite-element models.
-
-It also shows where the simple picture fails. Very flexible "isoelastic" stems tried in the 1980s and 1990s did not do better clinically: they bent more under bending loads, raising shear stresses and micromotion at the bone–implant interface above the 50–150 µm limit for bone ingrowth, so they loosened for a different reason. The design target is not the lowest modulus but a balance between load transfer to bone and stability of the interface, a multi-objective selection problem of the kind treated in Chapter 48.
-
-<!-- FIGURE 31.2 | figures/ch31/fig-31-2-modulus-comparison.png | plot | Implant metals are 3-12 times stiffer than cortical bone, which causes stress shielding; low-modulus alloys, porous metals and composites narrow the gap. | Content: horizontal bar chart, log x-axis Young's modulus 0.05-500 GPa. Bars (ranges): cancellous bone 0.1-2, cortical bone 15-20 (highlighted band across the chart), UHMWPE 0.5-1, PMMA bone cement 2-3, PEEK 3.6, CF-PEEK 15-20, porous tantalum 1.5-3, porous Ti lattice 1-20, Mg alloys 45, NiTi 40-75, beta-Ti 55-85, Ti-6Al-4V 110-114, 316L 193, CoCrMo 210-230, 3Y-TZP zirconia 200-210, alumina 380-400. Right-hand annotation: bone load share from the worked example at 154/439 mm2 area ratio: CF-PEEK 73 %, beta-Ti 45 %, Ti-6Al-4V 31 %, CoCr 19 %. -->
-
-### 31.2.5 Corrosion in the body
-
-Body fluid is an aggressive electrolyte: about 0.15 M chloride, pH 7.4, 37 °C, with dissolved oxygen lower than in air-saturated water and with proteins and cells that can both adsorb on and attack surfaces. After surgery or in inflamed tissue, pH may fall to about 5 and reactive oxygen species are produced. Implant alloys survive because they are **passive** (Chapter 34): a nanometre-thin oxide film reduces the dissolution current density to $10^{-2}$–$10^{-1}$ µA/cm². Problems arise where the film is damaged or the local chemistry changes (Chapter 35):
-
-- **Crevice and pitting corrosion** under screw heads and in plate–screw contacts, mainly in stainless steel.
-- **Fretting corrosion** and **tribocorrosion** where micromotion repeatedly scrapes off the film, most notoriously at the tapered junction between a modular femoral head and the stem (*taper corrosion* or *trunnionosis*), which can release metal debris even from metal-on-polyethylene hips.
-- **Galvanic corrosion** between dissimilar alloys; CoCr and Ti are close enough in the passive state to be combined, but stainless steel is not mixed with them.
-
-Even passive dissolution releases ions continuously, and Faraday's law (Chapter 34) converts current to mass.
-
-**Worked example — ion release from passive implants.** A 316L fracture plate and screws expose 50 cm² to tissue fluid and dissolve passively at $i=0.1$ µA/cm². The current is $I=5\times10^{-6}$ A, and over one year ($t=3.156\times10^{7}$ s) the charge is 158 C. Treating the alloy as dissolving to Fe²⁺, Cr³⁺, Ni²⁺ and Mo³⁺ in proportion to its composition gives an equivalent weight of about 25.5 g/equivalent, so the mass dissolved is
-
-$$
-m=\frac{ItM}{nF}=\frac{158\times25.5}{96\,485}=0.042\ \mathrm{g}
-$$
-
-about 42 mg per year, a uniform thinning of only about 1 µm, structurally irrelevant, but containing about 5 mg of nickel ions each year at the site, enough to matter for a patient with nickel allergy. A titanium implant of the same area with $i=0.01$ µA/cm² and Ti⁴⁺ ($M/n=47.87/4$) releases $5\times10^{-7}\times3.156\times10^{7}\times47.87/(4\times96\,485)=2.0$ mg per year. The difference of a factor of 20, together with titanium's low toxicity, is a large part of why titanium dominates permanent implants.
-
-### 31.2.6 Biodegradable metals
-
-For temporary functions (holding a fracture until it heals, keeping an artery open for six months) a metal that corrodes away safely avoids a second operation. **Magnesium** alloys (with rare earths, zinc, calcium) corrode in body fluid with hydrogen evolution; resorbable Mg compression screws and a drug-eluting Mg coronary scaffold are on the market in some regions. The challenge is controlling the rate, because hydrogen bubbles and loss of strength before healing are both unacceptable; purity (Fe, Ni, Cu below tens of ppm, since they form cathodic particles), grain refinement and coatings are used. **Iron** alloys corrode too slowly and **zinc** alloys at intermediate rates, and both are under development for stents.
+where $\mu_n$ and $\mu_p$ are the mobilities defined in Chapter 25. The rest of this chapter finds $n$ and $p$. Chapter 32 finds $\mu_n$ and $\mu_p$.
 
 ---
 
-## 31.3 Ceramic biomaterials
+## 31.4 Band gaps
 
-Ceramics (Chapter 17) bring hardness, wear resistance and chemical stability, and in calcium-phosphate and glass form, the ability to bond to bone. Their limitation is brittleness, which Chapter 14's fracture mechanics and Weibull statistics govern.
+### What the gap measures
 
-**Table 31.2 — Ceramic biomaterials (typical values)**
+The band gap $E_g=E_c-E_v$ is the energy difference between the conduction-band minimum $E_c$ and the valence-band maximum $E_v$. Physically it is the minimum energy needed to break one bond and free its electron to move through the crystal while leaving a mobile hole behind. Almost every important semiconductor property depends on it:
 
-| Material | Young's modulus (GPa) | Flexural strength (MPa) | $K_{IC}$ (MPa m^1/2) | Response | Uses |
+- the intrinsic carrier concentration, through $e^{-E_g/2k_BT}$ (Section 31.8), and with it leakage currents and the maximum operating temperature;
+- the critical field for avalanche breakdown, which grows roughly as $E_g^2$ to $E_g^{2.5}$ (Chapter 32), and with it the voltage rating per unit thickness of a power device;
+- the absorption edge and emission wavelength, $\lambda\,(\mathrm{\mu m})\approx1.24/E_g\,(\mathrm{eV})$ (Section 31.9 and Chapter 35);
+- the ionization energies of dopants and the depth of defect levels, measured from the band edges (Chapter 32).
+
+### Representative values
+
+| Material | Structure | $E_g$ at 300 K (eV) | Type | Cut-off wavelength $1.24/E_g$ (µm) |
+|---|---|---|---|---|
+| InSb | zincblende | 0.17 | direct | 7.3 |
+| InAs | zincblende | 0.35 | direct | 3.5 |
+| Ge | diamond | 0.66 | indirect | 1.88 |
+| In$_{0.53}$Ga$_{0.47}$As | zincblende | 0.75 | direct | 1.65 |
+| Si | diamond | 1.12 | indirect | 1.11 |
+| InP | zincblende | 1.34 | direct | 0.93 |
+| GaAs | zincblende | 1.42 | direct | 0.87 |
+| GaP | zincblende | 2.26 | indirect | 0.55 |
+| 4H-SiC | hexagonal | 3.26 | indirect | 0.38 |
+| GaN | wurtzite | 3.39 | direct | 0.37 |
+| ZnO | wurtzite | 3.37 | direct | 0.37 |
+| β-Ga$_2$O$_3$ | monoclinic | 4.8–4.9 | (nearly) indirect | 0.26 |
+| Diamond (C) | diamond | 5.47 | indirect | 0.23 |
+| AlN | wurtzite | 6.0–6.2 | direct | 0.20 |
+| SiO$_2$ (amorphous) | amorphous | about 9 | — | — |
+
+### Trends: what sets the gap
+
+The table shows two clear trends, both explained by the tight-binding picture of Section 31.2.
+
+**Shorter, stronger bonds give wider gaps.** Down group IV, the bond length grows and the bonding–antibonding splitting falls: C (0.154 nm, 5.47 eV) → Si (0.235 nm, 1.12 eV) → Ge (0.245 nm, 0.66 eV) → α-Sn (0.281 nm, 0, a semimetal). The same pattern runs through the III–V compounds: AlN > GaN > InN (about 0.7 eV), and GaP > GaAs > GaSb (0.73 eV).
+
+**Ionicity widens the gap.** Moving from a group-IV element to an isoelectronic III–V and then II–VI compound in the same row keeps the bond length nearly constant but makes the bond more polar, which adds an ionic contribution to the splitting: Ge (0.66 eV) → GaAs (1.42 eV) → ZnSe (2.7 eV). The polar bond character is a chemistry result (Advanced Chemistry core). Its materials consequence is that compound semiconductors offer a wide, nearly continuous menu of gaps.
+
+**Alloys interpolate.** In a solid solution such as Al$_x$Ga$_{1-x}$As or In$_x$Ga$_{1-x}$N the gap varies smoothly with composition, usually as a quadratic with a small **bowing parameter** $b$:
+
+$$
+E_g(x)=xE_g^{A}+(1-x)E_g^{B}-b\,x(1-x)
+$$
+
+> **Status of the principle: gap interpolation with bowing**
+> *Empirical.* The quadratic form fits measured gaps of most III–V and II–VI alloys with one fitted parameter. It fails where the alloy changes from direct to indirect (Al$_x$Ga$_{1-x}$As near $x\approx0.45$), where the different valleys must each be interpolated separately, and for highly mismatched alloys such as GaN$_x$As$_{1-x}$, where a few per cent of nitrogen lowers the gap by hundreds of meV.
+
+This is how optoelectronic materials are tuned to a wavelength (Chapters 33 and 35).
+
+### Temperature and pressure dependence
+
+The gap shrinks as temperature rises, because thermal expansion lengthens the bonds and lattice vibrations smear the band edges. The **Varshni relation** fits the data:
+
+$$
+E_g(T)=E_g(0)-\frac{\alpha T^2}{T+\beta}
+$$
+
+| Material | $E_g(0)$ (eV) | $\alpha$ (eV/K) | $\beta$ (K) | $E_g(300\ \mathrm K)$ (eV) | $dE_g/dT$ at 300 K (meV/K) |
 |---|---|---|---|---|---|
-| Alumina (medical grade, high purity, fine grain) | 380–400 | 500–600 | 4 | Bioinert | Femoral heads, liners |
-| Zirconia-toughened alumina (ZTA) | 350–360 | 1000–1400 | 6–7 | Bioinert | Hip heads and liners, knee components |
-| 3Y-TZP zirconia | 200–210 | 900–1200 | 5–10 | Bioinert | Dental crowns, bridges, implants |
-| Hydroxyapatite (dense) | 80–110 | 50–120 | 0.8–1.2 | Bioactive | Coatings, granules, small fillers |
-| β-tricalcium phosphate | ~30–70 (dense) | 30–90 | ~1 | Resorbable | Bone-graft substitutes |
-| Bioactive glass 45S5 | 35 | 40–60 | ~0.6 | Bioactive (bonds to bone and soft tissue) | Bone fillers, dental remineralisation |
-| Pyrolytic carbon | 20–30 | 300–500 | 1–2 | Thromboresistant | Mechanical heart-valve leaflets |
+| Si | 1.170 | $4.73\times10^{-4}$ | 636 | 1.125 | −0.25 |
+| Ge | 0.744 | $4.77\times10^{-4}$ | 235 | 0.663 | −0.39 |
+| GaAs | 1.519 | $5.41\times10^{-4}$ | 204 | 1.422 | −0.45 |
 
-### 31.3.1 Bioinert ceramics: alumina and zirconia
+> **Status of the principle: Varshni relation**
+> *Empirical.* A two-parameter fit that reproduces $E_g(T)$ to a few meV from cryogenic temperatures to several hundred kelvin. Its form is motivated by the electron–phonon interaction but its parameters are fitted, not derived.
 
-High-purity, fine-grained **alumina** was introduced for hip heads in the 1970s because its hardness and wettability give very low wear against itself or polyethylene. Early heads fractured at rates of several per thousand; refinement of grain size (to below 2 µm), purity, hot isostatic pressing and proof testing reduced fracture to a few per 100 000. **Zirconia** (3 mol% yttria-stabilised tetragonal zirconia polycrystal, 3Y-TZP) is tougher because of transformation toughening (Chapter 14): the stress field at a crack tip converts metastable tetragonal grains to monoclinic with a 4 % volume expansion, which closes the crack. That same metastability is its weakness: in warm water the tetragonal-to-monoclinic transformation can proceed spontaneously from the surface (**low-temperature degradation**, or ageing), roughening and weakening it. In 2001 one manufacturer's change from batch to tunnel-furnace sintering produced zirconia hip heads that aged rapidly; several hundred fractured and the product was recalled. Today, **zirconia-toughened alumina**, with about 17–25 % zirconia dispersed in an alumina matrix that constrains it against ageing, is the standard ceramic bearing, combining alumina's stability with zirconia's toughness. In dentistry, monolithic zirconia crowns and bridges have largely replaced porcelain fused to metal, and translucent zirconias with more yttria (4–5 mol%, more cubic phase) trade toughness for aesthetics.
+The shift matters in practice. An LED's emission wavelength red-shifts by about 0.3 nm/K, and a silicon bandgap-voltage reference relies on extrapolating the junction voltage to $E_g(0)/q\approx1.2$ V, which is the temperature-independent quantity in the circuit.
 
-### 31.3.2 Bioactive ceramics and glasses
+### The gap is not always the same number
 
-**Hydroxyapatite** (HA), Ca₁₀(PO₄)₆(OH)₂, is the mineral of bone and teeth, though biological apatite is nanocrystalline, carbonate-substituted and calcium-deficient. Synthetic HA bonds directly to bone, but it is too weak and brittle to bear load on its own, so it is used as plasma-sprayed coatings 50–150 µm thick on titanium stems and cups (to speed fixation), as porous granules and blocks for filling bone defects, and in composites. **Tricalcium phosphate** (β-TCP) is more soluble and resorbs over months to years; biphasic HA/TCP mixtures tune the rate.
+Three different "gaps" appear in the literature, and confusing them causes errors.
 
-**Bioactive glasses**, discovered by Hench in 1969, bond to bone faster than HA and even to soft tissue. The original **45S5** composition (45 SiO₂, 24.5 Na₂O, 24.5 CaO, 6 P₂O₅ wt%) has much less silica and much more modifier than window glass. In body fluid it undergoes a sequence of surface reactions: Na⁺ exchanges with H⁺ from solution, silanol groups form and condense to a silica-rich gel layer, calcium and phosphate migrate through it and from solution, and a layer of hydroxycarbonate apatite crystallises within hours to days. Collagen and cells attach to this apatite, and released soluble silicon and calcium stimulate bone-forming cells. Bioactivity depends on composition in the Na₂O–CaO–SiO₂ system (Figure 31.3): above about 60 wt% SiO₂ the network is too connected to react, and the glass is inert. Bioactive glasses are used as bone-defect fillers, in toothpaste for sensitive teeth, and as borate-glass fibres in wound dressings. **Glass-ceramics** (apatite–wollastonite, A-W) give higher strength (about 200 MPa in bending) with retained bioactivity for vertebral and iliac spacers.
-
-> **Status of the principle: Composition–bioactivity map for silicate glasses**
-> *Empirical.* Derived from animal implantation studies of soda–lime–phosphosilicate glasses; it is explained qualitatively by network connectivity and dissolution rate but does not transfer quantitatively to other glass systems (borate, phosphate) or to glass-ceramics.
-
-<!-- FIGURE 31.3 | figures/ch31/fig-31-3-bioactive-glass-diagram.png | map | Bone bonding of soda-lime-silica glasses depends on composition: only a region rich in modifiers and low in silica bonds to bone, and a smaller region also bonds to soft tissue. | Content: Gibbs triangle (wt%) SiO2 (top), CaO (left), Na2O (right), at constant 6 wt% P2O5. Region A (bioactive, bonds to bone) as a lens roughly 40-55 wt% SiO2 with CaO 15-30 and Na2O 15-30; inner region E (bonds to soft tissue too) around 45S5; 45S5 point marked (45 SiO2, 24.5 CaO, 24.5 Na2O). Region B (bioinert, encapsulated) above ~60 wt% SiO2; region C (resorbs too fast) below ~35 wt% SiO2; region D (not glass-forming) toward high CaO. Window glass (~72 SiO2, 9 CaO, 14 Na2O) marked in region B. -->
+- The **electronic (transport) gap** is the energy to create a free electron and a free hole.
+- The **optical gap** is the photon energy at which absorption begins. It is smaller than the transport gap by the exciton binding energy, a few meV in Si and GaAs, 60 meV in ZnO, and 0.3–1 eV in organic semiconductors and monolayer transition-metal dichalcogenides (Chapter 33).
+- **Computed gaps** from standard density-functional theory underestimate the true gap, often by 30–50 %. Values from simulation must be checked against measurement before being used in design.
 
 ---
 
-## 31.4 Polymeric biomaterials
+## 31.5 Density of states
 
-Polymers are the most widely used biomaterials by number of devices: catheters, tubing, sutures, blood bags, intraocular lenses, vascular grafts, heart-valve components, bone cement and joint bearings.
+### Why we need it
 
-### 31.4.1 Biostable polymers
+To find how many electrons occupy a band we need two things: how many states exist at each energy, and the probability that each state is occupied. The first is the **density of states** $g(E)$, defined so that $g(E)\,dE$ is the number of states per unit volume with energies between $E$ and $E+dE$. The second is the Fermi–Dirac function of Section 31.6. Their product gives the carrier distribution.
 
-| Polymer | Key properties | Uses |
+### Derivation for a parabolic band in three dimensions
+
+Near the bottom of the conduction band, any smooth $E(\mathbf k)$ can be expanded about its minimum. For an isotropic minimum this gives
+
+$$
+E=E_c+\frac{\hbar^2k^2}{2m_n^*}
+$$
+
+with an effective mass $m_n^*$ (Section 31.7). With periodic boundary conditions on a crystal of volume $V$, the allowed wavevectors form a grid with one point per $(2\pi)^3/V$ of $k$-space. The number of states, including two spins, inside a sphere of radius $k$ is
+
+$$
+N(k)=2\times\frac{\tfrac43\pi k^3}{(2\pi)^3/V}=\frac{Vk^3}{3\pi^2}
+$$
+
+Substituting $k=\sqrt{2m_n^*(E-E_c)}/\hbar$ and differentiating with respect to $E$, then dividing by $V$:
+
+$$
+g_c(E)=\frac{1}{2\pi^2}\left(\frac{2m_n^*}{\hbar^2}\right)^{3/2}\sqrt{E-E_c},\qquad E\ge E_c
+$$
+
+Similarly for holes near the valence-band maximum, $g_v(E)=\frac{1}{2\pi^2}(2m_p^*/\hbar^2)^{3/2}\sqrt{E_v-E}$ for $E\le E_v$. Inside the gap, $g=0$ in a perfect crystal.
+
+> **Status of the principle: parabolic density of states**
+> *Approximate.* It follows from the parabolic (effective-mass) expansion of $E(\mathbf k)$ and is accurate within roughly 0.1–0.2 eV of a band edge, which is where nearly all carriers sit in a non-degenerate semiconductor. It fails for hot carriers far into the band, for non-parabolic narrow-gap materials (InSb, InAs), and in disordered solids, where band tails extend into the gap (amorphous silicon, Chapter 33).
+
+Two features matter. First, the density of states rises from zero at the band edge as $\sqrt{E-E_c}$: there are very few states right at the edge. Second, it scales as $(m^*)^{3/2}$: a heavy-mass band has many more states near its edge than a light one. A material with several equivalent valleys (six in Si) multiplies its density of states by the number of valleys, which is absorbed into a **density-of-states effective mass** (Section 31.7).
+
+**Worked example — how many states lie near the band edge?** For the silicon conduction band, with a density-of-states mass $m_n^*=1.09\,m_0$, the number of states per unit volume within $k_BT$ of the band edge at 300 K is
+
+$$
+N(k_BT)=\int_{E_c}^{E_c+k_BT}g_c(E)\,dE=\frac{1}{3\pi^2}\left(\frac{2m_n^*k_BT}{\hbar^2}\right)^{3/2}
+$$
+
+With $2m_n^*k_BT/\hbar^2=2\times1.09\times9.109\times10^{-31}\times4.142\times10^{-21}/1.112\times10^{-68}=7.40\times10^{17}\ \mathrm{m^{-2}}$, its $3/2$ power is $6.36\times10^{26}\ \mathrm{m^{-3}}$, and dividing by $3\pi^2=29.6$ gives $2.15\times10^{25}\ \mathrm{m^{-3}}=2.1\times10^{19}\ \mathrm{cm^{-3}}$. A typically doped wafer with $n=10^{16}\ \mathrm{cm^{-3}}$ therefore occupies only about one in two thousand of the available states near the edge. This is why the simple Boltzmann statistics of Section 31.6 work so well, and why they fail once doping approaches $10^{19}\ \mathrm{cm^{-3}}$.
+
+### Lower dimensions
+
+If electrons are confined in one, two or three directions to a size comparable to their wavelength (a few nanometres), the density of states changes shape:
+
+| Dimensionality | Example | $g(E)$ near a sub-band edge |
 |---|---|---|
-| UHMWPE (molar mass 2–6 × 10⁶ g/mol) | Tough, low friction, wear resistant; $E\approx0.5$–1 GPa | Hip liners, knee tibial inserts |
-| PMMA | Rigid, transparent; $E\approx2$–3 GPa | Bone cement, intraocular lenses (historically), dentures |
-| PEEK, CF-PEEK | $E\approx3.6$ GPa (unfilled), 15–20 GPa (CF); radiolucent | Spinal cages, trauma plates |
-| Silicone (PDMS) | Soft, flexible, gas-permeable, stable | Catheters, shunts, breast implants, lens materials |
-| Polyurethanes | Tough, elastic, blood-compatible grades | Catheters, pacemaker-lead insulation, heart pumps |
-| PET (Dacron), ePTFE | Fibrous/porous, strong, stable | Large-diameter vascular grafts, sutures, sewing cuffs |
-| Polypropylene | Strong monofilament | Sutures, hernia mesh |
+| 3D (bulk) | Silicon wafer | $\propto\sqrt{E-E_c}$ |
+| 2D (quantum well, 2DEG, monolayer) | AlGaN/GaN channel, MoS$_2$ | constant, $m^*/\pi\hbar^2$ per sub-band (per unit area) |
+| 1D (nanowire, nanotube) | Carbon nanotube | $\propto1/\sqrt{E-E_n}$ |
+| 0D (quantum dot) | CdSe nanocrystal | discrete levels |
 
-Several of these were engineering polymers adopted with little modification, and their failures taught biomaterials science. **PMMA bone cement** is mixed in the operating theatre from a powder (pre-polymerised PMMA beads, initiator, radiopacifier such as BaSO₄ or ZrO₂) and liquid monomer; it grouts the stem into bone as a space filler, not an adhesive. Its exothermic polymerisation reaches peak temperatures of 60–80 °C at the cement surface, its residual monomer is cytotoxic, and its porosity and fatigue cracking contribute to aseptic loosening; vacuum mixing and antibiotic-loaded cements are refinements. **Polyester-urethane** foam coatings on breast implants degraded in the body, and early polyether-urethane lead insulation suffered environmental stress cracking and metal-ion oxidation (Chapter 21), problems solved by polycarbonate-urethanes and silicone–urethane copolymers. Long-term oxidation of gamma-sterilized UHMWPE is discussed in Section 31.8.
-
-### 31.4.2 Biodegradable polymers
-
-A **biodegradable** (or bioresorbable) polymer breaks down in the body into products that are metabolised or excreted. The workhorses are aliphatic polyesters, which degrade by **hydrolysis** of their ester bonds (Chapter 21):
-
-| Polymer | $T_g$ (°C) | $T_m$ (°C) | Modulus (GPa) | Typical loss of strength | Typical complete resorption |
-|---|---|---|---|---|---|
-| Poly(glycolic acid), PGA | 35–40 | 220–230 | 6–7 | 2–4 weeks | 6–12 months |
-| Poly(L-lactic acid), PLLA | 55–65 | 170–180 | 3–4 | 6–12 months | 2–5 years |
-| Poly(DL-lactic acid), PDLLA (amorphous) | 50–60 | — | 1.5–2 | 1–2 months | 12–16 months |
-| PLGA 50:50 | 45–55 | — (amorphous) | 1–2 | 1–2 months | 1–2 months |
-| Poly(ε-caprolactone), PCL | −60 | 58–63 | 0.2–0.4 | > 1 year | 2–4 years |
-
-Degradation rate follows chemistry and structure. PGA is more hydrophilic than PLA (no methyl group), so water penetrates faster. Crystallinity slows hydrolysis because water enters amorphous regions first, so PLLA (semicrystalline) lasts far longer than amorphous PDLLA. Copolymerising lactide and glycolide disrupts crystallinity, so PLGA 50:50 degrades faster than either homopolymer. PCL, hydrophobic and with a long methylene sequence, degrades over years and is used for long-term implants and drug depots.
-
-Hydrolysis is random chain scission, so to a first approximation the number-average molar mass decreases exponentially,
-
-$$
-M_n(t)=M_{n0}\,e^{-kt}
-$$
-
-while mass is lost only after chains have become short enough (a few kg/mol) to dissolve. Strength falls once $M_n$ drops below a few times the entanglement molar mass. A device therefore keeps its shape long after it has lost its strength (Figure 31.4).
-
-> **Status of the principle: First-order kinetics of polyester hydrolysis**
-> *Approximate.* Assumes random scission with a constant water concentration and no autocatalysis; it describes thin films and fibres well, but thick devices degrade faster inside than at the surface because acidic degradation products accumulate and catalyse hydrolysis.
-
-**Worked example — how long does a resorbable device keep its strength?** A PLLA interference screw has initial $M_n=150$ kg/mol and loses molar mass with a half-life of 25 weeks in vivo ($k=\ln2/25=0.0277$ per week). If strength is effectively lost when $M_n$ reaches 20 kg/mol, the time is $t=\ln(150/20)/0.0277=73$ weeks, about 17 months, ample for a ligament graft to integrate with bone. A PLGA 50:50 suture with $M_n=100$ kg/mol and a half-life of 3 weeks reaches 20 kg/mol in $\ln5/(\ln2/3)=7.0$ weeks, which suits soft-tissue closure. The thick screw also illustrates the autocatalysis warning: lactic acid trapped in its core lowers the local pH, interior degradation can outrun the surface, and late, sudden release of acidic fragments has caused sterile inflammatory reactions, one reason resorbable devices are kept thin or buffered with calcium carbonate or phosphate fillers.
-
-<!-- FIGURE 31.4 | figures/ch31/fig-31-4-polyester-degradation.png | plot | Biodegradable polyesters lose molar mass first, strength next and mass last; PGA and PLGA degrade in weeks, PLLA and PCL over years. | Content: (a) normalised number-average molar mass Mn/Mn0 (0-1) vs time on log axis 1 week to 5 years for PLGA 50:50 (half-life 3 weeks), PGA (~2 weeks), PDLLA (~8 weeks), PLLA (25 weeks), PCL (~1 year), exponential decays. (b) For PLLA screw: three curves vs time in months (0-60): Mn (falls first, crossing 20 kg/mol at ~17 months from 150 kg/mol), strength (retained to ~6 months then falling to near zero by ~18 months), mass (unchanged until ~24 months then falling to 0 at ~48 months). Shaded band "device holds load" and "device present but weak". -->
-
-Biodegradable polymers have mixed clinical history. Resorbable sutures (PGA, polyglactin) and PLGA drug depots are unquestioned successes. The everolimus-eluting PLLA coronary scaffold, approved in 2016, was withdrawn in 2017: its struts had to be about 150 µm thick (twice those of metallic stents) to compensate for the polymer's low stiffness and strength, and thrombosis rates were higher than for metal stents, a reminder that a material that is right in principle must also be right in the dimensions the mechanics imposes.
+The step-like 2D density of states is why quantum-well lasers have lower threshold currents and why the two-dimensional electron gas of a GaN high-electron-mobility transistor holds a fixed sheet density per volt. These materials are treated in Chapters 34 and 38. Figure 31.4 shows the bulk 3D case.
 
 ---
 
-## 31.5 Hydrogels, tissue scaffolds and tissue engineering
+## 31.6 Fermi level
 
-### 31.5.1 Hydrogels in medicine
+### The Fermi–Dirac distribution
 
-Hydrogels (Chapter 29) resemble soft tissue: they are mostly water, soft (moduli of 0.1 kPa to 1 MPa) and permeable to nutrients. Their medical uses include:
+Electrons are fermions: each state holds at most one electron of a given spin. In thermal equilibrium at temperature $T$, the probability that a state of energy $E$ is occupied is the **Fermi–Dirac function**
 
-- **Contact lenses.** pHEMA lenses (about 38 % water) were followed by silicone-hydrogel lenses, which combine hydrophilic monomers with siloxane-rich domains so that oxygen can diffuse through the silicone phase, raising oxygen transmissibility several-fold, the critical property for corneal health.
-- **Wound dressings** of alginate, hydrocolloid and polyurethane hydrogels that keep the wound moist and absorb exudate.
-- **Injectable fillers and lubricants**, mostly crosslinked hyaluronic acid, used in dermatology and for knee injections.
-- **Cell encapsulation**: alginate microcapsules that let insulin, glucose and oxygen pass while excluding antibodies and immune cells, depending on the mesh size calculated in Chapter 29. The fibrotic capsule of Section 31.1 is the main obstacle; chemically modified alginates that reduce macrophage adhesion are being tested.
-- **Drug delivery** (Section 31.7) and **soft electronics** interfaces with nerve tissue.
+$$
+f(E)=\frac{1}{1+\exp\!\left[(E-E_F)/k_BT\right]}
+$$
 
-### 31.5.2 Scaffolds and tissue engineering
+The parameter $E_F$, the **Fermi level**, is the energy at which the occupation probability is exactly one half. At $T=0$, $f$ is a step: every state below $E_F$ is full and every state above is empty. At finite temperature the step softens over a width of a few $k_BT$ ($k_BT=25.85$ meV at 300 K). The probability that a state is *empty*, which is the probability of finding a hole there, is $1-f(E)$.
 
-**Tissue engineering** aims to regenerate tissue rather than replace it with a permanent implant. The classical recipe combines three elements: cells (the patient's own or stem cells), a **scaffold** that gives them a three-dimensional structure, and signals (growth factors, mechanical loading). The scaffold must meet materials requirements that are in tension with one another:
+> **Status of the principle: Fermi–Dirac distribution**
+> *Fundamental.* It follows from statistical mechanics for indistinguishable particles obeying the Pauli principle, in thermal equilibrium. Out of equilibrium (under illumination or current injection) a single $E_F$ no longer describes both bands, and separate quasi-Fermi levels are needed (Chapter 32).
 
-- **Porosity and pore size.** Interconnected porosity of 70–90 % with pores of 100–500 µm for bone (so that blood vessels can grow in, with 300 µm or larger favoured) or 20–150 µm for soft tissues; but high porosity reduces stiffness and strength, which scale roughly as the square of relative density for open-cell foams.
-- **Degradation matched to tissue formation**, so that the scaffold hands over load gradually: PLGA, PCL, collagen, β-TCP and bioactive glass are chosen for their rates.
-- **Surface chemistry and stiffness** that direct cell behaviour: stem cells on substrates as soft as brain tissue (~1 kPa) tend toward neural lineages, on ~10 kPa toward muscle, and on stiffer substrates toward bone. Peptide sequences such as RGD (arginine–glycine–aspartic acid) are grafted to promote attachment.
-- **Manufacturability** in patient-specific shapes: salt leaching, freeze-drying, electrospinning (fibres of 0.1–5 µm resembling the collagen of extracellular matrix), and increasingly 3D printing and bioprinting of cell-laden hydrogel "bioinks" (Chapter 40).
+### The Fermi level is the electrochemical potential
 
-Commercial success has come mainly in simpler tissues (skin substitutes, cartilage cell implantation, bone-graft substitutes, decellularised tissue matrices); complex, vascularised organs remain research targets, limited above all by the need to supply oxygen beyond a diffusion distance of about 100–200 µm.
+Thermodynamically, $E_F$ is the chemical potential of the electrons, more precisely their electrochemical potential, which includes the electrostatic energy (Advanced Chemistry core for the general definition). Its most important property follows directly:
+
+> **In thermal equilibrium, the Fermi level is the same everywhere in a connected system.**
+
+If two materials with different Fermi levels are brought into contact, electrons flow from the higher to the lower until the Fermi levels align, building up the dipole layer and band bending that appear at every metal–semiconductor contact and p–n junction. A flat Fermi level in an equilibrium band diagram is a check that the diagram is correct. A gradient in the Fermi level drives current (Chapter 32).
+
+> **Status of the principle: constant Fermi level in equilibrium**
+> *Fundamental.* It is the thermodynamic condition for no net particle flow, the electronic counterpart of equal chemical potential in phase equilibrium.
+
+### Metals versus semiconductors
+
+In a **metal**, $E_F$ lies inside a partly filled band. For copper, the free-electron estimate with $n=8.47\times10^{28}\ \mathrm{m^{-3}}$ gives
+
+$$
+E_F=\frac{\hbar^2}{2m_0}\left(3\pi^2n\right)^{2/3}=7.0\ \mathrm{eV}
+$$
+
+measured from the band bottom, corresponding to a Fermi temperature $E_F/k_B\approx81\,000$ K. Thermal energy disturbs only a thin shell of electrons within a few $k_BT$ of $E_F$. This is why the electronic heat capacity of metals is small and why their carrier concentration does not change with temperature (Chapter 25).
+
+In a **semiconductor**, $E_F$ lies in the gap, where there are no states. It still matters, because the tails of $f(E)$ reach into both bands. Figure 31.4 shows the construction: the product $g_c(E)f(E)$ gives the electron distribution in the conduction band, and $g_v(E)[1-f(E)]$ gives the hole distribution in the valence band.
+
+<!-- FIGURE 31.4 | figures/ch31/fig-31-4-dos-fermi-carriers.png | plot | Density of states, Fermi–Dirac occupation and the resulting electron and hole distributions for an intrinsic and an n-type semiconductor. | Content: three side-by-side panels sharing a vertical energy axis (Ev at 0, Ec at 1.12 eV, about -0.3 to 1.4 eV). Panel 1: g(E) square-root curves above Ec and below Ev, zero in the gap. Panel 2: f(E) from 0 to 1 at 300 K, drawn for EF at midgap (solid) and for EF 0.2 eV below Ec (dashed, n-type). Panel 3: products g_c f (electrons, shaded) and g_v (1 - f) (holes, shaded), peaked about kT/2 inside each band; the n-type case shows a large electron population and a tiny hole population. Mark kT = 25.9 meV scale bar. -->
+
+![Figure 31.4 — Density of states, Fermi–Dirac occupation and the resulting electron and hole distributions for an intrinsic and an n-type semiconductor](../figures/ch31/fig-31-4-dos-fermi-carriers.png)
+
+*Figure 31.4 — Density of states, Fermi–Dirac occupation and the resulting electron and hole distributions for an intrinsic and an n-type semiconductor.*
+
+### The Boltzmann approximation
+
+When $E-E_F\gg k_BT$, the 1 in the denominator of $f$ is negligible and
+
+$$
+f(E)\approx\exp\!\left[-(E-E_F)/k_BT\right]
+$$
+
+This Maxwell–Boltzmann tail is accurate to better than 5 % when $E-E_F>3k_BT$ (at $3k_BT$, the exact value is $0.0474$ versus $0.0498$). A semiconductor in which $E_F$ lies more than about $3k_BT$ inside the gap from both band edges is called **non-degenerate**, and its carriers behave as a classical ideal gas.
+
+> **Status of the principle: Boltzmann approximation**
+> *Approximate.* Valid when the Fermi level lies more than about $3k_BT$ (roughly 80 meV at 300 K) below $E_c$ and above $E_v$. In silicon this corresponds to doping below about $10^{18}\ \mathrm{cm^{-3}}$. It fails in heavily doped (degenerate) contact and emitter regions and in the channel of a strongly inverted MOSFET, where full Fermi–Dirac statistics must be used.
+
+### Carrier concentrations
+
+With the Boltzmann approximation the integral of $g_c(E)f(E)$ over the conduction band can be done in closed form:
+
+$$
+n=\int_{E_c}^{\infty}g_c(E)f(E)\,dE=N_c\exp\!\left(-\frac{E_c-E_F}{k_BT}\right),\qquad N_c=2\left(\frac{2\pi m_n^*k_BT}{h^2}\right)^{3/2}
+$$
+
+$$
+p=N_v\exp\!\left(-\frac{E_F-E_v}{k_BT}\right),\qquad N_v=2\left(\frac{2\pi m_p^*k_BT}{h^2}\right)^{3/2}
+$$
+
+$N_c$ and $N_v$ are the **effective densities of states**. The whole band behaves as if it were a single level at $E_c$ (or $E_v$) holding $N_c$ (or $N_v$) states. Numerically,
+
+$$
+N_c=2.51\times10^{19}\left(\frac{m_n^*}{m_0}\right)^{3/2}\left(\frac{T}{300\ \mathrm K}\right)^{3/2}\ \mathrm{cm^{-3}}
+$$
+
+> **Status of the principle: $n=N_c e^{-(E_c-E_F)/k_BT}$**
+> *Derived.* It follows from the parabolic density of states and the Boltzmann approximation. It inherits the limits of both: non-degenerate material and carriers near the band edge.
+
+| Material | $m_n^*/m_0$ (DOS) | $m_p^*/m_0$ (DOS) | $N_c$ (cm⁻³) | $N_v$ (cm⁻³) |
+|---|---|---|---|---|
+| Ge | 0.56 | 0.29–0.37 | $1.0\times10^{19}$ | $(4\text{–}6)\times10^{18}$ |
+| Si | 1.09 | 0.81–1.15 | $2.9\times10^{19}$ | $(1.8\text{–}3.1)\times10^{19}$ |
+| GaAs | 0.067 | 0.53 | $4.4\times10^{17}$ | $9\times10^{18}$ |
+| 4H-SiC | 0.77 (3 valleys) | about 1 | $1.7\times10^{19}$ | $2.5\times10^{19}$ |
+| GaN | 0.20 | about 1.5 | $2.3\times10^{18}$ | $4.6\times10^{19}$ |
+
+The spread in the hole values reflects how strongly non-parabolic the valence band is: different authors fit different temperature ranges. GaAs, with its very light electron, has an effective density of states in the conduction band about 60 times smaller than silicon's. A modest doping of $4\times10^{17}\ \mathrm{cm^{-3}}$ already pushes its Fermi level to the band edge.
+
+### The law of mass action
+
+Multiply the expressions for $n$ and $p$. The Fermi level cancels:
+
+$$
+np=N_cN_v\exp\!\left(-\frac{E_g}{k_BT}\right)\equiv n_i^2
+$$
+
+The product $np$ depends only on the material ($E_g$, the effective masses) and the temperature, not on doping. Adding donors raises $n$ and, in equilibrium, lowers $p$ in exact proportion. This is the semiconductor analogue of the ionic product of water, $[\mathrm{H^+}][\mathrm{OH^-}]=K_w$, and it comes from the same thermodynamic argument (Advanced Chemistry core): the generation and recombination of electron–hole pairs is a reaction $0\rightleftharpoons e^-+h^+$ whose equilibrium constant is $n_i^2$.
+
+> **Status of the principle: law of mass action, $np=n_i^2$**
+> *Derived.* It holds in thermal equilibrium for non-degenerate material. It fails under illumination or carrier injection, where $np>n_i^2$, and in reverse-biased depletion regions, where $np<n_i^2$. The departure $np-n_i^2$ is exactly what drives recombination and generation (Chapter 32). In heavily doped material, bandgap narrowing raises the effective $n_i$.
+
+### Intrinsic material and the intrinsic Fermi level
+
+In a perfectly pure (**intrinsic**) semiconductor every electron in the conduction band came from the valence band, so $n=p=n_i$, with
+
+$$
+n_i=\sqrt{N_cN_v}\,\exp\!\left(-\frac{E_g}{2k_BT}\right)
+$$
+
+Setting $n=p$ gives the position of the **intrinsic Fermi level**:
+
+$$
+E_i=\frac{E_c+E_v}{2}+\frac{k_BT}{2}\ln\frac{N_v}{N_c}=\frac{E_c+E_v}{2}+\frac{3k_BT}{4}\ln\frac{m_p^*}{m_n^*}
+$$
+
+$E_i$ lies close to mid-gap, displaced toward the band with the lighter mass. In Si the shift is only a few meV. In GaAs, with $m_p^*/m_n^*\approx8$, it is about 40 meV above mid-gap.
+
+A useful equivalent form refers the carrier densities to $E_i$:
+
+$$
+n=n_i\,e^{(E_F-E_i)/k_BT},\qquad p=n_i\,e^{(E_i-E_F)/k_BT}
+$$
+
+Every decade of $n$ moves $E_F$ by $k_BT\ln10=59.5$ meV at 300 K.
+
+### Work function and electron affinity
+
+Two further energies fix the absolute position of the bands. The **work function** $\Phi$ is the energy from the Fermi level to the vacuum level just outside the surface. The **electron affinity** $\chi$ is the energy from the conduction-band edge to the vacuum level. For a semiconductor, $\chi$ is a material constant (4.05 eV for Si, 4.07 eV for GaAs), while $\Phi=\chi+(E_c-E_F)$ depends on doping. These quantities set the line-up of bands at heterojunctions and contacts. Chapter 34 treats them, together with the surface dipoles that make real alignments depart from the simple rules.
 
 ---
 
-## 31.6 Implants as material systems
+## 31.7 Effective mass
 
-### 31.6.1 Total hip replacement
+### Definition
 
-More than a million total hip replacements are performed worldwide each year, and registries report that about 95 % survive ten years. A hip (Figure 31.5) combines several materials, each chosen for a different function: a **stem** in the femur (Ti-6Al-4V or CoCr, cemented with PMMA or press-fitted with a porous or HA-coated surface for bone ingrowth), a **head** (CoCr, ZTA or alumina, 28–36 mm in diameter) fitted on a taper, a **liner** (polyethylene or ceramic) and an **acetabular shell** (titanium, porous coated or AM lattice) in the pelvis.
+An electron in a band responds to an applied force as if it had a mass different from $m_0$, because the lattice also pushes on it. Combining the group velocity of a wavepacket,
 
-The bearing couple has dominated the history of hip design because of the wear–particle–osteolysis chain. Each step releases particles of polyethylene of 0.1–1 µm, the size range macrophages phagocytose. Activated macrophages release cytokines that recruit osteoclasts, which resorb bone around the implant (**osteolysis**), leading to aseptic loosening, historically the commonest reason for revision.
+$$
+\mathbf v=\frac{1}{\hbar}\nabla_{\mathbf k}E
+$$
 
-**Worked example — wear debris from a polyethylene liner.** Wear of polyethylene against a polished CoCr head follows Archard's law (Chapter 37), $V=k\,F\,s$, with a wear factor of about $k=1\times10^{-6}$ mm³/(N m) for conventional UHMWPE in hip simulators. Take an average joint force of 2000 N, a sliding distance of about 25 mm per step and one million steps a year ($s=25$ km). The yearly wear volume is $V=10^{-6}\times2000\times25\,000=50$ mm³, which for a 28 mm head corresponds to a linear penetration of about $50/(\pi\times14^2)=0.08$ mm per year, in line with the 0.1–0.2 mm per year measured on retrieved conventional liners. If the debris is spheres of 0.5 µm diameter (volume $6.5\times10^{-11}$ mm³), the 50 mm³ amounts to about $8\times10^{11}$ particles a year. Clinical experience shows osteolysis becomes common when linear wear exceeds about 0.1 mm per year.
+with $\hbar\,d\mathbf k/dt=\mathbf F$ gives, in one dimension,
 
-> **Status of the principle: Archard wear law**
-> *Empirical.* Wear volume proportional to load and sliding distance fits steady-state sliding wear with a constant wear factor; in hips, the factor depends on cross-shear (multidirectional motion), lubrication, counterface roughness and third-body particles, so simulator tests under realistic kinematics are mandatory.
+$$
+\frac{dv}{dt}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}F\equiv\frac{F}{m^*},\qquad \frac{1}{m^*}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}
+$$
 
-The response was a materials solution. **Highly crosslinked polyethylene** (HXLPE), irradiated with 50–100 kGy of gamma or electron radiation and then remelted or annealed to eliminate the free radicals that would cause oxidation, or stabilised with vitamin E, reduces the wear factor by 80–95 % (because crosslinks resist the orientation-softening of chains under multidirectional sliding), at some cost in fatigue toughness. Registry data now show markedly lower revision for osteolysis with HXLPE. **Ceramic-on-ceramic** bearings (ZTA on ZTA) wear least of all, but can fracture and occasionally squeak. **Metal-on-metal** bearings, revived for large heads with low volumetric wear, failed as the chapter's opening describes, because their nanometre debris and ions provoked adverse local tissue reactions; most large-head MoM hips were withdrawn after 2010. The lesson is that wear *volume* is not the only metric: particle size, number, chemistry and the dissolved-ion load decide the biological response.
+The **effective mass** is the inverse curvature of the band. A sharply curved band (GaAs conduction band at Γ) has a light mass. A flat band has a heavy mass. In three dimensions the curvature is a tensor, and in an anisotropic valley the mass is different along different directions.
 
-<!-- FIGURE 31.5 | figures/ch31/fig-31-5-hip-knee-materials.png | schematic | A total hip and a total knee replacement are multi-material systems; each component is chosen for stiffness, wear, corrosion or fixation. | Content: (a) cross-section of a hip in pelvis and femur: Ti-6Al-4V stem with porous/HA-coated proximal region in femoral canal (cementless) or PMMA cement mantle (cemented, alternative shown dashed); CoCr or ZTA head 28-36 mm on 12/14 taper (taper corrosion site marked); HXLPE or ceramic liner; porous Ti or AM-lattice acetabular shell with screws. Labels with material, function and typical failure mode (aseptic loosening, osteolysis from 0.1-1 um particles, taper corrosion, stress shielding zone in proximal femur). (b) Knee: CoCr femoral component, UHMWPE/HXLPE tibial insert, Ti or CoCr tibial tray, PE patella button; wear sites (delamination, pitting) marked. -->
+> **Status of the principle: effective-mass approximation**
+> *Approximate.* It replaces the full crystal potential by a single parameter, valid when the carrier stays near a band extremum (where $E(\mathbf k)$ is parabolic) and when the applied fields vary slowly on the scale of the lattice constant. It is the reason one can use Newtonian mechanics, Boltzmann transport and the hydrogen-atom model for dopants (Chapter 32) inside a crystal. It fails for hot carriers, strongly non-parabolic bands and atomically sharp potentials.
 
-### 31.6.2 Total knee replacement
+Two consequences surprise newcomers.
 
-A knee replacement articulates a cast **CoCr femoral component** against a polyethylene **tibial insert** locked into a titanium or CoCr **tibial tray**. Its kinematics differ from the hip: rolling and sliding over a smaller, less conforming contact give high contact stresses (often above polyethylene's yield stress of about 20 MPa) and cyclic subsurface stresses. The historical failure mode was fatigue **delamination** and pitting of the insert, aggravated by oxidation of gamma-irradiated polyethylene sterilised in air and stored for years. Sterilisation in inert gas, remelted HXLPE and vitamin-E stabilisation have largely solved oxidation, and knee survival now matches hips at about 90–95 % at 15 years.
+- **Near the top of a band the curvature is negative**, so an electron there accelerates *against* the applied force. This is the physics behind the positive-mass hole: the missing electron at the top of the valence band has $m^*<0$, and the equivalent hole has $m_h^*=-m_e^*>0$.
+- **The effective mass is not the inertia of a different particle.** It is a property of the band, set by the crystal potential and the atomic orbitals that form the band. It can be changed by strain (strained-silicon channels, Chapter 34) and by alloying.
 
-### 31.6.3 Dental implants
+### Anisotropic valleys and the two averaged masses
 
-A dental implant is a threaded titanium (CP grade 4, Ti-6Al-4V or Ti–Zr) screw placed in the jaw bone, which osseointegrates over 3–6 months and then carries an abutment and crown. Ten-year survival above 95 % rests on surface engineering: grit blasting and acid etching create micro- and nano-roughness (Ra about 1–2 µm), increasing bone-to-implant contact and the torque needed to remove the screw several-fold relative to machined surfaces. Ceramic implants of zirconia are an alternative for metal-sensitive patients. The crown itself is now commonly monolithic zirconia or lithium-disilicate glass-ceramic (Chapter 17). The main long-term threat is **peri-implantitis**, a bacterial infection of the tissue around the implant, which links surface roughness (good for bone, bad for biofilm) to a trade-off between osseointegration and cleanability. Dental amalgam (Hg–Ag–Sn–Cu), used for 150 years and still among the most durable fillings, is being phased down under the Minamata Convention on mercury in favour of resin composites and glass-ionomer cements.
+The six conduction-band valleys of silicon are ellipsoids elongated along the $\langle100\rangle$ axes, with a **longitudinal** mass $m_l=0.98\,m_0$ along the axis and a **transverse** mass $m_t=0.19\,m_0$ perpendicular to it. Two different averages are needed, depending on what is being calculated.
 
-### 31.6.4 Cardiovascular stents and other blood-contacting devices
+**Density-of-states mass** (for counting carriers, $N_c$): the geometric mean of the three principal masses, multiplied by the valley degeneracy $M$:
 
-A coronary **stent** is a mesh tube expanded inside a narrowed artery to keep it open. Balloon-expandable stents must deform plastically to a larger diameter and then resist the artery's recoil: a high yield strength to resist recoil, but low enough to expand at balloon pressures, plus high ductility, radiopacity for X-ray visibility, and fatigue resistance for about 40 million heart beats a year. The first stents were 316L stainless steel with struts around 140 µm; CoCr (L605, MP35N) and platinum–chromium alloys, stronger and more radiopaque, allowed struts of 60–90 µm, which reduce vessel injury and restenosis. Self-expanding peripheral stents use superelastic NiTi (Chapter 29), whose constant plateau force and kink resistance suit vessels in the leg and neck that are bent and compressed.
+$$
+m_{\mathrm{dos}}=M^{2/3}\left(m_lm_t^2\right)^{1/3}
+$$
 
-Bare-metal stents reduced acute closure but 20–30 % of arteries renarrowed within months as smooth-muscle cells proliferated through the mesh (**in-stent restenosis**). **Drug-eluting stents** (DES) coat the struts with a thin polymer layer (5–15 µm) carrying an antiproliferative drug (sirolimus, everolimus, zotarolimus, paclitaxel) released over weeks to months, reducing restenosis below 10 %. Their polymers (originally durable PBMA/PEVA and SIBS, now fluoropolymers or biodegradable PLGA and PLLA) must not crack or delaminate when the stent expands by 200–300 %, must release the drug at the right rate (Section 31.7), and must not themselves provoke inflammation, which was linked to late stent thrombosis in early designs. Stent fatigue qualification simulates ten years of pulsation, about 400 million cycles.
+**Conductivity mass** (for mobility): the harmonic mean, because current in any direction is carried by valleys whose masses along that direction differ:
 
-Other blood-contacting devices show the same structure–property logic: mechanical heart valves use pyrolytic carbon leaflets for wear resistance and thromboresistance (but require lifelong anticoagulation), while bioprosthetic valves of glutaraldehyde-fixed bovine pericardium avoid anticoagulation but calcify and wear out in 10–20 years; large-diameter vascular grafts of woven PET or expanded PTFE work, but small-diameter (< 6 mm) synthetic grafts thrombose, a problem tissue engineering is attacking.
+$$
+m_{\mathrm{cond}}=\frac{3}{1/m_l+2/m_t}
+$$
+
+**Worked example — the two electron masses of silicon.** With $m_l=0.98$, $m_t=0.19$ and $M=6$: $m_lm_t^2=0.98\times0.0361=0.0354$, whose cube root is $0.328$; $6^{2/3}=3.30$; so $m_{\mathrm{dos}}=3.30\times0.328=1.08\,m_0$. This gives $N_c=2.51\times10^{19}\times1.08^{3/2}=2.8\times10^{19}\ \mathrm{cm^{-3}}$, consistent with the table in Section 31.6. For the conductivity mass, $1/0.98+2/0.19=1.02+10.53=11.55$, so $m_{\mathrm{cond}}=3/11.55=0.26\,m_0$. Silicon electrons are counted as if they were heavier than free electrons, because there are six valleys, but they move as if they were four times lighter. The same construction for germanium ($m_l=1.64$, $m_t=0.082$, four valleys) gives $m_{\mathrm{dos}}=0.56\,m_0$ and $m_{\mathrm{cond}}=0.12\,m_0$. This lighter conductivity mass is one reason Ge has more than twice the electron mobility of Si.
+
+### Representative effective masses
+
+| Material | Electrons (in units of $m_0$) | Heavy holes | Light holes | Where it matters |
+|---|---|---|---|---|
+| Si | $m_l=0.98$, $m_t=0.19$; cond. 0.26 | 0.49 | 0.16 | Mobility anisotropy; strain engineering |
+| Ge | $m_l=1.64$, $m_t=0.082$; cond. 0.12 | 0.33 | 0.043 | High hole mobility; Ge p-channels |
+| GaAs | 0.067 | 0.51 | 0.082 | Very high electron mobility; HEMTs |
+| InP | 0.080 | 0.6 | 0.09 | Fast electronics; 1.55 µm photonics |
+| In$_{0.53}$Ga$_{0.47}$As | 0.041 | 0.46 | 0.05 | Highest-speed transistors, detectors |
+| InSb | 0.014 | 0.43 | 0.015 | Magnetic sensors, mid-IR detectors |
+| GaN | 0.20 | about 1.4 | about 0.3 | Moderate mobility; heavy, slow holes |
+| 4H-SiC | 0.29–0.42 (anisotropic, 3 valleys) | about 1 | about 0.5 | Moderate, anisotropic mobility |
+
+Light electrons give high mobility and high peak velocity (Chapter 32), but also a small density of states, easy degeneracy, strong quantum confinement and more tunnelling leakage. Heavy holes, as in GaN, are the main reason p-type wide-gap materials conduct poorly.
+
+### Non-parabolicity
+
+Far from the band minimum, $E(\mathbf k)$ flattens and the effective mass grows. In narrow-gap materials, where the conduction and valence bands interact strongly, this happens within a few tens of meV. A common correction is $E(1+E/E_g)=\hbar^2k^2/2m^*$. Non-parabolicity matters for heavily doped material, hot carriers and quantum wells. It is the reason the hole density-of-states mass of silicon has values from 0.81 to 1.15 $m_0$ in the literature.
 
 ---
 
-## 31.7 Drug delivery systems
+## 31.8 Temperature dependence of carrier populations
 
-### 31.7.1 Why control release?
+### The intrinsic concentration
 
-A tablet or injection produces a concentration peak followed by decay: too high at first (toxicity), too low later (no effect), and repeated dosing is needed. A **controlled-release** system keeps the concentration in a therapeutic window for a defined time, targets the site where it is needed, protects fragile drugs (proteins, nucleic acids) from degradation, and improves adherence. Materials engineering provides the release mechanism.
-
-### 31.7.2 Release mechanisms
-
-- **Diffusion through a membrane (reservoir systems).** A drug core surrounded by a rate-controlling polymer membrane releases at a constant rate as long as the core concentration stays saturated (**zero order**), by Fick's first law (Chapter 8): $dM/dt=ADK\Delta C/\ell$ for membrane area $A$, thickness $\ell$, partition coefficient $K$. Examples are transdermal patches (nicotine, fentanyl), contraceptive implants in ethylene–vinyl acetate rods and intrauterine systems.
-- **Diffusion from a matrix (monolithic systems).** Drug dispersed in a polymer matrix at concentration $C_0$ above its solubility $C_s$ in the polymer dissolves at a receding front. Higuchi's analysis gives the cumulative release per unit area
-$$
-Q=\sqrt{D\,(2C_0-C_s)\,C_s\,t}
-$$
-so release scales as $\sqrt t$: fast at first, slowing with time.
-- **Degradation- and erosion-controlled release.** In PLGA microspheres and implants, the drug is released as the polymer hydrolyses (Section 31.4), with an initial burst from surface drug, a lag, and then erosion-controlled release over weeks to months. Monthly and three-monthly injections of peptide hormones (leuprolide) and of antipsychotics use this mechanism.
-- **Osmotic systems.** A tablet with a semipermeable shell draws water in at a constant rate and pumps drug solution through a laser-drilled orifice at zero order.
-- **Stimulus-responsive systems.** Hydrogels that swell with pH, temperature or glucose (Chapter 29) release in a chosen environment.
-- **Nanocarriers.** Liposomes (lipid bilayers, Chapter 29) carry doxorubicin in a polyethylene-glycol-coated "stealth" form that circulates for days; **lipid nanoparticles** of ionisable lipids, cholesterol, phospholipid and PEG-lipid protect mRNA and release it into cells, the basis of mRNA vaccines; polymeric micelles and nanoparticles of PLGA and PEG–PLA carry poorly soluble drugs. Passive accumulation in tumours through leaky blood vessels was once expected to deliver large fractions of a dose; in practice typically less than 1 % of injected nanoparticles reach a solid tumour, and targeting remains a central research problem.
-
-> **Status of the principle: Higuchi square-root-of-time release**
-> *Approximate.* Derived for a planar matrix with $C_0\gg C_s$, perfect sink conditions and a constant diffusivity; it fits the first 50–60 % of release from many matrix systems but not swelling or eroding matrices, where empirical power laws $M_t/M_\infty=kt^n$ are fitted instead.
-
-**Worked example — release from a drug-eluting stent coating.** A coating 10 µm thick contains drug at $C_0=200$ kg/m³ (20 wt% loading), solubility in the polymer $C_s=1$ kg/m³, and diffusivity $D=1\times10^{-15}$ m²/s. The drug load per unit area is $C_0\ell=200\times10^{-5}=2\times10^{-3}$ kg/m² (200 µg/cm², close to commercial loadings). After one day ($t=8.64\times10^{4}$ s), $Q=\sqrt{10^{-15}\times399\times1\times8.64\times10^{4}}=1.86\times10^{-4}$ kg/m², 9 % of the load; after 7 days 25 %; after 28 days 49 %. Half the drug is released when $Q=10^{-3}$ kg/m², at $t=(10^{-3})^2/(10^{-15}\times399)=2.5\times10^{6}$ s, about 29 days, matching the one-to-three-month window over which smooth-muscle proliferation must be suppressed. Because $Q\propto\sqrt{D}$, a tenfold change in diffusivity (a different polymer, or a different crystallinity of the same one) changes the release time tenfold, which is why coating morphology must be controlled as tightly as composition (Figure 31.6).
-
-<!-- FIGURE 31.6 | figures/ch31/fig-31-6-drug-release-profiles.png | plot | Release mechanism sets the shape of the release curve: zero order from reservoirs, square root of time from matrices, burst-lag-erosion from degrading polyesters. | Content: cumulative fraction released (0-1) vs time in days (0-90). Curves: reservoir system (straight line reaching 1 at 90 days); Higuchi matrix with D = 1e-15 m2/s, C0 = 200, Cs = 1 kg/m3, 10 um coating (9 % at 1 day, 25 % at 7 days, 49 % at 28 days, dashed beyond 60 %); same with D = 1e-14 (half release at ~3 days); PLGA microsphere degradation-controlled (15 % burst at day 1, lag to day ~20, sigmoidal erosion phase to ~90 % at day 60). Shaded horizontal band on an inset plasma-concentration vs time graph showing therapeutic window, with conventional repeated bolus dosing oscillating outside it and controlled release staying inside. -->
-
----
-
-## 31.8 Sterilization, testing and regulation
-
-### 31.8.1 Sterilization
-
-Every implant must be sterile, and every sterilization method interacts with the material. Sterility is defined statistically by a **sterility assurance level** (SAL): the probability that a single item is non-sterile after the process, normally $10^{-6}$ for implants. Microbial death under a constant lethal condition is first order, so the surviving population falls by a factor of ten in each **D-value** of exposure:
+Combining Sections 31.4–31.6 gives the intrinsic carrier concentration as a function of temperature:
 
 $$
-N(t)=N_0\,10^{-t/D}
+n_i(T)=\sqrt{N_c(300)N_v(300)}\left(\frac{T}{300}\right)^{3/2}\exp\!\left(-\frac{E_g(T)}{2k_BT}\right)
 $$
 
-> **Status of the principle: Log-linear microbial inactivation**
-> *Empirical.* First-order kinetics fitted to survivor curves of standard bioindicator organisms; real curves show shoulders and tails (clumped or resistant subpopulations), which is why validated processes add safety margins.
+The power-law prefactor changes slowly. The exponential dominates, and it is controlled by the ratio $E_g/k_BT$. At 300 K, $E_g/2k_BT$ is 21.7 for silicon and 63 for 4H-SiC, and the exponential factors differ by about 18 orders of magnitude.
 
-**Worked example — designing a steam cycle.** A device carries a bioburden of $10^{3}$ organisms and must reach SAL $10^{-6}$, a reduction of $10^{9}$, or 9 D-values. For a resistant spore with $D_{121}=1.5$ min at 121 °C, the exposure is $9\times1.5=13.5$ min, which is why the standard steam cycle is 15 minutes at 121 °C. With a $z$-value of 10 K (the temperature rise that reduces $D$ tenfold), at 134 °C $D=1.5\times10^{-1.3}=0.075$ min and 9 D-values take 0.68 min; the common 3-minute cycle at 134 °C carries a large margin.
+**Worked example — the intrinsic concentration of silicon at 300 K.** Take $N_c=2.86\times10^{19}\ \mathrm{cm^{-3}}$, $N_v=3.10\times10^{19}\ \mathrm{cm^{-3}}$ (the values of Green, which fit measured $n_i$ data) and $E_g=1.1245$ eV from the Varshni relation. Then $\sqrt{N_cN_v}=\sqrt{8.87\times10^{38}}=2.98\times10^{19}\ \mathrm{cm^{-3}}$. With $k_BT=0.025852$ eV, $E_g/2k_BT=1.1245/0.051704=21.75$, and $e^{-21.75}=3.59\times10^{-10}$. Therefore
 
-The materials consequences differ by method:
+$$
+n_i=2.98\times10^{19}\times3.59\times10^{-10}=1.07\times10^{10}\ \mathrm{cm^{-3}}
+$$
 
-| Method | Conditions | Suited to | Materials concerns |
+Careful measurements give $(0.97\text{–}1.0)\times10^{10}\ \mathrm{cm^{-3}}$, and $1.0\times10^{10}\ \mathrm{cm^{-3}}$ is the value used throughout this book. Older texts quote $1.45\times10^{10}$ or $1.5\times10^{10}$. The differences come from small differences in $E_g$ and in the hole mass: an error of only 10 meV in $E_g$ changes $n_i$ by $e^{0.01/0.0517}=1.21$, or 21 %. Using the older $N_v=1.04\times10^{19}\ \mathrm{cm^{-3}}$ with $E_g=1.12$ eV gives $6.7\times10^{9}\ \mathrm{cm^{-3}}$. Exponential sensitivity means that any quantity computed from $n_i$ (leakage current, minority-carrier density) inherits an uncertainty of tens of per cent unless the parameter set is self-consistent.
+
+Silicon contains $5.0\times10^{22}$ atoms per cubic centimetre and $2.0\times10^{23}$ valence electrons. At room temperature only one valence electron in $2\times10^{13}$ is free. The intrinsic resistivity, with $\mu_n+\mu_p\approx1850\ \mathrm{cm^2/(V\,s)}$, is $1/(qn_i(\mu_n+\mu_p))\approx3.4\times10^{5}\ \Omega$ cm. Undoped silicon is a fairly good insulator, and every useful conductivity comes from doping (Chapter 32).
+
+### Comparison across materials
+
+| Material | $E_g$ (eV) | $n_i$ at 300 K (cm⁻³) | Temperature at which $n_i=10^{15}\ \mathrm{cm^{-3}}$ (approx.) |
 |---|---|---|---|
-| Steam (autoclave) | 121 °C 15 min or 134 °C 3 min, saturated steam | Metals, ceramics, glass, some polymers (PP, PSU, PEEK) | Hydrolysis of polyesters; distortion above $T_g$; zirconia ageing |
-| Ethylene oxide | 30–60 °C, gas, humidity, aeration | Heat-sensitive polymers, complex devices, catheters | Toxic, carcinogenic residues (limits in ISO 10993-7); long aeration |
-| Gamma radiation | 25 kGy typical (Co-60) | Single-use disposables, packaged implants | Chain scission and crosslinking: PE oxidation, PTFE and PP embrittlement, yellowing of PC and PVC |
-| Electron beam | 25 kGy in seconds | Thin, low-density products | Same chemistry as gamma; limited penetration |
-| Hydrogen peroxide plasma/vapour | 40–50 °C | Heat- and moisture-sensitive instruments | Not for cellulose or liquids; limited lumen penetration |
+| Ge | 0.66 | $2\times10^{13}$ | about 390 K |
+| Si | 1.12 | $1.0\times10^{10}$ | about 545 K |
+| GaAs | 1.42 | $2\times10^{6}$ | about 770 K |
+| 4H-SiC | 3.26 | $\sim10^{-8}$ | about 1350 K |
+| GaN | 3.39 | $\sim10^{-10}$ | about 1400 K |
 
-The polyethylene story is the clearest example. Gamma irradiation in air creates free radicals in UHMWPE; trapped in crystalline regions, they react with oxygen over years on the shelf and in the body, causing chain scission, embrittlement and the delamination of knee inserts of the 1990s. Changing the sterilization atmosphere to inert gas, then remelting and vitamin E stabilisation, solved a problem that was not visible in any short-term test.
+The values of $n_i$ for the wide-gap materials are notional: a cubic centimetre of 4H-SiC at room temperature contains, on average, no thermally generated carriers at all, and the real carrier density is set entirely by impurities and defects. Figure 31.5 plots $n_i$ against $1000/T$.
 
-### 31.8.2 Biological and mechanical testing
+<!-- FIGURE 31.5 | figures/ch31/fig-31-5-ni-vs-temperature.png | plot | Intrinsic carrier concentration versus inverse temperature for Ge, Si, GaAs, 4H-SiC and GaN, showing the exponential dependence on band gap and the temperatures at which each material becomes intrinsic for typical doping. | Content: semilog plot, x axis 1000/T from 0.5 to 4.0 K^-1 with a secondary top axis in degrees C (−25, 25, 125, 300, 600, 1000 C), y axis n_i from 1e-10 to 1e18 cm^-3. Five nearly straight lines with slopes proportional to Eg: Ge (2e13 at 300 K), Si (1.0e10 at 300 K, 5e12 at 398 K, 1e15 near 545 K), GaAs (2e6 at 300 K), 4H-SiC (about 1e-8 at 300 K, 1e15 near 1350 K), GaN (about 1e-10 at 300 K). Horizontal dashed lines at 1e14 and 1e15 cm^-3 labelled typical drift-layer doping. Vertical band shading 125 C to 175 C labelled automotive and industrial junction limits. -->
 
-**Biological evaluation** follows the ISO 10993 series, organised as risk management (ISO 14971) rather than a fixed checklist. The type and duration of body contact (surface, external communicating, implant; limited < 24 h, prolonged up to 30 days, long-term > 30 days) determine which end-points must be addressed: chemical characterisation of extractables and leachables (part 18) and toxicological risk assessment, cytotoxicity (part 5), sensitisation and irritation (parts 10 and 23), systemic toxicity (part 11), genotoxicity (part 3), implantation (part 6), haemocompatibility (part 4), and degradation products of polymers, ceramics and metals (parts 13–15). Increasingly, chemical characterisation and existing data replace animal tests where they can.
+![Figure 31.5 — Intrinsic carrier concentration versus inverse temperature for Ge, Si, GaAs, 4H-SiC and GaN, showing the exponential dependence on band gap and the temperatures at which each material becomes intrinsic for typical doping](../figures/ch31/fig-31-5-ni-vs-temperature.png)
 
-**Mechanical and functional testing** reproduces the loads of service on the finished device, not just on material coupons: fatigue of femoral stems under a cyclic load of several kilonewtons for 5–10 million cycles (ISO 7206-4), hip and knee wear in joint simulators for 5 million cycles with lubricant of bovine serum (ISO 14242, ISO 14243), fatigue of stents for 400 million cycles of simulated pulsation with finite-element analysis of strain amplitude, and corrosion tests of modular tapers under fretting. The metal-on-metal story shows the limits: simulators run with ideal cup positioning missed the edge-loading conditions that occurred in patients. Since then, standards have added adverse-condition testing.
+*Figure 31.5 — Intrinsic carrier concentration versus inverse temperature for Ge, Si, GaAs, 4H-SiC and GaN, showing the exponential dependence on band gap and the temperatures at which each material becomes intrinsic for typical doping.*
 
-### 31.8.3 Regulation
+### The temperature limit of a material
 
-Medical devices are regulated by risk class. In the United States, the Food and Drug Administration places devices in Class I (low risk, such as bandages), Class II (moderate, such as many orthopaedic screws and catheters) and Class III (life-sustaining or implanted high-risk devices, such as heart valves and coronary stents). Most Class II devices reach the market by a **510(k)** notification showing substantial equivalence to an existing device; Class III devices require **premarket approval** with clinical evidence. In the European Union the Medical Device Regulation (EU 2017/745) uses Classes I, IIa, IIb and III, with notified bodies auditing technical files and quality systems (ISO 13485), and it has tightened clinical-evidence and post-market surveillance requirements, partly in response to the metal-on-metal hip and breast-implant scandals. Joint registries, which track every implant and revision in a country, provide the long-term field data that no laboratory test can, and were the first to signal the metal-on-metal problem.
+A doped semiconductor works as designed only as long as the dopant-controlled carrier density exceeds $n_i$. Once $n_i$ approaches the doping, the material becomes intrinsic: carrier density and resistivity stop being controlled by design and start falling exponentially with temperature, and p–n junctions lose their rectifying behaviour.
 
-For the materials engineer, regulation has three consequences. A material's history matters: a grade with a long record in a similar application (Ti-6Al-4V ELI, CoCrMo, UHMWPE) can be justified by equivalence, while a new alloy or polymer needs the full biological evaluation, so innovation in biomaterials is slow and expensive. Processing is part of the material: a change of supplier, sintering furnace, sterilization method or surface treatment can require re-validation, as the zirconia recall showed. And the evidence is never complete: post-market surveillance treats every implanted device as part of a continuing experiment, so the structure–property–performance chain of this book is extended here by a final link, the patient's outcome.
+**Worked example — the leakage problem of the opening, and the intrinsic temperature.** Leakage from thermal generation in a reverse-biased silicon junction scales with $n_i$. Recompute $n_i$ at 125 °C (398.15 K). The Varshni relation gives $E_g=1.170-4.73\times10^{-4}\times398.15^2/(398.15+636)=1.0975$ eV. The prefactor grows as $(398.15/300)^{3/2}=1.529$, giving $\sqrt{N_cN_v}=4.55\times10^{19}\ \mathrm{cm^{-3}}$. With $k_BT=0.03431$ eV, $E_g/2k_BT=15.99$ and $e^{-15.99}=1.13\times10^{-7}$, so $n_i(125\ ^\circ\mathrm C)=5.2\times10^{12}\ \mathrm{cm^{-3}}$. At 25 °C the same procedure gives $9.2\times10^{9}\ \mathrm{cm^{-3}}$. The ratio is about 560: generation leakage rises by a factor of over 500 for a 100 K rise. (Diffusion leakage scales as $n_i^2$ and rises by $3\times10^5$.) Near room temperature $n_i$ doubles roughly every 9 K.
+
+Now ask when a silicon drift layer doped at $N_D=10^{15}\ \mathrm{cm^{-3}}$ stops being extrinsic. Iterating the same formula, $n_i$ reaches $10^{14}\ \mathrm{cm^{-3}}$ (10 % of the doping) near 470 K, about 200 °C, and equals the doping near 545 K, about 270 °C. This is why silicon power devices are rated at 150–175 °C junction temperature. For 4H-SiC with the same doping, $n_i$ does not reach $10^{15}\ \mathrm{cm^{-3}}$ until about 1350 K. The silicon carbide device is limited not by its semiconductor but by its metallization, die attach, gate oxide and package (Chapters 34 and 51).
+
+> **Status of the principle: exponential temperature dependence of $n_i$**
+> *Derived.* It follows from the law of mass action with temperature-dependent $E_g$ and $N_{c,v}\propto T^{3/2}$. In plots of $\ln(n_iT^{-3/2})$ versus $1/T$ the slope gives $E_g(0)/2k_B$, extrapolated to 0 K, not $E_g$ at the measurement temperature, because of the linear part of the Varshni shift.
+
+### What else changes with temperature
+
+The intrinsic concentration is only the start. In a doped semiconductor, temperature also controls the fraction of dopants that are ionized (freeze-out below about 100 K in Si, and at room temperature for deep acceptors in SiC and GaN), the mobility (falling roughly as $T^{-1.5}$ to $T^{-2.4}$ as phonon scattering grows), and the recombination lifetime. These are properties of doped, real material and are the subject of Chapter 32, which also draws the full curve of carrier density from cryogenic to intrinsic temperatures.
+
+---
+
+## 31.9 Direct and indirect band gaps
+
+### Two shapes of band edge
+
+Section 31.2 showed that the valence-band maximum of the common semiconductors lies at $\Gamma$, but that the conduction-band minimum can lie at $\Gamma$ or elsewhere in the zone. This difference divides semiconductors into two classes.
+
+- **Direct gap**: conduction-band minimum and valence-band maximum at the same $\mathbf k$ (both at $\Gamma$). Examples: GaAs, InP, InGaAs, GaN, InGaN, ZnO, AlN, CdTe, and the organic-inorganic perovskites.
+- **Indirect gap**: the extrema are at different $\mathbf k$. Examples: Si (minimum near X), Ge (at L), GaP, 4H-SiC, AlAs, diamond.
+
+Figure 31.3 shows the two shapes.
+
+### Why it matters: conservation of crystal momentum
+
+An optical transition must conserve both energy and crystal momentum. A photon carries a lot of energy but very little momentum. For a photon at the silicon gap ($\lambda=1.1$ µm) the wavevector is $2\pi/\lambda=5.7\times10^6\ \mathrm{m^{-1}}$. The Brillouin zone of silicon extends to about $2\pi/a=1.16\times10^{10}\ \mathrm{m^{-1}}$, so the photon wavevector is only $5\times10^{-4}$ of the zone size. On a band diagram, optical transitions are vertical lines.
+
+- In a **direct-gap** material, an electron at the bottom of the conduction band and a hole at the top of the valence band have the same $\mathbf k$. They can recombine and emit a photon in a single, fast, first-order process.
+- In an **indirect-gap** material, the electron at the conduction minimum has a crystal momentum of order $0.85\times2\pi/a$ that the photon cannot absorb. Recombination requires a third particle, a **phonon**, to supply or remove the momentum. A second-order process involving three particles is much less probable, so radiative recombination is slow and loses out to non-radiative channels via defects (Chapter 32).
+
+> **Status of the principle: k-conservation in optical transitions**
+> *Fundamental.* It follows from the translational symmetry of the crystal (conservation of crystal momentum), combined with the negligible momentum of an optical photon. It is relaxed when translational symmetry is broken: in amorphous silicon, in heavily alloyed or defect-bound states (the isoelectronic N trap in GaP:N, used in green LEDs), and in nanostructures small enough that $k$ is no longer a good quantum number (porous Si, Si nanocrystals, Chapter 38).
+
+### The radiative coefficient: a factor of 10⁴
+
+The strength of band-to-band radiative recombination is measured by the coefficient $B$ in the rate $R=Bnp$ (Chapter 32):
+
+| Material | Gap type | $B$ at 300 K (cm³/s) |
+|---|---|---|
+| Si | indirect | $\approx1\times10^{-14}$ |
+| 4H-SiC | indirect | $\approx1.5\times10^{-12}$ |
+| GaN | direct | $\approx(1\text{–}2)\times10^{-11}$ |
+| GaAs | direct | $\approx(1\text{–}7)\times10^{-10}$, often $2\times10^{-10}$ |
+
+GaAs recombines radiatively about $10^4$ times faster than silicon at equal carrier densities. In silicon the radiative lifetime at $10^{17}\ \mathrm{cm^{-3}}$ doping is about 1 ms, while the defect-assisted lifetime in good material is microseconds to milliseconds, so most recombination produces heat. In GaAs the radiative lifetime at the same doping is tens of nanoseconds and wins. This one number decides that LEDs and lasers are made from direct-gap materials (Chapter 35), and it explains the opening question: the indicator LED on the sensor board is InGaN or AlGaInP, not Si or SiC.
+
+### Absorption: both work, but not equally well
+
+Absorption is the reverse process. Indirect absorption also needs a phonon and is weak near the edge, but at higher photon energies a direct transition becomes available (at $\Gamma$, about 3.4 eV in Si) and absorption becomes strong in any material. The absorption coefficient $\alpha$ (light intensity decays as $e^{-\alpha x}$) near the edge rises much more steeply in a direct-gap material: roughly $\alpha\propto(\hbar\omega-E_g)^{1/2}$ for direct and $\alpha\propto(\hbar\omega-E_g\pm E_{\mathrm{ph}})^2$ for phonon-assisted indirect transitions, where $E_{\mathrm{ph}}$ is the phonon energy. Figure 31.6 compares the measured curves.
+
+<!-- FIGURE 31.6 | figures/ch31/fig-31-6-absorption-coefficient.png | plot | Optical absorption coefficient versus photon energy for silicon and germanium (indirect) and gallium arsenide and indium phosphide (direct), showing the slow rise above an indirect edge and the abrupt rise above a direct edge. | Content: semilog plot, x axis photon energy 0.6 to 3.5 eV (top axis wavelength 2000 to 350 nm), y axis absorption coefficient 1e0 to 1e7 cm^-1, right axis absorption depth 1/alpha from 10 mm to 1 nm. Si: about 3.5 cm^-1 at 1.13 eV (1100 nm), 64 cm^-1 at 1.24 eV (1000 nm), 850 cm^-1 at 1.55 eV (800 nm), about 4e3 at 2.07 eV (600 nm), 1e6 above 3.4 eV. Ge: indirect tail from 0.66 eV, sharp step to about 5e3 cm^-1 at the direct gap 0.80 eV (1550 nm) and 1e4 to 1e5 above. GaAs: steep edge at 1.42 eV reaching about 1e4 cm^-1 within 0.05 eV, 1.2e4 at 1.55 eV. InP: steep edge at 1.34 eV. Annotate 1310 nm and 1550 nm telecom lines and 850 nm. -->
+
+![Figure 31.6 — Optical absorption coefficient versus photon energy for silicon and germanium (indirect) and gallium arsenide and indium phosphide (direct), showing the slow rise above an indirect edge and the abrupt rise above a direct edge](../figures/ch31/fig-31-6-absorption-coefficient.png)
+
+*Figure 31.6 — Optical absorption coefficient versus photon energy for silicon and germanium (indirect) and gallium arsenide and indium phosphide (direct), showing the slow rise above an indirect edge and the abrupt rise above a direct edge.*
+
+**Worked example — how thick must an absorber be?** To absorb 90 % of light that enters, the thickness must satisfy $e^{-\alpha d}=0.1$, so $d=\ln10/\alpha=2.303/\alpha$. At 800 nm, silicon has $\alpha\approx850\ \mathrm{cm^{-1}}$, so $d=2.303/850=2.7\times10^{-3}$ cm $=27$ µm. GaAs has $\alpha\approx1.2\times10^4\ \mathrm{cm^{-1}}$ at the same wavelength, so $d=2.303/1.2\times10^4=1.9\times10^{-4}$ cm $=1.9$ µm. The indirect-gap absorber must be about 14 times thicker. For the near-infrared at 1000 nm, silicon's $\alpha$ falls to about 64 cm⁻¹ and the 90 % thickness grows to 360 µm, thicker than many wafers. This is why silicon solar cells use textured surfaces and back reflectors to lengthen the optical path, why silicon photodiodes lose responsivity beyond about 950 nm, and why thin-film absorbers such as CdTe and perovskites need only a micrometre or two (Chapters 35 and 40). Germanium is indirect too, but its direct gap at $\Gamma$ lies only 0.14 eV above the indirect gap, at 0.80 eV (1.55 µm), so it absorbs strongly at the main telecommunication wavelength. This is why Ge-on-Si photodetectors are used in silicon photonics.
+
+### Summary of the consequences
+
+| Property | Direct gap (GaAs, InP, GaN) | Indirect gap (Si, Ge, SiC) |
+|---|---|---|
+| Radiative coefficient $B$ | High ($10^{-11}$–$10^{-10}$ cm³/s) | Low ($10^{-14}$–$10^{-12}$ cm³/s) |
+| Light emission | Efficient: LEDs, lasers | Inefficient; recombination mostly non-radiative |
+| Absorption near the edge | Steep; µm-thick absorbers | Gradual; tens to hundreds of µm |
+| Minority-carrier lifetime | Short (ns), limited by radiative recombination | Long (µs–ms) in clean material |
+| Diffusion length | µm | 100 µm–mm in clean Si |
+| Typical uses | Optoelectronics, fast low-noise RF | Logic, power, photodetection, solar cells |
+
+The long lifetime of indirect-gap silicon, a handicap for emitting light, is an advantage for bipolar power devices and solar cells, which need minority carriers to survive long enough to diffuse across thick regions. Chapter 32 quantifies this. The material choice follows the physics.
 
 ---
 
@@ -358,15 +650,14 @@ For the materials engineer, regulation has three consequences. A material's hist
 
 | Open question | Where it is answered |
 |---|---|
-| How is the passive film formed and broken, and how are pitting, crevice and fretting corrosion analysed? | Chapters 34 and 35 |
-| How do Archard wear, lubrication regimes and contact mechanics apply to joint bearings? | Chapter 37 |
-| Why is titanium processed as α, α+β or β alloys, and how does that set its properties? | Chapter 16 |
-| How does transformation toughening work in zirconia, and why do ceramics follow Weibull statistics? | Chapters 14 and 17 |
-| How does hydrolytic degradation depend on polymer chemistry and crystallinity? | Chapters 20 and 21 |
-| How are porous titanium implants and scaffolds made by additive manufacturing and qualified? | Chapter 40 |
-| How are failed implants investigated and their failure statistics analysed? | Chapter 36 |
-| How are surfaces of implants characterised (XPS, contact angle, roughness) and protein layers studied? | Chapters 37 and 42 |
-| How can multi-objective selection balance modulus, strength, corrosion and cost for an implant? | Chapter 48 |
-| How do the lifecycle and resource footprint of single-use medical devices compare? | Chapter 49 |
+| How do donors and acceptors set $n$, $p$ and $E_F$, and what happens at very low and very high temperatures in doped material? | Chapter 32 |
+| What limits mobility and velocity, and how do carriers diffuse and recombine? | Chapter 32 |
+| How do Si, Ge, the III–V compounds, SiC, GaN, Ga$_2$O$_3$, diamond, amorphous, organic and 2D semiconductors compare in practice? | Chapter 33 |
+| How do bands line up at heterojunctions, surfaces and contacts, and what are interface states? | Chapter 34 |
+| How are absorption and emission used in LEDs, lasers, photodetectors and solar absorbers? | Chapter 35 |
+| How do electron states and the density of states change when a material is a few atoms thick? | Chapter 38 |
+| Why does a superconductor also have a gap, and how does it differ from a band gap? | Chapter 30 |
+| How are crystals grown and doped with the purity this chapter assumes? | Chapter 50 |
+| How are carrier concentration, mobility and band gap measured (Hall effect, spectroscopy)? | Chapter 52 |
 
-**Next:** Chapter 32 turns from the body to energy, asking which material properties limit how efficiently energy can be converted and stored, and whether those materials can be made at the scale the energy transition needs.
+**Next:** Chapter 32 adds the impurities and defects that make semiconductors useful, deriving how doping, mobility, diffusion, recombination and high-field transport set the electrical behaviour of real material.

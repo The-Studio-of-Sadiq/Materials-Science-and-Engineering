@@ -12,13 +12,13 @@ The *Schenectady* is the materials discipline in one story. A material is not a 
 | Concept | Engineering destination |
 |---|---|
 | Science versus engineering of materials; the history of materials | Reading specifications critically; recognizing that each era's limiting technology was a material |
-| Structure–processing–property–performance tetrahedron | Failure analysis (Chapter 36); process specifications (Chapters 38–41) |
-| Length and time scales | Choosing the right model and test; multiscale simulation (Chapter 46) |
+| Structure–processing–property–performance tetrahedron | Failure analysis (Chapter 44); process specifications (Chapters 46–49) |
+| Length and time scales | Choosing the right model and test; multiscale simulation (Chapter 56) |
 | Material classes and property ranges | First screening of candidates for any component |
 | Bonding as the origin of property classes | Predicting stiffness, melting point and expansion from chemistry |
 | Isotropy, anisotropy, homogeneity | Rolled sheet, wood, fibre composites, single-crystal blades |
-| Property charts and selection logic | Systematic material selection (Chapter 48) |
-| Economics, criticality, sustainability | Supply-chain risk, cost, embodied carbon, circular design (Chapters 32, 48–49) |
+| Property charts and selection logic | Systematic material selection (Chapter 58) |
+| Economics, criticality, sustainability | Supply-chain risk, cost, embodied carbon, circular design (Chapters 40, 58–59) |
 
 **Roadmap.** What the discipline is and how it grew (1.1) → its organizing idea, the tetrahedron (1.2) → length and time scales (1.3) → material classes and their property ranges (1.4) → bonding as the reason the classes differ (1.5) → direction dependence and spatial uniformity (1.6) → property charts and selection (1.7) → materials in the economy and the environment (1.8).
 
@@ -32,11 +32,11 @@ The *Schenectady* is the materials discipline in one story. A material is not a 
 
 **Materials engineering** asks *how*. How do we make a steel plate for a ship hull that is tough at −40 °C and still weldable? How do we cast a nickel alloy blade as one crystal, with internal cooling passages, at an acceptable scrap rate? How do we make a concrete that reaches 100 MPa yet still flows into congested formwork? The engineer uses the explanations of science to design a structure, then designs a manufacturing route that produces that structure reliably and cheaply.
 
-The jet-engine turbine blade shows the two halves working together. The *science* was the discovery that nickel alloys gain their high-temperature strength from a dense dispersion of ordered Ni$_3$(Al,Ti) precipitates (the γ′ phase), and that creep at high temperature proceeds largely along grain boundaries, especially those lying across the stress. The *engineering* was a sequence of processing routes that removed those boundaries: conventionally cast equiaxed blades, then directionally solidified blades with columnar grains along the blade axis, and from the early 1980s single-crystal blades with no grain boundaries at all. Each step added a few tens of kelvin of allowable metal temperature; together with ceramic thermal-barrier coatings and internal cooling, they let turbine-entry temperatures rise from about 1100 K in early jet engines to over 1900 K today, well above the melting point of the blade alloy itself (Chapters 10, 16 and 33).
+The jet-engine turbine blade shows the two halves working together. The *science* was the discovery that nickel alloys gain their high-temperature strength from a dense dispersion of ordered Ni$_3$(Al,Ti) precipitates (the γ′ phase), and that creep at high temperature proceeds largely along grain boundaries, especially those lying across the stress. The *engineering* was a sequence of processing routes that removed those boundaries: conventionally cast equiaxed blades, then directionally solidified blades with columnar grains along the blade axis, and from the early 1980s single-crystal blades with no grain boundaries at all. Each step added a few tens of kelvin of allowable metal temperature; together with ceramic thermal-barrier coatings and internal cooling, they let turbine-entry temperatures rise from about 1100 K in early jet engines to over 1900 K today, well above the melting point of the blade alloy itself (Chapters 10, 16 and 41).
 
 A datasheet value is an engineering fact about one grade made by one route; a scientific explanation tells you which way it moves when the grade or route changes.
 
-> **Boundary.** The types of chemical bond, the laws of thermodynamics and reaction chemistry belong to the Advanced Chemistry book; the quantum mechanics of electrons in solids belongs to Engineering Physics. This book uses those results, recapping them where needed, and concentrates on how the arrangement of atoms in a solid, and its imperfections, produce engineering properties. Where the *Materials Core (EEE)* book treats an electronic topic in more depth, the text says so.
+> **Boundary.** The types of chemical bond, the laws of thermodynamics and reaction chemistry belong to the Advanced Chemistry book; the quantum mechanics of electrons in solids belongs to Engineering Physics. This book uses those results, recapping them where needed, and concentrates on how the arrangement of atoms in a solid, and its imperfections, produce engineering properties. Parts VI and VII treat electrical, magnetic, semiconductor and photonic materials in depth.
 
 ### A short history of materials ages
 
@@ -47,10 +47,14 @@ Historians name the early ages of humanity after their dominant material, and th
 - **Iron** (from about 1200 BCE). Iron ore is far more abundant than copper and tin, but iron melts at 1538 °C, beyond ancient furnaces, so it was reduced in the solid state and forged. Smiths learned empirically that carburizing, quenching and tempering made iron hard: heat treatment, the control of structure by processing, three thousand years before anyone could see a microstructure.
 - **Steel, cement and the industrial age** (from the nineteenth century). Portland cement (1824) and later reinforced concrete made the modern city; the Bessemer converter (1856) made cheap tonnage steel, and with it railways, ships and skyscrapers. The Hall–Héroult process (1886) turned aluminium from a precious metal into a structural one, and the discovery of age hardening in Al–Cu alloys (Alfred Wilm, 1906) made metal aircraft frames possible.
 - **Polymers** (from 1907). Bakelite, the first fully synthetic plastic, was followed by polyethylene and nylon in the 1930s and the explosion of commodity plastics after 1950, from about 2 million tonnes a year in 1950 to more than 400 million tonnes today.
-- **Silicon and electronic materials** (from 1947). The transistor and the integrated circuit depend on single crystals of a purity never needed before (Chapter 26).
-- **Composites and designed materials** (from the 1960s). Carbon and aramid fibres, superalloys and single-crystal blades, high-performance concrete, biomaterials designed to be accepted or resorbed by the body, and materials designed atom by atom by computation (Chapters 45–47).
+- **Silicon and electronic materials** (from 1947). The transistor and the integrated circuit depend on single crystals of a purity never needed before (Chapter 32).
+- **Composites and designed materials** (from the 1960s). Carbon and aramid fibres, superalloys and single-crystal blades, high-performance concrete, biomaterials designed to be accepted or resorbed by the body, and materials designed atom by atom by computation (Chapters 55–57).
 
 <!-- FIGURE 1.1 | figures/ch01/fig-1-1-materials-ages.png | plot | The relative importance of material classes over ten thousand years of engineering, with milestones marking the processes that changed it. | Content: x-axis time on a piecewise non-linear scale with ticks 10000 BCE, 5000 BCE, 0, 1000, 1500, 1800, 1900, 1950, 2000, 2025. y-axis "relative importance" 0–100 % (qualitative stacked areas) for natural materials (brown), ceramics and glass (red), metals (blue), polymers and elastomers (green), composites (purple), semiconductors (thin orange band after 1950). Metals peak around 1950–1960; polymers and composites grow after 1950. Milestone labels: bronze 3300 BCE, iron 1200 BCE, Portland cement 1824, Bessemer 1856, Hall–Héroult 1886, age hardening 1906, Bakelite 1907, transistor 1947, carbon fibre 1960s, single-crystal blades 1980s, graphene 2004. -->
+
+![Figure 1.1 — The relative importance of material classes over ten thousand years of engineering, with milestones marking the processes that changed it](../figures/ch01/fig-1-1-materials-ages.png)
+
+*Figure 1.1 — The relative importance of material classes over ten thousand years of engineering, with milestones marking the processes that changed it.*
 
 Figure 1.1 sketches the changing mix. Metals peaked in the mid-twentieth century; since then polymers, composites and technical ceramics have taken share, while steel and concrete remain by far the largest materials by tonnage. The problem has shifted from finding *a* material that works to choosing the *best* one under many constraints (Sections 1.7–1.8).
 
@@ -67,6 +71,10 @@ Figure 1.1 sketches the changing mix. Metals peaked in the mid-twentieth century
 
 <!-- FIGURE 1.2 | figures/ch01/fig-1-2-tetrahedron.png | schematic | The materials tetrahedron: processing, structure, properties and performance, with characterization at the centre, illustrated by a single-crystal turbine blade. | Content: tetrahedron in perspective with vertices Processing (bottom left), Structure (bottom right), Properties (bottom back), Performance (apex); sphere "Characterization" at the centre linked to all four. Solid arrows Processing → Structure → Properties → Performance; dashed arrow Performance → Processing labelled "redesign". Turbine-blade annotations: Processing "investment casting with grain selector; solution + ageing"; Structure "single crystal, [001] along axis, 65–70 vol % cuboidal γ′ ≈ 0.5 µm"; Properties "creep rupture ~1000 h at ~1050 °C, 140 MPa"; Performance "blade life > 20 000 h at turbine entry 1900 K". Small inset: the same tetrahedron for a concrete beam (mix design and curing → C–S–H, porosity, aggregate → 40 MPa, low chloride diffusivity → 100-year design life). -->
 
+![Figure 1.2 — The materials tetrahedron: processing, structure, properties and performance, with characterization at the centre, illustrated by a single-crystal turbine blade](../figures/ch01/fig-1-2-tetrahedron.png)
+
+*Figure 1.2 — The materials tetrahedron: processing, structure, properties and performance, with characterization at the centre, illustrated by a single-crystal turbine blade.*
+
 ### The chain and its direction
 
 The four ideas are usually drawn as a tetrahedron (Figure 1.2) or as a chain:
@@ -81,7 +89,7 @@ Design runs the chain backwards: from the performance required to the properties
 
 ### Characterization: closing the loop
 
-The chain is useless unless each link can be measured. **Characterization** measures structure (optical and electron microscopy, X-ray and neutron diffraction, spectroscopy, tomography) and properties (mechanical, thermal, electrical and corrosion tests). It sits at the centre of the tetrahedron because it connects every link, and Part X (Chapters 42–44) is devoted to it. The Liberty-ship failures were understood only after impact tests on plates from fractured ships showed that plates in which fractures started had transition temperatures well above the water temperature.
+The chain is useless unless each link can be measured. **Characterization** measures structure (optical and electron microscopy, X-ray and neutron diffraction, spectroscopy, tomography) and properties (mechanical, thermal, electrical and corrosion tests). It sits at the centre of the tetrahedron because it connects every link, and Part XI (Chapters 52–54) is devoted to it. The Liberty-ship failures were understood only after impact tests on plates from fractured ships showed that plates in which fractures started had transition temperatures well above the water temperature.
 
 ### Structure-insensitive and structure-sensitive properties
 
@@ -105,13 +113,17 @@ The Young's modulus of every carbon and low-alloy steel lies within a few per ce
 
 **Electronic and atomic scale (about 0.01–1 nm).** Electrons forming bonds, the crystal structure and its unit cell, and point defects such as vacancies and solute atoms. The nearest-neighbour distance in iron is 0.248 nm; the Si–O bond in quartz and glass is 0.162 nm. Structure-insensitive properties are decided here.
 
-**Nanoscale (about 1–100 nm).** Dislocation cores, strengthening precipitates (γ′ in superalloys, Guinier–Preston zones in aluminium alloys), the calcium silicate hydrate gel that binds concrete, the crystalline lamellae of polyethylene (10–20 nm thick), the mineral platelets in bone, thin films and coatings. When a structural dimension becomes comparable to a physical length of the electrons, phonons or dislocations that carry a property, the property itself changes (Chapter 30).
+**Nanoscale (about 1–100 nm).** Dislocation cores, strengthening precipitates (γ′ in superalloys, Guinier–Preston zones in aluminium alloys), the calcium silicate hydrate gel that binds concrete, the crystalline lamellae of polyethylene (10–20 nm thick), the mineral platelets in bone, thin films and coatings. When a structural dimension becomes comparable to a physical length of the electrons, phonons or dislocations that carry a property, the property itself changes (Chapter 38).
 
 **Microscale (about 0.1–100 µm).** Grains, the phases of an alloy such as the lamellae of pearlite in rail steel, pores in a sintered ceramic, the 7 µm fibres of a carbon composite, spherulites in a polymer, wood cells, osteons in bone. This is what metallurgists usually mean by "microstructure"; strength, toughness and fatigue resistance are mostly set here.
 
 **Meso- and macroscale (above about 0.1 mm).** Plies of a laminate, aggregate in concrete, weld beads and heat-affected zones, texture across a rolled sheet, cracks, and the shape of the component. Performance is finally determined here, by geometry combined with properties.
 
 <!-- FIGURE 1.3 | figures/ch01/fig-1-3-length-time-scales.png | schematic | Length and time scales of materials structure and processes, from electrons to engineering structures, with the modelling methods that cover each range. | Content: x-axis length 10^-11 to 10^2 m (log), y-axis time 10^-15 to 10^10 s (log; right labels fs, ps, ns, µs, ms, s, hour, year, century). Shaded regions: "electronic structure / DFT" (10^-11–10^-9 m, 10^-15–10^-12 s); "molecular dynamics" (10^-10–10^-7 m, 10^-14–10^-8 s); "kinetic Monte Carlo, dislocation dynamics, phase field" (10^-8–10^-4 m, 10^-9–10^2 s); "crystal plasticity / continuum FEM" (10^-5–10^2 m, 10^-3–10^10 s). Labelled points: atomic vibration 10^-13 s at 0.25 nm; carbon in ferrite at 20 °C, 1 nm in 1 h; bake hardening 20 min at 180 °C over 0.33 µm; carburizing 4 h at 925 °C over 0.34 mm; precipitation ageing (hours, 10–50 nm); creep design life 10^5 h for power-plant pipe; concrete design life 100 years at 1–100 m. -->
+
+![Figure 1.3 — Length and time scales of materials structure and processes, from electrons to engineering structures, with the modelling methods that cover each range](../figures/ch01/fig-1-3-length-time-scales.png)
+
+*Figure 1.3 — Length and time scales of materials structure and processes, from electrons to engineering structures, with the modelling methods that cover each range.*
 
 ### Time scales
 
@@ -146,7 +158,7 @@ In one hour $\sqrt{Dt}=\sqrt{2.9\times10^{-22}\times3600}=1.0\times10^{-9}$ m; i
 
 ### Why scales interact
 
-Three consequences recur throughout the book. **Properties are set at the scale of their carriers**: a crack a millimetre long sets the strength of a ceramic; precipitates tens of nanometres apart set the strength of an alloy. **Models are scale-specific**: electronic-structure calculations handle hundreds of atoms for picoseconds, continuum mechanics whole structures for decades; linking them is multiscale modelling (Chapter 46). **Tests are scale-specific**: when the feature that controls failure is rarer than a small specimen captures, small-specimen data overestimate strength and statistics enter (Chapters 11 and 14).
+Three consequences recur throughout the book. **Properties are set at the scale of their carriers**: a crack a millimetre long sets the strength of a ceramic; precipitates tens of nanometres apart set the strength of an alloy. **Models are scale-specific**: electronic-structure calculations handle hundreds of atoms for picoseconds, continuum mechanics whole structures for decades; linking them is multiscale modelling (Chapter 56). **Tests are scale-specific**: when the feature that controls failure is rarer than a small specimen captures, small-specimen data overestimate strength and statistics enter (Chapters 11 and 14).
 
 ---
 
@@ -166,9 +178,9 @@ Each class carries a recognizable *package* of properties. Knowing that a candid
 
 **Composites** combine materials so that the result has properties neither has alone. CFRP outperforms aluminium on stiffness and strength per unit mass; GFRP makes wind-turbine blades and boat hulls; reinforced concrete puts steel where concrete would crack in tension; wood and bone are natural composites. Their properties depend on the *arrangement* of the constituents as much as on their amounts, and they are usually strongly anisotropic (Section 1.6, Chapters 22–23).
 
-**Semiconductors** are covalent solids whose band gap ($\sim$0.1–4 eV) lets their conductivity be controlled over many orders of magnitude by doping, temperature, light or field. Mechanically they behave like ceramics. Silicon dominates electronics and photovoltaics; SiC and GaN serve power electronics. Uniquely, they are used at near-perfect crystalline quality (Chapter 26; the *Materials Core (EEE)* book treats them in depth).
+**Semiconductors** are covalent solids whose band gap ($\sim$0.1–4 eV) lets their conductivity be controlled over many orders of magnitude by doping, temperature, light or field. Mechanically they behave like ceramics. Silicon dominates electronics and photovoltaics; SiC and GaN serve power electronics. Uniquely, they are used at near-perfect crystalline quality (Chapters 31–33).
 
-**Biomaterials** are defined by function, not bonding: materials intended to interact with the body, drawn from every other class. Titanium alloys and cobalt–chromium make joint replacements; alumina, zirconia, hydroxyapatite and bioactive glass make bearing surfaces and bone substitutes; ultra-high-molecular-weight polyethylene makes joint liners; biodegradable polyesters make sutures and scaffolds. What distinguishes them is the extra requirement of biocompatibility in a corrosive, cyclically loaded environment (Chapter 31).
+**Biomaterials** are defined by function, not bonding: materials intended to interact with the body, drawn from every other class. Titanium alloys and cobalt–chromium make joint replacements; alumina, zirconia, hydroxyapatite and bioactive glass make bearing surfaces and bone substitutes; ultra-high-molecular-weight polyethylene makes joint liners; biodegradable polyesters make sutures and scaffolds. What distinguishes them is the extra requirement of biocompatibility in a corrosive, cyclically loaded environment (Chapter 39).
 
 ### Representative property values
 
@@ -214,6 +226,10 @@ The Advanced Chemistry book develops chemical bonding; here we need only its con
 Real materials usually mix bond types; the Si–O bond in silica is roughly half ionic, half covalent.
 
 <!-- FIGURE 1.4 | figures/ch01/fig-1-4-bond-energy-curves.png | plot | Interatomic potential energy and force against separation for a strong, stiff bond and a weak, compliant bond, showing why stiffness, melting point and thermal expansion are linked. | Content: two panels, x-axis separation r/r0 from 0.7 to 2.5. (a) Morse-type U(r): deep narrow well labelled "strong bond (e.g. W, SiC), U0 ≈ 8 eV" and shallow wide well labelled "weak bond (e.g. Al, polymer interchain), U0 ≈ 1–3 eV"; minimum at r0; horizontal lines at two vibrational energies with the midpoint of each line marked by a dot, the dots drifting to larger r as energy rises, labelled "mean spacing grows → thermal expansion". (b) Force F = −dU/dr for both bonds; slope at r0 labelled "S0 = d²U/dr² → E ≈ S0/r0"; force maximum labelled "ideal strength". -->
+
+![Figure 1.4 — Interatomic potential energy and force against separation for a strong, stiff bond and a weak, compliant bond, showing why stiffness, melting point and thermal expansion are linked](../figures/ch01/fig-1-4-bond-energy-curves.png)
+
+*Figure 1.4 — Interatomic potential energy and force against separation for a strong, stiff bond and a weak, compliant bond, showing why stiffness, melting point and thermal expansion are linked.*
 
 ### Stiffness from the bond curve
 
@@ -279,8 +295,8 @@ and the nine numbers $k_{ij}$ form a second-rank tensor. If they are not equival
 ### Sources of anisotropy
 
 - **Crystal structure.** Zinc expands four to five times more along its hexagonal $c$ axis than in the basal plane; graphite conducts heat several hundred times better within its layers than across them.
-- **Crystallographic texture.** Processing can align the grains of a polycrystal. Textured aluminium sheet forms "ears" when deep-drawn into a beverage can; zirconium-alloy fuel cladding is given a texture so that brittle hydrides precipitate in a harmless orientation (Chapters 3 and 38).
-- **Microstructural alignment.** Inclusions strung out by rolling make steel plate weaker through its thickness (a cause of lamellar tearing under welds); columnar grains form in castings and additively manufactured parts (Chapter 40).
+- **Crystallographic texture.** Processing can align the grains of a polycrystal. Textured aluminium sheet forms "ears" when deep-drawn into a beverage can; zirconium-alloy fuel cladding is given a texture so that brittle hydrides precipitate in a harmless orientation (Chapters 3 and 46).
+- **Microstructural alignment.** Inclusions strung out by rolling make steel plate weaker through its thickness (a cause of lamellar tearing under welds); columnar grains form in castings and additively manufactured parts (Chapter 48).
 - **Architecture.** Fibres in a composite, cells in wood, plies in a laminate, osteons in bone. Wood is about 10–20 times stiffer along the grain than across it.
 
 Anisotropy is a resource when the loads are known: a CFRP wing skin puts its fibres along the load paths, and a single-crystal blade grown along its compliant $\langle001\rangle$ direction has lower thermal stresses.
@@ -377,6 +393,10 @@ A **property chart** (Ashby chart) plots one property against another for all ma
 
 <!-- FIGURE 1.5 | figures/ch01/fig-1-5-modulus-density-chart.png | map | Property chart of Young's modulus against density for engineering materials, with guide lines for minimum-mass ties, beams and panels. | Content: log–log axes; x-axis density 0.01 to 30 g/cm³; y-axis Young's modulus 10^-4 to 10^3 GPa. Translucent class envelopes: foams (0.02–0.5, 10^-3–1), elastomers (0.9–1.3, 10^-3–0.1), polymers (0.9–2.2, 0.2–4), natural materials (wood along/across grain, bamboo, bone, cork: 0.1–2, 0.005–30), composites (GFRP, CFRP: 1.5–2.0, 15–220), metals (Mg 1.8/45, Al 2.7/70, Ti 4.4/114, steel 7.85/210, Cu 8.9/120, W 19.3/410), technical ceramics (alumina 3.9/370, SiC 3.15/410, Si3N4 3.2/310, diamond 3.5/1050), glasses (2.2–2.6, 60–90), concrete and stone (1.9–2.7, 20–70). Labelled points for the worked example: steel, Al alloy, Ti-6Al-4V, Mg alloy, GFRP (1.9, 25), CFRP quasi-isotropic (1.55, 60), Douglas fir along grain (0.50, 13). Parallel dashed guide lines of slope 1 "E/ρ (tie)", slope 2 "E^1/2/ρ (beam)" and slope 3 "E^1/3/ρ (panel)", arrow "search region" to upper left. -->
 
+![Figure 1.5 — Property chart of Young's modulus against density for engineering materials, with guide lines for minimum-mass ties, beams and panels](../figures/ch01/fig-1-5-modulus-density-chart.png)
+
+*Figure 1.5 — Property chart of Young's modulus against density for engineering materials, with guide lines for minimum-mass ties, beams and panels.*
+
 **Worked example — Choosing a light, stiff beam, and asking what it costs.** A simply supported beam of span $L=3$ m with square section must have mid-span stiffness $S=1.0\times10^6$ N/m ($C=48$). For steel ($E=210$ GPa, $\rho=7850\ \mathrm{kg\,m^{-3}}$),
 
 $$
@@ -403,7 +423,7 @@ The masses follow the index exactly: any two masses are in the inverse ratio of 
 
 ### The general method
 
-The procedure, developed fully in Chapter 48, is: translate the requirement into function, constraints, objectives and free variables; screen out every material that violates a constraint; rank the survivors by the index on a property chart; examine the leaders for secondary properties, manufacturability, joining, reliability, cost and supply; decide, and document why. When objectives conflict, as mass and cost do above, no single material is best. The useful set is the **Pareto front**: materials for which no other candidate is better in one objective without being worse in another (Chapter 48).
+The procedure, developed fully in Chapter 58, is: translate the requirement into function, constraints, objectives and free variables; screen out every material that violates a constraint; rank the survivors by the index on a property chart; examine the leaders for secondary properties, manufacturability, joining, reliability, cost and supply; decide, and document why. When objectives conflict, as mass and cost do above, no single material is best. The useful set is the **Pareto front**: materials for which no other candidate is better in one objective without being worse in another (Chapter 58).
 
 ---
 
@@ -424,7 +444,7 @@ Humanity uses materials in staggering quantities, dominated by a few cheap struc
 | Copper (refined) | about 26 million tonnes | 8–10 | 3–5 |
 | Carbon fibre | about 0.1–0.2 million tonnes | 20–50 | 20–40 |
 
-Cement and steel production each account for roughly 7–8 % of global anthropogenic CO$_2$ emissions; calcining limestone (CaCO$_3$ → CaO + CO$_2$) and reducing iron oxide with carbon release CO$_2$ whatever the fuel (Chapters 18 and 49).
+Cement and steel production each account for roughly 7–8 % of global anthropogenic CO$_2$ emissions; calcining limestone (CaCO$_3$ → CaO + CO$_2$) and reducing iron oxide with carbon release CO$_2$ whatever the fuel (Chapters 18 and 59).
 
 ### Economics
 
@@ -436,11 +456,15 @@ A material is **critical** when it is economically important and its supply is a
 
 <!-- FIGURE 1.6 | figures/ch01/fig-1-6-criticality-map.png | plot | A criticality assessment places each raw material by economic importance and supply risk; materials in the upper right are critical. | Content: x-axis "economic importance" 0–10, y-axis "supply risk" 0–5, shaded critical region above supply risk 1.0 and right of importance 2.8 (schematic, in the style of EU assessments). Indicative points with labels: heavy rare earths (6, 4.5), light rare earths (5, 3.8), gallium (4, 3.9), magnesium (7, 4.0), niobium (6, 3.9), tungsten (8, 1.3), cobalt (6.5, 2.5), platinum-group metals (6, 2.4), lithium (4, 1.9), natural graphite (3, 1.8), silicon metal (5, 1.2), titanium (5, 1.3), bauxite (5.5, 1.0), copper (5.5, 0.3), nickel (5, 0.5), iron ore (6.5, 0.6), limestone (3, 0.2). Annotations: "by-product metal" at Ga; "single-country supply" at rare earths and Nb. -->
 
-Materials engineering responds by **substitution** (magnets that need less dysprosium because it is diffused only into grain boundaries; iron-phosphate battery cathodes instead of cobalt-rich ones), **thrifting** (thinner platinum catalyst layers) and **recycling** (Chapter 49). Each depends on knowing which structural feature delivers the property, so that the scarce element is used only where it matters.
+![Figure 1.6 — A criticality assessment places each raw material by economic importance and supply risk; materials in the upper right are critical](../figures/ch01/fig-1-6-criticality-map.png)
+
+*Figure 1.6 — A criticality assessment places each raw material by economic importance and supply risk; materials in the upper right are critical.*
+
+Materials engineering responds by **substitution** (magnets that need less dysprosium because it is diffused only into grain boundaries; iron-phosphate battery cathodes instead of cobalt-rich ones), **thrifting** (thinner platinum catalyst layers) and **recycling** (Chapter 59). Each depends on knowing which structural feature delivers the property, so that the scarce element is used only where it matters.
 
 ### Sustainability
 
-Sustainability adds the whole lifecycle to selection: extraction, processing, manufacture, use and end of life. Its first quantitative tools are **embodied energy** and **embodied carbon** per kilogram (Table 1.3) and the **lifecycle assessment** that combines them with the use phase (Chapter 49). The beam example of Section 1.7 shows how much the ranking changes when carbon is the objective. The use phase may dominate: a lighter car or aircraft that burns less fuel over its life can justify aluminium or CFRP, while a component sitting in a building wall for 60 years gains nothing from lightness and should minimize embodied carbon.
+Sustainability adds the whole lifecycle to selection: extraction, processing, manufacture, use and end of life. Its first quantitative tools are **embodied energy** and **embodied carbon** per kilogram (Table 1.3) and the **lifecycle assessment** that combines them with the use phase (Chapter 59). The beam example of Section 1.7 shows how much the ranking changes when carbon is the objective. The use phase may dominate: a lighter car or aircraft that burns less fuel over its life can justify aluminium or CFRP, while a component sitting in a building wall for 60 years gains nothing from lightness and should minimize embodied carbon.
 
 Three principles connect sustainability back to structure. **Durability** divides embodied impacts over more years: a bridge deck whose concrete resists chloride ingress for 100 years rather than 40 is more sustainable even if it uses more cement. **Recyclability** depends on composition: aluminium can be remelted with about 5 % of the energy of primary production, but mixing alloys accumulates iron and copper that are hard to remove, and thermoset composites are hard to separate at all. **Design for disassembly** and alloy simplification keep materials in circulation. The circular economy is ultimately a materials-engineering problem: designing structures that can be recovered without losing the properties that made them valuable.
 
@@ -462,8 +486,8 @@ Three principles connect sustainability back to structure. **Durability** divide
 | What controls strength, and how do pinned dislocations cause strain ageing? | Chapters 12–13 |
 | How are composite stiffnesses predicted beyond the simple bounds, and laminates designed? | Chapters 22–23 |
 | How are thermal stresses from expansion mismatch calculated? | Chapter 24 |
-| How are single-crystal blades and other high-temperature materials designed? | Chapters 16 and 33 |
-| How are multiple objectives, shape and processing combined in selection? | Chapter 48 |
-| How are embodied carbon, lifecycle assessment, criticality and recycling handled quantitatively? | Chapter 49 |
+| How are single-crystal blades and other high-temperature materials designed? | Chapters 16 and 41 |
+| How are multiple objectives, shape and processing combined in selection? | Chapter 58 |
+| How are embodied carbon, lifecycle assessment, criticality and recycling handled quantitatively? | Chapter 59 |
 
 **Next:** Chapter 2 describes the atomic arrangements on which everything else is built: lattices and unit cells, the crystal structures of metals, ceramics and silicates, the notation for directions and planes, polycrystals and texture, and the non-crystalline and partly ordered solids — glasses, polymers, liquid crystals and quasicrystals.

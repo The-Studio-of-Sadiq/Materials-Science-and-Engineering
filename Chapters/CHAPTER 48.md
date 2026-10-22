@@ -1,476 +1,399 @@
-# Chapter 48 — Materials Selection and Design
+# Chapter 48 — Additive Manufacturing
 
-*Part X · Characterization, Computation and Design*
+*Part X · Processing and Manufacturing*
 
-A car maker redesigning the bonnet of a mid-size saloon has four candidates on the table: the incumbent bake-hardening steel, a 6xxx-series aluminium sheet, a magnesium alloy, and carbon-fibre-reinforced epoxy. Each has a champion in the company. The steel engineers point out that their panel is the cheapest, welds on the existing line and is recycled at over 90 %. The aluminium team says their panel is half the mass. The composites group says theirs is lighter still. The pedestrian-safety team asks which bonnet absorbs a head impact best; the paint shop asks which survives the 180 °C bake; the corrosion engineers ask what happens where aluminium touches the steel hinge; the finance department asks what a kilogram saved is actually worth. All four claims are true and none settles the question, because each answers a different question. This chapter provides the method that makes such debates resolvable: translate the design into a function, an objective and constraints; derive the combination of properties that controls performance; display every candidate on property charts; put a price on each competing objective; account for the shape the material can be given and the process that gives it; and only then go into the detail that decides the final choice.
+A jet-engine fuel nozzle tip used to be brazed together from about twenty separately machined parts. Printed by laser powder-bed fusion in a cobalt–chromium alloy, it became one part with internal cooling passages that could not have been drilled, a quarter lighter and several times more durable, and it went into service in tens of thousands of engines. In the same years, a titanium hip cup printed with a porous outer lattice let bone grow into it; a rocket maker printed combustion chambers in a copper alloy with hundreds of internal coolant channels; and a dental lab replaced hand-cast crowns with printed ones. There were also failures: printed titanium brackets that failed in fatigue at a fraction of the wrought value because of unfused powder pockets a tenth of a millimetre across; aluminium alloys that cracked like poorly welded seams; and parts whose properties changed when the same file was printed on another machine. **Additive manufacturing (AM)** — building a part layer by layer directly from a digital model — is at once a new freedom of shape and a new metallurgy. Every millimetre of a printed metal part is a weld track, solidified at rates closer to a weld or a splat than to a casting.
 
-> **How does a design requirement become a ranked list of candidate materials, and why is "the strongest" or "the lightest" usually the wrong criterion?**
-> **How are mass, cost, shape and manufacturing combined into one defensible decision?**
-> **Do the same methods choose materials for a bridge, a hip implant, a pressure vessel and an aircraft?**
+> **What happens to a material when it is built from millions of tiny melt pools, sintered layers or cured slices?**
+> **Which process conditions avoid porosity, cracking and distortion, and how does one prove that a printed part is as good as a forged one?**
 
 | Concept | Engineering destination |
 |---|---|
-| Function, objective, constraints, free variables | Writing a selection specification for any component |
-| Screening, ranking, documentation | Narrowing tens of thousands of materials to a few candidates |
-| Performance indices ($E^{1/2}/\rho$, $\sigma_f^{2/3}/\rho$, $K_{IC}^2/\sigma_f$, $\sigma_f^2/E$, $k/\rho$) | Light stiff beams and panels, strong shafts, safe pressure vessels, springs, heat sinks |
-| Ashby property charts | Seeing all candidates and trade-offs at once; spotting gaps for new materials |
-| Pareto fronts, penalty functions, exchange constants | Mass versus cost in cars, aircraft and spacecraft; carbon versus cost |
-| Shape factors | Tubes, I-beams, sandwich panels; why wood and polymers are rarely made into thin-walled sections |
-| Process selection and cost modelling | Choosing moulding, machining, casting or additive manufacture for a batch size |
-| Case studies | Aerospace spars, civil floor beams, flywheels, pressure vessels, hip implants, busbars |
+| Process families (PBF, DED, binder jetting, material extrusion, vat photopolymerization) | Choice of machine and route for a part, material and batch size |
+| Energy density, melt-pool modes, process windows | Parameter development, avoiding lack of fusion and keyhole porosity |
+| Rapid solidification, $G$ and $R$, columnar growth | Fine strong microstructures, texture and anisotropy of printed alloys |
+| Porosity, residual stress, cracking | Fatigue life of printed brackets and implants, distortion, build failures |
+| HIP, heat treatment, machining | Turning as-built material into certifiable material |
+| Polymer and ceramic AM | Prototypes, jigs, dental aligners, surgical guides, ceramic cores |
+| Design for AM, lattices, topology optimization | Lightweight brackets, heat exchangers, porous implants, consolidated assemblies |
+| Qualification and certification | Flight hardware, medical devices, pressure equipment |
 
-**Roadmap.** How design proceeds and what it asks of materials (48.1) → indices derived from objective and constraint (48.2) → charts that show all materials at once (48.3) → several objectives at once (48.4) → shape as a second free variable (48.5) → the process and its cost (48.6) → the method applied across engineering (48.7).
+**Roadmap.** What AM is (48.1) → the process families (48.2) → melt-pool physics and solidification (48.3) → microstructure and defects (48.4) → post-processing (48.5) → polymer and ceramic AM (48.6) → design for AM (48.7) → qualification and certification (48.8).
 
----
-
-## 48.1 The design process and material requirements
-
-### Stages of design
-
-Engineering design is usually described in three stages, and the questions asked of materials sharpen as it proceeds:
-
-1. **Conceptual design** chooses the working principle: a bridge as a suspension, arch or girder; energy storage as a battery, flywheel or compressed air; a hip replacement as a cemented or cementless stem. Here *all* materials are candidates and the data needed are approximate: a modulus to within a factor of two, a cost to within a factor of three.
-2. **Embodiment design** sizes the components and settles their layout. Candidate materials narrow to a few classes, and the data needed are more precise: the yield strength of a particular alloy family, the creep strength at 600 °C, the fatigue limit of a grade of steel.
-3. **Detail design** specifies one material in one condition (6061-T6 extruded, not "aluminium"), with tolerances, surface finish, process route and test methods. The data needed are those of a specific supplier's product, often supplemented by the company's own tests.
-
-The materials engineer's errors at each stage are different. At the conceptual stage the error is to consider too few materials ("we always use steel"); at the detail stage it is to rely on generic data for a property, such as fatigue strength or toughness, that is controlled by processing (Chapters 13–15).
-
-<!-- FIGURE 48.1 | figures/ch48/fig-48-1-selection-procedure.png | flowchart | The materials-selection procedure: translation of the design requirement, then screening, ranking and documentation, run alongside the stages of design. | Content: left column, three stacked boxes 'Conceptual design (all materials, approximate data)', 'Embodiment design (few classes, more precise data)', 'Detail design (one grade, supplier data, tests)'. Right column, main flow top to bottom: 'Design requirement' → 'Translation: function, objective, constraints, free variables' → 'Screening: eliminate on property limits (e.g. T_max ≥ 150 °C, K_IC ≥ 15 MPa m^½, recyclable)' → 'Ranking: performance index M (e.g. E^½/ρ) on charts' → 'Documentation: supplier data, failure history, corrosion, joining, cost stability, availability' → 'Final choice + process route'. Side inputs feeding 'Ranking': 'Shape factors (48.5)', 'Exchange constants (48.4)'; feeding 'Documentation': 'Process and cost model (48.6)'. Funnel graphic beside screening–ranking–documentation with numbers ~ '10⁴–10⁵ materials → ~10² → ~5 → 1'. -->
-
-### Translation: function, objective, constraints, free variables
-
-Every selection problem is written in four parts:
-
-- **Function**: what the component does: carry a bending load, contain pressure, store elastic or kinetic energy, conduct heat or current, support a body tissue, insulate.
-- **Objective**: what is to be minimized or maximized: mass, cost, volume, embodied carbon (Chapter 49), thermal resistance, energy stored.
-- **Constraints**: requirements that must be met but need not be exceeded. Some are **geometric** (span fixed by the building grid, outer diameter fixed by the bore), some are **property limits** (service temperature above 200 °C, corrosion resistance in seawater, biocompatibility, electrical insulation), and some are **performance constraints** (stiffness not less than $S^*$, no yield at load $F^*$, resistance not more than $R^*$) that couple to the objective through a free variable.
-- **Free variables**: what the designer may change: a cross-sectional area, a wall thickness, a section shape, and the choice of material.
-
-Writing these four lists is not bureaucracy. It exposes the most common error in selection, which is to optimize the wrong thing: maximizing strength when the component is stiffness-limited, or minimizing mass when the objective is cost.
-
-### Screening, ranking, documentation
-
-With the translation in hand, selection proceeds in three steps (Figure 48.1):
-
-1. **Screening** eliminates every material that fails a property-limit constraint, whatever its other merits: a turbine-disc material must retain strength at 650 °C; an implant material must be biocompatible; a seawater pump must resist chloride pitting (Chapter 35). Screening uses simple attribute limits and removes most of the 10$^4$–10$^5$ engineering materials in commercial databases.
-2. **Ranking** orders the survivors by how well they meet the objective. Because the objective usually depends on a *combination* of properties, ranking uses performance indices (Section 48.2).
-3. **Documentation** examines the top few candidates in depth: supplier data and their scatter, processing experience, failure history (Chapter 36), corrosion and joining behaviour, price stability, supply security and recyclability. Many final choices are made here, on information that does not fit in a property table.
+> **Boundary.** Heat flow and solidification are developed in Chapters 9 and 47 and used here; powder production and sintering in Chapters 46 and 17; photopolymer chemistry in Chapter 19. Laser optics, machine design and slicing software belong to manufacturing engineering. Process simulation is introduced in Chapter 56.
 
 ---
 
-## 48.2 Performance indices derived
+## 48.1 What additive manufacturing is
 
-### The method: separating the problem
+Subtractive manufacturing removes material from a block; formative manufacturing (casting, forging, moulding) shapes it in a die or mould. **Additive manufacturing** builds a part by joining material, usually layer upon layer, from a 3D model sliced into layers 0.02–1 mm thick. The international terminology standard ISO/ASTM 52900 groups AM processes into seven families: **powder bed fusion**, **directed energy deposition**, **binder jetting**, **material extrusion**, **vat photopolymerization**, **material jetting** and **sheet lamination**.
 
-The performance of a component depends on three groups of things: the functional requirements $F$ (loads, stiffness, pressure), the geometry $G$ (lengths, fixed dimensions), and the material properties $M$. If the performance $P$ can be written as a product
+AM's value lies in three things that other routes do poorly:
 
-$$
-P=f_1(F)\,f_2(G)\,f_3(M)
-$$
+1. **Geometric freedom.** Internal channels, lattices, undercuts and organic shapes cost nothing extra; complexity is "free" while volume and build height are not.
+2. **No tooling.** The economics favour low volumes, customization (implants, dental restorations, hearing-aid shells) and fast iteration.
+3. **Part consolidation.** Assemblies of many brazed or bolted pieces become one part, eliminating joints and their failure modes.
 
-then the best material is the one that optimizes $f_3(M)$, whatever the loads and dimensions. The function $f_3(M)$ is the **material performance index**. The derivation is always the same: write the objective as an equation, write the performance constraint as an equation, use the constraint to eliminate the free variable from the objective, and read off the group of material properties that remains.
-
-### Light, stiff tie
-
-A tie of fixed length $L$ and free cross-sectional area $A$ must have axial stiffness $S=EA/L$ of at least $S^*$; the objective is minimum mass $m=AL\rho$. From the constraint $A=S^*L/E$, so
-
-$$
-m=S^*L^2\left(\frac{\rho}{E}\right)\qquad\Longrightarrow\qquad \text{maximize } M_1=\frac{E}{\rho}
-$$
-
-### Light, stiff beam
-
-A beam of length $L$, square cross-section of side $b$ ($A=b^2$, second moment of area $I=b^4/12=A^2/12$), loaded in bending, must have stiffness $S=C_1EI/L^3$ of at least $S^*$, where $C_1$ depends on the loading and end conditions (48 for a simply supported beam with central load). Eliminating $A$:
-
-$$
-A=\left(\frac{12S^*L^3}{C_1E}\right)^{1/2}\qquad\Longrightarrow\qquad m=\left(\frac{12S^*}{C_1}\right)^{1/2}L^{5/2}\left(\frac{\rho}{E^{1/2}}\right)
-$$
-
-so the index is $M_2=E^{1/2}/\rho$. The square-root appears because the free variable enters the stiffness as $A^2$: doubling the area quadruples the stiffness, so a low modulus can be compensated by a modest increase of section.
-
-### Light, stiff panel
-
-A flat panel of fixed length $L$ and width $b$, free thickness $t$, loaded in bending, has $I=bt^3/12$. With $m=bLt\rho$ and $S=C_1EI/L^3\ge S^*$:
-
-$$
-t=\left(\frac{12S^*L^3}{C_1Eb}\right)^{1/3}\qquad\Longrightarrow\qquad m=\left(\frac{12S^*}{C_1b}\right)^{1/3}bL^2\left(\frac{\rho}{E^{1/3}}\right)
-$$
-
-and the index is $M_3=E^{1/3}/\rho$. The cube root rewards low density even more strongly. This is why low-density materials, wood, magnesium, polymer foams and composites, are so effective in panels, and why the bonnet of the opening paragraph is a panel problem.
-
-### Strength-limited designs
-
-If the constraint is that the component must not yield (or fracture) rather than that it must not deflect, replace stiffness by strength $\sigma_f$. A tie that must carry $F^*$ without yield needs $A=F^*/\sigma_f$, giving $M=\sigma_f/\rho$. For a square beam, failure occurs when the maximum surface stress $\sigma=\mathcal M c/I$ reaches $\sigma_f$; the section modulus is $Z=I/c=A^{3/2}/6$ and the failure load $F_f=C_2Z\sigma_f/L$. Then
-
-$$
-A=\left(\frac{6F^*L}{C_2\sigma_f}\right)^{2/3}\qquad\Longrightarrow\qquad m=\left(\frac{6F^*}{C_2}\right)^{2/3}L^{5/3}\left(\frac{\rho}{\sigma_f^{2/3}}\right)
-$$
-
-so $M=\sigma_f^{2/3}/\rho$, and the same argument for a panel gives $\sigma_f^{1/2}/\rho$.
-
-### Indices for other functions
-
-The method extends to any function for which the performance equation is known:
-
-| Function, objective, constraint | Index to maximize | Where it is used |
-|---|---|---|
-| Tie, minimum mass, stiffness specified | $E/\rho$ | Cables, truss members, tension rods |
-| Beam, minimum mass, stiffness specified | $E^{1/2}/\rho$ | Spars, floor joists, robot arms, bicycle tubes |
-| Panel, minimum mass, stiffness specified | $E^{1/3}/\rho$ | Car body panels, aircraft floors, laptop cases |
-| Tie, minimum mass, strength specified | $\sigma_f/\rho$ | Tethers, rotating rims (flywheels, centrifuge rotors) |
-| Beam, minimum mass, strength specified | $\sigma_f^{2/3}/\rho$ | Shafts, crane booms, wing spars |
-| Panel, minimum mass, strength specified | $\sigma_f^{1/2}/\rho$ | Floor panels, hatches |
-| Spring, maximum stored energy per unit volume | $\sigma_f^2/E$ | Valve and suspension springs, clips |
-| Elastic hinge, maximum bending without yield | $\sigma_f/E$ | Snap fits, flexures, living hinges |
-| Pressure vessel, yield before fracture | $K_{IC}/\sigma_f$ | Boilers, reactors, gas cylinders |
-| Pressure vessel, leak before break | $K_{IC}^2/\sigma_f$ | Pressurized pipes, nuclear and chemical plant |
-| Thermal shock resistance (quench $\Delta T$ without fracture) | $\sigma_f/(E\alpha)$ | Furnace linings, cookware, turbine components |
-| Heat sink or spreader, minimum mass for given thermal resistance | $k/\rho$ | Electronics cooling, battery thermal plates |
-| Minimum thermal distortion under heat flux | $k/\alpha$ | Precision instruments, optical benches, mirror substrates |
-| Conductor, minimum mass for given resistance | $1/(\rho\,\rho_e)$ | Overhead lines, busbars, aircraft wiring |
-| Any of the above, minimum cost | Replace $\rho$ by $C_m\rho$ | Most civil and consumer products |
-| Any of the above, minimum embodied carbon | Replace $\rho$ by $H_c\rho$ | Low-carbon design (Chapter 49) |
-
-Here $\sigma_f$ is the failure strength appropriate to the material (yield strength for metals and polymers, modulus of rupture or compressive strength for ceramics), $C_m$ the price per kilogram and $H_c$ the embodied carbon per kilogram.
-
-> **Status of the principle: material performance indices**
-> *Derived.* Each index is an exact consequence of its stated objective, constraint, loading and free variable; it is only as general as those assumptions, and a change of failure mode (yield to buckling), loading or free variable changes the index.
-
-### A first ranking
-
-| Material (typical) | $E$ (GPa) | $\rho$ (Mg/m$^3$) | $\sigma_y$ (MPa) | $E/\rho$ | $E^{1/2}/\rho$ | $E^{1/3}/\rho$ | $\sigma_y/\rho$ | $\sigma_y^{2/3}/\rho$ |
-|---|---|---|---|---|---|---|---|---|
-| Low-carbon steel | 210 | 7.85 | 250 | 26.8 | 1.85 | 0.76 | 32 | 5.1 |
-| Advanced high-strength steel | 210 | 7.85 | 600 | 26.8 | 1.85 | 0.76 | 76 | 9.1 |
-| Al 6061-T6 | 69 | 2.70 | 275 | 25.6 | 3.08 | 1.52 | 102 | 15.7 |
-| Mg AZ31 | 45 | 1.77 | 200 | 25.4 | 3.79 | 2.01 | 113 | 19.3 |
-| Ti-6Al-4V | 114 | 4.43 | 880 | 25.7 | 2.41 | 1.09 | 199 | 20.7 |
-| CFRP, quasi-isotropic | 60 | 1.55 | 600 | 38.7 | 5.00 | 2.53 | 387 | 45.9 |
-| GFRP | 20 | 1.85 | 250 | 10.8 | 2.42 | 1.47 | 135 | 21.5 |
-| Softwood, along grain | 11 | 0.50 | 40 | 22.0 | 6.63 | 4.45 | 80 | 23.4 |
-| Alumina | 370 | 3.90 | 300 (flexural) | 94.9 | 4.93 | 1.84 | 77 | 11.5 |
-| Polypropylene | 1.3 | 0.905 | 30 | 1.4 | 1.26 | 1.21 | 33 | 10.7 |
-
-(Units: $E$ in GPa, $\rho$ in Mg/m$^3$, $\sigma_y$ in MPa; the indices are in the corresponding units, and only ratios between materials matter.)
-
-The table teaches three lessons. First, steel, aluminium, magnesium and titanium have almost the same $E/\rho$, so as ties none is lighter than the others; the light alloys win only in bending, where the exponent rewards low density. Second, wood along the grain is, for a beam or panel of given stiffness, the most mass-efficient material in the table: its $E^{1/2}/\rho$ exceeds that of CFRP. That is why aircraft were built of spruce for thirty years, and why timber floors are competitive. Third, the strength of advanced high-strength steels raises $\sigma_y^{2/3}/\rho$ by about 80 % relative to mild steel but leaves stiffness indices unchanged: strength-limited parts (bumper beams, door-intrusion beams) benefit from AHSS, stiffness-limited panels do not, which is the materials reason why outer panels are the first steel parts to be replaced by aluminium.
+Its costs are equally clear: slow build rates (tens of cm$^3$/h per laser for metals), expensive feedstock, surface roughness, anisotropic properties and process-sensitive defects. AM therefore complements casting, forging and machining rather than replacing them, and its engineering success depends on understanding the materials science of this chapter.
 
 ---
 
-## 48.3 Ashby charts and selection
+## 48.2 Process families
 
-### Property charts
+### Powder-bed fusion
 
-A table lists a few materials; a **property chart** shows all of them. Ashby charts plot one property against another on logarithmic axes, with each material class occupying a field and each family within it a bubble whose extent shows the range of grades and conditions (Figure 48.2). The charts show at once how widely properties span (Young's modulus from about 10$^{-4}$ GPa for soft foams to 1000 GPa for diamond, seven orders of magnitude), how the classes cluster (metals dense and stiff, polymers light and compliant, ceramics stiff and light but brittle, composites and woods filling the gaps), and where no material exists.
+In **powder-bed fusion (PBF)** a thin layer of powder is spread over a build plate by a recoater blade or roller, a heat source melts (or, for polymers, sinters) the cross-section of the part, the plate drops by one layer thickness, and the cycle repeats. Unmelted powder supports the part and is recovered and sieved for reuse.
 
-<!-- FIGURE 48.2 | figures/ch48/fig-48-2-ashby-modulus-density.png | map | Young's modulus against density for all material classes, with guidelines for light, stiff ties, beams and panels. | Content: log-log axes; x-axis density 0.01 to 30 Mg/m³; y-axis Young's modulus 10⁻⁴ to 1000 GPa. Shaded labelled envelopes: foams (polymer foams 0.02–0.3 Mg/m³, 10⁻³–0.3 GPa), elastomers (0.9–1.5, 10⁻³–0.1), polymers (0.9–2.2, 0.2–5; PP 0.905/1.3, PMMA 1.18/3.0, PEEK 1.30/3.8 labelled), woods along grain (0.4–0.9, 6–20; softwood 0.50/11 labelled) and across grain (0.4–0.9, 0.3–1.5), composites (GFRP 1.85/20, CFRP QI 1.55/60, CFRP UD 1.6/140), concrete (2.4/30), metals (Mg 1.77/45, Al 2.70/69, Ti 4.43/114, steels 7.85/210, Cu 8.9/120, W 19.3/410), technical ceramics (Al2O3 3.90/370, SiC 3.2/410, Si3N4 3.2/310, diamond 3.5/1000). Dashed guideline families: slope 1 'E/ρ (ties)', slope 2 'E^½/ρ (beams)', slope 3 'E^⅓/ρ (panels)'. One slope-2 selection line drawn through Al (2.70, 69) with arrow to upper left 'search region: better beams'; CFRP and wood lie above it, steel below. -->
+- **Laser powder-bed fusion (PBF-LB, also called SLM or DMLS)** scans one or more 200–1000 W fibre lasers, focused to 50–100 µm, at 0.5–2 m/s over layers 20–60 µm thick, under argon or nitrogen. It gives the finest features and best surface of the metal processes and dominates metal AM for Ti–6Al–4V, Inconel 718 and 625, 316L and 17-4PH stainless steels, AlSi10Mg, CoCr and copper alloys. The part is welded to the build plate and needs supports under overhangs, both to anchor it against distortion and to conduct heat away.
+- **Electron-beam powder-bed fusion (PBF-EB)** scans a beam of several kilowatts in vacuum, deflected electromagnetically at speeds up to several km/s, over 50–100 µm layers. Each layer is first preheated by a defocused beam, lightly sintering the powder (which stops it being blown away by charge build-up) and keeping the whole bed hot — 650–750 °C for Ti–6Al–4V, over 1000 °C for TiAl. Residual stress is therefore low and crack-prone alloys such as γ-TiAl turbine blades and some nickel superalloys can be built, at the cost of rougher surfaces and coarser features.
+- **Polymer PBF (laser sintering)** sinters polyamide 12, PA11 or TPU powder held just below its melting point; the surrounding powder supports the part, so no supports are needed (Section 48.6).
 
-### Selection lines
+### Directed energy deposition
 
-Because indices are power laws, a line of constant index is a straight line on a log–log chart. For $M=E^{1/2}/\rho$,
+In **directed energy deposition (DED)** powder or wire is fed into a melt pool created by a laser, electron beam or arc that moves with the feed nozzle, like automated welding. Layers are 0.25–3 mm thick and deposition rates range from about 0.1 kg/h for fine laser-powder DED to several kg/h for **wire-arc additive manufacturing (WAAM)**, which uses a GMAW or plasma torch on a robot. DED builds large near-net shapes (titanium aircraft frames, steel ship propellers, large valve bodies), adds features to existing parts and **repairs** worn turbine blades, moulds and shafts. Resolution is coarse, so DED parts are machined, and the large melt pools give coarser microstructures than PBF.
 
-$$
-\log E=2\log\rho+2\log M
-$$
+### Binder jetting
 
-a family of parallel lines of slope 2, one for each value of $M$. All materials on one line perform equally well as light stiff beams; those above it perform better. Selection consists of sliding the line toward the upper left until only a handful of materials remain above it. Lines of slope 1 select for ties ($E/\rho$), slope 3 for panels ($E^{1/3}/\rho$). A property limit appears as a horizontal or vertical line: "modulus at least 10 GPa" removes everything below $E=10$ GPa whatever its index.
+**Binder jetting** spreads powder and prints a liquid binder onto each layer with inkjet heads, like a paper printer. No melting occurs during the build, so there is no residual stress, no supports and very high throughput; the whole bed can be filled with nested parts. The printed "green" part is cured, removed from the powder, debound and **sintered** (Chapter 46), shrinking 15–20 % linearly — for a green density of 55 % sintered to 97 %, the linear shrinkage is $1-(0.55/0.97)^{1/3}=17$ % — or **infiltrated** with bronze. Stainless steels, tool steels, tungsten carbide, sand moulds and cores for casting, and ceramics are printed this way. Dimensional control of sintering shrinkage and slumping is its main difficulty.
 
-The commonly used charts include:
+### Material extrusion
 
-| Chart | Indices read from it | Typical applications |
-|---|---|---|
-| $E$ against $\rho$ | $E/\rho$, $E^{1/2}/\rho$, $E^{1/3}/\rho$ | Light stiff structures |
-| $\sigma_f$ against $\rho$ | $\sigma_f/\rho$, $\sigma_f^{2/3}/\rho$, $\sigma_f^{1/2}/\rho$ | Light strong structures, rotors |
-| $K_{IC}$ against $\sigma_f$ | $K_{IC}/\sigma_f$, $K_{IC}^2/\sigma_f$ | Damage-tolerant design, pressure vessels |
-| $E$ against $\sigma_f$ | $\sigma_f^2/E$, $\sigma_f/E$ | Springs, hinges, seals |
-| $k$ against $\alpha$ | $k/\alpha$ | Thermal distortion, thermal management |
-| $E$ against cost per unit volume | $E^{1/2}/(C_m\rho)$, etc. | Cost-limited structures |
-| Embodied energy or carbon against modulus or strength | $E^{1/2}/(H_c\rho)$, etc. | Low-carbon design (Chapter 49) |
-| Maximum service temperature against strength | Property limits | High-temperature design (Chapter 33) |
+**Material extrusion (MEX)**, best known as fused filament fabrication, pushes a thermoplastic filament through a heated nozzle of 0.2–1 mm and deposits beads layer by layer. It is the cheapest and most widespread AM process — from desktop printers to large-format machines that print car moulds and boat hulls — and also deposits metal- or ceramic-filled filaments that are then debound and sintered, as well as concrete (Section 48.6).
 
-### What the charts show beyond the ranking
+### Vat photopolymerization
 
-The empty regions of a chart are as informative as the occupied ones. There is no material with the stiffness of steel and the density of a polymer, none with the toughness of steel and the hardness and temperature capability of alumina, none with high thermal conductivity, low density and a CTE matched to silicon. Each gap is a target for material development: composites, foams and lattice materials (Chapter 40) are, in a sense, ways of filling chart space by combining a material with shape and with another material. Hybrid and architected materials are best understood as the deliberate occupation of chart regions that no monolithic material reaches.
+**Vat photopolymerization (VPP)** cures a liquid photopolymer resin layer by layer with ultraviolet light: a scanned laser (**stereolithography, SLA**), a projected image (**digital light processing, DLP**) or continuous variants that cure through an oxygen-permeable window. It gives the finest resolution (25–100 µm) and smoothest surfaces of common AM processes and is used for dental models and aligner moulds, hearing-aid shells, jewellery casting patterns, microfluidics and, with ceramic-filled resins, ceramic parts.
 
-> **Status of the principle: chart-based selection**
-> *Derived.* The selection lines are exact images of the derived indices; the conclusions are as reliable as the property ranges plotted, which are typical values for generic families and must be replaced by grade-specific data at the documentation stage.
+### Material jetting and sheet lamination
+
+**Material jetting** deposits droplets of photopolymer (or wax, or metal nanoparticle inks) from inkjet heads and cures them, allowing multi-material and full-colour parts. **Sheet lamination** bonds stacked sheets — paper, polymer, or metal foils joined by ultrasonic welding (ultrasonic additive manufacturing) — and machines each layer's contour.
+
+| Process family | Feedstock | Energy / bonding | Layer thickness | Typical resolution | Typical materials | Typical applications |
+|---|---|---|---|---|---|---|
+| PBF-LB (metal) | Powder 15–45 µm | Laser melting | 20–60 µm | 0.1–0.2 mm | Ti–6Al–4V, IN718, 316L, AlSi10Mg, CoCr | Brackets, fuel nozzles, implants, heat exchangers |
+| PBF-EB (metal) | Powder 45–105 µm | Electron-beam melting, hot bed | 50–100 µm | 0.3–0.5 mm | Ti–6Al–4V, γ-TiAl, CoCr | Implants, TiAl blades |
+| DED (laser, arc) | Powder or wire | Laser, EB or arc melting | 0.25–3 mm | 0.5–5 mm | Ti alloys, steels, Ni alloys | Large preforms, repair, cladding |
+| Binder jetting | Powder 5–30 µm | Binder, then sinter | 30–100 µm | 0.1–0.3 mm | Stainless, tool steel, WC–Co, sand, ceramics | Volume metal parts, casting moulds |
+| Material extrusion | Filament, pellets, paste | Melt and fuse | 0.1–1 mm | 0.2–1 mm | PLA, ABS, PC, PEEK, composites, concrete | Prototypes, jigs, tooling, buildings |
+| Vat photopolymerization | Liquid resin | UV curing | 25–100 µm | 25–100 µm | Acrylates, epoxies, ceramic slurries | Dental, hearing aids, microfluidics |
+| Polymer PBF | Powder 50–80 µm | Laser sintering | 80–120 µm | 0.3–0.5 mm | PA12, PA11, TPU | Functional plastic parts, ducts |
+
+*Typical ranges.*
+
+<!-- FIGURE 48.1 | figures/ch48/fig-48-1-am-process-families.png | schematic | Five principal additive manufacturing process families shown as simplified machine cross-sections. | Content: five panels side by side. (a) PBF-LB: build plate on piston, powder bed, recoater blade moving across, powder supply piston, laser beam from galvo scanner focused on bed, melted tracks, part with support structures, argon flow arrow. (b) DED: nozzle with coaxial powder streams (or wire) feeding a melt pool on a substrate, laser/arc from above, several tall deposited layers, robot arm hint. (c) Binder jetting: inkjet printhead depositing binder droplets on a powder layer, recoater; inset arrow to 'sinter furnace' with part shrinking ~17 %. (d) Material extrusion: heated nozzle depositing a thermoplastic bead from a filament, layers of rounded beads with voids between them. (e) Vat photopolymerization (bottom-up DLP): resin vat with transparent window, UV projector below, build platform lifting the part upward. Labels: typical layer thickness under each (30 µm, 1 mm, 50 µm, 0.2 mm, 50 µm). -->
+
+![Figure 48.1 — Five principal additive manufacturing process families shown as simplified machine cross-sections](../figures/ch48/fig-48-1-am-process-families.png)
+
+*Figure 48.1 — Five principal additive manufacturing process families shown as simplified machine cross-sections.*
+
+Figure 48.1 sketches the five main families. The rest of the chapter concentrates on metal PBF and DED, where the materials science is most demanding, and returns to polymers and ceramics in Section 48.6.
 
 ---
 
-## 48.4 Multi-objective selection
+## 48.3 Melt-pool physics and solidification
 
-### Conflicting objectives and the Pareto front
+### Energy input and absorption
 
-Real designs have several objectives that conflict: low mass and low cost; low cost and low embodied carbon; high stiffness and high damping. A solution (a material, or a material plus a design) is **dominated** if another solution is at least as good in every objective and better in one. The non-dominated solutions form the **Pareto front**, or trade-off surface (Figure 48.3). Every solution on the front is defensible; every solution off it is not, because something else is better in every respect. Finding the front removes most candidates, but it does not choose among the survivors. That requires a statement of how much one objective is worth in units of another.
+A laser track in PBF-LB is a miniature keyhole or conduction weld, a fraction of a millimetre wide, made in a few milliseconds. Only part of the beam power is absorbed: the **absorptivity** $\eta$ of a flat metal surface to near-infrared light is only 0.05–0.4, but a powder bed traps light by multiple reflections and absorbs more (often 0.4–0.7), and a keyhole absorbs most of it. Highly reflective, highly conductive metals — copper, silver, gold, and to a lesser extent aluminium — are the hardest to print for this reason.
 
-### Penalty functions and exchange constants
-
-The simplest way to make that statement is a linear **penalty function**,
+The process parameters are commonly combined into a **volumetric energy density**
 
 $$
-Z=C+\alpha\,m
+E_v=\frac{P}{v\,h\,t}
 $$
 
-where $C$ is cost, $m$ is mass and the **exchange constant** $\alpha$ is the value, in currency per kilogram, of saving one kilogram. The best solution minimizes $Z$. On a plot of $m$ against $C$, contours of constant $Z$ are straight lines of slope $-1/\alpha$; the optimum is the point where the lowest such line touches the front. A small $\alpha$ selects the cheap end of the front, a large $\alpha$ the light end.
+for laser power $P$, scan speed $v$, hatch spacing $h$ (distance between adjacent tracks) and layer thickness $t$. Typical PBF-LB values are 50–70 J/mm$^3$ for Ti–6Al–4V and IN718, 40–60 J/mm$^3$ for AlSi10Mg and 60–100 J/mm$^3$ for 316L. For example, Ti–6Al–4V at 280 W, 1200 mm/s, 0.14 mm hatch and 30 µm layers gives $280/(1200\times0.14\times0.03)=56$ J/mm$^3$. The same numbers give the theoretical build rate per laser, $vht=5.0$ mm$^3$/s or about 18 cm$^3$/h, before recoating and scan-jump time are subtracted — which is why production machines carry four to twelve lasers.
 
-Exchange constants are not material properties; they depend on the use of the product. Typical orders of magnitude:
+> **Status of the principle: volumetric energy density as a process variable**
+> *Empirical.* $E_v$ correlates density with parameters within one machine, alloy and parameter neighbourhood, but it is not a physical invariant: two parameter sets of equal $E_v$ can give different melt-pool shapes and defects, because $P$ and $v$ act differently on melt-pool depth. Normalized enthalpy and melt-pool-geometry criteria are more transferable.
 
-| Sector | Exchange constant $\alpha$ (USD per kg saved, order of magnitude) | Basis |
-|---|---|---|
-| Civil structures, domestic appliances | ~0–1 | Mass barely matters |
-| Family car | ~1–10 | Fuel or battery cost over vehicle life |
-| Heavy truck | ~5–20 | Payload revenue |
-| Civil aircraft | ~100–1000 | Fuel and payload over 25–30 year life |
-| Military aircraft | ~1000 | Performance |
-| Spacecraft | ~10$^4$ and above | Launch cost per kg to orbit |
+### Melt-pool modes
 
-The same construction works for any pair of objectives: cost against embodied carbon (with $\alpha$ a carbon price), cost against energy losses over life (Section 48.7), cost against volume in a crowded engine bay.
+As in welding (Chapter 47), the melt pool operates in one of two modes.
 
-<!-- FIGURE 48.3 | figures/ch48/fig-48-3-pareto-bonnet.png | plot | Mass against material cost for a car bonnet of equal bending stiffness: the Pareto front and lines of constant penalty for three exchange constants. | Content: log-log axes; x-axis material cost of one panel (USD, 3 to 100); y-axis panel mass (kg, 1 to 10). Points from the worked example: steel (5.65 USD, 6.28 kg), Al 6xxx (10.9, 3.12), Mg (11.8, 2.37), CFRP (56.5, 1.88). All four on the Pareto front (connected by a step line). Dashed lines Z = C + αm for α = 0.5 USD/kg (touches steel), α = 5 USD/kg (touches Mg), α = 500 USD/kg (touches CFRP), each labelled. Annotation near Al: 'on the front but never selected by a linear penalty (non-convex point)'. Shaded dominated region up and to the right of the front. -->
+- **Conduction mode**: the surface melts but does not vaporize significantly; the pool is shallow and roughly semicircular in cross-section, and heat flows outward from the surface.
+- **Keyhole mode**: at high power and low speed, the surface temperature exceeds the boiling point, recoil pressure from evaporation depresses the surface into a deep, narrow cavity, and absorption rises sharply. A stable keyhole gives deep penetration; an unstable one collapses intermittently and traps vapour bubbles, leaving round **keyhole pores** at the bottom of the track.
 
-**Worked example — choosing a bonnet material.** The bonnet is treated as a flat panel of area 1.0 m$^2$ that must match the bending stiffness of the current 0.80 mm steel panel. For equal stiffness, $Et^3$ is constant, so $t=t_{\rm steel}(E_{\rm steel}/E)^{1/3}$. Using indicative sheet prices (steel 0.9, aluminium 3.5, magnesium 5.0, CFRP 30 USD/kg; material only):
+Inside the pool, the surface tension of most liquid metals decreases with temperature, so surface tension is highest at the cool edges and pulls liquid outward from the hot centre: the **Marangoni flow** that widens pools. Surface-active elements such as oxygen and sulfur can reverse the sign of $d\gamma/dT$ and deepen the pool. Fluid velocities reach around 1 m/s, so convection, not conduction alone, shapes the pool and mixes the melt.
 
-| Material | $E$ (GPa) | $\rho$ (kg/m$^3$) | $t$ (mm) | Mass (kg) | Material cost (USD) |
+At the other extreme, too little energy or too fast a scan produces either **lack of fusion** between tracks and layers or, at high speed, **balling**: the long, thin liquid track breaks up into droplets by the Plateau–Rayleigh instability, because a liquid cylinder longer than about its circumference is unstable. A process map in the $P$–$v$ plane (Figure 48.2) therefore shows a window of dense parts bounded by lack of fusion (low $P$, high $v$), keyholing (high $P$, low $v$) and balling (high $P$ and high $v$).
+
+<!-- FIGURE 48.2 | figures/ch48/fig-48-2-process-window.png | map | Laser power–scan speed process map for PBF-LB of Ti–6Al–4V with 30 µm layers and 0.14 mm hatch, showing the dense-part window and the defect regimes around it. | Content: x-axis scan speed 200–2500 mm/s; y-axis laser power 50–450 W. Dashed lines of constant energy density E_v = 30, 56 and 120 J/mm³ (straight lines P ∝ v). Regions: 'lack of fusion' at low P / high v (lower right); 'keyhole porosity' at high P / low v (upper left); 'balling / humping' at high P and very high v (upper right); central 'dense (> 99.5 %)' window around the 56 J/mm³ line from ~150 W/600 mm/s to ~370 W/1600 mm/s. Marked point at 280 W, 1200 mm/s labelled 'worked example'. Arrow from that point to 280 W, 1500 mm/s crossing into lack of fusion. Inset sketches of melt-pool cross-sections: shallow conduction, deep keyhole with trapped pore, and irregular lack-of-fusion gap between tracks. -->
+
+![Figure 48.2 — Laser power–scan speed process map for PBF-LB of Ti–6Al–4V with 30 µm layers and 0.14 mm hatch, showing the dense-part window and the defect regimes around it](../figures/ch48/fig-48-2-process-window.png)
+
+*Figure 48.2 — Laser power–scan speed process map for PBF-LB of Ti–6Al–4V with 30 µm layers and 0.14 mm hatch, showing the dense-part window and the defect regimes around it.*
+
+### Melt-pool size and the lack-of-fusion criterion
+
+The Rosenthal solution for a moving point source (Chapter 47) gives a useful estimate of melt-pool size in conduction mode. At the high speeds of PBF the melt-pool cross-section approaches a semicircle whose width $w$ follows from maximizing the isotherm radius behind the source:
+
+$$
+w^{2}=\frac{8\,\eta P}{\pi e\,\rho c\,v\,(T_m-T_0)}
+$$
+
+with $\rho c$ the volumetric heat capacity and $e$ the base of natural logarithms; the depth is then about $w/2$. A simple geometric condition for full fusion, due to Tang, Pistorius and Beuth, requires adjacent tracks and layers to overlap: for hatch $h$, layer thickness $t$, pool width $W$ and depth $D$,
+
+$$
+\left(\frac{h}{W}\right)^{2}+\left(\frac{t}{D}\right)^{2}\le1
+$$
+
+If the sum exceeds 1, unmelted pockets remain between tracks.
+
+**Worked example — Is this parameter set in the dense window?** Take Ti–6Al–4V with $\eta=0.5$, $P=280$ W, $v=1.2$ m/s, $\rho c=4430\times670=2.97\times10^{6}$ J/m$^3$K, solidus $T_m=1604$ °C and $T_0=35$ °C, so $T_m-T_0=1569$ K. Then
+
+$$
+w^{2}=\frac{8\times0.5\times280}{\pi\times2.718\times2.97\times10^{6}\times1.2\times1569}=2.35\times10^{-8}\ \mathrm{m^2},\qquad w=153\ \mu\mathrm{m}
+$$
+
+and the depth is about 77 µm, enough to remelt two layers of 30 µm. With $h=140$ µm,
+
+$$
+\left(\frac{140}{153}\right)^{2}+\left(\frac{30}{77}\right)^{2}=0.84+0.15=0.99\le1
+$$
+
+The parameter set just satisfies the overlap condition. Increase the scan speed to 1.5 m/s to build faster and $w$ falls as $v^{-1/2}$, to 137 µm with depth 69 µm; the sum becomes $1.04+0.19=1.24$, and lack-of-fusion porosity appears between tracks. A 25 % gain in speed has crossed the boundary in Figure 48.2. In practice the pool also contains a partial keyhole and Marangoni flow, so Rosenthal underestimates depth, and parameter development confirms windows by building cubes and measuring density; but the scaling — $w\propto\sqrt{\eta P/v}$ — is the right guide.
+
+> **Status of the principle: Rosenthal melt-pool estimate and overlap criterion**
+> *Approximate.* A point source moving over a semi-infinite solid with constant properties, no latent heat and no fluid flow. It predicts trends and order of magnitude in conduction mode; it underestimates depth in keyhole mode and ignores the powder layer, heat accumulation in thin features and the previous tracks.
+
+### Cooling rate, thermal gradient and solidification rate
+
+From the same solution, the cooling rate at the solidus on the track centreline is
+
+$$
+\dot T=\frac{2\pi k\,(T_m-T_0)^2\,v}{\eta P}
+$$
+
+With $k=20$ W/m K for Ti–6Al–4V near its solidus and the parameters above, $\dot T=2\pi\times20\times1569^2\times1.2/140=2.7\times10^{6}$ K/s. The thermal gradient behind the pool is $G=\dot T/v=2.2\times10^{6}$ K/m, or 2.2 K/µm, and the solidification rate on the centreline equals the scan speed, $R\approx v=1.2$ m/s, falling toward zero at the bottom of the pool. Compare a sand casting with $G\sim10^{3}$ K/m and $R\sim10^{-4}$ m/s, or an arc weld with $\dot T\sim10^{2}$–$10^{3}$ K/s. PBF solidifies three to four orders of magnitude faster than conventional welding, and DED and WAAM, with larger pools, lie in between (about 10$^2$–10$^4$ K/s).
+
+The consequences follow from Chapter 9:
+
+- **Fine solidification structures.** Primary dendrite or cell spacing scales roughly as $\lambda_1\propto\dot T^{-1/3}$ to $\dot T^{-1/2}$. In PBF it is 0.3–1 µm: 316L shows a cellular substructure of about 0.5 µm with Cr and Mo segregated to cell walls and a high dislocation density, which gives a yield strength of 450–550 MPa, roughly double that of annealed wrought 316L, with good ductility. AlSi10Mg forms a fine cellular network of eutectic silicon around α-Al cells, giving higher strength than the cast alloy.
+- **Columnar, epitaxial growth.** Each new track remelts the one below and grows epitaxially from it, as in a multipass weld. With high $G/R$ at the pool bottom, grains grow as columns along the build direction across many layers, often with a ⟨100⟩ fibre texture along the build direction. The **columnar-to-equiaxed transition (CET)**, predicted by Hunt's criterion to occur when $G^n/R$ falls below an alloy-dependent constant (with $n\approx3$–$4$), is hard to reach in PBF because $G$ is so high; equiaxed grains need potent inoculants or alloys designed for AM.
+- **Metastable phases.** Ti–6Al–4V cools fast enough to form **α′ martensite** within the columnar prior-β grains: high strength (tensile strength 1100–1300 MPa) but limited ductility (5–10 %). Rapid cooling also extends solid solubility, suppresses equilibrium precipitates in nickel alloys, and can retain austenite in martensitic steels.
+- **Intrinsic heat treatment.** Each layer is reheated many times by the tracks above it, with peaks that diminish with distance. These cycles temper martensite, precipitate phases or (in PBF-EB, with its hot bed) decompose α′ into fine α+β during the build. Properties therefore vary with height and with the time between layers — a feature of AM with no counterpart in casting.
+
+<!-- FIGURE 48.3 | figures/ch48/fig-48-3-g-r-solidification-map.png | map | Solidification map of thermal gradient G versus solidification rate R, locating casting, welding, DED and PBF and the morphology regions. | Content: log–log axes: x-axis R from 10^-6 to 10 m/s; y-axis G from 10^2 to 10^8 K/m. Diagonal lines of constant cooling rate G·R = 1, 10^2, 10^4, 10^6 K/s (finer structure toward upper right); lines of constant G/R separating 'planar' (upper left), 'cellular', 'columnar dendritic' and 'equiaxed dendritic' (lower right) regions for a generic alloy. Process ellipses: sand casting (G 10^2–10^3, R 10^-5–10^-4), directional solidification (G ~10^3–10^4, R ~10^-5), arc welding (G 10^4–10^5, R 10^-3–10^-2), DED/WAAM (G 10^4–10^6, R 10^-3–10^-2), PBF-LB (G 10^5–10^7, R 10^-2–1). Point marked for worked example: G = 2.2×10^6 K/m, R = 1.2 m/s (cooling rate 2.7×10^6 K/s). Arrow along PBF ellipse from pool bottom (low R, high G/R → columnar) to top centreline (high R). -->
+
+![Figure 48.3 — Solidification map of thermal gradient G versus solidification rate R, locating casting, welding, DED and PBF and the morphology regions](../figures/ch48/fig-48-3-g-r-solidification-map.png)
+
+*Figure 48.3 — Solidification map of thermal gradient G versus solidification rate R, locating casting, welding, DED and PBF and the morphology regions.*
+
+Figure 48.3 locates the AM processes among other solidification routes; the high-$G$, high-$R$ corner occupied by PBF explains both its fine structure and its stubbornly columnar grains.
+
+---
+
+## 48.4 Microstructure and defects
+
+### Porosity
+
+Three kinds of pore dominate metal AM, each with a characteristic shape and cause (Figure 48.4):
+
+- **Lack-of-fusion (LOF) pores**: irregular, flat, crack-like voids between tracks or layers, often containing unmelted powder particles, caused by insufficient energy or overlap (the criterion above), spatter particles landing on the bed, or recoating defects. They are the most damaging because they are large (50–500 µm), sharp and often oriented parallel to the layers.
+- **Keyhole pores**: spherical voids of 20–100 µm at the bottom of tracks, caused by keyhole collapse at excessive energy density, particularly at the turnaround points of scan vectors where the laser slows.
+- **Gas pores**: small (5–30 µm) spherical pores from argon trapped inside gas-atomized powder particles or from dissolved hydrogen (moisture on aluminium powder). They are relatively benign but cannot be removed by HIP if they contain insoluble argon.
+
+Well-optimized PBF-LB routinely achieves 99.5–99.9 % density; the defect population that remains, and its largest member, decide fatigue.
+
+### Spatter, powder and surface
+
+The laser ejects **spatter** — molten droplets and entrained powder particles — that can land on the bed, become larger than the layer thickness, and cause LOF in the next layer; gas flow across the bed is designed to carry it away. Powder recycled many times picks up oxygen and coarse spatter particles, so powder chemistry and size distribution are monitored lot by lot. **Surface roughness** of as-built PBF-LB metal surfaces is typically Ra 5–20 µm (worse on down-facing surfaces, which sit on loose powder), and PBF-EB and DED surfaces are rougher still. Partly fused particles and notch-like valleys between layers act as surface cracks in fatigue.
+
+### Residual stress, distortion and cracking
+
+Residual stresses arise as in a weld (Chapter 47), with an AM-specific twist known as the **temperature-gradient mechanism**: the newly melted layer is hot and expands against cooler material beneath, yields in compression, and on cooling contracts and is left in tension, while the material below is put in compression. Layer upon layer, this builds tensile stresses near the top surface and the edges, often reaching the yield strength. While the part is welded to its build plate the stresses are balanced; when the part is cut off, it distorts. Stresses can also crack the part or the supports, or lift the part off the plate during the build. Remedies include preheating the plate (200 °C for aluminium, up to 500 °C or more for crack-prone alloys), island or rotating scan strategies that shorten scan vectors and change their direction every layer, adequate supports, and a **stress-relief anneal before removal** from the plate.
+
+**Cracking** in AM follows the welding classification. **Solidification cracking** limits the high-strength aluminium alloys 2024, 6061 and 7075, whose wide freezing range and long columnar grains with continuous interdendritic liquid films make them crack in PBF just as they do in autogenous welds. Two strategies work: alloys designed for AM, such as Al–Mg–Sc–Zr, in which Al$_3$(Sc,Zr) particles formed in the melt nucleate fine equiaxed grains, and **inoculating** conventional alloys with nanoparticles (for example Zr-based or TiB$_2$ additions) that do the same — breaking the columnar structure and allowing crack-free 7075 and 6061. Nickel superalloys with high γ′ fractions (such as IN738LC and CM247LC) suffer solidification and liquation cracking and **strain-age cracking**, which PBF-EB with its hot bed partly avoids. Carbon steels and tool steels with high hardenability suffer cold cracking from martensite, mitigated by plate preheating.
+
+### Anisotropy
+
+Columnar grains along the build direction, crystallographic texture, layer-aligned LOF defects and the "stacking" of melt-pool boundaries make as-built AM metals **anisotropic**. Typically, Ti–6Al–4V tested with the load parallel to the build direction (vertical specimens) has lower elongation and lower fatigue strength than horizontal specimens, because flat LOF defects lie perpendicular to the load. Elastic modulus also varies with texture. Specifications therefore require testing in several build orientations, and HIP and recrystallization treatments reduce, though rarely remove, the anisotropy.
+
+<!-- FIGURE 48.4 | figures/ch48/fig-48-4-am-defects.png | micrograph-style | Characteristic defects in laser powder-bed-fused metal: lack-of-fusion voids, keyhole pores, gas pores, columnar grains, and the residual-stress mechanism. | Content: left: schematic polished cross-section (build direction vertical, 1 mm field) showing stacked melt-pool boundaries as overlapping arcs; an irregular flat lack-of-fusion void ~200 µm wide with an unmelted powder particle between two layers; spherical keyhole pores ~50 µm at melt-pool bottoms; tiny gas pores ~10 µm; columnar prior grains crossing many layers along build direction; rough top surface with partly fused particles (Ra ~10 µm). Right: two-panel cartoon of the temperature-gradient mechanism: (1) heated top layer expanding, compressive yielding; (2) after cooling, top layer in tension (+) and layers beneath in compression (−); below, distortion of a cantilever after cutting from the build plate. -->
+
+![Figure 48.4 — Characteristic defects in laser powder-bed-fused metal: lack-of-fusion voids, keyhole pores, gas pores, columnar grains, and the residual-stress mechanism](../figures/ch48/fig-48-4-am-defects.png)
+
+*Figure 48.4 — Characteristic defects in laser powder-bed-fused metal: lack-of-fusion voids, keyhole pores, gas pores, columnar grains, and the residual-stress mechanism.*
+
+### Fatigue: why the largest defect matters
+
+Static strength of well-made AM metal matches or exceeds wrought material, but fatigue does not, unless defects and surfaces are dealt with. Fatigue cracks start at the largest near-surface defect or at the rough as-built surface. Murakami's empirical $\sqrt{\mathrm{area}}$ model relates the fatigue limit to hardness and the square root of the defect's projected area normal to the stress:
+
+$$
+\sigma_w=\frac{C\,(\mathrm{HV}+120)}{\left(\sqrt{\mathrm{area}}\right)^{1/6}}
+$$
+
+with $\sigma_w$ in MPa, HV the Vickers hardness, $\sqrt{\mathrm{area}}$ in µm, and $C=1.43$ for surface defects and 1.56 for internal ones.
+
+> **Status of the principle: Murakami's $\sqrt{\mathrm{area}}$ model**
+> *Empirical.* Fitted to steels with small defects and inclusions; it treats a defect as an equivalent small crack whose threshold for growth depends on its size and the matrix hardness. It is widely used for ranking AM defects in titanium and nickel alloys, but its constants are not universal and it applies to defects small enough to behave as short cracks (roughly below 1000 µm).
+
+**Worked example — How much does a lack-of-fusion pore cost?** For as-built Ti–6Al–4V of about 350 HV, a surface-connected LOF defect with $\sqrt{\mathrm{area}}=100$ µm gives
+
+$$
+\sigma_w=\frac{1.43\times(350+120)}{100^{1/6}}=\frac{672}{2.15}=312\ \mathrm{MPa}
+$$
+
+If HIP closes the internal defects and machining removes the surface layer so that the largest remaining defect is an internal gas pore of $\sqrt{\mathrm{area}}=30$ µm,
+
+$$
+\sigma_w=\frac{1.56\times470}{30^{1/6}}=\frac{733}{1.76}=416\ \mathrm{MPa}
+$$
+
+and for a 10 µm pore, about 500 MPa. These estimates bracket what is observed: fatigue strengths at 10$^7$ cycles of about 200–350 MPa for as-built PBF Ti–6Al–4V with as-built surfaces, against 500–600 MPa for HIPed and machined material — comparable to wrought. A defect only a tenth of a millimetre across is enough to cut the fatigue limit by a third; this is why AM qualification focuses on the size of the largest defect, not on the average density.
+
+---
+
+## 48.5 Post-processing
+
+Almost no metal AM part goes into service as built. A typical sequence for a PBF-LB aerospace or medical part is:
+
+1. **Stress relief** on the build plate (for example 650–800 °C for Ti–6Al–4V, 300 °C for AlSi10Mg, 1065 °C for IN718 in some routes) to prevent distortion and cracking on removal.
+2. **Removal** from the plate by wire electrical-discharge machining or band saw, and **support removal**.
+3. **Hot isostatic pressing** to close internal porosity: typically 920 °C, 100 MPa, 2 h for Ti–6Al–4V; around 1160–1200 °C and 100–150 MPa for nickel superalloys. HIP closes LOF and keyhole pores that are not connected to the surface, but not surface-connected ones, and not argon-filled gas pores, which can reappear on subsequent heat treatment. It also coarsens the microstructure: α′ martensite in Ti–6Al–4V decomposes to a lamellar α+β structure, trading strength for ductility.
+4. **Heat treatment** to the required condition: solution and age for IN718 and 17-4PH, which also dissolves the Laves and δ phases that segregation creates; annealing to recrystallize and homogenize the cellular structure of 316L if corrosion or isotropy demands it; T6 for AlSi10Mg (which, unlike the cast alloy, loses strength because the fine as-built silicon network coarsens).
+5. **Machining** of critical surfaces, threads and interfaces, and **surface finishing** — abrasive blasting, chemical or electrochemical polishing, abrasive-flow machining of internal channels — to remove the rough surface layer and its partly fused particles.
+6. **Inspection**: computed tomography for internal defects and geometry, dye penetrant, dimensional checks, and testing of witness coupons built alongside the part.
+
+| Ti–6Al–4V condition | Microstructure | Yield strength (MPa) | Tensile strength (MPa) | Elongation (%) | Fatigue strength at 10⁷ cycles (MPa) |
 |---|---|---|---|---|---|
-| Steel | 210 | 7850 | 0.80 | 6.28 | 5.65 |
-| Al 6xxx | 70 | 2700 | 1.15 | 3.12 | 10.9 |
-| Mg alloy | 45 | 1770 | 1.34 | 2.37 | 11.8 |
-| CFRP | 60 | 1550 | 1.22 | 1.88 | 56.5 |
+| PBF-LB, as built | α′ martensite in columnar prior β | 1000–1150 | 1100–1300 | 5–10 | 200–350 (as-built surface) |
+| PBF-LB, stress relieved | Tempered α′ / fine α+β | 950–1050 | 1050–1150 | 8–12 | 250–400 (as-built surface) |
+| PBF-LB, HIP + machined | Lamellar α+β | 850–950 | 950–1050 | 12–16 | 500–600 |
+| PBF-EB, as built | Fine α+β (hot bed) | 850–950 | 950–1050 | 12–16 | 250–350 (as-built surface) |
+| DED/WAAM, as deposited | Coarse columnar prior β, basketweave α | 800–950 | 900–1000 | 8–15 | — |
+| Wrought, mill annealed | Equiaxed α+β | 830–900 | 900–1000 | 12–16 | 500–600 |
 
-For aluminium, $t=0.80\times(210/70)^{1/3}=0.80\times1.442=1.154$ mm and $m=2700\times1.0\times1.154\times10^{-3}=3.12$ kg. No material is dominated: each lighter one is dearer. The penalties for three exchange constants are:
+*Typical values; fatigue strength depends on stress ratio, surface and defect content.*
 
-| | Steel | Al | Mg | CFRP |
-|---|---|---|---|---|
-| $Z$ at $\alpha=0$ (cost only) | **5.7** | 10.9 | 11.8 | 56.5 |
-| $Z$ at $\alpha=5$ USD/kg (car) | 37.1 | 26.5 | **23.7** | 65.9 |
-| $Z$ at $\alpha=500$ USD/kg (aircraft) | 3146 | 1569 | 1195 | **998** |
+The table shows the general pattern: as-built PBF material is stronger and less ductile than wrought, HIP and machining bring it to wrought-equivalent behaviour, and fatigue — governed by surface and defects — is the property most sensitive to post-processing. Figure 48.5 shows the same pattern as S–N curves.
 
-The switch-over values follow from equating penalties: aluminium beats steel when $\alpha>(10.9-5.65)/(6.28-3.12)=1.7$ USD/kg; magnesium beats steel when $\alpha>1.6$ USD/kg and beats aluminium when $\alpha>1.2$ USD/kg; CFRP beats magnesium only when $\alpha>(56.5-11.8)/(2.37-1.88)\approx91$ USD/kg. Two conclusions follow. For a car, with $\alpha$ of a few USD per kilogram, a light alloy is justified on material cost, and CFRP is not; CFRP bonnets appear on cars where mass is valued like aircraft mass (racing, some premium sports models). And aluminium, although on the Pareto front, is never the minimum of a linear penalty with these numbers: magnesium overtakes it before it overtakes steel. Points in a non-convex part of the front can only be selected by a non-linear value function or by other criteria. In practice those other criteria decide: magnesium's corrosion, formability at room temperature and paint-bake behaviour are worse, and processing costs (stamping, joining, painting) are not in this material-only model, so aluminium is the common industrial choice. The penalty function narrows the debate to a number, $\alpha$, and to a short list of documentation questions.
+<!-- FIGURE 48.5 | figures/ch48/fig-48-5-ti64-fatigue-postprocessing.png | plot | Fatigue S–N curves of Ti–6Al–4V made by PBF-LB in different post-processing conditions compared with wrought material. | Content: x-axis cycles to failure 10^4–10^8 (log); y-axis maximum stress 100–1000 MPa (R = 0.1). Curves (schematic, typical): as-built surface, as built (endurance ~250 MPa at 10^7); stress relieved, as-built surface (~300 MPa); HIP, as-built surface (~350 MPa, little gain because surface dominates); machined, not HIPed (~450 MPa, internal LOF initiation, large scatter band shaded); HIP + machined (~550 MPa); wrought mill-annealed (~550–600 MPa, dashed). Inset fractograph sketches at right: crack initiation at a surface LOF defect with unmelted particles vs at an internal 30 µm pore vs at α-lath boundaries. Annotations of the worked-example Murakami estimates: 312 MPa (100 µm surface defect) and 416 MPa (30 µm internal pore). -->
 
-> **Status of the principle: linear penalty functions**
-> *Approximate.* Exact for a linear value of mass (or other objective), which is a reasonable local approximation; real value functions are non-linear (the first kilogram saved in a spacecraft enables a mission, the last one does not), and a linear penalty cannot select points in non-convex regions of the front.
+![Figure 48.5 — Fatigue S–N curves of Ti–6Al–4V made by PBF-LB in different post-processing conditions compared with wrought material](../figures/ch48/fig-48-5-ti64-fatigue-postprocessing.png)
 
-### Other multi-objective methods
-
-Where exchange constants cannot be agreed, **weighted-sum scoring** (each property normalized and weighted by importance, as in the weighted decision matrices used in design reviews) is common but hides arbitrary choices in the weights. **Constraint methods** optimize one objective with the others as limits (minimize cost subject to $m\le m_{\max}$), which trace the front point by point including non-convex parts. **Multi-objective evolutionary algorithms** construct the whole front numerically when a design model is available, and are widely used in combination with finite-element models of components and with the informatics tools of Chapter 47.
+*Figure 48.5 — Fatigue S–N curves of Ti–6Al–4V made by PBF-LB in different post-processing conditions compared with wrought material.*
 
 ---
 
-## 48.5 Shape factors
+## 48.6 Polymer and ceramic additive manufacturing
 
-### Shape as a free variable
+### Polymers
 
-Indices derived so far fixed the shape of the cross-section (solid square) and left only its size free. But the designer can also choose the shape: a tube, an I-beam, a box, a sandwich panel. Shape changes stiffness and strength in bending and torsion enormously at the same mass, while leaving axial (tie) stiffness unchanged. Its efficiency is measured by a dimensionless **shape factor**, defined relative to a solid square section of the same area. For elastic bending,
+Polymers were the first AM materials and still account for most printed parts by number.
+
+- **Material extrusion** deposits beads of molten thermoplastic: PLA, ABS, PETG, polycarbonate, nylon and high-temperature PEEK and PEI, often filled with chopped or continuous carbon or glass fibre. The weakness is the **interface between beads and layers**: a new bead must reheat the previous one above its glass transition long enough for chains to diffuse across the interface and entangle. The time for this healing scales with the reptation time (Chapter 21), and if the interface cools too quickly only partial interdiffusion occurs. Strength perpendicular to the layers is therefore typically 30–70 % of that along the beads, and parts are oriented so that the main loads run along the beads. Voids between rounded beads add to the anisotropy.
+- **Polymer PBF** (laser sintering) holds a bed of PA12 or PA11 powder a few degrees below its melting point, inside the **sintering window** between melting on heating and recrystallization on cooling of the semicrystalline polymer; the laser supplies the last increment of energy to melt and coalesce the scanned particles. Because the whole bed stays above the recrystallization temperature during the build, the part does not curl, and because the surrounding powder supports it, no supports are needed — enabling nested batches of functional ducts, housings and orthotics. Parts are 95–97 % dense with near-isotropic properties close to moulded PA12.
+- **Vat photopolymerization** cures acrylate or epoxy resins by UV-initiated radical or cationic polymerization (Chapter 19). Light is absorbed exponentially with depth (Beer–Lambert), and the resin cures where the dose exceeds a critical dose $E_c$. The cured depth follows the **Jacobs working curve**:
 
 $$
-\phi_B^e=\frac{I}{I_{\rm square}}=\frac{12\,I}{A^2}
+C_d=D_p\ln\frac{E}{E_c}
 $$
 
-so $\phi_B^e=1$ for a solid square. For failure in bending the corresponding factor is $\phi_B^f=6Z/A^{3/2}$.
+where $E$ is the surface exposure and $D_p$ the depth at which the light falls to $1/e$. Each layer must cure slightly deeper than the layer thickness so that it bonds to the one below.
 
-| Section (thin-walled limits) | $I$ | $A$ | $\phi_B^e$ |
+**Worked example — Choosing the exposure.** A resin has $D_p=0.15$ mm and $E_c=10$ mJ/cm$^2$. For 0.1 mm layers with 50 % overcure, $C_d=0.15$ mm and
+
+$$
+E=E_c\exp\!\left(\frac{C_d}{D_p}\right)=10\times e^{1.0}=27\ \mathrm{mJ/cm^2}
+$$
+
+A 0.2 mm cure depth needs $10\times e^{1.33}=38$ mJ/cm$^2$: cure depth grows only logarithmically with exposure. A ceramic-filled slurry scatters light strongly and might have $D_p=0.05$ mm; curing 0.075 mm then needs $10\times e^{1.5}=45$ mJ/cm$^2$, and the shallower penetration forces thinner layers. Overexposure enlarges features laterally and over-cures down-facing surfaces, so exposure, layer thickness and resolution are set together.
+
+Polymer parts printed by VPP are post-cured under UV and heat to complete the reaction; incompletely cured resins contain residual monomer, which matters for skin-contact and dental parts.
+
+### Ceramics
+
+Ceramics cannot be melted layer by layer without cracking, so most ceramic AM is **indirect**: shape a powder–binder green body, then debind and sinter it (Chapters 17 and 46).
+
+- **Vat photopolymerization of ceramic slurries** (40–60 vol% alumina, zirconia, silicon nitride or hydroxyapatite in a photocurable resin) gives the best resolution and density, reaching 99 %+ after sintering for alumina and zirconia. Debinding is slow (often days) because the polymer must leave without cracking the part, which limits wall thickness to a few millimetres. Applications include ceramic cores for turbine-blade casting, dental zirconia, and bioceramic bone scaffolds.
+- **Binder jetting** of ceramic powders gives porous parts that are infiltrated or used porous (sand moulds and cores for metal casting are its largest application, eliminating patterns entirely).
+- **Material extrusion of pastes** ("robocasting") prints ceramic lattices and scaffolds, and on a much larger scale, **3D concrete printing** extrudes stiff cementitious mortar to build walls without formwork. Printable concrete must be fluid enough to pump yet develop a yield stress fast enough to support the layers above it — a rheology problem — and its interlayer bond, like FFF polymers, is a weak plane (Chapter 18).
+- **Direct laser melting** of ceramics is limited to special cases (eutectic oxide ceramics, small parts with preheating) because thermal shock cracks them.
+
+Sintering shrinkage of 15–25 % linear must be compensated in the model, and like MIM (Chapter 46), uniform green density is the key to dimensional control.
+
+---
+
+## 48.7 Design for additive manufacturing
+
+Design for AM exploits geometric freedom while respecting what the processes cannot do.
+
+### Process constraints
+
+- **Overhangs and supports.** In metal PBF, surfaces inclined at less than about 40–45° to the build plate need supports, which consume time and powder and must be removed; down-facing surfaces are rough. Designers orient parts and use self-supporting shapes (teardrop or diamond channels instead of circles).
+- **Minimum features.** Walls of about 0.3–0.5 mm, holes of about 0.5–1 mm and channels that powder can be removed from; trapped powder in closed cavities is a defect.
+- **Thermal mass and distortion.** Large flat areas, abrupt section changes and long scan vectors build residual stress; thin features overheat because heat cannot escape, changing microstructure locally.
+- **Build orientation** sets anisotropy, surface quality on critical faces, support needs and build height (and so time and cost).
+
+### Topology optimization and part consolidation
+
+**Topology optimization** distributes material within a design space to minimize compliance or mass for given loads and constraints; the organic, truss-like results are often manufacturable only by AM. Typical aerospace brackets redesigned this way lose 30–60 % of their mass. **Part consolidation** replaces assemblies — the fuel-nozzle example of the opening, heat exchangers with thousands of brazed fins, hydraulic manifolds with drilled cross-holes and plugs — by single parts with internal passages shaped for flow rather than for drilling. Each eliminated joint removes a leak path and a failure mode (Chapter 47), but the consolidated part must be inspectable, and internal surfaces cannot be machined.
+
+### Lattices and architected materials
+
+AM can build **lattices** — periodic or stochastic cellular structures — whose properties follow the scaling laws of cellular solids. For a lattice of relative density $\bar\rho=\rho^*/\rho_s$ made of a solid with modulus $E_s$ and yield strength $\sigma_s$, Gibson–Ashby analysis gives
+
+$$
+\frac{E^*}{E_s}\approx\bar\rho^{\,2},\qquad\frac{\sigma^*}{\sigma_s}\approx0.3\,\bar\rho^{\,3/2}
+$$
+
+for **bending-dominated** lattices (such as open-cell foams and many strut lattices with low nodal connectivity), and
+
+$$
+\frac{E^*}{E_s}\approx\frac{\bar\rho}{3}
+$$
+
+for **stretch-dominated** lattices (such as the octet truss), whose struts carry axial load.
+
+> **Status of the principle: Gibson–Ashby scaling of cellular solids**
+> *Approximate.* Derived from beam theory for idealized cells, with prefactors fitted to experiment. It holds for relative densities below about 0.3; at higher densities nodes and strut thickness dominate. Printed lattices fall below the predictions when strut diameters approach the melt-track width, because of surface roughness, waviness and porosity in the struts.
+
+**Worked example — A titanium lattice that matches bone.** A femoral stem made of solid Ti–6Al–4V ($E_s=114$ GPa) is about six times stiffer than cortical bone (15–20 GPa); the stiff implant carries load that the bone around it would otherwise carry, and the unloaded bone resorbs (**stress shielding**, Chapter 39). A bending-dominated Ti–6Al–4V lattice at $\bar\rho=0.2$ has
+
+$$
+E^*\approx114\times0.2^{2}=4.6\ \mathrm{GPa},\qquad\sigma^*\approx0.3\times950\times0.2^{1.5}=25\ \mathrm{MPa}
+$$
+
+between trabecular and cortical bone, and far closer to bone than solid titanium. At $\bar\rho=0.3$ the modulus is 10 GPa and the strength 47 MPa; a stretch-dominated octet lattice at $\bar\rho=0.2$ gives 7.6 GPa. By grading the density through the part, a designer can make an implant that is stiff where it must carry bending and compliant where it meets bone, and whose open pores of 300–700 µm allow bone ingrowth. Figure 48.6 places these lattices against bone on a log–log chart. The same scaling guides lightweight sandwich cores, energy-absorbing crash structures and heat-exchanger lattices.
+
+<!-- FIGURE 48.6 | figures/ch48/fig-48-6-lattice-scaling.png | plot | Relative modulus of printed lattices versus relative density, comparing bending- and stretch-dominated architectures with bone. | Content: log–log axes: x-axis relative density 0.01–1; y-axis modulus E* 0.01–200 GPa for Ti–6Al–4V (E_s = 114 GPa), secondary axis E*/E_s. Lines: bending-dominated E* = E_s ρ̄² (slope 2), stretch-dominated E* = E_s ρ̄/3 (slope 1), crossing at ρ̄ ≈ 0.33, beyond the range (ρ̄ < 0.3) where the scaling holds. Points: worked example at ρ̄ = 0.2 (4.6 GPa bending, 7.6 GPa stretch) and ρ̄ = 0.3 (10.3 GPa). Shaded horizontal bands: trabecular bone 0.1–2 GPa, cortical bone 15–20 GPa. Scatter of typical measured PBF lattice data lying slightly below the bending line. Small unit-cell sketches: body-centred cubic strut cell (bending), octet truss (stretch), gyroid sheet (intermediate). -->
+
+![Figure 48.6 — Relative modulus of printed lattices versus relative density, comparing bending- and stretch-dominated architectures with bone](../figures/ch48/fig-48-6-lattice-scaling.png)
+
+*Figure 48.6 — Relative modulus of printed lattices versus relative density, comparing bending- and stretch-dominated architectures with bone.*
+
+---
+
+## 48.8 Qualification and certification
+
+A forged aircraft part is trusted because its material comes from a mature specification — a defined alloy, a controlled melting and forging process, and decades of statistical property data. An AM part breaks that model: the material is created at the same moment as the part, by a process with dozens of parameters, on machines whose behaviour can drift, and its properties depend on geometry, orientation and location on the build plate. **Qualification** is the demonstration that a material, process and machine reliably produce parts with the required properties; **certification** is a regulator's or customer's acceptance that a particular part meets requirements for its application.
+
+### The elements of AM qualification
+
+1. **Feedstock control**: powder chemistry (particularly oxygen, nitrogen and hydrogen), size distribution, morphology, flowability and reuse limits; wire chemistry for DED.
+2. **A frozen process**: machine, software, parameter set, scan strategy, gas flow, plate preheat and post-processing are fixed and documented; any change triggers requalification. Machine qualification checks laser power, beam focus, recoater and gas-flow performance.
+3. **Material property databases**: tensile, fatigue, fracture-toughness and crack-growth data from many builds, machines and powder lots, in several orientations, giving statistically based design allowables (for example values that 99 % or 90 % of the population exceed with 95 % confidence, as for conventional aerospace materials).
+4. **Part qualification**: first-article inspection, CT scanning, destructive sectioning of sample parts, proof testing.
+5. **Production control**: **witness coupons** built with each lot and tested; **in-situ monitoring** of melt-pool emission, layer images and thermal fields, which can detect recoater streaks, spatter and LOF as they occur and is increasingly used to flag parts for extra inspection; and statistical process control.
+6. **Defect-tolerant design**: since the largest defect governs fatigue, designs use damage-tolerance analysis with an assumed initial flaw size set by what inspection can reliably find, and **classify parts by criticality**, from non-structural parts that need little qualification to fracture-critical parts that need the most.
+
+Standards organizations (ISO/ASTM, SAE's Aerospace Material Specifications, ASME, NASA, and medical-device regulators) have published AM-specific standards covering terminology, feedstock, process control, testing and inspection, and the number grows each year. In medicine, porous printed titanium acetabular cups and spinal cages have been cleared for routine clinical use, with patient-specific implants and surgical guides regulated as custom devices.
+
+### Why qualification is hard, and how it is getting easier
+
+The fundamental difficulty is that AM properties are path-dependent at fine scale. A change in part geometry changes local heat accumulation, which changes melt-pool size, cooling rate, porosity and microstructure. Two approaches reduce the cost of proving each new part: **process–structure–property models** (melt-pool, solidification and microstructure simulations linked to property models in an ICME framework, Chapter 56) that predict where in a part defects and weak microstructures will occur, and **in-situ monitoring plus closed-loop control**, which aims to certify the part by its own build record rather than by sacrificial testing. Neither yet replaces testing for critical parts, but together they are moving AM from "qualify every part" toward "qualify the process".
+
+| Concern | Root cause | Control | Verification |
 |---|---|---|---|
-| Solid square, side $b$ | $b^4/12$ | $b^2$ | 1 |
-| Solid circle, radius $r$ | $\pi r^4/4$ | $\pi r^2$ | $3/\pi=0.95$ |
-| Thin-walled tube, radius $r$, wall $t$ | $\pi r^3t$ | $2\pi rt$ | $3r/(\pi t)$ |
-| Thin-walled square box, side $h$, wall $t$ | $2h^3t/3$ | $4ht$ | $h/(2t)$ |
-| Rolled I-sections | — | — | typically 10–50 |
-| Sandwich panel with thin faces | — | — | can exceed 100 |
-
-A tube with $r/t=10$ has $\phi_B^e=30/\pi=9.5$: it is 9.5 times stiffer in bending than a solid square bar of the same mass. Its strength shape factor grows more slowly, $\phi_B^f=(3/\sqrt{2\pi})(r/t)^{1/2}$, which is 3.8 at $r/t=10$ and 5.4 at $r/t=20$.
-
-### Combined material-and-shape indices
-
-Repeating the derivation of Section 48.2 with $I=\phi_B^eA^2/12$ gives the mass of a light stiff beam of given shape as
-
-$$
-m=\left(\frac{12S^*}{C_1}\right)^{1/2}L^{5/2}\left(\frac{\rho}{(\phi_B^eE)^{1/2}}\right)\qquad\Longrightarrow\qquad \text{maximize } \frac{(\phi_B^eE)^{1/2}}{\rho}
-$$
-
-The shape factor multiplies the modulus: a shaped material behaves like a solid one of modulus $\phi_B^eE$ and the same density. On the $E$–$\rho$ chart, shaping moves a material vertically upward by the factor $\phi$; a tube of steel with $\phi=20$ behaves, in bending, like a solid material of modulus 4200 GPa.
-
-### Why shape efficiency is material-dependent
-
-If shape gives such gains, why not use thin walls everywhere? Because thin walls fail by **local buckling** (wrinkling of the wall, crippling of a flange) before they reach their design load, and because manufacturing limits how thin a section can be rolled, extruded, moulded or laid up. The maximum practical shape factor is therefore a property of the material and its process:
-
-| Material class | Practical maximum $\phi_B^e$ (typical) | Reason |
-|---|---|---|
-| Structural steels | ~65 | High $E$ resists local buckling; rolled and welded sections |
-| Aluminium alloys | ~45 | Extrusion allows complex thin sections; lower $E$ |
-| CFRP, GFRP | ~40 | Laid-up and pultruded sections; buckling and delamination |
-| Engineering polymers | ~10–12 | Low $E$, creep; mouldable but buckling-limited |
-| Wood | ~5–8 | Natural sections; glued and box sections extend this |
-| Concrete (reinforced and prestressed) | ~10–20 | Cast T- and box sections; tension carried by steel |
-
-Local buckling of a tube wall begins at a stress proportional to $Et/r$, so a material of higher modulus can be made thinner before buckling. This is why high-modulus metals reach the highest practical shape factors, and why low-modulus materials gain less from shaping than their density advantage suggests.
-
-> **Status of the principle: shape factors**
-> *Derived.* Exact consequences of beam theory for linear-elastic, thin-walled sections; they hold until local buckling, shear deformation of the web or core, or manufacturing limits intervene, which set material-dependent upper bounds on $\phi$.
-
-**Worked example — material and shape for a light stiff tube.** A bicycle down-tube or a light aircraft strut is a beam of fixed length that must meet a bending stiffness at minimum mass. Compare a solid steel bar, a steel tube with $r/t=20$, an aluminium tube with $r/t=15$ and a CFRP tube with $r/t=12$ (each within the practical limits above). The mass for equal stiffness is proportional to $\rho/(\phi E)^{1/2}$, with $\phi=3(r/t)/\pi$:
-
-| Section | $E$ (GPa) | $\rho$ (Mg/m$^3$) | $\phi_B^e$ | $\rho/(\phi E)^{1/2}$ | Mass relative to solid steel |
-|---|---|---|---|---|---|
-| Solid steel bar | 210 | 7.85 | 1.0 | 0.542 | 1.00 |
-| Steel tube, $r/t=20$ | 210 | 7.85 | 19.1 | 0.124 | 0.23 |
-| Al tube, $r/t=15$ | 70 | 2.70 | 14.3 | 0.085 | 0.16 |
-| CFRP tube, $r/t=12$ | 60 | 1.55 | 11.5 | 0.059 | 0.11 |
-
-Shape alone cuts the steel bar's mass by more than a factor of four; changing the material to CFRP and keeping the best feasible shape cuts it by a further factor of two. Because steel can be made thinner than aluminium before its wall buckles, the shaped steel tube recovers part of steel's disadvantage in density: the ratio of aluminium to steel mass is 0.69 for tubes, compared with $0.325/0.542=0.60$ for solid bars. This is the materials logic of the bicycle industry: thin-walled steel (Cr-Mo) frames, aluminium frames with larger-diameter tubes, and CFRP frames that are lightest of all, in that order of mass and of cost.
-
----
-
-## 48.6 Process selection and cost modelling
-
-### Process attributes and screening
-
-A material is only a candidate if a process exists to give it the required shape, size, tolerance, surface finish and microstructure at an acceptable cost. Processes (Chapters 38–41) are screened in the same way as materials, by attribute limits:
-
-| Attribute | Example constraint | Processes it eliminates |
-|---|---|---|
-| Material compatibility | Titanium alloy | Die casting (reaction with dies), conventional sand casting |
-| Shape class | Hollow, re-entrant, 3D | Rolling, simple extrusion, sheet stamping |
-| Mass or size | 0.05 kg or 50 t | Powder metallurgy for very large parts; investment casting for very large parts |
-| Section thickness | 0.5 mm walls | Sand casting (~3 mm minimum) |
-| Tolerance | ±0.02 mm | Sand casting (±1 mm), most moulding without machining |
-| Surface roughness | $R_a<0.4$ µm | As-cast and as-printed surfaces without finishing |
-| Microstructure and properties | Fatigue-critical, no porosity | High-pressure die casting without HIP, as-built AM without HIP (Chapter 40) |
-| Economic batch size | 200 parts | Injection moulding, die casting, forging (tooling not amortized) |
-
-Ranking among the survivors is usually by cost.
-
-### A cost model
-
-The cost of making one part combines three contributions: material, dedicated tooling shared among the batch, and capital and labour charged by the time taken. A simple model that captures the essential behaviour is
-
-$$
-C=\frac{m\,C_m}{1-f}+\frac{C_t}{n}+\frac{\dot C_{\rm oh}}{\dot n}
-$$
-
-with $m$ the part mass, $C_m$ the material price per kilogram, $f$ the scrap fraction (material removed, gates and runners, failed parts), $C_t$ the cost of dedicated tooling (dies, moulds, fixtures), $n$ the batch size, $\dot C_{\rm oh}$ the overhead rate (capital write-off of the equipment, labour, energy, floor space) per hour and $\dot n$ the production rate in parts per hour. The first and third terms are independent of batch size; the tooling term falls as $1/n$. On a log–log plot of cost against batch size, each process is a horizontal line at large $n$ joined to a line of slope $-1$ at small $n$ (Figure 48.4).
-
-> **Status of the principle: process cost model**
-> *Approximate.* A first-order model that captures the scaling of material, tooling and time costs; it omits set-up and inspection costs, learning effects, tooling life (dies wear out after 10$^4$–10$^6$ shots), and the strong dependence of overhead rates on location and utilization.
-
-**Worked example — moulding, machining or printing?** A 50 g polyamide bracket can be made by injection moulding (PA6 granules at 3 USD/kg, 5 % scrap, mould 30 000 USD, 200 parts/h, overhead 60 USD/h), by CNC machining from rod (4 USD/kg, 67 % of the rod machined away, fixtures 1500 USD, 10 parts/h, 80 USD/h), or by selective laser sintering of PA12 powder (60 USD/kg, 10 % powder lost, no tooling, an effective 3 parts/h, 30 USD/h).
-
-The batch-independent cost per part is
-
-| | Material $mC_m/(1-f)$ | Time $\dot C_{\rm oh}/\dot n$ | Sum (USD) | Tooling $C_t$ (USD) |
-|---|---|---|---|---|
-| Injection moulding | $0.05\times3/0.95=0.16$ | $60/200=0.30$ | 0.46 | 30 000 |
-| CNC machining | $0.05\times4/0.33=0.61$ | $80/10=8.00$ | 8.61 | 1 500 |
-| Laser sintering | $0.05\times60/0.90=3.33$ | $30/3=10.00$ | 13.33 | 0 |
-
-Cost per part at several batch sizes:
-
-| Batch size $n$ | 10 | 100 | 1000 | 10 000 | 100 000 |
-|---|---|---|---|---|---|
-| Injection moulding | 3000 | 300 | 30.5 | 3.46 | 0.76 |
-| CNC machining | 159 | 23.6 | 10.1 | 8.76 | 8.62 |
-| Laser sintering | 13.3 | 13.3 | 13.3 | 13.3 | 13.3 |
-
-The crossovers follow from equating costs: laser sintering is cheapest below $n=1500/(13.33-8.61)\approx320$ parts, machining between about 320 and $n=(30\,000-1500)/(8.61-0.46)\approx3500$ parts, and injection moulding above. The same structure recurs in every manufacturing sector: sand casting against die casting for aluminium housings, open-die against closed-die forging for steel shafts, hand lay-up against resin transfer moulding for composite panels. Additive manufacturing wins at small batch sizes and for shapes that other processes cannot make; its higher material and machine-time costs keep it out of high-volume production unless the geometry it enables saves more elsewhere (consolidating an assembly of twenty parts into one, or reducing the mass of an aircraft bracket where $\alpha$ is large).
-
-<!-- FIGURE 48.4 | figures/ch48/fig-48-4-cost-batch-size.png | plot | Cost per part against batch size for a 50 g polymer bracket made by laser sintering, CNC machining and injection moulding. | Content: log-log axes; x-axis batch size n from 1 to 10⁶; y-axis cost per part (USD) from 0.1 to 10⁴. Three curves C = a + C_t/n: laser sintering flat at 13.3 USD (C_t = 0); CNC machining a = 8.61, C_t = 1500 (slope −1 at small n, flattening near 8.6); injection moulding a = 0.46, C_t = 30 000 (slope −1, flattening to 0.46 above ~10⁵). Vertical dotted lines at crossovers n ≈ 320 (SLS/CNC) and n ≈ 3500 (CNC/IM), with the lower envelope highlighted (thick line) and labelled 'cheapest route'. Horizontal annotations 'tooling-dominated' (left) and 'material + time dominated' (right). -->
-
-### Cost in the selection procedure
-
-Cost enters selection in three ways: as an objective (minimize $C$ through indices such as $E^{1/2}/(C_m\rho)$, Section 48.7); as a term in a penalty function with mass or carbon (Section 48.4); and through the process model, which converts material price into part cost. For high-volume products, processing often costs more than material: a stamped steel panel costs perhaps two to three times its steel content once press time, dies and scrap are included; an investment-cast titanium part may cost ten times its alloy content. Material price alone is a poor guide whenever the cheaper material requires a dearer process.
-
----
-
-## 48.7 Selection case studies across engineering fields
-
-### Aerospace: wing spars, skins and the value of a kilogram
-
-A wing spar is a beam loaded in bending, designed against both stiffness (aeroelastic deflection, flutter) and strength; the skin is a panel loaded in bending and buckling. With $\alpha$ of hundreds of USD per kilogram, mass dominates, so the indices are $E^{1/2}/\rho$ and $\sigma_f^{2/3}/\rho$ for spars and $E^{1/3}/\rho$ for skins and floors. From the table in Section 48.2, $\sigma_y^{2/3}/\rho$ is 45.9 for quasi-isotropic CFRP against 15.7 for Al 6061-T6 and about 20 for the high-strength 7xxx alloys used in wings, so a strength-limited CFRP spar has roughly half the mass of a 7xxx aluminium one and a third that of a 6061 one. This is why wide-body airliners designed after 2005 have CFRP wings and fuselages comprising about half of their structural mass. Documentation then raises the questions that indices miss: damage tolerance and barely visible impact damage (Chapter 23), lightning-strike protection (CFRP conducts poorly compared with aluminium), repair methods, and inspection. Al–Li alloys (Chapter 16), which reduce density by about 3 % and raise modulus by about 6 % per percent of lithium, are aluminium's response, keeping metallic structures competitive where established manufacturing and repairability matter.
-
-### Civil: a floor beam at minimum cost
-
-In buildings, mass is cheap ($\alpha\approx0$) and the objective is cost. For a stiffness-limited beam, the index becomes $E^{1/2}/(C_m\rho)$; equivalently, minimize $C_m\rho/E^{1/2}$:
-
-| Material (typical) | $E$ (GPa) | $\rho$ (Mg/m$^3$) | $C_m$ (USD/kg) | $C_m\rho/E^{1/2}$ (relative units) |
-|---|---|---|---|---|
-| Reinforced concrete | 30 | 2.40 | 0.12 | 0.053 |
-| Glulam (softwood) | 12 | 0.48 | 1.0 | 0.139 |
-| Structural steel | 210 | 7.85 | 1.0 | 0.54 |
-| Aluminium 6063 extrusion | 69 | 2.70 | 3.5 | 1.14 |
-| Pultruded GFRP | 25 | 1.90 | 5.0 | 1.90 |
-
-Concrete wins by a factor of three over timber and ten over steel; this ordering is why concrete is the most-used material on Earth by mass (Chapter 49). But concrete is weak in tension (Chapter 18), so it needs steel reinforcement, which the simple index omits; steel wins where spans are long and mass matters for the supporting structure (the self-weight of a long-span concrete beam becomes the dominant load); timber wins in low-rise construction where speed of erection and embodied carbon are valued (Chapter 49 repeats this ranking with carbon instead of cost). Fire resistance, durability in exposure classes, construction time and the cost of the foundations carrying the dead load are documentation-stage questions that often decide.
-
-### Mechanical: flywheels and why the densest material is wrong
-
-A flywheel stores kinetic energy; the objective is maximum energy per unit mass, and the constraint is that the rim must not burst. For a thin rim of radius $r$ rotating at angular velocity $\omega$, the hoop stress is $\sigma=\rho r^2\omega^2$ and the stored energy per unit mass is $U/m=\tfrac12r^2\omega^2$. Setting $\sigma=\sigma_f$:
-
-$$
-\frac{U}{m}=\frac12\,\frac{\sigma_f}{\rho}
-$$
-
-so the index is $\sigma_f/\rho$. With $\sigma_f$ in MPa and $\rho$ in Mg/m$^3$, $\sigma_f/\rho$ is directly in kJ/kg. Maraging steel (1800 MPa, 8.0 Mg/m$^3$) stores at most about 110 kJ/kg; Al 7075 (500 MPa, 2.8 Mg/m$^3$) about 90 kJ/kg; hoop-wound CFRP (about 1500 MPa in the hoop direction, 1.6 Mg/m$^3$) about 470 kJ/kg, or 130 Wh/kg before safety factors. Lead, the traditional "heavy" flywheel material, stores less than 1 kJ/kg at bursting. Density appears in the denominator, not the numerator: when the speed is free, the best flywheel is light and strong. Heavy flywheels are right only when the speed is fixed (an engine flywheel smoothing torque at a given rpm), where energy per unit volume $\tfrac12\rho r^2\omega^2$ rewards density. Composite rotors also fail more benignly, delaminating into fibrous debris rather than ejecting large fragments, a documentation-stage advantage for containment design.
-
-### Chemical and energy: pressure vessels that leak before they break
-
-A pressure vessel must not fail by fast fracture. Two design philosophies lead to two indices. **Yield before break**: the vessel should yield (and visibly deform) before a crack of the largest size that inspection can miss becomes critical; with $K_{IC}=\sigma\sqrt{\pi a}$ (Chapter 14) at $\sigma=\sigma_y$, the critical crack length is proportional to $(K_{IC}/\sigma_y)^2$, so the index is $K_{IC}/\sigma_y$. **Leak before break**: a crack growing through the wall should leak, and be detected, before it becomes unstable; this requires that a through-wall crack of length about equal to the wall thickness $t$ be stable at the operating stress.
-
-**Worked example — leak before break.** A thin-walled spherical or cylindrical vessel of radius $R$ under pressure $p$ carries a wall stress $\sigma=pR/t$ (taking the cylindrical hoop stress for simplicity). A through-crack of total length $2a=t$ is stable if $\sigma\sqrt{\pi t/2}\le K_{IC}$. Substituting $t=pR/\sigma$ and solving for $p$:
-
-$$
-p\le\frac{2}{\pi R}\,\frac{K_{IC}^2}{\sigma}
-$$
-
-The largest pressure that can be contained with leak-before-break, at a given working stress, scales with $K_{IC}^2/\sigma$. For $R=1.0$ m and the wall working at its yield stress:
-
-| Material (typical) | $\sigma_y$ (MPa) | $K_{IC}$ (MPa m$^{1/2}$) | $K_{IC}^2/\sigma_y$ (MPa m) | Max. pressure for LBB (MPa) | Wall thickness at that pressure (mm) |
-|---|---|---|---|---|---|
-| Pressure-vessel steel (C–Mn, normalized) | 350 | 150 | 64 | 41 | 117 |
-| Quenched-and-tempered high-strength steel | 1000 | 60 | 3.6 | 2.3 | 2.3 |
-| Al 2024-T3 | 350 | 30 | 2.6 | 1.6 | 4.7 |
-
-For the tough steel, $p=2\times64.3/(\pi\times1.0)=40.9$ MPa. The high-strength steel, nearly three times stronger, can guarantee leak-before-break only up to 2.3 MPa in a 1 m vessel: above that its thin wall would break before it leaked. Strength and toughness are inversely related in most alloy families (Chapters 13–15), so the ranking by $\sigma_y$ is reversed when the index is $K_{IC}^2/\sigma_y$. This is the reason why boilers, nuclear pressure vessels and chemical reactors use moderate-strength, high-toughness steels, with real designs adding safety factors, temperature effects (the ductile-to-brittle transition, Chapter 15) and fatigue crack growth (Chapter 14). On a $K_{IC}$–$\sigma_f$ chart (Figure 48.5), lines of slope 1 and slope 1/2 select the two criteria.
-
-<!-- FIGURE 48.5 | figures/ch48/fig-48-5-toughness-strength-chart.png | map | Fracture toughness against strength, with guidelines for yield-before-break and leak-before-break design. | Content: log-log axes; x-axis strength σ_f 1 to 3000 MPa; y-axis fracture toughness K_IC 0.01 to 300 MPa m^½. Envelopes: foams (0.1–10 MPa, 0.01–0.1), polymers (20–100 MPa, 0.5–5), woods along grain (30–100, 5–15), concrete and stone (compressive 20–100 but toughness 0.3–1.5), glasses (50–100, 0.6–1), technical ceramics (Al2O3 300/3.5, SiC 400/3.5, Si3N4 700/6, ZrO2 900/8), composites (GFRP 250/20, CFRP 600/30), Al alloys (100–550, 20–45; Al 2024-T3 350/30 marked), Ti alloys (500–1100, 50–100), steels (250–2000, 30–200; points: pressure-vessel steel 350/150, Q&T 1000/60, maraging 1800/90). Guideline families: slope 1 'K_IC/σ_f = const (yield before break)', slope ½ 'K_IC²/σ_f = const (leak before break)'. One leak-before-break line through K²/σ = 64 MPa m (passing through the pressure-vessel steel point); arrow to upper left labelled 'safer vessels'. -->
-
-### Biomedical: a hip stem where modulus is a constraint, not an objective
-
-A femoral stem replaces the head and neck of the femur and is inserted into the bone canal. It must not fatigue in 10$^7$–10$^8$ gait cycles (about 1–2 million per year for ten years and more), must not corrode in body fluid, and must be biocompatible (Chapter 31). Its stiffness creates a problem absent from structural design: a very stiff stem carries load that the surrounding bone would otherwise carry, and bone that is not loaded is resorbed. This **stress shielding** loosens implants. The stem modulus should therefore be as close to cortical bone (about 15–20 GPa) as strength allows: here modulus enters as an upper limit, not something to maximize.
-
-| Stem material (typical) | $E$ (GPa) | Ratio to cortical bone (18 GPa) | Fatigue strength at 10$^7$ cycles (MPa) |
-|---|---|---|---|
-| Co–Cr–Mo alloy | 230 | 12.8 | 400–600 |
-| 316L stainless steel (cold worked) | 193 | 10.7 | 300–450 |
-| Ti-6Al-4V | 114 | 6.3 | 500–600 |
-| β-titanium (Ti–Nb–Zr–Ta type) | 55–65 | ~3.3 | 300–500 |
-| Cortical bone | 15–20 | 1 | — |
-
-Screening removes non-biocompatible and corrosion-prone alloys; ranking by fatigue strength with a modulus ceiling selects titanium alloys, and β-titanium alloys were developed specifically to fill the chart region of low modulus with adequate fatigue strength. Shape enters as well: a hollow or tapered stem lowers bending stiffness at the same material modulus. The cobalt alloy remains the material of choice for the bearing head, where wear resistance (Chapter 37), not modulus, is the governing requirement: one implant, two components, two different indices.
-
-### Energy and electrical: busbars and conductors
-
-A busbar of length $L$ must have resistance at most $R^*$. With $R=\rho_eL/A$, the area is $A=\rho_eL/R^*$ and the mass $m=(L^2/R^*)\,\rho\rho_e$; minimum mass means minimum $\rho\rho_e$, and minimum cost minimum $C_m\rho\rho_e$. For a 1.00 m bar with $R^*=50$ µΩ:
-
-| | Copper | Aluminium |
-|---|---|---|
-| $\rho_e$ (Ω m, 20 °C) | $1.72\times10^{-8}$ | $2.82\times10^{-8}$ |
-| Area $A=\rho_eL/R^*$ | 344 mm$^2$ | 564 mm$^2$ |
-| Mass ($\rho=8960$ and 2700 kg/m$^3$) | 3.08 kg | 1.52 kg |
-| Material cost (indicative 9.5 and 2.5 USD/kg) | 29 USD | 3.8 USD |
-
-Aluminium halves the mass and costs about one-eighth as much, for a 64 % larger section. This is why overhead lines and, increasingly, battery busbars in electric vehicles are aluminium; copper keeps the applications where volume is constrained, joints are numerous, or the higher creep resistance of copper under bolt load matters. The busbar is also the clearest example of a selection where the use phase dominates both cost and environmental impact, because resistive losses over twenty years far exceed the material's cost and embodied energy; Chapter 49 returns to it.
-
-> **Boundary.** The EEE-specific selection of substrates, laminates, solders and insulation, with the reliability statistics that go with them, is treated in more depth in the *Materials Core (EEE)* book.
-
-### Electronics and thermal management: a heat sink
-
-A heat-sink base of fixed length $L$ along the heat path must have thermal resistance $L/(kA)$ at most $R_{\rm th}^*$; minimum mass gives the index $k/\rho$. Aluminium alloys ($k\approx200$ W/(m K), $\rho=2.7$ Mg/m$^3$, $k/\rho\approx74$) beat copper ($k\approx400$, $\rho=8.96$, $k/\rho\approx45$), so heat sinks are extruded aluminium unless volume is constrained, when copper's higher $k$ wins (vapour-chamber and heat-pipe bases, compact processor coolers). For a substrate bonded to a silicon or silicon-carbide die, CTE matching (Chapter 24) is a constraint that eliminates both metals and leads to aluminium nitride, silicon nitride or metal–ceramic composites such as AlSiC: again an index ranks, but a constraint decides.
-
-### The pattern across fields
-
-The same steps appear in every case: a translation into function, objective, constraints and free variables; an index derived from the governing equation; a chart or table that ranks; an exchange constant or a constraint that resolves conflicts; a shape and a process that the material must accept; and a documentation stage where corrosion, joining, fatigue, supply and regulation decide among the last few. What differs between fields is not the method but the values of the exchange constants and which constraints bind.
-
-> **Status of the principle: systematic materials selection**
-> *Derived.* The procedure is a logical consequence of stating objectives and constraints explicitly; its results are as good as the property data, the exchange constants and the completeness of the constraint list, and the most frequent failures in practice come from a constraint that was never written down.
+| Lack of fusion | Low energy, poor overlap, spatter, recoating faults | Parameter window, gas flow, powder quality | CT, density cubes, in-situ layer imaging |
+| Keyhole porosity | Excess energy, scan turnarounds | Parameter window, scan-strategy design | CT, metallography |
+| Residual stress and distortion | Thermal gradients | Plate preheat, scan strategy, supports, stress relief | Dimensional inspection, diffraction |
+| Cracking | Alloy freezing range, hardenability | Alloy design, inoculants, preheat | CT, penetrant, metallography |
+| Anisotropy | Columnar grains, texture, oriented defects | Orientation choice, HIP, heat treatment | Tests in several orientations |
+| Surface-initiated fatigue | Roughness, partly fused particles | Machining, polishing | Surface metrology, fatigue coupons |
+| Powder degradation | Oxygen pick-up, spatter in reused powder | Reuse limits, sieving, lot testing | Chemistry and size analysis |
 
 ---
 
@@ -478,15 +401,17 @@ The same steps appear in every case: a translation into function, objective, con
 
 | Open question | Where it is answered |
 |---|---|
-| Elastic moduli, yield strength and their measurement, which feed every index | Chapters 11 and 13 |
-| Fracture toughness, fatigue and creep data used in damage-tolerant and high-temperature selection | Chapter 14 |
-| Why strength and toughness trade off in steels, aluminium and titanium alloys | Chapters 13, 15 and 16 |
-| Composite laminate stiffness and damage tolerance behind CFRP indices | Chapters 22 and 23 |
-| Processes, their attribute limits and the microstructures they produce | Chapters 38–41 |
-| Corrosion behaviour that decides many documentation-stage choices | Chapters 34 and 35 |
-| Biocompatibility and implant materials | Chapter 31 |
-| Data-driven discovery of candidates before selection | Chapter 47 |
-| Embodied energy, carbon, criticality and recyclability as objectives and constraints | Chapter 49 |
-| Optimization theory and multi-objective algorithms in general | The Mathematics Universe |
+| What sets dendrite spacing, CET and segregation during rapid solidification? | Chapter 9 |
+| How do martensite, precipitation and recrystallization respond to AM thermal cycles and post-build heat treatment? | Chapter 10 |
+| How do defects and surfaces control fatigue and fracture? | Chapter 14 |
+| How are Ti, Ni and Al alloys designed and processed conventionally for comparison? | Chapter 16 |
+| How are ceramic powders sintered, and polymers processed and degraded? | Chapters 17 and 21 |
+| How do printed implants interact with bone, and what is stress shielding? | Chapter 39 |
+| How are AM parts used in high-temperature and aerospace service? | Chapter 41 |
+| How is surface roughness modified by finishing and coating? | Chapters 45 and 49 |
+| How are porosity, texture and residual stress measured (CT, EBSD, synchrotron and neutron methods)? | Chapters 52–53 |
+| How do in-situ X-ray imaging and melt-pool monitoring reveal defect formation? | Chapter 54 |
+| How are melt pools, microstructures and properties simulated and linked in ICME? | Chapter 56 |
+| How is AM chosen against casting, forging and machining on cost and performance, and what is its environmental footprint? | Chapters 58–59 |
 
-**Next:** Chapter 49 widens the frame from one component to the whole life of materials in society, adding embodied energy and carbon, lifecycle assessment, criticality and recycling to the selection tools developed here.
+**Next:** Chapter 49 moves from bulk parts to layers — films and coatings from nanometres to millimetres thick — and to the crystal growth and device processing on which electronic materials depend.

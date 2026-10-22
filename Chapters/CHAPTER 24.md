@@ -1,6 +1,6 @@
 # Chapter 24 — Thermal Properties
 
-*Part VI · Physical and Functional Properties*
+*Part VI · Thermal, Electrical, Dielectric and Magnetic Materials*
 
 On a cold morning a cook pours boiling water into a glass baking dish that has just come out of the refrigerator, and the dish shatters. Its borosilicate cousin, the laboratory beaker, survives the same treatment every day. A few kilometres away, a railway engineer checks the temperature forecast: continuously welded rail laid on a cool spring day will be in compression on a hot summer afternoon, and if the stress is high enough the track buckles sideways. At an airport, a turbofan's first-stage turbine blades run in gas several hundred kelvin hotter than the melting point of the nickel alloy they are made of, protected by a ceramic coating a quarter of a millimetre thick. In a data centre, a processor dissipating 300 W through a die the size of a postage stamp depends on a copper lid, a smear of grease and a finned aluminium block to stay below 100 °C.
 
@@ -99,6 +99,10 @@ At room temperature copper is nearly classical, silicon has lost a fifth of its 
 
 <!-- FIGURE 24.1 | figures/ch24/fig-24-1-debye-einstein-heat-capacity.png | plot | Heat capacity of solids versus reduced temperature: the Debye and Einstein models and the classical Dulong–Petit limit, with copper, silicon and diamond at room temperature. | Content: x-axis T/θ_D from 0 to 1.5 (linear); y-axis C_v/3R from 0 to 1.05. Debye curve (solid): 0.200 at T/θ_D = 0.146 (Cu at 50 K), 0.592 at 0.29, 0.867 at 0.58, 0.938 at 0.875, 0.977 at 1.46. Einstein curve with θ_E = 0.806 θ_D (dashed): falls below Debye at low T (0.003 at T/θ_D = 0.078, versus Debye 0.036). Horizontal line at 1 labelled "Dulong–Petit 3R". Markers at 300 K: Cu (T/θ_D = 0.875, 0.938), Si (0.465, 0.802), diamond (0.135, 0.166; measured value 0.245 shown as open marker). Inset log–log plot of C_v versus T for Cu 1–50 K showing the T³ lattice term and the linear electronic term γT crossing near 4 K. -->
 
+![Figure 24.1 — Heat capacity of solids versus reduced temperature: the Debye and Einstein models and the classical Dulong–Petit limit, with copper, silicon and diamond at room temperature](../figures/ch24/fig-24-1-debye-einstein-heat-capacity.png)
+
+*Figure 24.1 — Heat capacity of solids versus reduced temperature: the Debye and Einstein models and the classical Dulong–Petit limit, with copper, silicon and diamond at room temperature.*
+
 **Table 24.1 — Heat capacity at 25 °C (typical values).**
 
 | Material | $c_p$ (J kg⁻¹ K⁻¹) | $\rho$ (kg/m³) | $\rho c_p$ (MJ m⁻³ K⁻¹) | $\theta_D$ (K) |
@@ -120,7 +124,7 @@ At room temperature copper is nearly classical, silicon has lost a fifth of its 
 
 ### Where heat capacity matters
 
-Heat capacity decides how much a component's temperature rises when it absorbs energy faster than conduction can remove it. Carbon–carbon aircraft brakes absorb tens of megajoules in a rejected take-off because carbon's specific heat (about 1,400 J kg⁻¹ K⁻¹ at 500 °C, rising as more modes are excited) and its tolerance of 2,000 °C let a few hundred kilograms soak up that energy. Concrete and masonry give buildings thermal mass; solar plants store heat in molten nitrate salts; **phase-change materials** (paraffins, salt hydrates) add latent heat for battery packs and building panels; and in welding and additive manufacturing the heat capacity of the surrounding metal sets the cooling rate of the melt pool (Chapters 39 and 40).
+Heat capacity decides how much a component's temperature rises when it absorbs energy faster than conduction can remove it. Carbon–carbon aircraft brakes absorb tens of megajoules in a rejected take-off because carbon's specific heat (about 1,400 J kg⁻¹ K⁻¹ at 500 °C, rising as more modes are excited) and its tolerance of 2,000 °C let a few hundred kilograms soak up that energy. Concrete and masonry give buildings thermal mass; solar plants store heat in molten nitrate salts; **phase-change materials** (paraffins, salt hydrates) add latent heat for battery packs and building panels; and in welding and additive manufacturing the heat capacity of the surrounding metal sets the cooling rate of the melt pool (Chapters 47 and 48).
 
 ---
 
@@ -155,9 +159,13 @@ $$
 \alpha=\frac{\gamma C_v}{3KV_m}=\frac{2.0\times24.4}{3\times1.40\times10^{11}\times7.11\times10^{-6}}=1.63\times10^{-5}\ \mathrm{K^{-1}}
 $$
 
-against a measured 16.5 ppm/K. For tungsten ($\gamma\approx1.6$, $C_v\approx24.3$, $K=310$ GPa, $V_m=9.55\times10^{-6}$ m³/mol): $\alpha=1.6\times24.3/(3\times3.10\times10^{11}\times9.55\times10^{-6})=4.4$ ppm/K, against a measured 4.5 ppm/K. The factor of nearly four between them comes almost entirely from tungsten's higher bulk modulus. Hence tungsten, molybdenum and Kovar-type alloys seal to glasses and ceramics, while aluminium mismatches nearly everything bonded to it.
+against a measured 16.5 ppm/K. For tungsten ($\gamma\approx1.6$, $C_v\approx24.3$, $K=310$ GPa, $V_m=9.55\times10^{-6}$ m³/mol): $\alpha=1.6\times24.3/(3\times3.10\times10^{11}\times9.55\times10^{-6})=4.4$ ppm/K, against a measured 4.5 ppm/K. The factor of nearly four between them comes mainly from tungsten's higher bulk modulus (about a factor of 2.2), with its larger molar volume and smaller Grüneisen parameter supplying the rest. Hence tungsten, molybdenum and Kovar-type alloys seal to glasses and ceramics, while aluminium mismatches nearly everything bonded to it.
 
 <!-- FIGURE 24.2 | figures/ch24/fig-24-2-anharmonic-potential.png | schematic | The anharmonic interatomic potential and the origin of thermal expansion. | Content: x-axis interatomic separation r / r_0 from 0.8 to 1.6; y-axis potential energy U (arbitrary units, negative well). Morse-type asymmetric potential well with minimum at r/r_0 = 1, steep on the left, shallow on the right; dashed harmonic parabola fitted at the bottom for comparison. Horizontal lines at increasing energies labelled T_1 < T_2 < T_3 spanning the well between turning points; their midpoints (dots) moving to larger r with increasing T, joined by a line labelled "mean separation increases: thermal expansion". For the parabola the midpoints stay at r_0 (label "harmonic: no expansion"). Inset bar chart of α (ppm/K): diamond 1.0, Invar 1.2, fused silica 0.5, W 4.5, SiC 4.0, Al2O3 8, steel 12, Cu 16.5, Al 23, Pb 29, PMMA 70, PE 150. -->
+
+![Figure 24.2 — The anharmonic interatomic potential and the origin of thermal expansion](../figures/ch24/fig-24-2-anharmonic-potential.png)
+
+*Figure 24.2 — The anharmonic interatomic potential and the origin of thermal expansion.*
 
 **Table 24.2 — Linear thermal expansion coefficients near room temperature (typical values).**
 
@@ -189,7 +197,7 @@ against a measured 16.5 ppm/K. For tungsten ($\gamma\approx1.6$, $C_v\approx24.3
 
 Two coincidences in Table 24.2 hold up whole industries. Steel and concrete have nearly equal expansion coefficients, so reinforced concrete does not tear itself apart in daily temperature cycles (Chapter 18). Yttria-stabilized zirconia expands nearly as much as nickel superalloys, which is what allows a ceramic coating to survive on a metal blade (Section 24.6).
 
-Some materials expand little or contract on heating by design. In **Invar**, the magnetic moment of the iron–nickel alloy shrinks with rising temperature and with it a magnetovolume expansion, cancelling the normal lattice expansion up to the Curie temperature (Chapter 27); Invar is used for precision instruments, shadow masks, LNG tank membranes and composite-curing tools. **Negative-thermal-expansion** crystals such as ZrW₂O₈ and β-eucryptite (LiAlSiO₄) contract because transverse vibrations of corner-linked polyhedra pull their linking atoms closer, like a rope that shortens as it is shaken sideways. Dispersed in a glass, β-eucryptite or β-quartz solid solutions give the near-zero-expansion **glass-ceramics** of cooktops and telescope mirrors (Chapter 17), which survive thermal shocks no ordinary glass would.
+Some materials expand little or contract on heating by design. In **Invar**, the magnetic moment of the iron–nickel alloy shrinks with rising temperature and with it a magnetovolume expansion, cancelling the normal lattice expansion up to the Curie temperature (Chapter 28); Invar is used for precision instruments, shadow masks, LNG tank membranes and composite-curing tools. **Negative-thermal-expansion** crystals such as ZrW₂O₈ and β-eucryptite (LiAlSiO₄) contract because transverse vibrations of corner-linked polyhedra pull their linking atoms closer, like a rope that shortens as it is shaken sideways. Dispersed in a glass, β-eucryptite or β-quartz solid solutions give the near-zero-expansion **glass-ceramics** of cooktops and telescope mirrors (Chapter 17), which survive thermal shocks no ordinary glass would.
 
 ---
 
@@ -257,6 +265,10 @@ Now an alloy. Austenitic stainless steel 304 has $\rho_e=72\times10^{-8}$ Ω m �
 Figure 24.3 summarizes how $k$ varies with temperature. In dielectric crystals, $k$ rises as $T^3$ at very low temperature (following heat capacity, with mean free path limited by sample size), peaks at roughly $\theta_D/20$, and then falls as $1/T$ as Umklapp scattering takes over. In pure metals $k$ is nearly flat from room temperature upward, because the resistivity rising as $\rho_e\propto T$ is offset by the factor $T$ in $k_e=L_0T/\rho_e$. In alloys, which are dominated by temperature-independent solute scattering, $k$ rises gently with temperature. In glasses, polymers and other amorphous solids it also rises slowly, then saturates. Porous insulators gain a radiative component that grows as $T^3$ (Section 24.6).
 
 <!-- FIGURE 24.3 | figures/ch24/fig-24-3-conductivity-vs-temperature.png | plot | Thermal conductivity versus temperature for representative crystals, metals, alloys, glasses, polymers and insulators. | Content: x-axis temperature 200–1,300 K (linear); y-axis thermal conductivity 0.02–3,000 W/(m K) on a log scale. Curves (approximate): diamond (2,200 at 300 K falling to ~800 at 800 K); Cu (401, nearly flat, ~350 at 1,200 K); Al (237, ~220 at 800 K, ends at melting 933 K); SiC (~120 sintered at 300 K, ~50 at 1,200 K); AlN ceramic (175 at 300 K, ~80 at 800 K); Al2O3 (35 at 300 K, ~12 at 800 K, ~7 at 1,300 K); carbon steel (50 at 300 K falling to ~30 at 1,000 K); 304 stainless (16 at 300 K rising to ~25 at 1,000 K); Ti-6Al-4V (6.7 rising to ~15 at 900 K); dense YSZ (~2.5, nearly flat); plasma-sprayed YSZ coating (~1.0, flat); fused silica (1.4 rising to ~2); concrete (~1.7); HDPE (0.45, to 400 K only); mineral wool (0.035 at 300 K rising to ~0.15 at 900 K, radiation). Annotate "Umklapp: k ∝ 1/T" on crystalline ceramics, "electrons: nearly flat" on pure metals, "solute scattering: rising" on alloys, "disorder-limited" on glasses and polymers. -->
+
+![Figure 24.3 — Thermal conductivity versus temperature for representative crystals, metals, alloys, glasses, polymers and insulators](../figures/ch24/fig-24-3-conductivity-vs-temperature.png)
+
+*Figure 24.3 — Thermal conductivity versus temperature for representative crystals, metals, alloys, glasses, polymers and insulators.*
 
 **Table 24.3 — Thermal conductivity, diffusivity and effusivity near room temperature (typical values).**
 
@@ -335,7 +347,7 @@ $$
 Skin has $e\approx1,500$ J m⁻² K⁻¹ s⁻¹ᐟ². Touching steel at 0 °C ($e\approx13,700$) with skin at 33 °C gives a contact temperature of about 3 °C: steel feels icy. Touching wood at 0 °C ($e\approx320$) gives about 27 °C: wood feels warm. The same quantity explains why hot-surface safety limits are lower for metals than for plastics.
 
 
-Diffusivity is measured directly by the **laser-flash** method, in which the front of a thin disc is heated by a short pulse and the rise of the rear-face temperature is timed; conductivity then follows from $k=a\rho c_p$ (Chapter 42).
+Diffusivity is measured directly by the **laser-flash** method, in which the front of a thin disc is heated by a short pulse and the rise of the rear-face temperature is timed; conductivity then follows from $k=a\rho c_p$ (Chapter 52).
 
 ---
 
@@ -359,7 +371,7 @@ $$
 \sigma_{\mathrm{film}}=-\frac{E_f}{1-\nu_f}\,\Delta\alpha\,\Delta T
 $$
 
-A ceramic coating with lower expansion than its metal substrate is put into compression on cooling from deposition — usually beneficial — and into tension on heating. The factor $1/(1-\nu)$ makes biaxial stresses 25–40 % larger than uniaxial ones. It governs glazes, enamels, thermal barrier coatings (Section 24.6), thin films (Chapter 41) and laminate residual stresses (Chapter 23).
+A ceramic coating with lower expansion than its metal substrate is put into compression on cooling from deposition — usually beneficial — and into tension on heating. The factor $1/(1-\nu)$ makes biaxial stresses 25–40 % larger than uniaxial ones. It governs glazes, enamels, thermal barrier coatings (Section 24.6), thin films (Chapter 49) and laminate residual stresses (Chapter 23).
 
 > **Status of the principle: Thermal mismatch stress**
 > *Derived.* Follows from linear elasticity for a thin layer perfectly bonded to a thick, rigid substrate with temperature-independent properties; it overestimates stress where the layer creeps, yields, cracks or relaxes, and must be integrated over temperature when $\alpha$ or $E$ vary.
@@ -407,9 +419,13 @@ Among technical ceramics, silicon nitride combines high strength with low expans
 
 <!-- FIGURE 24.4 | figures/ch24/fig-24-4-thermal-shock-ranking.png | plot | Thermal shock resistance of brittle materials: critical quench temperature difference R and the conductivity-weighted parameter R′. | Content: horizontal bar chart (log x-axis 30–3,000 K) of R = ΔT_c: soda-lime glass 62, alumina 90, borosilicate 189, SiC 212, 3Y-TZP 325, Si3N4 589, fused silica 1,050; second panel bar chart (log x-axis 30–30,000 W/m) of R′ = R k: soda-lime 62, borosilicate 208, 3Y-TZP 810, fused silica 1,470, alumina 2,700, Si3N4 14,700, SiC 25,400. Small inset: schematic of surface tensile stress versus time after a quench for Bi = 0.5, 2 and ∞, normalized by Eα∆T/(1−ν), peaking at about 0.13, 0.32 and 1.0. Annotate "rapid quench → R governs; slow heat transfer → R′ governs". -->
 
+![Figure 24.4 — Thermal shock resistance of brittle materials: critical quench temperature difference R and the conductivity-weighted parameter R′](../figures/ch24/fig-24-4-thermal-shock-ranking.png)
+
+*Figure 24.4 — Thermal shock resistance of brittle materials: critical quench temperature difference R and the conductivity-weighted parameter R′.*
+
 ### Thermal shock and cycling in metals
 
-Metals rarely shatter in one thermal transient, but they fail by **thermal fatigue** under repeated transients: brake discs crazed with radial cracks, die-casting dies with a network of "heat checks", the leading edges of turbine blades, and the cylinder heads of engines. Each heat-up drives the hot surface into compressive yield; each cool-down reverses it into tension; the plastic strain range per cycle drives low-cycle fatigue (Coffin–Manson, Chapter 14). Resistance rewards high conductivity, low expansion, and high hot strength and ductility — the combination sought in H13 hot-work tool steel and in grey cast-iron brake discs. The thermal-cycling fatigue of solder joints in electronics, a close relative driven by expansion mismatch rather than gradients, is treated in the Materials Core (EEE) book.
+Metals rarely shatter in one thermal transient, but they fail by **thermal fatigue** under repeated transients: brake discs crazed with radial cracks, die-casting dies with a network of "heat checks", the leading edges of turbine blades, and the cylinder heads of engines. Each heat-up drives the hot surface into compressive yield; each cool-down reverses it into tension; the plastic strain range per cycle drives low-cycle fatigue (Coffin–Manson, Chapter 14). Resistance rewards high conductivity, low expansion, and high hot strength and ductility — the combination sought in H13 hot-work tool steel and in grey cast-iron brake discs. The thermal-cycling fatigue of solder joints in electronics, a close relative driven by expansion mismatch rather than gradients, is treated in Chapter 51 and Section 44.8.
 
 ---
 
@@ -417,10 +433,10 @@ Metals rarely shatter in one thermal transient, but they fail by **thermal fatig
 
 ### Thermal barrier coatings
 
-The gas entering the high-pressure turbine of a modern jet engine is at 1,500–1,700 °C; the nickel-base superalloy blades melt at about 1,300–1,350 °C and lose strength rapidly above 1,100 °C. Two technologies close the gap: internal air cooling through serpentine passages and film-cooling holes, and a **thermal barrier coating** (TBC) on the outside (Chapter 33). The TBC is a multilayer system, each layer chosen for a different property (Figure 24.5):
+The gas entering the high-pressure turbine of a modern jet engine is at 1,500–1,700 °C; the nickel-base superalloy blades melt at about 1,300–1,350 °C and lose strength rapidly above 1,100 °C. Two technologies close the gap: internal air cooling through serpentine passages and film-cooling holes, and a **thermal barrier coating** (TBC) on the outside (Chapter 41). The TBC is a multilayer system, each layer chosen for a different property (Figure 24.5):
 
 - **Ceramic top coat**, 100–500 μm of zirconia stabilized with 7–8 wt% Y₂O₃ (7YSZ). YSZ combines low intrinsic conductivity (2–2.5 W m⁻¹ K⁻¹ dense, because oxygen vacancies and Y solutes scatter phonons), an expansion coefficient (10–11 ppm/K) close to the superalloy's, a metastable tetragonal (t′) phase stable to about 1,200 °C, and high toughness for a ceramic. Porosity lowers the conductivity to 0.8–1.2 W m⁻¹ K⁻¹ in plasma-sprayed coatings (splat boundaries across the heat flow) or 1.5–1.9 in electron-beam PVD coatings, whose columns give **strain tolerance**.
-- **Thermally grown oxide** (TGO), a thin layer of α-Al₂O₃ that forms on the bond coat in service and protects it from further oxidation. It thickens parabolically (Chapter 34); when it reaches 5–10 μm, the mismatch stresses within and around it typically cause the top coat to spall.
+- **Thermally grown oxide** (TGO), a thin layer of α-Al₂O₃ that forms on the bond coat in service and protects it from further oxidation. It thickens parabolically (Chapter 42); when it reaches 5–10 μm, the mismatch stresses within and around it typically cause the top coat to spall.
 - **Bond coat**, 50–150 μm of MCrAlY (M = Ni, Co) or platinum-modified nickel aluminide, an aluminium reservoir that grows the protective alumina scale.
 - **Superalloy substrate**, internally cooled.
 
@@ -436,6 +452,10 @@ A quarter-millimetre of ceramic produces four times the temperature drop of a wa
 > *Approximate.* Each layer is treated as a uniform slab carrying the same heat flux in steady state ($\Delta T=qt/k$, resistances in series); valid for thin flat layers with uniform properties, but it ignores lateral spreading, contact resistances between layers, radiation through translucent ceramics and the temperature dependence of $k$.
 
 <!-- FIGURE 24.5 | figures/ch24/fig-24-5-tbc-temperature-profile.png | schematic | A thermal barrier coating system on a cooled turbine blade wall and the temperature profile through it. | Content: left: cross-section, to approximate scale, from hot gas (top) to cooling air (bottom): hot gas ~1,500 °C with boundary layer; YSZ top coat 250 μm (porous columnar or splat structure with vertical cracks drawn); TGO ~3–5 μm (thin dark line, labelled α-Al2O3); bond coat 100 μm (MCrAlY or Pt-aluminide); superalloy wall 1.5 mm; internal cooling passage with air ~650 °C. Right: temperature versus depth plot aligned with the layers: surface of YSZ ~1,250 °C dropping linearly by 200 K across the top coat to ~1,050 °C, 8 K across the bond coat, 48 K across the metal wall to ~1,000 °C at the cooled face; gas-side and coolant-side film drops shown as steep curves. Annotate heat flux q = 0.8 MW/m², and "200 K across 0.25 mm of YSZ versus 48 K across 1.5 mm of metal". -->
+
+![Figure 24.5 — A thermal barrier coating system on a cooled turbine blade wall and the temperature profile through it](../figures/ch24/fig-24-5-tbc-temperature-profile.png)
+
+*Figure 24.5 — A thermal barrier coating system on a cooled turbine blade wall and the temperature profile through it.*
 
 ### Thermal insulation
 
@@ -462,6 +482,10 @@ Figure 24.6 plots conductivity against expansion for the candidate materials.
 
 <!-- FIGURE 24.6 | figures/ch24/fig-24-6-k-vs-cte-map.png | map | Thermal conductivity versus thermal expansion coefficient for thermal-management materials, with the CTE window of semiconductor devices. | Content: x-axis CTE 0–25 ppm/K (linear); y-axis thermal conductivity 1–2,500 W/(m K) (log). Points or ellipses: diamond (1.0, 1,000–2,200); CVD diamond/Cu composite (6–7, 500–700); Cu (17, 401); Al (23, 237); Al-6061 (23.6, 167); AlSiC 63 % (7–8, 170–200); Cu–W 10–20 % Cu (6–8, 180–200); Cu–Mo–Cu laminate (6–8, 200–300); Kovar (5.5, 17); Invar (1.2, 10); AlN (4.6, 140–180); BeO (7.5, 250–280); SiC (4.2, 80–150); Si3N4 (3.0, 60–90 high-k grade); Al2O3 (7–8, 25–35); pyrolytic graphite in-plane (−1, 1,500–1,700) with an arrow to through-plane (25, 5–10); Si (2.6, 150); GaN (5.6, 200); stainless steel (17, 16); Ti-6Al-4V (9, 7); epoxy (60, 0.2 — off scale, arrow). Shaded vertical band 2.5–7 ppm/K labelled "Si, SiC, GaN, GaAs dies and ceramic substrates". Diagonal guide lines of constant α/k (thermal distortion) with "better" arrow towards top-left. -->
 
+![Figure 24.6 — Thermal conductivity versus thermal expansion coefficient for thermal-management materials, with the CTE window of semiconductor devices](../figures/ch24/fig-24-6-k-vs-cte-map.png)
+
+*Figure 24.6 — Thermal conductivity versus thermal expansion coefficient for thermal-management materials, with the CTE window of semiconductor devices.*
+
 ### The material families
 
 **Metals.** Copper (401 W m⁻¹ K⁻¹) is the default heat spreader, cold plate and heat-pipe envelope; aluminium (237 for pure, 150–200 for alloys) is the default heat sink, at a third of copper's density and a better $k/\rho$. Both expand much more than semiconductors and ceramics.
@@ -487,7 +511,7 @@ Figure 24.6 plots conductivity against expansion for the candidate materials.
 | Laser diode, RF power transistor | Very high local flux, CTE match | CVD diamond, Cu–W, Cu–diamond submounts |
 | Building envelope | Minimize heat flow, control thermal bridges | Mineral wool, PIR, aerogel blankets; thermally broken aluminium frames |
 
-> **Boundary.** The thermal resistance networks, junction-temperature budgets and thermal-cycling fatigue of electronic packages are treated in depth in the Materials Core (EEE) book; this section gives the materials logic common to all fields.
+> **Boundary.** The thermal resistance networks, junction-temperature budgets and thermal-cycling fatigue of electronic packages are treated in depth in Chapter 51; this section gives the materials logic common to all fields.
 
 ---
 
@@ -501,12 +525,12 @@ Figure 24.6 plots conductivity against expansion for the candidate materials.
 | How do glass, glass-ceramics and refractories achieve their thermal properties? | Chapter 17 (ceramics and glasses, refractories) |
 | How do residual thermal stresses arise in composite laminates? | Chapter 23 (thermal loads in CLT) |
 | How do electrons conduct charge, and how does alloying raise resistivity? | Chapter 25 (Drude, Matthiessen, alloy resistivity) |
-| How does magnetism produce Invar behaviour and magnetocaloric cooling? | Chapter 27 (magnetic materials) |
-| How do thermoelectric materials convert heat into electricity? | Chapter 32 (thermoelectric materials) |
-| How do superalloys, CMCs and coatings survive in turbines and hypersonic flight? | Chapter 33 (extreme environments) |
-| How fast do bond coats oxidize and TBCs fail? | Chapter 34 (high-temperature oxidation), Chapter 36 (failure analysis) |
-| How is thermal conductivity reduced or raised at the nanoscale? | Chapter 30 (size effects, nanomaterials) |
-| How are thermal properties measured (DSC, laser flash, TMA)? | Chapter 42 (thermal analysis) |
-| How are thermal-management materials selected with performance indices? | Chapter 48 (materials selection) |
+| How does magnetism produce Invar behaviour and magnetocaloric cooling? | Chapter 28 (magnetic materials) |
+| How do thermoelectric materials convert heat into electricity? | Chapter 40 (thermoelectric materials) |
+| How do superalloys, CMCs and coatings survive in turbines and hypersonic flight? | Chapter 41 (extreme environments) |
+| How fast do bond coats oxidize and TBCs fail? | Chapter 42 (high-temperature oxidation), Chapter 44 (failure analysis) |
+| How is thermal conductivity reduced or raised at the nanoscale? | Chapter 38 (size effects, nanomaterials) |
+| How are thermal properties measured (DSC, laser flash, TMA)? | Chapter 52 (thermal analysis) |
+| How are thermal-management materials selected with performance indices? | Chapter 58 (materials selection) |
 
-**Next:** Chapter 25 turns from heat to charge — how electrons and ions conduct, how dielectrics polarize and break down, and how superconductors carry current without loss.
+**Next:** Chapter 25 (Electrical Conduction in Materials) turns from heat to charge — how electrons and ions conduct, and why conductivity spans so many orders of magnitude.

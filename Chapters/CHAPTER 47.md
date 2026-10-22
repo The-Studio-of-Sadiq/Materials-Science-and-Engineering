@@ -1,396 +1,461 @@
-# Chapter 47 — Materials Informatics
+# Chapter 47 — Joining: Welding, Brazing and Adhesive Bonding
 
-*Part X · Characterization, Computation and Design*
+*Part X · Processing and Manufacturing*
 
-A battery company wants a solid electrolyte for a lithium-metal cell: a crystalline solid that conducts lithium ions almost as well as a liquid, does not react with lithium metal at 0 V, does not oxidize at the 4.3 V cathode, can be sintered below 1000 °C and contains no germanium or other scarce elements. The design space is enormous. With five elements chosen from about sixty that are cheap and non-toxic, there are more than five million chemical systems before a single composition ratio or crystal structure is chosen. A synthesis chemist can make and test perhaps two hundred compositions a year; a density-functional calculation (Chapter 45) of one structure takes hours to days of computer time; a molecular-dynamics simulation of ionic conductivity (Chapter 46) takes longer still. Historically, the solid electrolytes now in prototype cells — garnet Li$_7$La$_3$Zr$_2$O$_{12}$, the thiophosphate Li$_{10}$GeP$_2$S$_{12}$ and the argyrodites — were found by chemical intuition, analogy and luck, each after years of work. The question that defines this chapter is whether the accumulated data of the discipline, organized in databases and learned by statistical models, can search such a space faster and more reliably than intuition alone, and how an engineer can tell when a data-driven prediction should be trusted.
+After the 1994 Northridge earthquake in Los Angeles, steel moment-frame buildings designed to bend plastically and survive were found to have cracked at more than a hundred beam-to-column connections — not in the ductile beams or columns, but at the welds joining beam flanges to columns. The cracks started at weld roots where a backing bar left a notch, ran through low-toughness weld metal, and sometimes tore into the column flange through the heat-affected zone. US connection design, filler-toughness and inspection rules were rewritten. The story is typical: a structure is only as good as its joints, and a joint is a small, locally processed region with its own microstructure, residual stresses and defects. The same lesson applies to a pipeline girth weld that cracks hours after welding, an aluminium panel that loses half its strength beside a weld, a bonded car roof that debonds in humid heat, or a carbon-fibre panel that corrodes the aluminium bolted to it.
 
-> **What do materials databases contain, and how is a material turned into numbers that a learning algorithm can use?**
-> **How accurate can machine-learned predictions of properties and interatomic forces be, and how are they used to screen, explore and invert the design problem?**
-> **Where do data-driven methods fail, and how is that failure detected before it reaches a product?**
+> **What does a joining process do to the material around the joint, and why does that region so often decide the strength and life of a structure?**
+> **How do we choose between fusion welding, solid-state welding, brazing, adhesive bonding and fastening — and design the joint so that it is not the weakest link?**
 
 | Concept | Engineering destination |
 |---|---|
-| Computed and experimental materials databases | Rapid estimates of stability, elastic constants, band gaps; choosing candidates before synthesis |
-| Formation energy and energy above the convex hull | Will a new alloy phase, ceramic or electrolyte decompose? |
-| Descriptors and features | Turning compositions, structures and processing routes into model inputs |
-| Machine-learning property prediction, graph neural networks | Fast surrogates for DFT and for slow experiments (fatigue, creep, corrosion) |
-| Machine-learned interatomic potentials | Near-DFT accuracy molecular dynamics of interfaces, diffusion, radiation damage |
-| High-throughput screening and active learning | Battery, catalyst, thermoelectric and alloy discovery campaigns |
-| Autonomous laboratories | Closed-loop synthesis and testing of coatings, thin films, polymers |
-| Inverse design | Specifying the property and generating the material |
-| Uncertainty quantification, domain of applicability | Deciding when a prediction may be used for design and when it must be tested |
+| Arc, laser, electron-beam and resistance welding | Ship hulls, pipelines, car bodies, pressure vessels, turbine parts |
+| Heat input, Rosenthal heat flow, cooling time $t_{8/5}$ | Welding procedure specifications, preheat and interpass control |
+| Fusion zone and heat-affected zone metallurgy | Toughness of weld HAZs, softened zones in aluminium structures |
+| Residual stress and distortion | Post-weld heat treatment, fatigue of welded details, fabrication tolerances |
+| Carbon equivalent, hydrogen cracking, hot cracking | Preheat rules, consumable selection, alloy choice for welded structures |
+| Friction stir welding, diffusion bonding | Aluminium rail cars and launch-vehicle tanks, titanium aero-engine structures |
+| Brazing and soldering | Heat exchangers, carbide tools, ceramic–metal seals, electronics |
+| Adhesive bonding and joint design | Aircraft panels, car body structures, wind-turbine blades, composite repairs |
+| Fastening and dissimilar joints | Bolted steelwork, riveted aircraft, steel–aluminium car bodies, CFRP–metal joints |
 
-**Roadmap.** Where the data come from (47.1) → how materials become numbers (47.2) → learning properties from those numbers, from regression to graph networks (47.3) → learning the forces themselves (47.4) → using models to search: screening, active learning, autonomous labs (47.5) → running the problem backwards (47.6) → what the models cannot know (47.7).
+**Roadmap.** Classifying joints (47.1) → fusion welding processes and heat flow (47.2–47.3) → what welding does to the metal: fusion zone, HAZ, residual stress (47.4) → weldability and cracking (47.5) → solid-state welding (47.6) → brazing and soldering (47.7) → adhesive bonding (47.8) → fastening and dissimilar materials (47.9) → choosing a joining method (47.10).
 
----
-
-## 47.1 Materials databases
-
-### From handbooks to queryable data
-
-Materials engineers have always worked from compiled data: the steel handbooks, the ASM volumes, the JANAF thermochemical tables, the powder-diffraction files used in every X-ray laboratory (Chapter 42). What changed after about 2010 is that two kinds of data became available in quantity and in machine-readable form. The first is **computed data**: density-functional calculations (Chapter 45) run automatically, with identical settings, on hundreds of thousands to millions of crystal structures. The second is **curated experimental data** that had existed for decades but became accessible through programming interfaces. A database differs from a handbook in that it can be queried by property ("all oxides with band gap above 3 eV, energy above hull below 25 meV/atom, and no element with supply risk") and fed directly to a model.
-
-### The main inorganic databases
-
-| Database | Content (order of magnitude, mid-2020s) | Origin of data | Typical use |
-|---|---|---|---|
-| ICSD (Inorganic Crystal Structure Database) | ~3×10$^5$ experimentally determined crystal structures | Published diffraction studies, curated; licensed | Starting structures for calculations; "is this compound known?" |
-| Materials Project | ~1.5×10$^5$ inorganic compounds, with derived properties for many | High-throughput DFT (GGA, GGA+U, increasingly r$^2$SCAN) | Phase stability, elastic tensors, band structures, battery voltages, Pourbaix diagrams |
-| AFLOW | ~3×10$^6$ compounds, many hypothetical alloy prototypes | High-throughput DFT, prototype decoration | Alloy and intermetallic screening, thermal and elastic descriptors |
-| OQMD (Open Quantum Materials Database) | ~10$^6$ compounds | High-throughput DFT on ICSD and prototype structures | Formation energies, convex hulls, stability of hypothetical phases |
-| Others | JARVIS (DFT and ML, including 2D materials), NOMAD (archive of raw calculations, >10$^8$ entries), Pauling File, NIST and Citrination-type experimental collections, Cambridge Structural Database for molecular crystals, PolyInfo for polymers | Mixed | Specialized properties, raw-data reuse |
-
-The computed databases share a workflow (Figure 47.1, left): take a structure from ICSD or generate it by substituting elements into a known prototype; relax it with a standard DFT recipe; compute total energy, and often band structure, elastic constants, dielectric tensor or phonons; and store the result with its full provenance (code version, functional, pseudopotentials, convergence settings). Uniform settings are the point. Two DFT energies can only be compared if computed the same way, and the databases add empirical energy corrections (for example for the over-binding of O$_2$ in GGA and for the GGA+U treatment of transition-metal oxides) so that oxides, metals and mixed systems can appear on one energy scale.
-
-> **Boundary.** The DFT methods that generate these data, their functionals and their known errors are developed in Chapter 45; the thermodynamics of phase equilibria in Chapters 6 and 7. This chapter uses their outputs.
-
-### Formation energy and the convex hull
-
-The most-used quantity in computed databases is the **formation energy** per atom: the energy of the compound minus the energies of its elements in their reference states, divided by the number of atoms. For a binary compound A$_{1-x}$B$_x$:
-
-$$
-\Delta E_f(x)=\frac{E(\mathrm{A}_{n_A}\mathrm{B}_{n_B})-n_A\,\mu_A^0-n_B\,\mu_B^0}{n_A+n_B}
-$$
-
-A negative formation energy says only that the compound is more stable than the separated elements. It does not say that the compound is stable, because it may be less stable than a mixture of *other compounds*. The correct test is the **convex hull**: plot $\Delta E_f$ against composition for every known phase in the system and construct the lower convex envelope (Figure 47.1, right). Phases on the hull are stable at 0 K; a phase above the hull will, given the kinetic opportunity, decompose into the hull phases at its composition. The vertical distance to the hull, the **energy above hull** $E_{\rm hull}$, measures the driving force for that decomposition. It is the computational counterpart of the common-tangent construction on free-energy curves (Chapter 7), taken at 0 K and without entropy.
-
-<!-- FIGURE 47.1 | figures/ch47/fig-47-1-database-workflow-convex-hull.png | schematic | Left: the high-throughput workflow that fills a computed materials database. Right: the 0 K convex hull of a binary A–B system, showing how the energy above hull is read. | Content: two panels. Left panel, flowchart boxes top to bottom: 'Structure source (ICSD, prototype substitution)' → 'Standardized DFT relaxation (fixed functional, cutoff, k-mesh)' → 'Property calculations (energy, bands, elastic, dielectric)' → 'Corrections and validation' → 'Database with provenance (API query)'; side arrow 'ML models trained on the database' feeding back to 'Structure source' labelled 'new candidates'. Right panel: x-axis composition x_B from 0 (A) to 1 (B); y-axis formation energy from -0.6 to +0.1 eV/atom. Filled circles on hull: A (0, 0), AB (0.5, -0.50), B (1, 0); solid hull lines connecting them. Open circle AB2 at (0.667, -0.30) with vertical dashed arrow down to hull at -0.333 labelled 'E_hull = 33 meV/atom'. Second inset or dashed construction: AB3 at (0.75, -0.27) shown as a filled star below the original hull, with the rebuilt hull (dotted) AB–AB3–B, and AB2's new distance labelled '47 meV/atom'. -->
-
-**Worked example — energy above hull, and why it depends on the database.** In a binary A–B system the database contains elemental A and B (formation energy zero by definition) and the compound AB with $\Delta E_f=-0.50$ eV/atom at $x_B=0.5$. A new calculation gives $\Delta E_f=-0.30$ eV/atom for AB$_2$ ($x_B=2/3$). Is AB$_2$ stable?
-
-The hull between AB and B is a straight line; at $x_B=2/3$ it lies at
-
-$$
-E_{\rm hull\ line}=-0.50+\frac{2/3-1/2}{1-1/2}\,(0-(-0.50))=-0.50+0.1667=-0.333\ \mathrm{eV/atom}
-$$
-
-so $E_{\rm hull}=-0.30-(-0.333)=+0.033$ eV/atom, or 33 meV/atom. AB$_2$ is predicted to decompose into AB and B; the lever rule gives the fractions of atoms in each product as $(1-2/3)/(1-1/2)=2/3$ in AB and $1/3$ in B. The formation energy of $-0.30$ eV/atom is strongly negative, yet the compound is metastable.
-
-Now suppose a later calculation finds AB$_3$ at $x_B=0.75$ with $\Delta E_f=-0.27$ eV/atom. The old hull at $x_B=0.75$ lies at $-0.50+0.5\times0.50=-0.25$ eV/atom, so AB$_3$ is 20 meV/atom *below* it: it is a new stable phase, and the hull must be rebuilt through AB, AB$_3$ and B. On the new hull, at $x_B=2/3$,
-
-$$
-E_{\rm hull\ line}=-0.50+\frac{2/3-1/2}{3/4-1/2}\,(-0.27+0.50)=-0.50+0.153=-0.347\ \mathrm{eV/atom}
-$$
-
-and AB$_2$ now sits 47 meV/atom above the hull. Nothing about AB$_2$ changed; its stability label changed because the database learned about a competitor. Every $E_{\rm hull}$ in every database is therefore an upper bound on stability conditional on the completeness of that chemical system, and systems with few calculated phases give optimistic answers.
-
-> **Status of the principle: convex-hull stability criterion**
-> *Derived.* It follows exactly from minimizing the 0 K energy of a closed system at fixed composition; it is approximate as a statement about real materials because it neglects entropy (vibrational, configurational, magnetic), temperature and pressure, inherits the DFT functional error, and is only as complete as the set of competing phases computed.
-
-### How far above the hull is too far?
-
-Many known, useful materials are metastable: diamond, martensite (Chapter 15), most glasses (Chapter 17), many thin-film phases grown by kinetic routes (Chapter 41). Statistical analysis of the ICSD against computed hulls shows that the large majority of experimentally reported inorganic compounds lie within about 50–70 meV/atom of the hull for their chemical system, with oxides tighter than nitrides and metastable polymorphs reaching 100 meV/atom or more. Screening studies therefore use a threshold of order 25–100 meV/atom rather than zero, chosen to balance missed metastable phases against wasted synthesis attempts. Synthesizability is not the same as thermodynamic stability; it also depends on a synthesis route that avoids competing phases, a point returned to in Section 47.7.
-
-### Data quality, provenance and FAIR principles
-
-Experimental databases mix measurements made with different methods, sample purities, grain sizes and test standards. A reported yield strength without the heat-treatment condition, a thermal conductivity without the porosity, a band gap without stating optical or electrical measurement: each is a number whose meaning has been lost. Computed databases have a different problem: values are internally consistent but systematically biased (GGA band gaps underestimated by 30–50 %, Chapter 45; lattice parameters overestimated by 1–2 %). The community response is summarized as **FAIR** data: findable, accessible, interoperable (standard formats and vocabularies) and reusable (with enough metadata to know what was measured or computed, and how). For an engineer, the practical rule is to know which of these two failure modes a dataset is exposed to before trusting any model trained on it.
+> **Boundary.** Arc physics and power-source electronics belong to electrical and manufacturing engineering, and the thermodynamics of wetting and adhesion are developed in Chapter 45. Solidification (Chapter 9), solid-state transformations in steels (Chapters 10 and 15), fatigue and fracture (Chapter 14) and galvanic corrosion (Chapter 43) are used here as tools.
 
 ---
 
-## 47.2 Descriptors and features
+## 47.1 Joining as a materials problem
 
-### The representation problem
+Joining methods differ in how they make atoms on the two sides of a joint bond to each other, or whether they bond at all.
 
-A learning algorithm needs a fixed-length vector of numbers, or a graph, for each material. A crystal is a periodic arrangement of an arbitrary number of atoms; an alloy is a composition plus a processing history plus a microstructure; a polymer is a distribution of chain lengths with tacticity and branching (Chapter 19). The choice of **representation**, the mapping from material to numbers, often matters more than the choice of algorithm. A good representation is:
+- **Fusion welding** melts the edges of both parts, usually with added filler metal, and lets the pool solidify into a continuous metallurgical bond. It gives joints as strong as the base metal in most steels, but leaves a cast fusion zone and a heat-affected zone (HAZ).
+- **Solid-state welding** brings clean metal surfaces into atomic contact by pressure, plastic deformation and diffusion, without melting: friction, friction stir, diffusion, ultrasonic, explosive and roll bonding. It avoids solidification defects and joins many dissimilar pairs.
+- **Brazing and soldering** melt only a filler metal, with a liquidus below the solidus of the parts, which flows into the joint gap by capillarity and bonds by wetting and limited reaction. The parts do not melt.
+- **Adhesive bonding** uses a polymer that wets the surfaces as a liquid and then cures; adhesion is by intermolecular forces, chemical bonds and mechanical interlocking.
+- **Mechanical fastening** — bolts, rivets, screws, clinching — clamps parts together without any material continuity.
 
-- **complete enough** that different materials with different properties map to different vectors;
-- **invariant** to changes that do not change the material: translation and rotation of the structure, choice of unit cell, ordering of atoms in the input file;
-- **smooth**, so that small changes in structure give small changes in the representation, which lets a model interpolate;
-- **cheap**, at least much cheaper than the property it is used to predict.
-
-### Composition-based descriptors
-
-When only the chemical formula is known, as at the start of a discovery campaign, the representation is built from elemental properties. For a compound with atomic fractions $c_i$ and an elemental property $p_i$ (atomic number, mass, period and group, Pauling electronegativity, covalent radius, number of valence electrons, melting point of the element), one forms statistics such as
-
-$$
-\bar p=\sum_i c_i\,p_i,\qquad \delta p=\sqrt{\sum_i c_i\,(p_i-\bar p)^2},\qquad \max_i p_i-\min_i p_i
-$$
-
-A typical composition feature set (the widely used "Magpie" set is an example) has about 130 such numbers. Several are classical metallurgical descriptors in disguise: the mean valence electron concentration sets the stability of Hume-Rothery phases and the fcc/bcc competition in high-entropy alloys (Chapter 16); the atomic-size mismatch $\delta r$ is the Hume-Rothery size criterion (Chapter 7) and the solid-solution strengthening parameter (Chapter 13); the electronegativity spread distinguishes ionic from metallic compounds. Composition models cannot distinguish polymorphs (graphite and diamond have the same formula) and are blind to processing, which limits them to properties dominated by chemistry.
-
-### Structure-based descriptors
-
-When atomic positions are known, the representation can describe local environments:
-
-- **Radial distribution and coordination features**: counts of neighbours within shells, bond-length and bond-angle histograms, Voronoi coordination numbers.
-- **The Coulomb matrix and its periodic extensions**: entries $Z_iZ_j/\lvert\mathbf r_i-\mathbf r_j\rvert$, sorted or diagonalized to remove atom-ordering dependence.
-- **Smooth Overlap of Atomic Positions (SOAP)**: each atom's neighbourhood within a cutoff radius (typically 4–6 Å) is represented as a sum of Gaussians on the neighbours, expanded in radial functions and spherical harmonics; the rotationally invariant **power spectrum** of the expansion coefficients is the descriptor. Two environments can then be compared through a kernel, the normalized overlap of their power spectra. SOAP is complete enough for most purposes and underlies the GAP potentials of Section 47.4.
-- **Symmetry functions** (Behler–Parrinello): sums over neighbours of radial Gaussians and angular terms, with a smooth cutoff, giving a fixed-length vector per atom.
-
-The common idea is **locality**: the energy and many properties of a solid are, to a good approximation, sums of contributions from atoms in their local environments. This is the same nearsightedness that makes linear-scaling electronic-structure methods possible, and it fails where long-range physics dominates (Section 47.4).
-
-### Descriptors beyond the crystal
-
-For engineering alloys, the most important variables are often not atomic at all: solution-treatment temperature, cooling rate, ageing time, cold work, grain size, inclusion content, specimen orientation. Datasets for steel fatigue, nickel-superalloy creep or aluminium-alloy strength use these processing parameters directly as features, sometimes with physically motivated combinations (the Larson–Miller parameter of Chapter 14 is a hand-built feature that collapses time and temperature into one number; the Hollomon–Jaffe tempering parameter of Chapter 15 is another). Polymer informatics uses fingerprints of the repeat unit (counts of chemical fragments, SMILES-string encodings) together with molecular weight. Microstructures enter as images, through two-point correlation functions or features learned by convolutional networks from micrographs (Chapter 42). Building such features is where materials knowledge enters a data-driven model most directly, and a model with a few physically chosen features frequently beats one with hundreds of generic ones on a small dataset.
-
-> **Status of the principle: locality of atomic contributions**
-> *Approximate.* Valid when electronic screening confines interactions to a few ångström (most metals, covalent solids, many ionic solids at the level of short-range forces); it fails for long-range electrostatics, charge transfer across interfaces, van der Waals interactions in layered materials and properties set by delocalized electronic states unless those terms are added explicitly.
+The engineering consequences follow from where the material is altered. Fusion welding changes the parts' microstructure over millimetres; brazing changes them only slightly; adhesive bonding and fastening hardly at all. Conversely, a weld transmits load through continuous metal, while an adhesive transmits it through a thin polymer layer of modest strength and a fastener through bearing, friction and holes that concentrate stress.
 
 ---
 
-## 47.3 Machine-learning property prediction
+## 47.2 Fusion welding processes
 
-### Supervised learning in one paragraph
+### Heat sources and power density
 
-Given $N$ examples $(\mathbf x_i,y_i)$, with $\mathbf x_i$ the representation and $y_i$ a property (formation energy, band gap, bulk modulus, yield strength, glass-transition temperature), supervised learning finds a function $f(\mathbf x)$ that minimizes a loss on the training data plus a penalty on complexity, for example
+A fusion welding heat source is characterized by its **power density** at the work surface. A low-density source such as an oxy-acetylene flame (about 10$^6$–10$^7$ W/m$^2$) heats a wide area slowly, wastes most of its heat into the part and makes a broad, shallow weld with a wide HAZ. An arc concentrates 10$^7$–10$^8$ W/m$^2$; lasers and electron beams 10$^{10}$–10$^{12}$ W/m$^2$. Above roughly 10$^{10}$ W/m$^2$ the surface vaporizes, the recoil pressure of the vapour drills a narrow cavity, the **keyhole**, and energy is deposited along its whole depth: the weld becomes deep and narrow, with depth-to-width ratios up to about 10:1 for lasers and 30:1 for electron beams, a small HAZ and little distortion (Figure 47.1).
 
-$$
-\min_f\ \frac1N\sum_{i=1}^N\big(y_i-f(\mathbf x_i)\big)^2+\lambda\,\Omega(f)
-$$
-
-The regularization term $\lambda\,\Omega(f)$ keeps the function smooth enough to generalize. The algorithms used in materials work, in rough order of data appetite:
-
-| Method | How it works | Data needed (typical) | Strengths and weaknesses |
-|---|---|---|---|
-| Linear and sparse regression (LASSO, SISSO) | Linear combination of features, or of algebraic combinations of features selected for sparsity | 10–10$^3$ | Interpretable formulas; misses complex interactions |
-| Kernel ridge regression, Gaussian process (GP) | Prediction as weighted sum of similarities (kernels) to training points | 10$^2$–10$^4$ | Smooth; GP gives uncertainty; cost grows as $N^3$ |
-| Random forest, gradient-boosted trees | Ensembles of decision trees on features | 10$^2$–10$^5$ | Robust on tabular processing data; cannot extrapolate beyond training range |
-| Neural networks on descriptors | Layers of linear maps and nonlinear activations | 10$^3$–10$^6$ | Flexible; need care to avoid overfitting |
-| Graph neural networks (GNNs) | Learn the representation itself from the atomic graph | 10$^4$–10$^7$ | State of the art for structure–property prediction on large DFT sets |
-
-The Gaussian process deserves a sentence more because Section 47.5 depends on it. A GP treats the unknown function as a random function whose values at any set of points are jointly Gaussian with covariance given by a kernel $k(\mathbf x,\mathbf x')$, for example $k=\sigma_f^2\exp(-\lvert\mathbf x-\mathbf x'\rvert^2/2\ell^2)$. Conditioning on the training data gives, at a new point, both a mean prediction $\mu(\mathbf x)$ and a standard deviation $\sigma(\mathbf x)$. The standard deviation is small near training data and grows toward the prior value far from them: the model knows, in a limited sense, where it has not looked.
-
-### Training, validation and the metrics that matter
-
-A model is judged on data it has not seen. The data are split into training and test sets, or rotated through $k$-fold cross-validation, and three metrics are reported:
+The heat delivered to the work per unit length of weld is the **heat input**
 
 $$
-\mathrm{MAE}=\frac1N\sum_i\lvert\hat y_i-y_i\rvert,\qquad \mathrm{RMSE}=\sqrt{\frac1N\sum_i(\hat y_i-y_i)^2},\qquad R^2=1-\frac{\sum_i(\hat y_i-y_i)^2}{\sum_i(y_i-\bar y)^2}
+H=\eta\,\frac{VI}{v}
 $$
 
-The MAE is in the units of the property and is the easiest to interpret; the RMSE weights large errors more heavily; $R^2$ compares the model with the trivial predictor that always returns the mean. A high $R^2$ on a property spanning a wide range can hide errors that are large for the decision at hand, so MAE should always be compared with the **resolution the application requires**.
+for arc voltage $V$, current $I$, travel speed $v$ and arc efficiency $\eta$, the fraction of electrical power reaching the workpiece. Typical efficiencies (as tabulated in welding standards) are 0.6 for gas tungsten arc welding, 0.8 for gas metal arc and shielded metal arc welding, and 1.0 for submerged arc welding, where the flux blanket traps the heat.
 
-**Worked example — reading a parity plot.** A graph-network model predicts band gaps for eight test compounds whose DFT (HSE) gaps are 0.00, 0.45, 1.12, 1.80, 2.35, 3.10, 4.05 and 5.60 eV; the model returns 0.12, 0.30, 1.30, 1.62, 2.61, 2.88, 3.70 and 4.95 eV (Figure 47.2, left). The errors $\hat y-y$ are $+0.12,-0.15,+0.18,-0.18,+0.26,-0.22,-0.35,-0.65$ eV. Then
+### Arc welding processes
 
-$$
-\mathrm{MAE}=\frac{2.11}{8}=0.264\ \mathrm{eV},\qquad \mathrm{RMSE}=\sqrt{\frac{0.763}{8}}=0.309\ \mathrm{eV}
-$$
+- **Shielded metal arc welding (SMAW, "stick")**: a flux-coated consumable electrode whose coating shields the arc and forms slag. Portable — pipelines, site steelwork, repairs — but slow. The coating sets weld-metal hydrogen: cellulosic coatings release a lot, basic "low-hydrogen" coatings very little.
+- **Gas metal arc welding (GMAW, MIG/MAG)**: a fed wire electrode under argon, CO$_2$ or mixtures; the workhorse of fabrication. **Flux-cored** wires (FCAW) raise deposition and suit outdoor work.
+- **Gas tungsten arc welding (GTAW, TIG)**: a non-consumable tungsten electrode under inert gas with separate filler; slow, clean and precise, for root passes, thin stainless steel, titanium and aluminium.
+- **Submerged arc welding (SAW)**: an arc under granular flux at 500–1500 A per wire and 10–40 kg/h with multiple wires; ship panels, wind-turbine towers, thick pressure vessels.
+- **Plasma arc welding** constricts the arc to keyhole power densities for plates up to about 8 mm.
 
-The mean of the reference gaps is 2.309 eV and their total sum of squares 24.95 eV$^2$, so $R^2=1-0.763/24.95=0.969$. The baseline that always predicts 2.31 eV has an MAE of 1.47 eV, so the model is far better than knowing nothing. But three further observations matter more than the headline $R^2$. The RMSE exceeds the MAE noticeably, a sign that a few errors are large. The mean error is $-0.12$ eV and the two largest-gap compounds are both under-predicted, by 0.35 and 0.65 eV: a systematic bias at the edge of the data, where wide-gap materials are rare in the training set. And for an application that must distinguish a 1.1 eV absorber for photovoltaics from a 1.6 eV one for a tandem top cell (Chapter 32), an MAE of 0.26 eV is a coarse filter, not an answer.
+### High-energy-density beam welding
 
-### How error falls with data: learning curves
+**Laser beam welding** uses fibre, disc or CO$_2$ lasers of 1–20 kW focused to 0.2–1 mm spots: **tailor-welded blanks** (sheets of different gauge or grade joined before stamping), body-in-white seams at metres per minute, low-distortion ship panels, battery tabs. Absorption is a materials issue: copper and aluminium reflect over 90 % of near-infrared light until a keyhole forms, so green and blue lasers are being adopted for copper busbars. **Electron beam welding** at 60–150 kV in vacuum gives perfect shielding for titanium, zirconium and refractory metals and single-pass penetration beyond 100 mm in steel, for aero-engine shafts and nuclear components; the chamber limits part size.
 
-For a fixed model and representation, test error typically falls as a power of the training-set size,
+### Resistance welding
 
-$$
-\mathrm{MAE}(N)\approx a\,N^{-b}
-$$
+**Resistance spot welding** clamps overlapping sheets between copper-alloy electrodes and passes a current of about 8–12 kA for 0.1–0.3 s through 1 mm steel sheets. Joule heating, $I^2Rt$, is concentrated at the faying interface, where contact resistance is highest, and melts a lens-shaped **nugget**, typically required to have a diameter of at least $4\sqrt t$–$5\sqrt t$ for sheet thickness $t$ in millimetres. A steel car body has several thousand spot welds. Aluminium, with lower resistivity, needs two to three times the current and wears electrodes quickly.
 
-with $b$ between about 0.2 and 0.5 for materials properties (Figure 47.2, right). With $b=0.3$, ten times more data cuts the error by a factor $10^{-0.3}=0.50$; a hundred times more cuts it by 0.075 to a quarter. A better representation shifts the curve down or steepens it; data with irreducible noise make it flatten at the noise floor. For DFT-trained models the floor is not the DFT-versus-experiment error; that error is invisible to the model, which learns DFT, not nature. Graph networks trained on 10$^5$ Materials Project entries reach formation-energy MAEs of about 0.02–0.04 eV/atom against DFT, comparable to the typical DFT-versus-experiment discrepancy of about 0.1 eV/atom for formation enthalpies.
+| Process | Heat source | Power density (W/m²) | Typical heat input (kJ/mm) | Penetration per pass | Typical uses |
+|---|---|---|---|---|---|
+| Oxy-fuel | Flame | 10⁶–10⁷ | High, poorly controlled | A few mm | Repair, thin steel, cutting |
+| SMAW | Arc, flux-coated electrode | 10⁷–10⁸ | 0.8–3 | 2–5 mm | Site steelwork, pipelines |
+| GMAW / FCAW | Arc, wire electrode | 10⁷–10⁸ | 0.3–2.5 | 2–6 mm | General fabrication, car bodies |
+| GTAW | Arc, tungsten electrode | 10⁷–10⁸ | 0.3–1.5 | 1–3 mm | Root passes, thin stainless, Ti, Al |
+| SAW | Arc under flux | 10⁷–10⁸ | 1.5–6 | 5–15 mm | Ships, towers, pressure vessels |
+| Plasma arc (keyhole) | Constricted arc | 10⁹–10¹⁰ | 0.5–2 | up to ≈ 8 mm | Tube, thin plate |
+| Laser | Photon beam | 10¹⁰–10¹² | 0.05–0.5 | up to ≈ 20 mm | Tailor blanks, body-in-white, battery tabs |
+| Electron beam | Electron beam in vacuum | 10¹⁰–10¹² | 0.05–1 | up to > 100 mm | Aero-engine, nuclear, thick Ti |
+| Resistance spot | Joule heating at interface | — | — | Sheet thickness | Car bodies, appliances |
 
-<!-- FIGURE 47.2 | figures/ch47/fig-47-2-parity-and-learning-curve.png | plot | Left: parity plot of predicted against reference band gaps for the worked example. Right: learning curves showing test error falling as a power of training-set size for two representations. | Content: two panels. Left: x-axis reference (HSE) band gap 0 to 6 eV, y-axis predicted band gap 0 to 6 eV; diagonal y = x solid; dashed band y = x ± 0.26 eV labelled 'MAE = 0.26 eV'; eight points (0.00,0.12), (0.45,0.30), (1.12,1.30), (1.80,1.62), (2.35,2.61), (3.10,2.88), (4.05,3.70), (5.60,4.95); annotation 'R² = 0.97, bias −0.12 eV' and arrow to the two high-gap points 'under-predicted: sparse data'. Right: log-log axes; x-axis training-set size N from 10² to 10⁶; y-axis test MAE in formation energy from 0.01 to 1 eV/atom. Line 1 'composition features + random forest': MAE 0.30 at N = 10³ with slope −0.2, flattening near 0.08 by 10⁶. Line 2 'graph neural network': MAE 0.30 at N = 10³ with slope −0.4, reaching ~0.025 at 10⁶. Horizontal dashed line at 0.1 eV/atom labelled 'typical DFT vs experiment discrepancy'. -->
+*Typical ranges; heat input varies with joint, position and procedure.*
 
-### Graph neural networks
+<!-- FIGURE 47.1 | figures/ch47/fig-47-1-power-density-weld-shape.png | schematic | Weld cross-sections produced by heat sources of increasing power density, from oxy-fuel to arc to laser and electron-beam keyhole welding. | Content: top: horizontal log axis of power density 10^6 to 10^12 W/m² with bands labelled 'oxy-fuel', 'arc (SMAW, GMAW, GTAW, SAW)', 'plasma', 'laser', 'electron beam'; vertical dashed line near 10^10 W/m² labelled 'keyhole threshold'. Below: four transverse sections through a 10 mm steel plate at the same scale: oxy-fuel wide shallow bowl with very wide HAZ; GMAW bowl ~10 mm wide, 4 mm deep with HAZ ~3 mm; laser keyhole weld 2 mm wide × 10 mm deep, narrow HAZ; EB weld 1 mm wide, full penetration of a thicker 30 mm section shown as a separate narrow sliver. Fusion zone shaded dark, HAZ lighter. Labels for depth/width ratio ≈ 0.4, 0.4, 5 and 30. -->
 
-A crystal is naturally a graph: atoms are nodes, and edges join atoms closer than a cutoff radius (typically 5–8 Å), including periodic images. **Graph neural networks** learn the representation instead of having it designed. Each atom $i$ starts with a feature vector $\mathbf h_i^{(0)}$ encoding its element; each edge carries the interatomic distance (expanded in Gaussian or Bessel basis functions) and, in some architectures, angles. In each **message-passing** layer, every atom collects messages from its neighbours and updates its state:
+![Figure 47.1 — Weld cross-sections produced by heat sources of increasing power density, from oxy-fuel to arc to laser and electron-beam keyhole welding](../figures/ch47/fig-47-1-power-density-weld-shape.png)
 
-$$
-\mathbf h_i^{(t+1)}=U\!\left(\mathbf h_i^{(t)},\ \sum_{j\in\mathcal N(i)}M\big(\mathbf h_i^{(t)},\mathbf h_j^{(t)},\mathbf e_{ij}\big)\right)
-$$
+*Figure 47.1 — Weld cross-sections produced by heat sources of increasing power density, from oxy-fuel to arc to laser and electron-beam keyhole welding.*
 
-where $M$ and $U$ are small neural networks with learned weights shared across all atoms. After $T$ layers (typically three to six), each atom's state encodes its environment out to roughly $T$ times the cutoff. A **readout** sums or averages the atomic states and maps them to the property. Because the sum over neighbours is unordered and uses only distances (and angles), the output is automatically invariant to atom ordering, translation and rotation.
-
-The first widely used models, CGCNN (2018) and MEGNet (2019), demonstrated DFT-level accuracy for formation energies across the Materials Project; later models (ALIGNN with explicit bond angles, equivariant networks of the kind in Section 47.4) improved accuracy further. Graph networks are now the default for properties of crystals where the training set has more than about 10$^4$ entries. On small experimental datasets, a few hundred measured toughness or creep values, they offer little over random forests with good features, and the representation-learning advantage disappears.
-
-> **Status of the principle: power-law learning curves**
-> *Empirical.* Observed across many datasets and model families for interpolation within a fixed distribution of materials; the exponent is not universal, and the curve says nothing about error on materials unlike the training set.
-
-### Pitfalls that make models look better than they are
-
-- **Data leakage.** If the test set contains near-duplicates of training entries (the same compound at slightly different relaxation, polymorphs of one composition, the same alloy at two test temperatures), the test error measures memorization. Splitting by chemical system, by structure prototype or by alloy family (grouped cross-validation) gives an honest, and usually larger, error.
-- **Target leakage.** A feature that encodes the answer (using measured density to predict porosity-dependent conductivity, or a processing step that is only applied to the best alloys) produces impressive and useless models.
-- **Selection bias.** Published data over-represent successes. A model trained on reported superconductors has seen few non-superconductors, so it learns to predict high $T_c$ for nearly everything.
-- **Distribution shift.** A model trained on bulk oxides applied to sulfide surfaces, or on wrought alloys applied to additively manufactured ones (Chapter 40, where porosity and texture differ), is extrapolating, whatever the test error was.
+Figure 47.1 shows how the same joint looks when made with each family.
 
 ---
 
-## 47.4 Machine-learned interatomic potentials
+## 47.3 Heat flow in welding
 
-### The gap they fill
+### The Rosenthal solution
 
-Molecular dynamics (Chapter 46) needs forces on every atom at every time step, for $10^6$–$10^9$ steps. DFT gives accurate forces but its cost scales roughly as $N^3$ with the number of atoms and limits simulations to a few hundred atoms for tens of picoseconds. Classical potentials (Lennard-Jones, EAM, Tersoff, ReaxFF; Chapter 46) scale linearly and reach millions of atoms, but their fixed functional forms limit accuracy and transferability: an EAM potential fitted for bulk aluminium may give poor surface energies, stacking-fault energies or liquid structure. **Machine-learned interatomic potentials (MLIPs)** keep the linear scaling and locality of classical potentials but replace the fixed functional form by a flexible regression fitted to DFT energies, forces and stresses.
-
-### The common structure
-
-All MLIPs write the total energy as a sum of atomic contributions, each a learned function of the local environment within a cutoff $r_c$:
+The metallurgy of a weld is set by its thermal cycle: the peak temperature reached at each point, and how fast it cools. Rosenthal's solution treats the heat source as a point (thick plate) or line (thin plate) moving at constant speed $v$ through a solid of conductivity $k$ and diffusivity $\alpha$, with constant properties and no melting. In a frame moving with the source, a steady temperature field develops. For a **thick plate** (three-dimensional heat flow),
 
 $$
-E=\sum_{i=1}^{N}\varepsilon\big(\{\mathbf r_{ij}\}_{r_{ij}<r_c}\big),\qquad \mathbf F_i=-\frac{\partial E}{\partial\mathbf r_i}
+T-T_0=\frac{\eta P}{2\pi k R}\exp\!\left[-\frac{v\,(R+\xi)}{2\alpha}\right]
 $$
 
-Forces are obtained by differentiating the energy, so energy is conserved in dynamics. Training minimizes a weighted loss over a DFT dataset, typically
+where $P=VI$, $\xi$ is the distance ahead of the source along the weld and $R$ the distance from it. Isotherms are compressed ahead of the source and stretched behind it into a teardrop. Along the weld centreline far behind the source, the cooling rate is
 
 $$
-\mathcal L=w_E\sum_{\rm configs}\left(\frac{E-E^{\rm DFT}}{N}\right)^2+w_F\sum_{\rm atoms}\lvert\mathbf F_i-\mathbf F_i^{\rm DFT}\rvert^2+w_\sigma\sum_{\rm configs}\Vert\boldsymbol\sigma-\boldsymbol\sigma^{\rm DFT}\Vert^2
+\frac{dT}{dt}=-\frac{2\pi k\,(T-T_0)^2}{H}
 $$
 
-Forces are especially valuable training data: one DFT calculation on a 100-atom cell gives one energy but 300 force components.
+with $H=\eta P/v$ the heat input. Integrating between 800 and 500 °C gives the cooling time through the range in which austenite transforms in most structural steels:
 
-### Three generations of models
+$$
+t_{8/5}=\frac{H}{2\pi k}\left(\frac{1}{500-T_0}-\frac{1}{800-T_0}\right)
+$$
 
-| Potential | Representation and regression | Characteristics |
-|---|---|---|
-| Behler–Parrinello neural network (2007) | Atom-centred symmetry functions → per-element feed-forward network | First general MLIP; needs careful choice of symmetry functions |
-| GAP (Gaussian Approximation Potential, 2010) | SOAP descriptors → Gaussian-process (kernel) regression on sparse set of reference environments | Data-efficient; gives a variance that flags unfamiliar environments; used for Si, C, W, Fe, amorphous phases, radiation damage |
-| Moment Tensor Potentials, ACE (Atomic Cluster Expansion) | Systematic many-body polynomial expansions with linear fitting | Fast, systematically improvable, close relatives of the equivariant networks |
-| NequIP (2022) | E(3)-equivariant message-passing network: features carry vector and tensor character that rotates with the structure | Very data-efficient: chemical accuracy from a few hundred to a few thousand configurations |
-| MACE (2022) | Equivariant message passing with higher body-order messages built on the ACE basis; typically two layers | High accuracy with short effective receptive field; basis of widely used "foundation" potentials |
+For **thin plates** (two-dimensional flow) the corresponding result varies as $(H/d)^2$ for plate thickness $d$, so thin plates cool much more slowly for the same heat input. Welding standards use empirically calibrated versions of both; for steels the three-dimensional form is
 
-**Equivariance** is the key idea of the latest generation. The energy is invariant under rotation, but forces are vectors that rotate with the structure. Earlier networks built only invariant features (distances, angles) and lost directional information; equivariant networks carry internal features that transform like vectors and tensors under rotation, so that geometric information is preserved through the layers and the model needs far fewer examples to learn it. Typical accuracies for a well-trained MLIP on its target system are 1–5 meV/atom in energy and 0.03–0.1 eV/Å in force against the reference DFT.
+$$
+t_{8/5}=(6700-5T_0)\,H\left(\frac{1}{500-T_0}-\frac{1}{800-T_0}\right)F_3
+$$
 
-### Universal potentials
+with $H$ in kJ/mm, $T_0$ in °C, $t_{8/5}$ in seconds and a joint-shape factor $F_3$ (1 for a butt weld, about 0.67 for a fillet weld, which loses heat into three legs).
 
-Trained on the relaxation trajectories stored in databases such as the Materials Project (about 1.5 million configurations), models such as M3GNet, CHGNet and MACE-MP-0 cover most of the periodic table. They are less accurate on any particular system than a dedicated potential, with typical force errors of 0.05–0.1 eV/Å and a systematic softening of phonon frequencies inherited from training data dominated by near-equilibrium structures, but they run stable molecular dynamics on almost any inorganic material out of the box. They are used for pre-relaxing candidate structures before DFT, for screening stability and ionic diffusion, and as starting points that are fine-tuned with a few hundred system-specific DFT calculations.
+> **Status of the principle: Rosenthal heat flow and the $t_{8/5}$ formulas**
+> *Approximate.* The solution of the heat equation for a moving point or line source with constant properties, no latent heat and no convection in the pool. It predicts the HAZ cooling rate well away from the pool and fails near and inside it, where the source's size, convection and latent heat matter. The standard $t_{8/5}$ equations are *empirical* calibrations of the same form.
 
-### What MLIPs make possible, and their failure modes
+**Worked example — Cooling time and the effect of preheat.** A 25 mm S355 steel plate is butt welded by GMAW at 28 V, 250 A and 300 mm/min (5 mm/s), with $\eta=0.8$. The heat input is
 
-Speed is the reason they matter. A MACE or NequIP evaluation costs of order 10$^{-5}$–10$^{-4}$ s per atom per step on a GPU, against of order 0.1–10 s per atom per step for DFT molecular dynamics; with linear scaling, systems of 10$^5$–10$^6$ atoms and nanosecond times become practical. That opens problems that are out of reach for DFT and beyond the accuracy of classical potentials: dislocation core structure and mobility in tungsten and high-entropy alloys (Chapters 12 and 16), lithium diffusion and interface reactions in solid electrolytes (Chapter 32), amorphous silicon and carbon structures, phase transitions in perovskites, hydrogen embrittlement mechanisms (Chapter 36), and primary radiation damage cascades in reactor steels (Chapter 33).
+$$
+H=0.8\times\frac{28\times250}{5}=1120\ \mathrm{J/mm}=1.12\ \mathrm{kJ/mm}
+$$
 
-Failure modes follow from the construction:
+Is the plate thick enough for three-dimensional flow? The standards' transition thickness for this heat input and $T_0=20$ °C works out at about 15.5 mm, so 25 mm is thick. Without preheat ($T_0=20$ °C):
 
-- **Extrapolation**: an MLIP has no physics outside its training data. A potential trained on bulk crystals may let atoms collapse together at short distances never sampled, so short-range repulsion is often added by hand (a ZBL screened Coulomb term for radiation damage).
-- **Long-range effects**: a strictly local model misses long-range electrostatics and charge transfer. Space-charge layers at electrode interfaces, polar surfaces and charged defects need explicit electrostatic terms or charge-equilibration schemes.
-- **Inherited DFT error**: the potential is at best as good as its functional. A GGA-trained potential for water or for magnetic iron carries GGA's errors faithfully.
+$$
+t_{8/5}=(6700-100)\times1.12\times\left(\frac{1}{480}-\frac{1}{780}\right)=6600\times1.12\times8.01\times10^{-4}=5.9\ \mathrm{s}
+$$
 
-**Active learning** is the standard remedy for extrapolation: run dynamics with the current potential, monitor an uncertainty indicator (GP variance in GAP, disagreement among an ensemble of networks, or a descriptor-space distance), stop when it exceeds a threshold, compute the flagged configurations with DFT, add them to the training set and retrain. The same loop drives materials discovery in the next section.
+The Rosenthal formula with $k=30$ W/m K gives $1.12\times10^{6}/(2\pi\times30)\times8.01\times10^{-4}=4.8$ s — the same order, slightly faster because it ignores the reduced conductivity and latent effects that the calibration absorbs. With a preheat of 100 °C,
 
-> **Status of the principle: machine-learned interatomic potentials**
-> *Approximate.* They reproduce the reference electronic-structure method within stated errors for configurations similar to their training data, under the locality assumption; accuracy elsewhere is not guaranteed and must be tested, not assumed.
+$$
+t_{8/5}=(6700-500)\times1.12\times\left(\frac{1}{400}-\frac{1}{700}\right)=6200\times1.12\times1.071\times10^{-3}=7.4\ \mathrm{s}
+$$
+
+Preheating by 80 K lengthens the cooling time by about 25 % (Figure 47.2). For many C–Mn steels, the HAZ hardness rises steeply as $t_{8/5}$ falls below roughly 5 s, so this change can move the HAZ from a crack-susceptible martensitic structure to a tougher bainitic one. Preheat also slows cooling below 300 °C, where it matters even more by giving hydrogen time to diffuse out (Section 47.5). The same calculation, run the other way, shows why very high heat inputs ($t_{8/5}$ of 30 s or more) are restricted for thermomechanically processed steels: they coarsen the HAZ grains and lose the fine structure that gave the steel its toughness (Chapter 46).
+
+<!-- FIGURE 47.2 | figures/ch47/fig-47-2-t85-heat-input.png | plot | Cooling time from 800 to 500 °C in the heat-affected zone of a thick steel plate as a function of heat input and preheat temperature. | Content: x-axis heat input 0.5–3.0 kJ/mm; y-axis t8/5 0–40 s. Lines from the 3D formula (6700 − 5T0)H(1/(500−T0) − 1/(800−T0)) for butt welds at T0 = 20, 100 and 150 °C (at 1.12 kJ/mm: 5.9, 7.4, 8.8 s, marked with dots and the worked-example label). Dashed line for a fillet weld (F3 = 0.67) at 20 °C. Shaded horizontal band below ~5 s labelled 'martensitic HAZ, cold-cracking risk (typical C–Mn steel)'; band above ~25 s labelled 'coarse-grained HAZ, toughness loss in TMCP steels'. Secondary top axis: approximate HAZ hardness trend from ~400 HV at 3 s to ~200 HV at 30 s (schematic). -->
+
+![Figure 47.2 — Cooling time from 800 to 500 °C in the heat-affected zone of a thick steel plate as a function of heat input and preheat temperature](../figures/ch47/fig-47-2-t85-heat-input.png)
+
+*Figure 47.2 — Cooling time from 800 to 500 °C in the heat-affected zone of a thick steel plate as a function of heat input and preheat temperature.*
 
 ---
 
-## 47.5 High-throughput screening, active learning and autonomous laboratories
+## 47.4 Welding metallurgy
 
-### The screening funnel
+A fusion weld in cross-section has three regions: the **fusion zone** (weld metal), which was fully liquid; a narrow **partially melted zone** at the fusion boundary; and the **heat-affected zone**, base metal heated enough to change its microstructure but not to melt.
 
-High-throughput screening applies a sequence of filters of increasing cost and accuracy to a large candidate set (Figure 47.3). For a solid lithium electrolyte the funnel might be:
+### The fusion zone
 
-1. **Enumerate** candidates: known ICSD lithium compounds plus hypothetical ones generated by substituting elements into known structure prototypes, perhaps 10$^5$ structures.
-2. **Composition and rule filters** (cost: negligible): exclude toxic, scarce or radioactive elements; require charge neutrality and lithium content above a threshold.
-3. **ML stability filter** (cost: milliseconds to a second per structure): a universal potential relaxes each structure and a GNN predicts $E_{\rm hull}$; keep those below a threshold.
-4. **DFT stability and electrochemical window** (hours per structure): compute $E_{\rm hull}$ and the voltage range in which the compound is stable against lithium uptake or loss, using the grand-potential phase diagram.
-5. **Ionic conductivity** (days per structure): MLIP or ab initio molecular dynamics to compute the lithium diffusion coefficient and, through the Nernst–Einstein relation, the conductivity (Chapters 8 and 32).
-6. **Synthesis and testing** of a handful of survivors.
+The weld pool is a small casting with a peculiar mould: the hot, unmelted base metal of the same crystal structure. Solidification therefore starts without any nucleation barrier, by **epitaxial growth** from the partially melted grains at the fusion boundary, which continue across it with the same orientation. Grains then grow toward the pool's centreline along the steepest temperature gradient, and **competitive growth** favours those whose easy-growth ⟨100⟩ direction is best aligned with it. The result is columnar grains that curve toward the moving pool's trailing edge. As in Chapter 9, the solidification mode depends on the thermal gradient $G$ and growth rate $R$: high $G/R$ at the fusion boundary gives planar or cellular growth, low $G/R$ at the centreline gives columnar dendritic or even equiaxed grains, and the product $GR$ (the cooling rate) sets the scale of dendrites. Because $R=v\cos\theta$, with $\theta$ the angle between the growth direction and the welding direction, fast welding makes teardrop-shaped pools in which columnar grains meet head-on at the centreline — a weak plane where the last solute-rich liquid freezes and where solidification cracks form (Section 47.5).
 
-Each stage removes most of the remaining candidates, so expensive methods are used only where they matter. The funnel is the computational form of the screening and ranking stages of materials selection (Chapter 48).
+Weld metal is a mixture of filler and melted base metal; the **dilution** (base-metal fraction) is typically 10–40 % for arc welds and up to 100 % for autogenous laser welds. Steel fillers add deoxidizers (Si, Mn, Ti) and are designed so that **acicular ferrite** — fine interlocking laths nucleated on titanium-oxide inclusions — dominates and gives high toughness. Titanium welds must be shielded until below about 400 °C or they absorb oxygen and embrittle (silver colour acceptable, blue or grey rejected).
 
-<!-- FIGURE 47.3 | figures/ch47/fig-47-3-screening-funnel.png | flowchart | A high-throughput screening funnel for solid lithium electrolytes: each stage is more expensive and more accurate, and passes fewer candidates. | Content: an inverted funnel of six horizontal bands, top to bottom, each labelled with stage, method, cost per candidate and number surviving: 'Enumerate (ICSD + prototype substitution) — 100 000'; 'Composition rules (no toxic/scarce elements, charge balance, Li fraction) — 40 000, ~0 cost'; 'ML stability (universal MLIP relax + GNN E_hull < 50 meV/atom) — 3 000, ~0.1 s'; 'DFT stability + electrochemical window — 300, ~200 core-h'; 'MLIP/AIMD Li diffusion at 300–900 K — 30, ~10⁴ core-h'; 'Synthesis and impedance testing — 5, weeks'. Right-hand axis arrow labelled 'accuracy and cost per candidate increase'. Left-hand side, a small Gaussian error curve beside the ML stage annotated 'σ ≈ 0.05 eV/atom: threshold set to keep 84 % of truly stable phases'. -->
+### The heat-affected zone in steels
 
-**Worked example — setting a screening threshold that does not discard the answer.** In the funnel above, the ML stage predicts $E_{\rm hull}$ for 10$^5$ structures with an error that is approximately Gaussian with standard deviation $\sigma=0.05$ eV/atom. The team wants every truly stable compound ($E_{\rm hull}=0$) to reach the DFT stage. If the threshold were set at 0, a truly stable compound would pass with probability $\Phi(0/\sigma)=0.50$: half of the answers would be thrown away by the cheapest filter. With threshold $t$, a truly stable compound passes with probability $\Phi(t/\sigma)$:
+Each point in the HAZ experiences a thermal cycle with a peak temperature that falls with distance from the fusion line. Superimposing the peak temperatures on the Fe–C diagram (Figure 47.3) divides the HAZ of a steel into sub-zones:
 
-| Threshold $t$ (eV/atom) | $t/\sigma$ | Probability a truly stable compound passes |
-|---|---|---|
-| 0.00 | 0 | 0.50 |
-| 0.05 | 1 | 0.84 |
-| 0.10 | 2 | 0.977 |
+- **Coarse-grained HAZ (CGHAZ)**, peak above about 1100–1200 °C: austenite grains grow rapidly to 100 µm or more, increasing hardenability, so on cooling this zone forms the hardest and least tough structures — martensite or upper bainite. It is the critical region for both hydrogen cracking and toughness.
+- **Fine-grained HAZ (FGHAZ)**, peak about 900–1100 °C: the steel is fully austenitized but grains do not grow, and it transforms to fine ferrite–pearlite or bainite. Usually the toughest zone.
+- **Intercritical HAZ (ICHAZ)**, peak between $A_{c1}$ and $A_{c3}$ (about 720–900 °C): partial austenitization of carbon-rich regions, which can transform to brittle martensite–austenite islands.
+- **Subcritical HAZ**, peak below $A_{c1}$: tempering or spheroidization of the base metal; in quenched-and-tempered steels a softened band.
 
-Raising the threshold also passes more unstable compounds. Suppose 3000 structures pass at $t=0.05$ and 7000 at $t=0.10$. At about 200 core-hours per DFT stability calculation (relaxation plus a static calculation, Chapter 45), the DFT stage costs $3000\times200=6\times10^5$ core-hours at the lower threshold and $1.4\times10^6$ at the higher one, against $2\times10^7$ core-hours to compute all 10$^5$ structures directly. The ML stage itself, at about 0.1 s per structure, takes $10^5\times0.1/3600\approx2.8$ GPU-hours. The decision is an engineering trade: doubling the DFT budget raises the recall of stable phases from 84 % to 98 %. A cheap filter is only useful if its threshold is set from its error, not from the target value.
+In multipass welds, each pass reheats the previous ones, refining some CGHAZ and creating **intercritically reheated CGHAZ** regions with local brittle zones — one reason offshore-structure specifications require HAZ toughness tests (Charpy and CTOD) at several notch positions.
 
-### Active learning and Bayesian optimization
+<!-- FIGURE 47.3 | figures/ch47/fig-47-3-haz-regions-fe-c.png | schematic | Heat-affected-zone sub-regions of a 0.15 % C steel weld related to the peak temperature reached and the Fe–Fe3C phase diagram. | Content: left: steel-rich corner of Fe–Fe3C diagram (0–1.0 wt% C, 600–1600 °C) with vertical line at 0.15 % C, A1 (727 °C), A3 (~860 °C at 0.15 % C), solidus and liquidus marked. Right, sharing the temperature axis: half cross-section of a weld with fusion zone (columnar grains growing epitaxially), partially melted zone, coarse-grained HAZ (>1100 °C, large grains), fine-grained HAZ (900–1100 °C, small grains), intercritical HAZ (A1–A3, mixed), subcritical HAZ (<A1, tempered), unaffected base metal; horizontal dashed lines link each zone's peak temperature to the diagram. Below: peak temperature versus distance from the fusion line 0–6 mm, falling from 1500 to 500 °C. -->
 
-Screening evaluates everything that passes each filter. When each evaluation is expensive (a synthesis, a fatigue test, a week of molecular dynamics) and the candidate space is continuous (alloy compositions, processing temperatures and times), it is better to choose each next experiment so that it is maximally informative. This is **active learning**, and when the aim is to find the best material rather than to map the whole space, **Bayesian optimization**:
+![Figure 47.3 — Heat-affected-zone sub-regions of a 0.15 % C steel weld related to the peak temperature reached and the Fe–Fe3C phase diagram](../figures/ch47/fig-47-3-haz-regions-fe-c.png)
 
-1. Fit a surrogate model, usually a Gaussian process, to the measurements so far; it gives a mean $\mu(\mathbf x)$ and uncertainty $\sigma(\mathbf x)$ everywhere.
-2. Compute an **acquisition function** that scores each untested candidate by how useful testing it would be.
-3. Test the candidate with the highest score, add the result, refit, and repeat.
+*Figure 47.3 — Heat-affected-zone sub-regions of a 0.15 % C steel weld related to the peak temperature reached and the Fe–Fe3C phase diagram.*
 
-The acquisition function balances **exploitation** (test where $\mu$ is high) and **exploration** (test where $\sigma$ is large). The most common choice, **expected improvement**, is the expected amount by which a candidate will beat the best value $f^*$ found so far, for a property to be maximized:
+### The HAZ in non-ferrous alloys
+
+In alloys strengthened by cold work or precipitation, the HAZ is a region where that strengthening has been undone.
+
+- **Cold-worked alloys** (strain-hardened aluminium 5xxx-H temper, cold-drawn copper) recrystallize in the HAZ and soften to the annealed (O-temper) strength.
+- **Precipitation-hardened aluminium** (6xxx, 2xxx, 7xxx in T6 temper) is affected twice. Near the fusion line, precipitates dissolve; this region can partly recover by natural or artificial aging after welding. Farther out, at peak temperatures of roughly 250–400 °C, the fine β″ precipitates of a 6xxx alloy coarsen into non-strengthening β′ and β: the zone is **over-aged** and stays soft. Design codes therefore assign welded 6061-T6 an ultimate strength of about 165 MPa, compared with 260–310 MPa for the base metal, and structures place welds in low-stress regions or use friction stir welding (Section 47.6).
+- **Nickel-base superalloys** and **titanium alloys** suffer coarsening of γ′ or α structures and, in the PMZ, liquation of low-melting phases.
+
+### Residual stress and distortion
+
+As the weld pool cools, the hot weld metal and HAZ try to contract but are restrained by the cooler surrounding plate. The thermal strain available is enormous: for steel cooling through 600 K, $\alpha\Delta T=12\times10^{-6}\times600=0.0072$, which elastically would correspond to $E\alpha\Delta T\approx1440$ MPa, far above the yield strength. The weld region therefore yields in tension during cooling, and once cold it is left with **longitudinal residual stress approximately equal to the yield strength** of the weld or HAZ, balanced by compressive stress in the surrounding plate. Transverse residual stresses are smaller and depend on restraint.
+
+Residual stresses have three consequences. (1) **Distortion** — shrinkage, angular distortion and buckling of thin panels — controlled by sequencing, presetting, clamping and lower heat input (laser welds distort far less than arc welds). (2) **Fatigue**: tensile residual stress at the weld toe, with the toe's geometric stress concentration and small slag intrusions, makes the fatigue strength of welded details almost independent of steel strength, so design codes classify details by geometry, not grade (Chapter 14). Toe grinding, TIG dressing and peening introduce compression and raise it. (3) **Stress-assisted failure**: residual stress adds to service stress in brittle fracture, hydrogen cracking and stress-corrosion cracking (Chapter 43).
+
+**Post-weld heat treatment (PWHT)**, typically 580–620 °C for C–Mn pressure-vessel steels for about one hour per 25 mm of thickness, lowers the yield strength enough for creep to relax residual stresses to perhaps 20–30 % of their as-welded values, and tempers HAZ martensite. Residual stresses are measured by hole drilling, X-ray and neutron diffraction (Chapter 53) and contour methods.
+
+> **Status of the principle: residual stress near yield in as-welded joints**
+> *Approximate.* It follows from thermal strains far exceeding the elastic limit under restraint. It is a good design assumption for longitudinal stress in steel and aluminium welds; it overestimates in low-restraint thin sheet and is modified where solid-state phase transformations on cooling (martensite's volume expansion) put the weld into compression.
+
+---
+
+## 47.5 Weldability and weld cracking
+
+**Weldability** is the ability of a material to be welded into a structure that performs satisfactorily, under practical fabrication conditions. It is limited mainly by cracking, of which there are two families: **cold cracking**, which occurs after the weld has cooled, and **hot cracking**, which occurs during or immediately after solidification.
+
+### Hydrogen-induced cold cracking
+
+Hydrogen cracking — also called cold cracking, delayed cracking or underbead cracking — is the most common cause of weld rejections in structural steels. It requires four factors at once:
+
+1. **Hydrogen** in the weld, from moisture in fluxes and electrode coatings, from hydrocarbons and rust on the joint, or from the atmosphere. Diffusible hydrogen is classified in mL per 100 g of deposited weld metal: H5 (≤ 5), H10, H15; basic low-hydrogen electrodes and solid wires give under 5, cellulosic electrodes more than 30.
+2. **A susceptible microstructure**, chiefly high-carbon martensite in the CGHAZ or weld metal. A hardness above about 350 HV is a common warning level.
+3. **Tensile stress**, from residual stress and restraint.
+4. **A low temperature**, below about 150–200 °C, where hydrogen is trapped and embrittling rather than diffusing out.
+
+Cracks may appear hours or days later, as hydrogen diffuses to triaxially stressed notches and martensite (Chapter 43), so susceptible welds are inspected after a 16–48 hour delay. Prevention attacks each factor: dry low-hydrogen consumables; preheat and interpass temperature (softer HAZ, time for hydrogen to escape); a post-heat hold at about 200–250 °C; less restraint.
+
+### Carbon equivalent
+
+Since the susceptible microstructure depends on hardenability, empirical **carbon equivalents** combine alloying elements by their effect on HAZ hardenability. The most widely used, from the International Institute of Welding, is
 
 $$
-\mathrm{EI}(\mathbf x)=(\mu-f^*)\,\Phi(z)+\sigma\,\phi(z),\qquad z=\frac{\mu-f^*}{\sigma}
+\mathrm{CE_{IIW}}=\mathrm{C}+\frac{\mathrm{Mn}}{6}+\frac{\mathrm{Cr}+\mathrm{Mo}+\mathrm{V}}{5}+\frac{\mathrm{Ni}+\mathrm{Cu}}{15}
 $$
 
-with $\Phi$ and $\phi$ the standard normal cumulative distribution and density. The **upper confidence bound** $\mu+\kappa\sigma$ is a simpler alternative with an explicit exploration weight $\kappa$.
+in wt%. Rough guidance is that steels with $\mathrm{CE_{IIW}}<0.40$ seldom need preheat in ordinary thicknesses; 0.40–0.60 need preheat of the order of 50–200 °C depending on thickness, hydrogen level and heat input; above 0.60 preheat of 200 °C or more and often PWHT are required. For low-carbon (below about 0.12 % C) microalloyed and TMCP steels the formula overweights the alloying elements and the Ito–Bessyo parameter
 
-**Worked example — which experiment next?** A team optimizing the composition of a thermoelectric is maximizing a normalized figure of merit; the best measured so far is $f^*=0.80$. The GP proposes three candidates:
+$$
+P_{\mathrm{cm}}=\mathrm{C}+\frac{\mathrm{Si}}{30}+\frac{\mathrm{Mn}+\mathrm{Cu}+\mathrm{Cr}}{20}+\frac{\mathrm{Ni}}{60}+\frac{\mathrm{Mo}}{15}+\frac{\mathrm{V}}{10}+5\mathrm{B}
+$$
 
-| Candidate | $\mu$ | $\sigma$ | $z$ | EI |
+is preferred. The **Graville diagram** (Figure 47.4) plots carbon content against CE and divides steels into an easily weldable zone of low carbon, a zone of higher carbon but low hardenability where controlling cooling rate suffices, and a zone of high carbon and high hardenability where preheat, low hydrogen and often PWHT are all needed.
+
+> **Status of the principle: carbon equivalent**
+> *Empirical.* The coefficients are regression fits of HAZ hardness or cracking tests on steels of particular composition ranges. They rank steels within those ranges well and should not be extrapolated: CE$_{\mathrm{IIW}}$ suits C–Mn and low-alloy steels with more than about 0.12 % C, $P_{\mathrm{cm}}$ suits lower-carbon steels, and neither applies to stainless steels.
+
+**Worked example — Will this steel need preheat?** Compare a structural S355 plate (0.18 C, 1.40 Mn, 0.30 Si, 0.05 Cr, 0.02 Mo, 0.01 V, 0.05 Ni, 0.10 Cu) with a quenched-and-tempered AISI 4140 shaft steel (0.40 C, 0.85 Mn, 1.0 Cr, 0.20 Mo).
+
+$$
+\mathrm{CE_{S355}}=0.18+\frac{1.40}{6}+\frac{0.05+0.02+0.01}{5}+\frac{0.05+0.10}{15}=0.18+0.233+0.016+0.010=0.44
+$$
+
+$$
+\mathrm{CE_{4140}}=0.40+\frac{0.85}{6}+\frac{1.0+0.20}{5}=0.40+0.142+0.240=0.78
+$$
+
+A rough check on how hard a fully martensitic HAZ would be uses Yurioka's empirical fit $H_M\approx884\,\mathrm{C}\,(1-0.3\,\mathrm{C}^2)+294$ HV:
+
+$$
+H_{M}(0.18\,\mathrm{C})=884\times0.18\times(1-0.3\times0.0324)+294=452\ \mathrm{HV},\qquad H_{M}(0.40\,\mathrm{C})=631\ \mathrm{HV}
+$$
+
+The S355 lies in the middle band: at fast cooling its CGHAZ could exceed 350 HV, so for 25 mm plate a modest preheat (of order 75–125 °C, depending on hydrogen scale and heat input, as set by standards such as EN 1011-2 or AWS D1.1) with H5 consumables makes it safe — and the previous worked example showed what a 100 °C preheat does to $t_{8/5}$. The 4140, with a potential HAZ hardness above 600 HV and CE near 0.8, needs preheat around 250–350 °C, controlled interpass temperature, low-hydrogen practice and immediate PWHT; it is better not welded at all where it can be avoided. For comparison, a modern X70 pipeline steel with 0.08 C and 1.55 Mn plus small additions has $\mathrm{CE_{IIW}}\approx0.38$ and potential martensite hardness of about 365 HV, which is why such steels can be girth welded in the field with little or no preheat.
+
+<!-- FIGURE 47.4 | figures/ch47/fig-47-4-graville-diagram.png | map | Graville weldability diagram: carbon content versus carbon equivalent, showing zones of hydrogen-cracking susceptibility, with representative steels plotted. | Content: x-axis CE_IIW 0.2–0.9; y-axis carbon 0–0.5 wt%. Zone I (C < ~0.10 % across CE range up to ~0.6): 'easily weldable, low risk'. Zone II (C > 0.10 %, CE < ~0.45, boundary line sloping): 'control cooling rate / heat input'. Zone III (high C and high CE): 'preheat, low hydrogen, PWHT required'. Points: X70 TMCP pipeline steel (0.38, 0.08), S355 (0.44, 0.18), S690 Q&T (0.55, 0.16), AISI 4140 (0.78, 0.40), 1045 (0.6, 0.45). Labels next to each. -->
+
+![Figure 47.4 — Graville weldability diagram: carbon content versus carbon equivalent, showing zones of hydrogen-cracking susceptibility, with representative steels plotted](../figures/ch47/fig-47-4-graville-diagram.png)
+
+*Figure 47.4 — Graville weldability diagram: carbon content versus carbon equivalent, showing zones of hydrogen-cracking susceptibility, with representative steels plotted.*
+
+### Hot cracking
+
+**Solidification cracking** occurs in the fusion zone at the end of solidification, by the same mechanism as hot tearing in castings (Chapter 46): at high solid fraction, thin films of solute-rich liquid along columnar grain boundaries cannot sustain the contraction strain, and they separate. Centreline cracks, where grains meet head-on, are typical. Susceptibility rises with the **freezing range** and with impurities that form low-melting films — in steels, sulfur and phosphorus (FeS melts near 988 °C), which is why steel welding consumables keep S and P low and add manganese to tie sulfur up as high-melting MnS. Bead shape matters: deep narrow beads with depth-to-width ratios above about 1 concentrate segregation at the centre.
+
+In **aluminium alloys**, susceptibility versus solute content passes through a maximum at low solute contents (roughly 0.5–3 wt% of Si, Cu or Mg, depending on the system) and falls at higher contents where abundant eutectic liquid back-fills cracks. Alloys such as 6061 and 2024 are therefore welded with a high-solute filler — 4043 (Al–5Si) or 5356 (Al–5Mg) — that shifts the weld metal past the peak; autogenous welds crack. The 7xxx alloys are notoriously crack-prone. **Austenitic stainless steels** are protected by solidifying first as δ-ferrite: weld metal formulated to contain about 3–8 % ferrite (by the WRC-1992 or Schaeffler diagram, Chapter 15) dissolves S and P better and resists cracking, while fully austenitic weld metal is susceptible.
+
+**Liquation cracking** occurs in the partially melted zone when grain-boundary phases or segregates melt locally (constitutional liquation of carbides and sulfides in nickel alloys, eutectics in aluminium alloys) and are pulled apart by the contracting weld.
+
+### Other forms of weld cracking
+
+- **Lamellar tearing**: step-like cracks parallel to the plate surface below T- and corner joints, where weld shrinkage pulls the plate through its thickness and elongated MnS inclusions decohere. Prevented by clean steels with guaranteed through-thickness ductility (for example "Z25" grades, with at least 25 % reduction of area in a through-thickness tensile test) and by joint design.
+- **Reheat (stress-relief) cracking**: intergranular cracking in the CGHAZ of Cr–Mo–V and some nickel-alloy welds during PWHT, as carbides precipitate within grains and creep strain concentrates at boundaries.
+- **Sensitization** of stainless-steel HAZs to intergranular corrosion by chromium-carbide precipitation (Chapter 43), avoided with low-carbon "L" grades or stabilized grades.
+
+---
+
+## 47.6 Solid-state welding
+
+Solid-state processes avoid melting, so they avoid solidification cracking, porosity and the cast fusion zone, and they can join alloys that fusion welding cannot, including many dissimilar pairs. They work by bringing clean metal surfaces within atomic distances, which needs the oxide films to be broken up or dissolved and the surfaces brought into intimate contact.
+
+### Friction stir welding
+
+**Friction stir welding (FSW)**, invented at TWI in the UK in 1991, plunges a rotating non-consumable tool — a shoulder with a threaded or profiled pin — into the joint line between two clamped plates and traverses it along the joint. Friction under the shoulder and plastic work around the pin heat the metal to about 0.6–0.9$T_m$ (roughly 400–500 °C for aluminium alloys) without melting it. The softened metal is swept around the pin from the **advancing side** (where tool rotation and travel add) to the **retreating side** and consolidated behind it under the shoulder's forging pressure. Typical parameters for aluminium are 200–2000 rpm and 0.1–1 m/min.
+
+The joint has three zones (Figure 47.5): the **stir zone (nugget)**, where intense deformation at high temperature produces dynamically recrystallized equiaxed grains of 2–10 µm, often finer than the base metal; the **thermomechanically affected zone (TMAZ)**, deformed and heated but not recrystallized; and the **HAZ**, heated only. In precipitation-hardened aluminium the HAZ still over-ages, but the peak temperature and time are lower than in arc welding, so joint efficiencies (weld strength over base strength) of 70–90 % are typical for 6xxx and 7xxx alloys against 50–70 % for arc welds. The previously "unweldable" 2xxx and 7xxx alloys can be friction stir welded without cracking, and residual stress and distortion are low.
+
+FSW makes aluminium rail-car and ship-deck panels, launch-vehicle propellant tanks and electric-vehicle battery trays, and joins aluminium to copper or magnesium. Its limits are clamping forces of several tonnes, the tool's exit hole, simple joint paths and tool wear in steel and titanium (cubic boron nitride or W–Re tools). Typical defects are tunnel voids on the advancing side at low heat input and "kissing bonds" where the original oxide was not broken up.
+
+<!-- FIGURE 47.5 | figures/ch47/fig-47-5-friction-stir-zones.png | schematic | Friction stir welding: tool, material flow and the microstructural zones of the joint in a precipitation-hardened aluminium alloy, with the hardness profile. | Content: upper left: 3D sketch of rotating tool (shoulder 18 mm, threaded pin 6 mm) traversing a butt joint between two clamped 6 mm plates; arrows for rotation, travel, advancing side (AS) and retreating side (RS), onion-ring flow pattern behind tool. Upper right: transverse section with stir zone (fine recrystallized grains 2–10 µm), TMAZ (bent elongated grains), HAZ, base metal labelled on both sides. Lower: hardness profile across the weld for 6061-T6 (base ~105 HV, HAZ minimum ~65 HV about 10 mm from centre on each side, stir zone ~70–80 HV) compared with a dashed profile for a GMAW weld of the same alloy (HAZ minimum ~55 HV, wider softened region, fusion zone of 4043 filler ~55 HV). x-axis distance from weld centre −30 to +30 mm. -->
+
+![Figure 47.5 — Friction stir welding: tool, material flow and the microstructural zones of the joint in a precipitation-hardened aluminium alloy, with the hardness profile](../figures/ch47/fig-47-5-friction-stir-zones.png)
+
+*Figure 47.5 — Friction stir welding: tool, material flow and the microstructural zones of the joint in a precipitation-hardened aluminium alloy, with the hardness profile.*
+
+### Other friction and pressure processes
+
+- **Rotary and inertia friction welding** spins one part against another and then forges them together; used for drive shafts, valves, drill pipe and for joining dissimilar alloys in turbine rotor shafts. **Linear friction welding** oscillates a blade against a disc to make integrally bladed rotors (**blisks**) in titanium and nickel alloys.
+- **Ultrasonic welding** vibrates sheets at about 20–40 kHz under modest pressure, scrubbing off oxides; it bonds battery tabs, wire harnesses and foils of Al and Cu with little heating.
+- **Explosive welding** drives one plate obliquely into another at several hundred metres per second; a jet of surface material is ejected, and the clean surfaces bond with a characteristic wavy interface. It makes clad plate (stainless or titanium on steel) and **transition joints** for welding aluminium ship superstructures to steel decks.
+- **Roll bonding** bonds ductile metals by heavy deformation that fractures surface oxide (clad coinage, brazing sheet).
+
+### Diffusion bonding
+
+**Diffusion bonding** holds clean, smooth surfaces in contact at high temperature (about 0.5–0.8$T_m$) under a pressure too low to cause macroscopic deformation, for times of minutes to hours. Bonding proceeds as in sintering (Chapter 17): surface asperities deform plastically and creep, voids at the interface shrink by surface, boundary and volume diffusion, and finally the interface boundary migrates away from the original plane. Titanium alloys are ideal because their oxide dissolves into the metal at high temperature. Combined with **superplastic forming** (Chapter 13) at the same temperature — Ti–6Al–4V at about 900–930 °C, with bonding pressures of about 1–2 MPa for 1–2 hours — it makes hollow fan blades and stiffened aircraft structures from stacks of sheet in which stop-off compounds prevent bonding where cavities are wanted. **Transient-liquid-phase (TLP) bonding** places a thin interlayer containing a melting-point depressant (boron or silicon in nickel alloys) at the joint; it melts, then solidifies isothermally as the depressant diffuses away, leaving a joint whose remelting temperature is that of the base metal. It is used to repair and assemble nickel-base turbine components.
+
+---
+
+## 47.7 Brazing and soldering
+
+**Brazing** and **soldering** join parts with a filler metal whose liquidus is below the solidus of the parts. By convention the dividing line is 450 °C: below it the process is soldering, above it brazing. The parts do not melt, so their microstructure changes only through the thermal cycle, and dissimilar materials — steel to carbide, copper to stainless steel, metals to ceramics — can be joined.
+
+### Wetting and capillary flow
+
+The filler must **wet** the surfaces (contact angle $\theta$ well below 90°, Young's equation, Chapter 45) and flow into the joint gap by capillarity. For two parallel plates separated by a gap $h$, the meniscus has radius $h/(2\cos\theta)$ and the capillary pressure drawing liquid into the gap is
+
+$$
+\Delta p=\frac{2\gamma_{LV}\cos\theta}{h}
+$$
+
+Oxide films prevent wetting, so the surfaces are cleaned and protected during heating by **fluxes** (borates and fluorides for silver brazing, fluoroaluminates for aluminium, rosin and organic acids for soldering) or by **controlled atmospheres** (hydrogen, which reduces many oxides; vacuum, which lets oxides dissociate or dissolve at high temperature).
+
+**Worked example — How far can capillarity pull a braze?** A silver-base braze ($\gamma_{LV}\approx0.9$ J/m$^2$, density about 10 000 kg/m$^3$) wets a cleaned steel joint with $\theta=20°$. For a gap of 0.05 mm,
+
+$$
+\Delta p=\frac{2\times0.9\times\cos20°}{5\times10^{-5}}=3.4\times10^{4}\ \mathrm{Pa}
+$$
+
+equivalent to a column of liquid braze $\Delta p/(\rho g)=3.4\times10^4/(10^4\times9.81)=0.34$ m high. Capillarity can therefore fill a long joint vertically against gravity. With a 0.5 mm gap the pressure falls tenfold, and the braze rises only about 34 mm; it also no longer fills uniformly and leaves voids. This is why recommended clearances for silver brazes are about 0.025–0.125 mm: small enough for strong capillary flow, large enough for the liquid to enter and for flux and gases to escape. In a properly designed lap, the brazed joint can be stronger than the filler itself because the thin layer is constrained by stronger base metal on both sides, which raises its yield stress through triaxial constraint.
+
+### Filler metals and applications
+
+| Filler (AWS class or common name) | Composition | Melting range (°C) | Brazing / soldering temperature (°C) | Typical applications |
 |---|---|---|---|---|
-| A (near the current best) | 0.82 | 0.10 | 0.20 | 0.051 |
-| B (unexplored corner) | 0.70 | 0.25 | −0.40 | 0.058 |
-| C (between two tested points) | 0.79 | 0.02 | −0.50 | 0.004 |
+| Sn–37Pb (legacy solder) | Sn–Pb eutectic | 183 | 210–240 | Electronics before RoHS, repair |
+| SAC305 solder | Sn–3Ag–0.5Cu | 217–220 | 235–250 | Lead-free electronics |
+| Sn–58Bi solder | Sn–Bi eutectic | 138 | 160–180 | Low-temperature assembly |
+| BCuP (Cu–P, Cu–P–Ag) | Cu–6–7P (± Ag) | ≈ 645–800 | 700–815 | Copper plumbing and HVAC (self-fluxing on Cu) |
+| BAg (Ag–Cu–Zn–Sn) | 40–56 Ag | ≈ 620–780 | 650–800 | Steel, stainless, copper, carbide tool tips |
+| BAlSi-4 | Al–12Si | 577–582 | 590–605 | Aluminium automotive heat exchangers |
+| Copper | Cu | 1083 | 1100–1150 | Furnace brazing of steel parts in H₂ |
+| BNi-2 | Ni–7Cr–3Fe–4.5Si–3B | ≈ 970–1000 | 1010–1180 | Vacuum brazing of turbine and stainless parts |
+| Active braze (Ag–Cu–Ti) | Ag–27Cu–2Ti | ≈ 780–815 | 830–900 | Ceramic–metal joints (alumina, Si₃N₄, diamond) |
 
-For A, $\mathrm{EI}=0.02\,\Phi(0.2)+0.10\,\phi(0.2)=0.02\times0.579+0.10\times0.391=0.051$. For B, $\mathrm{EI}=-0.10\,\Phi(-0.4)+0.25\,\phi(-0.4)=-0.10\times0.345+0.25\times0.368=0.058$. For C, $\mathrm{EI}=-0.01\times0.309+0.02\times0.352=0.004$. Candidate B has the lowest predicted value but the highest expected improvement, because its large uncertainty leaves a real chance of a much better result. Candidate C, almost certain to be slightly worse than the best, is nearly worthless to test. Over many iterations this logic finds optima in tens of experiments where grid searches need hundreds; reported campaigns on alloy compositions, perovskite film processing and polymer formulations have typically needed three to ten times fewer experiments than one-factor-at-a-time or grid designs. The result depends on the surrogate's uncertainty being honest (Section 47.7).
+*Typical values; exact ranges depend on the specification.*
 
-> **Status of the principle: Bayesian optimization**
-> *Approximate.* A principled decision rule given the surrogate model; its efficiency depends on whether the GP kernel and noise model describe the real property landscape, and it degrades in high-dimensional spaces (more than about 10–20 variables) unless the representation is reduced.
+Several materials points stand out. **Copper–phosphorus** fillers self-flux copper but form brittle phosphides on steel and nickel. **Aluminium brazing** works in a narrow window between the filler's melting (577 °C) and the base solidus (about 630–650 °C for 3xxx); radiators and condensers use **brazing sheet**, a 3xxx core clad with Al–Si, furnace brazed with fluoroaluminate flux. **Nickel braze** fillers contain boron and silicon as melting-point depressants; boron diffuses rapidly into the base metal and can form brittle borides in wide gaps, so diffusion-brazing cycles hold long enough to dissolve them. **Active brazes** containing titanium react with ceramics to form a thin wettable layer (TiO, TiN or TiC), allowing metals to be brazed to oxides, nitrides and diamond without prior metallization.
 
-### Autonomous laboratories
-
-An **autonomous** or **self-driving laboratory** closes the loop physically: robots dispense precursors, synthesize (by solid-state reaction, spin coating, sputtering, electrodeposition or polymerization), characterize (X-ray diffraction, optical spectroscopy, conductivity, Chapter 42), and an algorithm analyses the data and chooses the next experiment without human intervention (Figure 47.4). Systems in operation include flow reactors for polymers and nanoparticles, combinatorial sputtering with automated diffraction for thin-film alloys, robot arms handling powders and furnaces for inorganic synthesis, and automated electrochemistry for corrosion and battery-electrolyte formulations.
-
-<!-- FIGURE 47.4 | figures/ch47/fig-47-4-active-learning-loop.png | plot | Bayesian optimization in one dimension, and the closed loop of an autonomous laboratory. | Content: two panels. Left (plot): x-axis composition variable 0 to 1; y-axis property (normalized figure of merit) 0 to 1.2. Hidden true function (thin grey dashed) with a broad maximum ~1.0 near x = 0.78. Five measured points (black dots) at x = 0.05, 0.25, 0.40, 0.55, 0.62 with best value 0.80 at x = 0.55. GP mean (solid line) and ±2σ band (shaded), narrow near data and wide for x > 0.7. Lower strip: expected improvement curve with peak at x ≈ 0.80, arrow 'next experiment'. Horizontal dotted line at f* = 0.80. Right (schematic loop): four boxes in a cycle: 'Plan (acquisition function)' → 'Synthesize (robotic dispensing, furnace/sputter/flow reactor)' → 'Characterize (XRD, spectroscopy, conductivity)' → 'Analyse and update model (phase ID, GP refit)' → back to 'Plan'; a dashed side input 'prior knowledge: databases, DFT, literature-mined recipes' feeding 'Plan'; a dashed side output 'human review of claims'. -->
-
-The benefit is throughput and reproducibility: a robotic platform runs day and night, records every parameter, and logs failures as faithfully as successes, which gives the unbiased data that literature-trained models lack. The limitations are equally concrete. Each platform automates a narrow chemistry and set of processes; solids handling (grinding, pelletizing, sintering) is much harder to automate than liquids; and automated analysis of characterization data is a weak link. A widely publicized 2023 autonomous synthesis campaign reported that most of its several dozen target inorganic compounds had been made, and subsequent re-analysis of its diffraction data questioned many of the phase identifications. The episode is a reminder that automation accelerates mistakes as efficiently as discoveries: claims of new phases still need the standard of evidence of Chapter 42, including refinement of diffraction patterns and independent confirmation.
-
----
-
-## 47.6 Inverse design
-
-### Running the structure–property map backwards
-
-The rest of this book runs from structure to property: given a microstructure or crystal structure, predict the modulus, conductivity or toughness. Engineering usually needs the inverse: given the required properties, find a structure (and a process to make it) that delivers them. The forward map is many-to-one and the inverse is ill-posed: many structures may satisfy the specification, or none, and small changes in requirement can jump between unrelated solutions. Three approaches are in use.
-
-**Optimization in a parameterized space.** If the design space can be described by continuous variables (alloy composition, layer thicknesses of a coating, volume fraction and aspect ratio of a reinforcement, lattice-architecture parameters for an additively manufactured part), a surrogate model plus an optimizer (Bayesian optimization, genetic algorithms, gradient methods if the surrogate is differentiable) searches it directly. Topology optimization of structures and multilayer optical coating design are mature examples. Most alloy-design successes of data-driven methods are of this kind: compositions of high-entropy alloys with targeted phase stability and strength, low-expansion Invar-type alloys, and nickel superalloys balancing $\gamma'$ fraction, density and cost, often with CALPHAD (Chapter 46) providing physics-based features or constraints.
-
-**Generative models.** For discrete crystal structures, generative models learn the distribution of known stable materials and sample new ones from it. Variational autoencoders map structures to a continuous latent space in which one can move and decode; **diffusion models**, which learn to reverse a process that progressively adds noise to atomic positions, lattice and species, generate periodic structures directly and can be conditioned on target properties (band gap, magnetic density, bulk modulus, chemical system, symmetry). Generated candidates are relaxed with an MLIP, checked against the convex hull with DFT, and screened for novelty against databases. Reported success rates, the fraction of generated structures that are stable, unique and new after DFT, are of order tens of percent for recent models, much higher than random substitution, though still dominated by close relatives of known structural families.
-
-**Property-to-structure for microstructure and architecture.** At larger scales, inverse design specifies a microstructure or architecture: the lattice geometry of a 3D-printed bone scaffold with a target modulus near that of trabecular bone (Chapter 31), the fibre layup of a composite wing skin (Chapter 23), the pore structure of a catalyst support. Here the forward model is usually homogenization or finite elements, and the inverse step is classical optimization.
-
-### Why inverse design is harder than it sounds
-
-A target property is only part of a specification. The generated material must also be thermodynamically accessible, synthesizable with available precursors, stable in service (against oxidation, moisture, radiation), processable into the required form, and made of affordable, non-critical elements (Chapter 49). Most of these are not in the model's training data. In practice inverse design proposes, and the screening funnel, the experimental loop and the documentation stage of materials selection (Chapter 48) dispose.
-
-> **Status of the principle: generative inverse design**
-> *Approximate.* A sampling method whose outputs are hypotheses; their stability is checked by DFT within its errors and their existence by synthesis, and the generator cannot reliably propose chemistries far outside the distribution it was trained on.
+In all brazed and soldered joints, the filler reacts with the base metal to form **intermetallic compounds** at the interface — Cu$_6$Sn$_5$ and Cu$_3$Sn in tin solders on copper, Ni$_3$Sn$_4$ on nickel finishes. A thin continuous IMC layer is the bond; a thick one, grown during prolonged soldering or in service by diffusion with $x\propto\sqrt{Dt}$ (Chapter 8), is brittle and a common failure site. The detailed metallurgy of solder joints and electronic packaging is treated in Chapter 51.
 
 ---
 
-## 47.7 Uncertainty and the limits of data-driven discovery
+## 47.8 Adhesive bonding
 
-### Two kinds of uncertainty
+**Structural adhesive bonding** joins parts with a polymer layer typically 0.1–0.5 mm thick. It distributes load over an area instead of concentrating it at welds or holes, joins dissimilar and thin materials without heat damage, seals the joint and damps vibration. Aircraft have used bonded aluminium skins and honeycomb since the 1940s; modern car bodies contain 10–20 m or more of structural adhesive alongside spot welds and rivets; wind-turbine blades are two composite shells bonded along their edges and to internal shear webs; and composite repairs are bonded patches.
 
-Every prediction carries two kinds of uncertainty:
+### How adhesives stick
 
-- **Aleatoric** uncertainty is noise in the data themselves: scatter in measured fatigue lives (Chapter 14), sample-to-sample variation in thermal conductivity, numerical noise in DFT. It cannot be reduced by more data of the same kind, only by better measurements.
-- **Epistemic** uncertainty is the model's ignorance: lack of training data near the query, or a model form that cannot represent the true function. It shrinks with more relevant data.
+Adhesion arises from (1) **intermolecular forces** — van der Waals and acid–base interactions across an intimately wetted interface; (2) **chemical bonds**, for example between epoxy hydroxyl groups or silane coupling agents and surface oxides; and (3) **mechanical interlocking** into a porous or rough surface such as an anodic oxide. All three require the liquid adhesive to wet the surface, which requires the surface energy of the adherend to exceed the surface tension of the adhesive (Chapter 45). Metals with clean oxides have high surface energies and are easily wetted; low-energy polymers such as polyethylene and polypropylene (about 30 mJ/m$^2$) are not, and must be activated.
 
-Methods for estimating epistemic uncertainty include Gaussian-process variances, the spread of an **ensemble** of models trained on different data subsets or with different initializations, Monte Carlo dropout in neural networks, and distance-based measures (how far is the query from its nearest training neighbours in descriptor space?). None is perfect: ensembles can agree confidently while all being wrong, and GP variances depend on the kernel assumed. **Calibration** checks whether stated uncertainties are honest: of the predictions made with a stated 90 % interval, about 90 % of test values should fall inside. Many published models are overconfident far from their data.
+### Surface preparation
 
-**Conformal prediction** offers a distribution-free alternative for calibration: hold out a calibration set, compute the residuals, and use their quantiles to put intervals around new predictions, with guaranteed coverage on average, provided new queries come from the same distribution as the calibration data. That proviso is the whole difficulty.
+Most service failures of adhesive bonds are interfacial and trace back to surface preparation, which must remove oils, release agents and weak oxides and leave a surface stable in moisture.
 
-### Interpolation versus discovery
+- **Aluminium**: degreasing, etching and anodizing. Aerospace **phosphoric acid anodizing** grows a porous, whiskered oxide that the primer penetrates and that resists hydration to weak hydroxide in humid service — the failure that destroyed some early bonded structures. Automotive practice uses Ti–Zr conversion coatings.
+- **Steel**: degreasing and grit blasting, often with a silane primer; galvanized steel bonds to the zinc layer.
+- **Composites**: abrading or removing a peel ply to expose fresh resin.
+- **Polymers**: corona, flame or plasma treatment to oxidize the surface and raise its surface energy above about 40 mJ/m$^2$.
 
-The deepest limitation is structural. Discovery means finding materials unlike those already known, whereas statistical learning works best on materials like those in the training set. A model trained on known superconductors would not have predicted the cuprates in 1986 or MgB$_2$ in 2001; a model trained on oxide electrolytes would not propose sulfide argyrodites. Data-driven methods therefore excel at **interpolation and dense search** within known families (optimizing a composition, finding the best member of a structure type, mapping a processing window) and are weakest at the conceptual leaps that create new families. The **domain of applicability** of a model, the region of descriptor space where its errors have been measured, should accompany every prediction used for design, and a prediction outside it should be treated as a hypothesis.
+Joint durability is qualified by tests such as the **wedge test**, which drives a wedge into a bonded double-cantilever specimen exposed to hot, humid air and measures crack growth; a crack that runs along the interface rather than through the adhesive indicates poor preparation.
 
-### Biases in the data
+### Adhesive types
 
-- **Publication bias**: failed syntheses and non-functional compositions are rarely reported, so training data over-represent success.
-- **Anthropogenic bias**: research attention concentrates on fashionable chemistries; a few thousand compounds account for a large share of literature data.
-- **Method bias**: DFT databases inherit functional errors (band gaps, magnetic and strongly correlated systems, van der Waals layered structures, Chapter 45); experimental databases mix test methods.
-- **Condition bias**: computed properties are for perfect crystals at 0 K; engineering properties depend on defects, microstructure and temperature (Chapters 5, 13 and 14). No database of perfect crystals can predict fatigue strength, which is controlled by inclusions and surface finish.
+| Adhesive family | Cure | Typical lap-shear strength (MPa) | Service temperature (°C) | Typical use |
+|---|---|---|---|---|
+| Toughened epoxy (one-part, heat cured) | 120–180 °C | 25–40 | −55 to 120 (higher for some) | Aircraft structure, car bodies (crash-durable adhesives) |
+| Epoxy (two-part) | Room temperature or warm | 15–30 | −40 to 80 | Composite repair, wind-turbine blades, civil strengthening |
+| Structural acrylic (MMA) | Room temperature, fast | 15–25 | −40 to 100 | Marine, bus and truck panels |
+| Polyurethane | Moisture or two-part | 5–15 | −40 to 90 | Windscreens, sandwich panels |
+| Cyanoacrylate | Moisture, seconds | 10–20 | −40 to 80 | Small parts, medical |
+| Silicone | Moisture | 1–3 | −60 to 200 | Glazing, electronics |
+| Anaerobic | Absence of air, metal contact | 10–25 (in shear on threads) | −55 to 150 | Thread locking, retaining bearings |
 
-### Synthesizability and processing
+*Typical values; strength depends strongly on adherends, preparation, bondline thickness and test.*
 
-A material predicted to be stable, with excellent properties, may still be impossible to make with the required phase purity, grain size, density or form. Models trained on text-mined synthesis recipes can suggest precursors and temperatures, but synthesis outcomes depend on kinetics, nucleation and competing phases (Chapters 9 and 10) that are poorly represented in data. For engineering materials, processing defines the structure, and the structure defines most of the properties that matter in service. That is the main reason why informatics has so far had more impact on functional materials, where properties follow chemistry and crystal structure fairly directly, than on structural ones, where they follow microstructure.
+### Joint design: stresses in a lap joint
 
-### The engineer's checklist
+The single-lap shear test is the standard way to measure adhesive strength, but the stress in a lap joint is far from uniform. Because the adherends stretch under load, more at the loaded end of each, shear strain in the adhesive concentrates at the two ends of the overlap. Volkersen's **shear-lag analysis** of a lap joint between identical adherends of modulus $E$ and thickness $t$, with adhesive shear modulus $G_a$ and thickness $\eta_a$, gives a peak-to-average shear stress ratio
 
-Before a data-driven prediction is used to commit time or money:
+$$
+\frac{\tau_{\max}}{\tau_{\mathrm{avg}}}=\frac{\omega L}{2}\coth\!\left(\frac{\omega L}{2}\right),\qquad\omega^{2}=\frac{2G_a}{E\,t\,\eta_a}
+$$
 
-1. What data was the model trained on, and does the query lie within that distribution?
-2. How was the test error measured: random split or grouped by chemistry or family?
-3. Is the error small compared with the difference the decision depends on?
-4. Is an uncertainty reported, and has it been calibrated?
-5. Does the prediction violate known physics (negative elastic constants, a band gap above the ionization energy, a density above the close-packed limit)?
-6. Has the top candidate been confirmed by the next level of the hierarchy: DFT for an ML prediction, experiment for a DFT prediction?
+for overlap length $L$. When $\omega L$ is small the stress is uniform; when it is large, all the load is carried within a distance of about $1/\omega$ of each end and the middle of the overlap is nearly unloaded.
 
-> **Status of the principle: data-driven property prediction**
-> *Empirical.* Machine-learned models are fitted to observation (computed or measured); their reliability is established only by testing on held-out data from the same distribution, and does not transfer to new chemistries, structures or processing routes without new evidence.
+> **Status of the principle: Volkersen shear-lag model**
+> *Approximate.* It treats the adherends as bars in tension and the adhesive as a linear-elastic shear spring, neglecting bending and peel. It captures the end concentration of shear stress; the Goland–Reissner analysis adds the peel stresses caused by the eccentric load path, and adhesive plasticity redistributes stress before failure.
 
-### Where informatics fits in the discipline
+**Worked example — Does a longer overlap help?** Two 2 mm aluminium sheets ($E=70$ GPa), 25 mm wide, are bonded with a 0.2 mm epoxy layer of shear modulus 1.0 GPa. Then
 
-Informatics does not replace the physical understanding developed in the rest of this book; it depends on it. The descriptors that work best are the classical ones (size mismatch, electron concentration, electronegativity, the Larson–Miller parameter); the most reliable training data come from the physics-based methods of Chapters 45 and 46 or from careful characterization (Chapters 42–44); and the predictions must be filtered by thermodynamics, kinetics, processing and selection criteria that the models do not know. Used this way, as a fast and statistically honest layer on top of physical models and experiments, it shortens the path from requirement to material from decades to years, and in favourable cases to months.
+$$
+\omega=\sqrt{\frac{2\times1.0\times10^{9}}{70\times10^{9}\times0.002\times0.0002}}=267\ \mathrm{m^{-1}}
+$$
+
+so $1/\omega=3.7$ mm. With a 25 mm overlap, $\omega L/2=3.34$ and $\tau_{\max}/\tau_{\mathrm{avg}}=3.34\coth3.34=3.35$. If the adhesive is taken to behave elastically up to a shear stress of 30 MPa, the joint reaches that stress at the overlap ends at a load of
+
+$$
+F=\frac{30}{3.35}\times(25\times25)=5.6\ \mathrm{kN}
+$$
+
+although the average-stress estimate would suggest 18.8 kN. Doubling the overlap to 50 mm gives $\omega L/2=6.68$, a ratio of 6.68, and the elastic-limit load stays at 5.6 kN: the extra overlap carries almost nothing (Figure 47.6). Halving it to 12.5 mm gives 5.2 kN. In the elastic regime, the joint capacity is set by $\omega$, not by $L$, once $L$ exceeds a few times $1/\omega$. Real joints do better because toughened adhesives yield at the ends and spread the load, so strength rises with overlap until the plastic zones meet — which is why ductile, toughened adhesives are used in structures. The analysis also shows how to improve a joint: stiffer or thicker adherends (steel adherends of the same thickness give $\omega=154$ m$^{-1}$ and a ratio of 2.0), a more compliant or thicker adhesive layer, and **tapered** adherend ends, scarf joints or stepped laps that make the load transfer gradual.
+
+<!-- FIGURE 47.6 | figures/ch47/fig-47-6-lap-joint-shear-lag.png | plot | Adhesive shear-stress distribution along a single-lap joint from the Volkersen shear-lag model, for different overlap lengths, with joint configurations ranked by efficiency. | Content: main plot: x-axis normalized position along overlap x/L from −0.5 to +0.5; y-axis τ/τ_avg 0–7. Curves for Al adherends 2 mm, epoxy G = 1 GPa, 0.2 mm bondline: L = 12.5 mm (ωL/2 = 1.67, peak 1.79), L = 25 mm (peak 3.35), L = 50 mm (peak 6.68), showing U-shaped distributions increasingly concentrated at the ends. Horizontal dashed line at 1 'uniform (rigid adherends)'. Secondary panel: elastic-limit joint load (kN) versus overlap length 5–60 mm for τ_allow = 30 MPa: saturating near 5.6 kN; dashed line of average-stress estimate rising linearly. Bottom strip: sketches of single lap, tapered lap, double lap, stepped lap and scarf joint, arrows indicating increasing efficiency; small icons showing peel loading to avoid. -->
+
+![Figure 47.6 — Adhesive shear-stress distribution along a single-lap joint from the Volkersen shear-lag model, for different overlap lengths, with joint configurations ranked by efficiency](../figures/ch47/fig-47-6-lap-joint-shear-lag.png)
+
+*Figure 47.6 — Adhesive shear-stress distribution along a single-lap joint from the Volkersen shear-lag model, for different overlap lengths, with joint configurations ranked by efficiency.*
+
+### Design rules
+
+Adhesives are strong in shear and compression and weak in **peel** and **cleavage**, where load concentrates on a line at the bond edge. Good joints load the bondline in shear (lap, double-lap, strap, scarf), and resist peel with stiff adherends, adhesive fillets and supplementary rivets or spot welds. Adhesive properties fall as the polymer approaches its glass transition (Chapter 20), and adhesives creep, so allowables are set at the maximum service temperature after humidity aging. "Kissing bonds" — surfaces in contact without adhesion — are nearly invisible to inspection, which is why primary aircraft structure relies on tight process control of surface preparation and often on fail-safe fasteners.
+
+---
+
+## 47.9 Mechanical fastening and joining dissimilar materials
+
+### Bolts, rivets and clinching
+
+**Bolted joints** in structural steelwork are either bearing-type, where bolts carry shear by bearing on the hole walls, or **preloaded (slip-resistant)** joints, where high-strength bolts (grade 8.8 or 10.9, ASTM A325/A490 types) are tightened to about 70 % of their tensile strength so that the clamping force generates friction between the plates; the load then passes by friction and the bolts see little fluctuating stress, which is excellent for fatigue. Bolt tightening is controlled by torque, turn-of-nut or direct-tension indicators. High-strength bolts above roughly 1000 MPa tensile strength are susceptible to hydrogen embrittlement from galvanizing or corrosion (Chapter 43), which is why the strongest bolt grades are not hot-dip galvanized.
+
+**Rivets** remain the main fastener of aluminium aircraft, by the hundred thousand per fuselage. Each hole concentrates stress (factor about 3 for an open hole in tension), and fatigue cracks at rivet holes are the classic airframe failure; cold expansion of holes and interference-fit fasteners add compressive residual stress to delay them. **Self-piercing rivets**, **clinching** (an interlocking button pressed without any added part) and **flow-drill screws** join aluminium and mixed-material car bodies where spot welding is difficult. Fasteners allow disassembly and need no heat or surface preparation, but add mass, need stress-concentrating holes and create crevices for corrosion.
+
+### Joining dissimilar materials
+
+Lightweight structures increasingly mix steel, aluminium, magnesium, titanium and fibre composites, and every pair raises three materials problems:
+
+1. **Metallurgical incompatibility.** Fusion welding of aluminium to steel forms brittle Fe–Al intermetallics (Fe$_2$Al$_5$, FeAl$_3$) at the interface; once the layer exceeds roughly 10 µm, the joint is brittle. Titanium to steel forms brittle Fe–Ti phases. Solutions keep the interface cold and short-lived: solid-state processes (friction stir, friction, ultrasonic, explosive welding), brazing-like processes in which only aluminium melts and wets galvanized steel, or **transition joints** — explosion-welded aluminium–steel strips welded each to its own metal, as used to attach aluminium superstructures to steel ship hulls.
+2. **Galvanic corrosion.** In an electrolyte, the less noble member of a couple corrodes preferentially (Chapter 43). Aluminium against steel, magnesium against almost anything, and especially aluminium against **carbon-fibre composite** (carbon is strongly cathodic) are dangerous couples. Designs isolate them with sealants, coatings, insulating washers, a glass-fibre isolation ply between carbon composite and aluminium, or by using titanium fasteners and titanium fittings, which are compatible with carbon composites.
+3. **Thermal-expansion mismatch.** Aluminium expands by about $23\times10^{-6}$ K$^{-1}$, steel by about $12\times10^{-6}$ K$^{-1}$, and carbon-fibre laminates in-plane by almost nothing. A 1 m aluminium panel fixed to a steel frame and heated by 60 K, as in a car-body paint oven, wants to grow $(23-12)\times10^{-6}\times1000\times60=0.66$ mm more than the frame. If fasteners are rigid and the adhesive is cured at that temperature, the panel buckles or the joints are loaded on cooling; joining sequences, slotted holes and compliant adhesives absorb the difference.
+
+**Hybrid joints** cover each method's weakness: in aluminium car bodies adhesive carries shear and seals while self-piercing rivets resist peel and hold parts during cure; aircraft use bolted–bonded composite joints.
+
+---
+
+## 47.10 Choosing a joining method
+
+| Criterion | Fusion welding | Solid-state welding | Brazing / soldering | Adhesive bonding | Mechanical fastening |
+|---|---|---|---|---|---|
+| Joint strength vs base | Up to 100 % (steel); 50–70 % (age-hardened Al) | 70–100 % | Filler-limited, high in good laps | Shear-limited; poor in peel | Hole-limited; 50–80 % in sheet |
+| Heat effect on parts | Large: HAZ, residual stress, distortion | Moderate, no melting | Small to moderate (whole part heated in furnace brazing) | Little (cure temperature) | None |
+| Dissimilar materials | Limited | Good | Good, including ceramics | Excellent | Excellent |
+| Section thickness | Thin to very thick | Mostly moderate | Thin to moderate | Thin sheets | Any |
+| Inspection | Radiography, ultrasound | Ultrasound, limited | Ultrasound, leak test | Difficult (kissing bonds) | Visual, torque checks |
+| Disassembly | No | No | Possible by reheating | No | Yes |
+| Typical uses | Ships, bridges, pipelines, vessels | Al tanks, blisks, clad plate | Heat exchangers, tools, electronics | Aircraft panels, car bodies, blades | Aircraft, steelwork, maintenance joints |
+
+Where full-strength continuous metal is needed in thick weldable steel, fusion welding wins, and the materials task is to control heat input, hydrogen and composition. Where strength comes from cold work or precipitation, or alloys crack on freezing, solid-state or mechanical methods preserve it. Where heat must be kept out or dissimilar materials meet, brazing, adhesives and fasteners take over, and the task becomes surface preparation, joint geometry and corrosion protection. The joint is part of the material's processing history.
 
 ---
 
@@ -398,14 +463,17 @@ Informatics does not replace the physical understanding developed in the rest of
 
 | Open question | Where it is answered |
 |---|---|
-| How the DFT energies, band gaps and elastic constants in the databases are computed, and their systematic errors | Chapter 45 |
-| Classical potentials, molecular dynamics, kinetic Monte Carlo, phase-field and CALPHAD, which MLIPs and ML surrogates accelerate | Chapter 46 |
-| Common-tangent construction and phase diagrams behind the convex hull | Chapters 6 and 7 |
-| Why stability is not synthesizability: nucleation, growth and metastable phase formation | Chapters 9 and 10 |
-| Turning predicted properties into a ranked material choice with costs, shapes and processes | Chapter 48 |
-| Adding embodied carbon, criticality and recyclability as objectives and constraints in screening | Chapter 49 |
-| Characterization data that train and validate models, and automated analysis of diffraction and microscopy | Chapters 42–44 |
-| Statistical learning theory, Gaussian processes and Bayesian inference in full | The Mathematics Universe |
-| Quantum-mechanical foundations of the electronic structure that the models learn | Engineering Physics |
+| How do solidification modes, segregation and constitutional supercooling work in a weld pool? | Chapter 9 |
+| How do CCT diagrams and hardenability predict HAZ microstructure in steels? | Chapters 10 and 15 |
+| Why do welded details have low fatigue strength, and how is weld toughness tested? | Chapter 14 |
+| How are TMCP, stainless and Ni-base alloys designed for weldability? | Chapters 15–16 |
+| How do composite laminates behave in bolted and bonded joints? | Chapter 23 |
+| How do galvanic corrosion, hydrogen embrittlement and stress-corrosion cracking attack joints? | Chapter 43 |
+| How are failed welds and joints investigated? | Chapter 44 |
+| What are the thermodynamics of wetting, surface energy and adhesion? | Chapter 45 |
+| How does the melt-pool physics of welding carry over to additive manufacturing? | Chapter 48 |
+| How are residual stresses in welds measured by X-ray and neutron diffraction? | Chapter 53 |
+| How are welding thermal cycles and microstructures simulated? | Chapter 56 |
+| How do joining costs and disassembly affect material and design choices? | Chapters 58–59 |
 
-**Next:** Chapter 48 turns from finding materials to choosing among them, deriving the performance indices, charts, shape factors and cost models by which a design requirement becomes a ranked list of materials and processes.
+**Next:** Chapter 48 turns the welding heat source into a manufacturing method in its own right: additive manufacturing builds whole parts from millions of tiny weld tracks, layers of fused powder or cured resin, and inherits both the possibilities and the defects of welding.

@@ -13,7 +13,7 @@ The same physics operates in a silicon wafer where boron must penetrate exactly 
 |---|---|
 | Fick's first law, flux and permeability | Hydrogen permeation through pipeline steel, gas barriers in packaging, membranes |
 | Fick's second law and its solutions | Case depth in carburizing and nitriding, dopant profiles, homogenization time |
-| Atomic mechanisms | Why carbon moves a million times faster than iron in steel |
+| Atomic mechanisms | Why carbon moves $10^5$–$10^9$ times faster than iron in steel |
 | Random walk and Arrhenius law | Temperature sensitivity of every heat-treatment specification |
 | Kirkendall effect, Darken equations | Voids in solder joints and wire bonds, diffusion bonding, coatings |
 | Short-circuit paths | Low-temperature creep, interconnect electromigration, grain-boundary embrittlement |
@@ -107,6 +107,10 @@ where $\mathrm{erf}(z)=\frac{2}{\sqrt\pi}\int_0^z e^{-u^2}du$. Carburizing, nitr
 
 <!-- FIGURE 8.1 | figures/ch08/fig-8-1-fick-solutions.png | plot | The two classic solutions of Fick's second law: a thin-film source spreading as a Gaussian and a constant-surface-concentration (error-function) profile, each at three times. | Content: two side-by-side panels sharing x-axis depth x in units of a reference length L = 2√(D t1), range 0–4. Left: thin-film Gaussian C/(Q/√(πDt1)) for t = t1, 4t1, 16t1 (amplitude halves each step, width doubles), shaded areas equal and labelled "constant dose Q". Right: erfc profiles (C−C0)/(Cs−C0) for t = t1, 4t1, 16t1, with horizontal dashed line at 0.25 showing the depth of a given concentration doubling for each fourfold increase of time; label "x ∝ √(Dt)". -->
 
+![Figure 8.1 — The two classic solutions of Fick's second law: a thin-film source spreading as a Gaussian and a constant-surface-concentration (error-function) profile, each at three times](../figures/ch08/fig-8-1-fick-solutions.png)
+
+*Figure 8.1 — The two classic solutions of Fick's second law: a thin-film source spreading as a Gaussian and a constant-surface-concentration (error-function) profile, each at three times.*
+
 ### Separation of variables: finite bodies and homogenization
 
 For finite geometries the solution is a sum of decaying spatial modes. Consider a cored casting in which the solute concentration varies sinusoidally between dendrite centres and the interdendritic regions, with half-wavelength $l$ (half the dendrite arm spacing):
@@ -134,13 +138,17 @@ Atoms in a crystal vibrate about their sites at about $10^{13}$ Hz. Occasionally
 
 **Vacancy mechanism.** A substitutional atom (an iron atom in iron, a zinc atom in copper) can move only if a neighbouring lattice site is empty. It exchanges places with the vacancy, and the vacancy moves the opposite way. The atom's jump rate is therefore the product of the probability that a neighbour site is vacant (the equilibrium vacancy fraction of Chapter 6, $x_v=\exp(S_f/k)\exp(-H_f/kT)$, typically $10^{-4}$ near the melting point of a metal) and the rate at which a vacancy jumps once present. The activation energy for diffusion is the sum of vacancy formation and migration enthalpies, $Q=H_f+H_m$; in copper, for example, $H_f\approx1.3$ eV and $H_m\approx0.7$ eV give $Q\approx2.0$ eV (about 190 kJ/mol), close to the measured 2.1–2.2 eV for self-diffusion.
 
-**Interstitial mechanism.** Small atoms that sit in the interstices between host atoms (H, C, N, O, B in metals) jump from one interstice to the next. Neighbouring interstices are almost always empty, so no defect needs to be formed and $Q=H_m$ only. This is why carbon diffuses in iron roughly a million times faster than iron itself at 500–1000 °C, and why hydrogen diffuses in ferritic steel at room temperature about as fast as solutes diffuse in a liquid.
+**Interstitial mechanism.** Small atoms that sit in the interstices between host atoms (H, C, N, O, B in metals) jump from one interstice to the next. Neighbouring interstices are almost always empty, so no defect needs to be formed and $Q=H_m$ only. This is why carbon diffuses in iron about $10^5$ to $10^9$ times faster than iron itself at 500–1000 °C (the ratio depends on temperature and phase), and why hydrogen diffuses in ferritic steel at room temperature about as fast as solutes diffuse in a liquid.
 
-**Interstitialcy mechanism.** A self-interstitial (an extra host atom squeezed into an interstice, usually as a dumbbell sharing a site) pushes a neighbouring lattice atom into an interstitial position and takes its place. In metals self-interstitials are too costly to form in equilibrium, but they are created in large numbers by neutron irradiation in nuclear reactors and dominate radiation-enhanced diffusion (Chapter 33). In silicon, dopants such as boron and phosphorus diffuse largely through interstitialcy-type mechanisms, which is why oxidizing the surface (injecting self-interstitials) speeds up boron diffusion, a well-known process effect in chip manufacturing.
+**Interstitialcy mechanism.** A self-interstitial (an extra host atom squeezed into an interstice, usually as a dumbbell sharing a site) pushes a neighbouring lattice atom into an interstitial position and takes its place. In metals self-interstitials are too costly to form in equilibrium, but they are created in large numbers by neutron irradiation in nuclear reactors and dominate radiation-enhanced diffusion (Chapter 41). In silicon, dopants such as boron and phosphorus diffuse largely through interstitialcy-type mechanisms, which is why oxidizing the surface (injecting self-interstitials) speeds up boron diffusion, a well-known process effect in chip manufacturing.
 
 Figure 8.2 compares the three mechanisms. Other mechanisms occur in special cases: direct exchange or ring rotation (energetically costly, not observed in practice), and the **dissociative** or kick-out mechanisms of fast-diffusing metals such as Cu, Ni and Au in silicon, which switch between substitutional and interstitial sites and contaminate whole wafers in minutes.
 
 <!-- FIGURE 8.2 | figures/ch08/fig-8-2-diffusion-mechanisms.png | schematic | Atomic mechanisms of diffusion: vacancy exchange, interstitial jumping and the interstitialcy mechanism, each with its energy barrier. | Content: three panels on a square 2D lattice of grey host atoms. (a) Vacancy: an atom (blue) jumping into an adjacent empty site, arrow labelled "atom →", dashed arrow "vacancy ←"; caption Q = Hf + Hm. (b) Interstitial: small red atom moving between interstices, Q = Hm. (c) Interstitialcy: an extra host atom in an interstice pushing a lattice atom into the next interstice (two arrows). Bottom strip: potential energy versus reaction coordinate showing the saddle-point barrier Hm between equivalent sites, with jump distance λ marked. -->
+
+![Figure 8.2 — Atomic mechanisms of diffusion: vacancy exchange, interstitial jumping and the interstitialcy mechanism, each with its energy barrier](../figures/ch08/fig-8-2-diffusion-mechanisms.png)
+
+*Figure 8.2 — Atomic mechanisms of diffusion: vacancy exchange, interstitial jumping and the interstitialcy mechanism, each with its energy barrier.*
 
 ---
 
@@ -191,7 +199,7 @@ with pre-exponential factor $D_0$ (typically $10^{-6}$ to $10^{-4}$ m²/s) and a
 
 | Diffusing species in host | $D_0$ (m²/s) | $Q$ (kJ/mol) | $T$ | $D(T)$ (m²/s) |
 |---|---|---|---|---|
-| H in α-Fe (interstitial) | $7\times10^{-8}$ | 6 | 25 °C | $7\times10^{-9}$ |
+| H in α-Fe (interstitial) | $7\times10^{-8}$ | 6 | 25 °C | $6\times10^{-9}$ |
 | C in α-Fe (interstitial) | $1.1\times10^{-6}$ | 87 | 500 °C | $1.4\times10^{-12}$ |
 | C in γ-Fe (interstitial) | $2.3\times10^{-5}$ | 148 | 950 °C | $1.1\times10^{-11}$ |
 | Fe in α-Fe (vacancy) | $2.8\times10^{-4}$ | 251 | 500 °C | $3\times10^{-21}$ |
@@ -207,6 +215,10 @@ Values are typical literature values; measured parameters scatter by tens of per
 
 <!-- FIGURE 8.3 | figures/ch08/fig-8-3-arrhenius-plot.png | plot | Arrhenius plot of diffusion coefficients for interstitial and substitutional diffusion in metals and dopant diffusion in silicon. | Content: x-axis 1000/T (K⁻¹) from 0.6 to 3.5 with a top axis in °C; y-axis log10 D (m²/s) from −24 to −8. Straight lines from D0, Q in the table: H in α-Fe, C in α-Fe, C in γ-Fe (plotted 900–1400 °C), Fe in α-Fe (below 912 °C), Fe in γ-Fe (912–1394 °C), Cu in Cu, Al in Al, Cu in Al, B in Si and P in Si (800–1200 °C). Annotate slope = −Q/(2.303R). Shade the band D ≈ 1e−12 to 1e−13 at the melting point labelled "solid metals near Tm". -->
 
+![Figure 8.3 — Arrhenius plot of diffusion coefficients for interstitial and substitutional diffusion in metals and dopant diffusion in silicon](../figures/ch08/fig-8-3-arrhenius-plot.png)
+
+*Figure 8.3 — Arrhenius plot of diffusion coefficients for interstitial and substitutional diffusion in metals and dopant diffusion in silicon.*
+
 **Worked example — Jumps and distances for carbon in austenite.** At 1000 °C, $D$ for carbon in γ-iron is $2.3\times10^{-5}\exp[-148000/(8.314\times1273)]=1.95\times10^{-11}$ m²/s. Carbon jumps between octahedral sites of FCC iron separated by $\lambda=a/\sqrt2$, with $a\approx0.365$ nm at this temperature, so $\lambda=0.258$ nm.
 
 *Jump frequency.*
@@ -219,7 +231,7 @@ Each carbon atom jumps almost two billion times per second.
 
 *Distance in one second.* The root-mean-square displacement is $\sqrt{6Dt}=\sqrt{6\times1.95\times10^{-11}\times1}=1.1\times10^{-5}$ m, about 11 µm. The total path length travelled is $\Gamma t\lambda=1.8\times10^9\times2.58\times10^{-10}=0.45$ m.
 
-*Temperature sensitivity.* For carbon in ferrite, $D$ at 900 °C ($1.4\times10^{-10}$ m²/s) is about $5\times10^{11}$ times larger than at 20 °C ($2.9\times10^{-22}$ m²/s). At room temperature a carbon atom in ferrite moves about $\sqrt{6Dt}\approx0.2$ µm per year.
+*Temperature sensitivity.* For carbon in ferrite, $D$ at 900 °C ($1.4\times10^{-10}$ m²/s) is about $4\times10^{11}$ times larger than at 20 °C ($3.5\times10^{-22}$ m²/s). At room temperature a carbon atom in ferrite moves about $\sqrt{6Dt}\approx0.26$ µm per year.
 
 The atom travels half a metre to get 11 µm, which is what a random walk means. And the Arrhenius factor makes processes that take minutes at heat-treatment temperatures effectively frozen at room temperature; that is why a quenched or tempered microstructure is stable in service, while the same steel used above 400–500 °C in a power plant slowly changes over decades.
 
@@ -240,6 +252,10 @@ In a binary alloy with a composition gradient, each component has its own **intr
 In 1947 Smigelskas and Kirkendall wound molybdenum wires around a block of α-brass (Cu–30 wt% Zn), electroplated copper over it and annealed the couple at 785 °C. The inert Mo wires, marking the original interface, moved toward the brass: the brass side lost volume as zinc left faster than copper arrived. This **Kirkendall effect** (Figure 8.4) proved that diffusion in metals proceeds by a vacancy mechanism (a direct exchange mechanism would give equal fluxes), and overturned the then-common view.
 
 <!-- FIGURE 8.4 | figures/ch08/fig-8-4-kirkendall-effect.png | schematic | The Kirkendall effect in a Cu/Cu–Zn diffusion couple: unequal intrinsic fluxes shift inert markers and can leave voids on the fast-diffuser side. | Content: top panel: block diagram before annealing, copper on the left, α-brass (Cu–30Zn) on the right, row of Mo marker wires at the interface x = 0. Bottom panel after annealing at 785 °C: concentration profile of Zn (S-shaped), arrows J_Zn (long, to the left) and J_Cu (short, to the right), net vacancy flux J_v toward the brass; markers displaced to the right by Δx into the brass side; small voids drawn in the brass side near the markers, labelled "Kirkendall voids". -->
+
+![Figure 8.4 — The Kirkendall effect in a Cu/Cu–Zn diffusion couple: unequal intrinsic fluxes shift inert markers and can leave voids on the fast-diffuser side](../figures/ch08/fig-8-4-kirkendall-effect.png)
+
+*Figure 8.4 — The Kirkendall effect in a Cu/Cu–Zn diffusion couple: unequal intrinsic fluxes shift inert markers and can leave voids on the fast-diffuser side.*
 
 ### Darken's equations
 
@@ -269,9 +285,9 @@ $$
 When vacancies flowing toward the faster diffuser's side cannot all be absorbed by dislocations and boundaries, they condense into **Kirkendall voids**. Examples are common and costly:
 
 - **Wire bonds.** Gold wire bonded to aluminium pads forms Au–Al intermetallics; at 150–200 °C unequal diffusion leaves a line of voids that weakens and eventually opens the bond ("purple plague").
-- **Solder joints.** Between copper pads and tin-based solder, Cu₃Sn grows at the copper side, and Kirkendall voids in it, especially with impurities in electroplated copper, cause brittle interfacial fracture under drop impact (Materials Core book, packaging chapter).
-- **Coatings.** Aluminide coatings on nickel superalloys degrade by interdiffusion with the substrate; voids at the interface promote spallation (Chapter 33).
-- **Deliberate use.** Oxidizing or sulphidizing metal nanoparticles, where the metal diffuses outward faster than oxygen or sulphur diffuses inward, produces hollow nanoshells for catalysis and drug delivery (Chapter 30).
+- **Solder joints.** Between copper pads and tin-based solder, Cu₃Sn grows at the copper side, and Kirkendall voids in it, especially with impurities in electroplated copper, cause brittle interfacial fracture under drop impact (Chapter 51).
+- **Coatings.** Aluminide coatings on nickel superalloys degrade by interdiffusion with the substrate; voids at the interface promote spallation (Chapter 41).
+- **Deliberate use.** Oxidizing or sulphidizing metal nanoparticles, where the metal diffuses outward faster than oxygen or sulphur diffuses inward, produces hollow nanoshells for catalysis and drug delivery (Chapter 38).
 
 ---
 
@@ -285,7 +301,7 @@ $$
 D_{lattice}\ll D_{dislocation}<D_{gb}<D_{surface}
 $$
 
-Because the activation energies differ, the ratio between them grows rapidly as temperature falls. At high temperature the volume of the lattice dominates total transport, since fast paths are a tiny fraction of the cross-section; below roughly $0.5$–$0.6\,T_m$, fast paths carry most of the flux. That is why grain-boundary diffusion controls low-temperature sintering of powders, Coble creep of fine-grained materials, grain-boundary oxidation and embrittlement, the interdiffusion of thin-film stacks in microelectronics (Chapter 41), and electromigration in copper interconnects, where atoms move along interfaces with the cap layer (Materials Core book).
+Because the activation energies differ, the ratio between them grows rapidly as temperature falls. At high temperature the volume of the lattice dominates total transport, since fast paths are a tiny fraction of the cross-section; below roughly $0.5$–$0.6\,T_m$, fast paths carry most of the flux. That is why grain-boundary diffusion controls low-temperature sintering of powders, Coble creep of fine-grained materials, grain-boundary oxidation and embrittlement, the interdiffusion of thin-film stacks in microelectronics (Chapter 49), and electromigration in copper interconnects, where atoms move along interfaces with the cap layer (Chapter 50).
 
 ### Harrison's A, B and C regimes
 
@@ -296,6 +312,10 @@ When a tracer diffuses into a polycrystal from the surface, the shape of the pro
 - **Type C** ($\sqrt{D_lt}<\delta$): essentially no leakage; transport is confined to the boundaries, and $D_{gb}$ is measured directly. Low temperatures, requiring very sensitive detection.
 
 <!-- FIGURE 8.5 | figures/ch08/fig-8-5-harrison-regimes.png | schematic | Harrison's A, B and C regimes of grain-boundary diffusion in a polycrystal, with the corresponding penetration profiles. | Content: top row: three cross-sections of a polycrystal with vertical grain boundaries (spacing d, width δ) and the tracer source on top; diffusion fields shaded. A: overlapping fields forming a nearly flat front; B: deep thin wedges along boundaries with lateral leakage; C: penetration only inside boundaries. Bottom row: log(average concentration) versus depth (or depth^(6/5)) for each, A: single erfc-like curve; B: steep near-surface lattice part plus long linear tail labelled "slope → sδD_gb"; C: boundary-only tail. Criteria printed under each: √(D_l t) > d; δ < √(D_l t) < d; √(D_l t) < δ. -->
+
+![Figure 8.5 — Harrison's A, B and C regimes of grain-boundary diffusion in a polycrystal, with the corresponding penetration profiles](../figures/ch08/fig-8-5-harrison-regimes.png)
+
+*Figure 8.5 — Harrison's A, B and C regimes of grain-boundary diffusion in a polycrystal, with the corresponding penetration profiles.*
 
 **Worked example — Grain boundaries versus lattice in copper at 400 °C.** Take lattice self-diffusion in copper $D_l=7.8\times10^{-5}\exp(-211000/RT)$ and an illustrative boundary diffusivity $D_{gb}=1\times10^{-5}\exp(-105000/RT)$ m²/s (activation energy half the lattice value). At $T=673$ K,
 
@@ -346,7 +366,7 @@ $$
 
 The vacancies are almost as mobile as carbon in austenite at 1000 °C. Spread over all oxide ions ($n_O=5.7\times10^{28}$ m⁻³), the equivalent oxygen diffusivity is about $8\times10^{-12}$ m²/s.
 
-This is why an SOFC electrolyte must be thin (5–20 µm in anode-supported cells): its area-specific resistance is $h/\sigma$, so a 10 µm 8YSZ layer at 800 °C contributes $10^{-5}/3\approx3\times10^{-6}\ \Omega\,\mathrm{m^2}$ (0.03 Ω cm²), small next to the electrodes. Below 600 °C, the Arrhenius fall in $D$ makes YSZ too resistive, which drives the search for gadolinia-doped ceria and other electrolytes (Chapter 32). The same physics governs the oxide scales that protect high-temperature alloys: alumina and chromia grow slowly because ion diffusion through them is slow (Chapter 34), and lithium-ion battery electrodes are limited by Li diffusion over particle radii of micrometres (Chapter 32).
+This is why an SOFC electrolyte must be thin (5–20 µm in anode-supported cells): its area-specific resistance is $h/\sigma$, so a 10 µm 8YSZ layer at 800 °C contributes $10^{-5}/3\approx3\times10^{-6}\ \Omega\,\mathrm{m^2}$ (0.03 Ω cm²), small next to the electrodes. Below 600 °C, the Arrhenius fall in $D$ makes YSZ too resistive, which drives the search for gadolinia-doped ceria and other electrolytes (Chapter 40). The same physics governs the oxide scales that protect high-temperature alloys: alumina and chromia grow slowly because ion diffusion through them is slow (Chapter 42), and lithium-ion battery electrodes are limited by Li diffusion over particle radii of micrometres (Chapter 40).
 
 ---
 
@@ -377,7 +397,7 @@ $$
 
 With $D=1\times10^{-12}$ m²/s and $h=2$ mm, half saturation takes $t=\pi(0.5h/4)^2/D=2.0\times10^5$ s, about 2.3 days, and near-saturation takes several weeks ($h^2/D\approx46$ days is the characteristic time). Aerospace qualification of composite parts uses accelerated conditioning (70 °C, 85 % relative humidity) to reach saturation before testing hot–wet properties. The same equation governs moisture in IC mould compounds, which turns to steam during reflow soldering and cracks packages ("popcorning").
 
-**Case II diffusion.** When a solvent diffuses into a glassy polymer and plasticizes it, a sharp front moves at constant velocity rather than as $\sqrt t$; this non-Fickian behaviour causes solvent crazing of polycarbonate and PMMA and is used in controlled drug release from hydrogels (Chapter 31).
+**Case II diffusion.** When a solvent diffuses into a glassy polymer and plasticizes it, a sharp front moves at constant velocity rather than as $\sqrt t$; this non-Fickian behaviour causes solvent crazing of polycarbonate and PMMA and is used in controlled drug release from hydrogels (Chapter 39).
 
 ### Inorganic glasses
 
@@ -408,9 +428,9 @@ In 1949 Darken welded together two steels with nearly the same carbon content (a
 
 ### Engineering consequences
 
-- **Dissimilar welds.** In welds between low-alloy ferritic steel and austenitic stainless steel or nickel alloys in power plants, chromium in the stainless side lowers carbon activity. Carbon migrates across the fusion line during service at 500–600 °C, leaving a soft decarburized band in the ferritic steel and a hard carbide-rich band on the other side; creep cracks start there (Chapter 39).
+- **Dissimilar welds.** In welds between low-alloy ferritic steel and austenitic stainless steel or nickel alloys in power plants, chromium in the stainless side lowers carbon activity. Carbon migrates across the fusion line during service at 500–600 °C, leaving a soft decarburized band in the ferritic steel and a hard carbide-rich band on the other side; creep cracks start there (Chapter 47).
 - **Spinodal decomposition.** Inside a miscibility gap, where $\partial^2G/\partial X^2<0$, the effective interdiffusion coefficient is negative: small composition fluctuations grow instead of decaying. This is how Fe–Cr stainless steels embrittle at 475 °C and how Alnico magnets and some glass-ceramics form their fine two-phase structures (Chapter 10).
-- **Stress-driven diffusion.** A gradient of hydrostatic stress changes chemical potential: hydrogen accumulates in the tensile region ahead of a crack tip in high-strength steel and causes hydrogen embrittlement (Chapter 36). Under an electric current, the "electron wind" adds a force that drives electromigration in interconnects.
+- **Stress-driven diffusion.** A gradient of hydrostatic stress changes chemical potential: hydrogen accumulates in the tensile region ahead of a crack tip in high-strength steel and causes hydrogen embrittlement (Chapter 44). Under an electric current, the "electron wind" adds a force that drives electromigration in interconnects.
 - **Thermal gradients (Soret effect)** drive species separation in nuclear fuel pellets and in solders under steep temperature gradients.
 
 ---
@@ -445,6 +465,10 @@ A 25 °C error removed 14 % of the case depth (Figure 8.6), the failure describe
 
 <!-- FIGURE 8.6 | figures/ch08/fig-8-6-carburizing-profiles.png | plot | Carbon profiles in a carburized 0.20 wt% C steel at 950 °C for several times, and the effect of a 25 °C temperature error on case depth. | Content: x-axis depth 0–2.5 mm, y-axis wt% C 0.1–1.1. erfc profiles with Cs = 1.0 wt% C, C0 = 0.20 wt% C, D = 1.10e−11 m²/s at 950 °C, for t = 2.4 h, 9.5 h and 20 h; horizontal dashed line at 0.40 wt% C labelled "case-depth criterion"; the 9.5 h curve crosses 0.40 at 1.0 mm (marked). Additional dotted curve for 9.5 h at 925 °C (D = 8.1e−12 m²/s) crossing 0.40 at ~0.86 mm, labelled "furnace 25 °C cold". -->
 
+![Figure 8.6 — Carbon profiles in a carburized 0.20 wt% C steel at 950 °C for several times, and the effect of a 25 °C temperature error on case depth](../figures/ch08/fig-8-6-carburizing-profiles.png)
+
+*Figure 8.6 — Carbon profiles in a carburized 0.20 wt% C steel at 950 °C for several times, and the effect of a 25 °C temperature error on case depth.*
+
 ### Doping semiconductors
 
 Before ion implantation became dominant, silicon devices were doped by diffusion in two steps: a **predeposition** at constant surface concentration (erfc profile), then a **drive-in** with the source removed (Gaussian profile). Today ions are implanted and then annealed, and the anneal still redistributes the dopant by diffusion.
@@ -455,7 +479,7 @@ $$
 x_j=\sqrt{4Dt\ln\frac{C_{surface}}{C_B}}=1.3\ \mu\mathrm m
 $$
 
-Modern transistors need junctions only tens of nanometres deep, so thermal budgets ($\sum Dt$ over all hot steps) are minimized with millisecond flash and laser anneals that activate dopants while moving them only a few nanometres (Chapters 26 and 41; the Materials Core book treats device doping in more depth).
+Modern transistors need junctions only tens of nanometres deep, so thermal budgets ($\sum Dt$ over all hot steps) are minimized with millisecond flash and laser anneals that activate dopants while moving them only a few nanometres (Chapters 32 and 50).
 
 ### Homogenization
 
@@ -486,7 +510,7 @@ In practice industrial homogenization of aluminium alloys takes 4–24 h. The di
 | Dopant diffusion and gettering in Si wafers | B, P, As, Fe, Cu | 800–1100 °C |
 | Ion exchange in cover glass | K⁺/Na⁺ | 400–450 °C, hours |
 
-> **Boundary.** The statistical-mechanical basis of the Boltzmann factor and of transition-state theory belongs to the Engineering Physics and Advanced Chemistry books; this chapter uses their results. Diffusion of charge carriers (electrons and holes) in semiconductors follows the same mathematics and is treated in Chapter 26 and in the Materials Core book.
+> **Boundary.** The statistical-mechanical basis of the Boltzmann factor and of transition-state theory belongs to the Engineering Physics and Advanced Chemistry books; this chapter uses their results. Diffusion of charge carriers (electrons and holes) in semiconductors follows the same mathematics and is treated in Chapter 32.
 
 ---
 
@@ -500,9 +524,9 @@ In practice industrial homogenization of aluminium alloys takes 4–24 h. The di
 | How do precipitation, coarsening, spinodal decomposition and pearlite growth depend on diffusion? | Chapter 10 |
 | How does diffusion produce creep, and how are creep mechanisms mapped? | Chapter 14 |
 | How are carburizing, nitriding and heat treatments specified for steels? | Chapter 15 |
-| How do ionic conductors serve in fuel cells and batteries? | Chapter 32 |
-| How do oxide scales grow by diffusion, and how is hydrogen embrittlement controlled? | Chapters 34 and 36 |
-| How are diffusion profiles measured (SIMS, EPMA, tracer methods)? | Chapters 42 and 43 |
-| How are jump barriers computed from first principles and diffusion simulated atom by atom? | Chapters 45 and 46 |
+| How do ionic conductors serve in fuel cells and batteries? | Chapter 40 |
+| How do oxide scales grow by diffusion, and how is hydrogen embrittlement controlled? | Chapters 42 and 44 |
+| How are diffusion profiles measured (SIMS, EPMA, tracer methods)? | Chapters 52 and 53 |
+| How are jump barriers computed from first principles and diffusion simulated atom by atom? | Chapters 55 and 56 |
 
 **Next:** Chapter 9 combines the driving forces of Chapter 6 with the atomic mobility of this chapter to explain how new phases are born and grow, from the first nucleus in an undercooled melt to the grains of a casting.

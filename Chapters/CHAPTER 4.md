@@ -11,14 +11,14 @@ Elsewhere, an engineer specifying single-crystal nickel-superalloy turbine blade
 
 | Concept | Engineering destination |
 |---|---|
-| Reciprocal lattice, Brillouin zones | Electron bands (Ch 26), phonons and heat capacity (Ch 24), diffraction indexing |
-| Bragg's law, Laue condition, Ewald sphere | X-ray, electron and neutron diffraction (Ch 42–43), phase identification, texture (Ch 38) |
+| Reciprocal lattice, Brillouin zones | Electron bands (Ch 31), phonons and heat capacity (Ch 24), diffraction indexing |
+| Bragg's law, Laue condition, Ewald sphere | X-ray, electron and neutron diffraction (Ch 52–53), phase identification, texture (Ch 46) |
 | Structure factor, systematic absences | Identifying FCC, BCC and ordered phases; γ′ in superalloys; retained austenite in steels |
 | Intensity factors | Quantitative phase analysis, Rietveld refinement, temperature measurement from the Debye–Waller factor |
 | Peak broadening (Scherrer, Williamson–Hall) | Crystallite size of catalysts and nanopowders; dislocation density in cold-worked and milled metals |
 | Neumann's principle | Deciding which properties a crystal or a textured part can possibly show |
 | Rank-2 tensors | Thermal expansion of HCP metals and ceramics, anisotropic conduction in graphite, permittivity of sapphire substrates |
-| Rank-3 tensors | Piezoelectric sensors and actuators: quartz, PZT, AlN (Ch 25, 29) |
+| Rank-3 tensors | Piezoelectric sensors and actuators: quartz, PZT, AlN (Ch 27, 37) |
 | Rank-4 tensors | Anisotropic stiffness of single-crystal blades, silicon MEMS, textured sheet, composites and wood (Ch 11, 22) |
 
 **Roadmap.** The reciprocal lattice and Brillouin zones (4.1) → the diffraction condition in three equivalent forms (4.2) → which reflections appear: the structure factor (4.3) → how strong they are (4.4) → how wide they are (4.5) → symmetry and properties: Neumann's principle (4.6) → tensor properties of rank 2, 3 and 4 (4.7) → why cubic crystals conduct isotropically but deform anisotropically (4.8).
@@ -77,16 +77,20 @@ $$
 \mathbf k\cdot\hat{\mathbf G}=\tfrac12\lvert\mathbf G\rvert
 $$
 
-That is precisely the condition, derived in Section 4.2, for a wave of wavevector $\mathbf k$ to be Bragg-reflected by the planes $\mathbf G$. A wave travelling in the crystal with $\mathbf k$ on a zone face is reflected back on itself and forms a standing wave. For electrons this opens the energy gaps that separate metals, semiconductors and insulators (Chapter 26); for lattice vibrations it caps the phonon wavevector and fixes the Debye cut-off of the heat capacity (Chapter 24).
+That is precisely the condition, derived in Section 4.2, for a wave of wavevector $\mathbf k$ to be Bragg-reflected by the planes $\mathbf G$. A wave travelling in the crystal with $\mathbf k$ on a zone face is reflected back on itself and forms a standing wave. For electrons this opens the energy gaps that separate metals, semiconductors and insulators (Chapter 31); for lattice vibrations it caps the phonon wavevector and fixes the Debye cut-off of the heat capacity (Chapter 24).
 
 For FCC metals, whose reciprocal lattice is BCC, the first Brillouin zone is a **truncated octahedron**: eight hexagonal faces normal to $\langle111\rangle$ and six square faces normal to $\langle100\rangle$ (Figure 4.1). For BCC metals it is a rhombic dodecahedron with twelve faces normal to $\langle110\rangle$. High-symmetry points carry standard labels ($\Gamma$ at the centre, $X$ and $L$ at the square and hexagonal face centres) used in band and phonon diagrams.
 
 <!-- FIGURE 4.1 | figures/ch04/fig-4-1-fcc-reciprocal-brillouin.png | crystal | The FCC direct lattice, its BCC reciprocal lattice, and the first Brillouin zone (truncated octahedron) with high-symmetry points. | Content: three panels. (a) FCC conventional cube of edge a with the three primitive vectors a1 = (a/2)(0,1,1), a2 = (a/2)(1,0,1), a3 = (a/2)(1,1,0) drawn as arrows from the origin. (b) Reciprocal lattice drawn as a BCC cube of edge 4π/a, with b1 = (2π/a)(−1,1,1) etc. as arrows; points labelled with (hkl) indices of the conventional cubic reflections: 000, 111, 200, 220. (c) First Brillouin zone: truncated octahedron centred at Γ, eight hexagonal faces normal to ⟨111⟩ and six square faces normal to ⟨100⟩, points Γ, X (2π/a)(1,0,0), L (π/a)(1,1,1), K and W marked; dashed line Γ–X–W–L–Γ–K as used in band diagrams. -->
 
+![Figure 4.1 — The FCC direct lattice, its BCC reciprocal lattice, and the first Brillouin zone (truncated octahedron) with high-symmetry points](../figures/ch04/fig-4-1-fcc-reciprocal-brillouin.png)
+
+*Figure 4.1 — The FCC direct lattice, its BCC reciprocal lattice, and the first Brillouin zone (truncated octahedron) with high-symmetry points.*
+
 > **Status of the principle: Brillouin-zone construction**
 > *Fundamental.* It expresses the translational symmetry of the crystal in wavevector space (Bloch's theorem, treated in the Engineering Physics book); it holds for any wave in any perfectly periodic crystal and blurs, but does not vanish, in alloys and defected crystals.
 
-> **Boundary.** The quantum mechanics of electrons in a periodic potential, and the derivation of Bloch's theorem, belong to the Engineering Physics book. This chapter uses the reciprocal lattice as a geometric tool; Chapters 24 and 26 use it for phonons and electrons.
+> **Boundary.** The quantum mechanics of electrons in a periodic potential, and the derivation of Bloch's theorem, belong to the Engineering Physics book. This chapter uses the reciprocal lattice as a geometric tool; Chapters 24 and 31 use it for phonons and electrons.
 
 ---
 
@@ -110,9 +114,9 @@ Bragg's law has two immediate consequences. First, since $\sin\theta\le1$, only 
 | Probe | Typical wavelength | Scatters from | Penetration in metals | Typical engineering use |
 |---|---|---|---|---|
 | Laboratory X-rays (Cu K$\alpha$) | 0.154 nm | Electron density, $\propto Z$ | 1–50 µm | Phase identification, lattice parameters, residual stress, texture |
-| Synchrotron X-rays (high energy) | 0.01–0.1 nm | Electron density | mm to cm | Strain mapping inside components, in-situ processing (Ch 43) |
+| Synchrotron X-rays (high energy) | 0.01–0.1 nm | Electron density | mm to cm | Strain mapping inside components, in-situ processing (Ch 53) |
 | Thermal neutrons | 0.1–0.4 nm | Nuclei (and magnetic moments) | cm | Residual stress in welds and rails, hydrogen and lithium positions, magnetic order |
-| Electrons (200 kV TEM) | 2.5 pm | Electrostatic potential | 10–200 nm | Phases, orientation and defects in individual grains and precipitates (Ch 42) |
+| Electrons (200 kV TEM) | 2.5 pm | Electrostatic potential | 10–200 nm | Phases, orientation and defects in individual grains and precipitates (Ch 52) |
 
 ### The Laue condition
 
@@ -139,6 +143,10 @@ The construction explains how every diffraction experiment works.
 - **Electron diffraction.** At 200 kV, $k=2\pi/\lambda\approx2500$ nm$^{-1}$, eighty times $\lvert\mathbf G_{111}\rvert$ of copper. The sphere is almost flat, and the reciprocal-lattice points of a thin foil are stretched into rods along the foil normal, so a whole plane of points appears at once as a spot pattern.
 
 <!-- FIGURE 4.2 | figures/ch04/fig-4-2-ewald-sphere.png | schematic | The Ewald construction: diffraction occurs when a reciprocal-lattice point lies on the sphere of radius 2π/λ; X-ray and electron cases compared. | Content: panel (a) 2D square reciprocal lattice (spacing 2π/a, points labelled 000, 100, 010, 110, 200...); incident wavevector k drawn ending at 000; Ewald circle of radius 2π/λ with λ/a ≈ 0.43 (Cu Kα on Cu-like cell); one point (e.g. 1̄1 or 2̄0) lying on the circle; scattered vector k' from circle centre to that point; G = k' − k drawn; angle 2θ between k and k' marked; Bragg planes shown as the perpendicular bisector of G. Panel (b) same lattice with an electron Ewald sphere of radius ~80× the lattice spacing, appearing nearly flat; reciprocal-lattice points drawn as short vertical rods (thin-foil shape effect) intersecting the sphere over a whole row. Panel (c) powder case: concentric circles of radius |G| for 111, 200, 220 intersecting the Ewald circle, giving diffraction cones of half-angle 2θ. -->
+
+![Figure 4.2 — The Ewald construction: diffraction occurs when a reciprocal-lattice point lies on the sphere of radius 2π/λ; X-ray and electron cases compared](../figures/ch04/fig-4-2-ewald-sphere.png)
+
+*Figure 4.2 — The Ewald construction: diffraction occurs when a reciprocal-lattice point lies on the sphere of radius 2π/λ; X-ray and electron cases compared.*
 
 > **Status of the principle: kinematic (single-scattering) approximation**
 > *Approximate.* It assumes each photon, neutron or electron scatters once; it is excellent for X-rays and neutrons in powders and small crystals and fails for electrons in all but very thin foils and for large, perfect crystals, where multiple (dynamical) scattering redistributes intensity between beams.
@@ -281,9 +289,13 @@ Repeating for the next reflections and normalising to 111:
 | 311 | 0.1090 | 89.93 | 14.8 | 24 | 2.83 | 0.793 | 27 | 17 |
 | 222 | 0.1044 | 95.14 | 14.2 | 8 | 2.74 | 0.777 | 8 | 5 |
 
-The positions are exact; the intensities agree at low angles and are 20–50 % high at higher angles. The anomalous correction $f'\approx-2$ lowers the calculated 220 and 311 values to 22 and 24; surface roughness and residual texture account for the rest. No single factor dominates, so quantitative work (phase fractions, Rietveld refinement, Chapter 42) must model them all.
+The positions are exact; the intensities agree at low angles and are 20–50 % high at higher angles. The anomalous correction $f'\approx-2$ lowers the calculated 220 and 311 values to 22 and 24; surface roughness and residual texture account for the rest. No single factor dominates, so quantitative work (phase fractions, Rietveld refinement, Chapter 52) must model them all.
 
 <!-- FIGURE 4.3 | figures/ch04/fig-4-3-cu-fe-powder-patterns.png | plot | Calculated powder patterns of FCC copper and BCC α-iron with Cu Kα radiation: the different systematic absences make the two lattices instantly distinguishable. | Content: two stacked stick patterns sharing x-axis 2θ from 30° to 120°. Top (Cu, FCC, a = 0.3615 nm): sticks at 43.32 (111, height 100), 50.45 (200, 46), 74.12 (220, 24), 89.93 (311, 27), 95.14 (222, 8), 116.93 (400, ~5); labelled with hkl and N = 3, 4, 8, 11, 12, 16. Bottom (α-Fe, BCC, a = 0.2867 nm): sticks at 44.67 (110, 100), 65.02 (200, ~20), 82.33 (211, ~30), 98.94 (220, ~10), 116.4 (310, ~12); labelled with hkl and N = 2, 4, 6, 8, 10. Thin grey dashed sticks at the positions of forbidden reflections (Cu 100, 110; Fe 100, 111) labelled "absent: F = 0". Inset table of the f, p, Lp and Debye–Waller factors for Cu 111 from the worked example. -->
+
+![Figure 4.3 — Calculated powder patterns of FCC copper and BCC α-iron with Cu Kα radiation: the different systematic absences make the two lattices instantly distinguishable](../figures/ch04/fig-4-3-cu-fe-powder-patterns.png)
+
+*Figure 4.3 — Calculated powder patterns of FCC copper and BCC α-iron with Cu Kα radiation: the different systematic absences make the two lattices instantly distinguishable.*
 
 ---
 
@@ -295,7 +307,7 @@ An infinite, perfect crystal would give infinitely sharp peaks (apart from the n
 2. **Size broadening** from crystallites (coherently diffracting domains) that are too small for destructive interference to be complete just off the Bragg angle.
 3. **Strain broadening** from non-uniform elastic strain — different crystallites, or different parts of one crystallite, having slightly different $d$-spacings.
 
-A *uniform* strain does not broaden a peak; it shifts it. That is the basis of residual-stress measurement by the $\sin^2\psi$ method, in which the shift of a high-angle peak is measured as the sample is tilted (Chapter 42).
+A *uniform* strain does not broaden a peak; it shifts it. That is the basis of residual-stress measurement by the $\sin^2\psi$ method, in which the shift of a high-angle peak is measured as the sample is tilted (Chapter 52).
 
 ### The Scherrer equation
 
@@ -359,6 +371,10 @@ Had the 110 peak alone been put into the Scherrer equation, the answer would hav
 
 <!-- FIGURE 4.4 | figures/ch04/fig-4-4-williamson-hall.png | plot | Williamson–Hall plot for ball-milled α-iron: the intercept gives crystallite size, the slope microstrain. | Content: x-axis 4 sin θ from 0 to 3.6; y-axis β cos θ (rad) from 0 to 0.018. Five data points from the worked-example table (1.520, 0.01017), (2.150, 0.01193), (2.633, 0.01340), (3.040, 0.01464), (3.399, 0.01573), labelled 110, 200, 211, 220, 310. Least-squares line y = 0.00560 + 0.00297x extrapolated to x = 0, intercept marked "Kλ/D → D = 24.7 nm", slope labelled "ε = 0.30 %". Dashed horizontal line at y = 0.00560 labelled "size only (no strain)"; dashed line through origin with slope 0.0045 labelled "strain only" for contrast. Inset: schematic of a single peak broken into instrumental, size and strain widths. -->
 
+![Figure 4.4 — Williamson–Hall plot for ball-milled α-iron: the intercept gives crystallite size, the slope microstrain](../figures/ch04/fig-4-4-williamson-hall.png)
+
+*Figure 4.4 — Williamson–Hall plot for ball-milled α-iron: the intercept gives crystallite size, the slope microstrain.*
+
 In every case the number is a *coherent-domain* size: a grain divided into subgrains, or containing twins and stacking faults, diffracts as several smaller domains, so diffraction sizes are usually smaller than grain sizes measured by microscopy (Chapter 5).
 
 ---
@@ -384,7 +400,7 @@ Neumann's principle has three kinds of consequence, all used routinely.
 - **Properties that must be equal.** A threefold axis along $[111]$ in a cubic crystal permutes $x\to y\to z$, so any property must have equal components along the three cube axes.
 - **The number of independent constants.** For each crystal system, the principle fixes how many numbers must be measured to characterise a property completely (Sections 4.7–4.8).
 
-The principle applies to *any* object with a symmetry, not only single crystals. A random polycrystal is statistically isotropic, so it has no piezoelectric effect even if each grain is piezoelectric; a sintered PZT ceramic must be **poled** in a strong field, lowering its symmetry to $\infty m$, before it becomes a transducer. A rolled sheet has orthorhombic sample symmetry, which governs its stiffness and the earing of deep-drawn cans (Chapter 38); a unidirectional fibre composite is transversely isotropic (Chapter 22); wood is orthotropic (Chapter 18).
+The principle applies to *any* object with a symmetry, not only single crystals. A random polycrystal is statistically isotropic, so it has no piezoelectric effect even if each grain is piezoelectric; a sintered PZT ceramic must be **poled** in a strong field, lowering its symmetry to $\infty m$, before it becomes a transducer. A rolled sheet has orthorhombic sample symmetry, which governs its stiffness and the earing of deep-drawn cans (Chapter 46); a unidirectional fibre composite is transversely isotropic (Chapter 22); wood is orthotropic (Chapter 18).
 
 > **Boundary.** The mathematics of tensors and their transformation belongs to The Mathematics Universe; this chapter states what materials engineers need and applies it.
 
@@ -451,6 +467,10 @@ The heat flux, however, is not parallel to the gradient. Resolving the gradient 
 
 <!-- FIGURE 4.5 | figures/ch04/fig-4-5-quartz-conductivity-quadric.png | plot | Direction dependence of a rank-2 property: thermal conductivity of α-quartz in a plane containing the c axis, and the tilt of heat flux away from the temperature gradient. | Content: polar plot in the plane containing c (vertical). Curve k(θ) = 6.2 sin²θ + 10.4 cos²θ W m⁻¹ K⁻¹, ranging from 10.4 along c to 6.2 perpendicular; mark k(45°) = 8.3. Representation-quadric ellipse (semi-axes 1/√k) drawn dashed in a second colour. Arrows at 45° from c: temperature gradient −∇T along the plate normal (45°) and heat flux q at 30.8° from c, angle between them 14.2° marked. Small inset: a circle labelled "cubic crystal (e.g. Cu): sphere, flux ∥ gradient". -->
 
+![Figure 4.5 — Direction dependence of a rank-2 property: thermal conductivity of α-quartz in a plane containing the c axis, and the tilt of heat flux away from the temperature gradient](../figures/ch04/fig-4-5-quartz-conductivity-quadric.png)
+
+*Figure 4.5 — Direction dependence of a rank-2 property: thermal conductivity of α-quartz in a plane containing the c axis, and the tilt of heat flux away from the temperature gradient.*
+
 Thermal expansion can even be negative along some directions: cordierite (Mg$_2$Al$_4$Si$_5$O$_{18}$) contracts along $c$ and expands across it. In extruded cordierite honeycombs for catalytic converters, aligned grains and microcracks between them bring the bulk expansion down to about $1\times10^{-6}$ K$^{-1}$, low enough to survive cold-start thermal shock. The volume coefficient is the trace, $\alpha_V=\alpha_1+\alpha_2+\alpha_3$; for quartz, $7.1+2\times13.2=33.5\times10^{-6}$ K$^{-1}$. Anisotropic expansion also stresses non-cubic polycrystals: neighbouring grains mismatch by $\Delta\alpha\,\Delta T$, and coarse-grained alumina and TiB$_2$ microcrack on cooling while fine-grained versions do not, because stored elastic energy scales with grain volume but crack energy with boundary area (Chapter 17).
 
 > **Status of the principle: representation of rank-2 properties by an ellipsoid**
@@ -478,9 +498,9 @@ Because $\sigma_{jk}$ is symmetric, the 27 components of $d_{ijk}$ reduce to 18,
 **Worked example — A quartz force sensor and a PZT actuator.** A quartz load washer in a machine-tool dynamometer is cut so that a compressive force along its $x_1$ axis produces charge on the faces normal to $x_1$ through $d_{11}$. Because the charge per area is $d_{11}\sigma$ and $\sigma=F/A$, the total charge is independent of area: $Q=d_{11}F$. For a cutting force of 100 N, $Q=2.3\times10^{-12}\times100=2.3\times10^{-10}$ C. Across the sensor's own capacitance of 10 pF this would give 23 V, but the charge leaks away through any finite resistance, which is why piezoelectric force sensors use charge amplifiers and measure dynamic rather than static loads. Run the converse effect in a soft PZT actuator with $d_{33}=400$ pC N$^{-1}$ under a field of 2 kV mm$^{-1}$: the strain is $400\times10^{-12}\times2\times10^{6}=8\times10^{-4}$, so a 10 mm multilayer stack extends by 8 µm. That stroke, delivered in microseconds against kilonewton forces, drives piezoelectric diesel injectors and the nanopositioners of scanning-probe microscopes.
 
 > **Status of the principle: linear piezoelectric equations**
-> *Approximate.* They are the leading term of the coupled electromechanical response; valid for quartz to very high stresses, but in ferroelectric ceramics such as PZT only at low fields, beyond which domain switching makes the response non-linear and hysteretic (Chapter 25).
+> *Approximate.* They are the leading term of the coupled electromechanical response; valid for quartz to very high stresses, but in ferroelectric ceramics such as PZT only at low fields, beyond which domain switching makes the response non-linear and hysteretic (Chapter 27).
 
-> **Boundary.** Ferroelectric domains, poling and the electrical side of piezoelectric devices are treated in Chapter 25 and, at EEE depth, in the separate *Materials Core (EEE)* book; actuators and sensors return in Chapter 29.
+> **Boundary.** Ferroelectric domains, poling and the electrical side of piezoelectric devices are treated in Chapter 27; actuators and sensors return in Chapter 37.
 
 ### Rank 4: elasticity
 
@@ -569,6 +589,10 @@ Values are typical room-temperature handbook constants. Tungsten is almost isotr
 
 <!-- FIGURE 4.6 | figures/ch04/fig-4-6-cubic-youngs-modulus.png | plot | Young's modulus versus direction in cubic crystals, in the (1-10) plane from [001] through [111] to [110]: cubic symmetry permits strong elastic anisotropy. | Content: x-axis angle from [001] in the (1-10) plane, 0° to 90°, with ticks labelled [001] (0°), [111] (54.7°), [110] (90°); y-axis E (GPa) 0–450. Curves computed from the formula with the table's constants: W (flat ~407–411), Al (64 → 76 → 73), Si (130 → 188 → 169), Fe (132 → 283 → 220), Ni (136 → 304 → 233), Cu (67 → 191 → 130). Dashed horizontal lines for polycrystal Hill averages: Cu 127, Fe ~210. Inset: 3D surface of E(n) for Cu showing lobes along ⟨111⟩ and dimples along ⟨100⟩, and a sphere for W. -->
 
+![Figure 4.6 — Young's modulus versus direction in cubic crystals, in the (1-10) plane from 001 through 111 to 110: cubic symmetry permits strong elastic anisotropy](../figures/ch04/fig-4-6-cubic-youngs-modulus.png)
+
+*Figure 4.6 — Young's modulus versus direction in cubic crystals, in the (1-10) plane from [001] through [111] to [110]: cubic symmetry permits strong elastic anisotropy.*
+
 **Worked example — Stiffness of a copper crystal and of copper polycrystal.** From the constants in the table, inverting the cubic stiffness matrix gives $S_{11}=0.01500$, $S_{12}=-0.00628$ and $S_{44}=1/C_{44}=0.01326\ \mathrm{GPa^{-1}}$. Then $S_{11}-S_{12}-\tfrac12S_{44}=0.01500+0.00628-0.00663=0.01465\ \mathrm{GPa^{-1}}$ and
 
 $$
@@ -580,11 +604,11 @@ A factor of 2.9 between the softest and stiffest directions. What does a randoml
 
 ### Where elastic anisotropy is engineered
 
-- **Single-crystal turbine blades.** For nickel, $E_{\langle001\rangle}=136$ GPa against $E_{\langle111\rangle}=304$ GPa. A blade grown with $\langle001\rangle$ along its axis (the natural growth direction of dendrites in directional solidification, Chapter 9) has the lowest available stiffness, so a given thermal strain $\alpha\Delta T$ produces the lowest thermal stress. Thermal-fatigue life improves several-fold over randomly oriented cast blades (Chapters 16 and 33).
+- **Single-crystal turbine blades.** For nickel, $E_{\langle001\rangle}=136$ GPa against $E_{\langle111\rangle}=304$ GPa. A blade grown with $\langle001\rangle$ along its axis (the natural growth direction of dendrites in directional solidification, Chapter 9) has the lowest available stiffness, so a given thermal strain $\alpha\Delta T$ produces the lowest thermal stress. Thermal-fatigue life improves several-fold over randomly oriented cast blades (Chapters 16 and 41).
 - **Silicon MEMS.** In a standard (100) wafer, beams along $\langle110\rangle$ have $E=169$ GPa and beams along $\langle100\rangle$ have 130 GPa. Resonant frequencies, which scale as $\sqrt E$, differ by 14 % between the two orientations; accelerometer and gyroscope designers must use the orientation-dependent modulus, not a handbook "isotropic" value.
-- **Textured sheet and films.** Steel sheet with a strong $\{111\}$ texture is stiffer and draws more deeply than random sheet; copper films with $\langle111\rangle$ fibre texture develop higher thermal stress on silicon than random films (Chapter 41).
+- **Textured sheet and films.** Steel sheet with a strong $\{111\}$ texture is stiffer and draws more deeply than random sheet; copper films with $\langle111\rangle$ fibre texture develop higher thermal stress on silicon than random films (Chapter 49).
 
-The same logic applies to every rank-4 property: photoelasticity, electrostriction and magnetostriction are also anisotropic in cubic crystals (Chapter 27). Plastic yielding, governed by slip systems and Schmid factors (Chapter 13), is direction-dependent too.
+The same logic applies to every rank-4 property: photoelasticity, electrostriction and magnetostriction are also anisotropic in cubic crystals (Chapter 28). Plastic yielding, governed by slip systems and Schmid factors (Chapter 13), is direction-dependent too.
 
 ---
 
@@ -594,12 +618,12 @@ The same logic applies to every rank-4 property: photoelasticity, electrostricti
 |---|---|
 | What are the vacancies, dislocations and grain boundaries that broaden peaks and limit coherent domain size? | Chapter 5 (defects); Chapter 12 (dislocations and their strain fields) |
 | How are elastic constants related to bonding, and how is anisotropic Hooke's law used in design? | Chapter 11 |
-| How do electron waves form bands at Brillouin-zone boundaries? | Chapter 26; foundations in the Engineering Physics book |
+| How do electron waves form bands at Brillouin-zone boundaries? | Chapter 31; foundations in the Engineering Physics book |
 | How do phonons on the Brillouin zone set heat capacity, expansion and thermal conductivity? | Chapter 24 |
 | How are orthotropic and transversely isotropic stiffness matrices handled for composite plies and wood? | Chapters 22 and 18 |
-| How do piezoelectric and ferroelectric materials work as devices? | Chapters 25 and 29 |
-| How is diffraction done in practice: Rietveld refinement, residual stress, texture, EBSD? | Chapter 42 |
-| What do synchrotron, neutron, PDF and 4D-STEM methods add? | Chapter 43 |
-| How do textures form during rolling, recrystallization and additive manufacturing? | Chapters 10, 38 and 40 |
+| How do piezoelectric and ferroelectric materials work as devices? | Chapters 27 and 37 |
+| How is diffraction done in practice: Rietveld refinement, residual stress, texture, EBSD? | Chapter 52 |
+| What do synchrotron, neutron, PDF and 4D-STEM methods add? | Chapter 53 |
+| How do textures form during rolling, recrystallization and additive manufacturing? | Chapters 10, 46 and 48 |
 
 **Next:** Chapter 5 turns from the ideal crystal to the real one — the point, line, planar and volume defects that diffraction detects and that control almost every property in this book.

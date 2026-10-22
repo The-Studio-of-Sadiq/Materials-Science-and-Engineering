@@ -63,6 +63,10 @@ where $m=\cos\phi\cos\lambda$ is the **Schmid factor** (Figure 13.1). Its maximu
 
 <!-- FIGURE 13.1 | figures/ch13/fig-13-1-schmid-geometry.png | schematic | Geometry of Schmid's law: a cylindrical single crystal under tension, with the slip-plane normal at angle phi and the slip direction at angle lambda to the tensile axis; inset of yield stress versus Schmid factor for magnesium basal slip. | Content: left panel — cylinder with axis vertical, force F at both ends, an inclined elliptical slip plane shaded, normal vector n at angle φ to axis, slip direction d in the plane at angle λ to axis, cross-section A0 and slip-plane area A0/cos φ labelled. Right panel — plot of tensile yield stress (MPa, 0–12) versus Schmid factor m (0–0.5) for Mg basal slip, curve σy = τc/m with τc = 0.5 MPa, data-like points scattered on the curve; mark m = 0.5 (σy = 1.0 MPa) and m = 0.087 (σy ≈ 5.8 MPa); dashed horizontal band at ~40–50 MPa labelled "prismatic/pyramidal slip takes over". -->
 
+![Figure 13.1 — Geometry of Schmid's law: a cylindrical single crystal under tension, with the slip-plane normal at angle phi and the slip direction at angle lambda to the tensile axis; inset of yield stress versus Schmid factor for magnesium basal slip](../figures/ch13/fig-13-1-schmid-geometry.png)
+
+*Figure 13.1 — Geometry of Schmid's law: a cylindrical single crystal under tension, with the slip-plane normal at angle phi and the slip direction at angle lambda to the tensile axis; inset of yield stress versus Schmid factor for magnesium basal slip.*
+
 ### Schmid's law
 
 Experiments on single crystals of zinc, cadmium, magnesium and copper in the 1920s and 1930s showed that the tensile yield stress varies by orders of magnitude with orientation, but the resolved shear stress on the active system at yield is almost constant. That constant is the **critical resolved shear stress** $\tau_c$ (CRSS). Yielding begins on the system with the largest Schmid factor when
@@ -102,7 +106,11 @@ If a single crystal is deformed and the results are plotted as resolved shear st
 
 <!-- FIGURE 13.2 | figures/ch13/fig-13-2-single-crystal-stages.png | plot | Resolved shear stress versus resolved shear strain for FCC single crystals: stages I (easy glide), II (linear hardening) and III (dynamic recovery), for copper in single-slip and multiple-slip orientations and for aluminium. | Content: x-axis resolved shear strain γ 0–0.8; y-axis resolved shear stress τ 0–100 MPa. Curve 1: Cu [123] orientation — yield ~0.6 MPa, stage I to γ ≈ 0.1 with slope ~G/3000 (≈ 16 MPa), stage II linear to τ ≈ 50 MPa with slope θII ≈ G/200 ≈ 240 MPa, then stage III with decreasing slope, reaching ~85 MPa at γ = 0.8. Curve 2: Cu [001] or [111] multiple-slip orientation — no stage I, stage II from the start. Curve 3: Al [123] — shorter stage II, stage III beginning at τ ≈ 10–15 MPa, flattening near 25 MPa (high stacking-fault energy). Label stages I, II, III on curve 1 and annotate slopes θI and θII. -->
 
-**Stage I — easy glide.** Only the primary system is active; dislocations glide long distances on parallel planes, interact little, and many leave at the surface. The hardening rate $\theta_I=d\tau/d\gamma$ is of order $10^{-4}G$. Stage I is longest for orientations such as $[123]$ deep inside the stereographic triangle and absent for $[001]$ and $[111]$, where several systems are equally stressed. As a crystal in single slip stretches, it rotates toward the slip direction until a second ("conjugate") system catches up.
+![Figure 13.2 — Resolved shear stress versus resolved shear strain for FCC single crystals: stages I (easy glide), II (linear hardening) and III (dynamic recovery), for copper in single-slip and multiple-slip orientations and for aluminium](../figures/ch13/fig-13-2-single-crystal-stages.png)
+
+*Figure 13.2 — Resolved shear stress versus resolved shear strain for FCC single crystals: stages I (easy glide), II (linear hardening) and III (dynamic recovery), for copper in single-slip and multiple-slip orientations and for aluminium.*
+
+**Stage I — easy glide.** Only the primary system is active; dislocations glide long distances on parallel planes, interact little, and many leave at the surface. The hardening rate $\theta_I=d\tau/d\gamma$ is of order $10^{-4}$–$3\times10^{-4}\,G$ (about 5–16 MPa for copper). Stage I is longest for orientations such as $[123]$ deep inside the stereographic triangle and absent for $[001]$ and $[111]$, where several systems are equally stressed. As a crystal in single slip stretches, it rotates toward the slip direction until a second ("conjugate") system catches up.
 
 **Stage II — linear hardening.** Once two or more slip systems operate, dislocations on intersecting planes react to form sessile junctions (Lomer–Cottrell locks in FCC, Section 12.5), forests thread every slip plane, and the mean free path of a gliding dislocation shrinks as the dislocation density rises. The hardening rate is high and remarkably constant, $\theta_{II}\approx G/200$ to $G/300$, nearly independent of temperature, metal and orientation. For copper ($G\approx48$ GPa) this is about 160–240 MPa per unit shear strain.
 
@@ -143,7 +151,7 @@ with the **Taylor factor** $M=3.06$ for FCC polycrystals with random texture and
 
 ### Texture and plastic anisotropy
 
-The Taylor factor depends on texture, so a rolled sheet whose grains share a few orientations yields and thins differently in different directions. The **Lankford coefficient** $r=\varepsilon_w/\varepsilon_t$ (width to thickness strain in a sheet tensile test) measures this: interstitial-free deep-drawing steels with a strong $\{111\}$ texture reach $r\approx1.8$–$2.5$ and draw deeply, while aluminium can stock has $r<1$ and forms "ears" around a drawn cup. Texture control returns in Chapters 38 and 46.
+The Taylor factor depends on texture, so a rolled sheet whose grains share a few orientations yields and thins differently in different directions. The **Lankford coefficient** $r=\varepsilon_w/\varepsilon_t$ (width to thickness strain in a sheet tensile test) measures this: interstitial-free deep-drawing steels with a strong $\{111\}$ texture reach $r\approx1.8$–$2.5$ and draw deeply, while aluminium can stock has $r<1$ and forms "ears" around a drawn cup. Texture control returns in Chapters 46 and 56.
 
 ---
 
@@ -187,6 +195,10 @@ The criterion has three equivalent interpretations: yield when the second invari
 In principal stress space, the von Mises criterion is a circular cylinder whose axis is the hydrostatic line $\sigma_1=\sigma_2=\sigma_3$; the Tresca criterion is a regular hexagonal prism inscribed in it. Cutting at $\sigma_3=0$ (plane stress, as in thin sheet and thin-walled tubes) gives an ellipse and an inscribed hexagon (Figure 13.3). The two agree in uniaxial tension and equibiaxial tension, and differ most in pure shear, by $2/\sqrt3=1.155$.
 
 <!-- FIGURE 13.3 | figures/ch13/fig-13-3-yield-surfaces.png | plot | Tresca hexagon and von Mises ellipse in the plane-stress section (sigma3 = 0), normalized by the uniaxial yield strength, with characteristic loading paths. | Content: axes σ1/σy and σ2/σy, both from −1.4 to 1.4, equal aspect. Von Mises ellipse σ1² − σ1σ2 + σ2² = σy² (solid), Tresca hexagon with vertices (1,0), (1,1), (0,1), (−1,0), (−1,−1), (0,−1) (dashed). Radial lines and labelled points: uniaxial tension (1,0); equibiaxial tension (1,1) labelled "balloon, sheet stretching"; pure shear σ1 = −σ2 at von Mises point (0.577, −0.577) and Tresca point (0.5, −0.5), label "torsion: 15 % difference"; thin-walled pressure vessel σθ = 2σz (point on ellipse at (1.155, 0.577) for von Mises). Inset arrow showing the hydrostatic axis perpendicular to the page in 3-D. -->
+
+![Figure 13.3 — Tresca hexagon and von Mises ellipse in the plane-stress section (sigma3 = 0), normalized by the uniaxial yield strength, with characteristic loading paths](../figures/ch13/fig-13-3-yield-surfaces.png)
+
+*Figure 13.3 — Tresca hexagon and von Mises ellipse in the plane-stress section (sigma3 = 0), normalized by the uniaxial yield strength, with characteristic loading paths.*
 
 **Worked example — A drive shaft in combined bending and torsion.** A solid steel shaft for a wind-turbine yaw drive carries, at its most stressed surface point, a bending stress $\sigma=150$ MPa and a torsional shear stress $\tau=100$ MPa. The steel is a quenched-and-tempered 42CrMo4 with $\sigma_y=350$ MPa at the elevated-temperature, large-section condition the designer uses. Is the shaft safe against yield, and by what factor?
 
@@ -351,7 +363,7 @@ $$
 discovered empirically by Hall (1951) and Petch (1953) for mild steel.
 
 > **Status of the principle: Hall–Petch relation**
-> *Empirical.* The $d^{-1/2}$ form follows from the pile-up model (and also from alternative models based on geometrically necessary dislocations or boundary sources), but $\sigma_0$ and $k_y$ are fitted; it holds from roughly 1 μm to a few hundred μm, weakens below about 100 nm as pile-ups contain too few dislocations to be continuous, and inverts below about 10–20 nm, where grain-boundary sliding dominates (Chapter 30).
+> *Empirical.* The $d^{-1/2}$ form follows from the pile-up model (and also from alternative models based on geometrically necessary dislocations or boundary sources), but $\sigma_0$ and $k_y$ are fitted; it holds from roughly 1 μm to a few hundred μm, weakens below about 100 nm as pile-ups contain too few dislocations to be continuous, and inverts below about 10–20 nm, where grain-boundary sliding dominates (Chapter 38).
 
 **Table 13.4 — Hall–Petch parameters (room temperature, typical).**
 
@@ -367,7 +379,11 @@ discovered empirically by Hall (1951) and Petch (1953) for mild steel.
 
 The striking contrast in $k_y$ between BCC iron (about 0.7) and FCC aluminium or copper (about 0.05–0.11) has a physical reason: in FCC metals slip is transmitted easily across boundaries by cross-slip and the many available slip systems, so the critical head stress $\tau^*$ is small; in BCC iron, interstitial atmospheres lock the sources in the next grain and $\tau^*$ is large. Grain refinement is therefore a modest strengthener for aluminium but a major one for steel and magnesium (Figure 13.4).
 
-<!-- FIGURE 13.4 | figures/ch13/fig-13-4-hall-petch.png | plot | Hall–Petch plots of yield strength versus inverse square root of grain size for low-carbon steel, alpha-titanium, AZ31 magnesium, copper and aluminium, with the nanocrystalline deviation indicated. | Content: x-axis d^(-1/2) in mm^(-1/2) from 0 to 25 (secondary top axis showing grain size 1 mm, 100 μm, 10 μm, 5 μm, 2 μm); y-axis yield strength 0–700 MPa. Straight lines: low-carbon steel σ0 = 70, ky = 0.74 MPa·m^1/2 (i.e. 23.4 MPa·mm^1/2); CP-Ti σ0 = 80, ky = 0.4; AZ31 σ0 = 80, ky = 0.25; Cu σ0 = 25, ky = 0.11; Al σ0 = 15, ky = 0.05. Mark worked-example points on the steel line: d = 30 μm (205 MPa) and 5 μm (401 MPa). Dashed extension at very small d (right edge) bending over, labelled "below ~100 nm: deviation; below ~15 nm: inverse Hall–Petch (Ch 30)". -->
+<!-- FIGURE 13.4 | figures/ch13/fig-13-4-hall-petch.png | plot | Hall–Petch plots of yield strength versus inverse square root of grain size for low-carbon steel, alpha-titanium, AZ31 magnesium, copper and aluminium, with the nanocrystalline deviation indicated. | Content: x-axis d^(-1/2) in mm^(-1/2) from 0 to 25 (secondary top axis showing grain size 1 mm, 100 μm, 10 μm, 5 μm, 2 μm); y-axis yield strength 0–700 MPa. Straight lines: low-carbon steel σ0 = 70, ky = 0.74 MPa·m^1/2 (i.e. 23.4 MPa·mm^1/2); CP-Ti σ0 = 80, ky = 0.4; AZ31 σ0 = 80, ky = 0.25; Cu σ0 = 25, ky = 0.11; Al σ0 = 15, ky = 0.05. Mark worked-example points on the steel line: d = 30 μm (205 MPa) and 5 μm (401 MPa). Dashed extension at very small d (right edge) bending over, labelled "below ~100 nm: deviation; below ~15 nm: inverse Hall–Petch (Ch 38)". -->
+
+![Figure 13.4 — Hall–Petch plots of yield strength versus inverse square root of grain size for low-carbon steel, alpha-titanium, AZ31 magnesium, copper and aluminium, with the nanocrystalline deviation indicated](../figures/ch13/fig-13-4-hall-petch.png)
+
+*Figure 13.4 — Hall–Petch plots of yield strength versus inverse square root of grain size for low-carbon steel, alpha-titanium, AZ31 magnesium, copper and aluminium, with the nanocrystalline deviation indicated.*
 
 **Worked example — Grain refinement of a structural steel.** A plate steel has $\sigma_0=70$ MPa and $k_y=0.74$ MPa m$^{1/2}$. Conventional hot rolling with air cooling gives a ferrite grain size of 30 μm; controlled rolling with Nb microalloying followed by accelerated cooling gives 5 μm (Chapter 15).
 
@@ -377,7 +393,7 @@ At $d=5$ μm: $k_yd^{-1/2}=0.74/\sqrt{5\times10^{-6}}=0.74/0.002236=331$ MPa, so
 
 Grain refinement alone nearly doubles the yield strength with no added alloy cost and no loss of weldability. It does something else no other mechanism does: it *lowers* the ductile–brittle transition temperature, because cleavage fracture stress rises with $d^{-1/2}$ faster than the yield strength does (Section 14.7). Refining a ship-plate steel from 30 to 5 μm can lower its Charpy transition by some 40–60 °C. This combination — stronger and tougher at once — is why controlled rolling became the backbone of pipeline, offshore-platform and shipbuilding steels from the 1970s onward.
 
-Hall–Petch-like behaviour also appears in fine-grained ceramics such as sub-micrometre alumina and WC tool grades, and nanocrystalline nickel and copper alloys reach 1–2 GPa before the trend reverses below about 10–20 nm (Chapter 30).
+Hall–Petch-like behaviour also appears in fine-grained ceramics such as sub-micrometre alumina and WC tool grades, and nanocrystalline nickel and copper alloys reach 1–2 GPa before the trend reverses below about 10–20 nm (Chapter 38).
 
 ---
 
@@ -428,6 +444,10 @@ Cutting stress rises with $r$; Orowan stress falls with $r$. At small sizes the 
 
 <!-- FIGURE 13.5 | figures/ch13/fig-13-5-cutting-orowan.png | plot | Precipitation strengthening versus particle radius at fixed volume fraction: rising cutting curve, falling Orowan curve, and the resulting peak strength, with insets of a dislocation shearing and bowing around particles. | Content: x-axis particle radius r 0–40 nm (linear); y-axis increment in polycrystal yield strength Δσ = M Δτ, 0–500 MPa, for an Al alloy with G = 26 GPa, b = 0.286 nm, M = 3.06, f = 0.03. Orowan curve from the Ashby–Orowan equation: passes through ~353 MPa at r = 5 nm, ~213 MPa at 10 nm, ~125 MPa at 20 nm. Cutting curve rising as C·sqrt(f r), scaled to cross the Orowan curve at r ≈ 7 nm and ~280 MPa. Bold envelope = minimum of the two, labelled "underaged (cutting)", "peak aged", "overaged (Orowan)". Top secondary axis: approximate ageing time at 175 °C (log, 0.1 h to 100 h). Insets: (a) dislocation passing through sheared coherent particles with offset ledges; (b) dislocation bowing between particles leaving Orowan loops. -->
 
+![Figure 13.5 — Precipitation strengthening versus particle radius at fixed volume fraction: rising cutting curve, falling Orowan curve, and the resulting peak strength, with insets of a dislocation shearing and bowing around particles](../figures/ch13/fig-13-5-cutting-orowan.png)
+
+*Figure 13.5 — Precipitation strengthening versus particle radius at fixed volume fraction: rising cutting curve, falling Orowan curve, and the resulting peak strength, with insets of a dislocation shearing and bowing around particles.*
+
 **Worked example — Orowan strengthening in an overaged aluminium alloy.** An Al–Cu–Mg alloy overaged at 220 °C contains semicoherent $\theta'$-type precipitates which we idealize as spheres of radius $r=10$ nm at volume fraction $f=0.03$. Take $G=26$ GPa, $b=0.286$ nm, $\nu=0.33$, $M=3.06$.
 
 Centre-to-centre spacing: $L=r\sqrt{2\pi/3f}=10\ \mathrm{nm}\times\sqrt{2\pi/0.09}=10\times8.355=83.6$ nm.
@@ -445,7 +465,7 @@ If overageing coarsens the particles to $r=20$ nm at the same $f$, all lengths d
 
 ### Engineering consequences
 
-Precipitate strengthening is the most powerful mechanism, with constraints. Peak-aged alloys soften if heated above their ageing temperature, so Al alloys are limited to about 150–200 °C and welded Al structures have a soft heat-affected zone. Cuttable particles promote planar slip — a cut particle is easier to cut again — which concentrates strain in slip bands and can lower fatigue resistance; non-shearable dispersoids homogenize slip. **Oxide-dispersion-strengthened** (ODS) alloys use 0.5–2 % of incoherent Y₂O₃ particles that neither dissolve nor coarsen, so their Orowan strengthening survives to 1000 °C or more in reactor steels (Chapter 33). Nickel superalloys use 40–70 % of ordered, coherent $\gamma'$ cut in pairs, which is why their yield strength *rises* with temperature up to about 700–800 °C (Chapter 16).
+Precipitate strengthening is the most powerful mechanism, with constraints. Peak-aged alloys soften if heated above their ageing temperature, so Al alloys are limited to about 150–200 °C and welded Al structures have a soft heat-affected zone. Cuttable particles promote planar slip — a cut particle is easier to cut again — which concentrates strain in slip bands and can lower fatigue resistance; non-shearable dispersoids homogenize slip. **Oxide-dispersion-strengthened** (ODS) alloys use 0.5–2 % of incoherent Y₂O₃ particles that neither dissolve nor coarsen, so their Orowan strengthening survives to 1000 °C or more in reactor steels (Chapter 41). Nickel superalloys use 40–70 % of ordered, coherent $\gamma'$ cut in pairs, which is why their yield strength *rises* with temperature up to about 700–800 °C (Chapter 16).
 
 ---
 
@@ -462,7 +482,7 @@ Twinning differs from slip in four engineering-relevant ways:
 3. **It is favoured by low temperature, high strain rate and low stacking-fault energy**: ferrite twins under impact or at cryogenic temperature (Neumann bands).
 4. **Twin boundaries block slip.** Twins that subdivide grains during straining shorten the dislocation mean free path — a "dynamic Hall–Petch effect" exploited in **twinning-induced plasticity** (TWIP) steels, Fe–(15–30)Mn–C with stacking-fault energy of 20–40 mJ/m², which reach tensile strengths near 1000 MPa with 50–60 % uniform elongation (Chapter 15). Nanotwinned copper reaches about 900 MPa yield while keeping its conductivity, because coherent twin boundaries scatter electrons very little.
 
-Closely related displacive shears produce martensite, and in shape-memory alloys the reversible motion of twin and variant boundaries gives the shape-memory and superelastic effects (Sections 10.6 and 29.2).
+Closely related displacive shears produce martensite, and in shape-memory alloys the reversible motion of twin and variant boundaries gives the shape-memory and superelastic effects (Sections 10.6 and 37.2).
 
 ### Superplasticity
 
@@ -515,9 +535,13 @@ More generally $\Delta\sigma^k=\sum\Delta\sigma_i^k$ with $1\le k\le2$.
 | Precipitation (Nb, V carbonitrides) | Orowan, few-nm particles, $f\approx0.001$ | 80 |
 | Dislocations | Taylor, $\rho\approx10^{14}$ m⁻² | 40 |
 
-Linear sum: $50+45+25+302+80+40=542$ MPa. Taking precipitates and dislocations in quadrature: $50+70+302+\sqrt{80^2+40^2}=50+70+302+89=511$ MPa. Measured X70 yield strengths lie around 485–560 MPa, so both estimates are in range. More than half the strength comes from grain size, the one mechanism that also raises toughness; the precipitates are there mainly to pin austenite grains during rolling (Chapter 15), and carbon is kept low for weldability (Chapter 39).
+Linear sum: $50+45+25+302+80+40=542$ MPa. Taking precipitates and dislocations in quadrature: $50+70+302+\sqrt{80^2+40^2}=50+70+302+89=511$ MPa. Measured X70 yield strengths lie around 485–560 MPa, so both estimates are in range. More than half the strength comes from grain size, the one mechanism that also raises toughness; the precipitates are there mainly to pin austenite grains during rolling (Chapter 15), and carbon is kept low for weldability (Chapter 47).
 
 <!-- FIGURE 13.6 | figures/ch13/fig-13-6-strength-contributions.png | plot | Stacked contributions to yield strength in four engineering alloys: annealed copper, cold-rolled copper, X70 HSLA pipeline steel and peak-aged 7075-T6 aluminium. | Content: horizontal stacked bars, x-axis yield strength 0–600 MPa. Annealed Cu (d = 30 μm): friction 15, Hall–Petch 20, dislocations 10 → ~45. Cold-rolled Cu (hard temper): friction 15, Hall–Petch 20, dislocations 250 → ~285. X70: friction 50, solid solution 70, grain size 302, precipitates 80, dislocations 40 → 542 (marker at 511 for quadrature sum and shaded band 485–560 "measured"). 7075-T6: friction 10, solid solution 30, grain/subgrain 20, precipitates ~420, dislocations ~20 → ~500 (band 460–505 measured). Distinct colours per mechanism, consistent legend. -->
+
+![Figure 13.6 — Stacked contributions to yield strength in four engineering alloys: annealed copper, cold-rolled copper, X70 HSLA pipeline steel and peak-aged 7075-T6 aluminium](../figures/ch13/fig-13-6-strength-contributions.png)
+
+*Figure 13.6 — Stacked contributions to yield strength in four engineering alloys: annealed copper, cold-rolled copper, X70 HSLA pipeline steel and peak-aged 7075-T6 aluminium.*
 
 ### Patterns across alloy families
 
@@ -556,9 +580,9 @@ Every mechanism that blocks dislocations also limits local plasticity, so streng
 | How are grain size, precipitates and transformation products controlled in steels by heat treatment and rolling? | Chapter 15 |
 | How are precipitation and solid-solution strengthening exploited in Al, Ti, Ni and Cu alloys? | Chapter 16 |
 | Why do polymers yield by shear banding and crazing instead of slip? | Chapter 21 |
-| What happens to Hall–Petch strengthening in nanocrystalline metals? | Chapter 30 |
-| How do texture and plastic anisotropy control sheet formability and forming limits? | Chapter 38 |
-| How is the strength of a weld heat-affected zone lost and recovered? | Chapter 39 |
-| How are dislocations and plastic slip simulated with discrete dislocation dynamics and crystal-plasticity FEM? | Chapter 46 |
+| What happens to Hall–Petch strengthening in nanocrystalline metals? | Chapter 38 |
+| How do texture and plastic anisotropy control sheet formability and forming limits? | Chapter 46 |
+| How is the strength of a weld heat-affected zone lost and recovered? | Chapter 47 |
+| How are dislocations and plastic slip simulated with discrete dislocation dynamics and crystal-plasticity FEM? | Chapter 56 |
 
 **Next:** Chapter 14 follows these mechanisms to high temperature, long times and sharp cracks — creep, viscoelasticity, fracture mechanics and fatigue — where strength alone stops being the right measure of a material.

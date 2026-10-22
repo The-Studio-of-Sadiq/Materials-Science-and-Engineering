@@ -49,6 +49,10 @@ Shear thinning lets thin-walled parts be filled at $10^4$ s⁻¹ with acceptable
 
 <!-- FIGURE 21.1 | figures/ch21/fig-21-1-flow-curves.png | plot | Shear viscosity versus shear rate for typical thermoplastic melts, with the processing windows of different operations. | Content: log–log axes, x shear rate 10^-1 to 10^5 s^-1, y viscosity 10 to 10^5 Pa·s. Cross-model curves: HDPE at 190 °C (η0 ≈ 2×10^4 Pa·s, n ≈ 0.4), PP at 230 °C (η0 ≈ 3×10^3 Pa·s, power-law part matching K = 8000 Pa·s^n, n = 0.35, i.e. η ≈ 145 Pa·s at 480 s^-1), PC at 300 °C (η0 ≈ 600 Pa·s, Newtonian to ~10^3 s^-1, n ≈ 0.7 above), PET at 280 °C (η0 ≈ 300 Pa·s). Shaded horizontal bands along x for compression moulding, extrusion, injection moulding. Dashed line showing slope n − 1. -->
 
+![Figure 21.1 — Shear viscosity versus shear rate for typical thermoplastic melts, with the processing windows of different operations](../figures/ch21/fig-21-1-flow-curves.png)
+
+*Figure 21.1 — Shear viscosity versus shear rate for typical thermoplastic melts, with the processing windows of different operations.*
+
 ### Entanglement
 
 In a melt, coils of different chains interpenetrate (Chapter 20). Above a critical length the chains cannot slide past one another freely: each is hemmed in by **entanglements**, topological constraints that act on short time scales like temporary crosslinks. Over times shorter than the disentanglement time, an entangled melt behaves like a rubber, with a **plateau modulus** given by the rubber-elasticity result of Chapter 20 with the entanglement molecular weight $M_e$ in place of $M_c$:
@@ -83,6 +87,10 @@ Below the critical molecular weight $M_c\approx2$–$3M_e$, chains are unentangl
 
 <!-- FIGURE 21.2 | figures/ch21/fig-21-2-viscosity-vs-m.png | plot | Zero-shear viscosity versus weight-average molar mass: Rouse regime below Mc and the 3.4-power law above it. | Content: log–log axes, x Mw from 10^3 to 10^6 g/mol, y η0 (relative, or Pa·s for polystyrene at 217 °C) from 10^-1 to 10^7. Slope-1 line below Mc ≈ 35,000 g/mol, slope-3.4 line above; data points for several narrow polystyrene standards scattered about the lines. Inset schematic: a chain (bold) confined in a tube formed by surrounding chains (dots in cross-section), with arrow "reptation along contour", labelled tube diameter ≈ 5–8 nm. Annotation: "doubling Mw → η0 × 10.6". -->
 
+![Figure 21.2 — Zero-shear viscosity versus weight-average molar mass: Rouse regime below Mc and the 3.4-power law above it](../figures/ch21/fig-21-2-viscosity-vs-m.png)
+
+*Figure 21.2 — Zero-shear viscosity versus weight-average molar mass: Rouse regime below Mc and the 3.4-power law above it.*
+
 **Worked example — molecular weight, grade and die pressure.** Because $\eta_0\propto M_w^{3.4}$, a 20 % increase in $M_w$ raises the zero-shear viscosity by $1.2^{3.4}=1.86$, and doubling $M_w$ raises it by $2^{3.4}=10.6$. This is why the **melt flow index** (MFI or MFR, grams extruded in 10 min through a standard die under a standard load, ISO 1133) is the everyday measure of grade: a PP of MFR 2 g/10 min is for pipes and sheet, one of 12 for general injection moulding, one of 50–100 for thin-wall packaging, and between them $M_w$ differs by roughly a factor of three. Now take a sheet die for PP at 230 °C, with a 1.0 m wide slit, 1.5 mm gap and 100 mm land length, running at 300 kg/h. With melt density 750 kg/m³ the flow rate is $Q=1.11\times10^{-4}$ m³/s. The apparent (Newtonian) wall shear rate in a slit is $6Q/(WH^2)=6\times1.11\times10^{-4}/(1.0\times(1.5\times10^{-3})^2)=296$ s⁻¹; the Rabinowitsch correction for a power-law fluid with $n=0.35$ multiplies this by $(2n+1)/(3n)=1.62$, giving $\dot\gamma_w=480$ s⁻¹. With $K=8{,}000$ Pa·sⁿ, the wall shear stress is $\tau_w=8000\times480^{0.35}=6.9\times10^4$ Pa, the viscosity is $145$ Pa·s, and the pressure drop over the land is $\Delta P=2L\tau_w/H=2\times0.10\times6.9\times10^4/1.5\times10^{-3}=9.3$ MPa (93 bar). Doubling the throughput would raise the pressure by only $2^{0.35}=1.27$, thanks to shear thinning; a Newtonian liquid would need twice the pressure.
 
 ### Melt elasticity: die swell, melt fracture and extensional flow
@@ -95,7 +103,7 @@ Chains oriented in the die recoil when the melt leaves it, so the extrudate swel
 
 ### Why polymers must be designed with time in mind
 
-Chapter 14 introduced the viscoelastic models and time–temperature superposition. Their practical consequence is that a polymer part has no single modulus: a polypropylene bracket may have an apparent modulus of 1.4 GPa after a minute, 0.9 GPa after a day and 0.6 GPa after a year at room temperature, and a part designed with the handbook modulus sags, loses clamping force or leaks.
+Chapter 14 introduced the viscoelastic models and time–temperature superposition. Their practical consequence is that a polymer part has no single modulus: a polypropylene bracket may have an apparent modulus of 1.4 GPa after a minute, 0.9 GPa after a day and about 0.45 GPa after a year at room temperature, and a part designed with the handbook modulus sags, loses clamping force or leaks.
 
 ### Creep modulus and isochronous curves
 
@@ -131,6 +139,10 @@ The most thoroughly codified viscoelastic design is that of plastic pressure pip
 **Worked example — pressure rating of a PE100 water main.** A PE100 pipe has MRS = 10 MPa. Water-supply codes apply an overall service coefficient $C=1.25$, giving a design stress $\sigma_s=10/1.25=8.0$ MPa. The hoop stress in a thin-walled pipe of mean diameter $D-e$ and wall $e$ under internal pressure $p$ is $\sigma=p(D-e)/(2e)$; written with the standard dimension ratio $\mathrm{SDR}=D/e$, $p=2\sigma_s/(\mathrm{SDR}-1)$. For SDR 11 (a 110 mm pipe with 10 mm wall), $p=2\times8.0/10=1.6$ MPa = 16 bar: the pipe is rated PN16. The same pipe in PE80 (MRS 8 MPa, $\sigma_s=6.4$ MPa) is rated PN12.5. For gas distribution, the coefficient is at least 2.0, so PE100 SDR 11 is limited to $2\times5.0/10=1.0$ MPa, or 10 bar.
 <!-- FIGURE 21.3 | figures/ch21/fig-21-3-pipe-regression.png | plot | Stress-regression curves for polyethylene pressure pipe: hoop stress versus time to failure at 20, 60 and 80 °C. | Content: log–log axes, x time to failure from 1 h to 10^6 h (with vertical line at 50 years = 4.38×10^5 h), y hoop stress from 2 to 20 MPa. PE100 at 20 °C: shallow ductile line from 13 MPa at 1 h to 10 MPa at 50 years (MRS marked). PE100 at 80 °C: ductile line from 6.5 MPa at 1 h falling to about 5 MPa at 10^4 h without a knee. Older unimodal PE at 80 °C: ductile line with a knee at about 1,000 h turning into a steeper brittle line (slope about −0.25). Annotation "ductile ballooning" and "slow crack growth (brittle)". -->
 
+![Figure 21.3 — Stress-regression curves for polyethylene pressure pipe: hoop stress versus time to failure at 20, 60 and 80 °C](../figures/ch21/fig-21-3-pipe-regression.png)
+
+*Figure 21.3 — Stress-regression curves for polyethylene pressure pipe: hoop stress versus time to failure at 20, 60 and 80 °C.*
+
 ---
 
 ## 21.3 Yielding, crazing and environmental stress cracking
@@ -159,6 +171,10 @@ Whether a glassy polymer crazes or shear-yields depends on its entanglement dens
 A craze absorbs energy as it forms. The trick in HIPS and ABS is to make many small crazes rather than one large one: rubber particles 0.5–5 µm across, grafted to the matrix (Chapter 19), concentrate stress at their equators and nucleate crazes, and also stop crazes from turning into cracks. In tougher matrices (PC/ABS, toughened nylon, toughened epoxy), rubber particles cavitate and relieve hydrostatic stress, which lets the matrix shear-yield. Impact strength increases five- to tenfold at the cost of some stiffness and transparency. The same principle, sometimes with core–shell particles or thermoplastic inclusions, toughens the epoxy matrices of aerospace composites (Chapter 23).
 
 <!-- FIGURE 21.4 | figures/ch21/fig-21-4-yield-craze.png | schematic | Polymer yielding and crazing: engineering stress–strain curves with necking and cold drawing, and the internal structure of a craze. | Content: left panel: engineering stress (0–80 MPa) vs strain (0–150 %) for polycarbonate at 23 °C (yield peak 62 MPa at 6 %, drop to 52 MPa, plateau during neck propagation to 100 %, hardening to fracture at 120 % and 65 MPa), polypropylene (yield 33 MPa at 10 %, long plateau), polystyrene (linear to 45 MPa, brittle at 2 %). Small specimen sketches showing neck formation and propagation. Right panel: craze cross-section: bulk polymer above and below, fibrils (diameter 5–30 nm, spacing 20–50 nm) bridging a gap 0.5–5 µm thick, voids between; craze tip with "meniscus instability" and labelled "craze → crack when fibrils break". -->
+
+![Figure 21.4 — Polymer yielding and crazing: engineering stress–strain curves with necking and cold drawing, and the internal structure of a craze](../figures/ch21/fig-21-4-yield-craze.png)
+
+*Figure 21.4 — Polymer yielding and crazing: engineering stress–strain curves with necking and cold drawing, and the internal structure of a craze.*
 
 ### Environmental stress cracking
 
@@ -215,7 +231,7 @@ Fibres are made by extruding polymer through a **spinneret** with many fine hole
 - **Melt spinning** (PET, nylon, PP): the melt is drawn down while cooling in air; at take-up speeds of 3,000–6,000 m/min PET filaments acquire substantial orientation, and further drawing below $T_m$ completes it.
 - **Wet and dry spinning** from solution (acrylic, viscose, spandex). Wet-spun polyacrylonitrile is the precursor of most carbon fibre (Chapter 22).
 - **Dry-jet wet spinning** of lyotropic liquid-crystalline solutions (Kevlar, Chapter 20) and **gel spinning** of UHMWPE, drawn to ratios above 30 (Dyneema, modulus 100–150 GPa).
-- **Electrospinning** in a strong electric field gives nanofibres 50–500 nm across for filters, battery separators and tissue scaffolds (Chapter 31).
+- **Electrospinning** in a strong electric field gives nanofibres 50–500 nm across for filters, battery separators and tissue scaffolds (Chapter 39).
 
 Orientation sets fibre properties: drawn PET fibre has a modulus of 10–20 GPa against 2–3 GPa for moulded PET.
 
@@ -224,6 +240,10 @@ Orientation sets fibre properties: drawn PET fibre has a modulus of 10–20 GPa 
 **Blown film** is the dominant process for polyethylene packaging film, agricultural film and bags. Melt is extruded through an annular die with a gap of 0.8–2.5 mm, inflated with internal air into a bubble, cooled by an air ring and pulled upward by nip rolls at a speed higher than the die exit speed. The **blow-up ratio** (BUR, bubble diameter over die diameter, typically 2–4) stretches the film in the transverse direction; the **draw-down ratio** stretches it in the machine direction. For a 1.2 mm die gap, a BUR of 2.5 and a final film thickness of 25 µm, the draw-down ratio is $1.2/(0.025\times2.5)=19$, so the film is stretched much more in the machine direction, and its tear strength is anisotropic unless the BUR is increased. The bubble is stabilized by the extensional strain hardening of LDPE (Section 21.1). Co-extrusion produces multilayer films combining PE for sealing, PA for toughness and EVOH for oxygen barrier; flat-die **biaxially oriented** films (BOPP, BOPET) serve where optical quality and dimensional stability matter, as in capacitor dielectrics and solar back sheets.
 
 <!-- FIGURE 21.5 | figures/ch21/fig-21-5-processing-routes.png | schematic | The main thermoplastic processing routes built around the single-screw extruder. | Content: centre: cross-section of a single-screw extruder (hopper, barrel heaters, screw with feed, compression and metering zones labelled with relative flight depths; L/D = 30), arrows from its outlet to five small sketches: (a) pipe die with vacuum calibrator and cooling bath; (b) injection unit with reciprocating screw and two-plate mould, with cycle bar "fill 1 s, pack 3 s, cool 4–17 s, eject 2 s"; (c) extrusion blow moulding: parison, mould closing, inflation; (d) blown film: annular die, bubble, air ring, nip rolls, labels BUR = 2.5, DDR = 19; (e) melt spinning: spinneret, quench air, godets, take-up at 3000 m/min. Side sketch (f) thermoforming of a sheet over a female mould with plug assist. -->
+
+![Figure 21.5 — The main thermoplastic processing routes built around the single-screw extruder](../figures/ch21/fig-21-5-processing-routes.png)
+
+*Figure 21.5 — The main thermoplastic processing routes built around the single-screw extruder.*
 
 ---
 
@@ -239,7 +259,7 @@ A commercial plastic is rarely a pure polymer. **Compounding** in twin-screw ext
 
 ### Fillers and reinforcements
 
-Inert fillers (calcium carbonate, talc, wood flour) lower cost, raise stiffness and reduce shrinkage; talc-filled PP is the standard car-interior material. Short glass fibres (10–50 %) raise stiffness and strength several-fold and reduce creep, at the cost of anisotropy and weld-line weakness (Chapter 22); glass-filled PA66 engine covers and connectors are the archetype. Carbon black and carbon nanotubes make antistatic and EMI-shielding grades, and exfoliated clays and graphene improve barrier at low loading if well dispersed (Chapter 30).
+Inert fillers (calcium carbonate, talc, wood flour) lower cost, raise stiffness and reduce shrinkage; talc-filled PP is the standard car-interior material. Short glass fibres (10–50 %) raise stiffness and strength several-fold and reduce creep, at the cost of anisotropy and weld-line weakness (Chapter 22); glass-filled PA66 engine covers and connectors are the archetype. Carbon black and carbon nanotubes make antistatic and EMI-shielding grades, and exfoliated clays and graphene improve barrier at low loading if well dispersed (Chapter 38).
 
 ### Stabilizers
 
@@ -290,15 +310,15 @@ Service life at elevated temperature is estimated by accelerated aging, assuming
 
 ### Photo-oxidation by ultraviolet light
 
-Sunlight reaching the ground contains UV down to about 295 nm, energetic enough to break C–C and C–H bonds when absorbed. Pure polyolefins absorb little, but carbonyl groups formed during processing, catalyst residues and hydroperoxides do, initiating auto-oxidation at the surface. Aromatic polymers (PC, PET, PS, aramids) absorb directly and yellow. The damage is concentrated in a surface layer tens to hundreds of micrometres thick, which embrittles and microcracks; the cracks then run into the interior under load. Chalking PVC window frames, yellowed polycarbonate headlamp lenses and crumbling polypropylene garden furniture are the familiar results. Accelerated xenon-arc tests (ISO 4892) correlate only roughly with outdoor exposure (Chapter 36).
+Sunlight reaching the ground contains UV down to about 295 nm, energetic enough to break C–C and C–H bonds when absorbed. Pure polyolefins absorb little, but carbonyl groups formed during processing, catalyst residues and hydroperoxides do, initiating auto-oxidation at the surface. Aromatic polymers (PC, PET, PS, aramids) absorb directly and yellow. The damage is concentrated in a surface layer tens to hundreds of micrometres thick, which embrittles and microcracks; the cracks then run into the interior under load. Chalking PVC window frames, yellowed polycarbonate headlamp lenses and crumbling polypropylene garden furniture are the familiar results. Accelerated xenon-arc tests (ISO 4892) correlate only roughly with outdoor exposure (Chapter 44).
 
 ### Hydrolytic degradation
 
-Condensation polymers — polyesters, polyamides, polycarbonates and polyurethanes — can be cut by water, the reverse of the step-growth reaction of Chapter 19. At room temperature hydrolysis is slow for most engineering grades, but it accelerates strongly with temperature and with acid or base catalysis. PET must be dried to below about 0.005–0.02 % moisture before melt processing; polyester-urethane seals and shoe soles crumble after years in humid climates; polycarbonate loses toughness in repeated steam sterilization. Hydrolysis is the designed degradation route of resorbable PLA, PGA and PLGA implants (Chapter 31): water penetrates the amorphous regions, ester bonds are cut, $M_n$ falls roughly exponentially with time and mass is lost only once fragments become small enough to dissolve, so strength disappears long before the device disappears.
+Condensation polymers — polyesters, polyamides, polycarbonates and polyurethanes — can be cut by water, the reverse of the step-growth reaction of Chapter 19. At room temperature hydrolysis is slow for most engineering grades, but it accelerates strongly with temperature and with acid or base catalysis. PET must be dried to below about 0.005–0.02 % moisture before melt processing; polyester-urethane seals and shoe soles crumble after years in humid climates; polycarbonate loses toughness in repeated steam sterilization. Hydrolysis is the designed degradation route of resorbable PLA, PGA and PLGA implants (Chapter 39): water penetrates the amorphous regions, ester bonds are cut, $M_n$ falls roughly exponentially with time and mass is lost only once fragments become small enough to dissolve, so strength disappears long before the device disappears.
 
 ### Other environmental attacks
 
-Ozone attacks the double bonds of diene rubbers (natural rubber, SBR, NBR), producing surface cracks perpendicular to the strain in stretched parts; antiozonants (para-phenylenediamines such as 6PPD) bloom to the surface and react with ozone first. Its transformation product 6PPD-quinone, washed from tyre wear particles into urban streams, was identified in 2020 as the cause of coho salmon die-offs. Ionizing radiation (gamma sterilization, nuclear environments, space) causes scission and crosslinking (Chapter 33); PTFE and PP are particularly sensitive, PEEK and polyimides resistant.
+Ozone attacks the double bonds of diene rubbers (natural rubber, SBR, NBR), producing surface cracks perpendicular to the strain in stretched parts; antiozonants (para-phenylenediamines such as 6PPD) bloom to the surface and react with ozone first. Its transformation product 6PPD-quinone, washed from tyre wear particles into urban streams, was identified in 2020 as the cause of coho salmon die-offs. Ionizing radiation (gamma sterilization, nuclear environments, space) causes scission and crosslinking (Chapter 41); PTFE and PP are particularly sensitive, PEEK and polyimides resistant.
 
 ---
 
@@ -319,6 +339,10 @@ Raw natural rubber, cis-1,4-polyisoprene from the latex of *Hevea brasiliensis*,
 Vulcanization is monitored with a moving-die rheometer (ISO 6502), which oscillates a die in a sample held at cure temperature and records the torque (Figure 21.6). The torque first falls to a minimum $M_L$ as the compound softens, stays low during the **scorch time** $t_{s2}$ (the processing safety window during which the compound can still be shaped), rises as crosslinks form and levels off at $M_H$. The optimum cure time $t_{90}$ is the time to reach 90 % of the torque rise. Some NR compounds show **reversion**, a fall in torque after the maximum, as polysulfidic crosslinks break and rearrange at high temperature; truck tyres cured too hot or too long revert in their thick sections. The difference $M_H-M_L$ is proportional to crosslink density.
 
 <!-- FIGURE 21.6 | figures/ch21/fig-21-6-cure-curve.png | plot | Moving-die rheometer cure curves for a sulfur-cured natural-rubber compound at 160 °C. | Content: x-axis time 0–30 min; y-axis torque 0–20 dN·m. Curve 1 (conventional sulfur system): minimum ML = 2 dN·m at 1 min, scorch time ts2 ≈ 2.5 min, steep rise, maximum MH = 16 dN·m at 12 min, then reversion decreasing to 13.5 dN·m at 30 min. Curve 2 (EV system): ts2 ≈ 3.5 min, plateau at MH = 14 dN·m with no reversion. Curve 3 (peroxide-cured EPDM, same axes): slower rise, marching to 15 dN·m at 30 min. Vertical dashed lines marking ts2 and t90 (≈ 7 min for curve 1). Labels "scorch safety", "cure", "reversion". -->
+
+![Figure 21.6 — Moving-die rheometer cure curves for a sulfur-cured natural-rubber compound at 160 °C](../figures/ch21/fig-21-6-cure-curve.png)
+
+*Figure 21.6 — Moving-die rheometer cure curves for a sulfur-cured natural-rubber compound at 160 °C.*
 
 ### Measuring crosslink density by swelling
 
@@ -358,7 +382,7 @@ Unfilled vulcanizates of non-crystallizing rubbers such as SBR have tensile stre
 
 ### The scale of the problem
 
-World plastics production exceeds 400 million tonnes per year; about 40 % is packaging with a service life of months. Historically under 10 % of plastic waste has been recycled. Materials science decides which end-of-life routes are technically possible; Chapter 49 weighs them.
+World plastics production exceeds 400 million tonnes per year; about 40 % is packaging with a service life of months. Historically under 10 % of plastic waste has been recycled. Materials science decides which end-of-life routes are technically possible; Chapter 59 weighs them.
 
 ### Mechanical recycling
 
@@ -366,7 +390,7 @@ World plastics production exceeds 400 million tonnes per year; about 40 % is pac
 
 1. **Sorting.** Polymers are identified by resin codes (1 PET, 2 HDPE, 3 PVC, 4 LDPE, 5 PP, 6 PS, 7 other) and sorted by near-infrared spectroscopy, which cannot see carbon-black-pigmented plastics. Because most polymer pairs are immiscible (Chapter 20), mixed streams give weak, brittle blends, and a few percent of PVC in PET releases HCl that degrades the whole batch.
 2. **Molecular-weight loss.** Each melt cycle causes chain scission by shear, oxidation and hydrolysis (Chapter 19). Recycled PET is dried and solid-state polymerized back to bottle grade; polyolefins are restabilized with antioxidants.
-3. **Contamination.** Labels, adhesives, multilayer barrier films and absorbed chemicals limit the use of recyclate, which is why single-polymer packaging is now a design requirement (Chapter 49).
+3. **Contamination.** Labels, adhesives, multilayer barrier films and absorbed chemicals limit the use of recyclate, which is why single-polymer packaging is now a design requirement (Chapter 59).
 
 ### Chemical and feedstock recycling
 
@@ -388,7 +412,7 @@ Two different properties are often confused. **Bio-based** means made from renew
 
 Biodegradation usually starts with abiotic hydrolysis that cuts chains to oligomers small enough for microbes to assimilate, so it depends on the factors of Section 21.6: temperature relative to $T_g$, crystallinity and thickness. PLA hydrolyses quickly only above its $T_g$ of about 55–60 °C, which is why it certifies as compostable under industrial composting standards (EN 13432, ASTM D6400: at least 90 % conversion to CO₂ within 6 months and disintegration within 12 weeks at about 58 °C) but persists for years in a garden compost heap or the sea. Compostability is no solution to litter.
 
-> **Boundary.** The full life-cycle comparison of recycling routes, biodegradable alternatives and energy recovery, including embodied carbon, belongs to Chapter 49; implant applications of resorbable polymers to Chapter 31.
+> **Boundary.** The full life-cycle comparison of recycling routes, biodegradable alternatives and energy recovery, including embodied carbon, belongs to Chapter 59; implant applications of resorbable polymers to Chapter 39.
 
 ---
 
@@ -401,14 +425,14 @@ Biodegradation usually starts with abiotic hydrolysis that cuts chains to oligom
 | How do short and continuous fibres stiffen a polymer, and why are moulded fibre-filled parts anisotropic? | Chapter 22 |
 | How are thermoset matrices cured and composite parts manufactured? | Chapter 23 |
 | Why is the thermal conductivity of polymers low, and how do they expand? | Chapter 24 |
-| How do polymer insulation and dielectrics fail electrically? | Chapter 25 |
-| How do polymer nanocomposites and conductive fillers work? | Chapter 30 |
-| Which polymers are used in implants, and how are resorbable devices designed? | Chapter 31 |
-| How does radiation damage polymers in nuclear and space environments? | Chapter 33 |
-| How are weathering, aging and polymer failures investigated in practice? | Chapter 36 |
-| How are adhesives designed and bonded joints made? | Chapter 39 |
-| How are polymers processed by additive manufacturing? | Chapter 40 |
-| How are DSC, TGA, DMA, FTIR and SEC used in polymer analysis? | Chapter 42 |
-| How do recycling routes compare in life-cycle and circular-economy terms? | Chapter 49 |
+| How do polymer insulation and dielectrics fail electrically? | Chapter 26 |
+| How do polymer nanocomposites and conductive fillers work? | Chapter 38 |
+| Which polymers are used in implants, and how are resorbable devices designed? | Chapter 39 |
+| How does radiation damage polymers in nuclear and space environments? | Chapter 41 |
+| How are weathering, aging and polymer failures investigated in practice? | Chapter 44 |
+| How are adhesives designed and bonded joints made? | Chapter 47 |
+| How are polymers processed by additive manufacturing? | Chapter 48 |
+| How are DSC, TGA, DMA, FTIR and SEC used in polymer analysis? | Chapter 52 |
+| How do recycling routes compare in life-cycle and circular-economy terms? | Chapter 59 |
 
 **Next:** Chapter 22 adds a second phase to the polymer — stiff, strong fibres of glass, carbon or aramid — and asks how fibre and matrix share load in a composite lamina.

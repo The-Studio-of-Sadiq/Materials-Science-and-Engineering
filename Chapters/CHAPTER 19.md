@@ -62,6 +62,10 @@ The older classification into *condensation* (a small molecule such as water is 
 
 <!-- FIGURE 19.1 | figures/ch19/fig-19-1-step-vs-chain-growth.png | plot | Number-average degree of polymerization versus monomer conversion for step-growth, free-radical chain-growth and living chain-growth polymerization. | Content: x-axis conversion p from 0 to 1 (linear); y-axis Xn logarithmic from 1 to 10^4. Curve 1 "step growth" Xn = 1/(1-p), staying below 10 until p = 0.9 and rising steeply to 1000 at p = 0.999. Curve 2 "free-radical chain growth" nearly horizontal at Xn ≈ 1500 from low conversion onward (high polymer present immediately). Curve 3 "living anionic" straight line Xn = p·[M]0/[I]0 with [M]0/[I]0 = 1000, reaching 1000 at p = 1. Annotate p = 0.99 → Xn = 100 on curve 1. -->
 
+![Figure 19.1 — Number-average degree of polymerization versus monomer conversion for step-growth, free-radical chain-growth and living chain-growth polymerization](../figures/ch19/fig-19-1-step-vs-chain-growth.png)
+
+*Figure 19.1 — Number-average degree of polymerization versus monomer conversion for step-growth, free-radical chain-growth and living chain-growth polymerization.*
+
 Figure 19.1 explains a practical difference. A chain-growth reactor can be stopped at 50 % conversion and still deliver high polymer (the unreacted monomer is stripped off and recycled). A step-growth reactor must be driven to almost complete conversion, because, as the next section shows, the chains are short until the last fraction of a percent of reaction.
 
 ---
@@ -96,6 +100,10 @@ At complete conversion of the minority group ($p=1$), $X_n=(1+r)/(1-r)$. A monof
 **Worked example — molecular weight of nylon-6,6 by step growth.** The repeat unit of nylon-6,6, $-\mathrm{NH(CH_2)_6NH{-}CO(CH_2)_4CO}-$, has $M=226.32$ g/mol and contains two monomer residues, so the mean residue mass is $M_0=113.16$ g/mol. With exact stoichiometry and $p=0.99$, $X_n=1/(1-0.99)=100$ residues and $M_n=100\times113.16\approx11{,}300$ g/mol. Pushing to $p=0.995$ doubles this to $X_n=200$, $M_n\approx22{,}600$ g/mol, a typical injection-moulding grade. Now suppose the diamine is weighed 1 % short, $r=0.99$. At $p=0.99$, $X_n=(1.99)/(1.99-2\times0.99\times0.99)=1.99/0.0298=66.8$, giving $M_n\approx7{,}600$ g/mol; even at complete conversion, $X_n=1.99/0.01=199$, $M_n\approx22{,}500$ g/mol. A 1 % weighing error therefore costs a third of the chain length at a realistic conversion and caps it permanently. In the cable-tie failure of the opening, the reverse reaction did the damage: a resin with $M_n=18{,}100$ g/mol ($X_n=160$) contains $1000/18{,}100\approx0.055$ mol of chains per kg. Cutting each chain once requires $0.055$ mol, or about 1.0 g, of water per kilogram of resin: 0.1 wt %. Polyamide moulding specifications therefore require moisture below about 0.2 %, against an equilibrium uptake of 2–3 % in humid air.
 
 <!-- FIGURE 19.2 | figures/ch19/fig-19-2-carothers.png | plot | Carothers equation: number-average degree of polymerization versus extent of reaction for exact stoichiometry and for small stoichiometric imbalances. | Content: x-axis extent of reaction p from 0.90 to 1.00; y-axis Xn logarithmic from 10 to 10^4. Curves for r = 1.000 (diverging as p → 1), r = 0.999 (plateau at 1999), r = 0.99 (plateau at 199), r = 0.98 (plateau at 99). Horizontal band labelled "engineering polyamides and polyesters, Xn ≈ 100–250". Marked points: p = 0.99, r = 1 → 100; p = 0.99, r = 0.99 → 66.8. Secondary right-hand axis Mn for nylon-6,6 (Xn × 113.16 g/mol). -->
+
+![Figure 19.2 — Carothers equation: number-average degree of polymerization versus extent of reaction for exact stoichiometry and for small stoichiometric imbalances](../figures/ch19/fig-19-2-carothers.png)
+
+*Figure 19.2 — Carothers equation: number-average degree of polymerization versus extent of reaction for exact stoichiometry and for small stoichiometric imbalances.*
 
 ### The most probable distribution
 
@@ -192,7 +200,7 @@ The engineering value of a broad distribution should not be underestimated. Pipe
 Cyclic monomers polymerize by opening the ring, driven by the release of ring strain (and, for some, by entropy). Ring-opening is chain growth: an active centre attacks a ring and regenerates itself at the new chain end. The important engineering examples are:
 
 - **Nylon-6** from caprolactam, opened by water (hydrolytic) or by anionic initiators. Anionic casting of caprolactam directly in a mould ("cast nylon") produces large bearings, sheaves and liners.
-- **Poly(lactic acid)** (PLA) and **poly(glycolic acid)** (PGA) from the cyclic dimers lactide and glycolide, opened by tin(II) octoate. These are the resorbable sutures, bone screws and drug-eluting matrices of Chapter 31, and PLA is the most widely used bio-based packaging polymer.
+- **Poly(lactic acid)** (PLA) and **poly(glycolic acid)** (PGA) from the cyclic dimers lactide and glycolide, opened by tin(II) octoate. These are the resorbable sutures, bone screws and drug-eluting matrices of Chapter 39, and PLA is the most widely used bio-based packaging polymer.
 - **Poly(ε-caprolactone)** (PCL), a low-melting (60 °C), slowly resorbing polyester for long-term implants and 3D-printed scaffolds.
 - **Polyacetal** (POM) from trioxane, and **poly(ethylene oxide)** from ethylene oxide.
 - **Silicones** (polydimethylsiloxane, PDMS) from cyclic siloxanes such as D4, used in sealants, medical tubing and soft lithography.
@@ -224,6 +232,10 @@ Different properties depend on different averages. Brittle-to-ductile behaviour,
 
 <!-- FIGURE 19.3 | figures/ch19/fig-19-3-mw-distribution.png | plot | A molecular-weight distribution plotted as weight fraction versus log molar mass, with the number-, viscosity-, weight- and z-average molar masses marked. | Content: x-axis log10(M / g mol^-1) from 3 to 7; y-axis dw/dlogM (normalized). Solid curve: log-normal distribution with Mn = 50,000 and Mw = 100,000 g/mol (Đ = 2.0). Vertical lines labelled Mn (5.0×10^4), Mv (about 9.0×10^4 for a = 0.7), Mw (1.0×10^5), Mz (2.0×10^5). Dashed second curve: narrow anionic standard Mn = 100,000, Đ = 1.05. Dotted third curve: bimodal PE100 pipe resin with peaks near 2×10^4 and 4×10^5 g/mol. Small annotation: "Mn ↔ toughness, Mw ↔ melt viscosity, Mz ↔ melt elasticity". -->
 
+![Figure 19.3 — A molecular-weight distribution plotted as weight fraction versus log molar mass, with the number-, viscosity-, weight- and z-average molar masses marked](../figures/ch19/fig-19-3-mw-distribution.png)
+
+*Figure 19.3 — A molecular-weight distribution plotted as weight fraction versus log molar mass, with the number-, viscosity-, weight- and z-average molar masses marked.*
+
 **Worked example — averages of a blended resin.** A compounder mixes 10 g of polymer with $M=20{,}000$ g/mol, 10 g with $M=100{,}000$ g/mol and 5 g with $M=500{,}000$ g/mol (each fraction taken as uniform). The numbers of moles are $10/20{,}000=5.0\times10^{-4}$, $10/100{,}000=1.0\times10^{-4}$ and $5/500{,}000=1.0\times10^{-5}$ mol, totalling $6.1\times10^{-4}$ mol for 25 g. Thus $M_n=25/6.1\times10^{-4}=41{,}000$ g/mol. The weight average is $M_w=(10\times20{,}000+10\times100{,}000+5\times500{,}000)/25=148{,}000$ g/mol, and $M_z=\sum w_iM_i^2/\sum w_iM_i=(10\times4\times10^{8}+10\times10^{10}+5\times2.5\times10^{11})/(3.7\times10^{6})=3.66\times10^{5}$ g/mol. The dispersity is $148{,}000/41{,}000=3.6$. Although the heavy fraction is only one-fifth of the mass and under 2 % of the molecules, it contributes 68 % of $M_w$ and dominates $M_z$, which is exactly why a small amount of very long chains changes melt elasticity so much. Conversely, the light fraction, 40 % of the mass, makes up 82 % of the molecules and pulls $M_n$ — and hence toughness — down.
 
 ### Measurement methods
@@ -239,7 +251,7 @@ Different properties depend on different averages. Brittle-to-ductile behaviour,
 | MALDI-TOF mass spectrometry | Whole distribution | up to about $10^5$ (narrow samples) | Mass of individual ions | Resolves individual oligomers and end groups |
 | Melt rheology (melt flow index) | Correlates with $M_w$ | Industrial grades | Flow through a standard die | Quality control, not an absolute method |
 
-**Osmometry.** For a dilute solution of concentration $c$ (mass per volume), the osmotic pressure obeys the van 't Hoff relation $\Pi/c=RT/M_n$ in the limit $c\to0$, with a correction from the second virial coefficient $A_2$: $\Pi/c=RT(1/M_n+A_2c+\dots)$. The pressures are small: 5 g/L of a polymer with $M_n=10^5$ g/mol at 25 °C gives $\Pi=(5/100)\ \mathrm{mol/m^3}\times8.314\times298\approx124$ Pa, the height of a 13 mm column of water. That is still measurable, which is why osmometry was historically the reference method; the same measurement on a 1 % sugar solution would give a hundredfold larger signal.
+**Osmometry.** For a dilute solution of concentration $c$ (mass per volume), the osmotic pressure obeys the van 't Hoff relation $\Pi/c=RT/M_n$ in the limit $c\to0$, with a correction from the second virial coefficient $A_2$: $\Pi/c=RT(1/M_n+A_2c+\dots)$. The pressures are small: 5 g/L of a polymer with $M_n=10^5$ g/mol at 25 °C gives $\Pi=(5/100)\ \mathrm{mol/m^3}\times8.314\times298\approx124$ Pa, the height of a 13 mm column of water. That is still measurable, which is why osmometry was historically the reference method; the same measurement on a 1 % sugar solution would give a signal several hundred times larger.
 
 **Light scattering.** A polymer coil scatters light in proportion to the square of its mass, so the scattered intensity weights molecules by mass and gives $M_w$. Measurement at several angles also yields the radius of gyration $R_g$ (Chapter 20), and extrapolating to zero angle and zero concentration (the Zimm plot) gives $M_w$, $R_g$ and $A_2$ together. The second virial coefficient vanishes in a theta solvent, a link developed in Chapter 20.
 
@@ -271,6 +283,10 @@ A **copolymer** contains two or more kinds of repeat unit. The way they are arra
 
 <!-- FIGURE 19.4 | figures/ch19/fig-19-4-copolymer-architectures.png | schematic | Copolymer sequence architectures and chain topologies. | Content: two rows of bead-chain drawings with beads of two colours (A dark, B light). Row 1, sequence: homopolymer (all A), random copolymer (irregular A/B), alternating (ABAB), diblock (20 A then 20 B), triblock (ABA, e.g. SBS), graft (A backbone with three B side chains). Row 2, topology: linear chain, short-chain branched (LLDPE, short pendant stubs), long-chain branched (LDPE, branches of branches), star, crosslinked network (several chains joined by junction points, one dangling end and one loop marked). Each drawing labelled with an engineering example (SBR, SMA, SBS, ABS, HDPE, LDPE, cured epoxy). -->
 
+![Figure 19.4 — Copolymer sequence architectures and chain topologies](../figures/ch19/fig-19-4-copolymer-architectures.png)
+
+*Figure 19.4 — Copolymer sequence architectures and chain topologies.*
+
 ### Copolymer composition: the Mayo–Lewis equation
 
 In chain-growth copolymerization the composition of the chain differs in general from that of the monomer feed, because each type of chain end prefers one monomer. The four propagation reactions $\sim\!A^\bullet+A$, $\sim\!A^\bullet+B$, $\sim\!B^\bullet+A$ and $\sim\!B^\bullet+B$ are characterized by two **reactivity ratios**, $r_1=k_{AA}/k_{AB}$ and $r_2=k_{BB}/k_{BA}$. With mole fractions $f_1$ and $f_2$ of the monomers in the feed, the mole fraction $F_1$ of A incorporated into the chain is
@@ -299,6 +315,10 @@ In a vinyl polymer $-\mathrm{CH_2{-}CHX}-$ every second backbone carbon carries 
 Tacticity is not a cosmetic detail; it decides whether a polymer can crystallize. Isotactic polypropylene (iPP) packs into a $3_1$ helix and crystallizes to 40–70 %, giving a stiff, tough plastic that melts at about 165 °C and is used for car bumpers, battery cases, living hinges and medical syringes. Atactic polypropylene cannot crystallize, has a glass transition near −10 °C, and is a sticky material useful only in hot-melt adhesives. Atactic polystyrene is an amorphous glass (Tg about 100 °C, the clear material of CD cases and disposable cups); syndiotactic polystyrene, made with metallocene catalysts, crystallizes and melts at 270 °C, and is used in under-the-bonnet connectors. Tacticity is measured by ¹³C nuclear magnetic resonance, which resolves the chemical shift of methyl groups in different triad (*mm*, *mr*, *rr*) and pentad environments; commercial iPP has an isotactic pentad content *mmmm* of 90–98 %.
 
 <!-- FIGURE 19.5 | figures/ch19/fig-19-5-tacticity.png | schematic | Isotactic, syndiotactic and atactic polypropylene drawn as planar zig-zag backbones, with the consequence for crystallinity. | Content: three stacked zig-zag carbon backbones (10 backbone carbons each) with methyl groups drawn as wedge (up) or dash (down) bonds. Top: isotactic, all methyls on one side, labelled "meso dyads (m), mmmm > 95 %, crystalline, Tm ≈ 165 °C". Middle: syndiotactic, alternating, labelled "racemo dyads (r), crystalline, Tm ≈ 130–150 °C". Bottom: atactic, random sequence, labelled "amorphous, Tg ≈ −10 °C, adhesive". Small inset at right: 3_1 helix of iPP viewed along the chain axis. -->
+
+![Figure 19.5 — Isotactic, syndiotactic and atactic polypropylene drawn as planar zig-zag backbones, with the consequence for crystallinity](../figures/ch19/fig-19-5-tacticity.png)
+
+*Figure 19.5 — Isotactic, syndiotactic and atactic polypropylene drawn as planar zig-zag backbones, with the consequence for crystallinity.*
 
 ### Branching
 
@@ -340,7 +360,7 @@ The density of crosslinks is described by the average molar mass between junctio
 | Aerospace epoxy (TGDDM/DDS) | 300–500 | Stiff, high-Tg, brittle | CFRP matrices |
 | Phenolic, melamine | Below 300 | Very stiff, hard, brittle | Brake linings, worktops, circuit-breaker housings |
 
-The rubber elasticity theory of Chapter 20 links $M_c$ to the modulus of an elastomer, and the swelling equilibrium of Chapter 21 provides a simple way to measure it. Thermosets cannot be remelted, which has consequences for recycling (Chapter 21 and Chapter 49); covalent adaptable networks (vitrimers) with exchangeable bonds are being developed to make thermosets reprocessable.
+The rubber elasticity theory of Chapter 20 links $M_c$ to the modulus of an elastomer, and the swelling equilibrium of Chapter 21 provides a simple way to measure it. Thermosets cannot be remelted, which has consequences for recycling (Chapter 21 and Chapter 59); covalent adaptable networks (vitrimers) with exchangeable bonds are being developed to make thermosets reprocessable.
 
 ---
 
@@ -348,9 +368,13 @@ The rubber elasticity theory of Chapter 20 links $M_c$ to the modulus of an elas
 
 ### The polymer pyramid
 
-The several hundred commercial polymers are conventionally sorted into a pyramid by volume, price and temperature capability (Figure 19.6). At the base, **commodity** polymers — PE, PP, PVC, PS and PET — make up about 70–75 % of world production (which exceeds 400 million tonnes per year), cost roughly 1–2 USD/kg, and serve up to about 60–100 °C. In the middle, **engineering** polymers — polyamides, polycarbonate, acetal, PBT, ABS, PMMA and modified PPO — offer higher stiffness, toughness or service temperature (100–150 °C) at 2–6 USD/kg. At the top, **high-performance** polymers — PEEK, PEI, PPS, PSU, PAI, polyimides, LCPs and fluoropolymers — survive 150–260 °C, aggressive chemicals and fire, at 10–100 USD/kg or more. A parallel division separates amorphous polymers (transparent, isotropic shrinkage, poor chemical resistance) from semicrystalline ones (opaque, chemically resistant, retain stiffness up to near Tm) at every level of the pyramid.
+The several hundred commercial polymers are conventionally sorted into a pyramid by volume, price and temperature capability (Figure 19.6). At the base, **commodity** polymers — PE, PP, PVC, PS and PET — make up about 70–75 % of world production (which exceeds 400 million tonnes per year), cost roughly 1–2 USD/kg, and serve up to about 60–100 °C (PET, at 100–120 °C, straddles the boundary with the engineering tier). In the middle, **engineering** polymers — polyamides, polycarbonate, acetal, PBT, ABS, PMMA and modified PPO — offer higher stiffness, toughness or service temperature (100–150 °C) at 2–6 USD/kg. At the top, **high-performance** polymers — PEEK, PEI, PPS, PSU, PAI, polyimides, LCPs and fluoropolymers — survive 150–260 °C, aggressive chemicals and fire, at 10–100 USD/kg or more. A parallel division separates amorphous polymers (transparent, isotropic shrinkage, poor chemical resistance) from semicrystalline ones (opaque, chemically resistant, retain stiffness up to near Tm) at every level of the pyramid.
 
 <!-- FIGURE 19.6 | figures/ch19/fig-19-6-polymer-pyramid.png | schematic | The thermoplastic pyramid: commodity, engineering and high-performance polymers ranked by continuous-use temperature and price, split into amorphous and semicrystalline families. | Content: triangle divided horizontally into three tiers (base: commodity, up to about 100 °C, 1–2 USD/kg; middle: engineering, about 100–150 °C, 2–6 USD/kg; top: high-performance, 150–260 °C, 10–100 USD/kg). Vertical line splits left (amorphous: PS, PVC, PMMA, ABS, PC, PPO, PSU, PES, PEI, PAI) from right (semicrystalline: PE, PP, PET, PA6, PA66, POM, PBT, PPS, PEEK, LCP, PTFE). Each polymer placed at the height of its continuous-use temperature as given in the property table of Section 19.7. Right-hand axis "approximate continuous-use temperature, °C" from 50 to 260. -->
+
+![Figure 19.6 — The thermoplastic pyramid: commodity, engineering and high-performance polymers ranked by continuous-use temperature and price, split into amorphous and semicrystalline families](../figures/ch19/fig-19-6-polymer-pyramid.png)
+
+*Figure 19.6 — The thermoplastic pyramid: commodity, engineering and high-performance polymers ranked by continuous-use temperature and price, split into amorphous and semicrystalline families.*
 
 ### Representative properties
 
@@ -386,7 +410,7 @@ Cutting across the pyramid is the division by network topology. **Thermoplastics
 ### Choosing a family: three short cases
 
 - **Civil.** A water distribution pipe must last 50 years under 10–16 bar pressure with no maintenance. Bimodal HDPE (PE100), with a broad, engineered molecular-weight distribution and short-chain branches on the long chains, gives slow-crack-growth resistance no unimodal grade can match; the pipe classification itself is based on extrapolated 50-year hoop stress (Chapter 21).
-- **Biomedical.** A knee-replacement tibial insert needs wear resistance against a cobalt-chromium femoral component for 20 years. UHMWPE, with chains so long ($M$ above $3\times10^6$ g/mol) that the material cannot be melt-processed and is compression-moulded instead, provides it; radiation crosslinking further reduces wear, at a cost in toughness that is partly recovered by adding vitamin E as an antioxidant (Chapters 21 and 31).
+- **Biomedical.** A knee-replacement tibial insert needs wear resistance against a cobalt-chromium femoral component for 20 years. UHMWPE, with chains so long ($M$ above $3\times10^6$ g/mol) that the material cannot be melt-processed and is compression-moulded instead, provides it; radiation crosslinking further reduces wear, at a cost in toughness that is partly recovered by adding vitamin E as an antioxidant (Chapters 21 and 39).
 - **Aerospace.** A cabin-interior duct or a bracket near an engine must meet stringent flame, smoke and toxicity rules and survive 150–200 °C. PEI and PEEK, with aromatic backbones that char rather than drip, meet the rules without halogenated flame retardants, at twenty to fifty times the price of polypropylene.
 
 ---
@@ -401,13 +425,13 @@ Cutting across the pyramid is the division by network topology. **Thermoplastics
 | What sets Tg in molecular terms, and how does it change with molecular weight and copolymer composition? | Chapter 20 |
 | How does molecular weight control melt viscosity, and why do entanglements give the 3.4-power law? | Chapter 21 |
 | How are elastomers vulcanized, and how is crosslink density measured by swelling? | Chapter 21 |
-| How do hydrolysis, oxidation and UV cut chains in service, and how can polymers be recycled? | Chapters 21 and 36 |
+| How do hydrolysis, oxidation and UV cut chains in service, and how can polymers be recycled? | Chapters 21 and 44 |
 | Which matrices and fibres make composites, and how do they share load? | Chapter 22 |
 | How are epoxy matrices cured in composite manufacture? | Chapter 23 |
 | What are the viscoelastic models behind polymer creep and relaxation? | Chapter 14 |
-| How are DSC, FTIR, NMR and Raman used to characterize polymers? | Chapter 42 |
-| Which polymers are used in implants and drug delivery? | Chapter 31 |
-| How are chain conformations simulated by molecular dynamics and Monte Carlo? | Chapter 46 |
-| What is the life-cycle and circular-economy picture for plastics? | Chapter 49 |
+| How are DSC, FTIR, NMR and Raman used to characterize polymers? | Chapter 52 |
+| Which polymers are used in implants and drug delivery? | Chapter 39 |
+| How are chain conformations simulated by molecular dynamics and Monte Carlo? | Chapter 56 |
+| What is the life-cycle and circular-economy picture for plastics? | Chapter 59 |
 
 **Next:** Chapter 20 takes the chains made here and asks how they coil, stretch, mix, crystallize and freeze into glasses — the physics that turns a molecular structure into a material.

@@ -1,350 +1,829 @@
-# Chapter 26 — Semiconductor Materials
+# Chapter 26 — Dielectric and Insulating Materials
 
-*Part VI · Physical and Functional Properties*
+*Part VI · Thermal, Electrical, Dielectric and Magnetic Materials*
 
-An electric-vehicle maker redesigns the traction inverter of its next car. The old inverter used silicon IGBTs; the new one uses silicon carbide MOSFETs. Nothing about the circuit topology changes, yet the inverter loses about half as much energy, the cooling plate shrinks, the battery can be a few kilowatt-hours smaller for the same range, and the system voltage rises from 400 V to 800 V so the charging cable can be thinner. Every one of those gains traces back to three numbers that belong to a crystal, not a circuit: a band gap three times that of silicon, a breakdown field nearly ten times higher, and a thermal conductivity three times higher. The cost traces back to materials too: SiC crystals must be grown from vapour at above 2000 °C, more slowly than silicon by two orders of magnitude, and every wafer carries defects that a silicon fab would reject. A semiconductor device is a materials system before it is a circuit element.
+A utility installs a medium-voltage underground cable with cross-linked polyethylene (XLPE) insulation. It passes its factory tests at more than twice its operating voltage. Eleven years later it fails, in wet ground, at its ordinary operating voltage. The failure analysis finds a pinhole through the insulation, and around it a dense bush of microscopic water-filled channels, "water trees", that grew from a small contaminant particle at the conductor screen. Nothing about the material's datasheet strength of tens of kilovolts per millimetre predicted this. The insulation did not fail because the field was too high for polyethylene. It failed because water, a defect and an alternating field acted together for a decade, changing the material until the local field was too high for what it had become.
 
-This chapter covers semiconductors as materials: where band gaps and effective masses come from, how carrier concentrations are set by temperature and doping, how carriers move and recombine, which material families exist and why, how junctions and heterostructures are built, and how crystal growth and doping put the required structure into the solid. Device physics and circuit design belong elsewhere; the *Materials Core (EEE)* book, Chapters 10–13, treats each topic at greater depth.
+This chapter is about insulators: what makes them store field energy, why they waste some of it as heat, what determines the voltage they can hold, and how they age. An EEE engineer meets these questions in every capacitor, cable, PCB, transformer, motor winding, connector housing and chip.
 
-> **Why is silicon, a mediocre semiconductor in almost every single property, the basis of nearly all electronics?**
-> **Why can a SiC or GaN transistor block 1200 V across a layer ten times thinner than silicon needs?**
-> **Why do LEDs and lasers use GaAs, GaN and their alloys, but not silicon?**
-> **Why does a few parts per billion of iron ruin a solar wafer?**
+> **Why does a capacitor's dielectric heat up, and why does the heating depend on frequency?**
+> **Why does a thin film of an insulator hold a much higher field than a thick slab of the same material?**
+> **What turns a sound insulation into a failed one after years in service?**
 
 | Concept | Engineering destination |
 |---|---|
-| Bands, gaps, effective mass, density of states | Choosing a semiconductor for power, RF, light emission, detection or sensing |
-| Intrinsic and extrinsic carrier statistics | Doping design; maximum operating temperature of devices and sensors |
-| Mobility, drift, diffusion | Transistor speed, on-resistance, solar-cell collection |
-| Recombination and lifetime | Solar-cell efficiency, LED efficiency, switching speed of power diodes |
-| Material families | Silicon chips, SiC and GaN power converters, III–V lasers, oxide display backplanes, organic LEDs |
-| Junctions, heterostructures, interfaces | Diodes, transistors, quantum-well lasers, high-electron-mobility transistors |
-| Crystal growth and doping | Wafer cost and quality; yield; the processing chain of Chapter 41 |
+| Permittivity, polarization mechanisms | Capacitance, cable and PCB-line impedance, signal speed |
+| Loss tangent, complex permittivity | Capacitor heating, RF and high-speed PCB loss, cable loss |
+| Frequency and temperature dependence | Laminate choice for GHz boards, capacitor stability |
+| Dielectric strength, Weibull statistics | Insulation thickness, voltage ratings, test margins |
+| Breakdown mechanisms (gas, liquid, solid, thermal) | Clearances, oil and gas insulation, altitude derating |
+| Volume and surface resistivity | Leakage, insulation-resistance testing, high-impedance circuits |
+| Tracking, partial discharge | Creepage distances, CTI, PD testing of cables and machines |
+| Moisture and contamination | PCB cleanliness, conformal coating, transformer drying |
+| Insulation classes and aging | Thermal class of motors and transformers, design life |
 
-**Roadmap.** Band structure essentials (26.1) → intrinsic and extrinsic carrier statistics (26.2) → mobility, drift, diffusion and recombination (26.3) → semiconductor families (26.4) → junctions, heterostructures and interfaces (26.5) → crystal growth and doping (26.6).
-
----
-
-## 26.1 Band structure essentials
-
-### From atomic levels to bands
-
-When $N$ atoms come together to form a crystal, each atomic energy level splits into $N$ closely spaced levels because the electron wavefunctions overlap. For $N\sim10^{23}$ these form quasi-continuous **energy bands** separated by **gaps** where no electron states exist. In a periodic crystal the states are Bloch waves labelled by a wavevector $\mathbf k$, and the band structure $E(\mathbf k)$ is the dispersion relation of electrons in the crystal. The quantum mechanics is the business of the Engineering Physics book; what the materials engineer needs is its consequences.
-
-Whether a solid conducts depends on how the bands are filled at 0 K:
-
-- **Metals** have a partly filled band. Electrons at the top of the filled states (the Fermi energy) can accept infinitesimal energy from a field, so conduction is easy and the carrier density is fixed at about $10^{22}$–$10^{23}$ cm$^{-3}$ (Chapter 25).
-- **Insulators and semiconductors** have a completely filled **valence band** and an empty **conduction band** separated by a **band gap** $E_g$. Conduction requires electrons to be promoted across the gap, leaving behind **holes** — vacancies in the valence band that behave as positive carriers.
-
-The distinction between a semiconductor and an insulator is one of degree. With $E_g$ below about 3–4 eV, thermal excitation or doping can produce useful carrier densities; silicon (1.12 eV) is a semiconductor, diamond (5.5 eV) an insulator that can be doped into a wide-gap semiconductor, and SiO$_2$ (about 9 eV) an insulator. In covalent semiconductors the valence band derives from bonding sp$^3$ orbitals and the conduction band from antibonding orbitals, so the gap is a measure of bond strength: it decreases down a column of the periodic table (C 5.5, Si 1.12, Ge 0.66, grey Sn 0 eV) as bonds lengthen, and increases with ionicity in the sequence Ge (0.66) → GaAs (1.42) → ZnSe (2.7 eV), which share almost the same lattice constant.
-
-### Direct and indirect gaps
-
-The conduction-band minimum and valence-band maximum need not lie at the same $\mathbf k$ (Figure 26.1). In a **direct-gap** semiconductor (GaAs, InP, GaN, ZnO, most III–V and II–VI compounds) they do, and an electron can drop across the gap emitting a photon, because the photon carries negligible momentum. In an **indirect-gap** semiconductor (Si, Ge, SiC, diamond, AlAs) the minima are offset, and recombination needs a phonon to supply the momentum difference; radiative recombination is then about $10^4$–$10^6$ times slower, and other processes win. This single feature of the band structure decides which materials can be light emitters: GaAs and GaN make lasers and LEDs, silicon does not (Chapter 28). For absorption the difference is weaker but still important: silicon absorbs weakly near its gap and solar wafers must be 100–180 µm thick, while a direct-gap absorber such as CdTe or a halide perovskite absorbs the same light in about 1 µm (Chapter 32).
-
-<!-- FIGURE 26.1 | figures/ch26/fig-26-1-direct-indirect-bands.png | band-diagram | Direct and indirect band gaps: in GaAs an electron can emit a photon directly; in Si the momentum mismatch requires a phonon. | Content: two side-by-side E–k panels, k from -pi/a to +pi/a (labels L, Gamma, X). Left GaAs: parabolic conduction-band minimum at Gamma 1.42 eV above valence-band maximum (heavy and light hole bands at Gamma); vertical arrow labelled photon hv = Eg. Right Si: valence-band maximum at Gamma, conduction-band minimum near X (0.85 of the way to X) at 1.12 eV; vertical arrow at Gamma labelled direct gap 3.4 eV; diagonal arrow from CB minimum to VB maximum labelled phonon + photon. Curvature of the GaAs CB minimum visibly sharper (m* = 0.067 m0) than the Si CB valleys (m* about 0.26 m0 conductivity mass). -->
-
-### Effective mass
-
-Near a band minimum, $E(\mathbf k)$ is approximately parabolic, and an electron responds to forces as if it were a free particle with an **effective mass**
-
-$$
-\frac{1}{m^*}=\frac{1}{\hbar^2}\frac{d^2E}{dk^2}
-$$
-
-Sharp band curvature means a light carrier. The effective mass enters every transport and statistics formula below: lighter electrons are more mobile and give a lower density of states. Values span a wide range: $m_e^*=0.067m_0$ in GaAs, $0.041m_0$ in In$_{0.53}$Ga$_{0.47}$As, $0.26m_0$ (conductivity mass) in Si, $0.2$–$0.4m_0$ in SiC and GaN; holes are usually heavier ($0.3$–$0.8m_0$), which is why p-type material and p-channel devices are slower almost everywhere.
-
-> **Status of the principle: Effective-mass approximation**
-> *Approximate.* It replaces the band curvature near an extremum with a constant mass. It holds for carriers within a few $k_BT$ of a band edge and fails for hot carriers far up the band, where non-parabolicity and transfer to other valleys (the Gunn effect in GaAs) appear.
-
-### Density of states and the Fermi–Dirac distribution
-
-How many carriers occupy a band depends on how many states there are and on how likely each is to be filled. For a parabolic band in three dimensions the **density of states** per unit energy and volume is
-
-$$
-g_c(E)=\frac{1}{2\pi^2}\left(\frac{2m_e^*}{\hbar^2}\right)^{3/2}\sqrt{E-E_c}
-$$
-
-rising as the square root of energy above the band edge $E_c$ (a similar expression holds below the valence-band edge $E_v$). In quantum wells (two dimensions) the density of states becomes a staircase, and in quantum wires and dots it becomes spiky — the basis of the size effects of Chapter 30. Occupation follows the **Fermi–Dirac distribution**,
-
-$$
-f(E)=\frac{1}{1+\exp[(E-E_F)/k_BT]}
-$$
-
-where the **Fermi level** $E_F$ is the electrochemical potential of the electrons: the energy at which a state is half-filled. In thermal equilibrium $E_F$ is constant throughout a system of joined materials, which is the single principle that sets band bending at every junction in Section 26.5.
-
-> **Status of the principle: Fermi–Dirac statistics and constant $E_F$ in equilibrium**
-> *Fundamental.* It follows from the Pauli principle and equilibrium thermodynamics; a gradient of $E_F$ is what drives current, so in equilibrium it must vanish.
+**Roadmap.** Polarization and permittivity (26.1) → loss (26.2) → frequency and temperature dependence (26.3) → dielectric strength (26.4) → breakdown mechanisms (26.5) → resistivity of insulators (26.6) → surface and void discharges: tracking and partial discharge (26.7) → moisture and contamination (26.8) → polymer, ceramic and composite insulators (26.9) → aging (26.10).
 
 ---
 
-## 26.2 Intrinsic and extrinsic semiconductors; carrier statistics
+## 26.1 Permittivity and dielectric polarization
 
-### Intrinsic carriers
+### What a dielectric does to a capacitor
 
-When the Fermi level lies more than a few $k_BT$ inside the gap, Fermi–Dirac statistics reduce to Boltzmann statistics and the electron and hole concentrations become
-
-$$
-n=N_c\exp\!\left(-\frac{E_c-E_F}{k_BT}\right),\qquad p=N_v\exp\!\left(-\frac{E_F-E_v}{k_BT}\right)
-$$
-
-where $N_c$ and $N_v$ are effective densities of states (of order $10^{19}$ cm$^{-3}$ at 300 K, scaling as $(m^*T)^{3/2}$). Their product is independent of the Fermi level, and therefore of doping:
+Put a slab of insulator between the plates of a capacitor held at fixed voltage, and the charge on the plates rises by a factor $\varepsilon_r$, the **relative permittivity** (dielectric constant). The capacitance of a parallel-plate capacitor of area $A$ and gap $d$ becomes
 
 $$
-np=n_i^2=N_cN_v\exp\!\left(-\frac{E_g}{k_BT}\right)
+C=\frac{\varepsilon_0\varepsilon_rA}{d},\qquad \varepsilon_0=8.854\times10^{-12}\ \mathrm{F/m}
 $$
 
-This is the **law of mass action** for carriers, an equilibrium constant for the reaction "bond ⇌ electron + hole". In a pure (intrinsic) crystal $n=p=n_i$, the **intrinsic carrier concentration**.
-
-> **Status of the principle: Law of mass action $np=n_i^2$**
-> *Derived.* It follows from Boltzmann statistics in equilibrium. It fails in degenerate material (doping above about $10^{19}$ cm$^{-3}$, where full Fermi–Dirac statistics and band-gap narrowing are needed) and whenever carriers are injected or generated out of equilibrium — in an illuminated solar cell or a forward-biased diode, $np\gg n_i^2$.
-
-**Worked example — why silicon power electronics stops at about 150 °C.** For silicon take $N_c=2.86\times10^{19}$ and $N_v=3.10\times10^{19}$ cm$^{-3}$, $E_g=1.12$ eV and $k_BT=0.02585$ eV at 300 K. Then
+The extra charge is held by the material. The field displaces the bound charges in every atom or molecule slightly, creating dipoles, and the dipole moment per unit volume is the **polarization** $\mathbf P$ (unit $\mathrm{C/m^2}$). At the surfaces of the slab the ends of these dipoles leave a bound surface charge that partly cancels the field of the plate charges, so more free charge is needed to reach the same voltage. In terms of fields,
 
 $$
-n_i=\sqrt{N_cN_v}\exp\!\left(-\frac{E_g}{2k_BT}\right)=(2.98\times10^{19})\exp(-21.66)=1.2\times10^{10}\ \mathrm{cm^{-3}}
+\mathbf D=\varepsilon_0\mathbf E+\mathbf P=\varepsilon_0\varepsilon_r\mathbf E,\qquad \mathbf P=\varepsilon_0(\varepsilon_r-1)\mathbf E=\varepsilon_0\chi_e\mathbf E
 $$
 
-close to the accepted value of $1.0\times10^{10}$ cm$^{-3}$ (the difference reflects uncertainty in $N_c$ and $N_v$). The exponential makes $n_i$ climb steeply with temperature. Allowing for the $T^{3/2}$ factor and the slight narrowing of the gap with temperature (1.09 eV at 150 °C, 1.04 eV at 300 °C), $n_i$ reaches $1.6\times10^{13}$ cm$^{-3}$ at 150 °C and $2\times10^{15}$ cm$^{-3}$ at 300 °C. A 1200 V silicon device has a drift layer doped to only about $10^{14}$ cm$^{-3}$ (Section 26.4), so above about 200 °C intrinsic carriers outnumber the dopant electrons, leakage current soars and the junction can no longer block. For 4H-SiC ($E_g=3.26$ eV, $N_c=1.7\times10^{19}$, $N_v=2.5\times10^{19}$ cm$^{-3}$) the same formula gives $n_i\approx10^{-8}$ cm$^{-3}$ at 300 K and still only about $10^{5}$ cm$^{-3}$ at 300 °C. The band gap sets the maximum junction temperature, which is why wide-gap materials are used in down-hole oil and geothermal sensors, aero-engine electronics and Venus-lander circuits, as well as in power converters.
+where $\chi_e$ is the electric susceptibility. The relative permittivity measures how easily the material's charges are displaced. In an anisotropic crystal it is a tensor; in amorphous polymers, glasses and fine-grained ceramics it is a scalar.
 
-### Donors, acceptors and the hydrogen model
+> **Status of the principle: linear dielectric response $\mathbf P=\varepsilon_0\chi_e\mathbf E$**
+> *Approximate.* It is the first term of the response for fields small compared with internal atomic fields (about $10^{11}\ \mathrm{V/m}$). It holds for ordinary insulators up to breakdown. It fails for ferroelectrics, whose polarization depends on field history (Chapter 27).
 
-Substituting a group-V atom (P, As, Sb) for silicon leaves one valence electron that is not needed for bonding. It is bound to the donor ion like the electron of a hydrogen atom, but in a medium of permittivity $\varepsilon_r$ and with mass $m^*$, so its binding energy is
+### The four polarization mechanisms
+
+The bound charge can be displaced in four ways, at four very different length and time scales (Figure 26.1).
+
+<!-- FIGURE 26.1 | figures/ch26/fig-26-1-polarization-mechanisms.png | schematic | The four polarization mechanisms, each shown without field and with field applied. | Content: four panels in a row, each with "E = 0" (top) and "E applied" (bottom, field arrow to the right). (a) Electronic: atom with nucleus and spherical electron cloud; cloud shifted left of nucleus under field. (b) Ionic: row of alternating Na+ and Cl- ions; cations shifted right, anions left, bond lengths unequal. (c) Orientational: randomly oriented polar molecules (e.g. H2O drawn as bent with dipole arrows); partial alignment with field. (d) Interfacial (space charge): two-phase material or grain/grain-boundary structure with mobile charges accumulating at interfaces, + on one side, - on the other. Label each with typical upper frequency: electronic about 1e15 Hz, ionic about 1e13 Hz, orientational 1e3-1e11 Hz (material dependent), interfacial below about 1e3 Hz. -->
+
+![Figure 26.1 — The four polarization mechanisms, each shown without field and with field applied](../figures/ch26/fig-26-1-polarization-mechanisms.png)
+
+*Figure 26.1 — The four polarization mechanisms, each shown without field and with field applied.*
+
+**Electronic polarization.** The electron cloud of every atom shifts relative to its nucleus. A crude model, a uniformly charged sphere of radius $R$ around a point nucleus, gives an induced dipole $p=\alpha_eE$ with polarizability $\alpha_e=4\pi\varepsilon_0R^3$. It is present in all materials, responds up to optical frequencies (about $10^{15}\ \mathrm{Hz}$), and is the whole story for non-polar materials such as polyethylene, PTFE and diamond.
+
+**Ionic (atomic) polarization.** In an ionic or partly ionic solid, the field pushes cations and anions in opposite directions, stretching the bonds. Ions are heavy, so this mechanism responds only up to infrared frequencies ($10^{12}$–$10^{13}\ \mathrm{Hz}$). It dominates the permittivity of oxide ceramics (alumina, $\varepsilon_r\approx9.8$) and becomes enormous in some perovskites (Chapter 27).
+
+**Orientational (dipolar) polarization.** Molecules or groups with a permanent dipole moment $p_0$ (water, C–Cl in PVC, C=O in polyesters) rotate partly into line with the field against thermal agitation. For weak fields the average aligned moment is $p_0^2E/(3k_BT)$, so the orientational polarizability is
 
 $$
-E_d\approx13.6\ \mathrm{eV}\times\frac{m^*/m_0}{\varepsilon_r^2}
+\alpha_{\rm or}=\frac{p_0^2}{3k_BT}
 $$
 
-For silicon ($m^*=0.26m_0$, $\varepsilon_r=11.7$) this gives 26 meV; measured values are 39–54 meV for Sb, P and As. Since $k_BT=26$ meV at room temperature, almost every donor is ionized and contributes one free electron: silicon doped with $10^{16}$ P cm$^{-3}$ has $n\approx10^{16}$ cm$^{-3}$ — a million times its intrinsic value — and $p=n_i^2/n\approx10^4$ cm$^{-3}$. Group-III **acceptors** (B, Al, Ga) accept an electron from the valence band and create a hole in the same way. Shallow dopants exist in silicon because its permittivity is high and its effective mass small; in wide-gap materials the hydrogen model predicts deeper levels (Mg acceptors in GaN lie about 0.17–0.2 eV above the valence band, so only a few per cent ionize at room temperature), which is why p-type GaN is hard and why some oxides can only be doped n-type.
+It falls with temperature, and since rotating a molecule in a liquid or solid is slow and frictional, it responds at frequencies from millihertz to about $10^{11}\ \mathrm{Hz}$, depending on how free the dipoles are.
 
-Impurities with levels near mid-gap — Au, Fe, Cu, Ni in silicon, or native defects such as vacancies — are **deep levels**. They do not usefully dope; they trap carriers and catalyse recombination (Section 26.3).
+**Interfacial (space-charge, Maxwell–Wagner) polarization.** In a heterogeneous material, such as a composite, a polycrystal with conducting grains and insulating boundaries, or a material with mobile ions, charges drift until they pile up at internal interfaces. The resulting dipoles are as large as the grains or layers, so the apparent permittivity can be huge, but the mechanism is slow (typically below a kilohertz) and always lossy.
 
-### Three temperature regimes
+### From atoms to permittivity: the local field
 
-In an n-type sample with donor density $N_d$ the electron concentration passes through three regimes (Figure 26.2):
+Each dipole feels not the average field $E$ but a **local field** that includes the field of all the other dipoles. For a site of cubic symmetry, Lorentz showed that
 
-- **Freeze-out** at low temperature, where electrons fall back onto donors; $n$ rises exponentially with $T$ with an activation energy of about $E_d/2$.
-- **Extrinsic (saturation)** range, $n\approx N_d$, flat over hundreds of kelvin. Devices are designed to work here.
-- **Intrinsic** range, where $n_i$ exceeds $N_d$ and $n$ rises again with an activation energy $E_g/2$.
+$$
+E_{\rm loc}=E+\frac{P}{3\varepsilon_0}
+$$
 
-The position of the Fermi level follows: in the extrinsic range $E_c-E_F=k_BT\ln(N_c/N_d)$, which for $N_d=10^{16}$ cm$^{-3}$ in silicon is 0.21 eV. When both donors and acceptors are present, they **compensate**: the net carrier density is $\lvert N_d-N_a\rvert$, but both species still scatter carriers, so compensated material has low mobility. Upgraded metallurgical silicon for solar cells, which contains both boron and phosphorus, suffers exactly this.
+With $N$ polarizable units per volume, $P=N\alpha E_{\rm loc}=N\alpha\left(E+P/3\varepsilon_0\right)$. Solving for $P$ and using $P=\varepsilon_0(\varepsilon_r-1)E$:
 
-<!-- FIGURE 26.2 | figures/ch26/fig-26-2-carrier-vs-temperature.png | plot | Electron concentration in n-type silicon against temperature: freeze-out, extrinsic and intrinsic regimes, with the intrinsic concentration of four semiconductors. | Content: x-axis 1000/T from 1 to 20 K^-1 (top axis temperature in C, from 700 down to -220); y-axis log10 n from 1e8 to 1e18 cm^-3. Bold curve: Si with Nd = 1e15 cm^-3 — freeze-out slope at the right (below about 100 K), flat plateau at 1e15 between about 150 and 500 K, intrinsic rise at the left. Thin dashed lines: n_i(T) for Ge (2e13 at 300 K), Si (1e10 at 300 K), GaAs (2e6 at 300 K), 4H-SiC (about 1e-8 at 300 K, entering the plot only above about 500 C). Horizontal dotted line at Nd. Shade the useful device window for Si. -->
+$$
+\frac{\varepsilon_r-1}{\varepsilon_r+2}=\frac{N\alpha}{3\varepsilon_0}
+$$
+
+This is the **Clausius–Mossotti relation**. It connects a macroscopic property ($\varepsilon_r$) to an atomic one ($\alpha$) and a structural one ($N$, the density of polarizable units). It also predicts that as $N\alpha/3\varepsilon_0$ approaches 1, $\varepsilon_r$ diverges. The local field feeds back on itself. That "polarization catastrophe" is the seed of ferroelectricity (Chapter 27).
+
+> **Status of the principle: Clausius–Mossotti relation**
+> *Approximate.* It assumes the Lorentz local field, exact only for sites of cubic symmetry with point dipoles. It works well for gases, non-polar liquids and cubic ionic crystals. It fails for polar liquids such as water, where neighbouring dipoles are strongly correlated (Onsager and Kirkwood corrections are needed).
+
+The relation explains why density changes permittivity. Polyethylene's $\varepsilon_r$ rises from 2.28 to 2.36 between low-density and high-density grades because $N$ rises. It also explains a small negative temperature coefficient of $\varepsilon_r$ in non-polar materials, which expand on heating.
+
+### Reading the mechanisms from optical data
+
+At optical frequencies only electronic polarization can follow the field, and Maxwell's equations give $\varepsilon_r=n^2$, where $n$ is the refractive index. Comparing $n^2$ with the low-frequency permittivity therefore shows how much of a material's polarization is electronic.
+
+**Worked example — which mechanism dominates?**
+
+| Material | $n$ (visible) | $n^2$ | $\varepsilon_r$ (1 kHz–1 MHz) | Interpretation |
+|---|---|---|---|---|
+| Polyethylene | 1.51 | 2.28 | 2.3 | Entirely electronic: non-polar |
+| PTFE | 1.35 | 1.82 | 2.1 | Mainly electronic; small atomic contribution from C–F bonds |
+| PVC | 1.54 | 2.37 | 3–4 | Extra comes from rotating C–Cl dipoles |
+| Alumina | 1.76 | 3.10 | 9.8 | Two thirds of the permittivity is ionic |
+| Water | 1.333 | 1.78 | 80 | Almost all orientational |
+
+Polyethylene and PTFE are the two lowest-permittivity solid insulators because they have only electronic polarization, and they keep that permittivity unchanged up to tens of gigahertz. That is why they are used in coaxial cables and microwave substrates. Water's $\varepsilon_r$ of 80, by contrast, is a property of its rotating dipoles. That is why a trace of water changes an insulator's behaviour so much (Section 26.8).
+
+### Representative permittivities
+
+| Material | $\varepsilon_r$ (typical, 1 kHz–1 MHz, 20 °C) | Dominant mechanism |
+|---|---|---|
+| Vacuum; air (1 atm) | 1; 1.0006 | — |
+| SF$_6$ gas (1 atm) | 1.002 | Electronic |
+| PTFE | 2.1 | Electronic |
+| Polypropylene; polyethylene, XLPE | 2.2; 2.3 | Electronic |
+| Mineral transformer oil | 2.2 | Electronic |
+| Polystyrene | 2.55 | Electronic |
+| Silicone rubber (filled) | 3–4 | Electronic + some dipolar |
+| Polyimide (Kapton) | 3.4 | Electronic + dipolar |
+| Epoxy (unfilled) | 3.5–4.5 | Electronic + dipolar |
+| Thermal SiO$_2$; fused silica | 3.9; 3.8 | Electronic + ionic |
+| FR-4 laminate | 4.3–4.8 (lower at GHz) | Composite: glass + epoxy |
+| Mica (muscovite) | 6–7 | Ionic |
+| Electrical porcelain | 5–7 | Ionic + interfacial |
+| Silicon nitride (film) | 7–7.5 | Ionic |
+| Aluminium nitride | 8.6–8.9 | Ionic |
+| Alumina (96–99.5 %) | 9.4–9.9 | Ionic |
+| HfO$_2$ (film) | 20–25 | Ionic (soft modes) |
+| Water (25 °C) | 78.4 | Orientational |
+| TiO$_2$ (rutile) | 86 (perp. to c), 170 (along c) | Ionic (soft modes) |
+| BaTiO$_3$ ceramics | 1000–10,000 | Ferroelectric (Chapter 27) |
 
 ---
 
-## 26.3 Mobility, drift, diffusion and recombination
+## 26.2 Dielectric loss and loss tangent
 
-### Drift and mobility
+### Why a capacitor heats
 
-In a field, carriers drift with velocity $v=\mu E$, so the conductivity of a semiconductor is
+An ideal capacitor driven by a sinusoidal voltage draws a current leading the voltage by exactly 90°, and dissipates no power. A real dielectric draws a current that leads by slightly less than 90°. The missing angle $\delta$ is the **loss angle**. Two separate processes cause it:
 
-$$
-\sigma=q(n\mu_n+p\mu_p)
-$$
+- **Polarization lag.** The dipoles of Section 26.1 cannot follow the field instantaneously. Their response lags, and part of the work done on them is dissipated by friction with their surroundings.
+- **Conduction.** A small real current flows through the insulator's finite resistivity (Section 26.6).
 
-With both $n$ and $\mu$ variables, semiconductors are the materials where conductivity is designed rather than accepted. Mobility $\mu=q\tau/m^*$ is limited by two main scattering mechanisms: **lattice (phonon) scattering**, which grows with temperature ($\mu_L\propto T^{-3/2}$ in an ideal case; closer to $T^{-2.2}$ for electrons in Si), and **ionized-impurity scattering** from the dopants themselves, which grows with doping and decreases with temperature as faster carriers are deflected less. Matthiessen's rule (Chapter 25) combines them, $1/\mu=1/\mu_L+1/\mu_I$. The empirical mobility–doping curves of Figure 26.3 are the semiconductor designer's working data: silicon electron mobility falls from 1400 cm²/(V s) in pure material to about 1200 at $10^{16}$ cm$^{-3}$ and below 100 at $10^{19}$ cm$^{-3}$.
-
-At high fields the drift velocity stops rising with field and **saturates** near $10^7$ cm/s in Si, because carriers lose energy to optical phonons as fast as they gain it. Saturation velocity, not low-field mobility, limits short-channel transistors. GaN's saturation velocity (about $2.5\times10^7$ cm/s) and GaAs's velocity overshoot are why those materials serve microwave amplifiers.
-
-<!-- FIGURE 26.3 | figures/ch26/fig-26-3-mobility-vs-doping.png | plot | Carrier mobility falls with doping as ionized-impurity scattering adds to lattice scattering. | Content: x-axis total dopant concentration 1e13 to 1e20 cm^-3 (log); y-axis mobility 10 to 10000 cm^2/(V s) (log). Curves at 300 K (Caughey–Thomas form): Si electrons (1417 at low doping, about 1200 at 1e16, 260 at 1e18, about 90 at 1e19); Si holes (470, 410 at 1e16, 150 at 1e18, 60 at 1e19); GaAs electrons (8500 at low doping, about 6000 at 1e16, 2400 at 1e18); 4H-SiC electrons (about 950 at low doping, 400 at 1e18). Annotate the lattice-limited plateau and the impurity-limited roll-off. -->
-
-### Diffusion and the Einstein relation
-
-Carriers also move down concentration gradients, giving diffusion currents $J_n=qD_n\,dn/dx$ (Fick's first law, Chapter 8). Drift and diffusion are two faces of the same random motion, and their coefficients are linked by the **Einstein relation**
+Both are described by a **complex relative permittivity**
 
 $$
-\frac{D}{\mu}=\frac{k_BT}{q}
+\varepsilon_r^*=\varepsilon'-j\varepsilon''
 $$
 
-which is 25.9 mV at 300 K. It is the semiconductor form of the Nernst–Einstein relation of Chapter 25.
-
-> **Status of the principle: Einstein relation $D/\mu=k_BT/q$**
-> *Derived.* It follows from requiring zero net current in equilibrium with Boltzmann statistics. It is modified in degenerate material and for hot carriers far from equilibrium.
-
-### Generation, recombination and lifetime
-
-Excess carriers created by light or injection decay back to equilibrium by **recombination**, with a characteristic **minority-carrier lifetime** $\tau$. Three routes exist:
-
-- **Radiative recombination** — an electron drops across the gap and emits a photon. Fast in direct-gap materials (nanoseconds at high injection in GaAs), negligible in indirect-gap Si. It is the useful process in LEDs and lasers.
-- **Shockley–Read–Hall (SRH) recombination** — via a deep trap level, which captures an electron and then a hole. Its rate is proportional to the trap density, and traps near mid-gap are the most effective. This is the dominant loss in silicon and in defective wide-gap crystals, and the reason transition metals are so damaging: interstitial iron at $10^{12}$ cm$^{-3}$ — about 20 parts per trillion — reduces the lifetime of p-type silicon to a few microseconds.
-- **Auger recombination** — the energy goes to a third carrier rather than a photon. It scales as the cube of carrier density and dominates in heavily doped regions and in LEDs at high current (one cause of efficiency droop in GaN LEDs).
-
-The **diffusion length** $L=\sqrt{D\tau}$ is the average distance a minority carrier travels before recombining. It is the materials parameter that decides whether a solar cell collects the carriers generated deep in its absorber.
-
-**Worked example — the solar wafer and its lifetime.** An n-type Czochralski silicon wafer, doped $10^{16}$ cm$^{-3}$, has hole (minority) mobility $\mu_p\approx450$ cm²/(V s). The Einstein relation gives $D_p=0.02585\times450=11.6$ cm²/s. With a lifetime of 10 µs (a moderately contaminated wafer):
+The real part $\varepsilon'$ governs storage; the imaginary part $\varepsilon''$ (the **loss factor** or loss index) governs dissipation. The ratio is the **loss tangent** (dissipation factor):
 
 $$
-L_p=\sqrt{D_p\tau}=\sqrt{11.6\times10\times10^{-6}}=1.08\times10^{-2}\ \mathrm{cm}=108\ \mu\mathrm m
+\tan\delta=\frac{\varepsilon''}{\varepsilon'}
 $$
 
-which is shorter than the 160 µm wafer, so carriers generated at the back by long-wavelength light recombine before reaching the junction. A high-quality n-type wafer with $\tau=1$ ms has $L_p=1.08$ mm, more than six times the wafer thickness, and nearly every carrier is collected. The difference — achieved by gettering iron to the surface, passivating the surfaces with Al$_2$O$_3$ or SiN$_x$, and choosing n-type material, which is less sensitive to iron and free of the boron–oxygen defect that degrades p-type cells — is a large part of why commercial cell efficiency rose from 17 % to over 24 % in a decade.
+A d.c. conductivity $\sigma$ adds $\sigma/(\omega\varepsilon_0)$ to $\varepsilon''$, which dominates at low frequency. The quality factor of a capacitor dielectric is $Q=1/\tan\delta$.
+
+### The power dissipated
+
+For a sinusoidal field of r.m.s. amplitude $E$ and angular frequency $\omega$, the power dissipated per unit volume is
+
+$$
+p=\omega\varepsilon_0\varepsilon''E^2=\omega\varepsilon_0\varepsilon'\tan\delta\,E^2
+$$
+
+For a capacitor at r.m.s. voltage $V$:
+
+$$
+P=\omega CV^2\tan\delta
+$$
+
+The equivalent circuit is an ideal capacitor $C$ in parallel with a resistance $R_p=1/(\omega C\tan\delta)$. This resistance is not a fixed resistor: it changes with frequency because $\tan\delta$ does.
+
+Three engineering consequences come straight from the formula:
+
+1. Loss grows linearly with frequency for fixed $\tan\delta$. A dielectric that is negligible at 50 Hz can dominate at 1 GHz.
+2. Loss grows with the square of the field. Insulation designed for higher stress needs a lower $\tan\delta$.
+3. The product $\varepsilon'\tan\delta=\varepsilon''$ is what heats the material. In microwave heating that is the goal (water's $\varepsilon''$ at 2.45 GHz is about 10–12); in an insulator it is the enemy.
+
+### Representative values
+
+| Material | $\varepsilon'$ | $\tan\delta$ (typical) | Frequency |
+|---|---|---|---|
+| PTFE | 2.1 | $1$–$2\times10^{-4}$ | 1 MHz–10 GHz |
+| Polyethylene, XLPE | 2.3 | $2$–$5\times10^{-4}$ | 50 Hz–1 GHz |
+| Polypropylene (capacitor film) | 2.2 | $2\times10^{-4}$ | 1 kHz–1 MHz |
+| Polystyrene | 2.55 | $1\times10^{-4}$ | 1 MHz |
+| Polyimide | 3.4 | $2$–$8\times10^{-3}$ | 1 kHz–1 GHz |
+| FR-4 | 4.2–4.5 | 0.015–0.02 | 1 GHz |
+| Low-loss hydrocarbon or PTFE–ceramic laminates | 3.0–3.5 | 0.001–0.004 | 10 GHz |
+| Fused silica | 3.8 | $1\times10^{-4}$ or lower | 1 MHz–10 GHz |
+| Alumina 99.5 % | 9.8 | $1\times10^{-4}$ | 1 MHz–10 GHz |
+| Mineral oil (new, 90 °C) | 2.2 | below $5\times10^{-3}$ | 50 Hz |
+| Oil-impregnated paper | 3.5 | $2$–$3\times10^{-3}$ | 50 Hz |
+| PVC (plasticized) | 4–6 | 0.05–0.1 | 50 Hz |
+| Water (25 °C) | 77 | about 0.16 | 2.45 GHz |
+
+**Worked example — loss and charging current in a medium-voltage cable.** An 11 kV three-phase cable has a phase-to-earth voltage $U_0=6.35\ \mathrm{kV}$. Each core has a conductor (with its semiconducting screen) of radius $r=6.0\ \mathrm{mm}$ and XLPE insulation out to $R=9.4\ \mathrm{mm}$, with $\varepsilon_r=2.3$ and $\tan\delta=5\times10^{-4}$ at 50 Hz.
+
+The capacitance of a coaxial insulation per unit length is
+
+$$
+C'=\frac{2\pi\varepsilon_0\varepsilon_r}{\ln(R/r)}=\frac{2\pi(8.854\times10^{-12})(2.3)}{\ln(9.4/6.0)}=\frac{1.280\times10^{-10}}{0.449}=2.85\times10^{-10}\ \mathrm{F/m}
+$$
+
+or $0.285\ \mu\mathrm F/\mathrm{km}$. The charging current per kilometre per phase is
+
+$$
+I=\omega C'U_0=(314.2)(2.85\times10^{-7})(6350)=0.57\ \mathrm{A/km}
+$$
+
+and the dielectric loss per kilometre per phase
+
+$$
+P=\omega C'U_0^2\tan\delta=(314.2)(2.85\times10^{-7})(6350)^2(5\times10^{-4})=1.8\ \mathrm{W/km}
+$$
+
+The dielectric loss is tiny compared with the conductor's $I^2R$ loss (several kilowatts per kilometre at rated current). That is why XLPE, with its low loss tangent, displaced the oil-paper cables of the past ($\tan\delta$ about 10 times higher). At transmission voltages, where $U_0^2$ is 100 times larger, the dielectric loss becomes significant and the loss tangent becomes a design parameter. The charging current, not the loss, limits the length of long a.c. cables, which is one reason long submarine links use HVDC.
+
+### Loss at high frequency: why board material matters
+
+On a printed circuit board carrying a signal of frequency $f$, the dielectric attenuation of a transmission line is approximately
+
+$$
+\alpha_d\approx\frac{\pi\sqrt{\varepsilon_{\rm eff}}\tan\delta}{\lambda_0}\ \ \mathrm{Np/m}=27.3\,\frac{\sqrt{\varepsilon_{\rm eff}}\tan\delta}{\lambda_0}\ \ \mathrm{dB/m}
+$$
+
+where $\lambda_0$ is the free-space wavelength. At 10 GHz ($\lambda_0=30\ \mathrm{mm}$), a stripline in FR-4 ($\varepsilon_r=4.3$, $\tan\delta=0.02$) loses $27.3\times2.07\times0.02/0.03=37.7\ \mathrm{dB/m}$, or about 0.38 dB/cm. A PTFE–ceramic laminate ($\varepsilon_r=3.0$, $\tan\delta=0.0013$) loses about 2.0 dB/m, nearly twenty times less. Over a 30 cm backplane trace the difference is 11 dB against 0.6 dB, which decides whether a multi-gigabit link works. This is the materials reason for the large family of low-loss laminates in Chapter 51: the epoxy and glass of FR-4 contain polar groups and ions whose losses rise in the gigahertz range, and low-loss laminates replace them with non-polar resins (PTFE, hydrocarbons, polyphenylene ether) and low-loss fillers.
 
 ---
 
-## 26.4 Semiconductor families: Si, Ge, III–V, SiC, GaN, oxides, organics
+## 26.3 Frequency and temperature dependence
 
-### A comparison
+### The dielectric spectrum
 
-| Material | $E_g$ (eV), type | $\mu_n$ (cm²/(V s)) | $\varepsilon_r$ | $E_{\mathrm{crit}}$ (MV/cm) | $k$ (W/(m K)) | Main uses |
-|---|---|---|---|---|---|---|
-| Si | 1.12, indirect | 1400 | 11.7 | 0.3 | 150 | Logic, memory, sensors, PV, power to 1.7 kV |
-| Ge | 0.66, indirect | 3900 | 16.0 | 0.1 | 60 | IR optics and detectors, SiGe channels |
-| GaAs | 1.42, direct | 8500 | 12.9 | 0.4 | 46–55 | RF front ends, lasers, space PV |
-| InP | 1.34, direct | 5400 | 12.5 | 0.5 | 68 | Telecom lasers and detectors, high-speed electronics |
-| In$_{0.53}$Ga$_{0.47}$As | 0.74, direct | 12 000 | 13.9 | 0.2 | 5 | 1.55 µm detectors, HEMT channels |
-| 4H-SiC | 3.26, indirect | 950 | 9.7 | 2.5–3 | 370–490 | Power devices 650 V–10 kV, harsh-environment sensors |
-| GaN | 3.4, direct | 1000 (2000 in 2DEG) | 9.0 | 3.3 | 130–230 | Blue/white LEDs, lasers, RF and fast power switches |
-| β-Ga$_2$O$_3$ | 4.8, (indirect) | 200 | 10 | 8 (theory) | 11–27 | Developmental ultra-high-voltage power |
-| Diamond | 5.5, indirect | 2000 | 5.7 | 10 | 2000 | Heat spreaders, radiation detectors |
-| ZnO | 3.37, direct | 200 | 8.7 | — | 50 | Varistors, transparent electrodes, UV sensors |
-| a-IGZO (amorphous oxide) | 3.0–3.5 | 10–20 | 10–16 | — | 1–2 | Display backplane transistors |
-| a-Si:H | 1.7 (mobility gap) | ≈1 | 11 | — | 1–2 | Large-area displays, detectors (largely superseded) |
-| Organic (small molecule / polymer) | 1.5–3 (HOMO–LUMO) | $10^{-3}$–10 | 3–4 | — | 0.2 | OLED displays, flexible electronics, OPV |
+Because each mechanism has its own response time, a plot of $\varepsilon'$ and $\varepsilon''$ against frequency shows a staircase of steps (Figure 26.2). At the lowest frequencies all mechanisms contribute. As frequency rises, first interfacial, then orientational, then ionic, then electronic polarization drops out, each producing a step down in $\varepsilon'$ and a peak in $\varepsilon''$. Every peak in loss accompanies a step in permittivity. The two are linked: the Kramers–Kronig relations, which follow from causality, require any frequency-dependent $\varepsilon'$ to come with loss somewhere in the spectrum.
 
-*Table 26.1 — Properties of semiconductor families at 300 K (typical values; mobility for low-doped material, field-effect mobility for amorphous and organic films).*
+<!-- FIGURE 26.2 | figures/ch26/fig-26-2-dielectric-spectrum.png | plot | Dielectric spectrum: real and imaginary permittivity of a polar, heterogeneous solid from millihertz to ultraviolet frequencies. | Content: x-axis log frequency 1e-2 to 1e16 Hz; upper panel epsilon' (0 to about 15, arbitrary but schematic) with four descending steps labelled interfacial (below 1e3 Hz), orientational (relaxation step centred about 1e6-1e9 Hz), ionic (resonance near 1e13 Hz with characteristic overshoot), electronic (resonance near 1e15 Hz, settling to 1 above). Lower panel epsilon'' with broad relaxation peaks at the first two steps and sharp resonance peaks at the last two. Mark the bands: power (50/60 Hz), audio, RF, microwave (1-100 GHz), infrared, visible, UV. Note n^2 = epsilon_infinity in the visible region. -->
 
-### Silicon and germanium
+![Figure 26.2 — Dielectric spectrum: real and imaginary permittivity of a polar, heterogeneous solid from millihertz to ultraviolet frequencies](../figures/ch26/fig-26-2-dielectric-spectrum.png)
 
-Silicon's dominance is not due to any outstanding electronic property: its mobility is modest, its gap indirect, its breakdown field low. It wins on materials and processing grounds. Silicon is the second most abundant element in the crust; it can be purified to eleven nines and grown as dislocation-free crystals 300 mm in diameter (Section 26.6); and above all it forms a native oxide, SiO$_2$, that is an excellent insulator with an interface that can be passivated to fewer than $10^{10}$ defect states per cm² — a property no other semiconductor matches. Silicon is also mechanically strong (it is the structural material of MEMS accelerometers and pressure sensors, with a yield strength above 1 GPa in small structures) and a good thermal conductor. Germanium, with higher mobility and a smaller gap, was the first transistor material but lost because its oxide is water-soluble and its $n_i$ is too high for hot devices. It survives in infrared optics and detectors, gamma-ray spectrometers, and as SiGe alloys that strain silicon channels and form fast heterojunction bipolar transistors.
+*Figure 26.2 — Dielectric spectrum: real and imaginary permittivity of a polar, heterogeneous solid from millihertz to ultraviolet frequencies.*
 
-### III–V compounds and alloys
+The two kinds of feature have different shapes. Ionic and electronic polarization are **resonances**: bound charges on springs with natural frequencies in the infrared and ultraviolet, giving sharp peaks and an overshoot in $\varepsilon'$ just below the resonance. Orientational and interfacial polarization are **relaxations**: there is no restoring spring, only friction, and the response decays smoothly.
 
-Compounds of group-III (Al, Ga, In) and group-V (N, P, As, Sb) elements crystallize in the zincblende structure (wurtzite for nitrides; Chapter 2) and are mostly direct-gap. Their decisive advantage is that they form continuous solid solutions whose lattice constant and band gap can be tuned by composition. The lattice constant follows **Vegard's law** (linear interpolation), and the band gap follows a quadratic with a **bowing parameter** $b$:
+### The Debye relaxation
+
+Suppose the orientational polarization relaxes toward its equilibrium value exponentially with a single time constant $\tau$. Solving for a sinusoidal field gives
 
 $$
-a(x)=xa_{AC}+(1-x)a_{BC},\qquad E_g(x)=xE_{AC}+(1-x)E_{BC}-b\,x(1-x)
+\varepsilon^*(\omega)=\varepsilon_\infty+\frac{\varepsilon_s-\varepsilon_\infty}{1+j\omega\tau}
 $$
 
-Figure 26.4, the band-gap–lattice-constant map, is the design chart for heterostructures: materials connected by a line can be alloyed; materials on the same vertical line can be grown on each other without strain.
-
-> **Status of the principle: Vegard's law and band-gap bowing**
-> *Empirical.* Vegard's law holds to within about 0.5 % for most III–V alloys; the band gap needs a fitted bowing parameter, which is large (several eV) for highly mismatched alloys such as GaAsN and InGaN, where the linear picture fails badly.
-
-**Worked example — designing a 1.55 µm detector alloy.** Telecom fibres have their lowest loss near 1.55 µm (Chapter 28), and InP is the substrate of choice. Which In$_x$Ga$_{1-x}$As composition is lattice-matched to InP? With $a_{\mathrm{GaAs}}=5.6533$ Å, $a_{\mathrm{InAs}}=6.0584$ Å and $a_{\mathrm{InP}}=5.8687$ Å, Vegard's law gives
+where $\varepsilon_s$ is the static (low-frequency) and $\varepsilon_\infty$ the high-frequency permittivity. Separating real and imaginary parts:
 
 $$
-x=\frac{5.8687-5.6533}{6.0584-5.6533}=0.532
+\varepsilon'=\varepsilon_\infty+\frac{\Delta\varepsilon}{1+\omega^2\tau^2},\qquad
+\varepsilon''=\frac{\Delta\varepsilon\,\omega\tau}{1+\omega^2\tau^2},\qquad \Delta\varepsilon=\varepsilon_s-\varepsilon_\infty
 $$
 
-the familiar In$_{0.53}$Ga$_{0.47}$As. With $E_{\mathrm{InAs}}=0.354$ eV, $E_{\mathrm{GaAs}}=1.424$ eV and $b=0.477$ eV,
+The loss peaks at $\omega\tau=1$ with height $\Delta\varepsilon/2$, and the step in $\varepsilon'$ is centred at the same frequency. Plotting $\varepsilon''$ against $\varepsilon'$ (a **Cole–Cole plot**) gives a semicircle of radius $\Delta\varepsilon/2$ centred on the real axis (Figure 26.3).
+
+<!-- FIGURE 26.3 | figures/ch26/fig-26-3-debye-cole-cole.png | plot | Debye relaxation: frequency response and the Cole–Cole representation. | Content: left panel: x-axis log(omega tau) from -3 to 3; epsilon' falling from epsilon_s to epsilon_infinity (use epsilon_s = 80, epsilon_infinity = 5, like water), epsilon'' peak 37.5 at omega tau = 1; second, broader dashed epsilon'' curve labelled "distribution of relaxation times (polymer)". Right panel: Cole–Cole plot epsilon'' vs epsilon', ideal Debye semicircle from 5 to 80, depressed arc for a distributed relaxation; arrow showing increasing frequency from right to left. Annotate water at 25 C: f_peak about 19 GHz, microwave oven at 2.45 GHz. -->
+
+![Figure 26.3 — Debye relaxation: frequency response and the Cole–Cole representation](../figures/ch26/fig-26-3-debye-cole-cole.png)
+
+*Figure 26.3 — Debye relaxation: frequency response and the Cole–Cole representation.*
+
+Water is close to a Debye relaxer, with $\tau\approx8.3\ \mathrm{ps}$ at 25 °C. Its loss peak is at $f=1/(2\pi\tau)\approx19\ \mathrm{GHz}$. A microwave oven at 2.45 GHz works on the low-frequency side of that peak, where $\varepsilon''$ is still large but the wave penetrates several centimetres. Polymers have broad distributions of relaxation times, and their arcs are flatter than a semicircle (the empirical Cole–Cole and Havriliak–Negami forms fit them).
+
+> **Status of the principle: Debye relaxation**
+> *Approximate.* It assumes non-interacting dipoles with a single relaxation time. It describes dilute polar liquids and some defect dipoles in crystals. Solids and polymers show broader, asymmetric loss peaks, fitted by empirical generalizations.
+
+### Interfacial polarization in a layered insulator
+
+Interfacial polarization can be derived from the same picture. Take two layers in series, thicknesses $d_1,d_2$, permittivities $\varepsilon_1,\varepsilon_2$ and conductivities $\sigma_1,\sigma_2$. At high frequency the field divides according to the permittivities (capacitive division). At low frequency, after charge has accumulated at the interface, it divides according to the conductivities (resistive division). The transition is a Debye relaxation with time constant
 
 $$
-E_g=0.532(0.354)+0.468(1.424)-0.477(0.532)(0.468)=0.736\ \mathrm{eV}
+\tau_{\rm MW}=\varepsilon_0\,\frac{\varepsilon_1d_2+\varepsilon_2d_1}{\sigma_1d_2+\sigma_2d_1}
 $$
 
-corresponding to an absorption edge at $1.2398/0.736=1.68$ µm. The alloy absorbs strongly across the 1.3 and 1.55 µm telecom bands and remains transparent beyond 1.7 µm: one composition simultaneously solves the lattice-matching problem (no misfit dislocations) and the optical problem. Lasers for the same band use quaternary InGaAsP or InGaAlAs, where the extra degree of freedom lets the gap be tuned while staying lattice-matched.
+For good insulators $\tau_{\rm MW}$ can be seconds to hours. This is the origin of **dielectric absorption** in capacitors: a capacitor discharged briefly and then left open-circuit recovers part of its voltage as the interfacial charge redistributes. It matters in sample-and-hold circuits and integrators, and is why polypropylene and polystyrene (homogeneous, non-polar) are chosen there.
 
-<!-- FIGURE 26.4 | figures/ch26/fig-26-4-bandgap-vs-lattice-constant.png | map | Band gap against lattice constant for the principal semiconductors: the design chart for alloys and heterostructures. | Content: x-axis lattice constant 3.0 to 6.6 angstrom (for wurtzite nitrides and SiC use the a-parameter, plotted in a separate left cluster 3.0–3.6); y-axis band gap 0 to 6.5 eV, right axis corresponding wavelength in um (0.2 to 10). Points: AlN (3.11, 6.0), GaN (3.19, 3.4), InN (3.54, 0.7), 4H-SiC (3.07, 3.26), diamond (3.57, 5.5), Si (5.431, 1.12), Ge (5.658, 0.66), GaP (5.451, 2.26), AlAs (5.661, 2.16), GaAs (5.653, 1.42), InP (5.869, 1.34), InAs (6.058, 0.35), GaSb (6.096, 0.73), AlSb (6.136, 1.6), InSb (6.479, 0.17), ZnSe (5.668, 2.7), CdTe (6.48, 1.5). Solid lines for direct-gap alloys, dashed for indirect segments; bowed curves for InGaAs, AlGaAs (nearly vertical), InGaN. Vertical dashed line at InP with In0.53Ga0.47As marked at 0.74 eV. Visible band 1.65–3.1 eV shaded in spectrum colours. -->
+### Temperature dependence
 
-GaAs and AlGaAs (nearly lattice-matched across the whole range) make red and infrared lasers, the high-efficiency multi-junction solar cells that power satellites, and the RF front-end amplifiers of mobile phones. InP-based alloys own optical communication. Antimonides and InSb cover the mid-infrared for thermal imaging and gas sensing.
+Temperature enters in three ways.
 
-### Silicon carbide
-
-SiC is a covalent compound that exists in more than 200 **polytypes** — the same Si–C layers stacked in different sequences (Chapter 2) — of which 4H-SiC is the electronic grade, chosen for its high, nearly isotropic electron mobility. It combines a 3.26 eV gap, a critical field of 2.5–3 MV/cm, a thermal conductivity above that of copper, and a native SiO$_2$ (though with a worse interface than silicon's, which limits MOSFET channel mobility). Its difficulties are crystal growth (Section 26.6) and the extreme hardness that makes wafering slow. It is also a structural ceramic: the same compound is used as abrasive, armour, kiln furniture, and as the matrix and fibre of SiC/SiC composites in jet-engine hot sections (Chapter 33).
-
-### Gallium nitride and the nitrides
-
-GaN and its alloys with InN and AlN cover band gaps from 0.7 eV to 6.0 eV — infrared to deep ultraviolet — in one material system. InGaN quantum wells emit the blue light of every white LED (a blue chip plus a yellow phosphor, Chapter 28) and the violet light of Blu-ray lasers. In electronics, GaN's high critical field and the very high sheet density of electrons that forms spontaneously at an AlGaN/GaN interface (Section 26.5) make high-electron-mobility transistors (HEMTs) for radar, 5G base stations and compact chargers. Remarkably, GaN devices work despite dislocation densities of $10^8$–$10^9$ cm$^{-2}$, because GaN is grown on sapphire, SiC or silicon with large lattice mismatch; in GaAs such densities would kill a laser in minutes. Indium-rich clusters that localize carriers away from dislocations are part of the explanation.
-
-### Oxide semiconductors
-
-Most oxides are insulators, but several are wide-gap semiconductors with useful niches. ZnO, n-type through native defects and hydrogen, is the basis of the varistors that protect power lines and electronics from surges (its grain boundaries form back-to-back barriers, a microstructural device). In$_2$O$_3$:Sn (ITO), SnO$_2$:F and Al-doped ZnO are degenerately doped **transparent conducting oxides**, combining a gap above 3 eV with conductivity near $10^4$ S/cm, essential for displays, touch screens and solar cells. **Amorphous oxide semiconductors** such as InGaZnO$_4$ (IGZO) keep mobilities of 10–20 cm²/(V s) without crystallinity, because conduction runs through overlapping, spherically symmetric metal s orbitals that are insensitive to bond-angle disorder — unlike the directional sp$^3$ bonds of amorphous silicon, whose mobility collapses to about 1. IGZO thin-film transistors drive large OLED and LCD panels. β-Ga$_2$O$_3$, with a 4.8 eV gap and melt-grown substrates, is the leading candidate for the next generation of power devices, though it cannot be doped p-type and conducts heat poorly.
-
-### Organic semiconductors
-
-Conjugated molecules and polymers (pentacene, rubrene, P3HT, polyfluorenes, fullerene derivatives) are semiconductors because their delocalized π electrons form a highest occupied and a lowest unoccupied molecular orbital (HOMO and LUMO) separated by 1.5–3 eV. In the solid, molecules are held by weak van der Waals forces, so carriers hop between molecules and mobilities are low ($10^{-3}$–10 cm²/(V s)) and strongly dependent on molecular packing, crystallinity and film processing — a polymer-morphology problem of the kind in Chapter 20. Light absorption creates tightly bound excitons rather than free carriers because the permittivity is low (about 3). Organic semiconductors cannot compete with silicon on speed, but they can be printed, deposited at low temperature on plastic, and tuned by chemistry. OLED displays in phones and televisions are the large commercial success; organic photovoltaics, sensors and flexible circuits are smaller. Halide perovskites, a newer solution-processed family with remarkable defect tolerance, are treated as photovoltaic absorbers in Chapter 32, and two-dimensional semiconductors such as MoS$_2$ in Chapter 30.
-
-**Worked example — why SiC and GaN power devices are small.** A unipolar power device blocks voltage across a lightly doped **drift layer**. For a 1200 V device with a triangular field profile peaking at the critical field $E_c$, the minimum layer thickness is $W=2V/E_c$ and the maximum doping $N=\varepsilon_r\varepsilon_0E_c^2/(2qV)$. For silicon ($E_c=0.3$ MV/cm, $\varepsilon_r=11.7$):
+**Relaxation times are thermally activated.** For dipoles that must hop over an energy barrier $E_a$,
 
 $$
-W=\frac{2(1200)}{3\times10^7\ \mathrm{V/m}}=80\ \mu\mathrm m,\qquad N=\frac{11.7(8.854\times10^{-12})(3\times10^7)^2}{2(1.602\times10^{-19})(1200)}=2.4\times10^{20}\ \mathrm{m^{-3}}=2.4\times10^{14}\ \mathrm{cm^{-3}}
+\tau=\tau_0\exp\left(\frac{E_a}{k_BT}\right)
 $$
 
-For 4H-SiC ($E_c=2.5$ MV/cm, $\varepsilon_r=9.7$): $W=9.6$ µm and $N=1.4\times10^{16}$ cm$^{-3}$. The drift-layer resistance per unit area, $R_{\mathrm{on}}=W/(q\mu N)$, is therefore
+so heating shortens $\tau$ and shifts the loss peak to higher frequency. A loss peak sitting at 1 kHz at room temperature may sit at 50 Hz at a lower temperature, or at 1 MHz at a higher one. For polymers the strongest relaxation is tied to the glass transition (Chapter 20). Below $T_g$ the main-chain dipoles are frozen and only local side-group motions contribute. Near $T_g$ the main chain unfreezes, and both $\varepsilon'$ and $\tan\delta$ rise sharply. This is why a polar insulator's loss rises steeply as it approaches its softening temperature, and why thermal runaway (Section 26.5) is a real risk.
 
-$$
-R_{\mathrm{on,Si}}=\frac{80\times10^{-4}\ \mathrm{cm}}{(1.602\times10^{-19})(1350)(2.4\times10^{14})}=153\ \mathrm{m\Omega\,cm^2},\qquad R_{\mathrm{on,SiC}}=0.45\ \mathrm{m\Omega\,cm^2}
-$$
+**Orientational polarizability falls as $1/T$** (Section 26.1), once the dipoles are free to rotate.
 
-(with $\mu=950$ cm²/(V s) for SiC) — a factor of about 340. Because $R_{\mathrm{on}}\propto V^2/(\varepsilon_r\mu E_c^3)$, the critical field enters as its cube, and that single materials property drives the whole trend. In practice silicon uses bipolar IGBTs to flood the drift layer with carriers and reduce this penalty, at the cost of slower switching. The SiC device conducts the same current through a chip a few hundredths the area, with less capacitance and faster switching — the opening example's inverter gains, derived from a breakdown field. The quantity $\varepsilon_r\mu E_c^3$ is Baliga's figure of merit, a performance index in exactly the sense of Chapter 48.
+**Conduction rises exponentially** with temperature (Section 26.6), adding $\sigma/\omega\varepsilon_0$ to $\varepsilon''$. At power frequencies and high temperature, conduction often dominates the loss.
+
+The net result is that non-polar insulators (PE, PP, PTFE, fused silica) have nearly flat $\varepsilon'(T)$ and very low loss over wide ranges, while polar ones (PVC, epoxy, polyamide, cellulose) change substantially. For capacitors, the temperature coefficient of capacitance, written $\mathrm{TCC}=(1/C)\,dC/dT$, is specified by class; Chapter 27 treats the ceramic capacitor classes, whose permittivity is engineered rather than incidental.
 
 ---
 
-## 26.5 Junctions, heterostructures and interfaces as material problems
+## 26.4 Dielectric strength
 
-### The p–n junction
+### Definition and what it hides
 
-When p-type and n-type regions of the same crystal meet, electrons diffuse into the p side and holes into the n side, leaving behind a **depletion region** of ionized dopants whose field opposes further diffusion. Equilibrium is reached when the Fermi level is constant across the junction; the bands then bend by the **built-in potential**
+The **dielectric strength** is the field at which an insulator fails, usually stated as breakdown voltage divided by thickness:
 
 $$
-V_{bi}=\frac{k_BT}{q}\ln\frac{N_aN_d}{n_i^2}
+E_b=\frac{V_b}{d}\qquad(\mathrm{kV/mm}\ \text{or}\ \mathrm{MV/m};\ 1\ \mathrm{kV/mm}=1\ \mathrm{MV/m})
 $$
 
-For silicon with $N_a=10^{17}$ and $N_d=10^{16}$ cm$^{-3}$, $V_{bi}=0.0259\ln(10^{33}/10^{20})=0.77$ V, and the depletion width $W=\sqrt{2\varepsilon V_{bi}(1/N_a+1/N_d)/q}$ is 0.33 µm. Under forward bias the barrier drops and current rises exponentially; under reverse bias only a small leakage flows, set by $n_i^2$ and by generation at defects — which is why leakage, like the high-temperature limit of Section 26.2, is ultimately a band-gap and crystal-quality property. Every solar cell, LED, photodiode and bipolar transistor is a junction.
+Unlike permittivity, $E_b$ is not a single material property. The measured value depends on:
 
-### Metal–semiconductor contacts
+- **Thickness.** Thinner specimens test stronger. An empirical fit is $E_b\propto d^{-n}$ with $n$ typically 0.3–0.5 for solids.
+- **Area or volume tested.** Larger specimens contain more weak spots and fail at lower fields (the weakest-link statistics below).
+- **Time and waveform.** Short impulses (lightning, 1.2/50 $\mu$s) give higher values than 1 min a.c. tests, which give higher values than long-term service. Breakdown is a process with a duration, not an instantaneous event.
+- **Electrode geometry and medium.** Edges and points enhance the field; a test in oil prevents flashover around the specimen, while in air the surrounding gas may break down first.
+- **Temperature, humidity and frequency.**
 
-A metal on a semiconductor forms either a rectifying **Schottky barrier** or an ohmic contact. The simple Schottky–Mott rule predicts a barrier equal to the metal work function minus the semiconductor's electron affinity, but in practice interface states **pin** the Fermi level, so barriers on silicon and GaAs depend only weakly on the metal. Ohmic contacts are therefore made not by choosing a metal of the right work function but by doping the semiconductor so heavily ($>10^{19}$ cm$^{-3}$) that the barrier becomes thin enough for electrons to tunnel, and by reacting metal with semiconductor to form silicides (TiSi$_2$, NiSi) or alloyed contacts (Ti/Al on GaN, Ni on SiC annealed at about 1000 °C). Contact formation is interfacial metallurgy: reaction kinetics, phase formation and thermal stability decide whether a contact survives.
+Datasheet values are therefore test-method values (IEC 60243, ASTM D149) and are useful only for comparing materials under the same conditions. Design stresses in long-life equipment are a small fraction of them.
 
-### Heterostructures and band alignment
+| Material | Typical short-term $E_b$ (kV/mm) | Conditions |
+|---|---|---|
+| Air, 1 atm | about 3 | Uniform field, gaps of about 1 cm |
+| SF$_6$, 1 atm | about 8.9 | Uniform field |
+| Mineral transformer oil | 10–25 | IEC 60156, 2.5 mm gap; strongly reduced by water and particles |
+| Polyethylene, XLPE | 20–50 | 1–2 mm sheet, a.c. |
+| PTFE | 20–60 | 1–2 mm sheet; higher in thin film |
+| Biaxially oriented PP film | 400–700 | 5–15 $\mu$m film, d.c. (capacitor film) |
+| Polyimide film | about 300 | 25 $\mu$m film, a.c. |
+| Epoxy (cast) | 20–30 | 1–3 mm |
+| FR-4 | 20–40 | Through thickness, in oil |
+| Electrical porcelain | 15–25 | Several mm |
+| Alumina 96–99.5 % | 10–35 | Thickness dependent; lower at high temperature |
+| Mica (muscovite) | 50–200 | Thin sheet |
+| Thermal SiO$_2$ | about 1000 | 5–100 nm gate oxides |
 
-A **heterojunction** joins two different semiconductors. Their gaps differ, so at the interface the band edges must step, and the steps $\Delta E_c$ and $\Delta E_v$ share the gap difference according to the **band alignment** (Figure 26.5). In a **type I** (straddling) alignment, such as GaAs in AlGaAs, the narrow-gap material is a well for both electrons and holes; this confines carriers in quantum-well lasers and LEDs. In a **type II** (staggered) alignment, electrons and holes collect on opposite sides, used in some infrared detectors. **Type III** (broken gap), as in InAs/GaSb, lets electrons tunnel from one valence band into the other's conduction band. Alignments are estimated from electron affinities (Anderson's rule, often wrong by 0.1–0.3 eV because of interface dipoles) and measured by photoemission.
+The thermal oxide value deserves a note. A 10 nm gate oxide holding 10 V experiences $10^{9}\ \mathrm{V/m}$, about 300 times the field that breaks down air. Thin, nearly defect-free amorphous films approach the intrinsic limit of the material (Section 26.5), while thick, practical insulation fails at defects long before.
 
-Heterostructures created modern optoelectronics: confining carriers and light in a thin, narrow-gap layer between wider-gap, lower-index cladding is what made continuous room-temperature semiconductor lasers possible. They also enable **modulation doping**: donors placed in the wide-gap layer release electrons that fall into the adjacent narrow-gap layer, where they move without impurity scattering in a **two-dimensional electron gas** (2DEG).
+### Weakest-link statistics
 
-In AlGaN/GaN, no doping is needed. Wurtzite nitrides are polar (pyroelectric, Chapter 25), and AlGaN grown on GaN is also strained and therefore piezoelectrically polarized. The discontinuity in total polarization at the interface leaves a fixed sheet charge of about $10^{13}$ cm$^{-2}$, which attracts an equal sheet density of electrons — a 2DEG with mobility near 2000 cm²/(V s). The GaN HEMT is a device whose channel is created by crystal symmetry.
+Breakdown starts at the worst flaw in the stressed volume: a void, a particle, a protrusion on an electrode. Repeated tests on nominally identical specimens give a spread of breakdown fields, usually well described by a two-parameter **Weibull distribution**:
 
-<!-- FIGURE 26.5 | figures/ch26/fig-26-5-junction-band-diagrams.png | band-diagram | Band diagrams of a silicon p–n junction in equilibrium and of an AlGaN/GaN heterojunction with its polarization-induced two-dimensional electron gas. | Content: left panel: Si p–n junction, Na = 1e17, Nd = 1e16 cm^-3, x from -0.5 to +0.5 um; Ec and Ev bending by qVbi = 0.77 eV across a depletion region 0.33 um wide (mostly on the n side), flat EF dashed line across; label Eg = 1.12 eV, depletion region, + and - fixed charges. Right panel: Al0.25Ga0.75N (25 nm, Eg 3.96 eV) on GaN (Eg 3.4 eV); conduction-band offset about 0.4 eV, triangular well at the interface dipping below EF, shaded 2DEG labelled ns about 1e13 cm^-2; arrows showing spontaneous and piezoelectric polarization in each layer; surface at left with gate metal. -->
+$$
+P_F(E)=1-\exp\left[-\left(\frac{E}{E_0}\right)^{\beta}\right]
+$$
 
-### Lattice mismatch, strain and critical thickness
+$E_0$ is the scale parameter (the field at which 63.2 % of specimens have failed), and $\beta$ the shape parameter: a large $\beta$ (20 or more) means a tight distribution of strengths; small $\beta$ (5–10) means scattered weak spots. If the failure probability per unit area is independent of position, a specimen $k$ times larger has the same probability of survival as $k$ independent small specimens all surviving, and its scale parameter falls as
 
-A heterostructure is only as good as its interface, and the first materials problem is the **lattice mismatch** $f=(a_{\mathrm{film}}-a_{\mathrm{sub}})/a_{\mathrm{sub}}$. A thin mismatched layer can grow coherently, elastically strained to the substrate's in-plane lattice parameter. Its strain energy grows with thickness, and beyond a **critical thickness** $h_c$ it becomes favourable to introduce misfit dislocations at the interface (the Matthews–Blakeslee criterion, from the dislocation theory of Chapter 12). For Si$_{0.8}$Ge$_{0.2}$ on Si ($f=0.84\,\%$) $h_c$ is of order 10–20 nm at equilibrium, larger in metastable low-temperature growth. Threading segments of these dislocations pass through active layers and act as recombination centres and leakage paths. Strain is not only a problem: biaxial tension in silicon channels raises electron mobility and was introduced deliberately into every high-performance logic chip from the 90 nm node, and compressive strain in InGaAs quantum wells improves lasers.
+$$
+E_0(kA)=E_0(A)\,k^{-1/\beta}
+$$
 
-When no lattice-matched substrate exists, as for GaN, growth on sapphire (16 % mismatch after the 30° in-plane rotation of the epitaxial relationship), SiC (3.5 %) or Si(111) (about 17 %, with a large thermal-expansion mismatch that cracks thick layers on cooling) relies on nucleation layers, buffer superlattices and dislocation filtering. These are materials-science solutions to device problems.
+> **Status of the principle: Weibull statistics of breakdown**
+> *Empirical.* The Weibull form follows from weakest-link reasoning if flaw strengths have a suitable extreme-value distribution; in practice it is fitted to test data (IEC 62539). The area-scaling law assumes flaws are randomly and independently distributed.
 
-### The Si/SiO$_2$ interface and high-$\kappa$ dielectrics
+**Worked example — why a large capacitor is weaker than a test coupon.** A polymer film tested on 1 cm$^2$ electrodes shows $E_0=500\ \mathrm{kV/mm}$ with $\beta=10$. A wound capacitor of the same film has 100 cm$^2$ of active area. Its characteristic strength is
 
-The MOS transistor depends on the quality of a semiconductor–insulator interface. Thermally grown SiO$_2$ on silicon, annealed in hydrogen, has an interface-trap density of about $10^{10}$ cm$^{-2}$ eV$^{-1}$ — one electrically active defect per $10^5$ surface atoms — because the amorphous oxide can accommodate the bond geometry of the crystal and hydrogen saturates the few remaining dangling bonds. When gate oxides thinned below about 1.5 nm, tunnelling leakage forced a change to **high-$\kappa$** dielectrics (HfO$_2$, $\varepsilon_r\approx20$–25), which give the same capacitance with a physically thicker layer; a sub-nanometre SiO$_2$ interlayer is kept to preserve the interface. SiC and GaN have worse oxide interfaces ($10^{11}$–$10^{12}$ cm$^{-2}$ eV$^{-1}$), which lowers channel mobility and causes threshold-voltage drift, an active area of interface materials science.
+$$
+E_0=500\times100^{-1/10}=500\times0.631=316\ \mathrm{kV/mm}
+$$
+
+37 % lower, purely from having more chances to contain a weak spot. A lower $\beta$ would make the reduction worse. This is why capacitor designers derate film strength heavily and why the self-healing metallized electrodes of Section 26.9 are so valuable: they turn a fatal weak spot into a small, isolated loss of area.
+
+### Field enhancement and geometry
+
+The field in real insulation is not uniform. In a coaxial cable it is highest at the conductor:
+
+$$
+E(r)=\frac{U_0}{r\ln(R/r_c)}
+$$
+
+where $r_c$ is the conductor radius and $R$ the outer radius of the insulation. For the cable of the worked example in Section 26.2, the field at the conductor screen is $6350/(0.006\times0.449)=2.36\ \mathrm{kV/mm}$ and at the outer screen $1.50\ \mathrm{kV/mm}$. That is a design stress of about 5 % of the short-term strength of XLPE, the margin needed for 40 years of service with defects, water and temperature cycling. Semiconducting screens are extruded onto both sides of the insulation to make the electrode surfaces smooth, because a protrusion of radius a few micrometres on a rough conductor could raise the local field by an order of magnitude. Such a protrusion was the origin of the water tree in the opening example.
 
 ---
 
-## 26.6 Crystal growth and doping as materials processing
+## 26.5 Electrical breakdown mechanisms
 
-### Purity and perfection
+Breakdown is the change from insulating to conducting, with a sudden collapse of voltage and a destructive current. The mechanisms differ in gases, liquids and solids, but they share one feature: a positive feedback that multiplies carriers or heat faster than they are removed.
 
-Semiconductor devices need crystals of a perfection demanded nowhere else in engineering: electrically active impurities below $10^{12}$–$10^{13}$ cm$^{-3}$ (sub-ppb), and, for silicon, no dislocations at all. Purification starts with chemistry: metallurgical-grade silicon (98–99 %) from carbothermic reduction of quartz is converted to trichlorosilane, distilled, and decomposed onto hot silicon rods (the Siemens process) to give polysilicon of 9–11 nines. The solidification science of Chapter 9 then turns it into single crystals.
+### Gases: avalanche and Paschen's law
 
-### Czochralski growth and segregation
-
-In the **Czochralski** (Cz) process, a seed crystal is dipped into molten silicon (1414 °C) in a silica crucible and slowly pulled and rotated, growing an ingot up to 300 mm in diameter and 2 m long. Two materials-science ideas make it work. First, dislocations are eliminated by **Dash necking**: the crystal is first pulled to a thin neck of about 3 mm, which dislocations grow out of, after which the crystal stays dislocation-free because there are no sources to regenerate them. Second, dopants and impurities **segregate** between melt and solid. With an equilibrium distribution coefficient $k=C_s/C_l$ and complete mixing in the melt, the dopant concentration in the solid follows the **Scheil equation** of Chapter 9:
+A free electron in a gas is accelerated by the field. If it gains enough energy between collisions, it ionizes a molecule, freeing a second electron. Both are accelerated and repeat the process. The number of ionizing collisions per unit length is the **first Townsend coefficient** $\alpha$, so an avalanche starting at the cathode grows as $e^{\alpha d}$ over a gap $d$. The positive ions produced drift back and release further electrons from the cathode, with yield $\gamma$ per ion (the **second Townsend coefficient**). The discharge becomes self-sustaining, i.e. breakdown occurs, when each initial electron leads on average to one replacement:
 
 $$
-C_s=kC_0(1-f_s)^{k-1}
+\gamma\left(e^{\alpha d}-1\right)=1\quad\Longrightarrow\quad\alpha d=\ln\left(1+\frac1\gamma\right)
 $$
 
-where $f_s$ is the fraction solidified.
+The ionization coefficient depends on the energy gained per mean free path. The mean free path is inversely proportional to pressure $p$, so $\alpha/p$ depends only on $E/p$. A standard empirical form is
 
-> **Status of the principle: Scheil equation**
-> *Approximate.* It assumes complete mixing in the liquid, no diffusion in the solid and local equilibrium at the interface. It describes Cz growth well when the melt is stirred by rotation and convection; an effective $k$ (closer to 1 at high growth rate) corrects for incomplete mixing in the boundary layer.
+$$
+\frac{\alpha}{p}=A\exp\left(-\frac{Bp}{E}\right)
+$$
 
-**Worked example — the resistivity profile along a Cz ingot.** Boron in silicon has $k=0.8$; phosphorus has $k=0.35$. For boron, the first solid ($f_s=0$) has $0.8C_0$, the middle of the ingot ($f_s=0.5$) has $0.8(0.5)^{-0.2}C_0=0.92C_0$, and at $f_s=0.9$ the concentration reaches $0.8(0.1)^{-0.2}C_0=1.27C_0$. Since resistivity is roughly inversely proportional to doping, the resistivity varies by a factor of $1.27/0.8=1.6$ along 90 % of the ingot — tolerable for most uses. For phosphorus, the same points give $0.35C_0$, $0.55C_0$ and $1.56C_0$: a factor of 4.5. n-type Cz ingots therefore have a wide resistivity spread, which matters for high-efficiency n-type solar wafers and for power devices. Figure 26.6 shows these profiles. Remedies are continuous Cz (topping up the melt), co-doping, or **neutron transmutation doping** of float-zone silicon, in which reactor neutrons convert $^{30}$Si to $^{31}$P uniformly through the whole crystal — doping by nuclear reaction rather than solidification.
+Substituting $E=V/d$ into the breakdown condition and solving for $V$:
 
-<!-- FIGURE 26.6 | figures/ch26/fig-26-6-czochralski-scheil.png | plot | Czochralski growth and the dopant profile it produces: segregation makes concentration rise along the ingot, much more strongly for phosphorus than for boron. | Content: left panel schematic of a Cz puller: rotating seed and neck (about 3 mm), shoulder, cylindrical ingot, meniscus, silica crucible in graphite susceptor, heaters, argon flow; labels 1414 C melt, pull rate about 1 mm/min. Right panel: x-axis fraction solidified 0 to 1; y-axis Cs/C0 from 0 to 3. Scheil curves for k = 0.8 (B: 0.80, 0.92 at 0.5, 1.27 at 0.9), k = 0.35 (P: 0.35, 0.55, 1.56), k = 0.023 (Sb, rising from 0.023), and k = 8e-6 (Fe, flat near zero until near the end, inset log scale) showing segregation-based purification. Horizontal line at 1. -->
+$$
+V_b=\frac{B\,pd}{\ln(A\,pd)-\ln\left[\ln\left(1+1/\gamma\right)\right]}
+$$
 
-Cz silicon dissolves oxygen from the crucible at about $10^{18}$ cm$^{-3}$. That oxygen is both a nuisance (thermal donors, boron–oxygen light-induced degradation in solar cells) and a resource: controlled precipitation of SiO$_2$ in the wafer interior creates **internal gettering** sites that trap iron and copper away from the device layer, and dissolved oxygen pins dislocations and strengthens wafers against slip during processing. When the lowest oxygen and highest resistivity are needed (power devices, detectors), the crucible-free **float-zone** process passes a molten zone along a polycrystalline rod held by surface tension. Solar silicon is also cast by **directional solidification** into large multicrystalline blocks, cheaper but containing grain boundaries and dislocations that limit lifetime — the subject of the lifetime example in Section 26.3.
+This is **Paschen's law**: the breakdown voltage of a uniform gap depends on pressure and gap only through their product $pd$. For air, $A\approx15\ \mathrm{cm^{-1}\,Torr^{-1}}$ and $B\approx365\ \mathrm{V\,cm^{-1}\,Torr^{-1}}$ (1 Torr = 133.3 Pa), with $\gamma\approx0.01$, so $\ln[\ln(101)]=1.53$.
 
-Compound semiconductors are harder. GaAs and InP decompose before melting at atmospheric pressure, so they are grown by liquid-encapsulated Czochralski under a B$_2$O$_3$ layer and high pressure, or by vertical gradient freeze, with dislocation densities of $10^2$–$10^4$ cm$^{-2}$. SiC sublimes rather than melts, and is grown by **physical vapour transport** at 2200–2500 °C at a few hundred micrometres per hour, compared with millimetres per minute for Cz silicon; screw-dislocation "micropipes" have been eliminated, but basal-plane dislocations that convert to stacking faults under forward current remain a reliability issue. GaN substrates are grown by hydride vapour-phase epitaxy or ammonothermally and remain expensive, so most GaN is grown on foreign substrates.
+> **Status of the principle: Paschen's law**
+> *Empirical.* The scaling with $pd$ follows from the Townsend mechanism, but the constants $A$, $B$, $\gamma$ are fitted, and the formula fails at very small gaps (below about 5 $\mu$m in air, where field emission from the electrodes takes over), at large $pd$ (above roughly 1000 Torr cm, where streamer breakdown governs), and in non-uniform fields.
 
-### Epitaxy
+**Worked example — the Paschen curve for air.** For a 1 mm gap at 1 atm, $pd=760\times0.1=76\ \mathrm{Torr\,cm}$:
 
-Device layers are grown on substrates by **epitaxy**, the deposition of a crystalline film that continues the substrate lattice. Chemical vapour deposition grows silicon and SiC epilayers with precisely controlled doping; **metal-organic CVD** (MOCVD), using trimethylgallium, ammonia and arsine, grows almost all III–V and nitride LEDs and lasers on wafers up to 200 mm; **molecular-beam epitaxy** (MBE) in ultra-high vacuum gives atomic-layer control for research and high-frequency devices. Growth modes, strain relaxation and defect formation are treated in Chapter 41.
+$$
+V_b=\frac{365\times76}{\ln(15\times76)-1.53}=\frac{27{,}740}{7.04-1.53}=5.0\ \mathrm{kV}
+$$
 
-### Doping by diffusion and ion implantation
+For a 1 cm gap, $pd=760$: $V_b=277{,}400/(9.34-1.53)=35.5\ \mathrm{kV}$. Measured values are about 4.5 kV and 31 kV; the fitted constants are good to 10–15 %. The curve has a minimum: setting $dV_b/d(pd)=0$ gives
 
-Dopants are introduced locally by **diffusion** from a surface source at 900–1100 °C, with profiles given by the error-function and Gaussian solutions of Fick's second law (Chapter 8), or by **ion implantation**, in which dopant ions accelerated to keV–MeV energies penetrate to a depth set by their range. Implantation gives precise dose and depth control but displaces many lattice atoms per ion, amorphizing the surface at high dose; an **activation anneal** must recrystallize the damage and move dopants onto substitutional sites, while diffusion during the anneal smears the profile. Modern silicon processing uses millisecond flash and laser anneals to activate without diffusing. In SiC, dopant diffusion is negligible even at 1700 °C, so all selective doping is by hot implantation followed by anneals at 1600–1800 °C under a carbon cap to stop silicon evaporating; in GaN, activating implanted Mg acceptors is still one of the material's hardest problems. Doping is solid-state kinetics applied with nanometre precision.
+$$
+(pd)_{\min}=\frac{e\,\ln(1+1/\gamma)}{A}=\frac{2.718\times4.62}{15}=0.84\ \mathrm{Torr\,cm},\qquad
+V_{\min}=\frac{e\,B\,\ln(1+1/\gamma)}{A}=305\ \mathrm V
+$$
 
-> **Boundary.** Band theory and carrier statistics are recapped here; their quantum-mechanical derivation belongs to the Engineering Physics book. Device operation and the full processing sequence (lithography, etching, metallization) are developed in the *Materials Core (EEE)* book, Chapters 10–13 and 20–22, and summarized in Chapter 41.
+(the measured minimum for air is about 330 V near 0.6–0.8 Torr cm). **No gap in air at any pressure breaks down below about 330 V**: on the left of the minimum there are too few molecules to ionize, on the right too many collisions to gain energy. Figure 26.4 shows the curve.
+
+<!-- FIGURE 26.4 | figures/ch26/fig-26-4-paschen-curve.png | plot | Paschen curves: breakdown voltage of a uniform gap depends on the product of pressure and gap. | Content: log-log axes, x: pd from 0.1 to 1000 Torr cm (secondary axis in Pa m: 0.13 to 1300); y: breakdown voltage 100 V to 1 MV. Curves for air (minimum about 330 V at about 0.7 Torr cm), SF6 (higher, minimum about 500 V), N2, and He (lower). Mark points: 1 mm and 1 cm gaps at 1 atm (about 4.5 kV, 31 kV); same gaps at 5000 m altitude (shifted left, lower V); a 0.1 mm void in epoxy at 1 atm (about 0.9 kV). Shade the "left branch" region used in vacuum insulation. -->
+
+![Figure 26.4 — Paschen curves: breakdown voltage of a uniform gap depends on the product of pressure and gap](../figures/ch26/fig-26-4-paschen-curve.png)
+
+*Figure 26.4 — Paschen curves: breakdown voltage of a uniform gap depends on the product of pressure and gap.*
+
+Two engineering consequences follow:
+
+- **Altitude.** At 5000 m the pressure is about 54 kPa (0.535 atm). For a 1 cm gap $pd=407\ \mathrm{Torr\,cm}$ and the calculated $V_b$ falls from 35.5 to 20.7 kV, a 42 % reduction. Insulation-coordination standards (IEC 60664-1) multiply clearances by altitude correction factors above 2000 m, and aircraft and space electronics need their own rules. In a partial vacuum a power supply may arc at a few hundred volts at the Paschen minimum.
+- **Vacuum and high-pressure insulation.** Both sides of the minimum are used. Vacuum interrupters and X-ray tubes work far to the left; SF$_6$ switchgear works to the right at several bar, exploiting the electronegative gas's ability to capture electrons and its higher $B$. Because SF$_6$ is a very potent greenhouse gas, replacements (dry air, fluoronitrile mixtures) are now being introduced.
+
+In non-uniform fields (points, edges, thin wires) the gas breaks down locally first, producing **corona**: a glow discharge near the sharp electrode that does not bridge the gap. Corona wastes power on transmission lines, generates ozone and radio noise, and erodes nearby polymer surfaces.
+
+### Liquids
+
+Very pure liquids can hold fields close to those of solids, but practical insulating liquids (mineral oil, synthetic and natural esters, silicone fluids) break down at much lower fields through their impurities:
+
+- **Particles and fibres** (cellulose fibres in a transformer) polarize, align along the field, and form bridges between electrodes.
+- **Water** dissolved in the oil is harmless up to its solubility limit, but free or emulsified water, especially on fibres, drastically lowers strength (Section 26.8).
+- **Bubbles** of gas, formed by heating or by local discharges, have lower permittivity than the oil, so the field inside them is higher, and they then break down as gases.
+
+Liquid insulation is therefore maintained, not just specified: transformer oil is filtered, dried and degassed, and tested periodically for breakdown voltage, water content and dissolved gases.
+
+### Solids
+
+Solids show several distinct mechanisms. In practice, which one governs depends on time scale, temperature and the quality of the material (Figure 26.5 summarizes them on a time axis).
+
+**Intrinsic (electronic) breakdown.** In a perfect solid at low temperature, conduction electrons gain energy from the field and lose it to phonons. Above a critical field the gain exceeds the loss, and impact ionization multiplies the electrons as in a gas. This sets the ultimate strength, about 0.5–1 GV/m ($500$–$1000\ \mathrm{kV/mm}$) for polymers and oxides. It is approached only in thin, clean films over nanoseconds to seconds.
+
+**Thermal breakdown.** Dielectric and conduction losses heat the insulation. Both $\tan\delta$ and conductivity increase with temperature (Sections 26.3 and 26.6), so heating raises the loss, which raises the temperature further. If heat cannot be removed fast enough, the temperature runs away.
+
+A simple model shows when. Let a slab of thickness $d$, with a voltage $V$ across it, lose heat from its surface with a heat-transfer coefficient $h$ (W/(m$^2$ K)), and let its loss tangent increase as $\tan\delta=\tan\delta_0\exp(\beta\Delta T)$, where $\Delta T$ is the temperature rise. Per unit area, heat generated equals heat removed in steady state:
+
+$$
+\omega\varepsilon_0\varepsilon_r\tan\delta_0\,e^{\beta\Delta T}\,\frac{V^2}{d}=h\,\Delta T
+$$
+
+The left side grows exponentially with $\Delta T$, the right side linearly. A stable solution exists only if the two curves cross. They just touch, the critical condition, when both their values and their slopes are equal, which happens at $\beta\Delta T=1$. At that point $e\cdot\omega\varepsilon_0\varepsilon_r\tan\delta_0V^2/d=h/\beta$, giving the critical voltage
+
+$$
+V_c=\sqrt{\frac{h\,d}{e\,\beta\,\omega\varepsilon_0\varepsilon_r\tan\delta_0}}
+$$
+
+> **Status of the principle: thermal breakdown criterion**
+> *Derived* from the heat balance, within an *approximate* model: uniform temperature through the slab, exponential temperature dependence of loss, and surface cooling with constant $h$. Thick insulation with internal temperature gradients needs a numerical solution, but the scaling with frequency, cooling and loss holds.
+
+**Worked example — thermal breakdown at power and radio frequency.** A 1 mm polar insulator has $\varepsilon_r=4$, $\tan\delta_0=0.01$, $\beta=0.05\ \mathrm{K^{-1}}$ (loss doubles every 14 K), and $h=20\ \mathrm{W/(m^2\,K)}$ (still air). At 50 Hz:
+
+$$
+V_c=\sqrt{\frac{20\times10^{-3}}{2.718\times0.05\times314.2\times8.854\times10^{-12}\times4\times0.01}}=\sqrt{\frac{0.020}{1.512\times10^{-11}}}=3.6\times10^{4}\ \mathrm V
+$$
+
+about 36 kV, comparable with the short-term electrical strength, so thermal breakdown competes with other mechanisms at power frequency. At 1 MHz (with the same loss tangent, for comparison) $V_c$ falls by $\sqrt{20{,}000}=141$, to about 260 V. The runaway point is reached when the insulation is only $1/\beta=20\ \mathrm K$ above ambient. The model explains three engineering rules: polar, lossy insulators are unsuitable at radio frequency; thermal breakdown voltage grows only as $\sqrt d$ (thicker insulation gains little); and cooling matters as much as material strength. Thermal runaway is a real failure mode in high-voltage bushings, in capacitors in hot enclosures, and in polar insulation near its glass transition.
+
+**Electromechanical breakdown.** The electrostatic pressure between electrodes, $\tfrac12\varepsilon_0\varepsilon_rE^2$, compresses a soft insulator. If the material's modulus is low (a polymer near its softening temperature), the thickness decreases, the field rises, and compression accelerates. Stark and Garton showed that instability occurs when the field reaches about $0.6\sqrt{Y/(\varepsilon_0\varepsilon_r)}$, where $Y$ is Young's modulus. It is significant for thermoplastics at elevated temperature and is exploited deliberately in dielectric elastomer actuators (Chapter 27).
+
+**Discharge-induced and treeing breakdown.** In practice, most long-term failures of polymer insulation follow a slow route:
+
+1. A local field enhancement (void, protrusion, contaminant) causes **partial discharges** (Section 26.7) or charge injection.
+2. These erode the polymer and leave a hollow channel. Further discharges in the channel extend it, and it branches. The resulting structure, visible in transparent samples, is an **electrical tree**.
+3. When a tree channel bridges most of the insulation, the remaining material breaks down.
+
+In the presence of water and a.c. fields, a different, slower structure grows at lower fields: the **water tree**, a region of microscopic water-filled voids and channels formed by electro-oxidation and mechanical stress in the polymer. A water tree does not itself conduct, but it raises the local field and lowers the strength, and an electrical tree eventually starts from its tip. This is the opening failure. Modern "tree-retardant" XLPE uses additives and very clean compounds to suppress it.
+
+<!-- FIGURE 26.5 | figures/ch26/fig-26-5-solid-breakdown-mechanisms.png | schematic | Breakdown mechanisms in solid insulation arranged by the time to failure, with sketches of electrical and water trees. | Content: upper panel: horizontal log time axis from 1e-8 s to 1e9 s (about 30 years); vertical axis breakdown field (log, 1 to 1000 kV/mm). Bands: intrinsic/electronic (about 500-1000 kV/mm, < 1e-6 s), electromechanical, thermal (seconds to hours, depends on cooling), partial discharge erosion and electrical treeing (hours to years, 5-50 kV/mm), water treeing (years, few kV/mm). Lower panel: two sketches in a slab between needle electrode and plane: an electrical tree (branched hollow channels, dark) and a vented water tree (diffuse bush of tiny voids, shaded) growing from a contaminant at the conductor screen. -->
+
+![Figure 26.5 — Breakdown mechanisms in solid insulation arranged by the time to failure, with sketches of electrical and water trees](../figures/ch26/fig-26-5-solid-breakdown-mechanisms.png)
+
+*Figure 26.5 — Breakdown mechanisms in solid insulation arranged by the time to failure, with sketches of electrical and water trees.*
+
+---
+
+## 26.6 Volume and surface resistivity
+
+### Two paths for leakage
+
+An insulator leaks current by two paths: through its bulk and along its surface. Each has its own resistivity.
+
+- **Volume resistivity** $\rho_v$ ($\Omega\,\mathrm m$; often quoted in $\Omega\,\mathrm{cm}$, 100 times larger numerically) is defined as for conductors: $\rho_v=R_vA/t$.
+- **Surface resistivity** $\rho_s$ is the resistance of a square of surface between two parallel edge electrodes. A path of length $g$ and width $W$ has $R_s=\rho_s\,g/W$, so $\rho_s$ has units of ohms (written $\Omega/\square$, as for sheet resistance).
+
+The two are measured together with a three-electrode arrangement (IEC 62631-3, ASTM D257): a guard ring diverts the surface current away from the measuring electrode when volume resistivity is measured, and the roles are swapped for surface resistivity. Volume resistivity is a material property; surface resistivity is mostly a property of the surface's condition: its moisture, contamination and history.
+
+### How current flows in an insulator
+
+An insulator has very few free carriers, and the ones it has move with difficulty. Several conduction mechanisms operate, with different signatures:
+
+| Mechanism | Carriers | Characteristic dependence |
+|---|---|---|
+| Ionic conduction | Mobile ions (Na$^+$ in glass, impurity ions in polymers) | Arrhenius in $T$; ohmic; electrode polarization at low frequency |
+| Hopping | Electrons between localized states | Arrhenius or $\exp[-(T_0/T)^{1/4}]$ |
+| Schottky emission | Electrons over an electrode barrier | $\ln J\propto\sqrt E$; strongly $T$-dependent |
+| Poole–Frenkel emission | Electrons released from traps in the bulk | $\ln(J/E)\propto\sqrt E$ |
+| Space-charge-limited current | Injected carriers | $J\propto V^2/d^3$ at high field |
+| Tunnelling (Fowler–Nordheim) | Electrons through a thin barrier | $J\propto E^2\exp(-b/E)$; nearly $T$-independent (thin gate oxides) |
+
+At low field the bulk conduction of most insulators is ionic or hopping, and the resistivity follows an Arrhenius law:
+
+$$
+\rho_v(T)=\rho_\infty\exp\left(\frac{E_a}{k_BT}\right)
+$$
+
+with activation energies typically 0.5–1.5 eV. At high field the electrode-limited and trap-limited mechanisms take over, and the current rises faster than linearly. These mechanisms matter most for thin films and gate dielectrics (Chapter 34).
+
+> **Status of the principle: Arrhenius dependence of insulator resistivity**
+> *Empirical.* It reflects thermally activated ion hopping or carrier release from traps (the kinetics is treated in the Advanced Chemistry core). Over wide temperature ranges several mechanisms with different $E_a$ contribute and the plot of $\ln\rho$ against $1/T$ curves.
+
+### Representative values
+
+| Material | Volume resistivity at 20–25 °C ($\Omega\,\mathrm m$) |
+|---|---|
+| PTFE | $>10^{16}$ |
+| Polyethylene, XLPE, PP | $10^{14}$–$10^{16}$ |
+| Fused silica | $>10^{16}$ |
+| Polyimide | about $10^{15}$ |
+| Epoxy (cast) | $10^{12}$–$10^{15}$ |
+| FR-4 (through thickness) | $10^{12}$–$10^{14}$ |
+| Alumina (99 %) | $>10^{12}$ (falls to about $10^{8}$ at 500 °C) |
+| Mica | $10^{11}$–$10^{15}$ |
+| PVC (plasticized) | $10^{9}$–$10^{13}$ |
+| Electrical porcelain | $10^{10}$–$10^{12}$ |
+| Soda-lime glass | $10^{9}$–$10^{11}$ (mobile Na$^+$) |
+| Mineral oil | $10^{10}$–$10^{13}$ |
+| Ultrapure water | $1.8\times10^{5}$ |
+
+**Worked example — leakage and its temperature dependence in the cable.** For the XLPE cable of Section 26.2, take $\rho_v=10^{14}\ \Omega\,\mathrm m$ at 20 °C. The insulation resistance of a length $\ell$ of coaxial insulation is
+
+$$
+R_{\rm ins}=\frac{\rho_v\ln(R/r)}{2\pi\ell}=\frac{10^{14}\times0.449}{2\pi\times1000}=7.1\times10^{9}\ \Omega
+$$
+
+for 1 km, i.e. 7.1 G$\Omega$ km. The leakage current at 6.35 kV is $6350/7.1\times10^{9}=0.9\ \mu\mathrm A$, six orders of magnitude below the capacitive charging current of 0.57 A. At a.c. the resistivity of XLPE hardly matters. Now heat the insulation to its rated 90 °C. With $E_a=1.0\ \mathrm{eV}$, the resistivity falls by
+
+$$
+\exp\left[\frac{E_a}{k_B}\left(\frac{1}{293.15}-\frac{1}{363.15}\right)\right]=\exp\left[11{,}605\times6.58\times10^{-4}\right]=\exp(7.63)\approx2.1\times10^{3}
+$$
+
+a factor of about 2000. Under d.c. this matters a great deal. In an HVDC cable the steady-state field divides according to resistivity, not permittivity (Section 26.9), so the temperature gradient across a loaded cable shifts the stress toward the cooler outer insulation.
+
+### Absorption currents and the polarization index
+
+When a d.c. voltage is applied to insulation, the current does not settle at once. A large capacitive charging spike is followed by an **absorption current** that decays over minutes to hours (slow orientational and interfacial polarization, Section 26.3), and only then by the steady leakage current. Insulation-resistance testers exploit this. The **polarization index** of a motor or generator winding, the ratio of the insulation resistance after 10 min to that after 1 min (IEEE 43), is about 2 or more for clean, dry insulation. Moisture and surface contamination add a large, steady conduction current that swamps the absorption, and the ratio falls toward 1. A measured ratio of insulation resistances is thus a quick indicator of the material's condition.
+
+---
+
+## 26.7 Tracking and partial discharge
+
+Two processes degrade insulation without ever bridging it as a whole: tracking along surfaces and partial discharges inside voids and at edges. Both are slow, both are driven by local discharges, and both are the subject of their own tests and standards.
+
+### Tracking: how a surface becomes a conductor
+
+On a contaminated, damp surface (dust plus condensation on a PCB, salt fog on an outdoor insulator), a thin conducting electrolyte film forms. Leakage current flows through it and heats it. Where the current density is highest the film dries out, forming a **dry band** that interrupts the current. Almost the full voltage now appears across the narrow dry band, which breaks down in small arcs (scintillations). The arcs' heat decomposes the polymer surface underneath. If the polymer leaves carbon behind, the carbonized path conducts, and the process advances step by step until a conducting **track** bridges the electrodes.
+
+Whether a material tracks depends on its chemistry. Polymers with aromatic rings or high char yield (phenolics, standard epoxies, polycarbonate) form carbon and track readily. Aliphatic polymers that decompose to volatile products (polyethylene, polyamide, melamine, PTFE, silicones) and filled compounds with alumina trihydrate (ATH), which releases water when heated and so cools the arc, resist tracking. Ceramics and glasses do not track at all, although they can suffer surface flashover.
+
+The resistance to tracking is measured by the **comparative tracking index** (CTI, IEC 60112): the highest voltage at which a specimen withstands 50 drops of an ammonium-chloride solution falling between two electrodes 4 mm apart without tracking. The insulation coordination standard groups materials by CTI:
+
+| Material group (IEC 60664-1) | CTI range (V) | Typical materials |
+|---|---|---|
+| I | 600 and above | PTFE, silicone rubber, melamine, PA66, high-CTI FR-4, ceramics |
+| II | 400 to below 600 | Some PBT and PA grades |
+| IIIa | 175 to below 400 | Standard FR-4, polycarbonate, many epoxies |
+| IIIb | 100 to below 175 | Phenolic paper laminates |
+
+The **creepage distance**, the shortest path along a surface between conductors, required by IEC 60664-1 and product standards (IEC 62368-1 and others) depends on the working voltage, the pollution degree of the environment, and the material group. For the same voltage and pollution degree, a group IIIb material may need roughly twice the creepage of group I. That is a direct materials-to-layout link: choosing a high-CTI laminate or housing material shrinks a power supply's layout. Slots milled in a PCB between high-voltage nodes, conformal coatings and potting all work by lengthening or protecting the surface path.
+
+### Partial discharge: breakdown inside the insulation
+
+A **partial discharge** (PD) is a breakdown that bridges only part of the insulation: a gas-filled void inside a cast resin or a cable, a delamination in a winding, the gap at a sharp electrode edge, the wedge of air between a wire and a board. Two effects make voids dangerous.
+
+**The field in a void is higher than in the solid.** In a flat, disc-shaped void with its faces perpendicular to the field, the normal component of $\mathbf D$ is continuous across the faces, so
+
+$$
+E_{\rm void}=\varepsilon_r\,E_{\rm solid}
+$$
+
+For a spherical void the enhancement is smaller, $E_{\rm void}=3\varepsilon_r E/(2\varepsilon_r+1)$, which is $1.33E$ for $\varepsilon_r=4$.
+
+**The gas in the void is weaker than the solid.** It breaks down according to Paschen's law at a voltage set by the void depth and gas pressure.
+
+**Worked example — PD inception in a void.** An epoxy insulation ($\varepsilon_r=4$) contains a flat air-filled void 0.1 mm deep at atmospheric pressure, normal to the field. From Paschen's law with $pd=760\times0.01=7.6\ \mathrm{Torr\,cm}$:
+
+$$
+V_b=\frac{365\times7.6}{\ln(15\times7.6)-1.53}=\frac{2774}{4.74-1.53}=0.865\ \mathrm{kV}
+$$
+
+The void breaks down when the field inside it reaches $0.865\ \mathrm{kV}/0.1\ \mathrm{mm}=8.65\ \mathrm{kV/mm}$, i.e. when the field in the epoxy reaches $8.65/4=2.2\ \mathrm{kV/mm}$. The epoxy itself has a short-term strength of 20–30 kV/mm. A design stress of 3 kV/mm, comfortable for the solid, would make this void discharge every half-cycle.
+
+Each discharge collapses the void voltage, then the applied a.c. voltage builds it back up, and the void discharges again: several times per cycle, $10^{8}$–$10^{9}$ times per year. Each discharge transfers a small charge (detectable at the terminals as an **apparent charge** of picocoulombs to nanocoulombs, measured to IEC 60270), and bombards the void walls with electrons, ions, UV and ozone. The walls erode, an electrical tree starts, and the insulation fails long before the bulk field alone would have caused trouble. Figure 26.5 places this mechanism on the time axis.
+
+That is why insulation systems are specified to be "PD-free" at a voltage above the operating voltage, why cable and resin casting processes are designed to exclude voids (vacuum casting, degassing, pressure impregnation), and why PD measurement is a standard acceptance and condition-monitoring test for cables, transformers, machines and power modules. The rise of fast-switching SiC and GaN inverters has made PD in motor windings a new problem: fast voltage edges with overshoots of up to twice the d.c. link voltage stress turn-to-turn enamel insulation above its PD inception voltage. Corona-resistant enamels, filled with nano-silica or alumina that resists erosion, are the materials response.
+
+---
+
+## 26.8 Moisture and contamination effects
+
+### Why water is the insulator's main enemy
+
+Water combines three properties that are all damaging to insulation:
+
+- **High permittivity.** Its $\varepsilon_r$ of 80 raises the permittivity of any material that absorbs it, and its orientational relaxation adds loss.
+- **Ionic conduction.** Water dissolves ionic impurities and makes them mobile, raising conductivity by orders of magnitude, especially on surfaces.
+- **Chemical attack.** It hydrolyzes polyesters, polyamides, cellulose and some epoxies, and drives electrochemical migration of metals (the electrochemistry belongs to the Advanced Chemistry core).
+
+The bulk permittivity rises only modestly. For an epoxy ($\varepsilon_r=4$) absorbing 1 % water by volume, the logarithmic mixing rule (Section 26.9) gives
+
+$$
+\ln\varepsilon=0.99\ln4+0.01\ln80=1.416\quad\Rightarrow\quad\varepsilon=4.12
+$$
+
+a 3 % rise. But the loss tangent can double, the volume resistivity can fall by one or two orders of magnitude, and the surface resistivity by many more. A humid film only a few molecular layers thick on a surface with ionic residues is enough to drop surface resistivity from above $10^{14}\ \Omega$ to below $10^{9}\ \Omega$.
+
+### Water uptake by insulating materials
+
+| Material | Typical water absorption | Consequence |
+|---|---|---|
+| PTFE, PE, PP | Below 0.01 % | Electrical properties nearly insensitive to humidity |
+| Polystyrene | 0.05 % | Stable, used in precision capacitors |
+| FR-4 | 0.1–0.2 % (24 h immersion) | Small shift in $\varepsilon_r$ and $\tan\delta$; CAF risk |
+| Epoxy (cast) | 0.1–0.5 % (24 h) | Higher at elevated temperature |
+| Polyimide | 1–3 % (at equilibrium, humid) | Measurable $\varepsilon_r$ and $\tan\delta$ change; bake before high-temperature soldering |
+| PA66 (nylon) | 2.5 % at 50 % RH; up to about 8 % saturated | Large shifts; dimensional change |
+| Cellulose (paper, pressboard) | Several per cent | Dried below 0.5 % in transformers |
+| Alumina, glass | Negligible in bulk; surface films only | Surface leakage in humidity |
+
+### Moisture in liquid–solid insulation systems
+
+In a power transformer, almost all the water is in the cellulose paper and pressboard, not in the oil. Water partitions between them according to temperature: as the transformer heats, water moves from paper into oil; as it cools, back again. The oil's breakdown voltage depends on its water content relative to saturation, not on the absolute amount, and drops steeply once relative saturation exceeds roughly 20–30 %. A sudden cooling of a wet, hot transformer can push the oil past saturation and form free water droplets. Water also accelerates the chemical aging of cellulose (Section 26.10). New transformers are therefore dried to below about 0.5 % water in the cellulose, and online moisture monitoring is common.
+
+### Contamination on printed circuit assemblies
+
+On a PCB, the combination of humidity, ionic residues (flux activators, handling salts, plating chemicals) and a bias voltage leads to two failure processes:
+
+- **Electrochemical migration.** Metal ions dissolve at the anode, migrate through a surface water film, and plate out at the cathode as dendrites that grow back across the gap until they short it. Silver, copper and tin all migrate; silver is the worst.
+- **Conductive anodic filament (CAF).** Copper migrates along the interface between glass fibres and resin inside the laminate, especially where drilling has damaged it, eventually shorting adjacent vias.
+
+The materials responses are cleaner processes ("no-clean" fluxes whose residues are non-ionic, or washing), CAF-resistant laminates with better glass–resin coupling, surface insulation resistance (SIR) qualification testing at elevated temperature and humidity under bias, and conformal coatings (acrylic, silicone, polyurethane, parylene) that keep water films from forming continuous paths. A coating slows water absorption but does not stop it, since all polymers are permeable to water vapour to some degree. The long-term processes of moisture ingress and corrosion in packages are treated in Chapter 44.
+
+---
+
+## 26.9 Polymer, ceramic, and composite insulators
+
+### Polymers
+
+Polymers are the dominant insulating materials by volume: cable insulation, wire enamel, film capacitors, PCB resins, encapsulants, connector housings. They are cheap, easily formed, and many have very low loss. Their weaknesses are a limited temperature range (Chapter 20), creep, flammability, water absorption for polar types, and susceptibility to discharge erosion and tracking.
+
+| Polymer | $\varepsilon_r$ | $\tan\delta$ | Max. continuous temperature (°C, typical) | Characteristic uses |
+|---|---|---|---|---|
+| PE (LDPE, HDPE) | 2.3 | $2\times10^{-4}$ | 70–80 | Coax dielectric, telecom cable |
+| XLPE | 2.3 | $2$–$5\times10^{-4}$ | 90 (250 short-circuit) | MV/HV power cable |
+| PP (biaxially oriented) | 2.2 | $2\times10^{-4}$ | 85–105 | Film capacitors (power electronics) |
+| PTFE | 2.1 | $1$–$2\times10^{-4}$ | 260 | RF cables, microwave laminates, high-temperature wire |
+| PET (polyester film) | 3.2 | $5\times10^{-3}$ | 105–125 | General-purpose film capacitors, motor slot liners |
+| Polyimide | 3.4 | $2$–$8\times10^{-3}$ | 200–240 | Flex circuits, wire wrap, high-temperature insulation |
+| Epoxy (filled, cast) | 3.5–5 | $5\times10^{-3}$–$0.02$ | 130–180 (depends on $T_g$) | Cast transformers, encapsulation, PCB resin |
+| Silicone rubber | 3–4 | $10^{-3}$–$5\times10^{-3}$ | 180–200 | Outdoor insulator housings, cable accessories, potting |
+| PVC | 3–6 | 0.01–0.1 | 70–90 | Low-voltage building wire |
+| PEEK, PPS | 3.0–3.3 | $3\times10^{-3}$ | 200–240 | High-temperature connectors, coil formers |
+
+The non-polar polymers (PE, PP, PTFE) are the high-performance dielectrics: lowest loss, highest intrinsic strength, lowest water uptake. Polarity buys adhesion, temperature resistance and flame retardancy at the price of loss.
+
+### Ceramics and glasses
+
+Ceramics offer what polymers cannot: high temperature capability, no creep, resistance to discharges and tracking, high thermal conductivity in some cases, and dimensional stability. Their weaknesses are brittleness, thermal-shock sensitivity (Chapter 24), and processing cost.
+
+| Ceramic | $\varepsilon_r$ | $\tan\delta$ (1 MHz) | Thermal conductivity (W/(m K)) | Characteristic uses |
+|---|---|---|---|---|
+| Electrical porcelain (quartz/alumina–feldspar–clay) | 5–7 | 0.01–0.02 | 1.5–4 | Line and station insulators, bushings |
+| Steatite (MgO–SiO$_2$) | 6 | $10^{-3}$ | 2–3 | Low-loss insulating parts, RF stand-offs |
+| Alumina 96 % | 9.4 | $3\times10^{-4}$ | 20–25 | Substrates, spark-plug insulators, vacuum feedthroughs |
+| Alumina 99.5 % | 9.8 | $1\times10^{-4}$ | 30–35 | Microwave substrates, high-voltage parts |
+| Aluminium nitride | 8.6–8.9 | $3\times10^{-4}$–$10^{-3}$ | 170–230 | Power-module substrates |
+| Beryllium oxide | 6.7 | $4\times10^{-4}$ | about 250 | RF power packages (toxic dust; declining use) |
+| Fused silica | 3.8 | $1\times10^{-4}$ | 1.4 | Low-loss RF windows, optical fibre |
+| Glass (borosilicate) | 4.6 | $4\times10^{-3}$ | 1.1 | Hermetic seals, bushings |
+| Mica (muscovite, phlogopite) | 6–7 | $2\times10^{-4}$ | 0.5 (across sheets) | Machine insulation (as mica paper), heaters, capacitors |
+
+### Composites: getting both
+
+Most practical insulation is a composite, designed to combine a polymer's processability with a ceramic or fibre's strength, discharge resistance or thermal conductivity.
+
+- **Oil–paper** (transformers, older cables, bushings): cellulose paper gives mechanical structure; oil fills the pores, excludes air (and therefore PD), and carries heat away.
+- **Epoxy–mica** (rotating-machine groundwall insulation): mica flakes, which do not erode under discharges, bound in epoxy and vacuum–pressure impregnated. Mica is the only practical material for machine windings at 6–25 kV because PD in such windings cannot be fully avoided.
+- **Glass-fibre–epoxy** (FR-4 laminates, rods of composite outdoor insulators, slot wedges): fibres give stiffness and strength; the resin bonds and insulates.
+- **Silicone housings over glass-fibre rods** (composite or "polymeric" line insulators): light, unbreakable, and with a water-repellent silicone surface that resists pollution flashover. Low-molecular-weight silicone migrates to the surface and keeps it hydrophobic even when polluted.
+- **Filled polymers**: silica or alumina in epoxy for lower expansion and higher thermal conductivity (Chapter 51); ATH in silicone for tracking resistance; nano-fillers for PD and treeing resistance (nanodielectrics, Chapter 38).
+
+### Mixing rules for composite permittivity
+
+The effective permittivity of a two-phase composite depends on how the phases are arranged:
+
+- **Layers parallel to the field** (capacitors side by side): $\varepsilon_{\rm eff}=\phi_1\varepsilon_1+\phi_2\varepsilon_2$, the upper bound.
+- **Layers in series with the field**: $1/\varepsilon_{\rm eff}=\phi_1/\varepsilon_1+\phi_2/\varepsilon_2$, the lower bound.
+- **Dilute spheres of $\varepsilon_i$ in a matrix $\varepsilon_m$** (Maxwell Garnett):
+
+$$
+\frac{\varepsilon_{\rm eff}-\varepsilon_m}{\varepsilon_{\rm eff}+2\varepsilon_m}=\phi\,\frac{\varepsilon_i-\varepsilon_m}{\varepsilon_i+2\varepsilon_m}
+$$
+
+- **Random mixtures**, often fitted by the logarithmic (Lichtenecker) rule: $\ln\varepsilon_{\rm eff}=\phi_1\ln\varepsilon_1+\phi_2\ln\varepsilon_2$.
+
+> **Status of the principle: dielectric mixing rules**
+> *Approximate.* The parallel and series forms are exact bounds for any arrangement. Maxwell Garnett is derived for dilute, non-interacting spheres. The Lichtenecker rule is empirical. None captures interfacial polarization, which can dominate at low frequency when one phase conducts.
+
+The bounds explain why a high-permittivity filler raises a polymer's permittivity so little at moderate loadings. Isolated particles in a low-permittivity matrix are effectively in series with matrix layers, and the field concentrates in the low-permittivity phase.
+
+### Field division in layered insulation
+
+The same series reasoning governs every insulation made of layers: oil and paper, a cable's insulation with a void, an encapsulant over a substrate. For two layers in series, continuity of $D$ under a.c. gives
+
+$$
+\varepsilon_1E_1=\varepsilon_2E_2\quad\Rightarrow\quad\frac{E_1}{E_2}=\frac{\varepsilon_2}{\varepsilon_1}\qquad(\text{a.c.})
+$$
+
+The **lower-permittivity layer carries the higher field**. In oil–paper insulation the oil ($\varepsilon_r=2.2$) is stressed $3.5/2.2=1.6$ times more than the paper ($\varepsilon_r=3.5$), and the oil is the weaker material. That is why transformer design uses thin oil ducts, divided by pressboard barriers, rather than wide open oil gaps: a thin oil gap has a higher breakdown strength.
+
+Under d.c., after the interfacial charging of Section 26.3, continuity of current gives
+
+$$
+\sigma_1E_1=\sigma_2E_2\quad\Rightarrow\quad\frac{E_1}{E_2}=\frac{\sigma_2}{\sigma_1}\qquad(\text{d.c., steady state})
+$$
+
+and the **lower-conductivity layer carries the higher field**. Because conductivities vary by orders of magnitude with temperature, moisture and field (Section 26.6), d.c. stress distributions are much harder to control than a.c. ones, and they change when the voltage polarity reverses. HVDC cable insulation is therefore a specially formulated material, with additives that make its conductivity less sensitive to temperature and that suppress space-charge accumulation.
+
+### Self-healing capacitor films
+
+A film capacitor with metallized electrodes (aluminium or zinc only 20–50 nm thick on polypropylene) survives the breakdown of a weak spot. The arc at the fault vaporizes the thin electrode around it within microseconds, isolating the spot, and the capacitor loses a tiny area of capacitance instead of failing. This is a materials solution to the Weibull problem of Section 26.4. It works only because the electrode is thin enough to evaporate and the polymer decomposes to gaseous, not carbonaceous, products.
+
+---
+
+## 26.10 Insulation aging and degradation
+
+Insulation rarely fails because its short-term strength is exceeded. It fails because the material changes over years until its strength falls to the service stress. The engineer's tools for designing against aging are life laws, fitted to accelerated tests, and thermal classes.
+
+### Thermal aging
+
+At service temperature, polymers slowly oxidize, lose plasticizer and low-molecular-weight fractions, cross-link further and embrittle, or depolymerize (cellulose). The insulation is usually declared at its end of life when a property such as tensile elongation at break or electrical strength has fallen to a fixed fraction (often 50 %) of its initial value, at which point mechanical stress (vibration, thermal cycling, short-circuit forces) can crack it.
+
+The rate of most of these processes is thermally activated, so life follows an Arrhenius law (the kinetics belongs to the Advanced Chemistry core):
+
+$$
+t_{\rm life}=A\exp\left(\frac{E_a}{k_BT}\right)\quad\Longrightarrow\quad\ln t_{\rm life}=\ln A+\frac{E_a}{k_B}\cdot\frac1T
+$$
+
+A plot of $\ln t_{\rm life}$ against $1/T$ is a straight line (Figure 26.6), which allows life at service temperature to be extrapolated from accelerated tests at higher temperatures (IEC 60216).
+
+The traditional rule of thumb is the **Montsinger rule**: life halves for every 10 K rise (some materials, 6–8 K). It is a local approximation to the Arrhenius law. Halving per 10 K near 100 °C corresponds to
+
+$$
+E_a=\frac{k_B\ln2}{\dfrac{1}{373.15}-\dfrac{1}{383.15}}=\frac{(8.617\times10^{-5})(0.693)}{7.0\times10^{-5}}=0.85\ \mathrm{eV}
+$$
+
+At higher temperatures the same activation energy gives a longer halving interval, because $1/T$ changes more slowly.
+
+> **Status of the principle: Arrhenius thermal-aging law**
+> *Empirical.* It assumes a single dominant, thermally activated degradation reaction whose mechanism does not change with temperature. Extrapolation fails if the accelerated test triggers a different mechanism (melting, a glass transition, loss of an additive), so test temperatures are kept close to service temperature and well below transitions.
+
+<!-- FIGURE 26.6 | figures/ch26/fig-26-6-arrhenius-aging.png | plot | Thermal endurance of insulation: Arrhenius life lines and the thermal classes they define. | Content: x-axis reciprocal temperature 1000/T from 2.0 to 2.9 per kK, with secondary top axis in degrees C (approx. 70 to 230). y-axis life in hours, log scale 100 to 1e6. Straight lines for three illustrative insulation systems with Ea about 0.85-1.2 eV crossing 20,000 h at 130 C, 155 C and 180 C (classes B, F, H). Horizontal dashed line at 20,000 h labelled "reference life for thermal index". Mark accelerated-test points (e.g. 200, 220, 240 C at 1000-5000 h) on the class H line, with extrapolation dashed. Annotate the 10 K halving rule as a local slope. -->
+
+![Figure 26.6 — Thermal endurance of insulation: Arrhenius life lines and the thermal classes they define](../figures/ch26/fig-26-6-arrhenius-aging.png)
+
+*Figure 26.6 — Thermal endurance of insulation: Arrhenius life lines and the thermal classes they define.*
+
+### Thermal classes
+
+Insulation systems for machines, transformers and wiring are assigned a **thermal class** (IEC 60085), the maximum continuous temperature at which they meet their design life (typically defined from a thermal index at 20,000 h):
+
+| Thermal class (°C) | Former letter | Typical materials |
+|---|---|---|
+| 90 | Y | Cotton, paper, unimpregnated |
+| 105 | A | Impregnated cellulose, oil-paper |
+| 120 | E | Polyester and polyurethane enamels, PET film |
+| 130 | B | Glass, mica with organic binders; polyester-imide enamels |
+| 155 | F | Mica, glass with epoxy or polyester-imide resins |
+| 180 | H | Silicone-bonded mica and glass; polyimide, aramid paper |
+| 200, 220, 250 | N, R, — | Polyimide film and enamel, ceramic-filled and inorganic systems |
+
+**Worked example — the value of running cooler.** A motor's class F insulation (155 °C) has a design life of 20,000 h at its hottest-spot temperature of 155 °C. In service it runs with a hot spot at 135 °C. By the 10 K rule, life increases by $2^{20/10}=4$, to 80,000 h. With the Arrhenius law and $E_a=0.85\ \mathrm{eV}$:
+
+$$
+\frac{t_{135}}{t_{155}}=\exp\left[\frac{0.85}{8.617\times10^{-5}}\left(\frac{1}{408.15}-\frac{1}{428.15}\right)\right]=\exp(1.13)=3.1
+$$
+
+giving about 62,000 h. The two estimates differ by 30 % because the 10 K rule was calibrated near 100 °C; at 150 °C the halving interval for 0.85 eV is about 13 K. Either way, the point is the same: 20 K of temperature margin multiplies insulation life by three to four. This is why motor designs are often "class F insulation, class B temperature rise", and why the hot-spot temperature, not the average winding temperature of Chapter 25, governs life.
+
+### Electrical aging
+
+At high field, the electrical processes of Sections 26.5 and 26.7 (charge injection, partial discharge, treeing) degrade the material even without high temperature. Life under constant field is usually fitted by an **inverse power law**:
+
+$$
+t_{\rm life}=t_0\left(\frac{E}{E_0}\right)^{-n}
+$$
+
+with a voltage endurance coefficient $n$ of about 9–15 for XLPE cable insulation and 9–12 for epoxy–mica machine insulation. The steepness is striking: with $n=9$, a 20 % higher field shortens life to $1.2^{-9}=0.19$ of its value, a factor of five. That is why voltage stress, not just temperature, must be held below the design value, and why overvoltages from switching surges and fast inverter edges matter for life.
+
+> **Status of the principle: inverse power law of electrical aging**
+> *Empirical.* It is fitted to accelerated voltage-endurance tests over a limited field range. It cannot be extrapolated below the threshold field for partial discharges or space-charge accumulation, below which electrical aging may practically stop.
+
+### Multi-stress aging
+
+Real insulation is aged by several stresses at once, often summarized as **TEAM**: thermal, electrical, ambient (moisture, chemicals, UV, radiation, pollution) and mechanical (vibration, thermal cycling, short-circuit forces). The stresses interact: heat accelerates electrical treeing, moisture accelerates thermal aging of cellulose, and mechanical cracks create voids for partial discharge. Life models that combine an Arrhenius term with an inverse power law are used for cables and machines, but their parameters are always empirical and specific to a material system. The opening water-tree failure is a textbook case of combined electrical and ambient aging. How aging appears as a failure mechanism in electronic systems, and how it is investigated, is the subject of Chapter 44, which also treats how accelerated tests are designed and interpreted.
 
 ---
 
@@ -352,14 +831,15 @@ Dopants are introduced locally by **diffusion** from a surface source at 900–1
 
 | Open question | Where it is answered |
 |---|---|
-| How do band gaps and recombination produce colour, luminescence, LEDs and lasers? | Chapter 28 |
-| How do quantum confinement and two-dimensional materials change band structure? | Chapter 30 |
-| How are semiconductors used as photovoltaic and thermoelectric materials, and why do halide perovskites tolerate defects? | Chapter 32 |
-| How do radiation and high temperature degrade semiconductor devices? | Chapter 33 |
-| How do electromigration, interface traps and dielectric wear-out cause device failures? | Chapter 36 |
-| How are films deposited and epitaxial layers grown; how are oxidation, implantation, lithography and etching done? | Chapter 41 |
-| How are carrier density, mobility, lifetime and band gap measured (Hall effect, photoluminescence, DLTS)? | Chapters 42 and 43 |
-| How are band structures and defect levels calculated from first principles? | Chapter 45 |
-| How is a semiconductor chosen for a given power, frequency or optical application? | Chapter 48 |
+| What happens when polarization becomes spontaneous and switchable, and how are ferroelectric, piezoelectric and high-permittivity dielectrics engineered? | Chapter 27 |
+| Why is the band gap of an insulator large, and how does it relate to breakdown strength and to tunnelling leakage? | Chapter 31 |
+| How do gate dielectrics, interface traps and thin-film insulators behave in devices? | Chapter 34 |
+| What dielectric properties matter for high-frequency electronic and optical materials? | Chapter 35 |
+| How do nanofillers change the breakdown and discharge resistance of polymers? | Chapter 38 |
+| How are dielectric films deposited and their defects controlled? | Chapter 50 |
+| Which laminates, encapsulants and substrates are used in packages, and how is CTE mismatch managed? | Chapter 51 |
+| How are dielectric properties and breakdown measured, and how is measurement uncertainty interpreted? | Chapter 52 |
+| How do dielectric breakdown, moisture ingress and thermal aging appear as failure mechanisms, and how are failures analysed? | Chapter 44 |
+| How are accelerated aging tests designed and insulation chosen for a required service life? | Chapter 58 |
 
-**Next:** Chapter 27 turns from electrons as charge carriers to electrons as magnetic moments, and asks how exchange, domains and microstructure make the soft and hard magnets of motors, transformers and generators.
+**Next:** Chapter 27 follows the polarization catastrophe of Section 26.1 to its conclusion: materials whose polarization is spontaneous, switchable, or coupled to strain, heat and light, and the capacitors, actuators, sensors and RF components built from them.

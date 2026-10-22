@@ -37,6 +37,10 @@ Carbon dissolves interstitially. In FCC austenite the octahedral interstices are
 
 <!-- FIGURE 15.1 | figures/ch15/fig-15-1-fe-fe3c-diagram.png | plot | The iron–cementite phase diagram up to 6.70 wt% C, with the steel and cast-iron ranges, critical temperatures A1, A3 and Acm, and heat-treatment temperature windows. | Content: x-axis wt% C 0–6.7 (top axis Fe3C weight fraction), y-axis temperature 400–1600 °C. Phase fields: L, δ, γ, α, α + Fe3C, γ + Fe3C, L + γ, L + Fe3C, δ + γ, L + δ. Invariant points: peritectic 1495 °C at 0.17 % C (δ 0.09, L 0.53); eutectic 1147 °C at 4.30 % C (γ 2.14 %); eutectoid 727 °C at 0.76 % C (α 0.022 %). Lines labelled A1 (727 °C), A3 (from 912 °C at 0 % C to 727 °C at 0.76 %), Acm (from 727 °C at 0.76 % to 1147 °C at 2.14 %). Vertical shaded band 0–2.14 % labelled "steels", 2.14–4.5 % "cast irons". Inset (zoom of 0–1.4 % C, 600–1000 °C): bands for full annealing (A3 + 30–50 °C), normalizing (A3/Acm + 50–80 °C), spheroidizing (just below A1), hardening (A3 + 30–50 °C for hypoeutectoid, A1 + 30–50 °C for hypereutectoid). Mark 0.45 % C vertical (worked example). -->
 
+![Figure 15.1 — The iron–cementite phase diagram up to 6.70 wt% C, with the steel and cast-iron ranges, critical temperatures A1, A3 and Acm, and heat-treatment temperature windows](../figures/ch15/fig-15-1-fe-fe3c-diagram.png)
+
+*Figure 15.1 — The iron–cementite phase diagram up to 6.70 wt% C, with the steel and cast-iron ranges, critical temperatures A1, A3 and Acm, and heat-treatment temperature windows.*
+
 ### The Fe–C diagram for steels
 
 Figure 15.1 shows the iron–cementite diagram, first met in Section 7.7. Its key features, with the conventional names of the critical lines:
@@ -91,6 +95,10 @@ The microstructure is 42 % proeutectoid ferrite and 58 % pearlite by weight, and
 | 1095 | 0.95 | Pearlite + grain-boundary Fe₃C | 500–550 | 1000–1020 | 9–10 | 290 | Blades, springs, tools |
 
 <!-- FIGURE 15.2 | figures/ch15/fig-15-2-properties-vs-carbon.png | plot | Hardness and strength of plain-carbon steels versus carbon content for pearlitic (normalized), spheroidized, as-quenched martensitic and tempered conditions. | Content: x-axis carbon 0–1.2 wt%; left y-axis hardness HV 0–950 (right axis approximate HRC). Curves: normalized ferrite–pearlite rising from ~100 HV at 0.05 % C to ~300 HV at 0.8 % then flat; spheroidized ~80–200 HV; as-quenched 100 % martensite rising steeply from ~400 HV (≈ 40 HRC) at 0.1 % C to ~650 HV (58 HRC) at 0.4 %, ~800 HV (64 HRC) at 0.6 %, plateau ~850–900 HV (65–66 HRC) above 0.7 % (label "retained austenite limits hardness"); tempered at 600 °C: ~200–330 HV. Secondary panel: tensile strength and elongation of normalized steels vs carbon, matching Table 15.1 (UTS 320 at 0.08 % to 1000 at 0.8 %; elongation 40 % to 10 %). -->
+
+![Figure 15.2 — Hardness and strength of plain-carbon steels versus carbon content for pearlitic (normalized), spheroidized, as-quenched martensitic and tempered conditions](../figures/ch15/fig-15-2-properties-vs-carbon.png)
+
+*Figure 15.2 — Hardness and strength of plain-carbon steels versus carbon content for pearlitic (normalized), spheroidized, as-quenched martensitic and tempered conditions.*
 
 Figure 15.2 summarizes the trend: in the slowly cooled condition each 0.1 % C adds roughly 100 MPa of tensile strength and costs elongation and toughness, raising the Charpy transition by roughly 15–20 °C. Structural and pipeline steels have therefore been driven to ever lower carbon (Section 15.5), with strength restored by grain refinement and microalloying.
 
@@ -188,11 +196,19 @@ Isothermal TTT diagrams (Section 10.9) describe transformation at constant tempe
 
 <!-- FIGURE 15.3 | figures/ch15/fig-15-3-cct-diagrams.png | plot | Continuous-cooling transformation diagrams for a plain-carbon 1045 steel and a Cr–Mo 4140 steel, with cooling curves for the surface and centre of a 50 mm bar quenched in oil. | Content: two panels side by side, x-axis time 0.1–10^5 s (log), y-axis temperature 100–900 °C. 1045 panel: Ac3 ~780 °C, Ac1 ~725 °C; ferrite start nose at ~1 s, pearlite nose ~2 s at ~550–600 °C, small bainite region; Ms 326 °C (dashed horizontal, worked example), M50 and M90 below. 4140 panel: ferrite/pearlite nose shifted to ~100 s at 650 °C, separate bainite bay at 400–550 °C starting at ~10 s; Ms 330 °C. Overlaid cooling curves (same on both panels): "surface, oil" reaching 400 °C in ~5 s; "centre of 50 mm bar, oil" reaching 400 °C in ~60 s. Label resulting microstructures at curve ends: 1045 surface "martensite + some bainite", 1045 centre "ferrite + pearlite (~20 HRC)"; 4140 surface "martensite", 4140 centre "martensite + bainite (~45 HRC)". -->
 
+![Figure 15.3 — Continuous-cooling transformation diagrams for a plain-carbon 1045 steel and a Cr–Mo 4140 steel, with cooling curves for the surface and centre of a 50 mm bar quenched in oil](../figures/ch15/fig-15-3-cct-diagrams.png)
+
+*Figure 15.3 — Continuous-cooling transformation diagrams for a plain-carbon 1045 steel and a Cr–Mo 4140 steel, with cooling curves for the surface and centre of a 50 mm bar quenched in oil.*
+
 ### The Jominy end-quench test
 
 The **Jominy test** (ASTM A255, ISO 642) austenitizes a bar 25 mm in diameter and 100 mm long and quenches one end with a standard water jet, so the cooling rate falls from several hundred °C/s at the end to about 3 °C/s at 50 mm. Hardness measured along the bar gives the **Jominy curve** (Figure 15.4). Since each Jominy distance corresponds to a known cooling rate, and the surface, mid-radius and centre of quenched bars are tabulated against equivalent Jominy distances, the curve predicts the hardness profile of a real component.
 
 <!-- FIGURE 15.4 | figures/ch15/fig-15-4-jominy-curves.png | plot | Jominy end-quench hardenability curves for 1040, 4140 and 4340 steels, with the cooling rate at each distance. | Content: x-axis distance from quenched end 0–50 mm (top axis cooling rate at 700 °C: ~300 °C/s at 1.5 mm, ~70 at 5 mm, ~30 at 10 mm, ~10 at 20 mm, ~5 at 30 mm, ~3 at 50 mm); y-axis hardness 20–60 HRC. 1040: ~55 HRC at end, falling to ~30 HRC by 6 mm and ~22 HRC by 20 mm. 4140: ~56 HRC at end, ~53 at 10 mm, ~45 at 20 mm, ~38 at 40 mm. 4340: ~55 at end, nearly flat, ~52 at 30 mm, ~50 at 50 mm. Horizontal dashed line at 50 % martensite hardness for 0.4 % C (~43 HRC). Label ideal critical diameters from worked example: 1040 ~22 mm, 4140 ~120 mm, 4340 ~170 mm. -->
+
+![Figure 15.4 — Jominy end-quench hardenability curves for 1040, 4140 and 4340 steels, with the cooling rate at each distance](../figures/ch15/fig-15-4-jominy-curves.png)
+
+*Figure 15.4 — Jominy end-quench hardenability curves for 1040, 4140 and 4340 steels, with the cooling rate at each distance.*
 
 ### Alloying effects
 
@@ -217,7 +233,7 @@ with approximate factors (ASTM A255, for moderate contents) $f_{\mathrm{Mn}}=1+3
 
 4340 (0.70 Mn, 0.25 Si, 0.80 Cr, 1.80 Ni, 0.25 Mo): $D_I=0.213\times3.33\times1.175\times2.73\times1.65\times1.75=6.6$ in, about 167 mm.
 
-Real quenches are not infinitely severe: a well-agitated oil quench hardens a bar about one-third to one-half of $D_I$ through. A 40 mm gear blank in 1040 therefore cannot form martensite at its core in oil and barely does so even in water, while 4140 hardens it comfortably, and 4340 is used for landing gear and large crankshafts whose sections reach 100 mm or more. The equal carbon contents give equal surface hardness after quenching; the alloy content is paid for in depth. Weldability goes the other way: the IIW carbon equivalent $\mathrm{CE}=\mathrm C+\mathrm{Mn}/6+(\mathrm{Cr}+\mathrm{Mo}+\mathrm V)/5+(\mathrm{Ni}+\mathrm{Cu})/15$ is 0.78 for 4140 against 0.41 for a C–Mn structural steel, and steels above about 0.45 need preheat to avoid hydrogen cracking in the hardened HAZ (Chapter 39).
+Real quenches are not infinitely severe: a well-agitated oil quench hardens a bar about one-third to one-half of $D_I$ through. A 40 mm gear blank in 1040 therefore cannot form martensite at its core in oil and barely does so even in water, while 4140 hardens it comfortably, and 4340 is used for landing gear and large crankshafts whose sections reach 100 mm or more. The equal carbon contents give equal surface hardness after quenching; the alloy content is paid for in depth. Weldability goes the other way: the IIW carbon equivalent $\mathrm{CE}=\mathrm C+\mathrm{Mn}/6+(\mathrm{Cr}+\mathrm{Mo}+\mathrm V)/5+(\mathrm{Ni}+\mathrm{Cu})/15$ is 0.78 for 4140 against 0.41 for a C–Mn structural steel, and steels above about 0.45 need preheat to avoid hydrogen cracking in the hardened HAZ (Chapter 47).
 
 ---
 
@@ -243,11 +259,11 @@ Tool steels must cut, form or shape other materials. They combine high carbon (0
 | H — hot work | H13 | 0.4 C, 5 Cr, 1.3 Mo, 1 V | 44–52 | Resists thermal fatigue and softening to ~600 °C | Die-casting dies, forging dies, extrusion tooling |
 | M — Mo high-speed | M2 | 0.85 C, 4 Cr, 6 W, 5 Mo, 2 V | 62–65 | Secondary hardening; red hardness | Drills, taps, end mills |
 
-High-speed and hot-work steels rely on **secondary hardening**: austenitized near 1200 °C (M2) to dissolve alloy carbides, quenched, and tempered two or three times at 540–580 °C, when fine Mo₂C, W₂C and VC precipitate and *raise* hardness above the as-quenched value. These carbides resist coarsening at the 500–600 °C of a cutting edge — the "red hardness" that let Taylor and White quadruple machining speeds around 1900. Powder-metallurgy tool steels (Chapter 38) avoid coarse eutectic carbides and are much tougher.
+High-speed and hot-work steels rely on **secondary hardening**: austenitized near 1200 °C (M2) to dissolve alloy carbides, quenched, and tempered two or three times at 540–580 °C, when fine Mo₂C, W₂C and VC precipitate and *raise* hardness above the as-quenched value. These carbides resist coarsening at the 500–600 °C of a cutting edge — the "red hardness" that let Taylor and White quadruple machining speeds around 1900. Powder-metallurgy tool steels (Chapter 46) avoid coarse eutectic carbides and are much tougher.
 
 ### Maraging steels
 
-**Maraging** steels ("martensite + ageing") take a different route to ultra-high strength. They contain almost no carbon (below 0.03 %), 18 % Ni, 8–12 % Co, 3–5 % Mo and 0.2–1.6 % Ti. On cooling from about 820 °C, even slowly, the high-Ni austenite transforms to a soft, tough, low-carbon **lath martensite** (about 30 HRC, 800 MPa yield) that can be machined. Ageing at 480–500 °C for 3–6 h then precipitates a dense dispersion of nanometre intermetallics (Ni₃Mo, Ni₃Ti, Fe₂Mo) in the dislocated martensite, raising the yield strength to 1400 MPa (grade 200), 1700 MPa (grade 250), 2000 MPa (grade 300) or 2400 MPa (grade 350). Cobalt lowers Mo solubility and promotes finer precipitation. Ageing involves no quench and a dimensional change of only about 0.05 %, so parts are finish-machined first. Maraging steels serve in rocket-motor cases, arrestor hooks, high-performance shafts and additively manufactured mould inserts (Chapter 40), wherever 2 GPa with good toughness justifies the Ni and Co cost.
+**Maraging** steels ("martensite + ageing") take a different route to ultra-high strength. They contain almost no carbon (below 0.03 %), 18 % Ni, 8–12 % Co, 3–5 % Mo and 0.2–1.6 % Ti. On cooling from about 820 °C, even slowly, the high-Ni austenite transforms to a soft, tough, low-carbon **lath martensite** (about 30 HRC, 800 MPa yield) that can be machined. Ageing at 480–500 °C for 3–6 h then precipitates a dense dispersion of nanometre intermetallics (Ni₃Mo, Ni₃Ti, Fe₂Mo) in the dislocated martensite, raising the yield strength to 1400 MPa (grade 200), 1700 MPa (grade 250), 2000 MPa (grade 300) or 2400 MPa (grade 350). Cobalt lowers Mo solubility and promotes finer precipitation. Ageing involves no quench and a dimensional change of only about 0.05 %, so parts are finish-machined first. Maraging steels serve in rocket-motor cases, arrestor hooks, high-performance shafts and additively manufactured mould inserts (Chapter 48), wherever 2 GPa with good toughness justifies the Ni and Co cost.
 
 ---
 
@@ -255,7 +271,7 @@ High-speed and hot-work steels rely on **secondary hardening**: austenitized nea
 
 ### Passivity from chromium
 
-Iron rusts because its oxide film is porous and non-protective. When chromium in solid solution exceeds about 10.5–12 wt%, the surface forms a continuous, self-healing **passive film** of chromium-rich oxide only 1–3 nm thick, which reduces the corrosion rate in many environments by a factor of 1000 or more (Chapter 34). Steels with at least 10.5 % Cr are **stainless**. Corrosion resistance rises with Cr, and in chloride environments with Mo and N; the **pitting-resistance equivalent number**
+Iron rusts because its oxide film is porous and non-protective. When chromium in solid solution exceeds about 10.5–12 wt%, the surface forms a continuous, self-healing **passive film** of chromium-rich oxide only 1–3 nm thick, which reduces the corrosion rate in many environments by a factor of 1000 or more (Chapter 42). Steels with at least 10.5 % Cr are **stainless**. Corrosion resistance rises with Cr, and in chloride environments with Mo and N; the **pitting-resistance equivalent number**
 
 $$
 \mathrm{PREN}=\mathrm{Cr}+3.3\,\mathrm{Mo}+16\,\mathrm N
@@ -290,6 +306,10 @@ The diagram then shows fields of austenite (A), ferrite (F), martensite (M) and 
 
 <!-- FIGURE 15.5 | figures/ch15/fig-15-5-schaeffler.png | map | Schaeffler diagram for stainless steel weld metal: phase fields of austenite, ferrite and martensite as functions of chromium and nickel equivalents, with common grades plotted. | Content: x-axis Cr_eq = Cr + Mo + 1.5Si + 0.5Nb, 0–40 %; y-axis Ni_eq = Ni + 30C + 0.5Mn, 0–32 %. Fields: A (upper left/upper), M (lower left), F (lower right), A+M, A+F (with iso-ferrite lines 0, 5, 10, 20, 40, 80, 100 % F), M+F, A+M+F. Plot points: 304 (Cr_eq 19.3, Ni_eq 11.3, ~5 % ferrite, worked example), 316L (19.9, 12.4), 2205 duplex (25.9, 6.9, ~50 % F), 430 (17, ~1, F+M region), 410 (12.5, ~3, M), mild-steel filler (~1, ~1.5). Draw a dilution tie-line between a 304 point and a mild-steel point with a 309 filler point (Cr_eq ~24, Ni_eq ~14) to illustrate dissimilar welding. Shade the zones "hot cracking (fully austenitic)", "sigma embrittlement (high ferrite)", "martensite cracking", "grain growth (ferritic)". -->
 
+![Figure 15.5 — Schaeffler diagram for stainless steel weld metal: phase fields of austenite, ferrite and martensite as functions of chromium and nickel equivalents, with common grades plotted](../figures/ch15/fig-15-5-schaeffler.png)
+
+*Figure 15.5 — Schaeffler diagram for stainless steel weld metal: phase fields of austenite, ferrite and martensite as functions of chromium and nickel equivalents, with common grades plotted.*
+
 **Worked example — Ferrite in a 304 weld, and why 309 joins stainless to carbon steel.** A 304 weld metal with 18.5 Cr, 9.0 Ni, 0.05 C, 1.5 Mn and 0.5 Si (wt%) has
 
 $$
@@ -298,7 +318,7 @@ $$
 
 This point lies in the A + F field with about 3–8 % ferrite. That small amount of δ-ferrite is wanted: it solidifies first, dissolves sulfur and phosphorus that would otherwise segregate to austenite grain boundaries, and prevents **solidification (hot) cracking**. Fully austenitic welds (Ni-rich, as in 310 or high-Ni alloys) are hot-crack sensitive; welds with too much ferrite embrittle by sigma formation at temperature.
 
-Joining 304 to carbon steel with a 304 filler would dilute the weld towards the low-alloy corner, crossing into the martensite field and causing cracking. A more highly alloyed **309** filler (about 23 Cr, 13 Ni; $\mathrm{Cr_{eq}}\approx24$, $\mathrm{Ni_{eq}}\approx14$) is chosen so that a typical 30 % dilution by carbon steel still lands the weld in A + F. Selection of dissimilar-metal welding consumables is one of the most frequent everyday uses of the diagram in chemical, power and food-processing plants.
+Joining 304 to carbon steel with a 304 filler would dilute the weld towards the low-alloy corner, crossing into the martensite field and causing cracking. A more highly alloyed **309** filler (about 23 Cr, 13 Ni; $\mathrm{Cr_{eq}}\approx24$, $\mathrm{Ni_{eq}}\approx14$) is chosen so that a typical 30 % dilution by the two base metals (304 plus carbon steel) still lands the weld in A + F, at about 5–8 % ferrite. Selection of dissimilar-metal welding consumables is one of the most frequent everyday uses of the diagram in chemical, power and food-processing plants.
 
 **Table 15.4 — Representative stainless steels (annealed, typical).**
 
@@ -322,6 +342,10 @@ Joining 304 to carbon steel with a 304 filler would dilute the weld towards the 
 A car body must be light (fuel economy, electric range), stiff, crashworthy and press-formable at a few seconds per part. Conventional strengthening trades ductility for strength along a "banana curve" (Figure 15.6): mild steel at 300 MPa UTS and 40 % elongation, HSLA at 500 MPa and 25 %, martensitic grades at 1500 MPa and 5 %. **Advanced high-strength steels** (AHSS) use multiphase microstructures or deformation-induced transformations to move above that curve.
 
 <!-- FIGURE 15.6 | figures/ch15/fig-15-6-ahss-banana.png | map | Total elongation versus tensile strength for automotive sheet steels: conventional grades, first-generation AHSS, third-generation AHSS and TWIP/austenitic grades. | Content: x-axis tensile strength 200–2000 MPa; y-axis total elongation 0–70 %. Bubbles: IF (UTS 280–350, El 40–50); mild (300–400, 32–42); bake hardening (350–450, 30–38); HSLA (450–650, 18–28); DP (500–1200, 10–30); TRIP (600–1000, 22–35); complex phase (800–1100, 10–18); martensitic MS (1000–1700, 3–8); press-hardened 22MnB5 (1300–1600, 5–8); third-generation Q&P and medium-Mn (980–1500, 15–30); TWIP (900–1100, 45–65); austenitic stainless 301 (700–1300, 30–60). Dashed "banana" envelope for conventional steels and labels "1st generation", "3rd generation", "2nd generation (high Mn)". -->
+
+![Figure 15.6 — Total elongation versus tensile strength for automotive sheet steels: conventional grades, first-generation AHSS, third-generation AHSS and TWIP/austenitic grades](../figures/ch15/fig-15-6-ahss-banana.png)
+
+*Figure 15.6 — Total elongation versus tensile strength for automotive sheet steels: conventional grades, first-generation AHSS, third-generation AHSS and TWIP/austenitic grades.*
 
 ### Dual-phase steels
 
@@ -445,7 +469,7 @@ These methods change no chemistry. They heat only the surface layer of a medium-
 | Induction hardening | 850–1000 (surface) | 0.5–6 | 50–60 HRC | Low to moderate | Shafts, journals, rail heads |
 | Laser hardening | 900–1200 (surface) | 0.2–1.5 | 55–65 HRC | Very low | Cutting edges, valve seats |
 
-The choice balances case depth (set by the depth of maximum contact shear stress, Chapter 37), distortion, volume and steel cost: a large wind-turbine ring gear is carburized and ground, a car crankshaft induction-hardened or nitrided, an injection mould nitrided after machining — each a solution to the problem this chapter began with: hard where contact demands it, tough everywhere else.
+The choice balances case depth (set by the depth of maximum contact shear stress, Chapter 45), distortion, volume and steel cost: a large wind-turbine ring gear is carburized and ground, a car crankshaft induction-hardened or nitrided, an injection mould nitrided after machining — each a solution to the problem this chapter began with: hard where contact demands it, tough everywhere else.
 
 ---
 
@@ -455,14 +479,14 @@ The choice balances case depth (set by the depth of maximum contact shear stress
 |---|---|
 | How are aluminium, titanium, nickel and copper alloys strengthened and selected, and how do they compare with steel? | Chapter 16 |
 | How do structural steel specifications, timber and concrete compare in building and bridge design? | Chapter 18 |
-| How do electrical steels and soft magnetic irons achieve low losses? | Chapter 27 |
-| How do steels perform under neutron irradiation and at cryogenic temperatures? | Chapter 33 |
-| How do stainless steels passivate, and how do they pit, crevice-corrode and crack? | Chapters 34 and 35 |
-| How do surface treatments interact with wear, friction and contact fatigue? | Chapter 37 |
-| How are steels rolled, forged and cast, and how does thermomechanical processing set texture? | Chapter 38 |
-| What happens in the heat-affected zone of a steel weld, and how is cold cracking prevented? | Chapter 39 |
-| How do additive manufacturing and rapid solidification change steel microstructures? | Chapter 40 |
-| How are CCT diagrams and hardenability computed rather than measured? | Chapter 46 |
-| How is steel recycled, and what is its carbon footprint? | Chapter 49 |
+| How do electrical steels and soft magnetic irons achieve low losses? | Chapter 29 |
+| How do steels perform under neutron irradiation and at cryogenic temperatures? | Chapter 41 |
+| How do stainless steels passivate, and how do they pit, crevice-corrode and crack? | Chapters 42 and 43 |
+| How do surface treatments interact with wear, friction and contact fatigue? | Chapter 45 |
+| How are steels rolled, forged and cast, and how does thermomechanical processing set texture? | Chapter 46 |
+| What happens in the heat-affected zone of a steel weld, and how is cold cracking prevented? | Chapter 47 |
+| How do additive manufacturing and rapid solidification change steel microstructures? | Chapter 48 |
+| How are CCT diagrams and hardenability computed rather than measured? | Chapter 56 |
+| How is steel recycled, and what is its carbon footprint? | Chapter 59 |
 
 **Next:** Chapter 16 turns to the non-ferrous alloys — aluminium, copper, titanium, nickel, magnesium and beyond — where precipitation, solid solution and crystal structure are used to win on lightness, conductivity, corrosion resistance or temperature capability where steel cannot.

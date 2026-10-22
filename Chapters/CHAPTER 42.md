@@ -1,340 +1,483 @@
-# Chapter 42 — Materials Characterization: The Laboratory Toolkit
+# Chapter 42 — Thermodynamics and Kinetics of Corrosion
 
-*Part X · Characterization, Computation and Design*
+*Part IX · Corrosion, Degradation and Surfaces*
 
-Six months after start-up, a girth weld in a duplex stainless-steel line on an offshore gas platform leaks. The pipe is cut out and sent to the laboratory. An optical microscope on a polished, etched section shows that the weld metal is about 75 % ferrite, where the specification allows 35–65 %. An electron backscatter diffraction map shows large ferrite grains with very little austenite along their boundaries; a scanning electron microscope shows that the crack ran through the ferrite in branched, river-like facets; its X-ray detector finds chlorine in the deposits on the crack walls. X-ray diffraction confirms the phase balance and measures 300 MPa of tensile residual stress near the weld root. Photoelectron spectroscopy of the inner surface shows a passive film thinner and poorer in chromium than on the parent pipe. Hardness traverses and a Charpy test complete the picture: a weld cooled too fast to form enough austenite, left tensile stress, and cracked by chloride stress corrosion (Chapter 35). Every statement in that diagnosis is a measurement with its own sampled volume, model and uncertainty. This chapter is the laboratory toolkit that produces them.
+A water utility digs up two sections of the same ductile-iron main, laid in the same year and carrying the same water. The section buried in well-drained sand is nearly as thick as when it was cast. The section fifty metres away, where the trench crosses waterlogged clay, has lost half its wall and is perforated in two places. In a chemical plant nearby, a 304 stainless-steel tank has served for twenty years in dilute nitric acid without measurable loss, yet a 304 heat-exchanger tube in brackish cooling water developed pits deep enough to leak in eighteen months. The steel of the turbine casing of the plant's gas turbine, meanwhile, grows a grey oxide in hot air at a rate that can be predicted to the micrometre from its temperature. None of these outcomes depends on strength, stiffness or toughness. They depend on the thermodynamics that decides whether a metal can react with its environment, and on the kinetics that decide how fast it does. Corrosion is estimated to cost the world economy of the order of 3 % of its gross domestic product each year, and studies suggest that a fifth to a third of that could be saved by applying what is already known. This chapter supplies the science behind that knowledge.
 
-> **What does each technique probe, from what volume of material, and with what detection limit?**
-> **How is a raw signal (an intensity, a heat flow, a voltage) turned into a property, and what model sits in between?**
-> **How large is the uncertainty on the final number, and which input dominates it?**
+> **When is a metal thermodynamically able to corrode in water or air, and what does it corrode to?**
+> **What sets the rate of corrosion, and how is an electrical current turned into millimetres per year?**
+> **Why do some metals, such as stainless steel, aluminium and titanium, survive in environments where they ought to dissolve, and when does that protection fail?**
 
 | Concept | Engineering destination |
 |---|---|
-| Optical microscopy, metallography, stereology | Grain size and phase fractions for specifications; weld, casting and coating sections |
-| SEM imaging, EDS, EBSD | Fractography, inclusion and corrosion-product analysis, texture and grain-boundary maps |
-| TEM and electron diffraction | Precipitates, dislocations, interfaces in alloys, ceramics and devices |
-| XRD: phase ID, Rietveld, residual stress, texture | Retained austenite, cement phases, coating stress, sheet-metal texture |
-| XPS, AES, SIMS | Passive films, adhesion and contamination failures, grain-boundary segregation, hydrogen and dopant profiles |
-| Raman, FTIR, UV–Vis | Zirconia implant aging, polymer identification and oxidation, optical band gaps |
-| DSC, TGA, TMA, DMA, laser flash | Polymer crystallinity and $T_g$, filler content, cement hydration, CTE, damping, conductivity |
-| Mechanical and electrical testing | Design allowables, toughness qualification, sheet resistance and conductivity |
-| GUM uncertainty budgets | Defensible numbers in certificates, qualification reports and failure investigations |
+| Corrosion cell: anode, cathode, electrolyte, metallic path | Diagnosing any corrosion problem, from car bodies to buried pipes |
+| Electrode potentials, galvanic series | Choosing compatible metals for joints, fasteners and heat exchangers |
+| Pourbaix diagrams | Water treatment, boiler chemistry, concrete reinforcement, cathodic protection |
+| Butler–Volmer and Tafel kinetics | Interpreting polarization tests; designing inhibitors and coatings |
+| Mixed-potential theory, Evans diagrams | Predicting corrosion potential and rate, galvanic coupling, effect of oxygen |
+| Faraday's law, polarization resistance | Corrosion allowances, monitoring probes, inspection intervals |
+| Passivity and its breakdown | Stainless-steel grade selection; pitting and crevice resistance |
+| Wagner theory, parabolic law, Pilling–Bedworth ratio | Furnace parts, turbines, boilers, hot rolling scale losses |
 
-**Roadmap.** The common anatomy of a measurement (42.1) → seeing structure with light, electrons and diffraction (42.2–42.5) → surface composition (42.6) → vibrational and optical spectroscopy (42.7) → thermal analysis (42.8) → mechanical and electrical tests (42.9) → how much to believe the number (42.10).
+**Roadmap.** The corrosion cell (42.1) → thermodynamics: potentials and the galvanic series (42.2) and Pourbaix diagrams (42.3) → kinetics: Butler–Volmer and Tafel (42.4) and mixed potentials (42.5) → turning current into rate (42.6) → passivity and its breakdown (42.7) → corrosion in hot gas (42.8).
 
----
-
-## 42.1 The anatomy of a measurement
-
-Every technique in this chapter has the same structure. A **probe** (photons, electrons, ions, heat, force, a current) interacts with a **sampled volume** and produces a **signal**; a **model** converts signal into property. Three figures of merit follow: **lateral resolution** (the smallest feature distinguished side by side), **information depth** (how deep the signal comes from) and **detection limit** (the smallest concentration detected). They trade against each other: techniques that see single atoms sample tiny volumes, and those that detect parts per billion average over micrometres. Figure 42.1 maps the toolkit.
-
-The habit worth acquiring is to ask, for every number: *which volume, which signal, which model?* A grain size measured on one plane, an EDS analysis of a 0.5 µm layer with a 1 µm interaction volume, or a DSC crystallinity calculated with the wrong reference enthalpy are all correct readings of wrong models.
-
-<!-- FIGURE 42.1 | figures/ch42/fig-42-1-technique-map.png | map | Laboratory characterization techniques placed by lateral resolution and information depth, with detection limits indicated. | Content: log-log map. x-axis lateral resolution from 0.1 nm to 10 mm; y-axis information depth from 1 nm to 10 mm. Ellipses labelled with typical detection limit in brackets: XPS (lateral 10 µm-1 mm, depth 3-10 nm, ~0.1 at.%), AES (10-50 nm, 2-5 nm, ~0.1 at.%), static/dynamic SIMS (0.1-100 µm, 1 nm-10 µm by sputtering, ppm-ppb), SEM-EDS (~1 µm, ~1 µm, ~0.1 wt%), EBSD (20-100 nm, 10-50 nm, phase/orientation), TEM/STEM (0.1-1 nm, foil thickness <100 nm), optical microscopy (0.25-1 µm, surface), Raman (~1 µm, 0.1 µm-mm depending on transparency), FTIR-ATR (10-50 µm, 0.5-2 µm), lab XRD (0.1-10 mm, 1-100 µm, ~1 wt% phase), thermal analysis and mechanical tests as bulk bar at right (whole specimen). Colour by probe type: photons, electrons, ions. -->
+> **Boundary.** The thermodynamics of electrochemical cells, the Nernst equation, standard electrode potentials and the derivation of the Butler–Volmer equation are electrochemistry fundamentals taught in the Advanced Chemistry book. They are recapped here and applied to metals and alloys, not derived. The forms that corrosion takes in structures, and how to prevent them, are the subject of Chapter 43.
 
 ---
 
-## 42.2 Optical microscopy and metallography
+## 42.1 The electrochemical corrosion cell
 
-### Resolution and contrast
+### Four necessary elements
 
-An objective collects light diffracted by the specimen; two points are resolved when their Airy discs separate by at least
+Aqueous corrosion is an electrochemical process. A metal surface in contact with water carries two kinds of reaction at once. At **anodic** sites the metal is oxidized and passes into solution as ions, releasing electrons:
 
 $$
-d=\frac{0.61\,\lambda}{\mathrm{NA}},\qquad \mathrm{NA}=n\sin\alpha
+\mathrm{M}\rightarrow\mathrm{M}^{n+}+n\,e^-
 $$
 
-For green light (550 nm) and a dry objective of NA 0.95, $d\approx350$ nm; oil immersion (NA 1.4) gives about 240 nm. Magnification beyond about $1000\times\mathrm{NA}$ adds no detail. Depth of field shrinks as $\lambda n/\mathrm{NA}^2$ (about 0.6 µm at NA 0.95), which is why rough fracture surfaces go to the SEM.
+for example $\mathrm{Fe}\rightarrow\mathrm{Fe^{2+}}+2e^-$. At **cathodic** sites those electrons are consumed by a reduction. In neutral and alkaline water open to air the dominant cathodic reaction is oxygen reduction,
 
-> **Status of the principle: Rayleigh resolution limit**
-> *Derived.* Fraunhofer diffraction at a circular aperture under incoherent illumination; 0.61 is a convention for "just resolved", and confocal, structured-illumination and near-field methods beat it.
+$$
+\mathrm{O_2}+2\,\mathrm{H_2O}+4\,e^-\rightarrow4\,\mathrm{OH^-}
+$$
 
-Reflected-light metallographic microscopes offer **bright field** (flat regions bright, grooves and inclusions dark), **dark field** (scattered light only: scratches, cracks), **polarized light** (optically anisotropic phases such as titanium, zinc, magnesium, graphite and many intermetallics show grain contrast unetched) and **differential interference contrast** (nanometre height steps as colour). Transmitted polarized light on 20–30 µm thin sections identifies minerals in rocks, clinker and concrete, and spherulites in polymers.
+and in acid, or in the absence of oxygen, hydrogen evolution, $2\mathrm{H^+}+2e^-\rightarrow\mathrm{H_2}$ (or $2\mathrm{H_2O}+2e^-\rightarrow\mathrm{H_2}+2\mathrm{OH^-}$ in neutral water). Other oxidants, such as Fe$^{3+}$, Cu$^{2+}$, dissolved chlorine or nitric acid, can also serve.
 
-### Preparing a section
+A corrosion cell therefore needs four elements (Figure 42.1): an **anode**, a **cathode**, an **electrolyte** that carries ionic current between them, and a **metallic path** that carries electrons. Remove any one and corrosion stops. This simple statement underlies every protection method in Chapter 43: coatings separate the metal from the electrolyte, insulating gaskets break the metallic path between dissimilar metals, deaeration removes the cathodic reactant, and cathodic protection makes the whole structure a cathode.
 
-Most microstructure is seen by cutting, mounting, grinding, polishing and etching, each step a source of artefacts.
+The anodic and cathodic sites may be microscopic and constantly shifting, giving fairly uniform attack, or fixed and separated, giving localized attack. Differences in composition (phases, inclusions, welds), in surface condition (mill scale, scratches), in stress, or in the environment (oxygen concentration, temperature, flow) fix the sites. The ferrous corrosion products then react further: Fe$^{2+}$ meets OH$^-$ and dissolved oxygen to precipitate hydrated ferric oxide, rust, often at some distance from the anode.
 
-| Material | Key preparation points | Typical etch or contrast |
+### The water main and differential aeration
+
+The pipe in the opening paragraph corroded by **differential aeration**. Where it passed through sand, oxygen reached the whole surface. Where it passed through saturated clay, oxygen could not diffuse in. The oxygen-starved section became anodic and the well-aerated section, close by and electrically connected through the pipe wall, became the cathode. Because the cathode was large and the anode small, the anode's current density, and therefore its rate of metal loss, was high. The same mechanism concentrates attack beneath a droplet of salt water (Evans's classic drop experiment: the oxygen-poor centre corrodes while rust forms in a ring near the edge), under deposits, in crevices and at the waterline of a partially immersed steel pile.
+
+<!-- FIGURE 42.1 | figures/ch42/fig-42-1-corrosion-cell-drop.png | schematic | The corrosion cell needs an anode, a cathode, an electrolyte and a metallic path; under a salt-water drop, differential aeration makes the oxygen-poor centre anodic. | Content: (a) generic cell: metal bar with anodic region (Fe -> Fe2+ + 2e-), cathodic region (O2 + 2H2O + 4e- -> 4OH-), electron flow through metal (arrow), ionic current through electrolyte (arrows), all four elements labelled. (b) cross-section of an NaCl droplet ~5 mm across on steel: high O2 at periphery (cathodic ring, OH- produced, pink with phenolphthalein indicator), low O2 at centre (anodic, Fe2+ produced, blue with ferricyanide indicator), brown rust ring Fe(OH)3 between them; O2 diffusion arrows from air. -->
+
+![Figure 42.1 — The corrosion cell needs an anode, a cathode, an electrolyte and a metallic path; under a salt-water drop, differential aeration makes the oxygen-poor centre anodic](../figures/ch42/fig-42-1-corrosion-cell-drop.png)
+
+*Figure 42.1 — The corrosion cell needs an anode, a cathode, an electrolyte and a metallic path; under a salt-water drop, differential aeration makes the oxygen-poor centre anodic.*
+
+---
+
+## 42.2 Thermodynamics: potentials and the galvanic series
+
+### Electrode potentials (recap)
+
+Whether a metal can corrode is decided by the Gibbs energy of the overall reaction, $\Delta G=-nFE$, where $E$ is the cell potential: the reaction is possible if the potential of the cathodic reaction lies above that of the anodic reaction. Each half-reaction has an equilibrium potential given by the **Nernst equation**,
+
+$$
+E=E^\circ-\frac{RT}{nF}\ln\frac{a_{\mathrm{red}}}{a_{\mathrm{ox}}}=E^\circ+\frac{0.05916}{n}\log_{10}\frac{a_{\mathrm{ox}}}{a_{\mathrm{red}}}\quad(25\ ^\circ\mathrm C)
+$$
+
+where $E^\circ$ is the standard potential relative to the standard hydrogen electrode (SHE) and the $a$ are activities (roughly, molar concentrations of dissolved species and partial pressures of gases). For a metal dissolving to its ions, $E=E^\circ+(0.05916/n)\log a_{\mathrm{M}^{n+}}$. In corrosion engineering an ion activity of $10^{-6}$ is conventionally taken as the threshold of "corrosion": below it the metal is considered not to dissolve measurably.
+
+> **Status of the principle: Nernst equation**
+> *Fundamental.* It follows from the equilibrium condition on electrochemical potentials. It gives the equilibrium potential only; it says nothing about rates, and real solutions require activities, not concentrations.
+
+The two cathodic reactions available in water have potentials that depend on pH:
+
+$$
+E_{\mathrm{H^+/H_2}}=-0.0592\,\mathrm{pH},\qquad E_{\mathrm{O_2/H_2O}}=1.229-0.0592\,\mathrm{pH}\quad(\mathrm V\ \mathrm{SHE},\ 1\ \mathrm{atm},\ 25\ ^\circ\mathrm C)
+$$
+
+These lines bound the stability of water. Any metal whose equilibrium potential lies below the hydrogen line can, in principle, be corroded by water alone with hydrogen evolution; any metal below the oxygen line can be corroded by aerated water. Only gold and platinum lie above both over most of the pH range.
+
+**Table 42.1 — Standard reduction potentials of metals at 25 °C (the emf series).**
+
+| Electrode reaction | $E^\circ$ (V vs SHE) | Equilibrium potential at $a=10^{-6}$ (V) |
 |---|---|---|
-| Carbon and low-alloy steel | Wet abrasive cutting; SiC grinding; diamond 3 then 1 µm | 2 % nital (ferrite boundaries, pearlite); picral for carbides |
-| Stainless and duplex steel | Avoid smearing of soft austenite | Electrolytic oxalic or NaOH (ferrite/austenite contrast); Beraha tints |
-| Aluminium alloys | Very soft; final colloidal silica; avoid embedded abrasive | Keller's reagent; Barker's anodizing for polarized grain contrast |
-| Titanium alloys | Chemo-mechanical final polish | Kroll's reagent (HF–HNO$_3$) for α/β |
-| Ceramics | Diamond throughout; pull-out mimics porosity | Thermal etch 100–200 °C below sintering temperature |
-| Polymers and composites | Low-temperature mounting; fibres pull out | Permanganic etch for spherulites; polarized light |
-| Concrete | Vacuum epoxy impregnation with fluorescent dye | UV light reveals cracks and porosity |
+| $\mathrm{Au^{3+}}+3e^-\rightarrow\mathrm{Au}$ | +1.50 | +1.38 |
+| $\mathrm{O_2}+4\mathrm{H^+}+4e^-\rightarrow2\mathrm{H_2O}$ | +1.229 | (pH-dependent) |
+| $\mathrm{Ag^+}+e^-\rightarrow\mathrm{Ag}$ | +0.80 | +0.44 |
+| $\mathrm{Cu^{2+}}+2e^-\rightarrow\mathrm{Cu}$ | +0.34 | +0.16 |
+| $2\mathrm{H^+}+2e^-\rightarrow\mathrm{H_2}$ | 0.000 | (pH-dependent) |
+| $\mathrm{Ni^{2+}}+2e^-\rightarrow\mathrm{Ni}$ | −0.25 | −0.43 |
+| $\mathrm{Fe^{2+}}+2e^-\rightarrow\mathrm{Fe}$ | −0.447 | −0.62 |
+| $\mathrm{Cr^{3+}}+3e^-\rightarrow\mathrm{Cr}$ | −0.74 | −0.86 |
+| $\mathrm{Zn^{2+}}+2e^-\rightarrow\mathrm{Zn}$ | −0.76 | −0.94 |
+| $\mathrm{Ti^{2+}}+2e^-\rightarrow\mathrm{Ti}$ | −1.63 | −1.81 |
+| $\mathrm{Al^{3+}}+3e^-\rightarrow\mathrm{Al}$ | −1.66 | −1.78 |
+| $\mathrm{Mg^{2+}}+2e^-\rightarrow\mathrm{Mg}$ | −2.37 | −2.55 |
 
-Hot mounting at about 150 °C can age solders and polymers; overetching widens cracks; edge rounding hides coatings unless the specimen is backed. A section is also a single plane: a crack seen in one plane may not be continuous, and only random sections give unbiased statistics.
+### The galvanic series
 
-### Quantitative metallography
+The emf series describes pure metals in contact with their own ions at unit activity, a condition never met in service. Engineers instead use a **galvanic series**: the measured corrosion potentials of real alloys in a specified environment, most often flowing seawater (Table 42.2). The two rankings differ in instructive ways. Titanium and aluminium, near the bottom of the emf series, sit much higher in the galvanic series, and stainless steels appear twice, because each develops a passive oxide film that changes its effective potential (Section 42.7). The galvanic series is thus not a thermodynamic table; it is an empirical record of how metals actually behave, kinetics and films included.
 
-**Stereology** (Chapter 5) turns plane measurements into volume quantities. The **point fraction** equals the volume fraction, $P_P=V_V$: a grid of points is laid over the image and the fraction falling on the phase is counted. Grain size is measured by the **linear intercept** method: test lines of total length $L$ cross $N$ grain boundaries, the mean intercept is $\bar\ell=L/N$, and the ASTM grain-size number is
+**Table 42.2 — Galvanic series in flowing seawater at about 25 °C (approximate corrosion potentials).**
 
-$$
-G=-6.6439\log_{10}\bar\ell-3.288\qquad(\bar\ell\ \text{in mm})
-$$
+| Alloy | Potential (V vs saturated calomel electrode) |
+|---|---|
+| Graphite, platinum | +0.2 to +0.3 |
+| Titanium, Alloy 625, super-austenitic stainless | −0.05 to +0.06 |
+| 316 stainless steel (passive) | −0.05 to −0.10 |
+| 70/30 copper–nickel | −0.18 to −0.25 |
+| Copper, brasses | −0.30 to −0.37 |
+| 316 stainless steel (active, in crevices) | −0.43 to −0.54 |
+| Carbon steel, cast iron | −0.60 to −0.72 |
+| Aluminium alloys | −0.76 to −1.0 |
+| Zinc | −0.98 to −1.03 |
+| Magnesium | −1.60 to −1.63 |
 
-> **Status of the principle: $P_P=V_V$ and intercept grain size**
-> *Derived.* Geometric-probability identities exact for isotropic, uniform random sampling; anisotropic or banded microstructures need oriented sections, and the mean intercept is about 0.67 of the mean 3D grain diameter for equiaxed grains.
+When two metals are electrically connected in an electrolyte, the one lower in the series tends to become the anode and corrode faster, and the one higher is protected. The farther apart they are, the greater the driving force; whether the coupling is damaging depends on kinetics and the area ratio (Section 42.5 and Chapter 43). This is why steel bolts in a copper-alloy seawater pump fail quickly, while zinc and aluminium anodes protect ship hulls.
 
-**Worked example — grain size and pearlite fraction of a structural steel.** On an etched section of a 0.18 % C steel, five test lines with a total true length of 2.50 mm cross 125 ferrite grain boundaries: $\bar\ell=2.50/125=0.020$ mm and $G=-6.6439\log_{10}0.020-3.288=8.0$. A 400-point grid lands on pearlite 92 times: $V_V=0.23$, with a binomial standard error $\sqrt{0.23\times0.77/400}=0.021$, so $V_V=0.23\pm0.02$. The lever rule on the Fe–C diagram (Chapter 7) predicts $(0.18-0.02)/(0.77-0.02)=0.21$, consistent within the counting error. Note that halving the error would need four times as many points; counting statistics, not the microscope, usually limit such measurements. Automated image analysis does the same counting on thousands of fields, but its thresholds must be checked against manual counts.
-
----
-
-## 42.3 SEM, EDS and EBSD
-
-### Electrons and the interaction volume
-
-An electron accelerated through $V$ has wavelength $\lambda=h/\sqrt{2m_eeV(1+eV/2m_ec^2)}$: 8.6 pm at 20 kV, 2.5 pm at 200 kV. Lens aberrations, not wavelength, limit resolution, but SEMs still reach about 1 nm and TEMs below 0.1 nm.
-
-A **scanning electron microscope (SEM)** rasters a 1–30 keV beam focused to a few nanometres. The beam spreads inside the specimen into an **interaction volume** whose depth is estimated by the Kanaya–Okayama range
-
-$$
-R\ (\mu\mathrm{m})=\frac{0.0276\,A\,E_0^{1.67}}{Z^{0.889}\,\rho}
-$$
-
-($A$ in g/mol, $E_0$ in keV, $\rho$ in g/cm$^3$).
-
-> **Status of the principle: Kanaya–Okayama range**
-> *Empirical.* A fit to transmission and Monte Carlo data for bulk elements, good to about ±20 % from carbon to gold at 5–30 keV; only indicative for compounds and layered specimens.
-
-**Worked example — where does the signal come from?** At 20 keV, aluminium ($A=26.98$, $Z=13$, $\rho=2.70$) gives $R=4.2$ µm, iron ($55.85$, 26, 7.87) 1.6 µm and tungsten 0.85 µm; a polymer approximated as carbon of density 0.95 g/cm$^3$ gives about 10 µm. At 5 keV the same numbers are 0.42, 0.16, 0.08 and 1.0 µm. An EDS analysis of a 1 µm corrosion layer on aluminium at 20 keV is therefore mostly substrate; dropping to 5–7 keV confines the signal but may not excite the K lines of heavier elements. Figure 42.2 shows the volumes.
-
-<!-- FIGURE 42.2 | figures/ch42/fig-42-2-interaction-volumes.png | schematic | Electron interaction volumes at 20 keV in aluminium, iron and tungsten, and the depths from which SE, BSE and X-ray signals come. | Content: three teardrop cross-sections on a common 1 µm scale bar: Al (depth 4.2 µm), Fe (1.6 µm), W (0.85 µm). In each, shaded zones: surface skin of ~1-10 nm labelled 'secondary electrons', upper ~30 % labelled 'backscattered electrons', full teardrop labelled 'characteristic X-rays (EDS)'. Small inset table: R at 5 keV = 0.42, 0.16, 0.08 µm. Annotation: 'EDS spatial resolution ~ R, not the beam diameter'. -->
-
-### Imaging signals
-
-**Secondary electrons (SE)** (below 50 eV) escape only from the top few nanometres, and their yield rises at inclined surfaces, so SE images show topography with a large depth of field: fracture surfaces, wear tracks, powder morphology, cell attachment on scaffolds. **Backscattered electrons (BSE)** are beam electrons scattered back with a yield that rises with atomic number (about 0.06 for carbon, 0.15 for aluminium, 0.28 for iron, 0.50 for gold), giving **atomic-number contrast**: carbides in tool steel, intermetallics in aluminium castings and unreacted clinker in concrete stand out without etching. Insulators (ceramics, polymers, biological tissue) charge; remedies are a thin carbon or gold coat, low voltage, or a variable-pressure SEM.
-
-**Fractography** reads the fracture mode from SE images: dimples for ductile microvoid coalescence, flat facets with river lines for cleavage, rock-candy grain faces for intergranular fracture, and striations whose spacing equals the crack advance per cycle in fatigue (Chapters 14 and 36).
-
-### Energy-dispersive X-ray spectroscopy
-
-Beam electrons eject inner-shell electrons, and the characteristic X-rays emitted as the vacancies fill identify the elements. A silicon drift detector resolves about 125–130 eV at Mn K$\alpha$. EDS detects about 0.1 wt% in minutes; light elements (B, C, N, O) are only semi-quantitative; quantification with ZAF or φ(ρz) corrections assumes a flat, polished, homogeneous region larger than the interaction volume. Peak overlaps cause classic errors: S K$\alpha$ (2.31 keV), Mo L$\alpha$ (2.29) and Pb M$\alpha$ (2.35); Ti K$\alpha$ (4.51) and Ba L$\alpha$ (4.47); Si K$\alpha$ (1.74) and W M$\alpha$ (1.78). **Wavelength-dispersive spectroscopy (WDS)** in an electron microprobe resolves such overlaps with 5–10 eV resolution and detects about 0.01 wt%, at the cost of speed.
-
-### Electron backscatter diffraction
-
-When the beam strikes a specimen tilted 70°, backscattered electrons diffract from lattice planes and form **Kikuchi bands** on a phosphor screen; each band is a lattice plane, and the pattern is indexed automatically to give crystal phase and orientation to about 0.5°. Scanning gives an **orientation map** with 20–100 nm resolution: grain size by true grain-boundary detection (rather than etching), misorientation and twin boundaries, phase maps (ferrite versus austenite, α versus β titanium), and texture over thousands of grains. Small orientation gradients within grains, plotted as **kernel average misorientation**, reveal plastic strain and geometrically necessary dislocations, useful for locating cold-worked regions near welds, cracks or forming defects. EBSD needs a deformation-free surface (final polish with colloidal silica or electropolishing), because the signal comes from the top 10–50 nm (Figure 42.3).
-
-<!-- FIGURE 42.3 | figures/ch42/fig-42-3-ebsd-map.png | micrograph-style | EBSD orientation map of a duplex stainless-steel weld metal with misorientation profile. | Content: left panel, schematic inverse-pole-figure (IPF-Z) coloured map ~200 x 150 µm: large ferrite grains (70-80 % area) with thin grain-boundary and Widmanstätten austenite (overlay phase outline in black), colour key triangle (001 red, 101 green, 111 blue). Scale bar 50 µm. Right top: phase-fraction bar 'ferrite 75 %, austenite 25 %'. Right bottom: misorientation profile along a 60 µm line across one grain: point-to-origin misorientation rising gradually to ~3° near the fusion boundary (labelled 'plastic strain / KAM') and a step of 45° at a high-angle boundary; dashed line at 15° labelled 'high-angle boundary threshold'. -->
+> **Status of the principle: galvanic series**
+> *Empirical.* A ranking of measured corrosion potentials valid only for the environment and conditions in which it was measured; it predicts the direction of galvanic action but not its rate.
 
 ---
 
-## 42.4 TEM and electron diffraction
+## 42.3 Pourbaix diagrams
 
-A **transmission electron microscope (TEM)** sends an 80–300 keV beam through a foil thinner than about 100 nm, prepared by electropolishing (metals), ion milling (ceramics), ultramicrotomy (polymers, tissue) or focused-ion-beam lift-out (site-specific sections).
+### Construction
 
-**Diffraction contrast.** An aperture selecting only the transmitted beam (bright field) or one diffracted beam (dark field) makes regions that diffract strongly appear dark or bright. Dislocations, stacking faults, precipitates and strain fields are visible because they locally bend the planes into or out of the Bragg condition. A dislocation is invisible when $\mathbf g\cdot\mathbf b=0$, with $\mathbf g$ the operating reflection; tilting to two such conditions determines its Burgers vector (Chapter 12).
+A **Pourbaix diagram** (potential–pH diagram) maps the thermodynamically stable species of a metal–water system as a function of electrode potential and pH, at a chosen temperature and dissolved-ion activity (usually 25 °C and $10^{-6}$). It is assembled from the equilibria of three kinds of reaction:
 
-**Selected-area electron diffraction (SAED).** Because $\lambda$ is tiny, Bragg angles are a fraction of a degree, and a spot or ring at distance $R$ on the detector corresponds to plane spacing
+- **Electron transfer without $\mathrm{H^+}$** (for example $\mathrm{Fe^{2+}}+2e^-\rightleftharpoons\mathrm{Fe}$): a horizontal line, independent of pH.
+- **$\mathrm{H^+}$ transfer without electrons** (for example $\mathrm{Fe^{2+}}+2\mathrm{H_2O}\rightleftharpoons\mathrm{Fe(OH)_2}+2\mathrm{H^+}$): a vertical line at a fixed pH.
+- **Both** (for example $\mathrm{Fe_2O_3}+6\mathrm{H^+}+2e^-\rightleftharpoons2\mathrm{Fe^{2+}}+3\mathrm{H_2O}$): a sloping line with slope $-0.0592\,m/n$ V per pH unit, where $m$ is the number of protons and $n$ the number of electrons.
 
-$$
-Rd=\lambda L
-$$
+The resulting regions are labelled by their practical meaning: **immunity**, where the metal itself is stable and cannot corrode; **corrosion**, where a soluble ion is stable above $10^{-6}$; and **passivation**, where a solid oxide or hydroxide is stable and may, if it is adherent and compact, protect the metal. Superimposing the two water lines shows which oxidants are available.
 
-with $L$ the camera length; $\lambda L$ is the **camera constant**. Single crystals give spot patterns, fine polycrystals rings, glasses diffuse halos.
+**Worked example — the boundaries of the iron diagram.** At $a_{\mathrm{Fe^{2+}}}=10^{-6}$ and 25 °C:
 
-**Worked example — indexing a ring pattern.** A nanocrystalline aluminium film is examined at 200 kV ($\lambda=2.508$ pm) with $L=1.00$ m, so $\lambda L=2.508\times10^{-12}$ m$^2$. The innermost ring is at 10.73 mm: $d=2.508\times10^{-12}/10.73\times10^{-3}=0.2337$ nm, which matches Al(111) ($0.4049/\sqrt3=0.2338$ nm). The next ring at 12.39 mm gives $d=0.2024$ nm = Al(200). For an FCC lattice the ratios $R^2$ run 3 : 4 : 8 : 11 : 12, so the following rings fall at 17.52 and 20.54 mm for (220) and (311). An extra ring at a spacing absent from the FCC sequence would signal a second phase, for example an oxide or an Al$_3$X precipitate. In practice the camera constant is calibrated on a standard to about 1 %, which limits SAED lattice parameters to that accuracy; XRD is a hundred times more precise.
+- Immunity–corrosion boundary: $E=-0.447+(0.05916/2)\times(-6)=-0.447-0.177=-0.624$ V, horizontal.
+- Fe$_2$O$_3$/Fe$^{2+}$ boundary, from $\mathrm{Fe_2O_3}+6\mathrm{H^+}+2e^-\rightleftharpoons2\mathrm{Fe^{2+}}+3\mathrm{H_2O}$ with $E^\circ=0.728$ V: $E=0.728-0.1775\,\mathrm{pH}-0.0592\log a_{\mathrm{Fe^{2+}}}=1.083-0.1775\,\mathrm{pH}$. With $m=6$ and $n=2$, the slope is $-0.0592\times6/2=-0.1775$ V per pH unit.
+- Fe$_3$O$_4$/Fe boundary, from $\mathrm{Fe_3O_4}+8\mathrm{H^+}+8e^-\rightleftharpoons3\mathrm{Fe}+4\mathrm{H_2O}$ with $E^\circ=-0.085$ V: $E=-0.085-0.0592\,\mathrm{pH}$. It meets the $-0.624$ V line at $\mathrm{pH}=(0.624-0.085)/0.0592=9.1$.
 
-**High-resolution TEM and STEM.** Phase-contrast lattice imaging shows atomic columns at interfaces, but bright spots are not necessarily atoms, and interpretation needs simulation. Scanning TEM with annular dark-field detection, spectroscopy and pixelated detectors, and the aberration correctors that take resolution below 0.1 nm, are the subject of Chapter 43. TEM's limitation is statistical: a few square micrometres of foil may not represent a component, so TEM conclusions are paired with bulk methods such as XRD and SANS.
+So iron corrodes as Fe$^{2+}$ at all pH below about 9 if its potential is above −0.62 V, while above pH 9 the stable product is magnetite and then haematite. Since the hydrogen line ($-0.0592$ pH) lies above −0.62 V at all pH below about 10.5, iron in deaerated acid or neutral water is thermodynamically able to corrode with hydrogen evolution; in aerated water the oxygen line lies far above it.
 
-> **Boundary.** Electron optics and scattering theory belong to Engineering Physics; diffraction geometry (reciprocal lattice, structure factor, Ewald sphere) is in Chapter 4.
+> **Status of the principle: Pourbaix diagram**
+> *Derived* from equilibrium thermodynamics (the Nernst equation and solubility products) for a stated temperature and ion activity. It predicts what can happen, never how fast; it ignores kinetics, non-equilibrium films, alloying and complexing ions such as chloride, and it does not show whether an oxide is protective.
 
----
+<!-- FIGURE 42.2 | figures/ch42/fig-42-2-pourbaix-iron.png | plot | The Pourbaix diagram of iron at 25 C and 10^-6 activity: iron is immune below -0.62 V, corrodes as Fe2+ in acid and neutral water, and is covered by oxides in alkaline water. | Content: x-axis pH -2 to 16, y-axis E (V vs SHE) -1.8 to +2.0. Computed lines at a = 10^-6: Fe2+/Fe horizontal at -0.624 V from pH -2 to 9.1; Fe3O4/Fe E = -0.085 - 0.0592 pH (pH 9.1 to ~14); Fe2O3/Fe2+ E = 1.083 - 0.1775 pH (pH 1.76 to 7.3); Fe3O4/Fe2+ E = 1.512 - 0.2366 pH (pH 7.3 to 9.0); Fe2O3/Fe3O4 E = 0.221 - 0.0592 pH (pH 7.3 to 16); Fe3+/Fe2+ horizontal at 0.771 V (pH < 1.76); Fe2O3/Fe3+ vertical at pH 1.76; small HFeO2- region at pH > ~14 at low potential. Dashed water lines (a) E = -0.0592 pH and (b) E = 1.229 - 0.0592 pH. Shade regions: immunity (grey), corrosion (red tint), passivation (blue tint). Mark the point of steel in concrete (pH 12.5-13.5, about -0.2 V) inside the passive region. -->
 
-## 42.5 X-ray diffraction in practice
+![Figure 42.2 — The Pourbaix diagram of iron at 25 C and 10^-6 activity: iron is immune below -0.62 V, corrodes as Fe2+ in acid and neutral water, and is covered by oxides in alkaline water](../figures/ch42/fig-42-2-pourbaix-iron.png)
 
-Chapter 4 derived Bragg's law $n\lambda=2d\sin\theta$, the structure factor and peak broadening. This section is about using a laboratory diffractometer.
+*Figure 42.2 — The Pourbaix diagram of iron at 25 C and 10^-6 activity: iron is immune below -0.62 V, corrodes as Fe2+ in acid and neutral water, and is covered by oxides in alkaline water.*
 
-### Instrument choices
+### Iron, aluminium, copper, zinc and titanium compared
 
-The common **Bragg–Brentano** geometry moves source and detector symmetrically, so only planes parallel to the surface diffract; a flat, randomly oriented powder or polycrystal of 10–20 mm is irradiated to a depth of 1–100 µm depending on absorption. The **anode** matters. Cu K$\alpha$ ($\lambda=0.15406$ nm) is standard, but its photons (8.05 keV) lie just above the iron K absorption edge (7.11 keV), so iron-bearing specimens fluoresce and give a high background; steels are therefore measured with Co K$\alpha$ (6.93 keV, below the edge) or Cr K$\alpha$, or with an energy-discriminating detector. Mo and Ag anodes give short wavelengths for transmission through thicker specimens and for total scattering (Chapter 43).
+The diagrams of the main engineering metals explain much of their practical behaviour (Figure 42.3).
 
-### Phase identification and quantification
+- **Iron** (Figure 42.2) is passive only in alkaline solution. That is why steel reinforcement survives in concrete, whose pore solution has a pH of 12.5–13.5, until carbonation lowers the pH or chloride breaks the film (Chapters 18 and 43); and why boiler water is dosed to pH 9–10 so that a protective magnetite layer forms on the tubes.
+- **Aluminium** is **amphoteric**: its oxide dissolves in both acid and base. At $10^{-6}$ activity, Al$_2$O$_3$ (as the hydrate) is stable only between about pH 4 and 8.6; below, aluminium dissolves as Al$^{3+}$, above, as aluminate AlO$_2^-$. Its immunity region lies near −1.8 V, far below the water line, so aluminium in water is always thermodynamically unstable; its usefulness rests entirely on its oxide film in near-neutral water. This is why aluminium must not be cleaned with strong alkali, why it is attacked by wet fresh concrete and mortar, and why aluminium cooking pots are pitted by salty, acidic foods.
+- **Zinc** is also amphoteric, passive roughly between pH 8.5 and 11 (where ZnO or Zn(OH)$_2$ is stable) and soluble outside. In the atmosphere it forms a protective basic carbonate patina, the basis of galvanizing, but it corrodes rapidly in acid rain and in hot alkaline water.
+- **Copper** has an immunity region that reaches *above* the hydrogen line: copper is thermodynamically stable in water free of oxidants. It corrodes only when oxygen or another oxidant is present, which is why copper water pipes last decades in most supplies but are attacked by aerated acidic water, ammonia (which complexes copper ions and is not shown on the simple diagram) and oxidizing acids. In near-neutral to alkaline aerated water, Cu$_2$O and CuO films protect.
+- **Titanium** has a TiO$_2$ passive region spanning essentially the whole pH range at potentials above the very negative immunity line, which is why titanium resists seawater, chlorides, wet chlorine and oxidizing acids, and is the material of choice for seawater heat exchangers, chlorine plants and implants (Chapter 39). It corrodes in hot reducing acids (hydrochloric, sulfuric) and in fluoride solutions, which form soluble fluoro-complexes.
 
-The set of $d$-spacings and intensities is a fingerprint matched against the ICDD Powder Diffraction File. XRD distinguishes phases, not just elements: ferrite from austenite, anatase from rutile, α- from γ-alumina, tetragonal from monoclinic zirconia, alite from belite in cement clinker. **Rietveld refinement** fits the whole pattern from crystal-structure models and returns phase fractions (to about 1 wt% for well-crystallized phases), lattice parameters (to $10^{-4}$ relative) and crystallite size and microstrain (Scherrer and Williamson–Hall, Chapter 4). Amorphous content appears as a broad hump and is quantified by adding a known internal standard. Detection limits for minor phases are about 0.5–2 wt%.
+The diagrams' limitations are as instructive as their predictions. A "passive" region only shows that a solid is stable; whether it protects depends on its structure and adherence, which thermodynamics cannot predict. Chloride is absent from the standard diagrams, yet it is the cause of most pitting. Alloys have no single diagram, and high temperature shifts all the lines. Pourbaix diagrams are therefore maps of possibility, to be combined with the kinetics of the following sections.
 
-Figure 42.4 shows a duplex stainless-steel pattern. The two phases' strongest peaks lie only 1.3° apart with Co radiation, and the austenite (200) and (220) peaks are well separated from ferrite peaks, which is why quantitative retained-austenite and duplex-balance measurements (an important specification for bearings, carburized gears and duplex welds) use them.
+<!-- FIGURE 42.3 | figures/ch42/fig-42-3-pourbaix-al-cu-zn-ti.png | plot | Simplified Pourbaix diagrams of aluminium, copper, zinc and titanium at 10^-6 activity: aluminium and zinc are amphoteric, copper is immune in oxidant-free water, titanium is passive at almost all pH. | Content: 2x2 panels, each x-axis pH 0-14, y-axis E (V vs SHE) -2.4 to +1.6, with dashed water lines. (a) Al: immunity below ~ -1.8 V (sloping below -1.8 at higher pH); corrosion Al3+ for pH < 3.9; passivation Al2O3.3H2O for pH 3.9-8.6; corrosion AlO2- for pH > 8.6. (b) Cu: immunity below 0.16 V at low pH and below 0.471 - 0.0592 pH (Cu2O/Cu) at higher pH, i.e. immunity region above the hydrogen line; Cu2+ corrosion for pH < ~6.9 above 0.16 V; Cu2O and CuO passivation in neutral-alkaline. (c) Zn: immunity below -0.94 V; Zn2+ corrosion for pH < 8.5; ZnO/Zn(OH)2 passivation pH 8.5-10.7; HZnO2-/ZnO2(2-) corrosion pH > 10.7. (d) Ti: immunity below ~ -1.8 to -2.2 V; narrow Ti2+/Ti3+ corrosion region at pH < ~2 and low potential; TiO2 passivation across pH 0-14 elsewhere. -->
 
-<!-- FIGURE 42.4 | figures/ch42/fig-42-4-xrd-duplex.png | plot | X-ray diffraction pattern of a duplex stainless steel recorded with Co Kα radiation, with peaks indexed for ferrite (BCC) and austenite (FCC). | Content: intensity (arbitrary units) vs 2θ from 45° to 130°, Co Kα1 λ = 0.178897 nm. Ferrite a = 0.2866 nm: (110) 52.38° (strongest), (200) 77.25°, (211) 99.72°, (220) 123.95°. Austenite a = 0.3595 nm: γ(111) 51.06°, γ(200) 59.69°, γ(220) 89.46°, γ(311) 111.22°. Ferrite peaks labelled α in one colour, austenite γ in another; peak heights consistent with ~50/50 phase balance. Inset at top right: the same specimen measured with Cu Kα showing raised flat background labelled 'Fe fluorescence (Cu Kα 8.05 keV > Fe K edge 7.11 keV)'. -->
+![Figure 42.3 — Simplified Pourbaix diagrams of aluminium, copper, zinc and titanium at 10^-6 activity: aluminium and zinc are amphoteric, copper is immune in oxidant-free water, titanium is passive at almost all pH](../figures/ch42/fig-42-3-pourbaix-al-cu-zn-ti.png)
 
-### Residual stress by the $\sin^2\psi$ method
-
-Stress changes lattice spacings, and XRD measures spacings to about $10^{-5}$, so the lattice is a strain gauge. For a biaxial surface stress $\sigma$ and isotropic elasticity, the spacing of planes whose normal is tilted by $\psi$ from the surface normal varies as
-
-$$
-\frac{d_\psi-d_0}{d_0}=\frac{1+\nu}{E}\,\sigma\sin^2\psi-\frac{2\nu}{E}\,\sigma
-\qquad\Longrightarrow\qquad
-\sigma=\frac{E}{1+\nu}\,\frac{1}{d_0}\,\frac{\partial d_\psi}{\partial\sin^2\psi}
-$$
-
-Because the slope is divided by $d_0$, an imprecise unstressed spacing hardly matters. High-angle reflections are used because $\Delta\theta=-\varepsilon\tan\theta$ grows toward 2θ = 180°.
-
-> **Status of the principle: $\sin^2\psi$ stress analysis**
-> *Approximate.* Assumes plane stress in the 10–20 µm sampled layer, isotropic elasticity and a linear $d$ versus $\sin^2\psi$ plot; texture, steep stress gradients or shear stresses curve or split the plot and need diffraction elastic constants or more general analysis.
-
-**Worked example — a shot-peened spring steel.** The Fe(211) reflection measured with Cr K$\alpha_1$ ($\lambda=0.22897$ nm) has $d_0=0.28665/\sqrt6=0.11702$ nm and $2\theta\approx156.1^\circ$. A least-squares line through $d_\psi$ at seven tilts has slope $-2.0\times10^{-4}$ nm. With $E=210$ GPa and $\nu=0.28$:
-
-$$
-\sigma=\frac{210\times10^9}{1.28}\times\frac{-2.0\times10^{-4}}{0.11702}=-2.8\times10^{8}\ \mathrm{Pa}=-280\ \mathrm{MPa}
-$$
-
-Compressive surface stress of this size is what shot peening is for: it closes surface fatigue cracks in springs, gears and aircraft landing gear (Chapter 14). The same measurement on the duplex weld of the opening found $+300$ MPa, tensile, which is what drove the stress-corrosion cracking. Laboratory X-rays sample only the top 5–20 µm in steel; depth profiles need electropolishing layer by layer, and through-thickness stresses need neutrons or high-energy synchrotron X-rays (Chapter 43).
-
-### Texture and thin films
-
-Relative peak intensities that differ from the powder file indicate **crystallographic texture**. Tilting and rotating the specimen records **pole figures**, from which the orientation distribution function is calculated. Texture governs the earing of deep-drawn aluminium cans, the $r$-value (formability) of steel sheet, the magnetic loss of grain-oriented electrical steel and the anisotropy of additively manufactured parts (Chapters 13, 27 and 40). For thin films, **grazing-incidence XRD** fixes the incident angle at 0.5–2° to confine the beam to the top 10–500 nm, and **X-ray reflectivity** measures film thickness, density and roughness from interference fringes at very low angles.
+*Figure 42.3 — Simplified Pourbaix diagrams of aluminium, copper, zinc and titanium at 10^-6 activity: aluminium and zinc are amphoteric, copper is immune in oxidant-free water, titanium is passive at almost all pH.*
 
 ---
 
-## 42.6 Surface analysis: XPS, AES and SIMS
+## 42.4 Electrode kinetics: Butler–Volmer and Tafel
 
-Adhesion, corrosion resistance, wetting, catalysis and biocompatibility are decided in the top few nanometres. The techniques here are surface-sensitive because the particles they detect (electrons of tens to hundreds of eV, or sputtered ions) escape only from the outermost layers, and they need ultra-high vacuum to keep the surface clean during analysis (Chapter 41).
+### Overpotential and exchange current
 
-### X-ray photoelectron spectroscopy
-
-Monochromatic Al K$\alpha$ X-rays ($h\nu=1486.6$ eV) eject core electrons, whose kinetic energy gives the binding energy
+Thermodynamics fixes the direction; kinetics fixes the rate. At its equilibrium potential $E_{eq}$, an electrode is not inert: the forward and backward reactions proceed at equal and opposite rates, each with a current density $i_0$, the **exchange current density**. Displacing the potential by an **overpotential** $\eta=E-E_{eq}$ lowers the activation barrier in one direction and raises it in the other. For a single-step reaction controlled by charge transfer, the net current density is the **Butler–Volmer equation**:
 
 $$
-E_B=h\nu-E_K-\phi
+i=i_0\left[\exp\left(\frac{\alpha_a nF\eta}{RT}\right)-\exp\left(-\frac{\alpha_c nF\eta}{RT}\right)\right]
 $$
 
-with $\phi$ the spectrometer work function. Photoelectrons of about 1 keV have an inelastic mean free path $\lambda$ of 2–3 nm, and 95 % of the signal comes from within $3\lambda$, so XPS samples the top 5–10 nm. Its power is **chemical state**: binding energies shift by 1–5 eV with oxidation state and bonding. Typical values: Al 2p 72.7 eV (metal) and about 75.5 eV (oxide); Ti 2p$_{3/2}$ 454.0 (metal) and 458.8 eV (TiO$_2$); Cr 2p$_{3/2}$ 574.2 (metal) and 576.6 eV (Cr$_2$O$_3$); Si 2p 99.4 (Si) and 103.4 eV (SiO$_2$); C 1s 284.8 eV (adventitious hydrocarbon, used for charge referencing on insulators). XPS quantifies all elements except H and He to about 0.1 at.% with relative accuracy of 10–20 %, and works on metals, ceramics, polymers and biomaterials alike.
+where $\alpha_a$ and $\alpha_c$ are the anodic and cathodic transfer coefficients (often about 0.5).
 
-**Worked example — thickness of a native oxide.** The Al 2p spectrum of an aluminium sheet, recorded at normal emission, shows oxide and metal peaks with intensity ratio $I_{ox}/I_m=0.80$. For an oxide of thickness $d$ on metal, with attenuation lengths $\lambda_{ox}=2.8$ nm and $\lambda_m=2.6$ nm and an Al atom density ratio $N_m/N_{ox}\approx1.6$ (metal 2.70 g/cm$^3$, oxide about 3.2 g/cm$^3$), the Strohmeier relation gives
+> **Status of the principle: Butler–Volmer equation**
+> *Derived* from transition-state theory for a charge-transfer-controlled electrode reaction (the derivation belongs to Advanced Chemistry). It assumes that mass transport is fast and that the surface is unchanged by the reaction; multistep reactions, adsorbed intermediates and films change the effective coefficients.
+
+The exchange current density is a property of the reaction *on a particular surface*, and it varies enormously. Hydrogen evolution is fast on platinum and slow on zinc, lead and mercury (Table 42.3). This is not a detail. It explains why zinc dissolves only slowly in acid despite its strongly negative potential (its own surface catalyses hydrogen evolution poorly), why touching zinc with a platinum wire makes it fizz, and why trace impurities of noble metals in magnesium or zinc accelerate their corrosion.
+
+**Table 42.3 — Exchange current densities for hydrogen evolution in acid at 25 °C (approximate).**
+
+| Electrode metal | $i_0$ for $2\mathrm{H^+}+2e^-\rightarrow\mathrm{H_2}$ (A/cm²) |
+|---|---|
+| Pt | $\approx10^{-3}$ |
+| Ni | $\approx10^{-5}$–$10^{-6}$ |
+| Fe | $\approx10^{-6}$ |
+| Cu | $\approx10^{-7}$ |
+| Zn | $\approx10^{-10}$–$10^{-11}$ |
+| Pb, Hg | $\approx10^{-12}$–$10^{-13}$ |
+
+### The Tafel regime
+
+When the overpotential exceeds about 50 mV, one exponential in the Butler–Volmer equation dominates and the other can be dropped. For an anodic reaction,
 
 $$
-d=\lambda_{ox}\sin\theta\,\ln\!\left(\frac{N_m\lambda_m}{N_{ox}\lambda_{ox}}\,\frac{I_{ox}}{I_m}+1\right)=2.8\ \mathrm{nm}\times\ln(1.6\times0.929\times0.80+1)=2.2\ \mathrm{nm}
+\eta_a=b_a\log_{10}\frac{i}{i_0},\qquad b_a=\frac{2.303\,RT}{\alpha_a nF}
 $$
 
-with $\theta=90^\circ$ the take-off angle from the surface. A native oxide of 2–4 nm is normal; a 10 nm hydrated oxide from storage in humid air would hide the metal peak entirely and would also degrade adhesive bonding of aerospace aluminium (Chapter 39), which is why bonding surfaces are etched or anodized just before use. The same overlayer logic measures passive films on stainless steel and the chromium enrichment that makes them protective, as in the duplex weld of the opening.
+and similarly for a cathodic reaction with slope $b_c$. This is the **Tafel equation**: overpotential is linear in the logarithm of current density. The **Tafel slope** $b$ for $\alpha=0.5$, $n=1$ at 25 °C is $2.303\times8.314\times298/(0.5\times96\,485)=0.118$ V per decade, the value often observed for hydrogen evolution; anodic dissolution of iron typically shows 40–60 mV per decade. Plotting potential against $\log\lvert i\rvert$ turns Tafel kinetics into straight lines, which is the basis of the Evans diagram.
 
-### Auger electron spectroscopy
+> **Status of the principle: Tafel equation**
+> *Approximate.* The high-overpotential limit of Butler–Volmer; it fails near equilibrium (below about 50 mV), where both directions matter, and at high currents, where mass transport limits the rate.
 
-In **AES** an electron beam creates core holes that relax by emitting Auger electrons of element-specific energy, from the top 2–5 nm. Because the probe is an electron beam, lateral resolution reaches 10–20 nm, far better than XPS. A classic application is **grain-boundary segregation**: a temper-embrittled steel is fractured inside the vacuum along its embrittled boundaries, and AES shows phosphorus or tin concentrated in a monolayer on the fresh intergranular facets. Combined with ion sputtering, AES and XPS give depth profiles through coatings and oxides.
+### Concentration polarization
 
-### Secondary ion mass spectrometry
+When a reactant must diffuse to the surface, its supply sets an upper bound. For a reactant of bulk concentration $C_b$ and diffusion coefficient $D$ crossing a diffusion boundary layer of thickness $\delta$, the **limiting current density** is
 
-**SIMS** sputters the surface with a focused primary ion beam (O$_2^+$, Cs$^+$, Bi$_n^+$) and analyses the ejected secondary ions in a mass spectrometer. It detects every element including hydrogen, distinguishes isotopes, and reaches parts per million to parts per billion. **Dynamic SIMS** erodes continuously and records concentration versus depth with nanometre resolution: dopant profiles in semiconductors, hydrogen and deuterium in titanium, zirconium and steels, and $^{18}$O tracer profiles from which oxygen diffusion coefficients in oxides and fuel-cell electrolytes are measured (Chapter 8). **Static SIMS** (time-of-flight) uses a tiny dose to analyse molecular fragments from the outermost monolayer: silicone release agents on a delaminated paint, lubricant films, protein layers on implants. SIMS yields vary by orders of magnitude between matrices, so quantification requires implanted or certified standards of the same matrix.
+$$
+i_L=\frac{nFDC_b}{\delta}
+$$
+
+Oxygen reduction in neutral water is the most important case: oxygen is sparingly soluble (about 8 mg/L, or $2.5\times10^{-7}$ mol/cm³, in air-saturated water at 25 °C) and diffuses slowly ($D\approx2\times10^{-5}$ cm²/s). In still water $\delta$ is about 0.05 cm, so
+
+$$
+i_L=\frac{4\times96\,485\times2\times10^{-5}\times2.5\times10^{-7}}{0.05}=3.9\times10^{-5}\ \mathrm{A/cm^2}=39\ \mu\mathrm A/\mathrm{cm^2}
+$$
+
+Stirring, flow or higher temperature thins the boundary layer and raises $i_L$, which is why steel corrodes faster in flowing water than in still water.
 
 ---
 
-## 42.7 Spectroscopy: Raman, FTIR and UV–Vis
+## 42.5 Mixed-potential theory and Evans diagrams
 
-### Raman spectroscopy
+### The corrosion potential
 
-Monochromatic laser light scattered inelastically by molecular or lattice vibrations is shifted by the vibrational frequency (the **Raman shift**, in cm$^{-1}$; 520 cm$^{-1}$ corresponds to 64.5 meV). A confocal Raman microscope analyses a spot of about 1 µm without contact or vacuum, through glass and in water. The spectrum identifies **phases and polymorphs**: silicon 520.7 cm$^{-1}$; diamond 1332 cm$^{-1}$; graphitic carbon G band at about 1580 and defect D band at about 1350 cm$^{-1}$, whose intensity ratio measures disorder in carbon fibres and graphene; anatase TiO$_2$ 144 cm$^{-1}$ versus rutile 447 and 612 cm$^{-1}$; tetragonal zirconia (bands near 148 and 264 cm$^{-1}$) versus monoclinic (a doublet at about 181 and 192 cm$^{-1}$). The last is used to map the low-temperature degradation of zirconia femoral heads and dental crowns, where the tetragonal-to-monoclinic transformation in body fluids roughens the surface (Chapter 31). Peak shifts measure **stress**: the silicon line moves by roughly 2 cm$^{-1}$ per GPa, mapping stress around through-silicon vias and in MEMS. In polymers and composites, the shift of a carbon-fibre or aramid band under load gives the fibre strain in situ.
+A corroding metal is not at the equilibrium potential of either of its reactions. It sits at a single **mixed potential**, the **corrosion potential** $E_{corr}$, at which the total rate of oxidation equals the total rate of reduction, so that no net current flows out of the isolated specimen. This is the **Wagner–Traud** principle: any electrochemical reaction can be divided into partial oxidation and reduction reactions; there can be no net accumulation of charge; and the partial reactions proceed independently, each according to its own kinetics.
 
-### Fourier-transform infrared spectroscopy
+> **Status of the principle: mixed-potential theory**
+> *Derived* from charge conservation and the independence of partial reactions. It holds when the partial reactions do not interact; strong adsorption, film formation or local separation of anodes and cathodes (with ohmic drop between them) require refinements.
 
-Infrared absorption excites vibrations with a changing dipole moment, so FTIR complements Raman (symmetric, non-polar vibrations are Raman-active; polar groups absorb strongly in IR). It is the standard identification method for **polymers**, adhesives, coatings and contaminants: C–H stretching near 2900 cm$^{-1}$, O–H near 3300 cm$^{-1}$, carbonyl C=O near 1715–1740 cm$^{-1}$, Si–O near 1000–1100 cm$^{-1}$. The **attenuated total reflectance (ATR)** accessory presses the sample on a diamond or germanium crystal and probes the top 0.5–2 µm without preparation. Absorbance follows the Beer–Lambert law $A=\varepsilon cl$, so band ratios are quantitative: the **carbonyl index** (area of the C=O band relative to a reference CH$_2$ band) tracks oxidation of polyethylene geomembranes, cable insulation and UHMWPE joint-replacement bearings after gamma sterilization (Chapters 31 and 36).
+An **Evans diagram** (Figure 42.4) plots the anodic line of the metal and the cathodic line of the oxidant on axes of potential against $\log\lvert i\rvert$. Their intersection gives $E_{corr}$ and the **corrosion current density** $i_{corr}$. The diagram makes the controlling factors visible at a glance: whichever line is steeper, or whichever reaction is limited by mass transport, controls the rate.
 
-### UV–Vis spectroscopy
+**Worked example — steel in deaerated acid.** Take iron in deaerated acid at pH 1, with these representative values: for iron dissolution, $E_{eq}=-0.624$ V (taking $a_{\mathrm{Fe^{2+}}}=10^{-6}$), $i_0=10^{-8}$ A/cm², $b_a=0.060$ V/decade; for hydrogen evolution on iron, $E_{eq}=-0.0592\times1=-0.059$ V, $i_0=10^{-6}$ A/cm², $b_c=0.120$ V/decade. At $E_{corr}$ the two Tafel lines meet:
 
-Transmission and reflectance from 200 to 1100 nm (or 2500 nm with an NIR extension) characterize glasses, transparent ceramics, polymers, pigments and coatings: solar transmittance of low-E glass, yellowing of polycarbonate, absorption edge of semiconductors. Near the edge, the absorption coefficient of a semiconductor follows the Tauc relation $(\alpha h\nu)^{1/r}\propto h\nu-E_g$, with $r=1/2$ for direct and 2 for indirect allowed transitions; extrapolating the linear part to zero gives the **optical band gap**. Anatase TiO$_2$ (3.2 eV) absorbs below 387 nm and ZnO (3.37 eV) below 368 nm, which is why both are UV absorbers in sunscreens and polymer stabilizers (Chapter 28). Integrating spheres collect diffuse light from powders and rough coatings; the Kubelka–Munk function converts diffuse reflectance into an absorption-like quantity.
+$$
+-0.624+0.060\log\frac{i}{10^{-8}}=-0.059-0.120\log\frac{i}{10^{-6}}
+$$
+
+Collecting terms, $0.180\log i=-0.059+0.624+0.060\times(-8)+0.120\times(-6)=-0.635$, so $\log i=-3.53$ and $i_{corr}=3.0\times10^{-4}$ A/cm² $=0.30$ mA/cm². Substituting back, $E_{corr}=-0.624+0.060\times(-3.53+8)=-0.356$ V. Using the conversion of Section 42.6 (1 µA/cm² corresponds to 11.6 µm/year for iron), the rate is $300\times0.0116=3.5$ mm per year, typical of steel in dilute hydrochloric acid. Changing the assumed Fe$^{2+}$ activity by a factor of 10 moves $E_{eq}$ by 30 mV but $i_{corr}$ by only a factor of about 1.5, because the cathodic line is steeper. Doubling the cathodic exchange current density (for instance, by a noble-metal impurity on the surface) raises $i_{corr}$ by a factor of $2^{0.12/0.18}=1.6$.
+
+<!-- FIGURE 42.4 | figures/ch42/fig-42-4-evans-diagram-iron.png | plot | Evans diagram for iron: the corrosion potential and current lie where the anodic and cathodic lines cross; in aerated neutral water, the oxygen limiting current controls the rate. | Content: y-axis E (V vs SHE) -0.8 to +0.2, x-axis log10 |i| (A/cm^2) from -10 to -1. (a) Deaerated pH 1 (worked example): Fe anodic Tafel line from (-8, -0.624) with slope +0.060 V/decade; H2 cathodic line from (-6, -0.059) with slope -0.120 V/decade; intersection Ecorr = -0.356 V, icorr = 3.0e-4 A/cm^2 marked. (b) Same axes, aerated neutral water: O2 reduction line becoming vertical at iL = 3.9e-5 A/cm^2 (still water) and at 3.9e-4 (stirred, delta = 0.005 cm); intersections with Fe anodic line marked. Dashed lines show equilibrium potentials. -->
+
+![Figure 42.4 — Evans diagram for iron: the corrosion potential and current lie where the anodic and cathodic lines cross; in aerated neutral water, the oxygen limiting current controls the rate](../figures/ch42/fig-42-4-evans-diagram-iron.png)
+
+*Figure 42.4 — Evans diagram for iron: the corrosion potential and current lie where the anodic and cathodic lines cross; in aerated neutral water, the oxygen limiting current controls the rate.*
+
+### What mixed-potential theory explains
+
+- **Oxygen-controlled corrosion.** In aerated neutral water the cathodic reaction is oxygen reduction at its limiting current. The anodic line of iron crosses the vertical part of the cathodic curve, so $i_{corr}=i_L\approx39$ µA/cm², or about $39\times0.0116=0.45$ mm/year in still water. The rate is set by oxygen diffusion, not by the steel, which is why ordinary carbon steels of different compositions corrode at similar rates in natural waters, why deaeration of boiler feedwater (to a few parts per billion of oxygen) is so effective, and why flow accelerates attack.
+- **Galvanic coupling.** Connecting a metal to a more noble one adds the noble metal's cathodic area, on which the oxidant is also reduced. The couple settles at a new mixed potential, raising the corrosion of the active metal and lowering that of the noble one. When the cathodic reaction is diffusion-limited, the total cathodic current is proportional to the cathode's area, so the anode's corrosion rate scales with the area ratio $A_c/A_a$: a small anode coupled to a large cathode corrodes catastrophically. Steel rivets in a copper plate fail quickly; copper rivets in a steel plate do little harm.
+- **Inhibitors and coatings.** Anodic inhibitors raise or steepen the anodic line; cathodic inhibitors lower the cathodic exchange current density or block oxygen access. Both lower $i_{corr}$, and the Evans diagram shows which is more effective in a given case.
 
 ---
 
-## 42.8 Thermal analysis: DSC, TGA, TMA and DMA
+## 42.6 Corrosion rate from current: Faraday's law
 
-Thermal analysis measures a property while temperature is ramped, typically at 5–20 K/min. It is fast, needs milligrams, and is the workhorse of polymer, pharmaceutical and ceramic laboratories.
+### Converting current to penetration
 
-### Differential scanning calorimetry
-
-**DSC** measures the heat flow into a sample relative to a reference. Its trace (Figure 42.5) shows a step at the **glass transition** (a change in heat capacity), exothermic peaks for **crystallization** and curing, and endothermic peaks for **melting**. The degree of crystallinity of a semicrystalline polymer follows from the melting enthalpy:
+Every $n$ electrons released correspond to one metal atom lost, so **Faraday's law** gives the mass lost per unit area and time from the corrosion current density: $\dot m=i_{corr}M/(nF)$. Dividing by the density $\rho$ gives the penetration rate. In practical units,
 
 $$
-X_c=\frac{\Delta H_m-\Delta H_{cc}}{\Delta H_m^0}
+\mathrm{CR}\ (\mathrm{mm/year})=3.27\times10^{-3}\,\frac{i_{corr}\,M}{n\rho}
 $$
 
-where $\Delta H_{cc}$ is any cold-crystallization exotherm formed during the scan and $\Delta H_m^0$ the enthalpy of a 100 % crystalline polymer (about 293 J/g for polyethylene, 207 J/g for polypropylene, 140 J/g for PET).
+with $i_{corr}$ in µA/cm², $M$ in g/mol and $\rho$ in g/cm³. The constant 3.27×10⁻³ collects the seconds in a year, Faraday's constant and the unit conversions.
 
-> **Status of the principle: DSC crystallinity**
-> *Approximate.* Assumes the crystalline phase has the same enthalpy as a perfect crystal at every melting temperature and that no reorganization occurs during the scan; literature values of $\Delta H_m^0$ themselves vary by about 10 %.
+> **Status of the principle: Faraday's law of electrolysis**
+> *Fundamental* as charge conservation applied to a reaction of known stoichiometry. Converting the result to a penetration rate assumes uniform attack over the area counted and a known valence; for localized attack the local rate can be orders of magnitude higher than the average.
 
-**Worked example — crystallinity of HDPE and of a PET bottle wall.** An HDPE pipe sample shows a melting endotherm of 175 J/g and no cold crystallization: $X_c=175/293=0.60$, or 60 %, typical for pipe grades. A PET bottle-wall sample shows $T_g$ at about 78 °C, a cold-crystallization exotherm of 25 J/g near 130 °C and a melting endotherm of 45 J/g near 250 °C; its crystallinity *as received* is $(45-25)/140=14$ %. Reporting 45/140 = 32 % would mistake crystals formed in the instrument for crystals present in the bottle. DSC also measures the **oxidation induction time** of stabilized polyolefins, the cure state of epoxy composites (residual exotherm), precipitation and dissolution in aluminium alloys, and the transformation temperatures of NiTi shape-memory alloys (Chapter 29).
+**Table 42.4 — Penetration rate for a corrosion current density of 1 µA/cm² (computed from Faraday's law).**
 
-<!-- FIGURE 42.5 | figures/ch42/fig-42-5-dsc-pet.png | plot | DSC heating trace of a partly crystalline PET sample, showing glass transition, cold crystallization and melting. | Content: x-axis temperature 30 to 290 °C at 10 K/min; y-axis heat flow in W/g, endotherm down (label convention on axis). Features: step at Tg ~78 °C (midpoint marked) with small enthalpy-relaxation overshoot; exothermic cold-crystallization peak centred ~130 °C, area shaded and labelled 'ΔHcc = 25 J/g'; endothermic melting peak ~250 °C, area shaded and labelled 'ΔHm = 45 J/g'. Annotation box: 'Xc = (45 - 25)/140 = 14 % as received'. Baseline dashed. -->
+| Metal | Valence $n$ | $M$ (g/mol) | $\rho$ (g/cm³) | mm/year per µA/cm² |
+|---|---|---|---|---|
+| Fe (carbon steel) | 2 | 55.85 | 7.87 | 0.0116 |
+| Ni | 2 | 58.69 | 8.90 | 0.0108 |
+| Cu | 2 | 63.55 | 8.96 | 0.0116 |
+| Zn | 2 | 65.38 | 7.13 | 0.0150 |
+| Al | 3 | 26.98 | 2.70 | 0.0109 |
+| Ti | 4 | 47.87 | 4.51 | 0.0087 |
+| Mg | 2 | 24.31 | 1.74 | 0.0228 |
 
-### Thermogravimetric analysis
+A useful rule follows: for most structural metals, **1 µA/cm² is roughly 10 µm per year**. Typical corrosion rates and their engineering significance are summarized in Table 42.5.
 
-**TGA** records mass versus temperature in a controlled atmosphere: moisture loss, polymer decomposition, the residue (glass fibre, mineral filler, ash) left after burn-off, and oxidation kinetics of metals. Stoichiometry turns steps into quantities. CaCO$_3$ → CaO + CO$_2$ loses 44.0 % of the carbonate mass near 700–800 °C; Ca(OH)$_2$ → CaO + H$_2$O loses 24.3 % near 400–500 °C.
+**Table 42.5 — Typical uniform corrosion rates (order of magnitude).**
 
-**Worked example — portlandite in hydrated cement.** A dried cement paste loses 4.2 % of its mass between 400 and 500 °C. Attributing this to portlandite, the paste contains $4.2/0.243=17$ wt% Ca(OH)$_2$. Tracking this number with age shows how far hydration has progressed and, in blended cements, how much portlandite pozzolanic fly ash or slag has consumed (Chapter 18). In a glass-fibre-reinforced PA66 housing, the residue after burn-off in air (for example 30.2 %) gives the fibre fraction directly, checking a 30 % specification.
+| Situation | Rate |
+|---|---|
+| Passive stainless steel or titanium in water | <1 µm/year |
+| Zinc in a rural atmosphere | ≈1 µm/year |
+| Carbon steel in a rural to urban atmosphere | 10–50 µm/year |
+| Carbon steel in a marine splash zone | 0.2–0.5 mm/year |
+| Carbon steel in aerated seawater, immersed | ≈0.1–0.2 mm/year |
+| Carbon steel in dilute hydrochloric acid | several mm/year |
 
-### TMA, DMA and laser flash
+Rates below about 0.1 mm/year are usually acceptable for structural steel with a corrosion allowance; above about 1 mm/year a material is rarely acceptable without protection.
 
-**Thermomechanical analysis (TMA)** measures dimension versus temperature under a small load: the coefficient of thermal expansion, softening and $T_g$ as a change of slope, and through-thickness expansion of laminates and coatings. **Dynamic mechanical analysis (DMA)** applies an oscillating stress and resolves the response into a storage modulus $E'$ and a loss modulus $E''$, with $\tan\delta=E''/E'$. The $\tan\delta$ peak locates $T_g$ (usually 5–15 K above the DSC value and frequency-dependent), secondary relaxations and damping (Chapter 21). For a carbon-fibre epoxy, the temperature at which $E'$ begins to fall sets the service ceiling of an aircraft part.
+### Measuring the corrosion current
 
-The **laser flash** method heats one face of a thin disc with a short pulse and records the rear-face temperature rise. The thermal diffusivity follows from the half-rise time, $\alpha=0.1388L^2/t_{1/2}$ (Parker), and conductivity from $k=\alpha\rho c_p$. For a 2.0 mm alumina disc with $t_{1/2}=52$ ms, $\alpha=0.1388\times(2.0\times10^{-3})^2/0.052=1.07\times10^{-5}$ m$^2$/s, and with $\rho=3950$ kg/m$^3$ and $c_p=775$ J kg$^{-1}$K$^{-1}$, $k=33$ W m$^{-1}$K$^{-1}$, typical of 99.5 % alumina (Chapter 24).
+The corrosion current cannot be measured directly with an ammeter, because anodic and cathodic currents flow on the same surface. Two electrochemical methods (developed with others in Chapter 43) infer it:
+
+- **Tafel extrapolation.** The specimen is polarized a few hundred millivolts on either side of $E_{corr}$; the linear Tafel regions are extrapolated back to $E_{corr}$, where they meet at $i_{corr}$.
+- **Linear polarization resistance.** Within about ±10 mV of $E_{corr}$, the Butler–Volmer expressions are nearly linear, and the slope of the potential–current curve, the **polarization resistance** $R_p=\Delta E/\Delta i$, is inversely proportional to the corrosion rate. This is the **Stern–Geary relation**:
+
+$$
+i_{corr}=\frac{B}{R_p},\qquad B=\frac{b_ab_c}{2.303\,(b_a+b_c)}
+$$
+
+**Worked example — a corrosion probe in a cooling-water system.** A linear-polarization probe in a cooling circuit reads $R_p=1000$ Ω cm². With Tafel slopes $b_a=0.060$ V and $b_c=0.120$ V per decade,
+
+$$
+B=\frac{0.060\times0.120}{2.303\times0.180}=0.0174\ \mathrm V,\qquad i_{corr}=\frac{0.0174}{1000}=1.74\times10^{-5}\ \mathrm{A/cm^2}=17.4\ \mu\mathrm{A/cm^2}
+$$
+
+For carbon steel this is $17.4\times0.0116=0.20$ mm/year. If the water treatment is improved and $R_p$ rises tenfold to $10^4$ Ω cm², the rate falls to 0.02 mm/year. Because $R_p$ can be measured every few minutes without damaging the probe, the method is the basis of online corrosion monitoring in refineries, cooling systems and pipelines.
+
+> **Status of the principle: Stern–Geary relation**
+> *Approximate.* Derived from the linearization of two Tafel reactions near $E_{corr}$; it assumes both reactions are activation-controlled, that the solution resistance is small or corrected, and that the Tafel slopes are known. Uncertainty in $B$ typically limits accuracy to a factor of about two.
 
 ---
 
-## 42.9 Mechanical and electrical testing
+## 42.7 Passivity and passive-film breakdown
 
-### Mechanical tests
+### The active–passive transition
 
-Chapter 11 introduced the tensile, hardness, impact and bend tests, and Chapter 14 fracture, fatigue and creep. In the laboratory, standard specimens and procedures (ISO 6892 and ASTM E8 for metals in tension, ISO 527 for plastics, EN 12390 for concrete, ASTM D3039 for composites) make numbers comparable. Practical points that often decide whether a number is right:
+Iron dissolves rapidly in dilute sulfuric acid but hardly at all in concentrated nitric acid, a far stronger oxidant. Faraday noticed this in the 1830s; the explanation is **passivity**. Above a certain potential, metals such as iron, chromium, nickel, titanium and aluminium form a continuous oxide film only 1–5 nm thick, which conducts ions so poorly that the dissolution current falls by three to six orders of magnitude.
 
-| Test | Measured | Common pitfalls |
-|---|---|---|
-| Tensile (metals) | $E$, $R_{p0.2}$, UTS, elongation | Crosshead displacement includes machine compliance: modulus needs an extensometer; strain rate affects yield of mild steel and Ti |
-| Tensile (polymers) | Modulus, yield, elongation | Strong rate and temperature dependence; conditioning of moisture in nylons |
-| Hardness (HV, HB, HRC) | Resistance to indentation | Load-dependent at low loads; for steels UTS ≈ 3.3 HV (MPa) only as a conversion estimate |
-| Charpy impact | Absorbed energy (J) | Transition curve, not a single value, for ferritic steels; notch machining quality |
-| Fracture toughness $K_{Ic}$ | Plane-strain toughness | Validity needs thickness $B\ge2.5(K_{Ic}/\sigma_y)^2$ |
-| Fatigue (S–N, $da/dN$) | Life, crack growth rate | Surface finish, mean stress, frequency effects on polymers |
-| Compression (concrete) | Characteristic strength | Cube versus cylinder; curing and loading rate |
-| Short-beam shear, open-hole (composites) | Interlaminar shear, notched strength | Failure mode must be checked, not just load |
-| Nanoindentation | Hardness, reduced modulus | Tip-area calibration, pile-up, substrate effect beyond ~10 % of film thickness |
+The **anodic polarization curve** of a passivating metal (Figure 42.5) has a characteristic shape. Just above $E_{corr}$ the metal dissolves actively, with current rising along a Tafel line. At the **primary passivation potential** $E_{pp}$ the current reaches a maximum, the **critical current density** $i_{crit}$, and then falls abruptly to the **passive current density** $i_{pass}$, which remains nearly constant over a range of several hundred millivolts. At still higher potentials the current rises again: in the **transpassive** region the film itself oxidizes to soluble species (chromium to dichromate) or oxygen is evolved.
 
-The $K_{Ic}$ thickness criterion shows how strongly specimen geometry can matter. For a high-strength steel with $K_{Ic}=50$ MPa√m and $\sigma_y=1400$ MPa, $B\ge2.5\times(50/1400)^2$ m = 3.2 mm, an easy specimen. For a structural steel with $K\approx150$ MPa√m and $\sigma_y=250$ MPa, $B\ge2.5\times0.36=0.9$ m: no valid plane-strain test exists, and elastic–plastic toughness ($J$ or CTOD) must be measured instead.
+This shape explains the apparent paradox of the opening paragraph and of iron in acids. A metal is passive only if the cathodic reaction can supply a current larger than $i_{crit}$ at potentials above $E_{pp}$, so that the mixed potential falls in the passive range. A weak oxidant (dilute non-oxidizing acid) intersects the anodic curve in the active region, giving rapid corrosion; a strong oxidant (nitric acid, dissolved oxygen in neutral water for stainless steel) intersects it in the passive region, giving negligible corrosion. A low $i_{crit}$ and a low $E_{pp}$ are what alloying for passivity seeks. **Anodic protection** (Chapter 43) exploits the same curve by holding a structure electronically at a potential in its passive range.
 
-**Nanoindentation** records load against depth to micronewton and nanometre resolution. Oliver–Pharr analysis takes the unloading stiffness $S$ and contact area $A$ (from depth and a calibrated tip shape) to give hardness $H=P_{max}/A$ and reduced modulus $E_r=(\sqrt\pi/2)S/\sqrt A$. It measures thin films, individual phases and biological tissue (bone lamellae, dentine), and maps properties across welds and coatings.
+> **Status of the principle: passivity**
+> *Empirical* in its parameters ($E_{pp}$, $i_{crit}$, $i_{pass}$, $E_{pit}$), which are measured for each alloy and environment. The underlying physics, a thin oxide with very low ionic conductivity whose growth and dissolution balance, is well established, but no model yet predicts the parameters from first principles.
 
-### Electrical tests
+### Why chromium makes steel stainless
 
-A two-probe measurement includes contact and lead resistance; separating current and voltage contacts removes them. For a thin layer measured with a collinear **four-point probe** whose spacing is much larger than the thickness $t$, the sheet resistance is
+On iron the passive film is a mixed iron oxide that is stable only at high pH or high potential, so iron needs either alkalinity (as in concrete) or a strong oxidant to stay passive. Chromium forms a highly protective, chromium-rich oxide (essentially Cr$_2$O$_3$ with hydroxide and some iron) at much lower potentials and over a much wider pH range. When iron is alloyed with chromium, $i_{crit}$ and $E_{pp}$ fall sharply above roughly 10.5–12 % Cr, the threshold for "stainless" steel: the film forms spontaneously in air and in aerated water, is a few nanometres thick, and self-repairs within milliseconds if scratched, provided oxygen is present. Nickel stabilizes austenite and lowers active dissolution; molybdenum and nitrogen strengthen the film against chloride.
+
+Typical passive current densities of stainless steels are below 1 µA/cm², which by Table 42.4 corresponds to less than about 10 µm per year: the 304 tank in nitric acid in the opening paragraph lives in this regime.
+
+<!-- FIGURE 42.5 | figures/ch42/fig-42-5-active-passive-curve.png | plot | Anodic polarization curve of a stainless steel: active dissolution, passivation above E_pp, a broad passive range, and breakdown by pitting in chloride or transpassive dissolution without it. | Content: y-axis E (V vs SHE) -0.6 to +1.4, x-axis log10 i (A/cm^2) from -8 to -1. Curve 1 (stainless steel in 0.5 M H2SO4, no chloride): Ecorr ~ -0.4 V, active peak at E_pp ~ -0.2 V with i_crit ~ 1e-3, passive plateau i_pass ~ 1e-6 from -0.1 to +0.9 V, transpassive rise above ~1.0 V. Curve 2 (same steel in neutral NaCl): passive from Ecorr to E_pit ~ +0.3 V (316L) where current rises steeply; return (reverse-scan) branch with repassivation potential E_rp ~ 0 V (hysteresis loop). Add two cathodic lines: weak oxidant crossing in active region (marked 'corrodes'), strong oxidant crossing in passive region (marked 'passive'). -->
+
+![Figure 42.5 — Anodic polarization curve of a stainless steel: active dissolution, passivation above E_pp, a broad passive range, and breakdown by pitting in chloride or transpassive dissolution without it](../figures/ch42/fig-42-5-active-passive-curve.png)
+
+*Figure 42.5 — Anodic polarization curve of a stainless steel: active dissolution, passivation above E_pp, a broad passive range, and breakdown by pitting in chloride or transpassive dissolution without it.*
+
+### Breakdown of passivity: pitting
+
+Passivity is a metastable condition, and its local failure is far more dangerous than uniform corrosion because it concentrates all the anodic current on a tiny area. **Chloride** ions are the principal agent. Above a critical **pitting potential** $E_{pit}$, chloride adsorbs on the film at weak points, often at sulfide inclusions (MnS in stainless steels) or where the film is thin, and breaks it locally. Once a pit starts, it sustains itself: metal ions hydrolyse inside it (for example $\mathrm{Cr^{3+}}+3\mathrm{H_2O}\rightarrow\mathrm{Cr(OH)_3}+3\mathrm{H^+}$), the pH inside falls to 1–2, chloride migrates in to balance charge, and the acidic chloride solution cannot repassivate. The surrounding passive surface serves as a large cathode. On reversing the potential scan, the pit repassivates only below a lower **repassivation potential**, and the difference between $E_{pit}$ and $E_{rp}$ measures how hard it is to stop pits once they grow. Crevices behave similarly, the occluded geometry producing the acidic chloride solution without needing a pit to nucleate first (Chapter 43).
+
+The resistance of stainless steels to chloride pitting is ranked by the empirical **pitting resistance equivalent number**,
 
 $$
-R_s=\frac{\pi}{\ln2}\,\frac{V}{I}=4.532\,\frac{V}{I},\qquad\rho=R_st
+\mathrm{PREN}=\%\mathrm{Cr}+3.3\,\%\mathrm{Mo}+16\,\%\mathrm N
 $$
 
-For a 200 nm copper film with $V/I=0.0207$ Ω, $R_s=0.094$ Ω/sq and $\rho=1.9\times10^{-8}$ Ω m, about 12 % above bulk copper (1.68 × 10⁻⁸ Ω m), as expected from grain-boundary and surface scattering. The **van der Pauw** method handles arbitrary sample shapes, and with a magnetic field the **Hall effect** gives carrier type, density and mobility (Chapter 26). Eddy-current probes measure the conductivity of aluminium alloys non-destructively, which is used to verify heat-treatment temper and detect overheating of aircraft skins. **Impedance spectroscopy** separates bulk, grain-boundary and electrode contributions in ionic conductors and coatings (Chapters 25 and 35), and dielectric spectroscopy gives permittivity and loss of insulating polymers and ceramics.
+(compositions in weight percent), and measured as a **critical pitting temperature** (CPT), above which pits initiate in a standard ferric chloride test.
 
-> **Boundary.** The derivations of four-point-probe correction factors, van der Pauw and Hall analysis, and magnetic hysteresis measurements are developed for electronic materials in the *Materials Core (EEE)* book.
+> **Status of the principle: pitting resistance equivalent number**
+> *Empirical.* A regression of pitting resistance on composition for wrought stainless steels; it ignores microstructure (inclusions, σ-phase, weld segregation), so a weld or a poorly heat-treated part can perform well below its PREN.
+
+**Table 42.6 — Pitting resistance of stainless steels (typical compositions and values).**
+
+| Grade | Cr (%) | Mo (%) | N (%) | PREN | Approximate CPT in ferric chloride (°C) | Typical service |
+|---|---|---|---|---|---|---|
+| 304 / 304L | 18 | — | 0.05 | ≈19 | <10 | Fresh water, food, nitric acid |
+| 316 / 316L | 17 | 2.1 | 0.05 | ≈25 | 15–25 | Mildly chloride-bearing water |
+| 2205 duplex | 22 | 3.1 | 0.17 | ≈35 | 30–45 | Brackish water, chemical plant |
+| 2507 super-duplex | 25 | 3.8 | 0.27 | ≈42 | 70–85 | Seawater, offshore piping |
+| 6 % Mo super-austenitic | 20 | 6.2 | 0.20 | ≈44 | 60–80 | Seawater, bleach plants |
+
+A PREN of about 40 or more is generally needed for reliable service in ambient seawater. The 304 heat-exchanger tube of the opening paragraph, with a PREN of about 19 in brackish water, was operating above its pitting potential. Passive aluminium alloys and titanium show the same kind of breakdown, aluminium readily in chloride, titanium only in extreme conditions (hot concentrated chlorides, fluorides). The forms of localized corrosion that follow from film breakdown, and how to design against them, are the subject of Chapter 43.
 
 ---
 
-## 42.10 Measurement uncertainty
+## 42.8 High-temperature oxidation
 
-### A number without an uncertainty is incomplete
+### Thermodynamics: will an oxide form?
 
-A certificate stating a yield strength of 400 MPa cannot tell an engineer whether the steel meets a 390 MPa minimum. The internationally agreed method, the *Guide to the Expression of Uncertainty in Measurement* (GUM), does so in four steps.
+In hot dry gas there is no electrolyte, yet the same separation of anodic and cathodic processes occurs: the oxide scale itself acts as a solid electrolyte, conducting ions and electrons. Whether a metal can oxidize is decided by the standard Gibbs energy of formation of its oxide, compared on an **Ellingham diagram** (Chapter 6). At the temperatures of furnaces, turbines and boilers, virtually all engineering metals except gold, silver and platinum can be oxidized by air, and the oxygen partial pressure in equilibrium with a metal and its oxide is extremely low (for Cr/Cr$_2$O$_3$ at 1000 °C, about $10^{-22}$ atm). Practical high-temperature alloys therefore never rely on thermodynamic immunity; they rely on growing a scale so slowly, and so adherently, that it protects.
 
-1. **Measurement model.** Write the result as a function of inputs, $y=f(x_1,x_2,\dots)$: for yield strength, $R_p=4F/(\pi d^2)$.
-2. **Standard uncertainties of inputs.** **Type A** uncertainties come from statistics of repeated observations: the standard deviation of the mean, $s/\sqrt n$. **Type B** come from other knowledge: calibration certificates, instrument class, resolution. A tolerance $\pm a$ with no further information is treated as a rectangular distribution with $u=a/\sqrt3$.
-3. **Propagation.** For uncorrelated inputs, $u_c^2(y)=\sum_i(\partial f/\partial x_i)^2u^2(x_i)$. For products and powers it is simpler in relative terms: if $y\propto x_1x_2^{-2}$, then $(u_c/y)^2=(u_1/x_1)^2+(2u_2/x_2)^2$.
-4. **Expanded uncertainty.** $U=ku_c$ with coverage factor $k=2$ gives about 95 % coverage for an approximately normal result.
+### Rate laws
 
-> **Status of the principle: GUM law of propagation of uncertainty**
-> *Approximate.* A first-order Taylor expansion valid when the model is close to linear over the uncertainty ranges and inputs are uncorrelated (or correlations included); strongly non-linear models use Monte Carlo propagation (GUM Supplement 1).
+Three rate laws describe most oxidation data (Figure 42.6):
 
-**Worked example — uncertainty budget for a yield strength.** Five specimens of 10.00 mm diameter from one plate give a mean yield load of 31.4 kN, i.e. $R_{p0.2}=4\times31\,400/(\pi\times10.00^2)=400$ MPa, with a standard deviation of 6 MPa between specimens. The contributions are:
+- **Linear**, $x=k_lt$: the scale is porous, cracked or volatile and offers no barrier; the rate is set by a surface reaction or gas transport. Magnesium and the alkali metals, tungsten and molybdenum above the temperature at which their oxides volatilize, and carbon all oxidize linearly.
+- **Parabolic**, $x^2=k_pt$: a compact scale whose growth is controlled by diffusion through it. Most protective high-temperature oxidation is parabolic.
+- **Logarithmic**, $x=k_e\log(at+1)$: thin films at low temperature (aluminium and copper near room temperature), where transport is driven by electric fields across a few nanometres and slows rapidly.
 
-- Specimen-to-specimen scatter (Type A): $6/\sqrt5=2.68$ MPa.
-- Load cell, class 1 (±1 %, rectangular): $u_{rel}=0.01/\sqrt3=0.577$ %, giving 2.31 MPa.
-- Diameter, micrometer ±0.01 mm (rectangular): $u=0.0058$ mm, relative 0.058 %, doubled because $d$ is squared: 0.12 %, giving 0.46 MPa.
-- Determination of the 0.2 % offset point from the curve (extensometer class and curve-fitting, estimated): 0.5 %, giving 2.00 MPa.
+Combinations are common. **Breakaway oxidation** is a transition from parabolic to linear when a protective scale cracks or the alloy beneath runs out of the element that formed it.
 
-Combined: $u_c=\sqrt{2.68^2+2.31^2+0.46^2+2.00^2}=4.1$ MPa, and $U=2u_c=8.2$ MPa. The result is $R_{p0.2}=400\pm8$ MPa ($k=2$). The budget (Figure 42.6) shows where effort pays: material scatter (43 % of the variance), the load cell (32 %) and offset determination (24 %) dominate, while the diameter measurement, the one most carefully done, contributes about 1 %. Against a 390 MPa minimum, the lower end of the interval, 392 MPa, still complies, but with little margin; ISO 14253-1 and similar decision rules specify how such guard bands are applied.
+### Wagner's theory of parabolic oxidation
 
-<!-- FIGURE 42.6 | figures/ch42/fig-42-6-uncertainty-budget.png | plot | Uncertainty budget for a tensile yield strength of 400 MPa: contributions and combined expanded uncertainty. | Content: horizontal bar chart. Bars (standard uncertainty in MPa): specimen scatter (Type A) 2.68; load cell class 1 (Type B) 2.31; 0.2 % offset determination (Type B) 2.00; diameter (Type B) 0.46; combined u_c 4.09 (darker bar); expanded U (k = 2) 8.19 (outlined bar). Secondary labels on right giving share of variance: 42.8 %, 31.8 %, 23.9 %, 1.3 %. Vertical dashed line annotation: 'result 400 ± 8 MPa (k = 2)' and small number line beneath from 385 to 415 MPa showing interval 392-408 and specification minimum 390 MPa. -->
+Wagner's theory (1933) explains the parabolic law and predicts its rate constant. Assume a dense, adherent scale of thickness $x$, with local equilibrium at both its interfaces: at the metal–scale interface the oxygen activity is that of the metal–oxide equilibrium, and at the scale–gas interface it is that of the gas. The chemical potential difference across the scale is therefore fixed. Ions and electrons move through the scale under this gradient, by way of point defects (cation vacancies in NiO, FeO and Cr$_2$O$_3$; oxygen vacancies in ZrO$_2$; Chapter 5), coupled so that no net charge flows. The flux of ions is then inversely proportional to the scale thickness, $J\propto1/x$, and since the growth rate is proportional to the flux,
 
-### Related ideas
+$$
+\frac{dx}{dt}=\frac{k'}{x}\quad\Rightarrow\quad x^2=2k't\equiv k_pt
+$$
 
-**Accuracy and precision** differ: a miscalibrated hardness tester can be precise and wrong; only calibration traceable to national standards (through certified reference blocks, weights and reference materials) controls accuracy. **Repeatability** (same operator, instrument and short time) and **reproducibility** (different laboratories) are quantified by interlaboratory round robins (ISO 5725), and reproducibility is typically two to three times worse. **Sampling** often dominates everything else: a hardness value from one location in a casting, an EDS spot on one inclusion, or one TEM foil may be precisely measured and unrepresentative. In materials testing the property itself is frequently a distribution, not a value, as for the strength of ceramics, described by Weibull statistics (Chapters 11 and 36).
+Wagner's analysis expresses the rate constant in terms of the self-diffusion coefficients of the cation $D_M$ and anion $D_O$ in the oxide, integrated across the range of oxygen activity $a_O$ that the scale spans:
+
+$$
+k'=\int_{a_O^{\,i}}^{a_O^{\,o}}\left(\frac{z_M}{\lvert z_O\rvert}D_M+D_O\right)d\ln a_O
+$$
+
+where $z_M$ and $z_O$ are the ionic charges and the superscripts denote the metal–scale (inner) and scale–gas (outer) interfaces.
+
+> **Status of the principle: Wagner's parabolic oxidation theory**
+> *Derived* from coupled ionic and electronic transport through a dense scale with local equilibrium at its interfaces. It predicts measured rate constants within a factor of a few for simple oxides such as NiO, CoO and FeO when lattice diffusion controls; for chromia and alumina, grain-boundary diffusion in fine-grained scales usually dominates, and the parabolic form remains but the constant must be measured.
+
+The theory ties oxidation resistance to defect chemistry. Wüstite, FeO, is highly non-stoichiometric (Fe$_{1-\delta}$O with $\delta$ up to about 0.15), so iron cations diffuse through it very fast; NiO is nearly stoichiometric and grows slowly; Cr$_2$O$_3$ and above all α-Al$_2$O$_3$ have very low defect concentrations and grow orders of magnitude more slowly still. Doping a scale changes its defect concentration: Li$^+$ in NiO lowers the cation-vacancy concentration and slows oxidation (Cr$^{3+}$ raises it and speeds oxidation), while reactive-element additions (Y, Hf) slow alumina growth by blocking grain-boundary transport (Chapter 41).
+
+**Worked example — three scales compared.** Representative parabolic rate constants (in thickness units) at about 1000 °C are $k_p\approx10^{-7}$ cm²/s for FeO on iron, $10^{-12}$ cm²/s for Cr$_2$O$_3$ on a chromia-forming alloy and, at 1100 °C, $10^{-14}$ cm²/s for α-Al$_2$O$_3$ on an alumina former. With $x=\sqrt{k_pt}$:
+
+- Iron, 1 h ($t=3600$ s): $x=\sqrt{10^{-7}\times3600}=0.019$ cm, or 190 µm. In 100 h, 1.9 mm. Plain steel is unusable in air at this temperature, and a steel slab reheated for rolling loses a measurable fraction of its mass as scale.
+- Chromia former, 100 h ($3.6\times10^5$ s): $x=\sqrt{10^{-12}\times3.6\times10^5}=6.0\times10^{-4}$ cm, or 6 µm; after 10,000 h, 60 µm, which is why chromia-forming alloys serve for long periods only up to about 950–1000 °C.
+- Alumina former, 10,000 h ($3.6\times10^7$ s): $x=\sqrt{10^{-14}\times3.6\times10^7}=6.0\times10^{-4}$ cm, or 6 µm.
+
+The alumina former grows in 10,000 hours the scale the chromia former grows in 100, and the iron in under four seconds. Because $x\propto\sqrt{k_p}$, a hundredfold smaller rate constant means a tenfold thinner scale at any time. The rate constant itself depends on temperature through the Arrhenius law, typically with activation energies of 150–400 kJ/mol, so a 100 °C rise often increases $k_p$ by an order of magnitude.
+
+> **Status of the principle: parabolic rate law**
+> *Approximate.* Holds while the scale is dense, adherent and thicker than a few tens of nanometres, and while the alloy can keep supplying the scale-forming element. Cracking, spallation, volatilization or depletion of that element end it.
+
+### The Pilling–Bedworth ratio
+
+A protective scale must also cover the metal. Pilling and Bedworth (1923) compared the volume of oxide formed with the volume of metal consumed:
+
+$$
+\mathrm{PBR}=\frac{V_{\mathrm{oxide}}}{V_{\mathrm{metal}}}=\frac{M_{\mathrm{ox}}\,\rho_{\mathrm M}}{n\,M_{\mathrm M}\,\rho_{\mathrm{ox}}}
+$$
+
+where $M_{\mathrm{ox}}$ and $\rho_{\mathrm{ox}}$ are the molar mass and density of the oxide, $M_{\mathrm M}$ and $\rho_{\mathrm M}$ those of the metal, and $n$ the number of metal atoms per oxide formula unit.
+
+**Worked example — magnesium, aluminium and iron.** For MgO ($M=40.30$, $\rho=3.58$ g/cm³) on Mg ($M=24.31$, $\rho=1.74$ g/cm³), $\mathrm{PBR}=40.30\times1.74/(1\times24.31\times3.58)=0.81$. For Al$_2$O$_3$ (101.96, 3.99) on Al (26.98, 2.70), $\mathrm{PBR}=101.96\times2.70/(2\times26.98\times3.99)=1.28$. For FeO (71.84, 5.74) on Fe (55.85, 7.87), $\mathrm{PBR}=71.84\times7.87/(1\times55.85\times5.74)=1.76$.
+
+**Table 42.7 — Pilling–Bedworth ratios (computed from handbook densities).**
+
+| Metal | Oxide | PBR | Behaviour |
+|---|---|---|---|
+| K, Na, Ca | K$_2$O, Na$_2$O, CaO | 0.44–0.65 | Porous, non-protective |
+| Mg | MgO | 0.81 | Non-protective at high temperature (linear) |
+| Al | Al$_2$O$_3$ | 1.28 | Protective |
+| Zr | ZrO$_2$ | 1.55 | Protective, but cracks at high thickness |
+| Cu | Cu$_2$O | 1.68 | Protective |
+| Ni | NiO | 1.70 | Protective |
+| Fe | FeO | 1.76 | Protective but fast-growing |
+| Ti | TiO$_2$ | 1.78 | Protective at moderate temperature |
+| Si | SiO$_2$ | 1.88 | Protective |
+| Cr | Cr$_2$O$_3$ | 2.01 | Protective |
+| Nb | Nb$_2$O$_5$ | 2.67 | Cracks and spalls |
+| Mo | MoO$_3$ | 3.29 | Volatile above ≈700 °C |
+| W | WO$_3$ | 3.40 | Cracks; volatile at high temperature |
+
+A ratio below 1 means the oxide cannot cover the metal and is porous; a ratio between about 1 and 2 allows a continuous, moderately compressed scale; a ratio well above 2 generates large compressive growth stresses that crack and spall it. The magnesium alloys that burn in air, and the niobium alloys that need silicide coatings (Chapter 41), illustrate the two extremes.
+
+> **Status of the principle: Pilling–Bedworth ratio**
+> *Empirical* as a predictor of protectiveness. It is a useful first screen, but it ignores the direction of scale growth (outward cation diffusion creates new oxide at the gas side and generates little stress), thermal-expansion mismatch on cooling, plasticity of scale and metal, and volatility; several metals with "good" ratios form non-protective scales and vice versa.
+
+<!-- FIGURE 42.6 | figures/ch42/fig-42-6-oxidation-kinetics-pbr.png | plot | Oxidation kinetics: protective scales grow parabolically, with rate constants spanning seven orders of magnitude from FeO to alumina; breakaway marks the loss of protection. | Content: (a) log-log plot, x-axis time 1 s to 10^8 s (secondary axis hours 0.001-30,000), y-axis scale thickness 0.01 um to 10 mm. Parabolic lines (slope 1/2): FeO on Fe at 1000 C (k_p = 1e-7 cm^2/s; 190 um at 1 h), Cr2O3 at 1000 C (1e-12; 6 um at 100 h), Al2O3 at 1100 C (1e-14; 6 um at 10,000 h). Mark the three worked-example points. Dashed linear branch from the Cr2O3 line at ~3000 h labelled 'breakaway'. (b) inset: schematic thickness vs time on linear axes showing linear, parabolic, logarithmic and breakaway curves. (c) inset bar: PBR values Mg 0.81, Al 1.28, Ni 1.70, Fe 1.76, Cr 2.01, Nb 2.67, W 3.40 with shaded protective band 1-2. -->
+
+![Figure 42.6 — Oxidation kinetics: protective scales grow parabolically, with rate constants spanning seven orders of magnitude from FeO to alumina; breakaway marks the loss of protection](../figures/ch42/fig-42-6-oxidation-kinetics-pbr.png)
+
+*Figure 42.6 — Oxidation kinetics: protective scales grow parabolically, with rate constants spanning seven orders of magnitude from FeO to alumina; breakaway marks the loss of protection.*
+
+### Selective oxidation of alloys
+
+Engineering alloys protect themselves by **selective oxidation**: an alloy containing enough of an element whose oxide is both thermodynamically more stable and slower-growing than the base metal's will form a continuous scale of that oxide, which then controls the rate. Chromium in nickel- and iron-based alloys forms chromia; aluminium in nickel aluminides, FeCrAl alloys and aluminide coatings forms alumina; silicon in silicides and SiC forms silica. The alloy must contain a critical minimum concentration, so that the element diffuses to the surface fast enough to keep the scale continuous and to heal it if it cracks: roughly 15–20 % Cr for chromia formers, or about 5 % Al with chromium present in FeCrAl, where chromium helps the alumina form (the "third-element effect"). Below the critical level, internal oxidation occurs: oxygen diffuses into the alloy and precipitates particles of the reactive element's oxide inside the metal instead of forming a protective surface layer. The design of oxidation-resistant alloys and coatings in Chapter 41, and of the hot-corrosion-resistant compositions in gas turbines, is an application of these rules.
 
 ---
 
@@ -342,12 +485,13 @@ Combined: $u_c=\sqrt{2.68^2+2.31^2+0.46^2+2.00^2}=4.1$ MPa, and $U=2u_c=8.2$ MPa
 
 | Open question | Where it is answered |
 |---|---|
-| How are single atoms, light elements and nanometre clusters located in three dimensions? | Chapter 43 (atom-probe tomography, aberration-corrected STEM) |
-| How do synchrotron X-rays and neutrons measure stress deep inside components and oxidation states of dilute elements? | Chapter 43 |
-| How is a microstructure followed while it is heated, strained or electrochemically cycled? | Chapter 44 (in-situ and operando methods) |
-| How are measured spectra and patterns linked to calculated structures? | Chapters 45 and 46 |
-| How can automated analysis of thousands of micrographs and spectra feed data-driven models? | Chapters 44 and 47 |
-| Where do Bragg's law, structure factors and peak-broadening analysis come from? | Chapter 4 (back reference) |
-| How are fracture surfaces and characterization results combined into a root-cause analysis? | Chapter 36 (back reference) |
+| What forms does corrosion take in real structures, and how are galvanic, pitting, crevice and intergranular attack prevented? | Chapter 43 |
+| How do stress, hydrogen and cyclic loading combine with corrosion to crack metals? | Chapter 43 |
+| How are cathodic-protection systems and coatings sized and tested, and how are polarization and impedance measurements made? | Chapter 43 |
+| How do ceramics, polymers, composites and concrete degrade, and how are corrosion failures investigated? | Chapter 44 |
+| How are surfaces structured, and how do adsorption and surface energy govern adhesion and wear? | Chapter 45 |
+| How are corrosion-resistant coatings deposited? | Chapters 47, 49 |
+| How are passive films and oxide scales characterized? | Chapters 52, 53 |
+| Where do the Gibbs energies, Ellingham diagrams and point-defect equilibria used here come from? | Chapters 5, 6; Advanced Chemistry |
 
-**Next:** Chapter 43 goes beyond the laboratory bench to synchrotrons, neutron sources, atom probes and aberration-corrected microscopes, the instruments that see what the toolkit of this chapter cannot.
+**Next:** Chapter 43 turns from the principles of corrosion to the forms it takes in real structures, from galvanic and pitting attack to stress-corrosion cracking, and to the coatings, inhibitors and cathodic protection that engineers use to stop it.

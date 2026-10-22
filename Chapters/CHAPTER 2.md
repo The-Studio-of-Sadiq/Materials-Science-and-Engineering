@@ -2,7 +2,7 @@
 
 *Part I · Structure of Materials*
 
-Zirconia (ZrO$_2$) looks like an ideal engineering ceramic: it melts at about 2700 °C, resists chemical attack and is tougher than almost any other oxide. Yet a pure zirconia component sintered at 1500 °C cracks to pieces as it cools. The cause is a change of crystal structure. Near 1170 °C on cooling, the tetragonal form of zirconia transforms to a monoclinic form whose volume is about 4–5 % larger, and the strain shatters the part. Engineers solved the problem in two quite different ways, both by controlling crystal structure. Adding about 8 mol % yttria stabilizes the cubic fluorite structure at all temperatures; this "fully stabilized" zirconia conducts oxygen ions and is the electrolyte of the oxygen sensor in every car exhaust and of solid-oxide fuel cells. Adding only about 3 mol % yttria keeps fine tetragonal grains *metastable* at room temperature; when a crack approaches, the stress triggers the transformation locally, the expansion squeezes the crack shut, and the toughness rises several-fold. That material makes dental crowns, hip-joint heads and cutting blades. One chemical compound, three crystal structures, three industries.
+Zirconia (ZrO$_2$) looks like an ideal engineering ceramic: it melts at about 2700 °C, resists chemical attack and is tougher than almost any other oxide. Yet a pure zirconia component sintered at 1500 °C cracks to pieces as it cools. The cause is a change of crystal structure. Near 950 °C on cooling (1170 °C on heating, with hysteresis), the tetragonal form of zirconia transforms to a monoclinic form whose volume is about 4–5 % larger, and the strain shatters the part. Engineers solved the problem in two quite different ways, both by controlling crystal structure. Adding about 8 mol % yttria stabilizes the cubic fluorite structure at all temperatures; this "fully stabilized" zirconia conducts oxygen ions and is the electrolyte of the oxygen sensor in every car exhaust and of solid-oxide fuel cells. Adding only about 3 mol % yttria keeps fine tetragonal grains *metastable* at room temperature; when a crack approaches, the stress triggers the transformation locally, the expansion squeezes the crack shut, and the toughness rises several-fold. That material makes dental crowns, hip-joint heads and cutting blades. One chemical compound, three crystal structures, three industries.
 
 Every property traced in this book starts from the arrangement of atoms. This chapter builds the vocabulary for describing it: lattices and unit cells, the structures of metals, ceramics and silicates, the notation for directions and planes, the aggregates of crystals that make up real parts, and the solids, from window glass to polyethylene to liquid crystals, that are not perfectly periodic at all.
 
@@ -70,6 +70,10 @@ where $A$ is the atomic (or formula) mass and $N_A=6.022\times10^{23}\ \mathrm{m
 Metallic bonds are non-directional, so most metals adopt one of three simple, dense structures (Figure 2.1).
 
 <!-- FIGURE 2.1 | figures/ch02/fig-2-1-metallic-structures.png | crystal | The metallic structures: body-centred cubic, face-centred cubic and hexagonal close-packed, with the stacking of close-packed layers and the interstitial sites. | Content: top row, three cells in hard-sphere and reduced-sphere views: (a) BCC with body diagonal of touching spheres, label a = 4R/√3, CN 8, APF 0.68; (b) FCC with face diagonal of touching spheres, label a = 2√2R, CN 12, APF 0.74, one (111) plane shaded; (c) HCP prism with a and c labelled, ideal c/a = 1.633, CN 12, APF 0.74. Bottom row: (d) close-packed layer viewed from above with sites A (spheres), B and C (hollows) marked; side views of stacking ABCABC (FCC) and ABAB (HCP); (e) FCC cell with octahedral site at body centre (r/R = 0.414) and one tetrahedral site at (¼,¼,¼) (r/R = 0.225); BCC cell with octahedral site at a face centre (r/R = 0.155) and tetrahedral site at (½,¼,0) (r/R = 0.291). -->
+
+![Figure 2.1 — The metallic structures: body-centred cubic, face-centred cubic and hexagonal close-packed, with the stacking of close-packed layers and the interstitial sites](../figures/ch02/fig-2-1-metallic-structures.png)
+
+*Figure 2.1 — The metallic structures: body-centred cubic, face-centred cubic and hexagonal close-packed, with the stacking of close-packed layers and the interstitial sites.*
 
 ### Body-centred cubic (BCC)
 
@@ -147,13 +151,13 @@ In an ionic compound the larger ions, usually the anions, form a close-packed or
 | 3 | Triangle | 0.155–0.225 | B in B$_2$O$_3$ glass |
 | 4 | Tetrahedron | 0.225–0.414 | Si in SiO$_2$, Zn in ZnO |
 | 6 | Octahedron | 0.414–0.732 | Mg in MgO, Al in Al$_2$O$_3$ |
-| 8 | Cube | 0.732–1.0 | Cs in CsCl, Zr in ZrO$_2$ |
+| 8 | Cube | 0.732–1.0 | Cs in CsCl, Ca in CaF$_2$ |
 | 12 | Cuboctahedron | ≥ 1.0 | Ba in BaTiO$_3$ |
 
 The boundaries are pure geometry: $2/\sqrt3-1=0.155$, $\sqrt{3/2}-1=0.225$, $\sqrt2-1=0.414$ and $\sqrt3-1=0.732$.
 
 > **Status of the principle: radius-ratio rules**
-> *Approximate.* They follow from treating ions as hard spheres of fixed radius; they predict the coordination of strongly ionic compounds about two times in three, and fail where covalency (ZnS, with tetrahedral coordination despite a ratio near 0.5) or ion polarizability matters.
+> *Approximate.* They follow from treating ions as hard spheres of fixed radius; they predict the coordination of strongly ionic compounds about two times in three, and fail where covalency (ZnO, tetrahedral despite a ratio of about 0.53 with the sixfold Zn radius) or ion polarizability matters.
 
 ### The common structure types
 
@@ -166,9 +170,13 @@ Figure 2.2 shows the important types.
 - **Wurtzite**: the hexagonal (AB-stacked) analogue of zincblende; ZnO, GaN, AlN, BeO. Its unique $c$ axis is polar, making these materials piezoelectric.
 - **Perovskite** (ABO$_3$): a large A cation at the cube corners, a small B cation at the centre inside an octahedron of six oxygens at the face centres. BaTiO$_3$ and PZT (capacitors, sensors, ultrasound transducers), SrTiO$_3$, the high-pressure mineral bridgmanite MgSiO$_3$ (the most abundant mineral in the Earth's mantle) and the halide perovskites of emerging solar cells.
 - **Spinel** (AB$_2$O$_4$): an FCC array of oxygen with A cations in one-eighth of the tetrahedral holes and B cations in half the octahedral holes, eight formula units in a cubic cell of edge about 0.81–0.84 nm. MgAl$_2$O$_4$ (transparent armour, refractories), magnetite Fe$_3$O$_4$, ferrites, and LiMn$_2$O$_4$ battery cathodes, whose lithium moves through the empty sites.
-- **Corundum** (α-Al$_2$O$_3$): a nearly HCP array of oxygen with Al in two-thirds of the octahedral holes; trigonal. Alumina substrates and wear parts, sapphire windows, ruby (with Cr$^{3+}$), and the protective Cr$_2$O$_3$ and Al$_2$O$_3$ scales on stainless steels and superalloys (Chapter 34).
+- **Corundum** (α-Al$_2$O$_3$): a nearly HCP array of oxygen with Al in two-thirds of the octahedral holes; trigonal. Alumina substrates and wear parts, sapphire windows, ruby (with Cr$^{3+}$), and the protective Cr$_2$O$_3$ and Al$_2$O$_3$ scales on stainless steels and superalloys (Chapter 42).
 
 <!-- FIGURE 2.2 | figures/ch02/fig-2-2-ionic-covalent-structures.png | crystal | Common ionic and covalent structure types: rock salt, CsCl, fluorite, zincblende/diamond, wurtzite and perovskite, with spinel and corundum shown as polyhedral sketches. | Content: eight small panels, ball-and-stick with coordination polyhedra shaded. (a) Rock salt MgO, a = 0.421 nm, MgO6 octahedron. (b) CsCl, a = 0.412 nm, cation at body centre, label "simple cubic lattice + 2-atom basis". (c) Fluorite UO2/CaF2, a = 0.547 nm, cation cube of 8 anions, empty octahedral hole at body centre highlighted. (d) Zincblende GaAs, a = 0.565 nm, tetrahedron, inset "same atom on both sites = diamond cubic (Si, a = 0.543 nm)". (e) Wurtzite GaN, a = 0.319, c = 0.519 nm, polar c-axis arrow. (f) Perovskite BaTiO3, a ≈ 0.40 nm, TiO6 octahedron, Ba in 12-fold site. (g) Spinel MgAl2O4 as corner-sharing AlO6 octahedra and MgO4 tetrahedra, a = 0.808 nm. (h) Corundum as layers of edge-sharing AlO6 octahedra with one-third of the octahedral sites empty in a honeycomb pattern. -->
+
+![Figure 2.2 — Common ionic and covalent structure types: rock salt, CsCl, fluorite, zincblende/diamond, wurtzite and perovskite, with spinel and corundum shown as polyhedral sketches](../figures/ch02/fig-2-2-ionic-covalent-structures.png)
+
+*Figure 2.2 — Common ionic and covalent structure types: rock salt, CsCl, fluorite, zincblende/diamond, wurtzite and perovskite, with spinel and corundum shown as polyhedral sketches.*
 
 | Compound | Structure type | Lattice parameters (nm) | Formula units per cell | Density (g cm$^{-3}$) |
 |---|---|---|---|---|
@@ -210,7 +218,7 @@ $$
 measures how well the ions fit. Cubic perovskites form for $t$ close to 1; for $t>1$ the B cation is too small for its octahedron and tends to displace off-centre, giving ferroelectricity; for $t<1$ the octahedra tilt and the symmetry drops to orthorhombic or rhombohedral; below about 0.8, other structures form.
 
 > **Status of the principle: Goldschmidt tolerance factor**
-> *Empirical.* A hard-sphere geometric criterion fitted to known perovskites; it is a useful screen (perovskites form for roughly $0.8<t<1.05$) but cannot predict the detailed distortions, which need the full energetics (Chapter 45).
+> *Empirical.* A hard-sphere geometric criterion fitted to known perovskites; it is a useful screen (perovskites form for roughly $0.8<t<1.05$) but cannot predict the detailed distortions, which need the full energetics (Chapter 55).
 
 **Worked example — From ionic radii to structure and density.** *MgO.* With Shannon radii $r_{\mathrm{Mg^{2+}}}=0.072$ nm (sixfold) and $r_{\mathrm{O^{2-}}}=0.140$ nm, $r_c/r_a=0.072/0.140=0.514$, inside the octahedral range 0.414–0.732, so rock salt is predicted, as observed. Cations and anions touch along the cube edge, so $a=2(r_c+r_a)=2(0.212)=0.424$ nm, within 0.7 % of the measured 0.4212 nm. With four MgO units (40.30 g mol$^{-1}$) per cell,
 
@@ -249,6 +257,10 @@ The connectivity explains engineering behaviour. Sheet silicates cleave into fla
 
 <!-- FIGURE 2.3 | figures/ch02/fig-2-3-silicate-units.png | schematic | Silicate structures built from corner-sharing SiO4 tetrahedra, from isolated tetrahedra to sheets and frameworks, and the polymorphs of silica. | Content: left two-thirds: tetrahedra drawn as blue triangles (top view) with bridging O as shared corners and non-bridging O as red dots: (a) isolated SiO4 (Q0), (b) Si2O7 pair (Q1), (c) six-membered ring (Q2), (d) single chain (Q2), (e) double chain (Q2/Q3), (f) sheet of six-membered rings (Q3), (g) 3D framework (Q4). Labels with Si:O ratios 1:4, 2:7, 1:3, 1:3, 4:11, 2:5, 1:2. Right third: (h) temperature axis 0–1800 °C at 1 atm with stability ranges of SiO2 polymorphs: α-quartz up to 573 °C, β-quartz 573–867 °C, tridymite 867–1470 °C, cristobalite 1470–1713 °C, liquid above 1713 °C; displacive α↔β transitions marked with short arrows, reconstructive transitions with long arrows; inset of densities: quartz 2.65, cristobalite 2.33, fused silica 2.20, coesite 2.93, stishovite 4.29 g/cm³. -->
 
+![Figure 2.3 — Silicate structures built from corner-sharing SiO4 tetrahedra, from isolated tetrahedra to sheets and frameworks, and the polymorphs of silica](../figures/ch02/fig-2-3-silicate-units.png)
+
+*Figure 2.3 — Silicate structures built from corner-sharing SiO4 tetrahedra, from isolated tetrahedra to sheets and frameworks, and the polymorphs of silica.*
+
 ### Polymorphism
 
 Many materials change crystal structure with temperature or pressure; this is **polymorphism** (called *allotropy* for elements). Two kinds of transformation differ in speed. **Displacive** transformations need only small atomic shifts and bond-angle changes; they happen almost instantly and cannot be suppressed. **Reconstructive** transformations require bonds to break and re-form; they are sluggish and the high-temperature form can often be retained metastably.
@@ -286,6 +298,10 @@ For $[100]$ and $[111]$, $\cos\theta=1/\sqrt3$ and $\theta=54.74^\circ$; for $[1
 A crystallographic **plane** always means a whole family of parallel, equally spaced planes passing through lattice points. Its **Miller indices** $(hkl)$ (Figure 2.4) are found by taking the intercepts of one plane on the three axes in units of $a$, $b$, $c$ (shifting the origin if the plane passes through it), taking reciprocals (a plane parallel to an axis has intercept $\infty$ and index 0), and clearing fractions to the smallest integers. A plane with intercepts $1, 2, \infty$ has reciprocals $1, \tfrac12, 0$ and indices $(210)$. Families of symmetry-equivalent planes are written in braces: $\{100\}$ for the six cube faces, $\{111\}$ for the eight octahedral planes. Reciprocals are used because $(hkl)$ are the components of the plane normal in the *reciprocal lattice*, the natural language of diffraction (Chapter 4).
 
 <!-- FIGURE 2.4 | figures/ch02/fig-2-4-miller-indices.png | crystal | Miller indices of planes and directions in a cubic cell, the close-packed directions and planes of FCC and BCC, and the four-index system for hexagonal crystals. | Content: top row: three cubes, origin at back-lower-left, axes x, y, z: (100) shaded with [100] normal; (110) shaded with [110]; (111) shaded with [111]; a fourth cube shows a plane with intercepts 1, 2, ∞ labelled (210). Middle row: FCC (111) plane with the three close-packed <110> directions drawn in it; BCC (110) plane with the two close-packed <111> directions; the 54.74° angle between [100] and [111] marked. Bottom row: hexagonal prism with axes a1, a2, a3 at 120° and c; basal plane (0001) blue, prism plane (1-100) green, prism plane (11-20) orange, pyramidal plane (10-11) grey; directions [2-1-10] and [0001] drawn; caption note i = −(h + k). -->
+
+![Figure 2.4 — Miller indices of planes and directions in a cubic cell, the close-packed directions and planes of FCC and BCC, and the four-index system for hexagonal crystals](../figures/ch02/fig-2-4-miller-indices.png)
+
+*Figure 2.4 — Miller indices of planes and directions in a cubic cell, the close-packed directions and planes of FCC and BCC, and the four-index system for hexagonal crystals.*
 
 ### Three results for cubic crystals
 
@@ -330,7 +346,7 @@ $$
 \mathrm{PD}_{110}=\frac{\sqrt2}{a^2}=\frac{1.414}{0.08214}=17.2,\qquad \mathrm{PD}_{100}=\frac{1}{a^2}=12.2,\qquad \mathrm{PD}_{111}=\frac{1}{\sqrt3a^2}=7.0\ \ \mathrm{atoms\,nm^{-2}}
 $$
 
-Iron slips along $\langle111\rangle$, mainly on $\{110\}$. But no BCC plane is truly close-packed (17.2 atoms nm$^{-2}$ against 18.3 for an ideal close-packed layer of iron-sized atoms), so dislocations in BCC metals face a strong lattice resistance that rises steeply as temperature falls; that is one root of the ductile–brittle transition of ferritic steels (Chapters 12 and 14).
+Iron slips along $\langle111\rangle$, mainly on $\{110\}$. But no BCC plane is truly close-packed (17.2 atoms nm$^{-2}$ against 18.7 for an ideal close-packed layer of iron-sized atoms), so dislocations in BCC metals face a strong lattice resistance that rises steeply as temperature falls; that is one root of the ductile–brittle transition of ferritic steels (Chapters 12 and 14).
 
 ### Miller–Bravais indices for hexagonal crystals
 
@@ -362,10 +378,10 @@ If grain orientations are random, a polycrystal is isotropic on scales much larg
 
 - **Steel for deep drawing** is processed to have $\{111\}$ planes parallel to the sheet (the γ-fibre). This resists thinning, so car-body panels and food cans can be drawn deep without splitting.
 - **Aluminium can stock** combines rolling and recrystallization textures in balance; if one dominates, the drawn cup forms four or six "ears" that must be trimmed off.
-- **Grain-oriented electrical steel** has the Goss texture $\{110\}\langle001\rangle$, putting the easy magnetization direction along the strip (Chapter 27).
+- **Grain-oriented electrical steel** has the Goss texture $\{110\}\langle001\rangle$, putting the easy magnetization direction along the strip (Chapter 29).
 - **Zirconium-alloy fuel cladding** is rolled so that basal-plane normals point radially, which makes hydrides precipitate circumferentially, where they do little harm.
 - **Drawn wire and electroplated or sputtered films** have fibre textures; in bone, the $c$ axes of hydroxyapatite crystals align with the collagen fibres.
-- **Additively manufactured metals** grow columnar grains with $\langle100\rangle$ along the build direction, making their properties anisotropic (Chapter 40).
+- **Additively manufactured metals** grow columnar grains with $\langle100\rangle$ along the build direction, making their properties anisotropic (Chapter 48).
 
 Chapter 3 introduces the pole figure, the standard way to display and measure texture.
 
@@ -396,7 +412,7 @@ $$
 S_V=\frac{2}{20\times10^{-6}\ \mathrm{m}}=1.0\times10^5\ \mathrm{m^{-1}}
 $$
 
-so every cubic centimetre of this steel contains about 0.1 m$^2$ of grain boundary. Refining to $G=12$ (5.6 µm) multiplies the boundary area by about four. Because boundaries obstruct dislocations, such refinement is the main strengthening mechanism of controlled-rolled high-strength low-alloy steels, with yield strength rising roughly as $d^{-1/2}$ (the Hall–Petch relation, Chapter 13); it also lowers the ductile–brittle transition temperature, the change that cured the Liberty ships. For creep at high temperature the opposite holds: boundaries slide and carry fast diffusion, so turbine blades remove them altogether.
+so every cubic centimetre of this steel contains about 0.1 m$^2$ of grain boundary. Refining to $G=12$ (about 5 µm) multiplies the boundary area by about four. Because boundaries obstruct dislocations, such refinement is the main strengthening mechanism of controlled-rolled high-strength low-alloy steels, with yield strength rising roughly as $d^{-1/2}$ (the Hall–Petch relation, Chapter 13); it also lowers the ductile–brittle transition temperature, the change that cured the Liberty ships. For creep at high temperature the opposite holds: boundaries slide and carry fast diffusion, so turbine blades remove them altogether.
 
 ---
 
@@ -417,9 +433,13 @@ $$
 N_1=\int_{\text{first peak}}4\pi r^2\rho_0\,g(r)\,dr
 $$
 
-In a crystal $g(r)$ is a series of sharp peaks continuing to arbitrary distance. In a glass the first peak is almost as sharp as in the crystal, the second is broader and beyond three or four neighbour distances $g(r)$ approaches 1: short-range order without long-range order (Figure 2.5). For silica glass the peaks lie at 0.162 nm (Si–O), 0.265 nm (O–O, the tetrahedron edge) and about 0.31 nm (Si–Si, consistent with $2\times0.162\times\sin72^\circ=0.308$ nm for a 144° bridge), and the first-peak area gives four O around each Si. Diffraction from a glass shows broad humps instead of sharp Bragg peaks; Fourier transforming them yields $g(r)$, the basis of the pair-distribution-function analysis of Chapter 43.
+In a crystal $g(r)$ is a series of sharp peaks continuing to arbitrary distance. In a glass the first peak is almost as sharp as in the crystal, the second is broader and beyond three or four neighbour distances $g(r)$ approaches 1: short-range order without long-range order (Figure 2.5). For silica glass the peaks lie at 0.162 nm (Si–O), 0.265 nm (O–O, the tetrahedron edge) and about 0.31 nm (Si–Si, consistent with $2\times0.162\times\sin72^\circ=0.308$ nm for a 144° bridge), and the first-peak area gives four O around each Si. Diffraction from a glass shows broad humps instead of sharp Bragg peaks; Fourier transforming them yields $g(r)$, the basis of the pair-distribution-function analysis of Chapter 53.
 
 <!-- FIGURE 2.5 | figures/ch02/fig-2-5-crystal-glass-rdf.png | schematic | Crystal, polycrystal and glass in two dimensions, with their pair distribution functions and the volume–temperature behaviour that defines the glass transition. | Content: top row: three 2D networks of threefold-coordinated atoms at the same density: (a) perfect hexagonal network; (b) four grains of the same network at different orientations with disordered boundaries (one labelled "grain boundary ~0.5 nm"); (c) continuous random network with same coordination, rings of 5, 6 and 7 members. Bottom left: g(r) versus r/d_nn from 0 to 5: crystal as sharp spikes at fixed shells; glass with sharp first peak at 1.0, broader peaks at about 1.7 and 2.6, decaying oscillation to g = 1 beyond about 4; annotation "short-range order only". Bottom right: specific volume versus temperature: liquid line, abrupt drop at T_m to crystal line; supercooled liquid continuing below T_m and bending into glass lines at T_g(fast cooling) above T_g(slow cooling); labels "liquid", "supercooled liquid", "glass (fast)", "glass (slow)", "crystal". -->
+
+![Figure 2.5 — Crystal, polycrystal and glass in two dimensions, with their pair distribution functions and the volume–temperature behaviour that defines the glass transition](../figures/ch02/fig-2-5-crystal-glass-rdf.png)
+
+*Figure 2.5 — Crystal, polycrystal and glass in two dimensions, with their pair distribution functions and the volume–temperature behaviour that defines the glass transition.*
 
 ### How glasses form and the glass transition
 
@@ -443,6 +463,10 @@ A polymer chain is a long, flexible covalent backbone, and whether it can crysta
 Polymer crystals are ordinary crystals with an unusual basis. Polyethylene is orthorhombic with $a=0.741$ nm, $b=0.494$ nm and $c=0.2547$ nm along the chain, two chains passing through each cell and four CH$_2$ groups per cell. The chain axis is a screw axis (Chapter 3): in the planar zigzag of polyethylene, each CH$_2$ unit is rotated 180° about the axis and advanced $c/2$; isotactic polypropylene forms a helix with three repeat units per turn.
 
 <!-- FIGURE 2.6 | figures/ch02/fig-2-6-polymer-crystallinity.png | schematic | Chain packing in crystalline polyethylene, chain-folded lamellae and the spherulite, from the unit cell to the micrometre scale. | Content: three panels at increasing scale. (a) Orthorhombic polyethylene cell viewed down the chain axis c: two zigzag chains (corner and centre), a = 0.741 nm, b = 0.494 nm, with setting angle of the zigzag planes about 45° to a; side view of one chain showing C–C zigzag with c = 0.2547 nm. (b) Stack of chain-folded lamellae, thickness 10–20 nm, separated by amorphous layers 5–10 nm with loops, cilia and tie molecules labelled. (c) Spherulite, 1–100 µm, radiating lamellar fibrils from a central nucleus, Maltese-cross pattern indicated as seen between crossed polarizers. Side scale bar comparing 1 nm, 10 nm, 10 µm. -->
+
+![Figure 2.6 — Chain packing in crystalline polyethylene, chain-folded lamellae and the spherulite, from the unit cell to the micrometre scale](../figures/ch02/fig-2-6-polymer-crystallinity.png)
+
+*Figure 2.6 — Chain packing in crystalline polyethylene, chain-folded lamellae and the spherulite, from the unit cell to the micrometre scale.*
 
 ### Degree of crystallinity
 
@@ -483,7 +507,7 @@ $$
 
 where $\theta$ is the angle between a molecule and the director and the brackets denote an average; $S=1$ for perfect alignment and $S=0$ for an isotropic liquid, with typical nematics between about 0.3 and 0.8. **Smectic** phases add layering, and **cholesteric** phases twist the director into a helix whose pitch can match the wavelength of light. *Thermotropic* liquid crystals form within a temperature window: the display compound 5CB is nematic between about 24 °C and 35 °C. *Lyotropic* ones form in solution above a critical concentration.
 
-The engineering uses are significant. Liquid-crystal displays exploit the optical anisotropy of nematics and the ease of turning the director with a few volts (Chapter 29). Aramid fibres (Kevlar) are spun from a lyotropic liquid-crystalline solution in sulphuric acid; the chains are already aligned in the fluid, and the fibre reaches a modulus above 100 GPa. Liquid-crystalline polymers mould into thin-walled connectors with very low shrinkage (Chapter 20). Cell membranes and many biological tissues are liquid-crystalline too.
+The engineering uses are significant. Liquid-crystal displays exploit the optical anisotropy of nematics and the ease of turning the director with a few volts (Chapter 37). Aramid fibres (Kevlar) are spun from a lyotropic liquid-crystalline solution in sulphuric acid; the chains are already aligned in the fluid, and the fibre reaches a modulus above 100 GPa. Liquid-crystalline polymers mould into thin-walled connectors with very low shrinkage (Chapter 20). Cell membranes and many biological tissues are liquid-crystalline too.
 
 ### Quasicrystals
 
@@ -507,7 +531,7 @@ Quasicrystals are hard, have low surface energy and friction, and conduct heat a
 | How does transformation toughening make zirconia tough? | Chapters 14 and 17 |
 | How do cement silicates hydrate to bind concrete? | Chapter 18 |
 | How do polymer chains crystallize, and how do lamellae and $T_g$ set polymer properties? | Chapters 19–20 |
-| How do liquid crystals work in displays and actuators? | Chapter 29 |
-| How are glasses and amorphous structures measured by pair-distribution-function analysis? | Chapter 43 |
+| How do liquid crystals work in displays and actuators? | Chapter 37 |
+| How are glasses and amorphous structures measured by pair-distribution-function analysis? | Chapter 53 |
 
 **Next:** Chapter 3 makes the idea of a periodic crystal precise through symmetry: the operations that leave a crystal unchanged, the point groups, Bravais lattices and space groups they generate, the stereographic projection, and the ordered superlattices, quasicrystals and modulated structures that extend the classical picture.

@@ -1,464 +1,445 @@
-# Chapter 37 — Surfaces, Interfaces and Tribology
+# Chapter 37 — Smart and Soft Materials
 
-*Part VIII · Corrosion, Degradation and Surfaces*
+*Part VIII · Advanced and Emerging Materials*
 
-A conventional polyethylene hip cup that wears by a tenth of a millimetre a year sounds like a success: the cup is several millimetres thick, so it will not wear through for decades. Yet in the 1980s and 1990s many such hips had to be revised after ten or fifteen years, not because the cup wore out but because the bone around it dissolved. Each year the joint shed tens of cubic millimetres of submicrometre polyethylene particles, hundreds of billions of them, which macrophages tried to digest and could not, releasing signals that switched on bone resorption. The fix was a materials one: polyethylene cross-linked by irradiation, then thermally treated to quench free radicals, which wears several times more slowly. The problem began at the surface, at the contact between a hard ball and a soft cup, where friction, wear and surface chemistry decide the fate of the whole component. The same is true of a car engine losing a few percent of its fuel to friction, a wind-turbine gearbox failing from micropitting, a paint that will not stick to a polypropylene bumper, and a turbine blade protected by a ceramic coating a quarter of a millimetre thick. This chapter treats the surface as a material in its own right: its energy and chemistry, how it wets and adheres, how two surfaces touch, slide and wear, how lubricants separate them, and how surfaces are engineered.
+A self-expanding stent for a femoral artery is crimped to 2 mm, threaded through a catheter and released inside the vessel, where it springs open to 7 mm and pushes gently and steadily against the wall for years, flexed half a million times a day by walking. It is laser-cut from a nickel–titanium tube, and no ordinary metal could do this job: steel crimped by 70 % in diameter would deform permanently, and a polymer would creep and lose its grip. A few metres away in the same hospital, an infusion pump's piezoelectric sensor detects air bubbles, the patient's contact lenses are a hydrogel that is 40 % water, and the monitor shows the patient's heart rate on a liquid-crystal display. None of these materials is used for its strength or stiffness. Each is used because it *responds*: to temperature, stress, electric or magnetic field, water, or ions. This chapter is about such materials. The first half treats "smart" solids that convert one form of energy into mechanical work; the second half treats "soft" matter (colloids, gels, liquid crystals and self-assembled structures) whose structure is held together by forces comparable to thermal energy and can therefore be reshaped by small stimuli.
 
-> **Why do surfaces have energy, and how does that energy control adsorption, wetting and adhesion?**
-> **Why is friction proportional to load and independent of apparent area, and what sets the coefficient?**
-> **How do surfaces wear, how do lubricants and coatings prevent it, and how is wear rate predicted?**
+> **How can a solid change shape on command, recover 8 % strain, or sense a force, and what limits the stroke, force and speed of such a material?**
+> **Why do particles in a paint stay dispersed, why does a gel swell, and how do molecules arrange themselves into micelles, membranes and display pixels without being placed?**
 
 | Concept | Engineering destination |
 |---|---|
-| Surface energy, broken-bond model, Wulff shape | Sintering, catalyst particle shape, crack-growth energy, grain-boundary energies |
-| Adsorption isotherms, BET surface area | Catalysts, sorbents, battery electrodes, powder characterization, corrosion inhibitors |
-| Contact angle, Young's equation, work of adhesion | Paint and adhesive bonding, printing on polymers, self-cleaning and anti-icing surfaces, implants |
-| Hertz contact | Rolling bearings, gears, wheel–rail contact, cam followers, indentation testing |
-| Real contact area $A_r=F/H$ | Friction, electrical and thermal contact resistance, sealing |
-| Amontons–Coulomb friction; Bowden–Tabor adhesion model | Brakes, clutches, bolted joints, tyres, machining, design of low-friction pairs |
-| Archard wear law and wear coefficients | Life of bushings, seals, implants, tools, dies, mining equipment |
-| Stribeck curve, film parameter $\lambda$ | Journal and rolling bearings, engine piston rings, lubricant selection |
-| Case hardening, nitriding, PVD and DLC coatings, shot peening, texturing | Gears, cutting tools, moulds, crankshafts, aerospace landing gear, medical devices |
+| Thermoelastic martensite, shape memory | Pipe couplings, actuator wires, deployable space structures, thermal valves |
+| Superelasticity, Clausius–Clapeyron slope | Self-expanding stents, orthodontic arch wires, seismic dampers, eyeglass frames |
+| Magnetostriction, magnetic shape memory | Sonar projectors, vibration energy harvesters, torque sensors, fast valves |
+| Piezoelectric stacks and sensors | Diesel injectors, nanopositioners, ultrasound probes, structural-health monitoring |
+| Electroactive polymers | Soft robots, haptics, artificial muscles, adaptive lenses |
+| DLVO theory, Debye length | Ceramic slips, paints, concrete admixtures, water treatment, drug suspensions |
+| Gels and hydrogels, swelling, mesh size | Contact lenses, superabsorbents, wound dressings, drug release, soft actuators |
+| Liquid-crystal order parameter, Fréedericksz transition | Displays, aramid fibre spinning, thermochromic sensors |
+| Self-assembly, packing parameter | Detergents, lipid nanoparticles, block-copolymer lithography, colloidal crystals |
 
-**Roadmap.** What a surface is and why it has energy (37.1) → what sticks to it: adsorption and surface chemistry (37.2) → liquids and solids on it: wetting and adhesion (37.3) → two solids in contact: Hertz and real contact area (37.4) → sliding: friction (37.5) → damage: wear mechanisms (37.6) → separation by a film: lubrication regimes and the Stribeck curve (37.7) → engineering the surface: hardening, coatings, texturing (37.8).
-
----
-
-## 37.1 Surface structure and surface energy
-
-### Why surfaces have energy
-
-An atom in the bulk of a crystal is bonded to all its neighbours; an atom at the surface has lost some of them. Creating a surface therefore costs energy, the **surface energy** $\gamma$, defined as the reversible work per unit area to create new surface (J/m$^2$). For liquids it equals the surface tension (N/m). For solids, surface energy and surface stress differ, because stretching a solid surface changes the atomic spacing instead of bringing new atoms to the surface, but for most materials science purposes $\gamma$ is the relevant quantity.
-
-The **broken-bond model** gives a first estimate. If the cohesive energy per atom is the sublimation enthalpy $\Delta H_s/N_A$, shared among $z$ nearest-neighbour bonds, then each broken bond costs $\Delta H_s/(zN_A)$, and a surface with $n_s$ atoms per unit area, each missing $z_s$ bonds, has
-
-$$
-\gamma\approx\frac{z_s}{z}\,\frac{\Delta H_s}{N_A}\,n_s
-$$
-
-> **Status of the principle: Broken-bond estimate of surface energy**
-> *Approximate.* Assumes pairwise nearest-neighbour bonds of equal energy and no relaxation of the surface atoms; it captures the trends with bonding strength and crystal orientation but typically overestimates measured values by 20–50 %, because real bond energy is not linear in coordination and surface atoms relax.
-
-**Worked example — surface energy of copper.** Copper is FCC with $z=12$, lattice parameter $a=0.3615$ nm and $\Delta H_s=337$ kJ/mol. On the close-packed (111) plane each surface atom has lost 3 of its 12 neighbours, and the atomic density is $n_s=4/(\sqrt3\,a^2)=1.77\times10^{19}$ m$^{-2}$. Then
-
-$$
-\gamma_{111}\approx\frac{3}{12}\times\frac{337\times10^{3}}{6.022\times10^{23}}\times1.77\times10^{19}=0.25\times5.60\times10^{-19}\times1.77\times10^{19}=2.47\ \mathrm{J\,m^{-2}}
-$$
-
-On the (100) plane each atom loses 4 bonds and $n_s=2/a^2=1.53\times10^{19}$ m$^{-2}$, giving 2.85 J/m$^2$. The measured average surface energy of solid copper is about 1.8 J/m$^2$, so the model overestimates by about a third, as expected, but correctly predicts that close-packed planes have the lowest energy, which is why crystals are bounded by them.
-
-| Material | Surface energy (typical) |
-|---|---|
-| Tungsten | about 3.0–3.3 J/m$^2$ |
-| Iron | about 2.4 J/m$^2$ |
-| Copper | about 1.8 J/m$^2$ |
-| Aluminium | about 1.1 J/m$^2$ |
-| Alumina | about 1.0–1.5 J/m$^2$ (orientation-dependent) |
-| Silica glass | about 0.3 J/m$^2$ (hydroxylated surface lower) |
-| Water (20 °C) | 72.8 mJ/m$^2$ |
-| Epoxy, polyamide | 40–45 mJ/m$^2$ |
-| Polyethylene, polypropylene | 29–33 mJ/m$^2$ |
-| PTFE | 18–20 mJ/m$^2$ |
-
-Grain-boundary energies are typically a third of the surface energy (Chapter 5), which is why grain boundaries groove at free surfaces with a dihedral angle set by the balance $\gamma_{gb}=2\gamma_s\cos(\psi/2)$.
-
-### Surface structure
-
-A real crystal surface is not a perfect plane. At atomic scale it consists of flat **terraces** separated by monatomic **steps**, which contain **kinks**; on the terraces sit **adatoms** and **vacancies** (the terrace–step–kink model, Figure 37.1). Kinks are the sites where atoms attach during crystal growth and detach during evaporation and dissolution; steps are preferred sites for adsorption and catalysis. Surface atoms also **relax** (the top interlayer spacing of metals typically contracts by a few percent) and some surfaces **reconstruct** into periodicities different from the bulk: the Si(111) 7×7 and Au(100) hexagonal reconstructions are classic examples revealed by scanning tunnelling microscopy and low-energy electron diffraction (Chapter 43).
-
-<!-- FIGURE 37.1 | figures/ch37/fig-37-1-terrace-step-kink.png | schematic | Atomic structure of a crystal surface (terrace–step–kink model) and the Wulff construction for an equilibrium crystal shape. | Content: left panel: 3D cube-atom rendering of a vicinal (100) surface with labelled terrace, monatomic step, kink, adatom, terrace vacancy and step adatom; number of broken bonds per site annotated (e.g., terrace atom 1 of 6 for simple cubic illustration, kink site 3 of 6). Right panel: 2D polar plot of γ(θ) with cusps at {10} and {11} orientations; Wulff planes drawn perpendicular to radius vectors; inner envelope shaded as the equilibrium shape (truncated square/octagon). Caption note 'close-packed, low-γ facets dominate'. -->
-
-### Anisotropy and the equilibrium shape
-
-Because surface energy depends on orientation, a small crystal minimizes its total surface energy $\sum\gamma_iA_i$ at fixed volume by exposing mainly low-energy facets. The **Wulff construction** gives the equilibrium shape: draw from a centre, in every direction, a plane perpendicular to that direction at a distance proportional to $\gamma$; the inner envelope of all such planes is the shape. Metal nanoparticles in catalysts adopt truncated octahedra of {111} and {100} facets, and the facet fraction controls their activity (Chapter 30). Surface energy also drives sintering, Ostwald ripening and grain growth (Chapters 9 and 38), and it appears in Griffith's fracture criterion as the minimum energy to make crack faces (Chapter 14).
+**Roadmap.** What makes a material "smart" and how actuators are compared (37.1) → shape-memory alloys (37.2) → magnetostrictive and magnetic shape-memory materials (37.3) → piezoelectric actuators and sensors (37.4) → electroactive polymers (37.5) → the soft-matter energy scale and colloid stability (37.6) → gels and hydrogels (37.7) → liquid crystals (37.8) → self-assembly as a design tool (37.9).
 
 ---
 
-## 37.2 Adsorption and surface chemistry
+## 37.1 Smart materials and how to compare actuators
 
-### Physisorption and chemisorption
+A **smart** (or *active*, *responsive*) material couples two physical domains strongly enough that the coupling can be used in a device: a mechanical strain produced by heat, electric field or magnetic field (an **actuator**), or an electrical signal produced by strain (a **sensor**). Every solid has such couplings (all solids expand when heated, all dielectrics strain slightly in a field), so the word is about magnitude: a smart material's coupling is large enough, reversible enough and fast enough to do work.
 
-Atoms and molecules from a gas or liquid stick to surfaces because doing so lowers the surface energy. Two kinds of bonding are distinguished:
+Three numbers characterise an actuator material:
 
-| | Physisorption | Chemisorption |
-|---|---|---|
-| Bonding | van der Waals | Chemical (covalent, ionic, metallic) |
-| Enthalpy of adsorption | 5–40 kJ/mol | 40–800 kJ/mol |
-| Specificity | Any gas on any surface | Specific to adsorbate–surface pair |
-| Layers | Multilayers possible | Monolayer at most |
-| Reversibility | Readily reversible | Often irreversible, may dissociate (H$_2\to$2H, O$_2\to$2O) |
-| Example | N$_2$ on any solid at 77 K | O on Fe, CO on Pt, H on Ni, thiols on Au |
+- the **free strain** $\varepsilon_{\max}$, reached with no external load;
+- the **blocking stress** $\sigma_{\mathrm{bl}}$, the stress at which the strain is suppressed completely;
+- the **bandwidth**, the highest frequency at which the full stroke can be cycled.
 
-Chemisorption is the first step of oxidation (Chapter 34), of heterogeneous catalysis, and of hydrogen entry into metals (Chapter 35); physisorption is how surface area and porosity are measured.
-
-### The Langmuir isotherm
-
-Langmuir's model assumes a fixed number of equivalent sites, one molecule per site, no interaction between adsorbed molecules, and dynamic equilibrium between adsorption (proportional to pressure and to the fraction of empty sites) and desorption (proportional to the fraction occupied). The fractional coverage is
+For a material whose output falls linearly from $\varepsilon_{\max}$ at zero load to zero at $\sigma_{\mathrm{bl}}$, the maximum work per unit volume delivered to a matched load is
 
 $$
-\theta=\frac{KP}{1+KP}
+w_{\max}=\tfrac14\,\sigma_{\mathrm{bl}}\,\varepsilon_{\max}
 $$
 
-where $K$ is an equilibrium constant that falls with temperature as $\exp(-\Delta H_{\rm ads}/RT)$, $\Delta H_{\rm ads}$ being negative. At low pressure $\theta\approx KP$ (Henry's law); at high pressure $\theta\to1$ (saturation). Langmuir kinetics underlies the rate laws of catalytic reactions and the adsorption of corrosion inhibitors (Chapter 35), whose efficiency is often taken as equal to the coverage.
+and the specific power is roughly that work times the cycling frequency. Table 37.1 and Figure 37.1 compare the main families.
 
-> **Status of the principle: Langmuir isotherm**
-> *Approximate.* Derived exactly for its assumptions (identical independent sites, monolayer, no lateral interactions); real surfaces have a distribution of site energies and interacting adsorbates, which the Temkin and Freundlich isotherms describe empirically.
+**Table 37.1 — Representative actuator materials (typical values; grade and drive conditions vary)**
 
-### BET surface area
+| Material | Stimulus | Free strain | Blocking stress | Work density (J/m³) | Bandwidth |
+|---|---|---|---|---|---|
+| NiTi shape-memory wire | Heating (Joule) | 4–6 % (one-way, polycrystal) | 200–600 MPa | $\sim10^{6}$–$10^{7}$ | 0.1–10 Hz (cooling-limited) |
+| Ni–Mn–Ga magnetic shape memory (single crystal) | Magnetic field ~0.7 T | 6 % (up to 10–12 %) | 2–3 MPa | $\sim4\times10^{4}$ | up to ~1 kHz |
+| Terfenol-D | Magnetic field | 0.1–0.2 % | 50–100 MPa | $\sim2\times10^{4}$–$5\times10^{4}$ | ~10 kHz |
+| PZT stack | Electric field ~2 kV/mm | 0.1–0.15 % | 30–50 MPa | $\sim10^{4}$ | 10–100 kHz |
+| Dielectric elastomer (acrylic, silicone) | Electric field 50–150 MV/m | 10–100 % | 0.1–3 MPa | $\sim10^{4}$–$10^{6}$ | 10 Hz–1 kHz |
+| Ionic polymer–metal composite | 1–3 V | ~1–3 % (bending) | 0.1–1 MPa | $\sim10^{3}$ | 0.1–10 Hz |
+| Skeletal muscle (reference) | Nerve signal | 20–40 % | 0.1–0.35 MPa | $\sim10^{4}$ | ~10 Hz |
+| Thermal expansion, steel ($\Delta T=100$ K) | Heating | 0.12 % | ~250 MPa | $\sim7\times10^{4}$ | slow |
 
-Brunauer, Emmett and Teller extended Langmuir's model to multilayer physisorption, assuming that layers beyond the first adsorb with the enthalpy of condensation. Fitting nitrogen adsorption at 77 K over relative pressures of about 0.05–0.3 gives the **monolayer capacity** $v_m$, and the specific surface area follows from the area occupied per molecule (0.162 nm$^2$ for N$_2$):
+<!-- FIGURE 37.1 | figures/ch37/fig-37-1-actuator-map.png | map | Actuator materials trade free strain against blocking stress; shape-memory alloys deliver the highest work density but are among the slowest. | Content: log-log Ashby-style map, x-axis free strain 1e-4 to 1 (0.01 % to 100 %), y-axis blocking stress 0.01 MPa to 1000 MPa. Labelled envelopes: PZT stack (strain 1e-3 to 1.5e-3, stress 30-50 MPa), Terfenol-D (1e-3 to 2e-3, 50-100 MPa), Ni-Mn-Ga MSM (0.03-0.1, 1-3 MPa), NiTi SMA (0.02-0.08, 100-600 MPa), dielectric elastomers (0.1-1, 0.1-3 MPa), IPMC/conducting polymers (0.005-0.03, 0.1-1 MPa), muscle (0.2-0.4, 0.1-0.35 MPa), thermal expansion of steel (1e-3, 250 MPa). Diagonal dashed lines of constant work density sigma*eps/4 = 1e3, 1e4, 1e5, 1e6, 1e7 J/m3. Small text next to each envelope gives typical bandwidth (e.g. "kHz", "Hz"). -->
 
-$$
-S=\frac{v_m}{V_{\rm mol}}\,N_A\,\sigma_{\rm N_2}
-$$
+![Figure 37.1 — Actuator materials trade free strain against blocking stress; shape-memory alloys deliver the highest work density but are among the slowest](../figures/ch37/fig-37-1-actuator-map.png)
 
-For a catalyst support with $v_m=50$ cm$^3$(STP)/g, $S=(50/22\,414)\times6.022\times10^{23}\times0.162\times10^{-18}=218$ m$^2$/g. BET areas range from below 1 m$^2$/g for dense powders, through 100–300 m$^2$/g for γ-alumina catalyst supports, to 1000–3000 m$^2$/g for activated carbons and metal–organic frameworks. Battery electrode powders, cement, pigments and pharmaceutical excipients are specified by BET area.
+*Figure 37.1 — Actuator materials trade free strain against blocking stress; shape-memory alloys deliver the highest work density but are among the slowest.*
 
-### Segregation and surface chemistry of real materials
-
-At equilibrium, components that lower the surface or grain-boundary energy concentrate there; the **Gibbs adsorption equation**, $\Gamma=-\frac{1}{RT}\frac{d\gamma}{d\ln c}$ for a dilute solute, links the surface excess $\Gamma$ to the drop in surface tension. Surfactants in water, sulfur on iron surfaces, and phosphorus or tin at grain boundaries of steel (temper embrittlement, Chapter 36) are examples. Engineering surfaces are therefore almost never clean:
-
-- **Metals** carry native oxides (2–5 nm on aluminium and stainless steel), hydroxyl groups, adsorbed water and a hydrocarbon contamination layer of about a nanometre within minutes of exposure to air.
-- **Oxides** in water acquire charge by protonation or deprotonation of surface hydroxyls; the pH at which the net charge is zero, the **isoelectric point**, is about 2 for silica, 6–7 for titania and 8–9 for alumina. It governs colloidal processing of ceramic slurries (Chapter 17), protein adsorption on implants and the adsorption of flotation reagents in mineral processing.
-- **Polymers** have low-energy, chemically inert surfaces that must be oxidized for bonding (Section 37.3).
-- **Self-assembled monolayers** (alkanethiols on gold, silanes on oxides) give molecularly defined surfaces for sensors, anti-stiction coatings in MEMS and adhesion promoters.
-
-Surface composition and chemistry are measured by XPS, AES and SIMS (Chapter 42).
+The map shows the central trade-off: large strain comes with low stress (soft polymers, magnetically driven twin boundaries), large stress with small strain (ceramics, magnetostrictives), and the one family that combines both, shape-memory alloys, is limited by how fast heat can be removed. Choosing an actuator material is therefore a design problem of the kind treated in Chapter 58: stroke, force, frequency, efficiency, mass and cost cannot all be maximised.
 
 ---
 
-## 37.3 Adhesion and wetting
+## 37.2 Shape-memory alloys
 
-### Young's equation
+### 37.2.1 The phenomenon
 
-A liquid drop on a flat solid surface meets it at a **contact angle** $\theta$ set by the balance of the three interfacial tensions at the contact line (Figure 37.2):
+In the late 1960s the US Navy needed a reliable way to join titanium hydraulic tubes in the F-14 fighter without welding. The solution was a coupling sleeve of nickel–titanium machined slightly *smaller* than the tube, cooled in liquid nitrogen, expanded mechanically by about 4 %, slipped over the tube ends while still cold, and then allowed to warm up. On warming, the sleeve "remembered" its original diameter, shrank and gripped the tubes with a contact pressure high enough to seal against 35 MPa of hydraulic fluid. Over a million such couplings were installed without a reported leak. Two properties are at work: the **shape-memory effect** (a deformation applied at low temperature is recovered on heating) and **superelasticity** (at a slightly higher temperature, very large strains are recovered simply on unloading).
 
-$$
-\gamma_{SV}=\gamma_{SL}+\gamma_{LV}\cos\theta
-$$
+### 37.2.2 Thermoelastic martensite
 
-A liquid **wets** the solid ($\theta<90°$) when the solid–vapour energy exceeds the solid–liquid energy; it spreads completely ($\theta=0$) when $\gamma_{SV}\ge\gamma_{SL}+\gamma_{LV}$. Water ($\gamma_{LV}=72.8$ mJ/m$^2$) spreads on clean glass and metal oxides but beads on PTFE and wax.
+Both effects come from the martensitic transformation of Chapter 10, but of a special kind. In steel, martensite forms with a large shape change, its interfaces are pinned by plastic deformation, and the transformation is irreversible in practice. In shape-memory alloys the transformation is **thermoelastic**:
 
-> **Status of the principle: Young's equation**
-> *Derived.* Follows from minimizing the total interfacial free energy of a drop on an ideal, smooth, chemically homogeneous, rigid and insoluble surface; real surfaces show a range of contact angles between advancing and receding values (contact-angle hysteresis) because of roughness and chemical heterogeneity.
+- the parent phase (**austenite**, for NiTi the ordered B2 cubic structure) transforms to a low-symmetry martensite (monoclinic B19′ in NiTi) by a small, coordinated shear;
+- the lattice correspondence is unique: every martensite variant can revert only to the original orientation of austenite;
+- the shape change is accommodated **elastically and by twinning**, not by dislocation slip, so the interfaces stay mobile and the transformation hysteresis is small (20–40 K in NiTi).
 
-### Work of adhesion
+Because martensite has lower symmetry than austenite, one austenite grain can form up to 12 crystallographically equivalent **variants** in NiTi (24 habit-plane variants). On cooling without load, the variants form in self-accommodating groups, twinned against each other so that the overall shape of the grain barely changes. Four temperatures describe the transformation: martensite start and finish $M_s$, $M_f$ on cooling, and austenite start and finish $A_s$, $A_f$ on heating.
 
-The **work of adhesion** is the reversible work to separate unit area of an interface into two free surfaces, $W_a=\gamma_{SV}+\gamma_{LV}-\gamma_{SL}$. Combined with Young's equation it gives the Young–Dupré equation, which turns a contact-angle measurement into an adhesion energy:
+The shape-memory cycle (Figure 37.2a) is then:
 
-$$
-W_a=\gamma_{LV}\,(1+\cos\theta)
-$$
+1. Cool below $M_f$: twinned, self-accommodated martensite, no shape change.
+2. Deform at low temperature: the twin boundaries move, so the variants best oriented for the applied stress grow at the expense of others (**detwinning**). Strains of 6–8 % (single crystals up to ~10 %) are produced at low stress (100–200 MPa in NiTi) with no dislocation slip.
+3. Unload: the detwinned martensite stays deformed.
+4. Heat above $A_f$: every variant reverts to the single original austenite orientation, so the original shape returns.
 
-For water on PTFE ($\theta\approx110°$), $W_a=72.8\times(1-0.342)=47.9$ mJ/m$^2$; on clean glass ($\theta\approx20°$), $W_a=72.8\times1.940=141$ mJ/m$^2$. The work of cohesion of water is $2\gamma_{LV}=146$ mJ/m$^2$: water adheres to glass almost as strongly as to itself, and to PTFE only a third as strongly.
+This is a **one-way** effect: cooling again does not restore the deformed shape. **Two-way** memory can be "trained" by thermomechanical cycling, which leaves oriented dislocation arrays whose stress fields favour particular variants on cooling, but the two-way strain is smaller (~2 %) and less stable.
 
-<!-- FIGURE 37.2 | figures/ch37/fig-37-2-wetting-regimes.png | schematic | Contact angle and the three wetting regimes: Young (smooth), Wenzel (roughness filled) and Cassie–Baxter (air trapped under the drop). | Content: top panel: sessile drop on a smooth surface with the three tension vectors γ_LV (tangent to drop), γ_SL and γ_SV along the surface, contact angle θ marked; examples beneath: 'glass + water θ ≈ 20°', 'PE + water θ ≈ 95°', 'PTFE + water θ ≈ 110°'. Bottom panels: (a) Wenzel: drop penetrating square pillars, roughness ratio r = 1.5, θ* = 121° from θ = 110°; (b) Cassie–Baxter: drop resting on pillar tops with air pockets, solid fraction f = 0.1, θ* = 159°. Inset: lotus-leaf style hierarchical texture sketch. -->
+### 37.2.3 Superelasticity and the Clausius–Clapeyron relation
 
-### Roughness and superhydrophobicity
+Above $A_f$, austenite is the stable phase at zero stress. But a stress that does work on the transformation strain lowers the Gibbs energy of the martensite variant aligned with it, so martensite can be *induced by stress*. On unloading, it is unstable and reverts. The result (Figure 37.2b) is a flag-shaped stress–strain curve: linear elastic austenite, an upper **plateau** at which stress-induced martensite forms and a band of transformed material propagates along the specimen, then elastic martensite; on unloading, a lower plateau at which it reverts, recovering 6–8 % strain with a hysteresis loop whose area is energy dissipated as heat.
 
-Roughness amplifies the intrinsic wettability. If the liquid fills the texture (**Wenzel** state), with roughness ratio $r$ (true area over projected area),
-
-$$
-\cos\theta^*=r\cos\theta
-$$
-
-so hydrophobic surfaces become more hydrophobic and hydrophilic ones more hydrophilic. If air stays trapped under the drop (**Cassie–Baxter** state) with solid fraction $f$ in contact with the liquid,
+The plateau stress rises with temperature, because the further one is above the equilibrium temperature, the more mechanical work must be supplied to make martensite stable. Treating stress and strain as a pair of conjugate variables like $-p$ and $V$, the two-phase equilibrium obeys a Clausius–Clapeyron relation (the thermodynamics is recapped from Chapter 6):
 
 $$
-\cos\theta^*=f(\cos\theta+1)-1
+\frac{d\sigma}{dT}=-\frac{\Delta S}{\varepsilon_{\mathrm{tr}}}=-\frac{\Delta H}{T_0\,\varepsilon_{\mathrm{tr}}}
 $$
 
-For PTFE ($\theta=110°$), a texture with $r=1.5$ in the Wenzel state gives $\cos\theta^*=1.5\times(-0.342)=-0.513$, $\theta^*=121°$; a pillar texture with $f=0.1$ in the Cassie state gives $\cos\theta^*=0.1\times0.658-1=-0.934$, $\theta^*=159°$. Contact angles above 150° with low hysteresis define **superhydrophobic** surfaces (the lotus leaf), on which drops roll off and carry dirt away. They are used for self-cleaning glass and textiles and studied for anti-icing on aircraft and power lines, but their fragile textures wear and contaminate, and the Cassie state can collapse into the Wenzel state under pressure or condensation, a durability problem that still limits applications. The same equations explain why a slightly hydrophilic material ($\theta=70°$) becomes clearly hydrophilic ($\theta^*=59°$) when roughened with $r=1.5$: the basis of grit blasting before painting and of rough titanium implant surfaces for bone contact.
+where $\Delta S$ and $\Delta H$ are the entropy and enthalpy of the austenite → martensite transformation per unit volume (both negative: the transformation releases heat), $\varepsilon_{\mathrm{tr}}$ is the transformation strain in the loading direction and $T_0$ the equilibrium temperature at zero stress.
 
-> **Status of the principle: Wenzel and Cassie–Baxter equations**
-> *Approximate.* Area-weighted averages of Young's equation that assume the texture is much smaller than the drop and that the contact line samples it uniformly; they predict apparent equilibrium angles but not the hysteresis that decides whether drops actually roll off.
+> **Status of the principle: Clausius–Clapeyron relation for stress-induced martensite**
+> *Derived.* It follows from equilibrium between two phases under uniaxial stress; it assumes a fixed transformation strain and neglects hysteresis and texture, and in polycrystals is obeyed by the measured plateau stresses to within 10–20 % over about 100 K above $A_f$.
 
-### Adhesion in practice
+**Worked example — the stress–temperature slope of NiTi and a stent's plateau.** NiTi has a latent heat of about 20 J/g and density 6450 kg/m³, so $\lvert\Delta H\rvert\approx 2.0\times10^{4}\times6450=1.29\times10^{8}$ J/m³. With $T_0\approx300$ K and a polycrystalline transformation strain $\varepsilon_{\mathrm{tr}}\approx0.06$:
 
-Practical adhesion of paints, adhesives and coatings depends on the thermodynamic work of adhesion only as a starting condition. The measured fracture energy of a bonded joint, typically 100–5000 J/m$^2$ for structural adhesives, is thousands of times $W_a$ because the polymer dissipates energy plastically and viscoelastically near the crack tip (Chapter 14). But dissipation can only operate if the interface does not fail first, so intimate wetting remains the necessary condition. Four mechanisms contribute:
+$$
+\frac{d\sigma}{dT}\approx\frac{1.29\times10^{8}}{300\times0.06}=7.2\times10^{6}\ \mathrm{Pa\,K^{-1}}\approx7\ \mathrm{MPa/K}
+$$
 
-- **Adsorption** (van der Waals and acid–base interactions across the interface), present wherever the adhesive wets the substrate. A useful rule is that the adhesive's surface tension should be below the substrate's surface energy, which is why polyolefins and PTFE are hard to bond.
-- **Chemical bonding**, deliberately introduced by silane coupling agents (glass fibres in composites, glass to sealants) and by primers.
-- **Mechanical interlocking** into roughness and porosity: grit blasting, phosphoric-acid anodizing of aluminium for aerospace bonding, porous coatings on implants.
-- **Interdiffusion**, in polymer–polymer welding and solvent bonding.
+Measured slopes for superelastic NiTi are 5–8 MPa/K. A stent alloy (Ni-rich, about Ni-50.8 at.% Ti) is processed so that the stress-induced transformation would start at zero stress at about $M_s=-20$ °C. Taking a slope of 6.5 MPa/K, the upper plateau at body temperature is $6.5\times(37-(-20))=6.5\times57\approx370$ MPa, and the device delivers a nearly constant outward force over a wide range of vessel diameters, the property clinicians call "biased stiffness". The same slope is a warning: a NiTi part designed at room temperature becomes about 100 MPa stiffer in its plateau 15 K warmer, and if it is used above the temperature $M_d$ (typically 50–100 K above $A_f$) the stress for slip falls below the stress for transformation, the alloy deforms plastically, and superelasticity is lost.
 
-Surface treatments raise the surface energy of polymers: corona discharge, flame and plasma treatment oxidize the surface of polyethylene and polypropylene, raising its surface energy from about 30 to 40–50 mJ/m$^2$ (checked on the shop floor with dyne inks), which is why plastic films can be printed and car bumpers painted. Weak boundary layers (mould-release agents, oils, loosely bound oxides) are the commonest cause of adhesive failure. The design of bonded joints is covered in Chapter 39.
+<!-- FIGURE 37.2 | figures/ch37/fig-37-2-sma-cycle-superelastic.png | plot | Shape memory and superelasticity are two faces of the same reversible martensitic transformation, separated by temperature. | Content: (a) schematic 3D-style stress-strain-temperature path for the one-way effect: cooling austenite to twinned martensite (no strain), loading to 6 % strain at ~150 MPa plateau (detwinning), unloading with 5.5 % retained strain, heating through As-Af (strain recovers to 0); small crystal sketches at each corner (cubic austenite, twinned variants, detwinned variant). (b) Stress-strain curves of superelastic NiTi at 20, 37 and 60 C: elastic slope ~40-60 GPa to upper plateau at about 260, 370 and 520 MPa, plateau length ~6 %, lower plateaus about 200 MPa lower, full recovery; inset stress vs temperature line with slope 6.5 MPa/K from Ms = -20 C, Md marked near 80 C. -->
+
+![Figure 37.2 — Shape memory and superelasticity are two faces of the same reversible martensitic transformation, separated by temperature](../figures/ch37/fig-37-2-sma-cycle-superelastic.png)
+
+*Figure 37.2 — Shape memory and superelasticity are two faces of the same reversible martensitic transformation, separated by temperature.*
+
+### 37.2.4 Alloys and engineering
+
+**NiTi (nitinol)** dominates: it has the largest recoverable strain, good fatigue and corrosion resistance (a protective TiO₂ film, Chapter 39), and transformation temperatures that move by roughly 10–20 K for each 0.1 at.% change in nickel content around equiatomic. That sensitivity makes melting and composition control (vacuum induction plus vacuum arc remelting, carbon and oxygen held below a few hundred ppm) the critical processing step. Ageing Ni-rich alloys precipitates Ni₄Ti₃, which raises the matrix Ti content and shifts the transformation temperatures upward, and also strengthens the austenite against slip. Cold working followed by **shape setting** at 450–550 °C while clamped in a fixture fixes the "remembered" shape; this is how stents, guidewires and arch wires are formed.
+
+Other families fill niches. Cu–Zn–Al and Cu–Al–Ni are cheaper and have higher transformation temperatures but are brittle in polycrystalline form because of their elastic anisotropy and coarse grains. Fe–Mn–Si alloys show a modest (~2–4 %) one-way effect through an FCC → HCP transformation and are used in prestressing strips for retrofitting concrete. **High-temperature SMAs** (NiTiHf, NiTiPd, NiTiPt) push $A_f$ above 100–250 °C for aerospace actuators near engines; Boeing flew NiTi torque tubes that twist trailing-edge surfaces on an engine chevron and a wing in test programmes.
+
+Design limits are as important as the effect itself:
+
+- **Speed.** Heating by electric current is fast; cooling is by conduction and convection. A 0.25 mm wire in still air cycles at about 1 Hz; thinner wires and liquid cooling are faster.
+- **Efficiency.** Most of the input energy heats the wire. The worked example below shows an efficiency of about 2 %, typical of thermal actuators, which is why SMAs suit low-duty-cycle tasks (valves, latches, deployment) rather than continuous motion.
+- **Functional fatigue.** Each cycle leaves some dislocations, so the plateau stress drifts down and the recoverable strain shrinks; designs that limit strain to 2–3 % achieve $10^{6}$–$10^{7}$ cycles. Structural fatigue of stents (Chapter 14) is assessed on strain amplitude, not stress, for this reason.
+
+**Worked example — a NiTi actuator wire.** A 0.25 mm NiTi wire, 100 mm long, lifts a load by recovering 4 % strain against a recovery stress of 150 MPa. Its cross-section is $A=\pi(0.125\times10^{-3})^2=4.91\times10^{-8}$ m², so the force is $150\times10^{6}\times4.91\times10^{-8}=7.4$ N and the stroke $0.04\times100=4.0$ mm. The mechanical work is $7.4\times0.004=29$ mJ per cycle. Heating the wire (mass $6450\times4.91\times10^{-8}\times0.1=3.2\times10^{-5}$ kg) by 60 K with $c_p\approx450$ J kg⁻¹ K⁻¹, and supplying the latent heat of 20 J/g, needs $3.2\times10^{-5}\times(450\times60+2.0\times10^{4})=1.5$ J. The efficiency is $0.029/1.5\approx2$ %. The wire is an excellent force-to-mass actuator (7 N from 0.03 g) and a poor energy converter.
+
+Civil engineers use superelastic NiTi bars and cables for the hysteresis rather than the stroke: in seismic dampers and beam–column connections, each loading cycle dissipates the loop area (about 10–20 MJ/m³ per cycle at 6 % strain) and the structure recentres afterwards, which steel dampers that yield plastically cannot do.
 
 ---
 
-## 37.4 Contact mechanics
+## 37.3 Magnetostrictive and magnetic shape-memory materials
 
-### Hertz contact
+### 37.3.1 Magnetostriction
 
-When two curved elastic bodies are pressed together, they touch over a small area whose size and pressure distribution were found by Hertz in 1882. For a sphere of radius $R$ on a flat (or two spheres with $1/R=1/R_1+1/R_2$) under normal force $F$, with effective modulus
+When a ferromagnet is magnetized, its domains rotate (Chapter 28) and the crystal lattice distorts slightly along the magnetization direction, because the spin–orbit coupling ties the magnetic moment to the shape of the electron orbitals and therefore to the bond lengths. The saturation **magnetostriction** $\lambda_s$ is the fractional length change at saturation. In iron and nickel it is tens of parts per million ($\lambda_s\approx-35$ ppm for Ni, a contraction), which is a nuisance in transformers (the 100 Hz hum, Chapter 29) but too small for actuation.
 
-$$
-\frac{1}{E^*}=\frac{1-\nu_1^2}{E_1}+\frac{1-\nu_2^2}{E_2}
-$$
+Rare-earth–iron Laves compounds change this. **Terfenol-D** (Tb₀.₃Dy₀.₇Fe₂) has $\lambda_s$ of 1500–2000 ppm at room temperature; the terbium–dysprosium ratio is chosen so that the large but opposite-signed anisotropies of TbFe₂ and DyFe₂ cancel, letting a modest field (about 50–200 kA/m) rotate the magnetization. It is grown as directionally solidified <112>-textured rods, operated under a compressive prestress of 10–20 MPa that orients the domains perpendicular to the rod so that the field can rotate them all, and used in high-power, low-frequency **sonar projectors**, active vibration control and fast valves. It is brittle (fracture toughness about 1 MPa m^1/2) and expensive.
 
-the contact radius, maximum (central) pressure and approach are
+**Galfenol** (Fe–Ga, 17–19 at.% Ga) gives 250–400 ppm but is ductile and machinable, can carry tension and bending, and is used in energy harvesters on vibrating machinery and in torque sensors. The **inverse** (Villari) effect, a change of magnetization with stress, makes magnetostrictive materials sensors as well: a shaft of Fe–Ni or Fe–Ga under torque changes permeability along its helix directions, which a non-contact coil detects, the basis of torque sensors in electric power steering.
 
-$$
-a=\left(\frac{3FR}{4E^*}\right)^{1/3},\qquad p_0=\frac{3F}{2\pi a^2},\qquad \delta=\frac{a^2}{R}
-$$
+### 37.3.2 Magnetic shape-memory alloys
 
-The pressure is distributed elliptically, $p(r)=p_0\sqrt{1-r^2/a^2}$, with mean pressure $p_m=2p_0/3$. The important feature for materials is below the surface: the maximum shear stress, about $0.31p_0$, occurs at a depth of about $0.48a$ (for $\nu=0.3$) (Figure 37.3). Yield therefore starts beneath the surface, when $p_0\approx1.6Y$ by the von Mises criterion, and rolling-contact fatigue cracks also nucleate there, which is why bearing steels must be clean of inclusions at that depth and why case-hardened layers must be deep enough to contain it.
+A much larger strain is obtained by combining the twinned martensite of Section 37.2 with magnetic anisotropy. In the Heusler alloy **Ni₂MnGa** (and off-stoichiometric Ni–Mn–Ga), the martensite is ferromagnetic and strongly anisotropic: the short $c$ axis of the tetragonal (or modulated) martensite cell is the easy axis of magnetization. A field applied along a crystal direction makes the variant whose easy axis points along the field favoured by the magnetic anisotropy energy $K_u$ per volume. If the twin boundaries are mobile enough, the favoured variant grows by twin-boundary motion and the crystal changes shape by the twinning strain $\varepsilon_0=1-c/a$, about 6 % in five-layer modulated martensite and up to 10–12 % in other modulations.
 
-> **Status of the principle: Hertz contact theory**
-> *Derived.* Exact within linear elasticity for smooth, frictionless, non-conforming surfaces whose contact radius is small compared with the radii of curvature; it fails for rough surfaces (Section 37.5), for conforming contacts such as a hip ball in its cup, for adhesive contacts of soft materials (JKR theory) and after yield.
-
-<!-- FIGURE 37.3 | figures/ch37/fig-37-3-hertz-subsurface-stress.png | plot | Hertzian sphere-on-flat contact: surface pressure distribution and subsurface stresses along the axis of symmetry. | Content: left panel: pressure p/p0 versus r/a from -1.5 to 1.5, elliptical profile with peak 1 at r = 0. Right panel: x-axis stress/p0 from 0 to 1.0; y-axis depth z/a from 0 to 3 (downward); curves for σ_z/p0 (1 at surface, decaying), σ_r/p0 (0.8 at surface for ν = 0.3, falling quickly) and maximum shear τ_max/p0 peaking at 0.31 at z = 0.48a; horizontal dashed line at z = 0.48a labelled 'yield and rolling-contact fatigue start here'. Annotation for the worked example: steel ball R = 6.35 mm, F = 500 N, a = 0.274 mm, p0 = 3.17 GPa. -->
-
-**Worked example — a ball pressed on a bearing race.** A hardened steel ball of radius $R=6.35$ mm (12.7 mm diameter) is pressed onto a flat race of the same steel ($E=210$ GPa, $\nu=0.3$) with $F=500$ N.
+The largest stress the field can exert on a twin boundary is set by the anisotropy energy:
 
 $$
-E^*=\frac{E}{2(1-\nu^2)}=\frac{210}{2\times0.91}=115.4\ \mathrm{GPa}
+\sigma_{\mathrm{mag}}^{\max}\approx\frac{K_u}{\varepsilon_0}
 $$
 
-$$
-a=\left(\frac{3\times500\times6.35\times10^{-3}}{4\times115.4\times10^{9}}\right)^{1/3}=2.74\times10^{-4}\ \mathrm m=0.274\ \mathrm{mm}
-$$
+With $K_u\approx2\times10^{5}$ J/m³ and $\varepsilon_0=0.06$, $\sigma_{\mathrm{mag}}^{\max}\approx3.3$ MPa. Twin boundaries in good single crystals move at about 0.1–1 MPa, so the margin is narrow: the blocking stress is only 2–3 MPa and polycrystals, whose grain boundaries obstruct twinning, show little strain. Magnetic shape-memory alloys therefore combine large strain with fast (kHz) response, because no heat must flow, but small force. Prototypes include fast valves, micropumps and positioners. Unlike NiTi, the effect is limited by magnetism, not by heat transfer, and the material's Curie temperature (about 100 °C) and martensite start temperature cap the operating range.
 
-$$
-p_0=\frac{3\times500}{2\pi\times(2.74\times10^{-4})^2}=3.17\times10^{9}\ \mathrm{Pa}=3.17\ \mathrm{GPa}
-$$
-
-The maximum shear stress is $0.31\times3.17=0.98$ GPa at a depth of $0.48\times0.274=0.13$ mm, and the approach is only $\delta=a^2/R=12$ µm. A modest load produces a contact pressure of more than 3 GPa because the contact area is less than 0.25 mm$^2$. For a through-hardened bearing steel (about 62 HRC, yield strength about 2 GPa), first yield is predicted at $p_0\approx1.6\times2.0=3.2$ GPa: this load is just at the elastic limit. Since $p_0\propto F^{1/3}$, the load would have to rise to about 1160 N to reach 4.2 GPa, the conventional static-capacity limit for ball bearings, at which a small permanent dent forms. Only hardened steels and ceramics such as silicon nitride (used for hybrid bearing balls) can carry such pressures; a mild steel with $Y\approx250$ MPa would yield at a central pressure of about 0.4 GPa.
-
-### Real contact area
-
-Engineering surfaces are rough. Even a polished surface has asperities with heights of tens of nanometres; a ground surface has a root-mean-square roughness $R_q$ of 0.1–1 µm; a turned surface several micrometres. When two such surfaces touch, they meet only at the tips of the highest asperities. Each asperity contact is a tiny Hertzian contact that quickly yields, so the asperities support the load at a pressure close to the indentation hardness $H$ of the softer material (Chapter 11). The **real contact area** is then
-
-$$
-A_r\approx\frac{F}{H}
-$$
-
-independent of the apparent area. A 10 kg steel block ($F=98$ N) resting on a 100 cm$^2$ face of mild steel ($H\approx1.5$ GPa) touches over only $98/(1.5\times10^9)=6.5\times10^{-8}$ m$^2$, about 0.07 mm$^2$, or 7 parts per million of the apparent area. Greenwood and Williamson showed that even for purely elastic asperities with a Gaussian height distribution, $A_r$ remains nearly proportional to load, because increasing load brings new asperities into contact rather than enlarging existing ones. Whether asperity contacts are elastic or plastic is decided by the **plasticity index** $\psi=(E^*/H)\sqrt{\sigma_s/\beta_s}$, where $\sigma_s$ is the standard deviation of asperity heights and $\beta_s$ their tip radius: $\psi<0.6$ means mostly elastic contact (smooth, hard surfaces), $\psi>1$ mostly plastic (most machined metals).
-
-> **Status of the principle: Real contact area proportional to load**
-> *Approximate.* Follows from plastic asperity contacts at the hardness, or from statistical elastic asperity models with many contacts; it fails at very high loads where $A_r$ approaches the apparent area, for soft elastomers, and when adhesion or work hardening changes the asperity pressure.
-
-The tiny real contact area explains far more than friction. Electrical contact resistance, thermal contact resistance across bolted joints and heat sinks (where interface materials fill the gaps), leakage through metal-to-metal seals and the cold-welding of clean metals in vacuum are all governed by $A_r$.
+> **Status of the principle: Anisotropy limit on magnetic shape-memory stress**
+> *Approximate.* The output stress cannot exceed the magnetic energy available per unit transformation strain; real devices fall below it because of demagnetizing fields, twinning stress and incomplete saturation.
 
 ---
 
-## 37.5 Friction
+## 37.4 Piezoelectric actuators and sensors (recap)
 
-### Amontons' laws
+Chapter 27 explained the origin of piezoelectricity: a crystal without a centre of symmetry polarizes under stress (direct effect) and strains under field (converse effect), linked by the third-rank tensor $d_{ij}$ of Chapter 4. Ferroelectric ceramics such as **lead zirconate titanate** (PZT) near the morphotropic phase boundary are poled to give large coefficients, $d_{33}=300$–600 pC/N (equivalently pm/V). Here the materials engineer's question is how such a ceramic becomes an actuator or a sensor.
 
-The empirical laws of dry friction, found by Leonardo da Vinci, restated by Amontons in 1699 and extended by Coulomb, are:
+**Table 37.2 — Typical piezoelectric materials**
 
-1. The friction force is proportional to the normal load: $F_f=\mu F_N$.
-2. The friction force is independent of the apparent area of contact.
-3. Kinetic friction is nearly independent of sliding velocity (Coulomb), and is usually lower than static friction.
-
-| Sliding pair (dry, in air, typical) | Coefficient of friction $\mu$ |
-|---|---|
-| Clean metals in vacuum | above 1, may seize |
-| Steel on steel, unlubricated | 0.5–0.8 |
-| Steel on steel, boundary lubricated | 0.05–0.15 |
-| Steel on bronze, lubricated | 0.05–0.1 |
-| Steel on brass or babbitt, dry | 0.3–0.5 |
-| Brake pad on cast-iron disc | 0.35–0.45 |
-| Tyre rubber on dry asphalt | 0.7–1.0 |
-| Tyre rubber on wet asphalt | 0.4–0.7 |
-| Steel on ice | about 0.02 |
-| PTFE on steel | 0.04–0.1 |
-| UHMWPE on Co–Cr in serum | 0.05–0.1 |
-| DLC coating on steel | 0.05–0.2 |
-| Hydrodynamic journal bearing | 0.001–0.01 |
-
-> **Status of the principle: Amontons–Coulomb friction laws**
-> *Empirical.* Accurate to roughly ±10–20 % for most dry and boundary-lubricated pairs of metals and ceramics over moderate loads; they fail for elastomers (friction depends on area, velocity and temperature), at very low loads where adhesion dominates, at high speeds where flash heating softens or melts the surface, and wherever a fluid film separates the surfaces.
-
-### The adhesion origin: Bowden and Tabor
-
-Bowden and Tabor explained the laws by combining real contact area with adhesion. If the asperity junctions cold-weld and must be sheared to slide, with shear strength $s$, then $F_f=sA_r=sF_N/H$, so
-
-$$
-\mu_{\rm adh}=\frac{s}{H}
-$$
-
-independent of load and of apparent area, which is Amontons' first and second laws. For a clean metal the junction shears at roughly its bulk shear strength, about $H/6$ (since $H\approx3Y$ and $s\approx Y/2$), giving $\mu\approx0.17$; a surface oxide or adsorbed film with lower shear strength lowers $\mu$. The model also predicts the right direction of most observations:
-
-- **Soft films on hard substrates** give low friction: $A_r$ is set by the hard substrate's $H$, the shear strength by the soft film's $s$. This is the principle of babbitt bearing metals, lead and silver films on aerospace bearings, solid lubricants such as MoS$_2$ (whose weak interlayer van der Waals bonding gives $\mu\approx0.02$–0.1 in dry air or vacuum) and graphite (which needs adsorbed water to be slippery and fails in space).
-- **Clean metals in vacuum** show $\mu$ well above 1. Tangential force makes the junctions grow (**junction growth**) because the combined normal and shear stress keeps them yielding, so $A_r$ increases during sliding until gross seizure. Satellite mechanisms that seized in orbit and galling of stainless-steel threads are this effect.
-
-A second contribution comes from **ploughing**: a hard asperity or particle digs a groove in the softer surface and must displace material. For a conical asperity of semi-angle $\alpha$, $\mu_{\rm pl}\approx(2/\pi)\cot\alpha$, small for blunt asperities (about 0.06 for a slope of 5°) but large for sharp abrasive grits. Total friction is approximately $\mu\approx\mu_{\rm adh}+\mu_{\rm pl}$, with additional hysteretic losses in viscoelastic materials.
-
-**Friction in polymers and elastomers** departs from Amontons. The real contact area of elastomers is large and depends on load sublinearly, and friction has an adhesive part and a hysteretic part that both depend on sliding speed and temperature through the material's viscoelastic loss (Chapter 21). Tyre grip on wet roads comes mainly from hysteresis as the tread deforms over road texture at frequencies of $10^3$–$10^6$ Hz; tread compounds with high loss near those frequencies at road temperature grip best, which is a time–temperature superposition argument applied to the road.
-
-**Stick–slip** occurs when static friction exceeds kinetic friction and the system is compliant: the surfaces stick until the spring force exceeds static friction, then slip and decelerate. Squealing brakes, chattering machine-tool slideways, creaking joints and the violin bow are examples; the cure is a pair with friction rising slightly with speed, higher stiffness, or damping.
-
----
-
-## 37.6 Wear mechanisms
-
-### The Archard wear law
-
-Wear is the progressive loss of material from a surface by mechanical action, often combined with chemical action. The simplest and most widely used model is Archard's: the wear volume $V$ is proportional to the sliding distance $s$ and the normal load $F$, and inversely proportional to the hardness $H$ of the softer surface,
-
-$$
-V=K\,\frac{F\,s}{H}
-$$
-
-where the dimensionless **wear coefficient** $K$ is the probability that an asperity encounter produces a wear particle. Engineers often use the **specific wear rate** $k=K/H=V/(Fs)$, in mm$^3$/(N m).
-
-| Situation | Typical wear coefficient $K$ |
-|---|---|
-| Unlubricated mild steel on mild steel (severe adhesive wear) | $10^{-3}$–$10^{-2}$ |
-| Unlubricated hardened steel on steel (mild oxidative wear) | $10^{-5}$–$10^{-4}$ |
-| Two-body abrasion by sharp grit | $10^{-2}$–$10^{-1}$ |
-| Three-body abrasion by loose particles | $10^{-3}$–$10^{-2}$ |
-| Polymer on smooth steel | $10^{-6}$–$10^{-4}$ |
-| Boundary-lubricated metals | $10^{-7}$–$10^{-6}$ |
-| Hydrodynamically lubricated (no contact) | below $10^{-9}$ |
-
-The range of seven orders of magnitude is the central fact of tribology: changing the mechanism matters far more than changing the hardness.
-
-> **Status of the principle: Archard wear law**
-> *Empirical.* Derived from a simple probability argument for asperity encounters, but $K$ is a fitted parameter that changes by orders of magnitude with mechanism, lubrication, environment and transitions between mild and severe wear; the law applies only within one wear regime and does not predict when a transition occurs.
-
-Figure 37.4 illustrates the four principal mechanisms.
-
-<!-- FIGURE 37.4 | figures/ch37/fig-37-4-wear-mechanisms.png | schematic | The four principal wear mechanisms: adhesive, abrasive, surface fatigue and corrosive (tribochemical). | Content: four cross-section panels. (a) Adhesive: two asperities forming a junction, shearing inside the softer body, a transferred fragment stuck to the harder surface, a loose flake; label 'galling, scuffing'. (b) Abrasive: two-body (hard rough surface ploughing grooves) and three-body (loose hard particles rolling and sliding between surfaces) sub-panels; microcutting chip and ploughing ridges; label 'H_abrasive/H_surface > 1.2'. (c) Surface fatigue: rolling ball over a race, subsurface crack at depth ~0.5a growing parallel to the surface and branching up to form a spall pit; label 'rolling-contact fatigue, pitting'. (d) Corrosive/tribochemical: thin oxide film forming between passes, being scraped off as debris, fretting debris accumulating in a small-amplitude oscillating contact. -->
-
-### Adhesive wear
-
-When asperity junctions are stronger than one of the parent materials, shearing tears a fragment from the weaker side and transfers it to the other; fragments later detach as wear debris. In mild form it is the slow wear of well-matched pairs; in severe form it becomes **scuffing** (sudden failure of a lubricated contact, as in gears and piston rings at high load and speed) and **galling** (gross transfer and seizure, typical of stainless steels, titanium and aluminium sliding on themselves). Defences follow from the Bowden–Tabor picture: avoid like-on-like metal pairs with high mutual solubility (steel on bronze or cast iron rather than steel on steel), use oxide-forming or lubricated surfaces, raise hardness, and apply coatings with low adhesion such as nitrides and DLC.
-
-### Abrasive wear
-
-Hard particles or protrusions plough and cut the softer surface. In **two-body** abrasion a hard rough surface or fixed grit slides on the softer one (grinding, a rock sliding on a chute liner, sand embedded in a seal); in **three-body** abrasion loose particles roll and slide between surfaces (contaminated lubricant, dust in a bearing, slurry pumps), and wear rates are typically an order of magnitude lower. Abrasion is severe when the abrasive is harder than the surface by a factor of about 1.2 or more, and mild when the surface is harder. Since quartz, the commonest natural abrasive, has a hardness of about 11 GPa (roughly 1100 HV), materials for mining, agriculture and earthmoving aim to exceed it: white cast irons with M$_7$C$_3$ carbides (about 1500 HV), WC–Co hardmetals (1200–1800 HV), and hardfaced overlays. Filtration of lubricants and seals that exclude dust are the abrasion defences in machinery.
-
-### Surface fatigue
-
-In rolling and rolling–sliding contacts (bearings, gears, cams, rails) there is little sliding, but every pass cycles the subsurface shear stress of Section 37.4. After millions of cycles, cracks nucleate near the depth of maximum shear, usually at non-metallic inclusions, grow parallel to the surface and turn up to release a flake, leaving a **spall** or pit. On gears, **micropitting** (pits of 10–20 µm depth) arises when the lubricant film is thin compared with the roughness. Rail head checking and squats are the railway equivalents. Rolling-bearing life is predicted with the Lundberg–Palmgren model, whose catalogue form is $L_{10}=(C/P)^3$ million revolutions for ball bearings ($C$ = dynamic load rating, $P$ = equivalent load); a 25 % overload cuts life by a factor of $1.25^3\approx2$. Steel cleanliness made the largest single improvement in bearing life over the twentieth century: vacuum-degassed and remelted steels with few large oxide inclusions last many times longer than older air-melted steels.
-
-### Corrosive and tribochemical wear
-
-Sliding removes protective films and heats asperity tips briefly to hundreds of degrees (**flash temperatures**), accelerating reactions. **Oxidative wear** of steels at moderate loads, where a thin oxide continually forms and is removed, is a benign mild-wear regime; in aggressive media the same mechanism becomes **tribocorrosion**, important in the taper junctions of modular hip implants, marine pumps and chemical mixers. **Fretting** is wear under small-amplitude oscillation (1–100 µm) between nominally fixed surfaces: bolted and riveted joints, spline couplings, turbine blade roots, wire ropes and electrical connectors. The debris, usually oxide, is trapped and abrasive, and fretting can nucleate fatigue cracks that reduce fatigue strength by half or more (**fretting fatigue**). Erosion by particles and liquid drops, and cavitation erosion (Chapter 35), complete the family.
-
-**Worked example — wear of a polyethylene hip cup.** A conventional UHMWPE acetabular cup articulates against a 28 mm diameter Co–Cr femoral head. Laboratory tests give a specific wear rate $k=1.0\times10^{-6}$ mm$^3$/(N m). Take an effective joint load of 2000 N during walking, a sliding distance of 25 mm per gait cycle, and $10^6$ cycles per year for a moderately active patient.
-
-Sliding distance per year: $s=0.025\times10^6=2.5\times10^4$ m.
-
-$$
-V=k\,F\,s=1.0\times10^{-6}\times2000\times2.5\times10^{4}=50\ \mathrm{mm^3/year}
-$$
-
-Dividing by the projected area of the head, $\pi\times14^2=616$ mm$^2$, gives a linear penetration of about $0.08$ mm/year. This agrees with clinical measurements for conventional polyethylene of roughly 0.1 mm/year and 40–80 mm$^3$/year. The thickness of the cup is not the problem; the volume is. If the average particle is a 0.5 µm sphere of volume $6.5\times10^{-11}$ mm$^3$, 50 mm$^3$ is about $8\times10^{11}$ particles a year, and osteolysis becomes common above roughly 0.1 mm/year. Highly cross-linked UHMWPE, with $k$ lower by a factor of about four to ten in simulator tests, brings the particle load below that threshold, which is why it replaced conventional polyethylene clinically. The Archard calculation also exposes its own limits: $k$ for polyethylene depends strongly on the crossing of sliding directions (multidirectional motion raises it several times compared with unidirectional sliding, because the molecules orient and then are sheared across their orientation), so the right test reproduces the kinematics of gait.
-
----
-
-## 37.7 Lubrication regimes and the Stribeck curve
-
-### Regimes
-
-A lubricant reduces friction and wear by separating the surfaces with a film that shears easily. How completely it separates them depends on the speed, the viscosity and the load. Stribeck's measurements on journal bearings (1902) showed that the coefficient of friction depends on these through a single group, the **Hersey number** $\eta N/P$ (viscosity × rotational speed / load per unit projected area). The resulting **Stribeck curve** (Figure 37.5) has three regions:
-
-- **Boundary lubrication** (low $\eta N/P$): the film is too thin to separate the asperities; load is carried by asperity contacts covered by adsorbed molecular films and reaction layers. Friction is 0.05–0.15, nearly independent of speed, and set by the chemistry of the boundary film. Wear is controlled by additives.
-- **Mixed lubrication**: load is shared between fluid pressure and asperity contacts; friction falls steeply as speed rises and the film thickens.
-- **Hydrodynamic (full-film) lubrication** (high $\eta N/P$): a converging wedge of fluid generates enough pressure to carry the whole load, and the surfaces do not touch. Friction is low (0.001–0.01) and rises slowly with $\eta N/P$ because of viscous shearing. Wear is essentially zero, except at start and stop.
-
-The minimum of the curve, at the transition from mixed to full-film lubrication, is where well-designed bearings run.
-
-<!-- FIGURE 37.5 | figures/ch37/fig-37-5-stribeck-curve.png | plot | The Stribeck curve: coefficient of friction against the Hersey number, with boundary, mixed and hydrodynamic regimes and the film parameter λ. | Content: x-axis Hersey number ηN/P (log scale, arbitrary units spanning 4 decades); y-axis friction coefficient μ from 0.001 to 0.3 (log). Curve: flat at ~0.1 in boundary region, steep fall through mixed region to minimum ~0.002, gentle rise in hydrodynamic region. Vertical dashed lines at λ = 1 and λ = 3 on a secondary top axis 'film parameter λ'. Small inset sketches above each region: asperities in contact with adsorbed molecules (boundary), partial film with some contacts (mixed), surfaces fully separated by fluid wedge (hydrodynamic); annotation 'elastohydrodynamic (EHL) in rolling contacts: λ ≈ 1–3'. Example markers: 'engine valve train (boundary/mixed)', 'piston ring at top dead centre (boundary)', 'crankshaft journal bearing (hydrodynamic)'. -->
-
-> **Status of the principle: Stribeck curve**
-> *Empirical.* A measured correlation of friction with the Hersey number for a given bearing geometry and surface finish; the regime boundaries shift with roughness, temperature-dependent viscosity and additive chemistry, and the hydrodynamic branch is derived quantitatively from Reynolds' lubrication equation.
-
-### The film parameter
-
-The regime is set more directly by comparing the minimum film thickness $h_{\min}$ with the composite roughness of the two surfaces,
-
-$$
-\lambda=\frac{h_{\min}}{\sqrt{R_{q1}^2+R_{q2}^2}}
-$$
-
-Roughly, $\lambda<1$ means boundary lubrication, $1<\lambda<3$ mixed, and $\lambda>3$ full-film. For example, a gear contact with $h_{\min}=0.3$ µm between flanks of $R_q=0.1$ and 0.15 µm has $\lambda=0.3/0.180=1.66$: mixed lubrication, in which micropitting and boundary additives matter. Superfinishing both flanks to 0.05 µm would give $\lambda=4.2$ and full separation. This is why surface finish specifications are as much a part of gear and bearing design as material and heat treatment.
-
-### Hydrodynamic and elastohydrodynamic films
-
-In a journal bearing the shaft drags oil into a converging gap, and Reynolds' equation (from the Navier–Stokes equations for thin films) gives the pressure that supports the load. For a lightly loaded, concentric journal, **Petroff's equation** estimates the friction coefficient:
-
-$$
-\mu=2\pi^2\,\frac{\eta N}{P}\,\frac{r}{c}
-$$
-
-with $r$ the journal radius and $c$ the radial clearance. For an engine main bearing with $\eta=0.03$ Pa s, $N=30$ rev/s, $P=1$ MPa and $r/c=1000$, $\mu=2\pi^2\times(0.03\times30/10^6)\times1000=0.018$, an order of magnitude below boundary friction.
-
-In rolling contacts (gears, rolling bearings, cams), the pressures of 1–3 GPa that Section 37.4 calculated do two things to the oil film: they deform the surfaces elastically, flattening the contact, and they raise the viscosity of the oil enormously (exponentially with pressure, by factors of $10^3$ or more), so that the lubricant in the contact behaves almost like a solid. This is **elastohydrodynamic lubrication** (EHL). Film thicknesses are only 0.1–1 µm, given by the Hamrock–Dowson and similar formulas, and depend strongly on speed and viscosity (roughly $h\propto(\eta U)^{0.7}$) but weakly on load (about $F^{-0.07}$). EHL is why a ball bearing survives billions of revolutions with a film thinner than the wavelength of light.
-
-### Lubricants and additives
-
-Mineral and synthetic oils (polyalphaolefins, esters, polyalkylene glycols) provide viscosity, whose temperature dependence is specified by the viscosity index. Additives provide the boundary protection: **anti-wear** additives such as zinc dialkyldithiophosphate (ZDDP) react at asperity flash temperatures to form glassy phosphate tribofilms about 100 nm thick; **extreme-pressure** additives (sulfur–phosphorus compounds) form iron sulfides that prevent scuffing in hypoid gears; **friction modifiers** (organic amides, molybdenum dithiocarbamate that forms MoS$_2$ in the contact) lower boundary friction to save fuel. Greases thicken oil with soaps or polymers to keep it in place. **Solid lubricants** (MoS$_2$, graphite, PTFE, soft metals) serve where oils cannot: vacuum, extreme temperature, food contact and dry-running bearings. Water-lubricated ceramic and polymer bearings and the hydration lubrication of articular cartilage, whose friction coefficient of about 0.001–0.01 no engineered bearing matches, are reminders that the lubricant need not be oil.
-
----
-
-## 37.8 Surface engineering
-
-Most tribological, fatigue and corrosion properties are surface properties, while strength and toughness are bulk properties. **Surface engineering** gives a component a surface different from its core, so that each can be optimized: a tough core with a hard, wear- and fatigue-resistant case.
-
-### Transformation hardening
-
-**Induction**, **flame** and **laser** hardening heat a thin surface layer of a medium-carbon or alloy steel (or cast iron) into the austenite range in seconds and quench it, forming martensite to a depth of 0.5–5 mm while the core stays soft and tough (Chapter 15). Crankshaft journals, gear teeth, rail heads and machine-tool ways are induction-hardened. The martensitic transformation's volume expansion leaves the case in compression, which raises fatigue strength.
-
-### Thermochemical treatments
-
-**Carburizing** diffuses carbon into a low-carbon steel (0.1–0.25 % C) at 900–950 °C, raising the surface to 0.7–1.0 % C, followed by quenching and tempering: the case becomes about 58–62 HRC martensite and the core a tough low-carbon martensite or bainite. It is the standard treatment for highly loaded gears, camshafts and bearing races of large size. **Nitriding** diffuses nitrogen into steels containing nitride formers (Cr, Mo, Al, V) at 500–570 °C, below the transformation range, forming hard alloy nitrides and an iron-nitride compound layer without quenching, so distortion is minimal; cases are shallower (0.1–0.6 mm) but very hard (up to about 1000–1200 HV) and fatigue-resistant. **Nitrocarburizing** adds carbon to a thin compound layer for wear and corrosion resistance; **boriding** forms Fe$_2$B layers of 1500–2000 HV for severe abrasion. Low-temperature carburizing or nitriding of austenitic stainless steel (expanded austenite, "S-phase") hardens it without sacrificing corrosion resistance.
-
-Case depth is controlled by diffusion (Chapter 8), and the time scales come directly from the error-function solution of Fick's second law.
-
-**Worked example — carburizing time for a gear.** A 0.20 % C gear steel is gas-carburized at 925 °C with the surface held at 1.00 % C. How long does it take for the carbon content at a depth of 1.0 mm to reach 0.40 %? Take the diffusivity of carbon in austenite as $D=D_0\exp(-Q/RT)$ with $D_0=2.3\times10^{-5}$ m$^2$/s and $Q=148$ kJ/mol.
-
-$$
-D=2.3\times10^{-5}\exp\!\left(\frac{-148\,000}{8.314\times1198.15}\right)=8.1\times10^{-12}\ \mathrm{m^2\,s^{-1}}
-$$
-
-$$
-\frac{C_s-C_x}{C_s-C_0}=\frac{1.00-0.40}{1.00-0.20}=0.75=\mathrm{erf}\!\left(\frac{x}{2\sqrt{Dt}}\right)\quad\Longrightarrow\quad\frac{x}{2\sqrt{Dt}}=0.813
-$$
-
-$$
-t=\frac{1}{D}\left(\frac{x}{2\times0.813}\right)^{2}=\frac{(1.0\times10^{-3}/1.627)^2}{8.1\times10^{-12}}=4.7\times10^{4}\ \mathrm s\approx13\ \mathrm h
-$$
-
-Halving the case depth to 0.5 mm needs only a quarter of the time, 3.2 h, because time scales with the square of depth (Figure 37.6). Industrial practice for 1 mm cases at 925 °C is somewhat shorter than this estimate, because carbon diffusivity in austenite rises with carbon content (to roughly twice the dilute value at 1 % C), and because many plants carburize at higher temperatures or with boost–diffuse cycles. The square-root scaling, however, is exactly why deep cases (2–3 mm on large wind-turbine and mining gears) take days in the furnace, and why vacuum carburizing at 1000–1050 °C is attractive.
-
-<!-- FIGURE 37.6 | figures/ch37/fig-37-6-carburized-case-profile.png | plot | Carbon concentration and hardness profiles through a carburized case. | Content: x-axis depth below surface 0–2.5 mm; left y-axis carbon wt % 0–1.1; right y-axis hardness HV 200–800. Carbon profiles from the erfc solution with C_s = 1.0 %, C_0 = 0.20 %, D = 8.1e-12 m²/s for t = 3.2 h, 13 h and 30 h; horizontal dashed line at 0.40 % C marking 0.5 mm and 1.0 mm depths for the first two curves. Hardness profile after quench and temper for the 13 h case: ~750 HV at surface, falling to ~400 HV near 1.3 mm and core ~350 HV; dashed line at 550 HV labelled 'effective case depth'. Inset: residual stress versus depth, compressive ~ -300 MPa at surface turning tensile in the core. -->
-
-### Coatings
-
-Where a different material is needed at the surface, it is added:
-
-| Coating | Process | Typical thickness | Hardness | Typical use |
+| Material | $d_{33}$ (pC/N) | Coupling $k_{33}$ | Curie/usable temperature | Notes |
 |---|---|---|---|---|
-| TiN, TiAlN, CrN | PVD (arc, sputtering) | 1–5 µm | 2000–3500 HV | Cutting tools, forming dies, piston rings |
-| Diamond-like carbon (DLC) | PVD, PECVD | 1–3 µm | 1500–5000 HV | Fuel-injector and valve-train parts, low friction, biomedical |
-| TiC/TiN/Al$_2$O$_3$ multilayers | CVD | 5–20 µm | 2500–3000 HV | Turning inserts for steel |
-| WC–Co, Cr$_3$C$_2$–NiCr | High-velocity oxy-fuel spray | 100–500 µm | 1000–1400 HV | Landing gear (hard-chrome replacement), pump sleeves, rolls |
-| Hard chromium | Electroplating | 20–500 µm | 800–1000 HV | Hydraulic rods; restricted by hexavalent chromium regulations |
-| Electroless Ni–P | Autocatalytic deposition | 10–50 µm | 500–1000 HV (heat-treated) | Moulds, valves, uniform coverage of complex shapes |
-| Stellite, NiCrBSi | Weld overlay, laser cladding | 1–3 mm | 400–700 HV | Valve seats, cavitation and erosion resistance |
-| Yttria-stabilized zirconia (on MCrAlY bond coat) | Plasma spray, EB-PVD | 100–500 µm | Low conductivity, not wear | Thermal barrier coatings on turbine blades (Chapter 33) |
+| Quartz (SiO₂) | 2.3 ($d_{11}$) | 0.1 | 573 °C ($\alpha$–$\beta$) | Very stable; resonators, force sensors |
+| PZT, "hard" (PZT-4) | 290 | 0.70 | 330 °C | Low loss; sonar, ultrasonic welding |
+| PZT, "soft" (PZT-5H) | 590 | 0.75 | 190 °C | Large strain; actuators, imaging |
+| PMN–PT single crystal | 1500–2500 | 0.9 | ~100 °C (phase change) | High-end medical ultrasound |
+| (K,Na)NbO₃-based (lead-free) | 200–400 | 0.5–0.6 | 200–400 °C | RoHS-driven replacement |
+| AlN thin film | 5 | 0.3 | > 1000 °C | MEMS microphones, RF filters |
+| PVDF (poled polymer) | −20 to −30 | 0.15–0.2 | ~80 °C | Flexible sensors, hydrophones |
 
-A coating is only as good as its adhesion and its stress state. A hard thin coating on a soft substrate fails by "eggshell" collapse when the substrate yields beneath it under a Hertzian load; the rule of thumb is that the substrate must be hard enough to support the subsurface shear stress at depth $0.48a$, which is why PVD coatings go on hardened tool steels and hardmetals, and why **duplex treatments** (nitriding followed by PVD) are used on softer steels. Thermal-expansion mismatch and growth stresses can crack or spall coatings (Chapter 41).
+### 37.4.1 Multilayer stack actuators
 
-### Mechanical surface treatments and texturing
+A single PZT plate 1 mm thick under 1 kV extends by only $d_{33}V\approx0.5$ µm. To get useful stroke at moderate voltage, the ceramic is tape-cast into layers 50–100 µm thick interleaved with electrodes and co-fired (the same process as multilayer capacitors, Chapter 49). The layers are mechanically in series and electrically in parallel, so the stroke is
 
-**Shot peening** bombards the surface with hard steel or ceramic shot, plastically stretching the surface layer; the elastic core pushes back and leaves a compressive residual stress of several hundred megapascals to a depth of 0.1–0.5 mm. Because fatigue cracks need tensile stress to open, peening raises the fatigue strength of springs, gears, crankshafts, aircraft landing gear and turbine-disc fir-tree slots by 20–50 %, and protects against SCC. **Laser shock peening** and **deep rolling** produce deeper compressive layers; burnishing also smooths the surface.
+$$
+\Delta L=n\,d_{33}\,V
+$$
 
-**Surface texturing** deliberately adds features to change tribology: laser-machined microdimples tens of micrometres across act as lubricant reservoirs and micro-hydrodynamic bearings in mechanical seals and piston rings, lowering friction in mixed lubrication; honed cross-hatch patterns retain oil on cylinder bores; textured implant surfaces promote bone ingrowth; and bio-inspired textures (shark-skin riblets) reduce drag in turbulent flow. **Surface nanocrystallization** by severe plastic deformation (surface mechanical attrition) creates a hard nanograined layer that improves wear and fatigue resistance.
+for $n$ layers at voltage $V$.
 
-> **Status of the principle: Compressive residual stress improves fatigue life**
-> *Derived.* Follows from superposing a static compressive mean stress on the applied cycle, which lowers the effective mean stress (Goodman-type relations, Chapter 14) and closes small cracks; it holds only while the residual stress is not relaxed by overloads, cyclic plasticity or high temperature, and it can be lost by subsequent machining or grinding.
+**Worked example — a stack for a common-rail injector.** A stack of $n=100$ layers, each 0.1 mm thick, with an effective $d_{33}=500$ pm/V driven at 150 V (field 1.5 kV/mm) gives $\Delta L=100\times500\times10^{-12}\times150=7.5$ µm. For a 10 mm × 10 mm stack 10 mm long with an open-circuit modulus of about 60 GPa, the stiffness is $k=EA/L=60\times10^{9}\times10^{-4}/0.01=6.0\times10^{8}$ N/m (600 N/µm), so the blocking force is $k\,\Delta L=6.0\times10^{8}\times7.5\times10^{-6}=4.5$ kN. A hydraulic amplifier converts this short, powerful, sub-millisecond stroke into the needle lift of a diesel or gasoline direct-injection valve, which can then deliver several small injections per combustion cycle. The same stacks drive nanopositioners in lithography steppers and atomic-force microscopes, where 7.5 µm with sub-nanometre resolution is ideal.
 
-### Choosing a surface treatment
+Engineering limits come from the ceramic: it is weak in tension (stacks are mechanically preloaded in compression), shows hysteresis of 10–15 % in strain and creep at high fields, depoles if heated towards the Curie temperature or driven by reverse fields beyond the coercive field, and suffers electrode-edge cracking and silver migration in humid service. Lead-free substitutes (KNN, BNT, BaTiO₃-based) are improving but have not matched soft PZT across temperature.
 
-The selection logic connects the chapter: identify the dominant surface damage (adhesive, abrasive, fatigue, corrosive, or a combination), the contact pressure and its subsurface depth from Hertz, the lubrication regime from $\lambda$, and the environment; then choose a treatment that puts a hard, low-adhesion or compressively stressed layer to the right depth without compromising the core. A gear needs carburizing deep enough for the Hertzian shear depth and a finish good enough for EHL; a cutting tool needs a hard, chemically inert PVD layer on a hardmetal that will not yield beneath it; an implant needs wear resistance and biocompatibility without particles; a hydraulic rod needs corrosion and wear resistance without hexavalent chromium. Thin-film deposition processes are developed in Chapter 41, and the materials-selection framework that weighs these options against cost in Chapter 48.
+### 37.4.2 Sensors and transducers
 
-> **Boundary.** The thermodynamics of adsorption and the electrochemistry of tribocorrosion belong to the Advanced Chemistry book; the continuum mechanics of contact and the fluid mechanics of Reynolds' equation draw on The Mathematics Universe and engineering mechanics courses. Contact resistance of electrical connectors and its degradation are treated in the Materials Core book, Ch 24.
+In the direct mode a force $F$ along the poling axis produces a charge $Q=d_{33}F$; a quartz or PZT disc in a load washer turns 100 N into 230 pC or 40 nC respectively, read by a charge amplifier. Piezoelectric **accelerometers** (a seismic mass on a ceramic element) monitor bearings and engines; **ultrasound** transducers emit and receive at 1–20 MHz for medical imaging and for non-destructive testing of welds and composites (Chapter 52); thin PZT or PVDF patches bonded to an aircraft panel or a bridge girder send and receive guided waves for **structural-health monitoring**, detecting cracks and disbonds from changes in the signal. Because charge leaks away through finite resistance, piezoelectric sensors measure dynamic, not static, forces.
+
+> **Boundary.** The crystal physics of piezo- and ferroelectricity is treated in more depth, with electrical equivalent circuits, in Chapter 27.
+
+---
+
+## 37.5 Electroactive polymers
+
+Polymers offer what ceramics cannot: strains of tens of percent, low density, compliance that matches biological tissue, and easy shaping. **Electroactive polymers** (EAPs) are polymers that change shape in an electric field. They divide into two groups.
+
+### 37.5.1 Electronic (field-driven) EAPs
+
+**Dielectric elastomers** are not active materials in the crystal sense at all: they are soft, incompressible rubbers (acrylic, silicone, polyurethane) coated on both faces with compliant electrodes (carbon grease, carbon nanotube mats). A voltage charges the film as a capacitor, the opposite charges on the electrodes attract each other and like charges on each electrode repel, so the film is squeezed in thickness and, being incompressible, expands in area. The effective compressive stress is the **Maxwell pressure**
+
+$$
+p=\varepsilon_0\varepsilon_r E^2
+$$
+
+(twice the electrostatic energy density, because the in-plane expansion also does work).
+
+**Worked example — a dielectric-elastomer membrane.** An acrylic film ($\varepsilon_r=4.7$, Young's modulus about 1 MPa) is 50 µm thick and driven at 3 kV, so $E=3000/(50\times10^{-6})=60$ MV/m. The Maxwell pressure is $p=8.854\times10^{-12}\times4.7\times(6.0\times10^{7})^{2}=0.15$ MPa, and the small-strain thickness strain is $p/Y\approx0.15/1.0=15$ %. In practice the film is prestretched biaxially (which thins it and stiffens it against instability), and area strains above 100 % have been demonstrated. Two failure modes bound the design: **electrical breakdown** (Chapter 26), and **pull-in** or electromechanical instability, in which thinning raises the field, which thins the film further, a positive feedback that collapses an unstretched film at about 1/3 thickness reduction. Prestretch and strain-stiffening elastomers move the instability past breakdown.
+
+Kilovolt drive is the main practical drawback, but dielectric elastomers give the best combination of strain, efficiency (energy not used mechanically can be recovered from the capacitor) and speed among polymer actuators; they are used in haptic feedback, tunable lenses, loudspeakers and soft grippers, and run in reverse as **generators** that harvest wave energy.
+
+**Ferroelectric and electrostrictive polymers** form the second electronic class: PVDF and its copolymer P(VDF-TrFE) are piezoelectric when poled (Table 37.2), and terpolymers such as P(VDF-TrFE-CFE), in which bulky comonomers break up long-range ferroelectric order into nanodomains (a relaxor), give electrostrictive strains of 4–7 % at about 150 MV/m with elastic modulus near 0.5 GPa, much stiffer than elastomers.
+
+### 37.5.2 Ionic EAPs
+
+Ionic EAPs work at 1–5 V because the active process is ion migration, not field-induced stress. In an **ionic polymer–metal composite** (IPMC) a Nafion-type ionomer membrane, swollen with water or an ionic liquid and plated with platinum or gold, bends when a voltage drives mobile cations and their hydration water towards the cathode side, which swells while the anode side shrinks. **Conducting polymers** such as polypyrrole and PEDOT change volume by a few percent as ions enter and leave on oxidation and reduction (the same chemistry as a battery electrode, Chapter 40). Ionic EAPs are slow (diffusion-limited, seconds), need to stay wet or use ionic liquids, and hold a deflection only while current flows, but their low voltage suits medical devices such as active catheters.
+
+A further, rapidly growing class is **liquid-crystal elastomers** (Section 37.8): crosslinked networks of mesogenic chains that contract by 30–400 % along their director when heated through the nematic–isotropic transition or when photoisomerizable groups are illuminated, offering light-driven, untethered soft actuators.
+
+---
+
+## 37.6 Soft matter and colloid stability
+
+### 37.6.1 The soft-matter energy scale
+
+The second half of the chapter changes scale. A steel lattice is held by bonds of a few electronvolts; thermal energy at room temperature is $k_BT=4.1\times10^{-21}$ J $=25.7$ meV at 25 °C, about a hundredth of that, so thermal motion only rattles the atoms. In **soft matter** (colloids, polymers in solution, gels, liquid crystals, surfactant assemblies, biological membranes) the structural units are large (nanometres to micrometres) and are held together by interactions of order $1$–$100\,k_BT$: van der Waals attraction between particles, screened electrostatic repulsion, hydrogen bonds, the hydrophobic effect, entropy of chains. As a result, soft matter is easily deformed (moduli of Pa to MPa), responds strongly to temperature, salt, pH and solvent, and organises itself by the balance of energy and entropy. That responsiveness is both the difficulty (a paint that settles, a sauce that separates) and the design opportunity (a gel that swells on cue, a membrane that forms by itself).
+
+### 37.6.2 Colloids
+
+A **colloid** is a dispersion of one phase in another with at least one dimension between about 1 nm and 1 µm: solid particles in liquid (*sols* and *suspensions*: paints, inks, ceramic slips, cement paste, blood), liquid droplets in liquid (*emulsions*: milk, mayonnaise, metalworking fluids, asphalt emulsions), gas in liquid or solid (*foams*: firefighting foams, polyurethane insulation), and liquid or solid in gas (*aerosols*). In this size range particles undergo Brownian motion strong enough to resist sedimentation for a time, but their huge interfacial area (Chapter 38) gives a large driving force to reduce it by aggregation. A colloid is therefore almost never in equilibrium; its "stability" is kinetic, meaning that a barrier prevents particles from coming into contact.
+
+### 37.6.3 DLVO theory
+
+The classical theory of that barrier, due to Derjaguin, Landau, Verwey and Overbeek (DLVO), adds two interactions between particles in an electrolyte.
+
+**Van der Waals attraction.** Correlated dipole fluctuations attract any two bodies of the same material through any medium. For two spheres of radius $R$ at surface separation $h\ll R$,
+
+$$
+V_A(h)=-\frac{A_H R}{12h}
+$$
+
+where $A_H$ is the **Hamaker constant**, of order $10^{-20}$ J for oxides and polymers in water and $10^{-19}$ J for metals in water.
+
+**Electrical double-layer repulsion.** Most surfaces in water carry charge (from dissociation of surface groups, such as Si–OH → SiO⁻, or adsorption of ions), balanced by a diffuse cloud of counter-ions. The cloud's thickness is the **Debye length** $\kappa^{-1}$, which falls with ionic strength $I$; for a 1:1 electrolyte in water at 25 °C
+
+$$
+\kappa^{-1}\approx\frac{0.304}{\sqrt{I/\mathrm{(mol\,L^{-1})}}}\ \mathrm{nm}
+$$
+
+(9.6 nm at 1 mM, 3.0 nm at 10 mM, 0.96 nm at 100 mM, and about 0.4 nm in sea water). When the clouds of two particles overlap, the osmotic pressure of the excess ions pushes them apart. For spheres with surface potential $\psi_0$ (in practice the measured **zeta potential**) and $\kappa R\gg1$, a common approximation is
+
+$$
+V_R(h)=2\pi\varepsilon_0\varepsilon_r R\,\psi_0^{2}\ln\!\left(1+e^{-\kappa h}\right)
+$$
+
+The total $V=V_A+V_R$ (Figure 37.3) has a deep **primary minimum** at contact (irreversible aggregation, *coagulation*), a **barrier** at about a Debye length from contact if repulsion is strong enough, and sometimes a shallow **secondary minimum** further out (weak, reversible *flocculation*). If the barrier is above about $15$–$25\,k_BT$, collisions almost never surmount it and the colloid is stable for months; below a few $k_BT$ it coagulates in seconds to minutes.
+
+> **Status of the principle: DLVO theory**
+> *Approximate.* It treats the medium as a continuum, the ions as point charges obeying Poisson–Boltzmann statistics and the forces as additive; it predicts trends with salt, valence and particle size well, but fails at separations below about 1–2 nm, where hydration forces, ion specificity and surface roughness dominate, and it ignores steric and depletion forces.
+
+**Worked example — when does a suspension coagulate?** Oxide particles of diameter 100 nm ($R=50$ nm) in water ($\varepsilon_r=78.5$) have $A_H=1.0\times10^{-20}$ J and a surface potential of 30 mV. Evaluating $V(h)/k_BT$ numerically with the two expressions above at 25 °C ($k_BT=4.12\times10^{-21}$ J):
+
+| NaCl concentration | Debye length | Barrier height | Position of barrier |
+|---|---|---|---|
+| 1 mM | 9.6 nm | $23\,k_BT$ | 2.1 nm |
+| 10 mM | 3.0 nm | $16\,k_BT$ | 1.3 nm |
+| 100 mM | 0.96 nm | $4.6\,k_BT$ | 0.8 nm |
+
+At 1 mM the dispersion is stable; at 100 mM thermal collisions cross the barrier routinely and the particles coagulate. (In reality the surface potential also falls as salt is added, which makes the collapse sharper.) Multivalent counter-ions are far more effective: the critical coagulation concentration varies roughly as $z^{-6}$ for highly charged surfaces (the **Schulze–Hardy rule**), which is why water-treatment plants dose aluminium or iron(III) salts to coagulate clay and organic colloids before filtration, and why a few millimoles of Ca²⁺ can destabilise a ceramic slip that tolerated ten times as much Na⁺.
+
+<!-- FIGURE 37.3 | figures/ch37/fig-37-3-dlvo-potential.png | plot | DLVO interaction energy between two 100 nm oxide particles: adding salt shrinks the Debye length and collapses the barrier that keeps the colloid stable. | Content: x-axis surface separation h 0-20 nm, y-axis V/kBT from -20 to +30. Curves for NaCl 1 mM (barrier 23 kBT at 2.1 nm), 10 mM (16 kBT at 1.3 nm), 100 mM (4.6 kBT at 0.8 nm), computed with A_H = 1e-20 J, R = 50 nm, psi0 = 30 mV, eps_r = 78.5, T = 298 K. Dashed curves: van der Waals attraction alone (black) and double-layer repulsion alone for 1 mM (grey). Horizontal dotted line at 15 kBT labelled "approx. stability threshold"; labels "primary minimum (coagulation)" near h -> 0, "barrier". Inset: Debye length vs ionic strength 1e-4 to 1 M log-log line, sea water marked. -->
+
+![Figure 37.3 — DLVO interaction energy between two 100 nm oxide particles: adding salt shrinks the Debye length and collapses the barrier that keeps the colloid stable](../figures/ch37/fig-37-3-dlvo-potential.png)
+
+*Figure 37.3 — DLVO interaction energy between two 100 nm oxide particles: adding salt shrinks the Debye length and collapses the barrier that keeps the colloid stable.*
+
+### 37.6.4 Beyond DLVO: engineering colloid stability
+
+Engineers control colloids with four tools:
+
+- **Charge (electrostatic stabilisation).** Adjusting pH away from the particle's **isoelectric point** (where zeta potential is zero: about pH 9 for alumina, 2–3 for silica, 6–7 for titania) raises $\lvert\psi_0\rvert$. Alumina slips for slip casting are dispersed at pH ~4 or with polyelectrolyte dispersants.
+- **Steric stabilisation.** Polymer chains grafted or adsorbed on the surface (polyethylene glycol on drug nanoparticles, polycarboxylate ethers on cement grains) repel because compressing them costs conformational entropy. This works at high ionic strength, where electrostatics fail; polycarboxylate **superplasticisers** let concrete be placed at water–cement ratios of 0.3–0.4 (Chapter 18) and are the largest-tonnage colloid stabilisers in industry.
+- **Depletion.** Non-adsorbing polymer or micelles in solution push large particles together (their exclusion zones overlap, raising the free volume available to the small species), which is used to cream emulsions deliberately and to assemble colloidal crystals.
+- **Bridging.** Long polymer chains adsorbed on two particles at once flocculate them: polyacrylamide flocculants in mineral processing and water treatment.
+
+Colloidal processing matters well beyond chemistry. Ceramic powder processing (Chapter 17) needs a well-dispersed, high-solids slip to give a dense, flaw-free green body; agglomerates become the strength-limiting flaws of Chapter 14. Paints, inks for printed electronics, magnetorheological fluids in automotive dampers, and lipid nanoparticles that carry mRNA vaccines are all colloids whose performance is decided by the balance in Figure 37.3.
+
+---
+
+## 37.7 Gels and hydrogels
+
+### 37.7.1 What a gel is
+
+A **gel** is a three-dimensional network that spans its container and holds a large volume of liquid. It is solid in the sense that it has an equilibrium shear modulus and does not flow, yet it may be more than 90 % solvent. When the solvent is water, the gel is a **hydrogel**. Gels are classified by how the network is held together:
+
+- **Chemical gels** have covalent crosslinks: polyacrylamide for electrophoresis, poly(2-hydroxyethyl methacrylate) (pHEMA) and silicone hydrogels for contact lenses, sodium polyacrylate superabsorbents. They are permanent.
+- **Physical gels** have reversible junctions: crystallites (poly(vinyl alcohol) freeze–thaw gels), helices (gelatin, agarose, carrageenan), ionic bridges (alginate crosslinked by Ca²⁺), hydrophobic associations or entanglements. They melt or dissolve on heating, on changes in salt, or under stress, and often heal.
+- **Colloidal gels** are networks of aggregated particles, such as a fumed-silica gel or a weak clay drilling mud; they are often thixotropic (they flow under shear and re-form at rest).
+- **Sol–gel** inorganic gels (silica from hydrolysis of tetraethoxysilane) are precursors to glasses, aerogels and coatings (Chapter 49).
+
+### 37.7.2 Swelling and elasticity
+
+A dry, crosslinked hydrophilic network placed in water swells until two free-energy contributions balance: the **mixing** free energy, which favours more water (Flory–Huggins theory, Chapter 20, with interaction parameter $\chi$), and the **elastic** free energy of the stretched strands, which resists (rubber elasticity, Chapter 20). For a polyelectrolyte network, the osmotic pressure of the counter-ions trapped inside adds a third, often dominant, swelling term. The **Flory–Rehner** balance predicts that the equilibrium swelling ratio rises as crosslink density falls, as $\chi$ falls (better solvent) and as fixed charge rises; and that salt in the surrounding water, by reducing the ion osmotic pressure difference, collapses a polyelectrolyte gel. That is why a sodium polyacrylate superabsorbent in a nappy absorbs about 300 times its mass of pure water but only 30–50 times its mass of urine (Figure 37.4b).
+
+> **Status of the principle: Flory–Rehner swelling theory**
+> *Approximate.* Combines mean-field mixing with affine rubber elasticity; it predicts trends and orders of magnitude, but the uniform-network assumption fails for real gels with heterogeneous crosslinking, dangling ends and loops.
+
+The shear modulus of a swollen network follows rubber elasticity: $G\approx\nu k_BT$, where $\nu$ is the number density of elastically active strands. Because a gel is mostly solvent, its strands are long and dilute and $G$ ranges from about 10 Pa (soft biological gels) to 1 MPa (contact lenses, cartilage substitutes). The **mesh size** $\xi$, the typical spacing between crosslinks, governs which molecules can diffuse through the gel; a scaling estimate is $\xi\approx(k_BT/G)^{1/3}$.
+
+**Worked example — mesh size of a hydrogel.** A hydrogel used for cell encapsulation has $G=10$ kPa at 25 °C. Then $\xi\approx(4.12\times10^{-21}/1.0\times10^{4})^{1/3}=7.4\times10^{-9}$ m, about 7 nm. Glucose (about 1 nm) and oxygen diffuse freely, small proteins such as insulin (about 3 nm) diffuse with hindrance, and antibodies (about 10–15 nm) and immune cells are excluded. A softer gel with $G=1$ kPa has $\xi\approx16$ nm and lets antibodies through. Tuning stiffness therefore also tunes permeability, which is a constraint in designing immunoisolating capsules (Chapter 39): one cannot make the gel tougher by crosslinking it more without also closing the mesh.
+
+### 37.7.3 Responsive and tough hydrogels
+
+Because swelling is a balance of small free-energy terms, gels can be made to respond to stimuli:
+
+- **Temperature.** Poly(N-isopropylacrylamide) (PNIPAM) has a lower critical solution temperature near 32 °C: below it the chains are hydrated and the gel is swollen; above it hydrophobic association wins and the gel expels most of its water within seconds to minutes (volume changes of 10× are common; Figure 37.4a). This is used for cell-sheet harvesting, valves in microfluidics and on-demand drug release.
+- **pH and ions.** Gels with acidic or basic groups swell when ionised: poly(acrylic acid) gels swell at high pH, chitosan gels at low pH, which allows release in a chosen part of the gut.
+- **Specific molecules.** Glucose-responsive gels (with phenylboronic acid groups) for insulin delivery; DNA-crosslinked gels.
+
+Classic hydrogels are brittle: a polyacrylamide gel has a fracture energy of about 10 J/m², because a crack breaks only the strands that cross it. **Double-network** gels (a stiff, brittle, highly crosslinked polyelectrolyte network interpenetrated by a soft, stretchable one) and hybrid ionic–covalent gels (alginate–polyacrylamide) reach $10^{3}$–$10^{4}$ J/m², comparable to cartilage, because the first network fractures sacrificially over a large zone around the crack and dissipates energy, an analogue of the process-zone toughening of ceramics (Chapter 14). Such gels open applications in soft robotics, stretchable ionic conductors and load-bearing tissue replacements.
+
+<!-- FIGURE 37.4 | figures/ch37/fig-37-4-hydrogel-swelling.png | plot | Hydrogels swell or collapse in response to temperature, salt and crosslink density; PNIPAM collapses sharply near 32 C. | Content: (a) swelling ratio Q (mass swollen/mass dry, log y-axis 1-1000) vs temperature 15-50 C for PNIPAM gel: Q ~ 15-20 below 30 C, sharp drop to ~2 between 31 and 34 C, transition at 32 C labelled LCST. (b) Swelling ratio of a sodium polyacrylate superabsorbent vs NaCl concentration (log x 1e-4 to 1 M): ~300 in pure water, ~50 at 0.15 M (saline / urine marked), ~20 at 1 M. (c) schematic network showing crosslinks, mesh size xi ~ 7 nm, with glucose (1 nm), insulin (3 nm) and IgG antibody (12 nm) circles drawn to scale. -->
+
+![Figure 37.4 — Hydrogels swell or collapse in response to temperature, salt and crosslink density; PNIPAM collapses sharply near 32 C](../figures/ch37/fig-37-4-hydrogel-swelling.png)
+
+*Figure 37.4 — Hydrogels swell or collapse in response to temperature, salt and crosslink density; PNIPAM collapses sharply near 32 C.*
+
+---
+
+## 37.8 Liquid crystals
+
+### 37.8.1 Phases between crystal and liquid
+
+A crystal has long-range positional and orientational order; a liquid has neither. **Liquid crystals** (introduced in Chapter 2) are fluids with orientational order and, in some phases, partial positional order. They form from strongly anisotropic molecules or particles, either rod-like (*calamitic*: cyanobiphenyls, aramid chains) or disc-like (*discotic*: triphenylenes, graphene-oxide platelets). Two ways of reaching them are distinguished:
+
+- **Thermotropic** liquid crystals change phase with temperature: the display mixtures, main-chain liquid-crystal polymers (Chapter 20), mesophase pitch for carbon fibres.
+- **Lyotropic** liquid crystals change phase with concentration in a solvent: surfactant–water systems, cell membranes, aramid (poly-p-phenylene terephthalamide) in concentrated sulfuric acid, cellulose nanocrystals in water.
+
+The principal phases (Figure 37.5) are:
+
+- **Nematic (N):** molecules point on average along a direction called the **director** $\mathbf{n}$, with no positional order. The fluid flows like a liquid but is optically birefringent.
+- **Smectic A and C:** molecules also stack in layers; in smectic A the director is normal to the layers, in smectic C it is tilted.
+- **Cholesteric (chiral nematic, N\*):** in chiral molecules the director twists helically with a pitch $p$ of 0.1–10 µm; when $p$ is comparable to the wavelength of light, the helix selectively reflects colour, and since pitch changes with temperature, cholesterics serve as thermometers and in thermochromic inks.
+- **Columnar:** discotic molecules stack into columns that pack in a 2D lattice.
+
+### 37.8.2 The order parameter
+
+How ordered a nematic is, is measured by the scalar **order parameter**
+
+$$
+S=\left\langle\tfrac12\left(3\cos^{2}\theta-1\right)\right\rangle
+$$
+
+where $\theta$ is the angle between a molecular axis and the director and the average is over all molecules. $S=1$ for perfect alignment and $S=0$ for an isotropic liquid. In real nematics $S$ falls from about 0.6–0.8 deep in the nematic phase to about 0.3–0.45 at the nematic–isotropic transition $T_{NI}$, where it drops discontinuously to zero (a weakly first-order transition). The **Maier–Saupe** mean-field theory, which treats each molecule as feeling an orienting potential proportional to $S$, predicts the jump at $S\approx0.43$ and a universal curve of $S$ versus $T/T_{NI}$ that fits many compounds reasonably well.
+
+> **Status of the principle: Maier–Saupe mean-field theory of nematic order**
+> *Approximate.* Mean-field treatment of anisotropic attractions; it reproduces the first-order N–I transition and the shape of $S(T)$, but ignores the steric (excluded-volume) contribution that Onsager showed is decisive for lyotropic rods, and overestimates order near $T_{NI}$.
+
+Macroscopic anisotropy follows from $S$: refractive indices along and across the director differ (birefringence $\Delta n=0.05$–0.3), and so do the dielectric constants (dielectric anisotropy $\Delta\varepsilon=\varepsilon_\parallel-\varepsilon_\perp$, positive for cyanobiphenyls with their strong axial dipole). Elastic resistance to distorting the director field is described by three Frank constants for splay, twist and bend, $K_{11},K_{22},K_{33}$, all of order 1–20 pN.
+
+<!-- FIGURE 37.5 | figures/ch37/fig-37-5-liquid-crystal-phases.png | schematic | Liquid-crystal phases are intermediate between crystal and isotropic liquid; the nematic order parameter falls with temperature and drops to zero at the clearing point. | Content: (a) row of five boxes with rod-shaped molecules: crystal (positional + orientational order), smectic C (tilted layers), smectic A (layers, director normal), nematic (director n arrow, no layers), isotropic liquid; temperature arrow increasing left to right. Small inset of a cholesteric helix with pitch p. (b) Order parameter S vs T/T_NI from 0.8 to 1.05: Maier-Saupe curve rising from S ~ 0.43 at T/T_NI = 1 to ~0.7 at 0.85, dropping to 0 above 1; points for 5CB (T_NI = 35 C). (c) Twisted-nematic cell schematic, off state (90 degree twist, light passes crossed polarizers) and on state (molecules aligned with field, dark). -->
+
+![Figure 37.5 — Liquid-crystal phases are intermediate between crystal and isotropic liquid; the nematic order parameter falls with temperature and drops to zero at the clearing point](../figures/ch37/fig-37-5-liquid-crystal-phases.png)
+
+*Figure 37.5 — Liquid-crystal phases are intermediate between crystal and isotropic liquid; the nematic order parameter falls with temperature and drops to zero at the clearing point.*
+
+### 37.8.3 Displays and the Fréedericksz transition
+
+A liquid-crystal display uses electric fields to rotate the director, and polarizers to turn director rotation into contrast. In the classic **twisted-nematic** (TN) cell, a nematic layer about 5 µm thick sits between glass plates whose alignment layers (rubbed polyimide) are at 90° to each other; the director twists through 90° across the cell and guides the polarisation of light through crossed polarizers (bright state). A field across the cell, acting on positive $\Delta\varepsilon$, tilts the molecules towards the field; above a threshold the twist unwinds, the polarisation is no longer rotated, and the pixel goes dark. The threshold is that of the **Fréedericksz transition**, where the dielectric torque first beats the elastic restoring torque; for a pure splay geometry
+
+$$
+V_{\mathrm{th}}=\pi\sqrt{\frac{K_{11}}{\varepsilon_0\,\Delta\varepsilon}}
+$$
+
+independent of cell thickness (both the field and the elastic torque scale with thickness).
+
+**Worked example — the threshold voltage of a nematic cell.** For $K_{11}=10$ pN and $\Delta\varepsilon=10$, $V_{\mathrm{th}}=\pi\sqrt{1.0\times10^{-11}/(8.854\times10^{-12}\times10)}=\pi\times0.336=1.06$ V. This is the reason liquid-crystal displays could be driven directly by low-voltage CMOS circuits and battery power: no other electro-optic effect switched so much light for so little energy (microwatts per square centimetre), which made the LCD the dominant display technology for three decades. Faster, wider-viewing-angle modes (in-plane switching, vertical alignment) keep the same physics with different geometries; response times of a few milliseconds are set by rotational viscosity and $d^2/K$.
+
+### 37.8.4 Liquid crystals in structural materials
+
+The same order produces the world's strongest organic fibres. Aramid (Kevlar, Twaron) is spun from a nematic solution in sulfuric acid: the rigid chains are already aligned in nematic domains, shear in the spinneret aligns the domains, and the fibre emerges with $S$ near 1 and a tensile strength of about 3–3.6 GPa and modulus of 70–130 GPa (Chapter 22). Mesophase pitch carbon fibres (moduli up to 900 GPa) and thermotropic liquid-crystal polymers (Vectra, used for precision moulded connectors because their melt flows easily and shrinks very little) exploit the same idea. Liquid-crystal elastomers (Section 37.5) bring orientational order and rubber elasticity together.
+
+---
+
+## 37.9 Self-assembly and soft-matter design
+
+### 37.9.1 Self-assembly as a minimisation problem
+
+**Self-assembly** is the spontaneous organisation of components into ordered structures by interactions encoded in the components themselves, without external placement. It operates whenever the interactions are a few $k_BT$: strong enough to define a preferred arrangement, weak enough that wrongly placed units can detach and try again (error correction). Covalent bonds are too strong to self-correct at room temperature; for that reason, molecular self-assembly uses hydrophobic, hydrogen-bonding, electrostatic and van der Waals interactions. The products include micelles, vesicles and bilayer membranes from surfactants and lipids; microphase-separated domains in block copolymers (Chapter 20); colloidal crystals; DNA nanostructures; and protein assemblies from viral capsids to collagen fibrils.
+
+### 37.9.2 Amphiphiles and the packing parameter
+
+An **amphiphile** has a hydrophilic head and a hydrophobic tail: soaps, detergents, phospholipids, block copolymers in selective solvents. Above the **critical micelle concentration** (CMC: 8 mM for sodium dodecyl sulfate, SDS; micromolar or lower for lipids) the tails hide from water inside aggregates. Which aggregate forms is decided, to a good first approximation, by geometry. The **packing parameter** (Israelachvili, Mitchell and Ninham) is
+
+$$
+P=\frac{v}{a_0\,l_c}
+$$
+
+where $v$ is the volume of the hydrophobic tail, $l_c$ its maximum extended length and $a_0$ the optimal head-group area at the aggregate surface (set by the balance of head-group repulsion and tail attraction). Simple geometry then gives the preferred shape (Figure 37.6):
+
+| Packing parameter $P$ | Preferred aggregate | Example |
+|---|---|---|
+| $< 1/3$ | Spherical micelles | SDS in pure water |
+| $1/3$–$1/2$ | Cylindrical (worm-like) micelles | SDS + salt; viscoelastic fracturing fluids |
+| $1/2$–$1$ | Flexible bilayers, vesicles | Phospholipids (two tails) |
+| $\approx 1$ | Planar bilayers | Lipids with small heads |
+| $> 1$ | Inverted micelles | Lipids in oil; lipid nanoparticle cores |
+
+For saturated hydrocarbon chains of $n$ carbons, Tanford's estimates are $l_c\approx(0.154+0.1265\,n)$ nm and $v\approx(0.0274+0.0269\,n)$ nm³.
+
+> **Status of the principle: Packing-parameter rule**
+> *Approximate.* A geometric argument that assumes incompressible tails and a fixed head-group area; it predicts aggregate shape and its shifts with salt, temperature and chain number reliably, but not aggregate size distributions or the effects of specific head-group chemistry.
+
+**Worked example — why salt turns soap into "worms" and why lipids make membranes.** For SDS ($n=12$), $l_c=0.154+0.1265\times12=1.67$ nm and $v=0.0274+0.0269\times12=0.350$ nm³. In pure water the charged sulfate heads repel strongly and $a_0\approx0.7$ nm², giving $P=0.350/(0.7\times1.67)=0.30$: spherical micelles. Adding salt screens the head-group repulsion (shorter Debye length, Section 37.6) and $a_0$ falls to about 0.5 nm², so $P=0.350/(0.5\times1.67)=0.42$: the micelles grow into long cylinders that entangle like polymer chains, and the solution becomes viscoelastic. This is exactly how surfactant-based fracturing fluids and many shampoos are thickened. A phospholipid with two C₁₆ tails has $v=2\times(0.0274+0.0269\times16)=0.916$ nm³ and $l_c=2.18$ nm; with $a_0\approx0.65$ nm², $P=0.916/(0.65\times2.18)=0.65$, so it forms bilayers and vesicles, which is why cell membranes, liposomes and the lipid shell of mRNA vaccine nanoparticles assemble themselves.
+
+<!-- FIGURE 37.6 | figures/ch37/fig-37-6-packing-parameter.png | schematic | The packing parameter of an amphiphile predicts whether it forms spherical micelles, cylinders, bilayers or inverted structures. | Content: top row of molecular shape sketches (cone, truncated cone, cylinder, inverted cone) with head area a0, tail volume v and length lc marked. Below each, the aggregate: spherical micelle (P < 1/3), cylindrical micelle (1/3-1/2), vesicle/flexible bilayer (1/2-1), planar bilayer (~1), inverted micelle (> 1). A horizontal P axis from 0 to 1.5 with markers: SDS in water (0.30), SDS + salt (0.42), two-tailed C16 phospholipid (0.65). -->
+
+![Figure 37.6 — The packing parameter of an amphiphile predicts whether it forms spherical micelles, cylinders, bilayers or inverted structures](../figures/ch37/fig-37-6-packing-parameter.png)
+
+*Figure 37.6 — The packing parameter of an amphiphile predicts whether it forms spherical micelles, cylinders, bilayers or inverted structures.*
+
+### 37.9.3 Designing with self-assembly
+
+Engineers now use self-assembly deliberately:
+
+- **Block-copolymer lithography.** A polystyrene-*b*-poly(methyl methacrylate) film microphase-separates into lamellae or cylinders with a period of 10–50 nm set by chain length (Chapter 20). Guided by a coarse lithographic pre-pattern (*directed self-assembly*), it multiplies pattern density for semiconductor manufacturing and hard-disk media (Chapter 49).
+- **Colloidal crystals.** Monodisperse silica or polymer spheres settle or evaporate into FCC arrays whose period, comparable to the wavelength of light, produces structural colour (natural opals) and photonic band gaps (Chapter 36); infiltrating and removing them gives inverse opals for catalysts and battery electrodes.
+- **DNA nanotechnology.** Because base pairing is programmable, DNA origami folds a long strand into almost any 2D or 3D shape with 2–5 nm precision, used as templates to place nanoparticles and as drug carriers.
+- **Mesoporous materials.** Surfactant micelles as templates around which silica condenses (MCM-41, SBA-15) give ordered pores 2–30 nm wide with surface areas around 1000 m²/g, for catalysis, separation and drug loading.
+- **Biological and bio-inspired assembly.** Collagen fibrils assemble from triple helices and mineralise into bone (Chapter 39); nacre's brick-and-mortar layering of aragonite platelets and protein gives toughness thousands of times that of aragonite alone and inspires ceramic laminates.
+
+The common rules of soft-matter design follow from the $k_BT$ scale: interactions must be weak enough for annealing out errors, assembly is sensitive to temperature, solvent and salt, defects are thermodynamically present and must be managed (annealing block-copolymer films, slow evaporation for colloidal crystals), and the structures are fragile unless they are fixed afterwards by crosslinking, mineralisation or conversion into an inorganic replica. The limits of self-assembly are mainly those of long-range order and defect density, which still prevent it from replacing lithography outright.
 
 ---
 
@@ -466,19 +447,16 @@ The selection logic connects the chapter: identify the dominant surface damage (
 
 | Open question | Where it is answered |
 |---|---|
-| Grain-boundary energy and structure, and their role in microstructure | Chapter 5 |
-| Diffusion solutions used for case depth and segregation | Chapter 8 |
-| Surface energy as the driving force for nucleation, sintering and coarsening | Chapters 9 and 38 |
-| Hardness testing, yield criteria and fracture energy used in contact and wear models | Chapters 11, 13 and 14 |
-| Heat treatment of steels behind induction hardening and carburizing | Chapter 15 |
-| Viscoelastic behaviour behind elastomer friction and polymer wear | Chapter 21 |
-| Nanoparticle shapes and catalysis by facets | Chapter 30 |
-| Implant articulation, wear debris and tissue response | Chapter 31 |
-| Thermal barrier coatings and high-temperature surface protection | Chapter 33 |
-| Corrosion and tribocorrosion; fretting and cavitation as degradation | Chapters 35 and 36 |
-| Adhesive bonding of structural joints | Chapter 39 |
-| PVD, CVD, thermal spray and electroplating processes and film stress | Chapter 41 |
-| Surface analysis (XPS, AES, SIMS), profilometry and AFM | Chapters 42 and 43 |
-| Selecting a surface treatment against cost and performance | Chapter 48 |
+| How does the martensite crystallography and habit plane follow from the lattice change? | Chapter 10 (martensitic transformations) |
+| What makes a crystal piezoelectric or ferroelectric, and how are ferroelectric domains switched? | Chapter 27 (ferroelectric and piezoelectric materials) |
+| Why are rare-earth magnetostrictive and permanent-magnet alloys supply-critical? | Chapters 29 and 59 |
+| How do nanoparticles and 2D sheets change properties purely through size? | Chapter 38 |
+| How do hydrogels, NiTi and other responsive materials behave inside the body, and how are they qualified? | Chapter 39 |
+| How do ion intercalation and conducting polymers store energy as well as actuate? | Chapter 40 |
+| How do Flory–Huggins mixing and rubber elasticity derive from chain statistics? | Chapter 20 |
+| How is the fatigue of superelastic and piezoceramic devices predicted and analysed after failure? | Chapters 14 and 44 |
+| How are surfaces, adsorption and wetting, which control colloids, characterised? | Chapter 45 |
+| How are soft materials imaged without destroying their water-filled structure? | Chapter 53 (cryo-EM, SAXS) |
+| How can molecular simulation predict self-assembled structures? | Chapter 56 |
 
-**Next:** Chapter 38 opens Part IX by turning from how materials degrade to how they are made, beginning with casting, deformation processing and powder metallurgy.
+**Next:** Chapter 38 shrinks materials to the nanoscale and asks which properties change when surfaces, confinement and grain boundaries take over from the bulk.

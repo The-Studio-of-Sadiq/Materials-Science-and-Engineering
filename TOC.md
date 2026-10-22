@@ -2,11 +2,9 @@
 
 **Purpose:** The whole discipline in one book. Why materials have the structures they have, how thermodynamics and kinetics set those structures, how structure produces properties, how processing controls structure, and how materials are characterized, modelled, selected and kept in service.
 
-Structure: 10 Parts · 49 Chapters. Sources: `Parts/PART N.md` (part openers) and `Chapters/CHAPTER N.md`.
+Structure: 11 Parts · 59 Chapters. Sources: `Parts/PART N.md` (part openers) and `Chapters/CHAPTER N.md`.
 
-The backbone is **structure → thermodynamics → kinetics → properties → materials classes → processing → characterization → computation and design**. Functional (electrical, magnetic, optical) materials are one part among ten; the EEE-focused treatment lives in the separate *Materials Core* book and is cited where a reader wants more depth.
-
-*Source notes* in italics mark chapters that adapt material from the Materials Core (EEE) book; they are generalized to the whole discipline, not copied.
+The backbone is **structure → thermodynamics → kinetics → properties → materials classes → processing → characterization → computation and design**. Parts VI and VII treat electrical, dielectric, magnetic, superconducting, semiconductor and photonic materials at the depth an electrical and electronic engineer needs; every other part serves the whole discipline.
 
 ---
 
@@ -22,8 +20,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Property charts and the logic of selection
 - Materials and society: economics, criticality, sustainability
 
-*Source: Materials Core Ch 1.*
-
 ### Chapter 2. Crystal Structures and Non-Crystalline Solids
 - Lattices, bases, unit cells; coordination and packing
 - Metallic structures: FCC, BCC, HCP, stacking sequences
@@ -34,8 +30,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Amorphous solids and glasses; radial distribution functions
 - Polymer chain packing and crystallinity (preview)
 - Liquid crystals and quasicrystals (preview)
-
-*Source: Materials Core Ch 2.*
 
 ### Chapter 3. Symmetry and Space Groups
 - Symmetry operations: rotation, reflection, inversion, rotoinversion, screw axes, glide planes
@@ -65,8 +59,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Volume defects: pores, inclusions, precipitates
 - Quantitative microstructure: stereology, grain size, volume fraction
 - How defects control properties: an overview
-
-*Source: Materials Core Ch 3.*
 
 ## Part II — Thermodynamics and Kinetics
 
@@ -139,8 +131,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Bend, compression and shear testing
 - Statistical nature of strength
 
-*Source: Materials Core Ch 4 (first half).*
-
 ### Chapter 12. Dislocation Theory
 - Theoretical shear strength versus real strength
 - Stress and strain fields of edge and screw dislocations; line energy and line tension
@@ -174,8 +164,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Fatigue: S–N, strain–life, Paris law, crack closure
 - Toughening of ceramics: transformation toughening, bridging, R-curves
 - Weibull statistics
-
-*Source: Materials Core Ch 4 (second half), extended.*
 
 ## Part IV — Metals, Ceramics and Construction Materials
 
@@ -262,8 +250,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Off-axis lamina: transformation, Q-bar
 - Thermal and hygral expansion of laminae
 
-*Source: Materials Core Ch 6 (composites sections), extended.*
-
 ### Chapter 23. Laminate Theory, Failure and Composite Manufacturing
 - Classical laminate theory: ABD matrix, coupling, symmetric and balanced layups
 - Failure criteria: maximum stress, Tsai–Hill, Tsai–Wu, Puck; progressive ply failure
@@ -273,7 +259,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Manufacturing: hand layup, prepreg/autoclave, RTM, filament winding, pultrusion, automated fibre placement
 - Metal- and ceramic-matrix composites
 
-## Part VI — Physical and Functional Properties
+## Part VI — Thermal, Electrical, Dielectric and Magnetic Materials
 
 ### Chapter 24. Thermal Properties
 - Phonons and heat capacity (Einstein, Debye)
@@ -284,40 +270,141 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Thermal barrier coatings and insulation
 - Materials for thermal management
 
-*Source: Materials Core Ch 5, generalized.*
-
-### Chapter 25. Electrical, Dielectric and Superconducting Materials
-- Conduction in metals: Drude, Matthiessen, alloy resistivity
+### Chapter 25. Electrical Conduction in Materials
+- Conductivity and resistivity
+- Mobility and scattering as material properties
+- Temperature coefficients of resistance
+- Conductivity in metals and alloys
+- Contact resistance
+- Thin-film conductors
+- Conductive composites
+- Electrical conductivity versus thermal conductivity
+- Material selection for wires, contacts, interconnects, and electrodes
 - Ionic conduction and solid electrolytes
-- Dielectric polarization, permittivity and loss
-- Dielectric breakdown and insulation
-- Ferroelectric, piezoelectric and pyroelectric materials
-- Superconductivity: Meissner effect, Type I/II, critical parameters, practical superconductors
 
-*Source: Materials Core Ch 7–9 and 17, condensed.*
+### Chapter 26. Dielectric and Insulating Materials
+- Permittivity and dielectric polarization
+- Dielectric loss and loss tangent
+- Frequency and temperature dependence
+- Dielectric strength
+- Electrical breakdown mechanisms
+- Volume and surface resistivity
+- Tracking and partial discharge
+- Moisture and contamination effects
+- Polymer, ceramic, and composite insulators
+- Insulation aging and degradation
 
-### Chapter 26. Semiconductor Materials
-- Band structure essentials: bands, gaps, effective mass, density of states
-- Intrinsic and extrinsic semiconductors; carrier statistics
-- Mobility, drift, diffusion, recombination
-- Semiconductor families: Si, Ge, III–V, SiC, GaN, oxides, organics
-- Junctions, heterostructures and interfaces as material problems
-- Crystal growth and doping as materials processing
+### Chapter 27. Functional Dielectric Materials
+- Ferroelectric materials
+- Piezoelectric materials
+- Pyroelectric materials
+- Electrostrictive materials
+- High-permittivity dielectrics
+- Dielectric resonators
+- Electro-optic materials
+- Applications in capacitors, actuators, sensors, and RF systems
 
-*Source: Materials Core Ch 10–13, condensed.*
+### Chapter 28. Magnetic Material Behaviour
+- Magnetic susceptibility and permeability
+- Diamagnetic and paramagnetic materials
+- Ferromagnetism and ferrimagnetism
+- Antiferromagnetism
+- Magnetic domains
+- Domain-wall motion
+- Hysteresis
+- Remanence and coercivity
+- Saturation magnetization
+- Temperature dependence of magnetic behavior
 
-### Chapter 27. Magnetic Materials
-- Magnetic moments and classes of magnetism
-- Exchange, ferro- and ferrimagnetism, Curie temperature
-- Domains, walls and hysteresis
-- Soft magnets: electrical steels, ferrites, amorphous and nanocrystalline alloys
-- Hard magnets: NdFeB, SmCo, ferrites; energy product
+### Chapter 29. Soft and Hard Magnetic Materials
+- Soft magnetic materials
+- Hard magnetic materials
+- Electrical steels
+- Ferrites
+- Amorphous and nanocrystalline magnetic alloys
+- Permanent-magnet materials
 - Magnetic losses
-- Magnetostriction, magnetocaloric and spintronic materials
+- Eddy-current suppression
+- Magnetic shielding materials
+- Material selection for transformers, motors, inductors, and sensors
 
-*Source: Materials Core Ch 15–16, condensed.*
+### Chapter 30. Superconducting Materials
+- Superconducting properties
+- Critical temperature, field, and current
+- Type I and Type II superconductors
+- High-temperature superconductors
+- Flux pinning
+- Superconducting wires and tapes
+- Material processing constraints
+- Applications in magnets, power systems, and sensing
 
-### Chapter 28. Optical and Photonic Materials
+## Part VII — Semiconductor and Photonic Materials
+
+### Chapter 31. Solid-State Foundations for Materials Engineering
+- Electronic states in solids
+- Energy-band formation
+- Valence and conduction bands
+- Band gaps
+- Density of states
+- Fermi level
+- Effective mass
+- Temperature dependence of carrier populations
+- Direct and indirect band gaps
+
+*Boundary:* material-level explanation only. Detailed quantum mechanics belongs in Engineering Physics; device operation belongs in Electronics & Computing.
+
+### Chapter 32. Semiconductor Material Properties
+- Intrinsic and extrinsic semiconductors
+- Donors and acceptors
+- Doping profiles
+- Carrier concentration
+- Carrier mobility
+- Drift and diffusion
+- Recombination and generation
+- Minority-carrier lifetime
+- Temperature dependence
+- High-field transport
+- Defects and impurities in semiconductors
+
+### Chapter 33. Semiconductor Material Families
+- Silicon and germanium
+- III–V compound semiconductors
+- Gallium arsenide and indium phosphide
+- Silicon carbide
+- Gallium nitride
+- Other wide-bandgap semiconductors
+- Amorphous silicon
+- Organic semiconductors
+- Two-dimensional materials
+- Material comparison for power, RF, sensing, and optoelectronics
+
+### Chapter 34. Semiconductor Interfaces and Thin Films
+- Semiconductor heterostructures
+- Band alignment
+- Heterojunction interfaces
+- Surface states
+- Interface traps
+- Thin-film properties
+- Film stress and defects
+- Grain boundaries in thin films
+- Contact interfaces
+- Material properties of gate dielectrics
+- Interface reliability
+
+### Chapter 35. Electronic and Optoelectronic Materials
+- Light absorption and emission in materials
+- Photoconductive materials
+- Luminescent materials
+- LED and laser semiconductor materials
+- Photodetector materials
+- Solar-cell absorber materials
+- Optical and photonic materials
+- Material properties for high-frequency electronics
+- Sensor materials
+
+*Boundary:* the materials mechanisms behind these devices belong here; circuit configurations and detailed device operation belong in Electronics & Computing.
+
+### Chapter 36. Optical and Photonic Materials
 - Interaction of light with matter: refraction, dispersion, absorption, scattering
 - Refractive index and its origin; Sellmeier
 - Colour in metals, insulators, semiconductors and pigments
@@ -327,11 +414,9 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Nonlinear and electro-optic materials
 - Photonic crystals and metamaterials
 
-*Source: Materials Core Ch 14, generalized.*
+## Part VIII — Advanced and Emerging Materials
 
-## Part VII — Advanced and Emerging Materials
-
-### Chapter 29. Smart and Soft Materials
+### Chapter 37. Smart and Soft Materials
 - Shape-memory alloys: martensite, superelasticity, NiTi
 - Magnetostrictive and magnetic shape-memory materials
 - Piezoelectric actuators and sensors (recap)
@@ -341,7 +426,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Liquid crystals: phases, order parameter, displays
 - Self-assembly and soft-matter design
 
-### Chapter 30. Nanomaterials and Two-Dimensional Materials
+### Chapter 38. Nanomaterials and Two-Dimensional Materials
 - Size effects: surface-to-volume, melting-point depression, quantum confinement
 - Nanoparticles, nanowires, nanotubes, quantum dots
 - Graphene and other 2D materials
@@ -350,9 +435,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Synthesis: top-down and bottom-up
 - Characterization and safety of nanomaterials
 
-*Source: Materials Core Ch 18, generalized.*
-
-### Chapter 31. Biomaterials
+### Chapter 39. Biomaterials
 - The host response: biocompatibility, protein adsorption, inflammation, foreign-body response
 - Metallic biomaterials: Ti alloys, CoCr, stainless steel, corrosion in the body
 - Ceramic biomaterials: alumina, zirconia, hydroxyapatite, bioactive glass
@@ -362,30 +445,28 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Drug delivery systems
 - Sterilization, testing and regulation
 
-### Chapter 32. Materials for Energy
+### Chapter 40. Materials for Energy
 - Photovoltaic absorbers
 - Battery materials: intercalation electrodes, electrolytes, solid-state
 - Fuel-cell and electrolyser materials
 - Hydrogen storage materials and hydrogen embrittlement
 - Thermoelectric materials
 - Supercapacitor materials
-- Nuclear fuels and cladding (pointer to Ch 33)
+- Nuclear fuels and cladding (pointer to Ch 41)
 - Critical raw materials and scalability
 
-*Source: Materials Core Ch 19, generalized.*
-
-### Chapter 33. Materials for Extreme Environments
+### Chapter 41. Materials for Extreme Environments
 - High-temperature materials: superalloys, refractory alloys, ceramics, CMCs, thermal barrier coatings
-- High-temperature oxidation and hot corrosion (pointer to Ch 34)
+- High-temperature oxidation and hot corrosion (pointer to Ch 42)
 - Radiation damage: displacement cascades, dpa, swelling, embrittlement, helium
 - Nuclear materials: fuels, cladding, structural steels, fusion first-wall
 - Aerospace materials: lightweighting, fatigue-critical design
 - Cryogenic materials: ductile–brittle behaviour, Invar, insulation
 - Hypersonic and space environments
 
-## Part VIII — Corrosion, Degradation and Surfaces
+## Part IX — Corrosion, Degradation and Surfaces
 
-### Chapter 34. Thermodynamics and Kinetics of Corrosion
+### Chapter 42. Thermodynamics and Kinetics of Corrosion
 - The electrochemical corrosion cell
 - Pourbaix diagrams for Fe, Al, Cu, Zn, Ti
 - Mixed-potential theory; Evans diagrams
@@ -396,7 +477,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 
 *Boundary:* electrochemistry fundamentals belong to Advanced Chemistry.
 
-### Chapter 35. Forms of Corrosion and Protection
+### Chapter 43. Forms of Corrosion and Protection
 - Uniform, galvanic, pitting, crevice, intergranular corrosion
 - Stress-corrosion cracking, hydrogen embrittlement, corrosion fatigue
 - Microbially influenced corrosion; selective leaching; erosion–corrosion; cavitation
@@ -405,17 +486,17 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Anodic protection; design rules
 - Testing: salt spray, polarization, EIS
 
-### Chapter 36. Degradation and Failure Analysis
+### Chapter 44. Degradation and Failure Analysis
 - Degradation mechanisms across classes: metals, ceramics, polymers, composites, concrete
 - Polymer aging and weathering
 - Wear-out mechanisms and life prediction
 - Failure analysis: methodology, fractography, root cause
 - Case studies across industries
 - Reliability statistics: Weibull, bathtub curve
+- Wear-out of electronic materials: Norris–Landzberg, electromigration (Black's equation, Blech length), dielectric breakdown and TDDB, semiconductor defect generation, moisture ingress, contact degradation
+- Accelerated aging tests: HAST, THB, temperature cycling, HTOL
 
-*Source: Materials Core Ch 24, generalized.*
-
-### Chapter 37. Surfaces, Interfaces and Tribology
+### Chapter 45. Surfaces, Interfaces and Tribology
 - Surface structure and surface energy
 - Adsorption and surface chemistry
 - Adhesion and wetting
@@ -425,9 +506,9 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Lubrication regimes: Stribeck curve
 - Surface engineering: coatings, hardening, texturing
 
-## Part IX — Processing and Manufacturing
+## Part X — Processing and Manufacturing
 
-### Chapter 38. Casting, Forming and Powder Processing
+### Chapter 46. Casting, Forming and Powder Processing
 - Casting processes and casting design; defects
 - Deformation processing: rolling, forging, extrusion, drawing, sheet forming
 - Hot, warm and cold working; formability and forming limit diagrams
@@ -435,9 +516,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Powder metallurgy: production, compaction, sintering, HIP, MIM
 - Processing of ceramics and glasses (pointer to Ch 17)
 
-*Source: Materials Core Ch 20 (casting, deformation, powder sections), extended.*
-
-### Chapter 39. Joining: Welding, Brazing and Adhesive Bonding
+### Chapter 47. Joining: Welding, Brazing and Adhesive Bonding
 - Fusion welding processes: arc, laser, electron beam
 - Welding metallurgy: fusion zone, heat-affected zone, residual stress
 - Weldability: carbon equivalent, hot and cold cracking
@@ -446,7 +525,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Adhesive bonding: surface preparation, joint design
 - Mechanical fastening and joining dissimilar materials
 
-### Chapter 40. Additive Manufacturing
+### Chapter 48. Additive Manufacturing
 - Process families: powder-bed fusion, directed energy deposition, binder jetting, material extrusion, vat photopolymerization
 - Melt-pool physics and solidification in AM
 - Microstructure and defects: porosity, lack of fusion, residual stress, anisotropy
@@ -454,20 +533,45 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Polymer and ceramic AM
 - Design for AM; qualification and certification
 
-### Chapter 41. Thin Films, Coatings and Electronic Materials Processing
+### Chapter 49. Thin Films and Coatings
 - Vacuum and plasma basics
 - PVD, CVD, ALD, electroplating, sol–gel
 - Thin-film growth modes and structure-zone models
 - Film stress and adhesion
-- Crystal growth for electronics: Czochralski, float zone, epitaxy
-- Oxidation, diffusion, implantation, lithography, etching (overview)
+- Electroless plating, anodizing, conversion coatings
+- Crystal growth and semiconductor processing (pointer to Ch 50)
 - Thermal spray and hard coatings
 
-*Source: Materials Core Ch 20–22, condensed.*
+### Chapter 50. Electronic Materials Manufacturing
+- Single-crystal growth
+- Wafer preparation
+- Thin-film deposition
+- Oxidation and diffusion
+- Doping and implantation principles
+- Photolithography overview
+- Etching
+- Metallization
+- Dielectric deposition
+- Packaging and encapsulation materials
+- Process-induced defects
 
-## Part X — Characterization, Computation and Design
+*Boundary:* how manufacturing changes material structure and properties. Detailed fabrication flows and IC process integration remain in Electronics & Computing.
 
-### Chapter 42. Materials Characterization: The Laboratory Toolkit
+### Chapter 51. Joining, Packaging, and Interconnect Materials
+- Solder materials
+- Bonding wires
+- Flip-chip interconnects
+- Conductive adhesives
+- Substrate materials
+- Printed circuit board laminates
+- Encapsulation materials
+- Thermal interface materials
+- Coefficient-of-thermal-expansion mismatch
+- Package stress and failure mechanisms
+
+## Part XI — Characterization, Computation and Design
+
+### Chapter 52. Materials Characterization: The Laboratory Toolkit
 - Optical microscopy and metallography
 - SEM, EDS, EBSD; TEM and diffraction
 - X-ray diffraction in practice
@@ -477,16 +581,14 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Mechanical and electrical testing
 - Measurement uncertainty
 
-*Source: Materials Core Ch 23, generalized.*
-
-### Chapter 43. Large-Facility and Nanoscale Characterization
+### Chapter 53. Large-Facility and Nanoscale Characterization
 - Synchrotron X-rays: XAS (XANES, EXAFS), SAXS, high-resolution diffraction, PDF analysis, tomography
 - Neutron scattering: contrast with X-rays, magnetic structures, light elements, residual stress, inelastic scattering
 - Atom-probe tomography
 - Aberration-corrected STEM: HAADF, EELS, 4D-STEM
 - Cryo-EM for soft materials
 
-### Chapter 44. In-Situ, Operando and Correlative Methods
+### Chapter 54. In-Situ, Operando and Correlative Methods
 - In-situ heating, straining and biasing in TEM and SEM
 - Operando battery and catalyst studies
 - Positron annihilation spectroscopy
@@ -495,7 +597,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Correlative multimodal workflows
 - Big data and automated analysis
 
-### Chapter 45. Electronic-Structure Methods
+### Chapter 55. Electronic-Structure Methods
 - Born–Oppenheimer approximation; Hartree–Fock; why DFT
 - Kohn–Sham equations; exchange–correlation functionals: LDA, GGA, hybrids, DFT+U
 - Basis sets: plane waves, pseudopotentials, PAW
@@ -505,7 +607,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 
 *Boundary:* quantum-mechanical foundations belong to Engineering Physics.
 
-### Chapter 46. Atomistic and Mesoscale Simulation
+### Chapter 56. Atomistic and Mesoscale Simulation
 - Molecular dynamics: interatomic potentials (LJ, EAM, Tersoff, ReaxFF), integrators, thermostats, barostats
 - Monte Carlo: Metropolis; kinetic Monte Carlo
 - Phase-field modelling
@@ -513,7 +615,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - CALPHAD and computational thermodynamics
 - Multiscale modelling and ICME
 
-### Chapter 47. Materials Informatics
+### Chapter 57. Materials Informatics
 - Materials databases: Materials Project, AFLOW, OQMD, ICSD
 - Descriptors and features
 - Machine-learning property prediction; graph neural networks
@@ -522,8 +624,9 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Inverse design
 - Uncertainty and the limits of data-driven discovery
 
-### Chapter 48. Materials Selection and Design
+### Chapter 58. Materials Selection and Design
 - Design process and material requirements
+- Regulatory compatibility: RoHS, REACH, conflict minerals
 - Performance indices derived
 - Ashby charts and selection
 - Multi-objective selection: Pareto fronts, penalty functions
@@ -531,9 +634,7 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 - Process selection and cost modelling
 - Selection case studies across engineering fields
 
-*Source: Materials Core Ch 25, generalized.*
-
-### Chapter 49. Sustainability, Lifecycle and the Circular Economy
+### Chapter 59. Sustainability, Lifecycle and the Circular Economy
 - Materials flows and the materials footprint of society
 - Embodied energy and carbon
 - Lifecycle assessment
@@ -552,5 +653,6 @@ The backbone is **structure → thermodynamics → kinetics → properties → m
 | Laws of thermodynamics, bonding, reaction chemistry, electrochemistry fundamentals | Advanced Chemistry |
 | Quantum mechanics and solid-state physics foundations | Engineering Physics |
 | Mathematics (tensors, PDEs, statistics) | The Mathematics Universe |
-| EEE-depth treatment of dielectric, semiconductor, magnetic and packaging materials | Materials Core (EEE) |
-| Everything else in materials science and engineering | **This book** |
+| Semiconductor device and circuit operation | Electronics & Computing |
+| Power-system, machine and battery-system sizing | Electrical Energy & Machines |
+| All of materials science and engineering | **This book** |

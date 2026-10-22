@@ -109,13 +109,17 @@ $$
 
 <!-- FIGURE 10.1 | figures/ch10/fig-10-1-al-cu-ageing-curves.png | plot | Hardness versus ageing time for Al–4 wt% Cu at 130 °C and 190 °C, with the dominant precipitate labelled along each curve. | Content: x-axis ageing time, log scale, 0.01 to 1000 days; y-axis hardness 40–140 HV. Curve at 130 °C: rises from ~45 HV, shoulder at ~90 HV labelled "GP zones" around 0.5–2 days, peak ~130 HV at ~30–50 days labelled "θ″", then decline labelled "θ′". Curve at 190 °C: no GP plateau, faster rise to a lower peak ~115 HV at ~1 day labelled "θ″ + θ′", falling to ~70 HV by 100 days labelled "θ (over-aged)". Annotate "under-aged", "peak-aged", "over-aged" regions above the 190 °C curve. -->
 
-Figure 10.1 shows the consequence. At a low ageing temperature hardness rises in two steps to a high peak that takes weeks; at a higher temperature the zones never form and a lower peak arrives in hours, because fewer, coarser nuclei form. Beyond the peak the alloy **over-ages**: precipitates coarsen, lose coherency and become so widely spaced that dislocations loop around them (Orowan bypass, Chapter 13).
+![Figure 10.1 — Hardness versus ageing time for Al–4 wt% Cu at 130 °C and 190 °C, with the dominant precipitate labelled along each curve](../figures/ch10/fig-10-1-al-cu-ageing-curves.png)
+
+*Figure 10.1 — Hardness versus ageing time for Al–4 wt% Cu at 130 °C and 190 °C, with the dominant precipitate labelled along each curve.*
+
+Figure 10.1 shows the consequence. At a low ageing temperature hardness rises in two steps to a high peak that takes weeks; at a higher temperature the zones never form and a lower peak arrives within about a day, because fewer, coarser nuclei form. Beyond the peak the alloy **over-ages**: precipitates coarsen, lose coherency and become so widely spaced that dislocations loop around them (Orowan bypass, Chapter 13).
 
 ### Other precipitation-hardening systems
 
 The same logic drives every age-hardenable alloy: Al–Mg–Si (6xxx, β″ needles, hardened during automotive paint baking at about 180 °C); Al–Zn–Mg–Cu (7xxx, η′, 7075-T6 at about 500 MPa yield for wing spars); nickel superalloys (coherent L1₂ γ′ with misfit 0.1–0.5 % at up to 70 vol% in turbine blades); maraging steels (Ni₃(Ti,Mo) in carbon-free Fe–Ni martensite, 1.7–2.4 GPa, for rocket-motor cases and landing gear); Cu–2Be springs above 1 GPa; and 17-4PH stainless steel for pump shafts.
 
-Grain boundaries complicate the picture. Solute and vacancies drain to them, leaving a soft **precipitate-free zone** 0.1–1 μm wide, and coarse boundary precipitates can provide paths for intergranular fracture and corrosion. Some alloys show **quench sensitivity**: in a slow quench, solute precipitates coarsely on the way down and is lost to ageing, which is why thick 7xxx plate uses 7050 rather than 7075. Aluminium tempers encode these steps: T4 (naturally aged), T6 (artificially aged to peak), T7 (over-aged for stress-corrosion resistance, Chapter 35), T8 (cold-worked before ageing so that dislocations nucleate a finer precipitate).
+Grain boundaries complicate the picture. Solute and vacancies drain to them, leaving a soft **precipitate-free zone** 0.1–1 μm wide, and coarse boundary precipitates can provide paths for intergranular fracture and corrosion. Some alloys show **quench sensitivity**: in a slow quench, solute precipitates coarsely on the way down and is lost to ageing, which is why thick 7xxx plate uses 7050 rather than 7075. Aluminium tempers encode these steps: T4 (naturally aged), T6 (artificially aged to peak), T7 (over-aged for stress-corrosion resistance, Chapter 43), T8 (cold-worked before ageing so that dislocations nucleate a finer precipitate).
 
 **Worked example — Shifting an ageing schedule.** Alloy 6061 reaches peak strength (T6) in about 8 h at 175 °C. A heat-treater wants to know the equivalent time at 160 °C, 190 °C and 205 °C. If the rate-limiting step is diffusion of Mg and Si with an activation energy $Q\approx130$ kJ/mol, the time to reach the same microstructural state scales as $t\propto\exp(Q/RT)$:
 
@@ -163,7 +167,7 @@ for a precipitate that is almost pure solute, with $c_\infty$ here the equilibri
 The rate constant identifies the levers available to an alloy designer. Each factor in $k$ can be made small:
 
 - **Low interfacial energy.** Coherent, low-misfit precipitates coarsen slowly; this is a principal reason γ′ in nickel superalloys survives thousands of hours at 1000 °C.
-- **Low solubility** $c_\infty$. Oxide dispersions in oxide-dispersion-strengthened (ODS) alloys have practically zero solubility in the metal matrix and do not coarsen even near the melting point; Y₂O₃ in ODS steels for fission and fusion reactors (Chapter 33) is the example.
+- **Low solubility** $c_\infty$. Oxide dispersions in oxide-dispersion-strengthened (ODS) alloys have practically zero solubility in the metal matrix and do not coarsen even near the melting point; Y₂O₃ in ODS steels for fission and fusion reactors (Chapter 41) is the example.
 - **Slow diffusion.** Adding slowly diffusing elements — Re, W and Ta in superalloys, Sc and Zr in aluminium (Al₃Sc and Al₃Zr precipitates stay a few nanometres in size up to about 300 °C) — slows the step that controls $k$.
 
 **Worked example — How long does γ′ take to coarsen?** Estimate the coarsening of γ′ in a binary Ni–Al alloy at 1000 °C (1273 K). Take the diffusivity of Al in Ni as $D=D_0\exp(-Q/RT)$ with $D_0=1.87\times10^{-4}$ m²/s and $Q=268$ kJ/mol; the γ/γ′ interfacial energy $\gamma=0.02$ J/m²; the equilibrium Al mole fraction in γ, $c_\infty=0.15$; and $V_m=7.0\times10^{-6}$ m³/mol.
@@ -221,9 +225,13 @@ $$
 where $\lambda_c$ is the shortest wavelength that can grow at all. Deep inside the spinodal $-f''$ is large and the wavelength is short, typically 2–10 nm in metals. In a crystal the lattice parameter usually changes with composition, which adds an elastic energy and shifts the instability to a lower **coherent spinodal**; the elastic anisotropy also aligns the modulations along elastically soft directions, $\langle100\rangle$ in most cubic metals.
 
 > **Status of the principle: Cahn–Hilliard theory**
-> *Derived.* Follows from a gradient expansion of the free energy and linear irreversible thermodynamics; the linearized solution describes only the early stage, while later coarsening needs the full nonlinear equation, which is now the basis of phase-field modelling (Chapter 46).
+> *Derived.* Follows from a gradient expansion of the free energy and linear irreversible thermodynamics; the linearized solution describes only the early stage, while later coarsening needs the full nonlinear equation, which is now the basis of phase-field modelling (Chapter 56).
 
 <!-- FIGURE 10.2 | figures/ch10/fig-10-2-spinodal-vs-nucleation.png | schematic | Spinodal decomposition compared with nucleation and growth: free-energy curve with binodal and spinodal points, and the evolution of composition profiles in each regime. | Content: Left panel: G versus composition x from 0 to 1, symmetric double-well curve; common tangent touching at binodal compositions (x ≈ 0.15, 0.85, marked with dots and dashed verticals); inflection points (x ≈ 0.3, 0.7) marked as spinodal; shaded region between labelled "metastable: nucleation needed", central region labelled "unstable: spinodal". Right panels: composition c versus distance x for three successive times. Top right "spinodal (inside spinodal)": low-amplitude sine wave of wavelength λ_max growing in amplitude with time, uphill-diffusion arrows. Bottom right "nucleation and growth (between binodal and spinodal)": an isolated particle at full equilibrium composition from the start, growing in width, with a depleted zone around it. -->
+
+![Figure 10.2 — Spinodal decomposition compared with nucleation and growth: free-energy curve with binodal and spinodal points, and the evolution of composition profiles in each regime](../figures/ch10/fig-10-2-spinodal-vs-nucleation.png)
+
+*Figure 10.2 — Spinodal decomposition compared with nucleation and growth: free-energy curve with binodal and spinodal points, and the evolution of composition profiles in each regime.*
 
 Figure 10.2 contrasts the paths: nucleation makes a sharp-edged particle of final composition that grows in size; spinodal decomposition makes a diffuse periodic modulation that grows in amplitude.
 
@@ -231,7 +239,7 @@ Figure 10.2 contrasts the paths: nucleation makes a sharp-edged particle of fina
 
 - **Fe–Cr and duplex stainless steels.** Ferrite with more than about 15 % Cr decomposes into Fe-rich α and Cr-rich α′ at 300–500 °C. The nanometre modulation hardens and embrittles it — **475 °C embrittlement** — limiting duplex steels in chemical and nuclear plant to about 250–300 °C.
 - **Cu–Ni–Sn spring alloys** (Cu–15Ni–8Sn) reach yield strengths over 1 GPa as a beryllium-free replacement for Cu–Be in aerospace bearings and connectors.
-- **Alnico magnets** owe their coercivity to Fe–Co-rich rods formed spinodally in a magnetic field (Chapter 27).
+- **Alnico magnets** owe their coercivity to Fe–Co-rich rods formed spinodally in a magnetic field (Chapter 29).
 - **Glasses and polymer blends.** Sodium borosilicate glass separates into interconnected silica-rich and borate-rich networks; leaching the borate leaves the porous silica of the Vycor process. Quenched polymer blends give co-continuous morphologies for membranes (Chapter 20).
 
 Near the spinodal line the nucleation barrier becomes very small, so in practice the two regimes merge.
@@ -300,6 +308,10 @@ The features that define a martensitic transformation are:
 How can FCC become BCC by a small homogeneous strain? Bain (1924) noticed that an FCC lattice already contains a body-centred tetragonal cell: two adjacent FCC cells share a BCT cell with axes $a_\gamma/\sqrt2$, $a_\gamma/\sqrt2$, $a_\gamma$ and axial ratio $\sqrt2$. Compressing this cell by about 17–20 % along its $c$ axis and expanding it by about 12–13 % along the other two converts it into the BCC (or, with carbon trapped in octahedral sites along $c$, the slightly tetragonal BCT) lattice of martensite. This is the **Bain strain** (Figure 10.3), and it requires the smallest atomic movements of any FCC → BCC correspondence.
 
 <!-- FIGURE 10.3 | figures/ch10/fig-10-3-bain-correspondence.png | crystal | The Bain correspondence: a body-centred tetragonal cell outlined within two FCC austenite cells is compressed along c and expanded along a to give the BCT martensite cell, with interstitial carbon on octahedral sites along c. | Content: Left: two adjacent FCC cells (edge a_γ = 0.359 nm) with corner and face atoms; the BCT cell with edges a_γ/√2 = 0.254 nm, 0.254 nm, a_γ = 0.359 nm highlighted in bold, c/a = 1.414. Arrows: compression ~ -17.6 % along [001], expansion ~ +12.5 % along [110] and [1-10] directions of the FCC cell. Right: resulting martensite cell a = 0.286 nm, c = 0.296 nm (c/a = 1.036 for 0.8 wt% C), with carbon atoms (small, different colour) at octahedral sites on c-axis edges and face centres. Caption note: lattice parameters for Fe–0.8 wt% C. -->
+
+![Figure 10.3 — The Bain correspondence: a body-centred tetragonal cell outlined within two FCC austenite cells is compressed along c and expanded along a to give the BCT martensite cell, with interstitial carbon on octahedral sites along c](../figures/ch10/fig-10-3-bain-correspondence.png)
+
+*Figure 10.3 — The Bain correspondence: a body-centred tetragonal cell outlined within two FCC austenite cells is compressed along c and expanded along a to give the BCT martensite cell, with interstitial carbon on octahedral sites along c.*
 
 **Worked example — Bain strains and volume change in a 0.8 % C steel.** The lattice parameters vary approximately linearly with carbon content $w$ (wt%): $a_\gamma=0.3555+0.0044w$ nm for austenite, and for martensite $c=0.2866+0.0116w$ nm and $a=0.2866-0.0013w$ nm. At $w=0.8$:
 
@@ -378,7 +390,7 @@ with $\Delta H$ the transformation enthalpy per unit volume (negative for austen
 > **Status of the principle: Clausius–Clapeyron relation for stress-induced martensite**
 > *Fundamental.* Follows from equating the Gibbs energies of parent and martensite under stress (thermodynamics of a first-order transformation with stress and strain as conjugate variables); real materials deviate because of hysteresis and texture.
 
-Superelastic NiTi is used for self-expanding stents and orthodontic arch wires; the shape-memory effect for pipe couplings, thermal actuators and deployable space structures (Chapters 29 and 31).
+Superelastic NiTi is used for self-expanding stents and orthodontic arch wires; the shape-memory effect for pipe couplings, thermal actuators and deployable space structures (Chapters 37 and 39).
 
 ---
 
@@ -415,7 +427,7 @@ Empirically, recrystallization needs a minimum strain of a few percent; more str
 | Low-carbon steel | 1538 (Fe) | 450–600 | Batch or continuous annealing of sheet |
 | Tungsten | 3422 | ~1200–1400 | Lamp filament grain structure stabilized by K dopant |
 
-**Hot** and **cold working** are defined by recrystallization, not absolute temperature: rolling lead at room temperature is hot working, rolling tungsten at 1000 °C is not (Chapter 38).
+**Hot** and **cold working** are defined by recrystallization, not absolute temperature: rolling lead at room temperature is hot working, rolling tungsten at 1000 °C is not (Chapter 46).
 
 ### Grain growth
 
@@ -428,7 +440,7 @@ $$
 > **Status of the principle: Parabolic grain-growth law**
 > *Approximate.* Derived for curvature-driven migration with a constant mobility (Burke and Turnbull); real metals usually give $d^n-d_0^n=kt$ with $n$ between 2 and 4, because solutes and particles slow boundaries as they move.
 
-Grain growth matters wherever metal is held hot: weld heat-affected zones (Chapter 39), austenitizing before quenching, and sintering of ceramics, where it competes with pore removal (Chapter 17).
+Grain growth matters wherever metal is held hot: weld heat-affected zones (Chapter 47), austenitizing before quenching, and sintering of ceramics, where it competes with pore removal (Chapter 17).
 
 ### Zener pinning
 
@@ -457,9 +469,13 @@ The pinning pressure is $P_Z=3\times0.001\times0.6/(2\times10\times10^{-9})=9.0\
 
 ### Abnormal grain growth
 
-When most boundaries are pinned, a few grains with an advantage — larger size, high-mobility boundaries, a local absence of particles — can escape and consume the fine matrix. This **abnormal grain growth** usually harms toughness and fatigue strength (in carburized gears, for example). It is exploited in **grain-oriented electrical steel** (Fe–3 % Si) for transformer cores: MnS and AlN inhibitors pin normal growth, and Goss-oriented $\{110\}\langle001\rangle$ grains grow abnormally to centimetre size, aligning the easy magnetization direction with the rolling direction and roughly halving core losses (Chapter 27).
+When most boundaries are pinned, a few grains with an advantage — larger size, high-mobility boundaries, a local absence of particles — can escape and consume the fine matrix. This **abnormal grain growth** usually harms toughness and fatigue strength (in carburized gears, for example). It is exploited in **grain-oriented electrical steel** (Fe–3 % Si) for transformer cores: MnS and AlN inhibitors pin normal growth, and Goss-oriented $\{110\}\langle001\rangle$ grains grow abnormally to centimetre size, aligning the easy magnetization direction with the rolling direction and roughly halving core losses (Chapter 29).
 
 <!-- FIGURE 10.4 | figures/ch10/fig-10-4-annealing-stages.png | plot | Changes in properties and microstructure during annealing of a cold-worked metal: recovery, recrystallization and grain growth. | Content: x-axis annealing temperature (1 h) for 70 % cold-rolled brass (Cu–30Zn) from 100 to 700 °C. Left y-axis tensile strength 300–700 MPa (falling from ~600 to ~330 MPa, steep drop between 300 and 450 °C) and ductility 0–60 % elongation (rising from ~5 to ~55 %, inverse shape). Right y-axis grain size 0–80 μm (constant cold-worked structure until ~350 °C, new grains ~10 μm at 400 °C, rising to ~70 μm at 700 °C). Shaded bands labelled "recovery" (100–300 °C), "recrystallization" (300–450 °C), "grain growth" (above 450 °C). Small schematic microstructure insets above each band: deformed grains with tangled dislocations; subgrains plus new equiaxed grains; large equiaxed grains. -->
+
+![Figure 10.4 — Changes in properties and microstructure during annealing of a cold-worked metal: recovery, recrystallization and grain growth](../figures/ch10/fig-10-4-annealing-stages.png)
+
+*Figure 10.4 — Changes in properties and microstructure during annealing of a cold-worked metal: recovery, recrystallization and grain growth.*
 
 Figure 10.4 brings the three stages together for cold-rolled brass, showing why a recrystallization anneal is the tool that resets strength and ductility between cold-rolling passes.
 
@@ -491,7 +507,11 @@ where $\alpha'$ is the supersaturated matrix and $\alpha$ the depleted one. It i
 
 A **time–temperature–transformation (TTT)** diagram shows, for a given composition and starting condition, how long transformation takes to start and finish at each constant temperature. Small specimens are quenched from the austenitizing temperature into baths at different temperatures, held, quenched again and examined by metallography or dilatometry. The start (1 %) and finish (99 %) lines form **C-curves**: near the equilibrium temperature the driving force is small, at low temperature diffusion is slow, and in between lies a **nose** of fastest transformation (Chapter 9).
 
-<!-- FIGURE 10.5 | figures/ch10/fig-10-5-ttt-eutectoid.png | plot | TTT diagram for a eutectoid (0.77 wt% C) plain-carbon steel with pearlite and bainite regions, martensite lines and four cooling paths. | Content: x-axis time, log scale 0.1 s to 10^5 s; y-axis temperature 0–800 °C. Horizontal dashed line at 727 °C labelled "A1". Start and finish C-curves: nose at ~540 °C, start ~0.7 s, finish ~6 s; at 700 °C start ~20 s, finish ~1000 s; at 300 °C start ~60 s, finish ~2000 s. Regions labelled "coarse pearlite" (650–727 °C), "fine pearlite" (540–650 °C), "upper bainite" (400–540 °C), "lower bainite" (230–400 °C). Horizontal lines Ms = 220 °C, M50 ≈ 160 °C, M90 ≈ 100 °C. Paths: (a) water quench → martensite, (b) quench to 600 °C, hold → fine pearlite, (c) quench to 300 °C, hold → lower bainite (austempering), (d) quench to just above Ms, equalize, then cool slowly through Ms (martempering). -->
+<!-- FIGURE 10.5 | figures/ch10/fig-10-5-ttt-eutectoid.png | plot | TTT diagram for a eutectoid (0.77 wt% C) plain-carbon steel with pearlite and bainite regions, martensite lines and four cooling paths. | Content: x-axis time, log scale 0.1 s to 10^5 s; y-axis temperature 0–800 °C. Horizontal dashed line at 727 °C labelled "A1". Start and finish C-curves: nose at ~540 °C, start ~0.7 s, finish ~6 s; at 700 °C start ~20 s, finish ~1000 s; at 300 °C start ~60 s, finish ~2000 s. Regions labelled "coarse pearlite" (650–727 °C), "fine pearlite" (540–650 °C), "upper bainite" (400–540 °C), "lower bainite" (230–400 °C). Horizontal lines Ms = 220 °C, M50 ≈ 160 °C, M90 ≈ 10 °C (Koistinen–Marburger). Paths: (a) water quench → martensite, (b) quench to 600 °C, hold → fine pearlite, (c) quench to 300 °C, hold → lower bainite (austempering), (d) quench to just above Ms, equalize, then cool slowly through Ms (martempering). -->
+
+![Figure 10.5 — TTT diagram for a eutectoid (0.77 wt% C) plain-carbon steel with pearlite and bainite regions, martensite lines and four cooling paths](../figures/ch10/fig-10-5-ttt-eutectoid.png)
+
+*Figure 10.5 — TTT diagram for a eutectoid (0.77 wt% C) plain-carbon steel with pearlite and bainite regions, martensite lines and four cooling paths.*
 
 Figure 10.5 is the TTT diagram for a plain eutectoid steel. Its nose lies at about 540 °C and less than one second, which is why only thin sections of plain-carbon steel can be quenched fast enough to miss it and form martensite throughout. The paths drawn on it are standard treatments: **patenting** (hold above the nose for fine pearlite), **austempering** (hold in the bainite range; low distortion, high toughness) and **martempering** (equalize just above $M_s$, then cool slowly so the whole section transforms together, reducing distortion and quench cracking).
 
@@ -503,11 +523,15 @@ Real parts cool continuously, at different rates at different depths. A **contin
 
 <!-- FIGURE 10.6 | figures/ch10/fig-10-6-cct-4340.png | plot | Continuous-cooling transformation diagram for 4340 steel with cooling curves for different section sizes and the resulting microstructures and hardnesses. | Content: x-axis time from 1 s to 10^5 s, log scale; y-axis temperature 0–900 °C. Ac3 ≈ 775 °C and Ac1 ≈ 720 °C dashed. Ferrite+pearlite region upper right with start curve nose at ~650 °C, ~1000 s; bainite region with nose at ~450 °C, ~60–100 s; Ms = 305 °C horizontal line, M50 ~ 240 °C. Four cooling curves from 850 °C: (1) water-quenched 10 mm bar, reaches Ms in ~5 s → "martensite, 57 HRC"; (2) oil-quenched 50 mm bar centre, ~60 s → "martensite + bainite, ~50 HRC"; (3) air-cooled 50 mm bar, crosses bainite region → "bainite, ~38 HRC"; (4) furnace-cooled, crosses ferrite/pearlite → "ferrite + pearlite, ~25 HRC". Critical cooling rate curve tangent to the bainite nose, labelled. -->
 
+![Figure 10.6 — Continuous-cooling transformation diagram for 4340 steel with cooling curves for different section sizes and the resulting microstructures and hardnesses](../figures/ch10/fig-10-6-cct-4340.png)
+
+*Figure 10.6 — Continuous-cooling transformation diagram for 4340 steel with cooling curves for different section sizes and the resulting microstructures and hardnesses.*
+
 The most important reading of a CCT diagram is the **critical cooling rate**: the slowest cooling curve that misses all the diffusional transformation curves and therefore gives fully martensitic structure. For a plain eutectoid steel it is of the order of 100–200 °C/s at 700 °C, attainable only at the surface of small parts with a brine or water quench; for 4340 (Figure 10.6) it is of the order of 1–10 °C/s, attainable in the centre of an oil-quenched bar several centimetres across. The ability of a steel to form martensite at depth is its **hardenability**, measured by the Jominy end-quench test and developed in Chapter 15. Hardenability is what alloying elements are mainly for: they are added not to make martensite harder but to make it possible in thick sections with gentle quenches that avoid cracking.
 
 ### Transformation diagrams beyond steel
 
-The same tools appear wherever a transformation competes with cooling: quench-sensitivity C-curves limit the furnace-to-tank transfer of 7075 sheet to about 10–15 s; CCT diagrams of Ti–6Al–4V show when cooling from the β field gives α′ martensite, basket-weave α or colony α, which matters for forged and additively manufactured aerospace parts (Chapter 40); crystallization TTT curves set critical cooling rates for glasses and bulk metallic glasses (Chapter 9); and weld-cycle CCT diagrams predict heat-affected-zone hardness and hydrogen-cracking risk (Chapter 39).
+The same tools appear wherever a transformation competes with cooling: quench-sensitivity C-curves limit the furnace-to-tank transfer of 7075 sheet to about 10–15 s; CCT diagrams of Ti–6Al–4V show when cooling from the β field gives α′ martensite, basket-weave α or colony α, which matters for forged and additively manufactured aerospace parts (Chapter 48); crystallization TTT curves set critical cooling rates for glasses and bulk metallic glasses (Chapter 9); and weld-cycle CCT diagrams predict heat-affected-zone hardness and hydrogen-cracking risk (Chapter 47).
 
 **Table 10.5 — Reading a transformation diagram: questions and answers.**
 
@@ -533,13 +557,13 @@ The same tools appear wherever a transformation competes with cooling: quench-se
 | How do dislocations climb, cross-slip and arrange into walls during recovery, and why does stacking-fault energy matter? | Chapter 12 |
 | How are steels heat-treated in practice: tempering stages, hardenability, Jominy, alloy and advanced high-strength steels? | Chapter 15 |
 | Which aluminium, titanium, nickel and copper alloys use these transformations, and in which tempers? | Chapter 16 |
-| How does γ′ coarsening and rafting set the creep life of turbine blades? | Chapters 14 and 33 |
+| How does γ′ coarsening and rafting set the creep life of turbine blades? | Chapters 14 and 41 |
 | How is transformation toughening used in zirconia and how does it give R-curves? | Chapter 14 |
-| How are shape-memory and superelastic alloys designed as actuators and medical devices? | Chapters 29 and 31 |
-| How do Goss texture and grain size control losses in electrical steels? | Chapter 27 |
-| How are recrystallization and grain growth used in rolling, forging and thermomechanical processing, and in welds? | Chapters 38 and 39 |
-| How are precipitates and spinodal modulations a few nanometres across actually observed? | Chapters 42 and 43 (TEM, atom-probe tomography) |
-| How are Cahn–Hilliard and microstructure evolution simulated quantitatively? | Chapter 46 (phase-field modelling) |
+| How are shape-memory and superelastic alloys designed as actuators and medical devices? | Chapters 37 and 39 |
+| How do Goss texture and grain size control losses in electrical steels? | Chapter 29 |
+| How are recrystallization and grain growth used in rolling, forging and thermomechanical processing, and in welds? | Chapters 46 and 47 |
+| How are precipitates and spinodal modulations a few nanometres across actually observed? | Chapters 52 and 53 (TEM, atom-probe tomography) |
+| How are Cahn–Hilliard and microstructure evolution simulated quantitatively? | Chapter 56 (phase-field modelling) |
 | How were the driving forces, nucleation barriers and JMAK kinetics used here derived? | Chapters 6 and 9 (back references) |
 
 **Next:** Chapter 11 opens Part III by asking how a solid responds to force — from the elastic stretching of bonds to the tests that measure yield, strength, hardness and toughness — the properties these transformations exist to control.

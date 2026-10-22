@@ -1,122 +1,749 @@
-# Chapter 25 — Electrical, Dielectric and Superconducting Materials
+# Chapter 25 — Electrical Conduction in Materials
 
-*Part VI · Physical and Functional Properties*
+*Part VI · Thermal, Electrical, Dielectric and Magnetic Materials*
 
-A wind-farm operator commissions a 30 km export cable from an offshore substation. Two years later a joint in the cable fails and the line is out of service for four months while a repair vessel is chartered. The post-mortem draws three materials lessons from one metre of cable. The copper conductor had been specified by cross-section, but an aluminium alternative of 1.6 times the area would have weighed half as much and carried the same current. The cross-linked polyethylene insulation was in good condition everywhere except next to the joint, where a sharp edge on a connector had concentrated the field, and a small cavity in the hand-applied joint insulation had sustained partial discharges for months until an electrical tree bridged the wall. And the monitoring sensors in the joint, piezoelectric acoustic detectors that might have heard the discharges, had been fitted but not connected.
+A battery-pack designer switches the main busbars of an electric scooter from copper to aluminium to save weight. The new pack passes its bench tests, but after a few hundred charge cycles the bolted joints at the cell terminals run hot. The thermal camera shows a cluster of hot spots of 40 K and more, all at the joints, none along the bars. The bars themselves were sized correctly: aluminium has 1.6 times the resistivity of copper, and the designer made the cross-section 1.6 times larger. What the calculation left out was that the current does not flow through the whole face of a bolted joint. It flows through a few microscopic contact spots, and aluminium covers itself within seconds with a hard insulating oxide. The resistance that mattered was a property of a surface and a few micrometre-sized spots, not of the bulk.
 
-This chapter treats materials that carry current by electrons or by ions, materials that block it while storing field energy, materials whose polarization couples to stress and temperature, and materials that carry current with no resistance at all. Semiconductors, where the carrier density itself is the design variable, follow in Chapter 26. The *Materials Core (EEE)* book, Chapters 7–9 and 17, treats each topic in more depth.
+This chapter is about what sets the resistance of real conductors: bulk metals, alloys, thin films, contacts and filled polymers. The central idea is simple. Every conductor has carriers, and those carriers are scattered. The density of carriers is fixed by the electronic structure of the material. Scattering is what the engineer controls through composition, temperature, defects, grain size and geometry.
 
-> **Why does a small addition of almost any element lower the conductivity of copper, and why do engineers accept it?**
-> **How can a ceramic conduct electricity well enough to be the electrolyte of a fuel cell?**
-> **Why does a polymer insulator that withstands 200 kV/mm in a laboratory film fail at 20 kV/mm in a cable?**
-> **Why do practical superconducting magnets use alloys and brittle compounds rather than the elements that superconduct best?**
+> **Why is copper a better conductor than brass, even though both are mostly copper?**
+> **Why does a 20 nm copper line have twice the resistivity of a copper wire?**
+> **Why do the joints, rather than the conductors, so often limit a high-current design?**
 
 | Concept | Engineering destination |
 |---|---|
-| Drude conductivity, mobility, scattering | Conductor sizing in power, aerospace and automotive wiring; electrical heating elements |
-| Matthiessen and Nordheim rules | Choosing conductor alloys that trade conductivity for strength (overhead lines, springs, welding electrodes) |
-| Ionic conduction, Nernst–Einstein relation | Solid-oxide fuel cells, oxygen sensors in car exhausts, solid-state batteries |
-| Permittivity, polarization mechanisms, loss tangent | Capacitors, cable insulation, PCB laminates, radomes, microwave and RF heating |
-| Breakdown, partial discharge, ageing | High-voltage cables, motor windings, outdoor insulators, battery-pack insulation |
-| Ferro-, piezo- and pyroelectricity | Ultrasound probes, fuel injectors, sonar, structural health monitoring, infrared detectors |
-| Superconductivity and flux pinning | MRI and NMR magnets, particle accelerators, fusion magnets, power cables, SQUID sensors |
+| Resistivity, conductivity, sheet resistance | Conductor sizing, PCB trace width, film resistors |
+| Mobility and scattering time | Why alloys and films conduct worse; link to semiconductors (Chapter 32) |
+| Temperature coefficient of resistance | Winding temperature measurement, RTDs, precision shunts |
+| Matthiessen and Nordheim rules | Alloy choice for connectors, springs, heating elements |
+| Holm constriction resistance | Connector, relay, busbar-joint and battery-terminal design |
+| Thin-film size effects | On-chip interconnects, thin-film resistors, transparent electrodes |
+| Percolation in composites | Conductive adhesives, ESD plastics, PTC fuses, thick-film resistors |
+| Wiedemann–Franz law | Estimating thermal conductivity of alloys and solders; contact heating |
+| Selection indices | Wires, contacts, interconnects, electrodes |
 
-**Roadmap.** Conduction in metals and alloys (25.1) → ionic conduction and solid electrolytes (25.2) → dielectric polarization, permittivity and loss (25.3) → breakdown and insulation (25.4) → ferroelectric, piezoelectric and pyroelectric materials (25.5) → superconductivity (25.6).
+**Roadmap.** Conductivity and resistivity as material properties (25.1) → carriers, mobility and scattering (25.2) → temperature dependence and TCR (25.3) → metals and alloys, Matthiessen and Nordheim (25.4) → contacts (25.5) → thin films (25.6) → conductive composites (25.7) → electrical versus thermal conductivity (25.8) → material selection (25.9) → ionic conduction and solid electrolytes (25.10).
 
 ---
 
-## 25.1 Conduction in metals: Drude, Matthiessen and alloy resistivity
+## 25.1 Conductivity and resistivity
 
-### Resistivity as a material property
+### From resistance to a material property
 
-A uniform bar of length $L$ and cross-section $A$ has resistance
+The resistance of a uniform bar of length $L$ and cross-section $A$ is
 
 $$
 R=\rho\,\frac{L}{A}
 $$
 
-where the **resistivity** $\rho$ ($\Omega\,\mathrm m$) depends only on the material and its state; its reciprocal is the conductivity $\sigma=1/\rho$ ($\mathrm{S/m}$). The local form, $\mathbf J=\sigma\mathbf E$, is Ohm's law at a point. In cubic metals $\sigma$ is a scalar; in graphite, many oxides and fibre composites it is a second-rank tensor (Chapter 4), so the current need not flow along the field.
+where the **resistivity** $\rho$ (unit $\Omega\,\mathrm{m}$) depends only on the material and its state (temperature, composition, microstructure). Its reciprocal is the **conductivity** $\sigma=1/\rho$ (unit $\mathrm{S/m}$). The geometry has been separated from the material.
 
-Resistivity spans more than 25 orders of magnitude at room temperature, from silver ($1.6\times10^{-8}\ \Omega\,\mathrm m$) to PTFE (above $10^{16}\ \Omega\,\mathrm m$), with superconductors at exactly zero. In practice two engineering units are common: **% IACS**, the conductivity as a percentage of annealed standard copper ($\rho=1.7241\ \mu\Omega\,\mathrm{cm}$, i.e. 58.0 MS/m), and **sheet resistance** $R_s=\rho/t$ in ohms per square for films and coatings.
-
-### The Drude model
-
-Treat the conduction electrons of a metal as a gas of $n$ free carriers per unit volume, of charge $-e$ and mass $m$, accelerated by the field and randomized by collisions at an average interval $\tau$ (the **relaxation time**). In steady state the mean (drift) velocity is $v_d=e\tau E/m$, and the current density $J=nev_d$ gives
+The local form of Ohm's law says the same thing without any bar:
 
 $$
-\sigma=\frac{ne^2\tau}{m}=ne\mu,\qquad \mu=\frac{e\tau}{m}
+\mathbf J=\sigma\,\mathbf E
 $$
 
-where $\mu$ is the **mobility**, drift velocity per unit field. The two factors separate what the engineer cannot change from what they can: $n$ is fixed by the electronic structure (about one to three conduction electrons per atom in simple metals), while $\tau$ is set by scattering from lattice vibrations, solute atoms, vacancies, dislocations, grain boundaries and surfaces — all of which are microstructure.
+The current density at a point is proportional to the electric field at that point. This is the form used in field solvers and in every derivation below. For an anisotropic crystal (graphite, many oxides, some intermetallics) $\sigma$ is a tensor and $\mathbf J$ need not be parallel to $\mathbf E$ (Chapter 4). Cubic metals are isotropic, and we will treat $\sigma$ as a scalar unless stated.
 
-> **Status of the principle: Drude conductivity $\sigma=ne^2\tau/m$**
-> *Approximate.* It assumes one relaxation time for free carriers. The form survives in band theory with $m$ replaced by an effective mass and $\tau$ evaluated at the Fermi energy (Chapter 26 and the Engineering Physics book); the classical model gets the electron speed and heat capacity wrong but the conductivity formula right.
+> **Status of the principle: Ohm's law $\mathbf J=\sigma\mathbf E$**
+> *Approximate.* It is the linear term of the current response to a field. It holds very well in metals up to current densities far beyond any practical use, because the drift velocity stays tiny compared with the electron speed (Section 25.2). It fails at high fields in semiconductors (velocity saturation, Chapter 32), in insulators near breakdown (Chapter 26) and in very short channels where carriers do not scatter at all.
 
-**Worked example — what limits current in a copper conductor.** Copper has $n=8.47\times10^{28}\ \mathrm{m^{-3}}$ (one electron per atom) and $\rho=1.68\times10^{-8}\ \Omega\,\mathrm m$ at 20 °C. The relaxation time is
+### Units engineers actually use
 
-$$
-\tau=\frac{m}{ne^2\rho}=\frac{9.11\times10^{-31}}{(8.47\times10^{28})(1.602\times10^{-19})^2(1.68\times10^{-8})}=2.49\times10^{-14}\ \mathrm s
-$$
+Several practical units are in daily use and are easy to confuse:
 
-and the mobility $\mu=e\tau/m=4.39\times10^{-3}\ \mathrm{m^2/(V\,s)}$, or 44 cm²/(V s) — far lower than in silicon (1350 cm²/(V s), Chapter 26). Copper conducts well not because its electrons are mobile but because there are so many of them. At a typical design current density of 5 A/mm² ($5\times10^6\ \mathrm{A/m^2}$) the drift velocity is $v_d=J/(ne)=3.7\times10^{-4}\ \mathrm{m/s}$, less than half a millimetre per second. The electrons that carry the current actually move at the Fermi velocity, $v_F=1.57\times10^6\ \mathrm{m/s}$, so the mean free path between collisions is $\ell=v_F\tau=39$ nm. That length is the key to size effects: once a wire, film or grain approaches tens of nanometres, its surfaces and boundaries become extra scatterers and resistivity rises — the reason on-chip copper interconnects narrower than about 40 nm have two or more times the bulk resistivity.
+- $\mu\Omega\,\mathrm{cm}$: $1\ \mu\Omega\,\mathrm{cm}=10^{-8}\ \Omega\,\mathrm{m}$. Copper is about $1.7\ \mu\Omega\,\mathrm{cm}$.
+- $\Omega\,\mathrm{mm^2/m}$: the wire-table unit. $1\ \Omega\,\mathrm{mm^2/m}=10^{-6}\ \Omega\,\mathrm{m}$. Copper is $0.0172\ \Omega\,\mathrm{mm^2/m}$.
+- **% IACS** (International Annealed Copper Standard): conductivity as a percentage of that of standard annealed copper, defined as $\rho=1.7241\times10^{-8}\ \Omega\,\mathrm{m}$ at 20 °C (that is, $58.0\ \mathrm{MS/m}$). Modern high-purity copper exceeds 100 % IACS (about 101–102 %).
+- **Sheet resistance** $R_s=\rho/t$ for a film of thickness $t$, in ohms per square ($\Omega/\square$). A line of length $L$ and width $W$ has $R=R_s\,L/W$, i.e. $R_s$ times the number of squares. It is the natural unit for PCB copper, thin films and printed conductors (Section 25.6).
 
-The current-carrying limit of a conductor is therefore never the electrons; it is heating ($I^2R$ loss against the thermal rating of the insulation, Section 25.4), voltage drop, and at very high current densities in microelectronics, electromigration (Chapter 36).
+### The widest range of any physical property
 
-### Temperature dependence and Matthiessen's rule
+Resistivity spans more than 25 orders of magnitude at room temperature, from silver ($1.6\times10^{-8}\ \Omega\,\mathrm{m}$) to PTFE (above $10^{16}\ \Omega\,\mathrm{m}$), and superconductors drop to zero (Chapter 30). Few other material properties vary over such a range. It is why the same field equation can describe a busbar and a cable insulation, and why measurement methods differ so much between conductors (four-point probe, Chapter 52) and insulators (guarded electrodes, Chapter 26).
 
-Above roughly a third of the Debye temperature (Chapter 24), the number of phonons is proportional to $T$, so the phonon-limited resistivity rises linearly: copper's temperature coefficient of resistance (TCR) is $\alpha\approx3.9\times10^{-3}\ \mathrm{K^{-1}}$, so its resistance rises 39 % from 20 °C to 120 °C. Below about 30 K the phonons freeze out and the resistivity falls to a constant **residual resistivity** set by impurities and defects. Because independent scattering mechanisms add their rates, the resistivities add:
+| Material class | Example | Typical $\rho$ at 20 °C ($\Omega\,\mathrm{m}$) |
+|---|---|---|
+| Pure metals | Ag, Cu, Al | $1.6$–$2.7\times10^{-8}$ |
+| Resistance alloys | Constantan, Nichrome | $0.5$–$1.1\times10^{-6}$ |
+| Conductive oxides | ITO film, RuO$_2$ | $10^{-6}$–$10^{-5}$ |
+| Graphite (polycrystalline) | Electrode graphite | $\approx 10^{-5}$ |
+| Conductive composites | Ag-filled epoxy; carbon-filled polymer | $10^{-6}$–$10^{-3}$; $10^{-2}$–$10^{2}$ |
+| Semiconductors | Si (doped to intrinsic) | $10^{-5}$–$2\times10^{3}$ |
+| Static-dissipative plastics | ESD trays | $10^{4}$–$10^{9}$ |
+| Glasses and ceramics | Soda-lime glass, alumina | $10^{9}$–$>10^{12}$ |
+| Polymers | Epoxy, PE, PTFE | $10^{12}$–$>10^{16}$ |
 
-$$
-\rho(T)=\rho_{\mathrm{ph}}(T)+\rho_{\mathrm{imp}}+\rho_{\mathrm{def}}
-$$
+<!-- FIGURE 25.1 | figures/ch25/fig-25-1-resistivity-spectrum.png | map | The resistivity of engineering materials at room temperature spans more than 25 orders of magnitude. | Content: horizontal log axis of resistivity from 1e-9 to 1e18 ohm m. Horizontal bars (ranges) stacked by class: superconductors (arrow at zero, left edge), pure metals (Ag, Cu, Au, Al, W, Fe, Ti labelled as points 1.6e-8 to 4.2e-7), resistance alloys (manganin, constantan, nichrome 4e-7 to 1.1e-6), conductive oxides and graphite (1e-6 to 1e-4), conductive composites (1e-6 to 1e2), semiconductors Si/Ge/GaAs (1e-5 to 1e6, note doping range), ESD plastics (1e4 to 1e9), glasses and ceramics (1e9 to 1e14), polymers (1e12 to 1e17). Vertical shaded bands labelled conductors, semiconductors, insulators. -->
 
-This is **Matthiessen's rule** (Figure 25.1). Solute atoms add a temperature-independent term, roughly proportional to concentration at low levels; cold work adds a small term from dislocations and vacancies (typically a few per cent for copper); grain boundaries add a term that matters only when grains are smaller than about a micrometre. The ratio of room-temperature to 4.2 K resistance, the **residual resistance ratio** (RRR), is a sensitive purity test: oxygen-free copper has RRR 100–300, and superconductor stabilizer copper (Section 25.6) is specified above 100.
+![Figure 25.1 — The resistivity of engineering materials at room temperature spans more than 25 orders of magnitude](../figures/ch25/fig-25-1-resistivity-spectrum.png)
 
-> **Status of the principle: Matthiessen's rule**
-> *Empirical.* It follows from adding independent scattering rates. The mechanisms are not strictly independent, so deviations of a few per cent of the residual term are common, and the rule fails in concentrated alloys and magnetic systems; it remains the standard first estimate.
+*Figure 25.1 — The resistivity of engineering materials at room temperature spans more than 25 orders of magnitude.*
 
-<!-- FIGURE 25.1 | figures/ch25/fig-25-1-matthiessen-rho-vs-t.png | plot | Matthiessen's rule: solute and defects shift the resistivity–temperature curve upward without changing its slope. | Content: x-axis temperature 0 to 400 K; y-axis resistivity 0 to 5 micro-ohm cm. Curves: high-purity annealed Cu (residual about 0.002, 1.7 at 293 K, linear above about 100 K, T^5 knee below about 40 K); Cu + 0.5 at.% Ni (same shape shifted up by about 0.56, reaching about 2.26 at 293 K); the same alloy cold-worked (shifted up a further 0.04). Vertical arrows at 300 K labelling rho_ph(T), rho_imp, rho_def. Inset: RRR = R(293 K)/R(4.2 K), with values 100–300 for OFE Cu. -->
-
-### Alloy resistivity: Nordheim's rule and the strength–conductivity trade
-
-In a disordered binary solid solution A$_{1-x}$B$_x$ the residual resistivity follows **Nordheim's rule**,
-
-$$
-\rho_{\mathrm{imp}}=C\,x(1-x)
-$$
-
-a parabola with its maximum at 50 at.%. For dilute solutions it reduces to $\rho_{\mathrm{imp}}\approx Cx$. The constant $C$ grows with the difference in valence and electronic structure between solute and solvent: in copper, 1 at.% of silver adds only about 0.14 $\mu\Omega\,\mathrm{cm}$, 1 at.% of nickel about 1.1, and 1 at.% of phosphorus or iron several $\mu\Omega\,\mathrm{cm}$ — which is why phosphorus-deoxidized copper for plumbing is unsuitable for conductors and why conductor copper is refined to 99.95 % or better. Ordered alloys break the rule: the Cu$_3$Au and CuAu ordered phases have far lower resistivity than the same compositions quenched disordered, because a periodic arrangement does not scatter Bloch waves.
-
-The engineering consequence is the **strength–conductivity trade-off**. Every mechanism that strengthens a metal (Chapter 13) also scatters electrons, but not equally. Solid-solution strengthening is expensive in conductivity, because each solute atom is a scatterer. Precipitation and dispersion strengthening are cheap: a small volume fraction of coarse precipitates scatters little, so an age-hardened alloy whose solute has been pulled out of solution can be both strong and conductive. Cold work is cheaper still. Table 25.1 shows the result across conductor alloys.
-
-| Material (condition) | Conductivity (% IACS) | Yield strength (MPa) | Typical use |
-|---|---|---|---|
-| Oxygen-free Cu (annealed) | 101 | 60–70 | Busbars, windings, superconductor stabilizer |
-| Cu (hard-drawn) | 97 | 300–380 | Contact wire for railways |
-| Cu–Cr–Zr (aged) | 75–85 | 350–450 | Resistance-welding electrodes, rocket-engine liners |
-| Cu–Ni–Si (aged) | 40–50 | 550–750 | Connector springs, lead frames |
-| Cu–Be C17200 (aged) | 20–25 | 1000–1200 | Springs, non-sparking tools |
-| Brass Cu–30Zn | 27–28 | 100–450 | Terminals, cheap contacts |
-| Al 1350 (EC grade, H19) | 61–62 | 160–190 | Overhead line strands, cable conductors |
-| Al 6101/6201 (T6/T81) | 52–57 | 200–310 | Self-supporting overhead conductors, busbars |
-| Constantan Cu–45Ni | 3.5 | 200–450 | Strain gauges, thermocouples (low TCR) |
-| Nichrome Ni–20Cr | 1.6 | 300–400 | Heating elements to 1150 °C |
-
-*Table 25.1 — Representative conductivity and strength of conductor and resistance alloys at room temperature (typical values; strength varies with temper).*
-
-At the other extreme, high resistivity is the goal. Heating elements (Ni–Cr, Fe–Cr–Al) need resistivity above 1 $\mu\Omega\,\mathrm m$ and a protective oxide scale (Chapter 34). Precision resistors and strain gauges need a near-zero TCR: in constantan and manganin the residual resistivity is so large that the small phonon term barely changes it, giving TCRs of order $10^{-5}\ \mathrm{K^{-1}}$.
-
-**Worked example — copper or aluminium for a conductor of fixed resistance?** A conductor of length $L$ must have resistance $R$; its area is $A=\rho L/R$ and its mass $m=dAL=(\rho d)L^2/R$, where $d$ is the density. The material index to minimize is $\rho d=d/\sigma$. For annealed copper, $\sigma=58.0$ MS/m and $d=8960\ \mathrm{kg/m^3}$; for EC aluminium, $\sigma=35.5$ MS/m and $d=2700\ \mathrm{kg/m^3}$. The aluminium conductor needs $58.0/35.5=1.63$ times the cross-section, but its mass ratio is
-
-$$
-\frac{(d/\sigma)_{\mathrm{Al}}}{(d/\sigma)_{\mathrm{Cu}}}=\frac{2700/35.5}{8960/58.0}=0.49
-$$
-
-Aluminium carries the same current at half the weight. That is why overhead transmission lines (where the span weight sets tower spacing), aircraft power feeders and many electric-vehicle battery busbars use aluminium, while copper keeps the jobs where volume is scarcer than mass (motor windings, transformers, printed circuits) and where joints must be simple — aluminium's oxide, creep under bolt pressure and galvanic couple with copper make its joints the weak point (Chapter 35).
+Figure 25.1 shows this range by material class. The split into "conductors", "semiconductors" and "insulators" is not a matter of degree only. A metal's carrier density is fixed by its electronic structure and barely changes with temperature. A semiconductor's carrier density can be changed by many orders of magnitude by doping and temperature. An insulator has almost no free carriers at all. Explaining that split needs energy bands, which is the job of Chapter 31. This chapter takes the carrier density of a metal as given and asks what limits the current.
 
 ---
 
-## 25.2 Ionic conduction and solid electrolytes
+## 25.2 Mobility and scattering as material properties
+
+### The Drude picture
+
+Treat the conduction electrons of a metal as a gas of $n$ free carriers per unit volume, each with charge $-e$ and mass $m$. A field $\mathbf E$ accelerates each electron. Collisions with imperfections of the lattice randomize its momentum, on average once every **mean free time** (scattering time) $\tau$. Between collisions the field adds momentum $-e\mathbf E$ per unit time; collisions remove it at the rate $\langle\mathbf p\rangle/\tau$. In steady state the two balance:
+
+$$
+\frac{d\langle\mathbf p\rangle}{dt}=-e\mathbf E-\frac{\langle\mathbf p\rangle}{\tau}=0
+\quad\Longrightarrow\quad
+\mathbf v_d=\frac{\langle\mathbf p\rangle}{m}=-\frac{e\tau}{m}\,\mathbf E
+$$
+
+The **drift velocity** $\mathbf v_d$ is proportional to the field. The constant of proportionality is the **mobility**
+
+$$
+\mu=\frac{e\tau}{m}\qquad(\mathrm{m^2\,V^{-1}\,s^{-1}})
+$$
+
+The current density is the charge per volume times the drift velocity, $\mathbf J=-ne\mathbf v_d=ne\mu\mathbf E$, so
+
+$$
+\sigma=ne\mu=\frac{ne^2\tau}{m}
+$$
+
+This one equation organizes the whole chapter. Conductivity is a product of **how many carriers** ($n$) and **how freely they move** ($\mu$, or equivalently $\tau$). In semiconductors both factors vary and both are engineered (Chapter 32). In metals $n$ is essentially fixed at roughly one to three electrons per atom, about $10^{28}$–$10^{29}\ \mathrm{m^{-3}}$. All the differences between pure copper, brass, a thin copper film and hot copper come from $\tau$.
+
+> **Status of the principle: Drude conductivity $\sigma=ne^2\tau/m$**
+> *Approximate.* It assumes free carriers with a single relaxation time. The form survives in the band theory of Chapter 31 with $m$ replaced by an effective mass and $\tau$ evaluated for electrons at the Fermi energy. The classical Drude model gets the electron speed wrong, and with it the heat capacity and the mean free path (see below), but its conductivity formula is right.
+
+### What the numbers say about copper
+
+**Worked example — scattering time, mobility and mean free path of copper.** Copper has one conduction electron per atom. With density $8.96\ \mathrm{g/cm^3}$ and molar mass $63.55\ \mathrm{g/mol}$, $n=8.47\times10^{28}\ \mathrm{m^{-3}}$. At room temperature $\rho=1.68\times10^{-8}\ \Omega\,\mathrm{m}$.
+
+The scattering time:
+
+$$
+\tau=\frac{m}{ne^2\rho}=\frac{9.109\times10^{-31}}{(8.47\times10^{28})(1.602\times10^{-19})^2(1.68\times10^{-8})}=2.49\times10^{-14}\ \mathrm{s}
+$$
+
+The mobility:
+
+$$
+\mu=\frac{e\tau}{m}=\frac{1}{ne\rho}=\frac{1}{(8.47\times10^{28})(1.602\times10^{-19})(1.68\times10^{-8})}=4.39\times10^{-3}\ \mathrm{m^2/(V\,s)}=43.9\ \mathrm{cm^2/(V\,s)}
+$$
+
+This is low. Electrons in lightly doped silicon have a mobility of about $1400\ \mathrm{cm^2/(V\,s)}$. Copper conducts well because it has $10^{6}$–$10^{9}$ times more carriers, not because its carriers move easily.
+
+The drift velocity at a heavy current density $J=10\ \mathrm{A/mm^2}=10^{7}\ \mathrm{A/m^2}$:
+
+$$
+v_d=\frac{J}{ne}=\frac{10^{7}}{(8.47\times10^{28})(1.602\times10^{-19})}=7.4\times10^{-4}\ \mathrm{m/s}
+$$
+
+Less than a millimetre per second. The signal travels at a large fraction of the speed of light because the field propagates, not the electrons.
+
+The mean free path. The conduction electrons do not move at thermal speeds. They move at the **Fermi velocity**, $v_F=1.57\times10^{6}\ \mathrm{m/s}$ for copper, a quantum result explained in Chapter 31. The distance between scattering events is
+
+$$
+\lambda=v_F\tau=(1.57\times10^{6})(2.49\times10^{-14})=3.9\times10^{-8}\ \mathrm{m}=39\ \mathrm{nm}
+$$
+
+about 150 atomic spacings. Electrons pass straight through a perfect lattice. They are scattered only by departures from perfect periodicity. And 39 nm is close to the dimensions of modern on-chip wires, which is why Section 25.6 will find that thin copper does not behave like bulk copper.
+
+### What scatters electrons
+
+A perfectly periodic lattice does not scatter electrons at all. That result (Bloch's theorem, Chapter 31) is why a classical picture of electrons bouncing off every ion fails by two orders of magnitude in $\lambda$. Scattering comes only from **deviations from periodicity**, which are exactly the structural features of Chapters 2 and 5:
+
+| Scatterer | Origin | Temperature dependence | Controlled by |
+|---|---|---|---|
+| Phonons (lattice vibrations) | Thermal motion of atoms | Strong; $\propto T$ above about $\Theta_D/3$ | Temperature only |
+| Impurity atoms in solution | Composition | Nearly independent of $T$ | Purity, alloying |
+| Vacancies, interstitials | Quenching, irradiation | Independent of $T$ (if frozen in) | Annealing |
+| Dislocations | Cold work | Independent of $T$ | Annealing |
+| Grain boundaries | Polycrystalline structure | Independent of $T$ | Grain size (Section 25.6) |
+| External surfaces | Finite size | Independent of $T$ | Film thickness, wire width |
+| Precipitates | Second phase | Independent of $T$ | Heat treatment |
+
+Each scattering process has its own rate $1/\tau_i$. Because the processes are independent, the rates add:
+
+$$
+\frac{1}{\tau}=\frac{1}{\tau_{\rm ph}}+\frac{1}{\tau_{\rm imp}}+\frac{1}{\tau_{\rm def}}+\cdots
+$$
+
+and since $\rho=m/(ne^2\tau)$ is proportional to $1/\tau$, the resistivities add. This is Matthiessen's rule, taken up in Section 25.4. The mobility and scattering time are therefore material properties in the same sense as yield strength: they depend on composition, temperature and microstructure, and processing sets them.
+
+> **Boundary.** The quantum-mechanical reason a periodic lattice does not scatter, and the meaning of $v_F$ and the effective mass, belong to Chapter 31 (and in full to Engineering Physics). Here we use them as material parameters.
+
+---
+
+## 25.3 Temperature coefficients of resistance
+
+### Definition
+
+The **temperature coefficient of resistance** (TCR) at a reference temperature $T_0$ is
+
+$$
+\alpha_0=\frac{1}{\rho(T_0)}\left.\frac{d\rho}{dT}\right\rvert_{T_0}
+$$
+
+Over a limited range the resistivity is close to linear,
+
+$$
+\rho(T)\approx\rho(T_0)\left[1+\alpha_0\,(T-T_0)\right]
+$$
+
+so that $\alpha_0$ is the fractional change per kelvin. The value depends on the reference temperature, because $\rho(T_0)$ appears in the denominator. Datasheets usually quote $\alpha_{20}$ (or $\alpha_{25}$). TCR is often given in $\mathrm{ppm/K}$; $1\ \mathrm{ppm/K}=10^{-6}\ \mathrm{K^{-1}}$.
+
+### Why pure metals have a TCR near 0.4 % per kelvin
+
+Above roughly a third of the Debye temperature $\Theta_D$, the number of thermally excited phonons is proportional to $T$, and so is the phonon scattering rate. The phonon resistivity is then linear in absolute temperature, $\rho_{\rm ph}\approx bT$. If phonons dominate, extrapolating $\rho$ linearly downward reaches zero near $T=0\ \mathrm K$, and the TCR at temperature $T$ is close to $1/T$. At 293 K that gives about $0.0034\ \mathrm{K^{-1}}$. Real pure metals have $\alpha_{20}=0.0039$–$0.0045\ \mathrm{K^{-1}}$. They are slightly higher because the phonon resistivity is not exactly linear and because the extrapolated zero lies a little above 0 K (for copper the linear extrapolation hits zero at $-234.5$ °C, i.e. 38.7 K).
+
+At low temperature the phonon contribution collapses (as $T^5$ in the Bloch–Grüneisen model for $T\ll\Theta_D$) and only the temperature-independent residual part remains. The ratio $\rho(300\ \mathrm K)/\rho(4.2\ \mathrm K)$, the **residual resistivity ratio** (RRR), is a sensitive measure of purity and perfection: about 50–100 for commercial copper and several thousand for annealed 6N copper. RRR matters in cryogenic electronics and in stabilizers for superconducting wires (Chapter 30).
+
+> **Status of the principle: $\rho_{\rm ph}\propto T$ above about $\Theta_D/3$**
+> *Approximate.* It follows from the classical (high-temperature) population of phonons. It fails at low temperature, where phonons freeze out, and is modified near the melting point and in metals with complex band structure (transition metals such as Ni and Pt show curvature).
+
+### Engineering values
+
+| Material | $\rho_{20}$ ($10^{-8}\ \Omega\,\mathrm{m}$) | $\alpha_{20}$ ($10^{-3}\ \mathrm{K^{-1}}$) | Use |
+|---|---|---|---|
+| Copper (annealed, IACS) | 1.724 | 3.93 | Windings, wiring |
+| Aluminium (EC grade 1350) | 2.82 | 4.03 | Overhead lines, busbars |
+| Silver | 1.59 | 3.8 | Contacts, plating |
+| Gold | 2.2 | 3.4 | Contacts, bond wires |
+| Platinum | 10.6 | 3.85 (IEC 60751, 0–100 °C) | RTDs (Pt100) |
+| Nickel | 6.9 | 6.0 | Thermistors, sensors |
+| Tungsten | 5.3 | 4.5 | Lamp filaments, contacts |
+| Nichrome (80Ni–20Cr) | 108 | about 0.1 | Heating elements, film resistors |
+| Constantan (55Cu–45Ni) | 49 | about $\pm0.02$ | Thermocouples, strain gauges |
+| Manganin (86Cu–12Mn–2Ni) | 43 | about $\pm0.01$ | Precision shunts, standards |
+| Carbon (graphite) | about 1000 | about $-0.5$ | Carbon resistors, brushes |
+
+The table splits into two groups that serve opposite purposes. Pure metals have a large, reproducible TCR, which is exactly what a **temperature sensor** needs. The platinum resistance thermometer (Pt100: $100\ \Omega$ at 0 °C) is the industrial standard because platinum is chemically stable and its $\rho(T)$ is reproducible to millikelvins; its curve is described by the Callendar–Van Dusen equation, an empirical quadratic (cubic below 0 °C). Concentrated alloys have a tiny TCR, which is what a **precision resistor or shunt** needs. Section 25.4 explains why alloying flattens $\rho(T)$.
+
+### Measuring a winding temperature by its resistance
+
+Since copper's TCR is reproducible, the resistance of a winding is a thermometer averaged over the whole winding. Standards for motors and transformers (IEC 60034, IEEE C57) use this "resistance method". Writing $\rho\propto(T+234.5)$ for copper with $T$ in °C:
+
+$$
+\frac{R_2}{R_1}=\frac{234.5+T_2}{234.5+T_1}
+$$
+
+(for aluminium the constant is 225 or 228, depending on the standard and grade).
+
+**Worked example — winding temperature rise.** A transformer winding measures $R_1=2.000\ \Omega$ at the ambient temperature of 20 °C. Immediately after a heat run it measures $R_2=2.480\ \Omega$. The hot temperature is
+
+$$
+T_2=\frac{R_2}{R_1}(234.5+T_1)-234.5=\frac{2.480}{2.000}(254.5)-234.5=315.6-234.5=81.1\ ^\circ\mathrm C
+$$
+
+The average winding rise is 61 K. Two lessons follow. First, a 24 % increase in resistance is a 24 % increase in $I^2R$ loss at the same current, so hot copper is less efficient copper, and loss estimates must be made at the operating temperature (75 °C or 115 °C reference temperatures are used in standards for this reason). Second, the method gives an average. The hottest spot may be 10–20 K hotter, which is what insulation life depends on (Chapter 26).
+
+---
+
+## 25.4 Conductivity in metals and alloys
+
+### Why pure metals differ
+
+Within the pure metals, resistivity varies by a factor of about 30 at room temperature (silver $1.6$, titanium $42\times10^{-8}\ \Omega\,\mathrm{m}$). The variation tracks the electronic structure. The noble metals Cu, Ag, Au have a single s-electron outside a filled d-shell; their conduction electrons have a small effective mass and few states to scatter into, and they are the best conductors. Aluminium has three free electrons per atom but scatters them more strongly. Transition metals (Fe, Ni, Pt, Ti) have partially filled d bands that offer many empty states into which an s-electron can be scattered. Their scattering rates are higher and their resistivities are 4–25 times that of copper. These trends come from band structure (Chapter 31). The engineer's working rule is simpler: **for low resistivity, use Ag, Cu, Au or Al, and keep them pure.**
+
+| Metal | $\rho_{20}$ ($10^{-8}\ \Omega\,\mathrm{m}$) | % IACS | Density ($\mathrm{g/cm^3}$) | Melting point (°C) |
+|---|---|---|---|---|
+| Silver | 1.59 | 108 | 10.5 | 962 |
+| Copper (OFE, annealed) | 1.69 | 102 | 8.96 | 1085 |
+| Gold | 2.2 | 78 | 19.3 | 1064 |
+| Aluminium (99.99 %) | 2.65 | 65 | 2.70 | 660 |
+| Magnesium | 4.4 | 39 | 1.74 | 650 |
+| Tungsten | 5.3 | 33 | 19.3 | 3422 |
+| Zinc | 5.9 | 29 | 7.14 | 420 |
+| Nickel | 6.9 | 25 | 8.90 | 1455 |
+| Iron | 9.7 | 18 | 7.87 | 1538 |
+| Platinum | 10.6 | 16 | 21.5 | 1768 |
+| Tin | 11.5 | 15 | 7.29 | 232 |
+| Lead | 21 | 8 | 11.3 | 327 |
+| Titanium | 42 | 4 | 4.51 | 1668 |
+
+### Matthiessen's rule
+
+Section 25.2 showed that independent scattering rates add. Translating to resistivity:
+
+$$
+\rho(T,c,\text{defects})=\rho_{\rm ph}(T)+\rho_{\rm imp}(c)+\rho_{\rm def}
+$$
+
+The thermal part depends only on temperature and is the same for pure copper and dilute copper alloys. The residual parts depend on composition and defects and not on temperature. Plotting $\rho(T)$ for a pure metal and a dilute alloy gives two curves of the same shape, displaced vertically by a constant (Figure 25.2).
+
+<!-- FIGURE 25.2 | figures/ch25/fig-25-2-matthiessen-rho-vs-t.png | plot | Matthiessen's rule: impurities and defects shift the resistivity curve upward without changing its temperature-dependent part. | Content: x-axis temperature 0 to 400 K; y-axis resistivity 0 to 5 micro-ohm cm. Curves: high-purity annealed Cu (residual about 0.002, reaching 1.7 at 293 K, T^5 knee below about 50 K, linear above about 100 K); Cu + 1 at.% Ni (same shape, shifted up by about 1.1); cold-worked Cu + 1 at.% Ni (shifted up a further 0.05). Annotate rho_ph(T), rho_imp, rho_def as vertical arrows at 300 K; mark Theta_D/3 for Cu (about 115 K) and the residual resistivity at 4 K. Inset: RRR definition. -->
+
+![Figure 25.2 — Matthiessen's rule: impurities and defects shift the resistivity curve upward without changing its temperature-dependent part](../figures/ch25/fig-25-2-matthiessen-rho-vs-t.png)
+
+*Figure 25.2 — Matthiessen's rule: impurities and defects shift the resistivity curve upward without changing its temperature-dependent part.*
+
+Figure 25.2 shows the consequence for the TCR. The slope $d\rho/dT$ is the same for the pure metal and the alloy, but $\rho$ is larger for the alloy, so the TCR $\alpha=(1/\rho)\,d\rho/dT$ is smaller. Adding a residual resistivity lowers the TCR. A concentrated alloy with a large residual term and an almost flat curve, such as manganin or constantan, is the extreme case.
+
+> **Status of the principle: Matthiessen's rule**
+> *Empirical.* It follows from adding independent scattering rates, but scattering processes are not strictly independent (impurities change the phonon spectrum and the electron distribution). Deviations of a few per cent of the residual resistivity are common, and the rule fails badly in concentrated alloys and at low temperature in some systems. It remains the standard first estimate.
+
+### Impurities: a little goes a long way
+
+Each dissolved impurity atom adds its own resistivity, roughly in proportion to its concentration while dilute. The increment per atomic per cent varies enormously with the solute:
+
+| Solute in copper | Approximate $\Delta\rho$ ($\mu\Omega\,\mathrm{cm}$ per at.%) |
+|---|---|
+| Ag | 0.14 |
+| Zn | 0.3 |
+| Au | 0.55 |
+| Ni | 1.1 |
+| Sn | 2.9 |
+| P | 6.7 |
+| Fe | 9 |
+
+The pattern is that solutes chemically similar to the host (Ag, Au, Zn) scatter weakly; solutes with a different valence or an open d-shell (P, Fe, Co) scatter strongly. Two industrial consequences follow:
+
+- **Phosphorus-deoxidized copper** (Cu-DHP, about 0.02 wt% P) is easy to braze and weld, but its conductivity is about 85 % IACS. Electrical conductors use electrolytic tough pitch (Cu-ETP) or oxygen-free (Cu-OF) copper at 100–101 % IACS. A tiny residue of the wrong element costs 15 % of the conductivity.
+- **Silver-bearing copper** (about 0.03–0.1 % Ag) keeps nearly full conductivity while raising the softening temperature, which is why it is used for commutators and windings that are hot during manufacturing.
+
+### Concentrated alloys: Nordheim's rule
+
+When a second element is added beyond the dilute limit, the residual resistivity of a disordered solid solution $A_{1-x}B_x$ follows approximately
+
+$$
+\rho_{\rm alloy}\approx\rho_{\rm ph}(T)+C\,x(1-x)
+$$
+
+where $C$ is a constant for the pair of elements. The resistivity is largest near $x=0.5$, where the lattice is most disordered, and returns to the pure-metal value at both ends. Copper–nickel (complete solid solubility) is the classic case; its resistivity rises from 1.7 to about $50\ \mu\Omega\,\mathrm{cm}$ near 45 % Ni, which is constantan.
+
+<!-- FIGURE 25.3 | figures/ch25/fig-25-3-nordheim-cu-ni-cu-au.png | plot | Resistivity across two complete solid-solution systems: the Nordheim parabola in Cu–Ni and the effect of atomic ordering in Cu–Au. | Content: x-axis composition 0 to 100 at.% of second element; y-axis residual plus room-temperature resistivity in micro-ohm cm (0 to 55). Curve 1: Cu-Ni, near-parabolic peak about 50 near 45 at.% Ni, annotate constantan and Cu-Ni 90/10 (about 19). Curve 2: Cu-Au quenched (disordered), smooth parabola with peak about 15 at 50 at.%. Curve 3: Cu-Au annealed (ordered), sharp minima at Cu3Au (25 at.%) and CuAu (50 at.%) dropping to about 4-5. Annotate "order removes scattering". -->
+
+![Figure 25.3 — Resistivity across two complete solid-solution systems: the Nordheim parabola in Cu–Ni and the effect of atomic ordering in Cu–Au](../figures/ch25/fig-25-3-nordheim-cu-ni-cu-au.png)
+
+*Figure 25.3 — Resistivity across two complete solid-solution systems: the Nordheim parabola in Cu–Ni and the effect of atomic ordering in Cu–Au.*
+
+Figure 25.3 also shows the second half of the story. If the alloy **orders**, so that A and B atoms occupy regular sublattices (Cu$_3$Au, CuAu), the lattice becomes periodic again and the resistivity drops sharply. Disorder, not composition as such, is what scatters. The same principle explains why intermetallic compounds such as Cu$_6$Sn$_5$ in solder joints (Chapter 51) have moderate resistivity, not a disordered-alloy value.
+
+> **Status of the principle: Nordheim's rule**
+> *Empirical.* It describes disordered binary solid solutions of elements with similar electronic structure. It fails for ordered alloys, for transition-metal solutes with magnetic effects, and when phases separate.
+
+### Strength versus conductivity
+
+Pure annealed copper is soft (yield strength about 70 MPa). A connector spring, a trolley wire or a lead frame needs much more strength. Every strengthening mechanism of Chapter 13 works by introducing obstacles to dislocations, and every obstacle also scatters electrons. The question is how much conductivity each mechanism costs:
+
+| Strengthening mechanism | Effect on strength | Effect on conductivity | Example |
+|---|---|---|---|
+| Cold work (dislocations) | Large (yield up to about 350 MPa) | Small (2–3 % IACS lost) | Hard-drawn Cu wire |
+| Solid solution | Moderate | Large (solute in the lattice scatters strongly) | Brass, phosphor bronze, Cu–Ni |
+| Precipitation hardening | Large | Small to moderate (solute removed from lattice into particles) | CuCrZr, CuBe, CuNiSi |
+| Grain refinement | Moderate | Small in bulk | Fine-grained Cu |
+| Dispersion strengthening | Moderate, stable when hot | Small | Al$_2$O$_3$-dispersed Cu (Glidcop) |
+
+The key is where the alloying atoms sit. A solute dissolved in the lattice scatters on every atomic scale; the same atoms gathered into precipitates scatter only at the particle surfaces, a far smaller area. Precipitation-hardened alloys therefore give the best compromise:
+
+| Alloy | Typical conductivity (% IACS) | Typical yield strength (MPa) | Use |
+|---|---|---|---|
+| Cu-ETP, annealed | 101 | 70 | Wire, busbar |
+| Cu-ETP, hard drawn | 97 | 300–350 | Overhead contact wire |
+| CuCrZr (aged) | 75–85 | 300–450 | Welding electrodes, lead frames |
+| CuNiSi (C70250, aged) | 35–45 | 550–700 | Connector springs |
+| CuBe (C17200, aged) | 20–25 | 1000–1200 | High-reliability springs |
+| Brass C26000 (70Cu–30Zn) | 28 | 100–450 | Terminals, housings |
+| Phosphor bronze C51000 | 15 | 300–700 | Spring contacts |
+| Al 1350 (EC) | 61–62 | 30–165 | Conductors |
+| Al 6101/6201 (Al–Mg–Si, aged) | 52–57 | 170–300 | Busbars, overhead conductors |
+
+The answer to the first opening question is now clear. Brass has 28 % IACS, not 100 %, because 30 % zinc in solid solution makes the copper lattice disordered on every atomic scale. Brass is chosen for terminals because it is cheap, machinable and strong enough, not because it conducts well.
+
+**Worked example — aluminium for copper.** Replace a copper busbar ($\rho_{\rm Cu}=1.72\times10^{-8}\ \Omega\,\mathrm{m}$) with EC aluminium ($\rho_{\rm Al}=2.82\times10^{-8}\ \Omega\,\mathrm{m}$) of the same length and the same resistance. Equal resistance needs
+
+$$
+\frac{A_{\rm Al}}{A_{\rm Cu}}=\frac{\rho_{\rm Al}}{\rho_{\rm Cu}}=\frac{2.82}{1.72}=1.64
+$$
+
+For a round conductor the diameter grows by $\sqrt{1.64}=1.28$. The mass ratio is
+
+$$
+\frac{m_{\rm Al}}{m_{\rm Cu}}=\frac{A_{\rm Al}\,d_{\rm Al}}{A_{\rm Cu}\,d_{\rm Cu}}=1.64\times\frac{2.70}{8.96}=0.49
+$$
+
+where $d$ is the density. The aluminium conductor has the same resistance at half the mass, which is why overhead transmission lines, large building busbars and many automotive cables use aluminium. The price is the larger cross-section, a lower strength (often fixed with a steel core or Al–Mg–Si alloy), a higher thermal expansion, creep under bolt load, and the joint problem of the opening paragraph, analysed in the next section.
+
+---
+
+## 25.5 Contact resistance
+
+### Why two flat conductors touch only at spots
+
+No real surface is flat at the micrometre scale. When two surfaces are pressed together, they touch only at the tips of the highest asperities. The asperities deform plastically until the total load is supported, so the true contact area is
+
+$$
+A_r\approx\frac{F}{H}
+$$
+
+where $F$ is the contact force and $H$ the indentation hardness of the softer member. With a hardness of about 1 GPa, a force of 1 N gives a real contact area of $10^{-9}\ \mathrm{m^2}$, i.e. $1000\ \mu\mathrm m^2$. That is a millionth of a square centimetre, regardless of how large the apparent contact face is. The current must squeeze through these small conducting spots ("a-spots").
+
+### Constriction resistance (Holm)
+
+Consider a single circular spot of radius $a$ joining two semi-infinite bodies of resistivity $\rho$. The current lines converge into the spot and spread out again on the other side (Figure 25.4). Solving Laplace's equation for this geometry (Holm, 1958) gives the **constriction resistance**
+
+$$
+R_c=\frac{\rho}{2a}
+$$
+
+for the two halves together ($\rho/4a$ each). If the two members have different resistivities, $R_c=(\rho_1+\rho_2)/4a$. The resistance scales with $1/a$, not $1/a^2$, because the constriction is a three-dimensional spreading effect, concentrated within a distance of a few $a$ from the spot.
+
+<!-- FIGURE 25.4 | figures/ch25/fig-25-4-holm-constriction.png | schematic | Electrical contact at the microscale: current lines converge through a-spots, and surface films add resistance in series. | Content: left panel: cross-section of two rough metal surfaces pressed together, apparent contact area bracketed, three or four a-spots where asperities touch, oxide/contaminant film (shaded) covering non-contacting regions, current lines bunching into the spots. Right panel: single circular a-spot of radius a between two half-spaces, equipotential surfaces as oblate ellipsoids and current lines as hyperbolae; label R_c = rho/(2a). Small inset: equivalent circuit R_bulk + R_c + R_film in series. -->
+
+![Figure 25.4 — Electrical contact at the microscale: current lines converge through a-spots, and surface films add resistance in series](../figures/ch25/fig-25-4-holm-constriction.png)
+
+*Figure 25.4 — Electrical contact at the microscale: current lines converge through a-spots, and surface films add resistance in series.*
+
+**Worked example — a copper contact at 1 N.** Two copper surfaces ($\rho=1.72\times10^{-8}\ \Omega\,\mathrm{m}$, $H\approx1\ \mathrm{GPa}$) are pressed together with $F=1\ \mathrm N$.
+
+The real contact area is $A_r=F/H=10^{-9}\ \mathrm{m^2}$. If it formed a single circular spot, its radius would be
+
+$$
+a=\sqrt{\frac{A_r}{\pi}}=\sqrt{\frac{10^{-9}}{\pi}}=1.78\times10^{-5}\ \mathrm m=17.8\ \mu\mathrm m
+$$
+
+and the constriction resistance
+
+$$
+R_c=\frac{\rho}{2a}=\frac{1.72\times10^{-8}}{2\times1.78\times10^{-5}}=4.8\times10^{-4}\ \Omega=0.48\ \mathrm{m\Omega}
+$$
+
+In practice the area is divided among many spots. If it were split into ten spots of equal area spread far apart, each would have $a=5.64\ \mu\mathrm m$; the ten resistances in parallel give $\rho/(2\times10\times a)=0.15\ \mathrm{m\Omega}$. Spots close together interact, and Greenwood's result for a cluster of $n$ spots of radius $a$ within a region of radius $\alpha$ is
+
+$$
+R_c\approx\frac{\rho}{2na}+\frac{\rho}{2\alpha}
+$$
+
+The first term is the parallel spot resistance; the second is the constriction of the whole cluster. For a cluster radius of 0.5 mm the second term adds only $0.017\ \mathrm{m\Omega}$. A clean metallic contact at 1 N is therefore a fraction of a milliohm, which is acceptable for a signal connector but not for a 200 A busbar joint, which needs hundreds to thousands of newtons. Because $a\propto\sqrt{F/H}$, the single-spot estimate gives $R_c\propto F^{-1/2}$: quadrupling the force only halves the resistance. Measured connector curves show $R_c\propto F^{-m}$ with $m$ between 0.5 and 1, depending on how the number of spots grows with force.
+
+> **Status of the principle: Holm constriction resistance $R_c=\rho/2a$**
+> *Derived.* It is an exact solution of Laplace's equation for a circular spot between half-spaces. Its use for real contacts is approximate: spot sizes and numbers are estimated from $F/H$, and when $a$ approaches the electron mean free path (39 nm in copper) the spot conducts ballistically (Sharvin resistance), which adds a term $\propto\lambda/a^2$.
+
+### Film resistance
+
+The second, and usually larger, contribution comes from films on the surfaces: oxides, sulphides, adsorbed water, organic residues. A film of resistivity $\rho_f$ and thickness $t_f$ over a spot of area $\pi a^2$ adds
+
+$$
+R_f=\frac{\rho_f\,t_f}{\pi a^2}=\frac{\sigma_f}{\pi a^2}
+$$
+
+where $\sigma_f$ (in $\Omega\,\mathrm{m^2}$) is the film resistance per unit area. For films thinner than about 2 nm, electrons tunnel through and $\sigma_f$ is roughly $10^{-12}$–$10^{-8}\ \Omega\,\mathrm{m^2}$. Thicker films insulate, and contact is made only where the film is broken mechanically (by wiping or by high contact pressure) or electrically ("fritting", breakdown of the film at a few volts).
+
+This is why contact materials are chosen for the films they do or do not form:
+
+- **Gold** forms no oxide. A thin gold plate (0.1–1.3 $\mu$m over a nickel barrier) keeps low-force signal contacts (0.3–1 N) below a few milliohms for decades. Hard gold (Au–Co, Au–Ni) resists wear.
+- **Silver** forms no oxide but tarnishes to Ag$_2$S in sulphur-bearing air. The sulphide is soft and broken easily at moderate force, so silver works well in power contacts.
+- **Tin** oxidizes in seconds, but the oxide is thin and brittle and tin is soft, so a force of 1–3 N cracks it. Tin contacts must not move after mating: micromotion of a few micrometres (from vibration or thermal cycling) repeatedly exposes fresh tin, which oxidizes and accumulates as an insulating debris layer. This **fretting corrosion** is a leading cause of automotive connector failure.
+- **Aluminium** forms an oxide that is hard, adherent, and an excellent insulator (it is the dielectric of electrolytic capacitors). Joints need abrasion plus a sealing grease, bimetallic Cu–Al transition pieces, or plating. Aluminium also creeps under bolt load, so the force decays and the joint relaxes; spring washers and specified torques compensate. This is the busbar failure of the opening paragraph.
+
+### Contact heating and the voltage–temperature relation
+
+All the power dissipated in a constriction is generated within a few spot radii of the spot, so the spot itself is the hottest point. Because heat and current spread through the same geometry, a remarkable result follows (Kohlrausch): if the metal obeys the Wiedemann–Franz law (Section 25.8), the maximum temperature $T_m$ in the spot depends only on the voltage $U$ across the contact, not on its size or the metal:
+
+$$
+T_m^2-T_0^2=\frac{U^2}{4L}
+$$
+
+where $L=2.44\times10^{-8}\ \mathrm{W\,\Omega\,K^{-2}}$ is the Lorenz number and $T_0$ the bulk temperature. Setting $T_m$ to characteristic temperatures of copper ($T_0=293\ \mathrm K$):
+
+- **Softening** of copper (about 190 °C, 463 K): $U=\sqrt{4L(T_m^2-T_0^2)}=0.11\ \mathrm V$.
+- **Melting** (1358 K): $U=0.41\ \mathrm V$.
+
+Measured softening and melting voltages for copper are about 0.12 V and 0.43 V. A contact drop of a tenth of a volt is therefore a warning: the spots soften, flatten and grow (which lowers the resistance, a self-healing effect), but at a few tenths of a volt they weld. Contact-resistance degradation over time (fretting, oxidation, intermetallic growth, stress relaxation) is treated as a failure mechanism in Chapter 44.
+
+### Contact materials for switching
+
+Contacts that make and break current (relays, contactors, circuit breakers) also face arcing, which erodes and welds. Their materials are composites designed against these failures:
+
+| Contact material | Typical use | Reason |
+|---|---|---|
+| Fine silver, AgNi | Low-current relays | Low resistance, soft, resists welding at low current |
+| Ag–SnO$_2$ (replaced Ag–CdO) | Contactors, motor starters | Oxide particles raise arc viscosity and resist welding |
+| W–Cu, W–Ag (sintered, infiltrated) | Circuit breakers, arcing tips | Tungsten resists arc erosion; Cu/Ag carries current |
+| Au, Au alloys, Pd | Signal relays, reed switches | No films at low force and low voltage ("dry circuit") |
+| Graphite, Cu–graphite | Brushes | Self-lubricating sliding contact |
+
+---
+
+## 25.6 Thin-film conductors
+
+### Sheet resistance
+
+On-chip interconnects, thin-film resistors, transparent electrodes and PCB copper are all thin layers, specified by sheet resistance $R_s=\rho/t$. PCB copper is specified by mass per area in ounces per square foot: 1 oz copper is 35 $\mu$m thick, giving $R_s=1.72\times10^{-8}/35\times10^{-6}=0.49\ \mathrm{m\Omega/\square}$. A 0.25 mm wide, 50 mm long trace is 200 squares, or $98\ \mathrm{m\Omega}$ at 20 °C.
+
+### Why thin films have higher resistivity
+
+When a film thickness $t$ or a grain size $d$ becomes comparable with the electron mean free path $\lambda$, the boundaries add scattering that bulk metal does not have. Two models describe the two contributions.
+
+**Surface scattering (Fuchs–Sondheimer).** An electron hitting a surface may reflect specularly (keeping its momentum along the film, no added resistance) or diffusely (randomized, like a collision). With a fraction $p$ of specular reflections, the thick-film limit of the Fuchs–Sondheimer solution is
+
+$$
+\frac{\rho_{\rm film}}{\rho_0}\approx1+\frac{3}{8}\,\frac{\lambda}{t}\,(1-p),\qquad t\gtrsim\lambda
+$$
+
+For $p=1$ there is no penalty. Real deposited films are rough on the atomic scale, and $p$ is usually close to zero.
+
+**Grain-boundary scattering (Mayadas–Shatzkes).** Electrons crossing a grain boundary are reflected with probability $R$ (typically 0.2–0.5 for copper). With average grain size $d$, define
+
+$$
+\alpha=\frac{\lambda}{d}\,\frac{R}{1-R}
+$$
+
+The Mayadas–Shatzkes result is
+
+$$
+\frac{\rho_0}{\rho_{\rm gb}}=3\left[\frac13-\frac{\alpha}{2}+\alpha^2-\alpha^3\ln\left(1+\frac1\alpha\right)\right]
+\quad\approx\quad\frac{\rho_{\rm gb}}{\rho_0}\approx1+\frac32\alpha\ \ (\alpha\ll1)
+$$
+
+Grain size in a deposited film is usually comparable with the film thickness, so the two effects grow together as the film thins.
+
+> **Status of the principle: Fuchs–Sondheimer and Mayadas–Shatzkes models**
+> *Approximate.* Both are Boltzmann-transport solutions with a single isotropic mean free path, and the parameters $p$ and $R$ are fitted to data. They describe trends well above about 10 nm; below that, the band structure of the thin layer, surface roughness on the scale of the electron wavelength and liner materials dominate, and first-principles calculations are needed.
+
+**Worked example — a 100 nm copper film.** Take $\lambda=39\ \mathrm{nm}$, $t=100\ \mathrm{nm}$, fully diffuse surfaces ($p=0$), grain size $d=100\ \mathrm{nm}$ and grain-boundary reflection $R=0.3$.
+
+Surface scattering:
+
+$$
+\frac{\rho_{\rm FS}}{\rho_0}=1+\frac38\times\frac{39}{100}=1+0.146=1.146
+$$
+
+Grain boundaries: $\alpha=(39/100)\times(0.3/0.7)=0.167$. The approximate form gives $1+1.5\times0.167=1.25$; the full expression gives
+
+$$
+3\left[0.3333-0.0836+0.0279-0.0091\right]=0.806\quad\Rightarrow\quad\frac{\rho_{\rm gb}}{\rho_0}=1.24
+$$
+
+Adding the two excess contributions (Matthiessen's rule again): $\rho/\rho_0\approx1+0.146+0.24=1.39$, so
+
+$$
+\rho\approx1.39\times1.68=2.3\ \mu\Omega\,\mathrm{cm},\qquad R_s=\frac{2.3\times10^{-8}}{1.0\times10^{-7}}=0.23\ \Omega/\square
+$$
+
+Grain boundaries cost more than surfaces in this film. That is why interconnect copper is annealed after plating to grow grains (Chapter 50), and why making the film thinner without growing the grains hurts twice.
+
+### On-chip interconnects: the end of copper's advantage
+
+For a modern on-chip wire, the cross-section is only tens of nanometres on a side, the grains are bounded by the line width, and a diffusion barrier (TaN/Ta, a few nanometres, resistivity 10–100 times that of copper) takes up part of the cross-section. The effective resistivity of a 20 nm copper line is roughly two to three times the bulk value (Figure 25.5). That is the answer to the second opening question.
+
+<!-- FIGURE 25.5 | figures/ch25/fig-25-5-thin-film-size-effect.png | plot | Effective resistivity of narrow interconnect lines rises steeply once the dimensions approach the electron mean free path. | Content: x-axis line width or film thickness 5 to 1000 nm (log scale); y-axis resistivity 0 to 10 micro-ohm cm. Curves: Cu bulk (flat 1.7 dashed); Cu film with surface + grain-boundary scattering (FS+MS, p=0, R=0.3, d=t), rising to about 2.3 at 100 nm and above 4 at 20 nm; Cu line including 2 nm TaN barrier (effective, rising faster below 30 nm); Ru and Co lines (higher at 1000 nm, about 7 and 6, but crossing Cu below about 10-15 nm). Mark the Cu mean free path 39 nm with a vertical dotted line. -->
+
+![Figure 25.5 — Effective resistivity of narrow interconnect lines rises steeply once the dimensions approach the electron mean free path](../figures/ch25/fig-25-5-thin-film-size-effect.png)
+
+*Figure 25.5 — Effective resistivity of narrow interconnect lines rises steeply once the dimensions approach the electron mean free path.*
+
+Whether a metal suffers from the size effect depends on the product $\rho_0\lambda$. For a free-electron metal $\rho_0\lambda=mv_F/(ne^2)$, a constant independent of how many scatterers the metal contains. A metal with a higher bulk resistivity but a much shorter mean free path loses less as dimensions shrink. This is why ruthenium, cobalt and molybdenum, poor conductors in bulk, are being introduced for the narrowest lines and vias:
+
+| Metal | Bulk $\rho$ ($\mu\Omega\,\mathrm{cm}$) | Approximate $\lambda$ at 300 K (nm) | Barrier needed? |
+|---|---|---|---|
+| Cu | 1.7 | 39 | Yes (diffuses into Si and SiO$_2$) |
+| Al | 2.7 | about 19 | No (but electromigration-prone) |
+| W | 5.3 | about 15–19 | Adhesion liner |
+| Mo | 5.3 | about 14 | Thin or none |
+| Co | 6.2 | about 12 | Thin |
+| Ru | 7.1 | about 7 | None or thin |
+
+Narrow lines also carry very high current densities ($10^{9}$–$10^{10}\ \mathrm{A/m^2}$), at which momentum transfer from electrons to atoms moves the metal itself. This **electromigration** is treated in Chapter 44; its material dependence (grain structure, interfaces, Cu versus Al) is one more reason the choice of interconnect metal is not just a question of resistivity.
+
+### Thin-film resistors and transparent conductors
+
+Some films are designed for high and stable resistance rather than low resistance:
+
+| Film | Typical sheet resistance | Typical TCR | Use |
+|---|---|---|---|
+| NiCr (sputtered, 10–50 nm) | 25–300 $\Omega/\square$ | $\pm25$ ppm/K or better | Precision thin-film resistors |
+| TaN | 10–100 $\Omega/\square$ | about $-100$ ppm/K | Integrated resistors, stable in humidity |
+| SiCr (cermet) | 0.5–2 k$\Omega/\square$ | $\pm50$ ppm/K | High-value integrated resistors |
+| RuO$_2$–glass thick film | 10 $\Omega/\square$–1 M$\Omega/\square$ | $\pm100$ ppm/K | Chip resistors, hybrid circuits (Section 25.7) |
+| ITO (In$_2$O$_3$:Sn, 100–200 nm) | 5–100 $\Omega/\square$ | Small | Transparent electrodes (displays, touch, solar cells) |
+
+Thin metal films typically have lower TCR than bulk because of their large residual resistivity (Matthiessen again), and the TCR of NiCr and TaN can be tuned to near zero by composition, oxygen or nitrogen content and annealing. Transparent conducting oxides are degenerate semiconductors: high carrier density ($10^{20}$–$10^{21}\ \mathrm{cm^{-3}}$) for conduction, wide band gap (above 3.5 eV) for transparency. They involve the band ideas of Chapters 31 and 35. Their engineering trade-off is direct: a thicker film lowers $R_s$ but absorbs more light.
+
+---
+
+## 25.7 Conductive composites
+
+### When conductors are dispersed in an insulator
+
+Many conducting materials in electronics are not metals but polymers filled with conducting particles: conductive adhesives, electrostatic dissipative (ESD) plastics, EMI shielding gaskets, printed silver inks, carbon-composite resistors, resettable polymer fuses, and the thick-film resistor pastes of the table above. Their behaviour is not described by any average of the two resistivities. It is controlled by connectivity.
+
+### Percolation
+
+Imagine adding conducting spheres at random to an insulating matrix. At low volume fraction $\phi$ the spheres are isolated and the composite insulates. As $\phi$ increases, clusters form and grow, and at a critical fraction $\phi_c$, the **percolation threshold**, the first cluster spans the sample. Above it the conductivity rises steeply:
+
+$$
+\sigma\approx\sigma_0\,(\phi-\phi_c)^{t},\qquad \phi>\phi_c
+$$
+
+with a universal exponent $t\approx2$ in three dimensions. The threshold depends on particle shape and arrangement. For randomly placed spheres $\phi_c\approx0.16$ (by volume). For elongated or flaky particles it is much lower, because a few long particles span large distances: carbon nanotubes with aspect ratios of 100–1000 percolate at a fraction of a per cent, and silver flakes in adhesives at well below the sphere value.
+
+<!-- FIGURE 25.6 | figures/ch25/fig-25-6-percolation.png | plot | Conductivity of a conductor-filled polymer: an abrupt percolation transition separates insulating and conducting composites. | Content: x-axis filler volume fraction 0 to 0.5; y-axis log conductivity 1e-14 to 1e6 S/m. Curve for spherical Ag particles in epoxy: flat at matrix level (about 1e-13) up to phi_c about 0.16, then rising about 15 orders over a few per cent, then following sigma_0 (phi - phi_c)^2 toward about 1e5-1e6 S/m. Second curve for CNT filler: threshold near 0.005. Shaded windows labelled: ESD/antistatic range (1e-7 to 1e-2 S/m), conductive adhesive range (1e4 to 1e6 S/m). Insets: schematic microstructures below, at and above threshold showing isolated particles, a first spanning cluster, a dense network. -->
+
+![Figure 25.6 — Conductivity of a conductor-filled polymer: an abrupt percolation transition separates insulating and conducting composites](../figures/ch25/fig-25-6-percolation.png)
+
+*Figure 25.6 — Conductivity of a conductor-filled polymer: an abrupt percolation transition separates insulating and conducting composites.*
+
+> **Status of the principle: percolation scaling $\sigma\propto(\phi-\phi_c)^t$**
+> *Approximate.* It is a result of statistical physics for random networks, exact only asymptotically near $\phi_c$. The prefactor $\sigma_0$ and the effective threshold depend on particle contact resistance, dispersion and processing, so both are fitted for each material system.
+
+Figure 25.6 shows the practical consequence: near the threshold, conductivity is extremely sensitive to filler content. For spheres with $\phi_c=0.16$ and $t=2$, raising the volume fraction from 0.20 to 0.25 multiplies the conductivity by $(0.09/0.04)^2=5.1$. A product formulated near the threshold will vary from batch to batch with small variations in dispersion. Products that need a defined resistivity are formulated well above the threshold or controlled through the contact resistance between particles.
+
+### What limits conductivity above threshold
+
+Even well above threshold a silver-filled epoxy is 10–100 times more resistive than bulk silver. Current passes from particle to particle through small contacts, so each junction is a Holm constriction (Section 25.5) with an organic or polymer film in series, often thin enough to tunnel through. Curing shrinks the matrix and presses particles together, which lowers the resistivity; silver is used because its oxide is conductive and its sulphide thin. Typical values:
+
+| Composite | Typical volume resistivity ($\Omega\,\mathrm{m}$) | Use |
+|---|---|---|
+| Isotropic conductive adhesive (Ag flake–epoxy) | $10^{-6}$–$10^{-5}$ | Die attach, SMD assembly on heat-sensitive substrates (Chapter 51) |
+| Sintered or printed Ag nanoparticle ink | $3\times10^{-8}$–$10^{-7}$ | Printed electronics, die attach |
+| Anisotropic conductive film (ACF) | Conducts only through the thickness | Display driver and flex connections |
+| Carbon-black–polymer | $10^{-2}$–$10^{2}$ | Resistors, heating films, PTC fuses |
+| ESD dissipative plastic | $10^{4}$–$10^{9}$ (surface $10^{5}$–$10^{11}\ \Omega/\square$) | Trays, housings, flooring |
+| RuO$_2$–glass thick film | $10^{-5}$–$10^{-1}$ (set by RuO$_2$ fraction) | Chip and hybrid resistors |
+
+Sintered silver differs from conductive adhesives because the particles fuse into a continuous, porous metal network with a resistivity only about 2–5 times that of bulk silver.
+
+### Engineering with the threshold: PTC polymer fuses
+
+A carbon-black-filled polyethylene formulated just above its percolation threshold conducts at room temperature. If the current heats it toward the melting point of the polyethylene crystallites (about 120–130 °C), the polymer expands by several per cent, pulls the particle network apart, and the volume fraction effectively drops below $\phi_c$. The resistance rises by three to six orders of magnitude within a few kelvin, limiting the current. On cooling the network reforms. This is the **resettable polymeric PTC fuse**: a circuit-protection device built entirely on the steepness of the percolation curve and the thermal expansion of a polymer (Chapter 24).
+
+### Anisotropic conductive films
+
+Anisotropic conductive films use a filler fraction well **below** the threshold, about 5–10 %, of 3–5 $\mu$m metal-coated polymer spheres. In the plane of the film the particles never connect, so adjacent pads stay isolated. When a bump is pressed onto a pad, the particles trapped between them are squeezed into contact through the film thickness. The same composite is an insulator laterally and a conductor vertically, purely through geometry.
+
+---
+
+## 25.8 Electrical conductivity versus thermal conductivity
+
+### Same carriers, same scattering
+
+In a metal the conduction electrons carry heat as well as charge, and they carry most of it. A material's thermal conductivity is the sum of an electronic part and a lattice (phonon) part, $\kappa=\kappa_e+\kappa_{\rm ph}$ (Chapter 24). In pure metals $\kappa_e$ dominates; $\kappa_{\rm ph}$ is a few W/(m K).
+
+Kinetic theory gives the thermal conductivity of a gas of carriers as
+
+$$
+\kappa_e=\tfrac13\,C_e\,v\,\lambda=\tfrac13\,C_e\,v^2\,\tau
+$$
+
+where $C_e$ is the heat capacity of the carriers per unit volume. If the same scattering time $\tau$ limits both currents, the ratio of thermal to electrical conductivity is
+
+$$
+\frac{\kappa_e}{\sigma}=\frac{\tfrac13C_ev^2\tau}{ne^2\tau/m}=\frac{C_e\,mv^2}{3ne^2}
+$$
+
+The scattering time cancels. All the disorder in the material, every impurity and grain boundary, drops out. What remains depends on how much heat the carriers absorb and how fast they move. Classical theory, with $C_e=\tfrac32nk_B$ and $\tfrac12mv^2=\tfrac32k_BT$, gives $\kappa/\sigma T=\tfrac32(k_B/e)^2$, which has the right form but the wrong constant. The correct values come from the quantum (Fermi–Dirac) statistics of Chapter 31: only electrons within about $k_BT$ of the Fermi energy can absorb heat, so $C_e=\tfrac{\pi^2}{2}nk_B\,(k_BT/E_F)$; but those electrons move at the Fermi velocity, $\tfrac12mv_F^2=E_F$. The Fermi energy cancels, and
+
+$$
+\frac{\kappa_e}{\sigma T}=\frac{\pi^2}{3}\left(\frac{k_B}{e}\right)^2=L_0=2.44\times10^{-8}\ \mathrm{W\,\Omega\,K^{-2}}
+$$
+
+This is the **Wiedemann–Franz law**, and $L_0$ is the Sommerfeld value of the **Lorenz number**.
+
+> **Status of the principle: Wiedemann–Franz law**
+> *Approximate.* It is derived for elastic scattering with the same relaxation time for charge and heat. It holds well for metals at room temperature and above, and at very low temperature where impurity scattering dominates. It fails at intermediate temperatures (roughly 10–100 K for Cu), where small-angle inelastic phonon scattering degrades the heat current more than the charge current, and wherever phonons carry a significant share of the heat (alloys, semiconductors, insulators).
+
+### The data
+
+| Metal (about 293 K) | $\sigma$ ($\mathrm{MS/m}$) | $\kappa$ (W/(m K)) | $L=\kappa/\sigma T$ ($10^{-8}\ \mathrm{W\,\Omega\,K^{-2}}$) |
+|---|---|---|---|
+| Silver | 63 | 429 | 2.32 |
+| Copper | 59.6 | 401 | 2.30 |
+| Gold | 45 | 318 | 2.41 |
+| Aluminium | 37.7 | 237 | 2.15 |
+| Tungsten | 18.9 | 173 | 3.12 |
+| Iron | 10.3 | 80 | 2.65 |
+| Platinum | 9.4 | 72 | 2.61 |
+| Stainless steel 304 | 1.4 | 16 | 3.9 |
+
+The noble metals and aluminium lie within about 12 % of $L_0$. Tungsten, iron and stainless steel have larger values because phonons and, in transition metals, electronic structure effects contribute more. In stainless steel the electrons are so strongly scattered by the disordered alloy that the lattice carries a significant share of the heat.
+
+### Using the law
+
+The law has three practical uses.
+
+**Estimating thermal conductivity from an electrical measurement.** Resistivity is easy to measure (four-point probe, Chapter 52); thermal conductivity is not. For metals and alloys, $\kappa\approx L_0T/\rho$ gives the electronic part.
+
+**Worked example — thermal conductivity of a lead-free solder.** SAC305 solder (Sn–3.0Ag–0.5Cu) has a resistivity of about $13.2\ \mu\Omega\,\mathrm{cm}$ at room temperature. The electronic thermal conductivity at 293 K is
+
+$$
+\kappa_e\approx\frac{L_0T}{\rho}=\frac{(2.443\times10^{-8})(293)}{1.32\times10^{-7}}=54\ \mathrm{W/(m\,K)}
+$$
+
+Published values for SAC305 are about $55$–$60\ \mathrm{W/(m\,K)}$, the remainder being the phonon contribution and the deviation of $L$ from $L_0$. A single resistance measurement gives the thermal conductivity of a new solder or bond-wire alloy to within about 10 %, which is good enough for a first thermal model of a joint (Chapter 51).
+
+**Explaining contact heating.** The voltage–temperature relation of Section 25.5 follows from the same identity of heat and charge paths.
+
+**Showing what cannot be had.** For a metal you cannot raise the thermal conductivity without raising the electrical conductivity, nor lower one without the other. Each design goal has its own way out:
+
+- **Electrically insulating heat spreaders** (AlN, BeO, diamond, cubic and hexagonal BN, alumina) conduct heat by phonons, not electrons, and so escape the law entirely. AlN reaches 170–230 W/(m K) and diamond above 1500 W/(m K) while remaining excellent insulators. That is the basis of power-module substrates and thermal interface fillers (Chapters 24 and 51).
+- **Thermoelectric materials** need the opposite: high $\sigma$ but low $\kappa$. They achieve it by suppressing phonons (heavy atoms, nanostructuring) in heavily doped semiconductors, where $\kappa_{\rm ph}$ is a large part of $\kappa$ (Chapter 40).
+- **Thermal isolation of a heated sensor element** (thermistors, bolometers, MEMS heaters) uses thin, high-resistivity metal or semiconductor legs, accepting the electrical resistance that comes with low thermal conductance.
+
+> **Boundary.** The thermal conductivity of insulators by phonons, its temperature dependence and its role in heat spreading are treated in Chapter 24. This section covers only the electronic part and its link to $\sigma$.
+
+---
+
+## 25.9 Material selection for wires, contacts, interconnects, and electrodes
+
+### What is being optimized
+
+Each conductor application weighs resistivity against other requirements. A useful way to compare candidates is a **performance index**, a combination of properties that measures merit for a given objective (developed in Chapter 58).
+
+- Minimum **mass** for a given resistance per length: maximize $1/(\rho d)$, i.e. conductivity divided by density.
+- Minimum **cost** for a given resistance per length: maximize $1/(\rho d c_m)$, with $c_m$ the cost per kg.
+- Minimum **volume** (most compact winding): maximize $1/\rho$.
+
+| Conductor | $1/\rho$ relative to Cu | $1/(\rho d)$ relative to Cu | Notes |
+|---|---|---|---|
+| Copper | 1.00 | 1.00 | Reference: compact, solderable, strong enough |
+| Aluminium (EC) | 0.61 | 2.0 | Lightest per resistance; joints are the weak point |
+| Silver | 1.08 | 0.92 | Too expensive for bulk; plating and contacts |
+| Gold | 0.78 | 0.36 | Contacts and bond wires only |
+| Sodium | 0.36 | 3.3 | Historically trialled for cables; reactive |
+| Copper-clad aluminium (10 % Cu by volume) | about 0.65 | about 1.8 | Light, solderable surface; RF and automotive cable |
+
+### Wires and cables
+
+Copper is the default because it combines high conductivity with solderability, ductility, adequate strength, moderate cost and easy joining. Aluminium wins where weight or cost per ampere dominates: overhead lines (as ACSR, aluminium conductor steel-reinforced, or all-aluminium-alloy conductors), large building feeders, and increasingly automotive battery cables. Fine wires for windings use oxygen-free copper with polymer enamel insulation (Chapter 26). High-temperature conductors use nickel-plated copper or copper with dispersed oxide.
+
+At high frequency, current crowds into a surface layer of thickness equal to the **skin depth**
+
+$$
+\delta=\sqrt{\frac{\rho}{\pi f\mu}}
+$$
+
+For copper ($\mu=\mu_0$) this is 9.3 mm at 50 Hz, 66 $\mu$m at 1 MHz and 2.1 $\mu$m at 1 GHz. Above a few megahertz only the outer few micrometres carry current, so the core can be made of something cheaper or stronger: copper-clad steel (antenna and CATV centre conductors), silver-plated copper (RF cables), and Litz wire (many insulated strands, each thinner than $\delta$) in high-frequency transformers. The derivation of $\delta$ belongs to electromagnetism; the materials point is that at RF the resistivity that matters is that of the surface finish, including its roughness. Rough PCB copper foil (needed for adhesion to the laminate) raises high-frequency loss once the roughness is comparable with $\delta$, which is why low-profile foils are specified for multi-gigahertz boards.
+
+### Contacts
+
+Contacts combine the criteria of Section 25.5: low film formation, adequate hardness, wear resistance, and for switching, arc resistance. The usual stack is a strong copper-alloy spring (CuNiSi, phosphor bronze, CuBe) for force, a nickel underplate as a diffusion barrier and hard base, and a thin noble or tin finish for the surface. Gold over nickel for low-force, low-voltage, high-reliability contacts; tin for high-force, low-cost, non-moving contacts; silver for power contacts; and the composite arc-resistant materials for switching.
+
+### Interconnects on chips and boards
+
+| Level | Typical conductor | Selection drivers |
+|---|---|---|
+| Lowest on-chip lines and vias (below about 20 nm) | Cu with thin liners; Ru, Co, Mo emerging | Size effect ($\rho_0\lambda$), barrier thickness, electromigration |
+| Upper on-chip levels | Cu (dual damascene), barrier TaN/Ta | Bulk-like resistivity, electromigration |
+| Contacts to transistors | W plugs, Co, silicides (NiSi, TiSi$_2$) | Fills high-aspect holes, stable on Si (Chapter 34) |
+| Bond wires | Au, Cu, Pd-coated Cu, Al (power modules) | Bondability, corrosion, cost (Chapter 51) |
+| PCB | Electrodeposited or rolled Cu, plated finishes | Adhesion, roughness, solderability |
+| Die attach | Solder, sintered Ag, conductive adhesive | Thermal and electrical conduction, stress |
+
+### Electrodes
+
+An electrode is a conductor in contact with a functional material: a dielectric, a semiconductor, an electrolyte or a sensor element. Its requirements come from that interface, not from bulk resistivity alone:
+
+- **Capacitor electrodes.** MLCC internal electrodes are Ni (base-metal electrode) or Ag–Pd, co-fired with the BaTiO$_3$ dielectric (Chapter 27). Nickel needs a reducing firing atmosphere; Ag–Pd tolerates air but costs more. Film capacitors use vapour-deposited Al or Zn layers 20–50 nm thick that burn away around a breakdown spot ("self-healing", Chapter 26).
+- **Semiconductor electrodes.** The work function and reactivity matter: Al, Ti, Ni, Pt, silicides and TiN are chosen for ohmic or Schottky behaviour and stability (Chapter 34).
+- **Sensor and heater electrodes.** Pt for high-temperature and chemically demanding sensors (oxygen sensors, RTDs, MEMS heaters); NiCr and FeCrAl alloys for heating elements, chosen for high resistivity, low TCR and a protective Cr$_2$O$_3$ or Al$_2$O$_3$ scale. MoSi$_2$ and SiC heating elements reach 1600–1800 °C in air.
+- **Transparent electrodes.** ITO, fluorine-doped tin oxide, silver nanowire networks (a percolating composite, Section 25.7) and graphene (Chapter 38) for displays, touch panels and solar cells.
+- **Electrochemical electrodes** (batteries, fuel cells, supercapacitors) are a separate topic that combines conduction with electrochemistry; their materials are covered in Chapter 40, and the electrochemistry belongs to the Advanced Chemistry core.
+
+The busbar of the opening paragraph can now be redesigned. The aluminium conductor itself was correct. The joint needed a larger, flatter contact area at a sustained high force (spring washers or Belleville stacks against creep), oxide removal and sealing grease at assembly, or a tin- or nickel-plated contact face, and a bimetallic transition where aluminium meets copper. Each of these follows from the Holm picture of Section 25.5.
+
+---
+
+## 25.10 Ionic conduction and solid electrolytes
 
 ### Ions as carriers
 
@@ -147,7 +774,7 @@ $$
 
 At 8 mol% Y$_2$O$_3$ (8YSZ) about 4 % of the oxygen sites are vacant, and oxide ions hop through them. Conductivity rises with dopant level up to about 8–10 mol%, then falls, because vacancies bind to dopant cations and to each other — a clean example of defect chemistry setting a property maximum. Gadolinium-doped ceria (GDC) and strontium- and magnesium-doped lanthanum gallate (LSGM) conduct better at lower temperature, but ceria is partly reduced in hydrogen and becomes a mixed conductor.
 
-These materials are the core of **solid-oxide fuel cells and electrolysers** (Chapter 32), of the zirconia **lambda sensor** that controls the air–fuel ratio of every petrol engine (an oxygen concentration cell whose voltage follows the Nernst equation), and of oxygen pumps for industrial gas analysis.
+These materials are the core of **solid-oxide fuel cells and electrolysers** (Chapter 40), of the zirconia **lambda sensor** that controls the air–fuel ratio of every petrol engine (an oxygen concentration cell whose voltage follows the Nernst equation), and of oxygen pumps for industrial gas analysis.
 
 ### The family of fast-ion conductors
 
@@ -163,13 +790,17 @@ These materials are the core of **solid-oxide fuel cells and electrolysers** (Ch
 | Nafion (hydrated) | H$^+$ | $\approx0.1$ at 80 °C | PEM fuel cells and electrolysers |
 | Soda-lime glass | Na$^+$ | $\approx10^{-13}$ at 25 °C | (an insulator, but ions drift under DC) |
 
-*Table 25.2 — Representative ionic conductivities (typical; values depend on dopant, density and microstructure).*
+*Chapter 25 — Representative ionic conductivities (typical; values depend on dopant, density and microstructure).*
 
-<!-- FIGURE 25.2 | figures/ch25/fig-25-2-ionic-conductivity-arrhenius.png | plot | Arrhenius plot of ionic conductivity: fast-ion conductors reach liquid-electrolyte values, but most oxide conductors need high temperature. | Content: x-axis 1000/T from 0.8 to 3.6 K^-1 with a secondary top axis in degrees C (1000, 800, 600, 400, 200, 25); y-axis log10 sigma from -8 to 0 (S/cm). Straight lines: 8YSZ (0.03 S/cm at 800 C, Ea 0.95 eV, about 2.9e-3 at 600 C); Gd-doped CeO2 (about 0.025 at 600 C, Ea 0.7 eV); Na beta''-alumina (0.3 at 300 C, Ea 0.3 eV); LLZO garnet (5e-4 at 25 C, Ea 0.35 eV); Li10GeP2S12 (1e-2 at 25 C, Ea 0.25 eV); alpha-AgI segment above 147 C at about 1 to 2 S/cm with a vertical jump at the transition; Nafion (0.1 at 80 C, short segment). Horizontal dashed band at 1e-2 labelled liquid Li-ion electrolyte. Shaded target region sigma > 1e-2 S/cm. -->
+<!-- FIGURE 25.7 | figures/ch25/fig-25-7-ionic-conductivity-arrhenius.png | plot | Arrhenius plot of ionic conductivity: fast-ion conductors reach liquid-electrolyte values, but most oxide conductors need high temperature. | Content: x-axis 1000/T from 0.8 to 3.6 K^-1 with a secondary top axis in degrees C (1000, 800, 600, 400, 200, 25); y-axis log10 sigma from -8 to 0 (S/cm). Straight lines: 8YSZ (0.03 S/cm at 800 C, Ea 0.95 eV, about 2.9e-3 at 600 C); Gd-doped CeO2 (about 0.025 at 600 C, Ea 0.7 eV); Na beta''-alumina (0.3 at 300 C, Ea 0.3 eV); LLZO garnet (5e-4 at 25 C, Ea 0.35 eV); Li10GeP2S12 (1e-2 at 25 C, Ea 0.25 eV); alpha-AgI segment above 147 C at about 1 to 2 S/cm with a vertical jump at the transition; Nafion (0.1 at 80 C, short segment). Horizontal dashed band at 1e-2 labelled liquid Li-ion electrolyte. Shaded target region sigma > 1e-2 S/cm. -->
 
-Figure 25.2 compares them on an Arrhenius plot. Several structural motifs recur. In $\beta$-alumina the Na$^+$ ions move in loosely packed planes between spinel blocks, so conduction is two-dimensional. In $\alpha$-AgI the iodide sublattice offers many more interstitial sites than there are silver ions, so the cation sublattice is effectively molten. In sulfide lithium conductors the large, polarizable S$^{2-}$ anions lower the hopping barrier. In Nafion, protons move through hydrated nanochannels formed by phase separation of the sulfonated side chains — a polymer conductor whose performance depends on keeping its water content. Even soda-lime glass conducts by sodium drift, which is why it is avoided in high-voltage DC insulators.
+![Figure 25.7 — Arrhenius plot of ionic conductivity: fast-ion conductors reach liquid-electrolyte values, but most oxide conductors need high temperature](../figures/ch25/fig-25-7-ionic-conductivity-arrhenius.png)
 
-Microstructure enters through **grain boundaries**. In polycrystalline YSZ and LLZO the boundaries carry a space-charge layer depleted of mobile defects, and at low temperature the grain-boundary resistance can exceed the bulk value by an order of magnitude. Impedance spectroscopy (Chapter 42) separates the two. Densification is equally critical: porosity both lowers conductivity and, in lithium garnets, lets lithium dendrites grow along voids and boundaries to short the cell.
+*Figure 25.7 — Arrhenius plot of ionic conductivity: fast-ion conductors reach liquid-electrolyte values, but most oxide conductors need high temperature.*
+
+Chapter 25 compares them on an Arrhenius plot. Several structural motifs recur. In $\beta$-alumina the Na$^+$ ions move in loosely packed planes between spinel blocks, so conduction is two-dimensional. In $\alpha$-AgI the iodide sublattice offers many more interstitial sites than there are silver ions, so the cation sublattice is effectively molten. In sulfide lithium conductors the large, polarizable S$^{2-}$ anions lower the hopping barrier. In Nafion, protons move through hydrated nanochannels formed by phase separation of the sulfonated side chains — a polymer conductor whose performance depends on keeping its water content. Even soda-lime glass conducts by sodium drift, which is why it is avoided in high-voltage DC insulators.
+
+Microstructure enters through **grain boundaries**. In polycrystalline YSZ and LLZO the boundaries carry a space-charge layer depleted of mobile defects, and at low temperature the grain-boundary resistance can exceed the bulk value by an order of magnitude. Impedance spectroscopy (Chapter 52) separates the two. Densification is equally critical: porosity both lowers conductivity and, in lithium garnets, lets lithium dendrites grow along voids and boundaries to short the cell.
 
 **Worked example — how thin must a fuel-cell electrolyte be?** An SOFC loses voltage across its electrolyte in proportion to the area-specific resistance $\mathrm{ASR}=t/\sigma$. Take 8YSZ with $\sigma=0.030$ S/cm at 800 °C and $E_a=0.95$ eV. A 150 µm self-supporting electrolyte has $\mathrm{ASR}=0.015\ \mathrm{cm}/0.030\ \mathrm{S\,cm^{-1}}=0.50\ \Omega\,\mathrm{cm^2}$, which at a typical 0.5 A/cm² wastes 0.25 V of a cell voltage of about 0.8 V. A 10 µm film on a porous anode support gives $0.033\ \Omega\,\mathrm{cm^2}$, a loss of only 17 mV. Lowering the operating temperature to 600 °C (cheaper steel interconnects, slower degradation) reduces the conductivity by the Arrhenius factor:
 
@@ -177,305 +808,8 @@ $$
 \sigma_{600}=0.030\exp\!\left[-\frac{0.95\ \mathrm{eV}}{k_B}\left(\frac{1}{873\ \mathrm K}-\frac{1}{1073\ \mathrm K}\right)\right]=2.9\times10^{-3}\ \mathrm{S/cm}
 $$
 
-a factor of 10.5 lower. The same 10 µm film now has ASR 0.35 $\Omega\,\mathrm{cm^2}$; to keep it below a target of 0.15 $\Omega\,\mathrm{cm^2}$ the film would have to be about 4 µm thick and pinhole-free over the whole cell, which is why intermediate-temperature cells switch to GDC or LSGM instead. The design problem is solved by defect chemistry (a better conductor) and thin-film processing (Chapter 41), not by geometry alone.
+a factor of 10.5 lower. The same 10 µm film now has ASR 0.35 $\Omega\,\mathrm{cm^2}$; to keep it below a target of 0.15 $\Omega\,\mathrm{cm^2}$ the film would have to be about 4 µm thick and pinhole-free over the whole cell, which is why intermediate-temperature cells switch to GDC or LSGM instead. The design problem is solved by defect chemistry (a better conductor) and thin-film processing (Chapter 49), not by geometry alone.
 
----
-
-## 25.3 Dielectric polarization, permittivity and loss
-
-### Polarization and permittivity
-
-An insulator in an electric field does not conduct, but its charges shift: bound electrons relative to nuclei, cations relative to anions, permanent molecular dipoles toward the field. The dipole moment per unit volume is the **polarization** $\mathbf P$, and for a linear isotropic dielectric
-
-$$
-\mathbf D=\varepsilon_0\mathbf E+\mathbf P=\varepsilon_0\varepsilon_r\mathbf E,\qquad \mathbf P=\varepsilon_0(\varepsilon_r-1)\mathbf E
-$$
-
-The **relative permittivity** $\varepsilon_r$ (dielectric constant) is the factor by which the material increases the capacitance of a capacitor over vacuum: $C=\varepsilon_0\varepsilon_rA/t$ for a parallel plate. It also sets signal speed, $v=c/\sqrt{\varepsilon_r}$, in cables and circuit boards.
-
-Four mechanisms contribute, each with its own structural origin and its own speed:
-
-- **Electronic polarization** — distortion of electron clouds. Present in every material, it responds up to optical frequencies and sets the refractive index, $n^2\approx\varepsilon_{r,\infty}$ (Chapter 28). Typical contribution 2–3 in polymers and glasses, up to 5–7 in high-index oxides.
-- **Ionic (atomic) polarization** — relative displacement of cation and anion sublattices. It responds up to the infrared (around $10^{13}$ Hz) and is large in ionic crystals: it is why alumina has $\varepsilon_r\approx9.8$ while its optical $n^2$ is only 3.1.
-- **Orientational (dipolar) polarization** — rotation of permanent dipoles (water, C–Cl and C=O groups in polymers). It is strongly temperature-dependent and slow, relaxing between kilohertz and gigahertz. Water has $\varepsilon_r\approx80$ for this reason.
-- **Interfacial (space-charge, Maxwell–Wagner) polarization** — accumulation of mobile charges at grain boundaries, filler interfaces and electrodes. It dominates at low frequency in composites, moist materials and ceramics with conductive grains.
-
-The local field acting on an atom in a dense solid is larger than the applied field because of the neighbours' polarization. For cubic or isotropic materials this gives the **Clausius–Mossotti relation**,
-
-$$
-\frac{\varepsilon_r-1}{\varepsilon_r+2}=\frac{N\alpha}{3\varepsilon_0}
-$$
-
-linking the macroscopic permittivity to the number density $N$ and polarizability $\alpha$ of the constituents. It fails, as the denominator approaches zero, where ferroelectric instability sets in (Section 25.5).
-
-> **Status of the principle: Clausius–Mossotti relation**
-> *Approximate.* It assumes a Lorentz local field, valid for cubic or random isotropic arrangements of non-interacting point dipoles. It works well for gases, non-polar liquids and simple cubic crystals, and fails for polar liquids, low-symmetry crystals and near ferroelectric transitions.
-
-### Complex permittivity, relaxation and loss
-
-No polarization is instantaneous. In an alternating field the polarization lags, and the permittivity becomes complex, $\varepsilon_r^*=\varepsilon'-i\varepsilon''$. The real part $\varepsilon'$ stores energy; the imaginary part $\varepsilon''$ dissipates it. The ratio is the **loss tangent**:
-
-$$
-\tan\delta=\frac{\varepsilon''}{\varepsilon'}
-$$
-
-The power dissipated per unit volume in a field of amplitude $E_0$ (rms $E$) at angular frequency $\omega$ is
-
-$$
-p=\omega\varepsilon_0\varepsilon''E^2=\omega\varepsilon_0\varepsilon'\tan\delta\,E^2
-$$
-
-For a relaxing dipole population with a single relaxation time $\tau$, the **Debye equation** gives
-
-$$
-\varepsilon^*(\omega)=\varepsilon_\infty+\frac{\varepsilon_s-\varepsilon_\infty}{1+i\omega\tau}
-$$
-
-so $\varepsilon'$ falls in a step from its static value $\varepsilon_s$ to $\varepsilon_\infty$ around $\omega\tau=1$, and $\varepsilon''$ shows a loss peak there. Ionic and electronic polarization appear as resonances in the infrared and ultraviolet (Figure 25.3). Because $\tau$ is thermally activated, loss peaks move to higher frequency on heating; the polymer relaxations of Chapter 20 appear this way, and dielectric spectroscopy is one way to measure $T_g$.
-
-> **Status of the principle: Debye relaxation**
-> *Approximate.* It assumes identical, non-interacting dipoles with one relaxation time. Real polymers and glasses show broadened, asymmetric peaks (fitted by Cole–Cole or Havriliak–Negami forms) because their environments are disordered.
-
-<!-- FIGURE 25.3 | figures/ch25/fig-25-3-dielectric-spectrum.png | plot | The dielectric spectrum: each polarization mechanism drops out above its characteristic frequency, with a loss peak or resonance where it does. | Content: x-axis frequency 1e0 to 1e17 Hz (log), with bands labelled power (50 Hz), RF, microwave, IR, visible, UV. Top panel: epsilon' stepping down from about 12 (interfacial + dipolar + ionic + electronic) through plateaus 8, 4.5, 2.3 with steps near 1e2 Hz (interfacial), 1e8 Hz (dipolar, Debye step), 1e13 Hz (ionic resonance, with overshoot), 1e15 Hz (electronic resonance). Bottom panel: epsilon'' with a broad Debye loss peak at the dipolar step, sharp resonance peaks at the ionic and electronic frequencies. Annotate n^2 = epsilon_inf in the optical region. Generic material, not a specific one. -->
-
-Representative values are in Table 25.3. Non-polar polymers (PE, PP, PTFE) combine low permittivity with very low loss and are the materials of choice for cable insulation, film capacitors and high-frequency substrates. Polar polymers (PVC, nylon, epoxy) have higher loss. Ceramics range from the low-loss single crystals and aluminas used in microwave windows and satellite filters to the very high permittivity, lossier perovskites used in capacitors.
-
-| Material | $\varepsilon_r$ | $\tan\delta$ | Frequency | Typical use |
-|---|---|---|---|---|
-| PTFE | 2.1 | $2\times10^{-4}$ | 1 MHz–10 GHz | RF cables, radomes, high-frequency boards |
-| Polyethylene / XLPE | 2.3 | $2$–$5\times10^{-4}$ | 50 Hz–1 MHz | Power-cable insulation |
-| Polypropylene (biaxially oriented) | 2.2 | $2\times10^{-4}$ | 50 Hz–1 MHz | Film capacitors for power electronics |
-| PVC (plasticized) | 4–8 | 0.05–0.1 | 1 kHz–30 MHz | Low-voltage cable sheathing |
-| Epoxy (cured) | 3.5–4.5 | 0.01–0.03 | 1 MHz | Potting, cast insulators |
-| FR-4 glass–epoxy laminate | 4.3–4.7 | 0.015–0.02 | 1 GHz | Printed circuit boards |
-| Fused silica | 3.8 | $\approx10^{-4}$ | 1 MHz–10 GHz | Optical and microwave windows |
-| Alumina (99.5 %) | 9.8 | $1$–$3\times10^{-4}$ | 1 MHz–10 GHz | Substrates, vacuum feedthroughs, spark plugs |
-| Electrical porcelain | 5–7 | 0.01–0.02 | 50 Hz | Line and station insulators |
-| Mica (muscovite) | 6–7 | $2\times10^{-4}$ | 1 MHz | Motor and generator insulation |
-| Water (liquid, 20 °C) | 80 | 0.1 at 2.45 GHz | — | The reason moisture ruins insulation |
-| BaTiO$_3$-based (X7R) | 2000–4000 | 0.01–0.025 | 1 kHz | Multilayer ceramic capacitors |
-
-*Table 25.3 — Room-temperature permittivity and loss of common dielectrics (typical values).*
-
-### Loss as heat: a nuisance and a tool
-
-In cables and capacitors dielectric loss is a nuisance. It heats the insulation and, because $\varepsilon''$ usually rises with temperature, can run away into thermal breakdown (Section 25.4). In high-frequency circuits and radomes it attenuates the signal. In processing it is a tool: microwave heating of food at 2.45 GHz relies on the relaxation loss of water; radio-frequency (27.12 MHz) welding of PVC sheets for medical bags, tarpaulins and inflatable structures relies on the dipolar loss of C–Cl groups.
-
-**Worked example — why PVC can be RF-welded and polyethylene cannot.** Apply a field of 1 kV/mm ($10^6$ V/m rms) at 27.12 MHz. For plasticized PVC take $\varepsilon''\approx0.2$; for polyethylene $\varepsilon''=2.3\times2\times10^{-4}=4.6\times10^{-4}$. The volumetric heating rate is $p=2\pi f\varepsilon_0\varepsilon''E^2$:
-
-$$
-p_{\mathrm{PVC}}=2\pi(27.12\times10^6)(8.854\times10^{-12})(0.2)(10^6)^2=3.0\times10^8\ \mathrm{W/m^3}
-$$
-
-With density 1380 kg/m³ and specific heat 1000 J/(kg K) the PVC heats at $3.0\times10^8/(1380\times1000)=220$ K/s — it reaches its welding temperature in under a second. Polyethylene, with $p=6.9\times10^5\ \mathrm{W/m^3}$, density 950 kg/m³ and specific heat 2300 J/(kg K), heats at only 0.3 K/s; it is welded by hot plates, hot gas or ultrasound instead. The property that makes polyethylene the best cable insulation is the same one that makes it impossible to RF-weld.
-
----
-
-## 25.4 Dielectric breakdown and insulation
-
-### Dielectric strength is not a single number
-
-Every insulator fails if the field is high enough: a conducting channel forms, the material is punctured, and in solids the damage is permanent. The **dielectric strength** is the field at breakdown, but unlike permittivity it is not a material constant. It depends on thickness (thin films are stronger), electrode shape, waveform (DC, AC, impulse), duration of stress, temperature, and above all on defects. Table 25.4 shows why: thin, defect-free polymer films withstand hundreds of kilovolts per millimetre; the same polymers in thick industrial insulation are designed to work at a few kilovolts per millimetre.
-
-| Material | Short-term dielectric strength (kV/mm) | Typical design stress (kV/mm) |
-|---|---|---|
-| Air (1 atm, uniform field, 1 cm gap) | 3 | — |
-| SF$_6$ gas (1 atm) | 8.9 | Gas-insulated switchgear at 4–6 bar |
-| Transformer mineral oil (standard test gap) | 10–15 | 2–5 (oil–paper) |
-| XLPE (cable, thick) | 30–50 (AC) | 5–15 at conductor screen |
-| BOPP film (capacitor, 5–10 µm) | 600–700 | 150–250 |
-| Mica | 100–200 | 2–3 (in mica-tape windings) |
-| Epoxy (cast) | 20–30 | 3–5 |
-| Alumina (96 %) | 10–35 | 2–5 |
-| Electrical porcelain | 10–20 | 1–3 |
-| Thermal SiO$_2$ film (10 nm) | $\approx1000$ | 300–500 in MOS gates |
-
-*Table 25.4 — Dielectric strength and practical working stress of insulating materials (typical; strength depends on thickness, waveform and test method).*
-
-### Mechanisms of breakdown
-
-- **Intrinsic (electronic) breakdown.** In a perfect insulator a few free electrons gain energy from the field faster than they can lose it to phonons, ionize atoms, and multiply in an avalanche. This sets an upper limit of order $10^2$–$10^3$ kV/mm, approached only in thin, clean films.
-- **Thermal breakdown.** Dielectric loss and leakage current heat the insulation; both increase with temperature; if heat cannot escape fast enough, temperature and current run away together. It dominates in thick insulation, at high frequency and at high ambient temperature.
-- **Electromechanical breakdown.** The electrostatic pressure of the electrodes, $\tfrac12\varepsilon_0\varepsilon_rE^2$, compresses a soft insulator; as it thins, the field rises. Relevant to soft polymers near or above $T_g$, and exploited in dielectric-elastomer actuators (Chapter 29).
-- **Discharge and erosion (long-term) breakdown.** Gas-filled voids, delaminations and surface films see a field enhanced by the permittivity mismatch and break down first. These **partial discharges** do not bridge the electrodes immediately, but each one erodes the cavity wall with ions, ultraviolet light, ozone and heat. Over months they grow branching channels called **electrical trees** that eventually cross the insulation — the failure of the opening example. In polymers exposed to water and AC fields, slower **water trees** grow from defects and contaminants and later initiate electrical trees.
-- **Surface tracking and flashover.** On outdoor insulators, contamination plus moisture forms a conductive surface film; leakage current dries bands of it; arcs across the dry bands carbonize organic surfaces into conductive tracks. Porcelain and glass resist tracking because they cannot carbonize; silicone rubber resists it because its surface is hydrophobic and recovers hydrophobicity by migrating low-molar-mass chains to the surface.
-
-The statistics of breakdown are weakest-link statistics, the same as brittle fracture (Chapter 14): the breakdown field of a large area or a long cable is lower than that of a small test sample, and is described by Weibull distributions. The design response is to remove the largest defect: super-clean compounds, triple extrusion of the screens with the insulation so no interface voids form, and smooth field grading at joints.
-
-**Worked example — field and loss in an HV cable.** A 132 kV cable has a conductor of radius $a=15.5$ mm and 18 mm of XLPE ($\varepsilon_r=2.3$, $\tan\delta=3\times10^{-4}$), so the outer radius is $b=33.5$ mm. The phase-to-earth voltage is $U_0=132/\sqrt3=76.2$ kV. The coaxial field is $E(r)=U_0/[r\ln(b/a)]$, highest at the conductor screen:
-
-$$
-E_{\max}=\frac{76.2\times10^3}{(0.0155)\ln(33.5/15.5)}=6.4\ \mathrm{kV/mm},\qquad E_{\min}=\frac{76.2\times10^3}{(0.0335)\ln(33.5/15.5)}=3.0\ \mathrm{kV/mm}
-$$
-
-The maximum working stress is about a fifth of the short-term strength of thick XLPE, a margin set by long-term ageing and the size effect, not by short-term tests. The capacitance per metre is $C=2\pi\varepsilon_0\varepsilon_r/\ln(b/a)=166$ pF/m, and the dielectric loss per metre is
-
-$$
-P=\omega CU_0^2\tan\delta=2\pi(50)(166\times10^{-12})(76.2\times10^3)^2(3\times10^{-4})=0.091\ \mathrm{W/m}
-$$
-
-or 91 W per kilometre, small beside the conductor's resistive loss. But the loss scales with $U_0^2$ and with $\varepsilon'\tan\delta$: at 400 kV (a factor 9.2 in $U_0^2$) with the older oil-impregnated paper ($\varepsilon_r\approx3.5$, $\tan\delta\approx2.5\times10^{-3}$), dielectric loss becomes a significant part of the cable's thermal budget. This is one reason XLPE displaced paper at extra-high voltage.
-
-### Insulation systems and ageing
-
-Real insulation is a system of several materials: in a motor winding, enamel on the wire, mica tape, glass-fibre backing and impregnating resin; in a transformer, oil, cellulose paper and pressboard; in a power-module package, silicone gel over a ceramic substrate. Insulation is classified by its continuous temperature rating (IEC thermal classes 105 (A), 130 (B), 155 (F), 180 (H) and above, in °C), and its life follows thermal-ageing kinetics. A common rule is that every 8–10 K above the rated temperature halves the life — the Arrhenius law of Chapter 8 with an activation energy of about 1 eV. Moisture is the other enemy: water raises permittivity and loss, lowers resistivity, and in cellulose catalyses depolymerization. Fast-switching SiC inverters in 800 V vehicle drives (Chapter 26) add a new stress: steep voltage pulses trigger partial discharge in winding enamels that were adequate at 400 V.
-
-> **Status of the principle: Thermal life halving every 8–10 K**
-> *Empirical.* It is an Arrhenius rule fitted to accelerated ageing of organic insulation over a limited temperature range; extrapolation far outside the tested range or across a change in degradation mechanism is unreliable.
-
----
-
-## 25.5 Ferroelectric, piezoelectric and pyroelectric materials
-
-### Symmetry decides which effects are possible
-
-A crystal can couple electrical polarization to stress or temperature only if its symmetry allows it (Neumann's principle, Chapter 3). Of the 32 crystallographic point groups, 11 have a centre of symmetry and show no such coupling. Of the 21 non-centrosymmetric classes, 20 are **piezoelectric**: stress produces polarization, and a field produces strain. Ten of those are **polar** — they have a unique axis along which a spontaneous polarization $P_s$ exists — and are **pyroelectric**: a temperature change alters $P_s$ and releases charge. A subset of the polar materials are **ferroelectric**: their spontaneous polarization can be reversed by an applied field. Every ferroelectric is therefore pyroelectric and piezoelectric, but quartz is piezoelectric without being pyroelectric, and wurtzite AlN and ZnO are pyroelectric without being switchable.
-
-| Class | Condition | Examples |
-|---|---|---|
-| Dielectric (all) | Any | All insulators |
-| Piezoelectric | Non-centrosymmetric (20 classes) | Quartz, AlN, ZnO, GaN, bone collagen |
-| Pyroelectric | Polar (10 classes) | AlN, ZnO, LiTaO$_3$, tourmaline |
-| Ferroelectric | Polar and switchable | BaTiO$_3$, PZT, LiNbO$_3$, PVDF |
-
-*Table 25.5 — The symmetry hierarchy of functional dielectrics.*
-
-A polycrystalline ceramic of randomly oriented grains is macroscopically centrosymmetric even when each grain is polar, so it shows no net piezoelectricity. Only ferroelectrics can be made piezoelectric as ceramics, because their domains can be aligned by **poling**: a strong DC field (2–4 kV/mm) applied above room temperature switches domains toward the field direction. This is why almost all engineering piezoelectric ceramics are ferroelectric, and why they lose their activity if heated near the Curie temperature.
-
-### Ferroelectricity in perovskites
-
-Barium titanate is the archetype. Above its **Curie temperature** $T_C\approx120$–130 °C it is cubic perovskite, with Ti$^{4+}$ at the centre of an oxygen octahedron. On cooling, the Ti ion shifts off-centre along a cube edge, the cell stretches to tetragonal ($c/a\approx1.01$), and a spontaneous polarization of about 0.26 C/m² appears. Further transitions to orthorhombic (about 5 °C) and rhombohedral (about −90 °C) symmetries follow. Above $T_C$ the permittivity follows the **Curie–Weiss law**,
-
-$$
-\varepsilon_r\approx\frac{C}{T-T_0}
-$$
-
-with $C\approx1.7\times10^5$ K for BaTiO$_3$ — the divergence predicted by the failure of the Clausius–Mossotti denominator. Near $T_C$ the permittivity reaches 10 000 or more, which is exploited (after chemical flattening with dopants) in multilayer ceramic capacitors: more than a trillion are made every year, each a sintered stack of hundreds of BaTiO$_3$ layers a few micrometres thick with nickel electrodes.
-
-The polarization below $T_C$ is organized into **domains**, separated by 180° and 90° walls, which form to reduce depolarizing fields and elastic strain energy. Switching under a field traces a **hysteresis loop** (P–E loop) characterized by the remanent polarization $P_r$ and the coercive field $E_c$ (Figure 25.4) — a direct analogue of the magnetic hysteresis of Chapter 27. Ferroelectric memories store a bit in the sign of $P_r$, now in thin films of silicon-compatible doped HfO$_2$.
-
-### Lead zirconate titanate and the morphotropic phase boundary
-
-The workhorse piezoelectric is lead zirconate titanate, PbZr$_{1-x}$Ti$_x$O$_3$ (PZT). Its phase diagram has a nearly vertical **morphotropic phase boundary** (MPB) near $x\approx0.48$ between rhombohedral (Zr-rich) and tetragonal (Ti-rich) ferroelectric phases. At the boundary the two phases are nearly degenerate, the polarization can rotate easily between their directions, poling is most complete, and the piezoelectric and dielectric coefficients peak. The Curie temperature at the MPB is about 390 °C, far above that of BaTiO$_3$, so PZT holds its poling in service. Commercial compositions are tuned by dopants: donor-doped "soft" PZT (PZT-5A, -5H) has large coefficients but higher loss, for sensors and actuators; acceptor-doped "hard" PZT (PZT-4, -8) has lower loss and is used in high-power ultrasonic transducers and sonar.
-
-<!-- FIGURE 25.4 | figures/ch25/fig-25-4-pzt-mpb-and-loop.png | plot | PZT: the morphotropic phase boundary where piezoelectric response peaks, and the ferroelectric hysteresis loop of a poled ceramic. | Content: left panel: phase diagram of PbZrO3–PbTiO3, x-axis mol% PbTiO3 0 to 100, y-axis temperature 0 to 500 C; cubic paraelectric above a Curie line rising from about 230 C (PbZrO3) to 490 C (PbTiO3); rhombohedral FE(R) on Zr-rich side, tetragonal FE(T) on Ti-rich side, near-vertical MPB at about 48 mol% PbTiO3; antiferroelectric region near 0–5 %. Overlay on secondary y-axis: d33 (pC/N) vs composition peaking at about 400 at the MPB, falling to about 100 at 30 and 70 %. Right panel: P–E loop, E from -4 to +4 kV/mm, P from -0.4 to +0.4 C/m2, Pr about 0.3 C/m2, Ec about 1 kV/mm, labels Ps, Pr, Ec. -->
-
-### Piezoelectric coefficients and applications
-
-The direct and converse effects are described by tensor coefficients (Chapter 4). In engineering notation,
-
-$$
-D_i=d_{ij}\sigma_j+\varepsilon_{ik}^{\sigma}E_k,\qquad S_j=s_{jk}^{E}\sigma_k+d_{ij}E_i
-$$
-
-where $d_{ij}$ (pC/N, or equivalently pm/V) gives both the charge per unit force and the strain per unit field. For poled ceramics, axis 3 is the poling direction; $d_{33}$ describes response along it and $d_{31}$ transverse to it. The **electromechanical coupling factor** $k$ ($k^2$ = fraction of input energy converted to the other form) measures efficiency for transducers.
-
-| Material | $d_{33}$ (pC/N) | $k_{33}$ | $T_C$ (°C) | Uses |
-|---|---|---|---|---|
-| Quartz (single crystal, $d_{11}$) | 2.3 | 0.1 | 573 (α–β) | Oscillators, force sensors |
-| AlN (thin film) | 5–6 | 0.3 | none (no switching) | RF filters in phones, MEMS |
-| ZnO | 12 | 0.4 | none | Thin-film transducers, sensors |
-| PVDF (poled film) | −20 to −33 | 0.2 | ≈170 (melts first) | Hydrophones, flexible sensors |
-| BaTiO$_3$ ceramic | 190 | 0.5 | 120–130 | Early transducers, capacitors |
-| PZT-4 (hard) | 290 | 0.70 | 330 | Sonar, ultrasonic cleaners, welders |
-| PZT-5H (soft) | 590 | 0.75 | 190–200 | Actuators, medical ultrasound, sensors |
-| KNN-based (lead-free) | 200–400 | 0.5–0.6 | 200–400 | Replacement for PZT under RoHS pressure |
-| PMN–PT (single crystal) | 1500–2500 | 0.9 | 130–170 | High-end medical imaging probes |
-
-*Table 25.6 — Piezoelectric properties at room temperature (typical values).*
-
-The applications span every field. In mechanical and automotive engineering: piezoelectric stack actuators open diesel injectors in about 0.1 ms; accelerometers monitor engines and machinery. In civil and aerospace engineering: bonded piezo wafers send and receive guided ultrasonic waves for structural health monitoring of bridges and composite wings, and ultrasonic testing of welds uses PZT probes. In biomedical engineering: imaging probes contain arrays of hundreds of PZT or PMN–PT elements. In electronics: quartz and AlN resonators time and filter almost every radio signal. The search for lead-free replacements (KNN, BNT–BT, BCZT) is driven by the toxicity of lead (Chapter 49).
-
-**Worked example — a fuel-injector actuator.** A diesel injector needle must lift about 40 µm. A PZT stack of 160 layers, each 80 µm thick, is driven at 160 V. Each layer sees a field $E=160/(80\times10^{-6})=2.0$ kV/mm, below the depolarizing limit of soft PZT for unipolar drive. With an effective large-signal $d_{33}=600$ pm/V, each layer extends $d_{33}V=600\times10^{-12}\times160=9.6\times10^{-2}$ µm, and the stack of 160 layers gives
-
-$$
-\Delta L=n\,d_{33}V=160\times(600\times10^{-12})(160)=15.4\ \mu\mathrm m
-$$
-
-from a total active length of 12.8 mm — a strain of 0.12 %. Since 15 µm is less than the required lift, injectors use a hydraulic or lever amplifier, trading force for stroke; the stack's attraction is its speed and its force (kilonewtons), not its displacement. The multilayer design is the key materials-processing idea: tape-casting thin PZT layers with interleaved electrodes and co-firing them lets a modest voltage produce a high field.
-
-### Pyroelectric materials
-
-In a polar material a temperature change $\Delta T$ alters the spontaneous polarization by $\Delta P=p\,\Delta T$, where $p$ is the **pyroelectric coefficient** (C/(m² K)). On an electroded element of area $A$ this releases a charge $Q=pA\Delta T$. Lithium tantalate ($p\approx2\times10^{-4}$ C/(m² K), $T_C\approx600$ °C), PZT ($\approx3\times10^{-4}$), triglycine sulfate (high $p$ but a low Curie point) and PVDF ($\approx3\times10^{-5}$) are used in passive infrared motion sensors, flame detectors, gas analysers and uncooled thermal-imaging arrays. A 1 mm² LiTaO$_3$-class element with $p=3\times10^{-4}$ C/(m² K) warmed by 1 mK releases only 0.3 pC, so detectors are made thin (low heat capacity), thermally isolated and read by high-impedance amplifiers; the useful figure of merit is $p/(c_v\varepsilon_r)$, which favours materials with high pyroelectric coefficient but modest permittivity.
-
----
-
-## 25.6 Superconductivity
-
-### Zero resistance and the Meissner effect
-
-Below a **critical temperature** $T_c$, many metals, alloys and oxides lose all DC resistance. Currents set up in superconducting rings have persisted for years without measurable decay, which puts the resistivity below $10^{-25}\ \Omega\,\mathrm m$, at least seventeen orders of magnitude below copper. Zero resistance alone, however, would describe a "perfect conductor". The defining property is the **Meissner effect**: a superconductor cooled in a magnetic field expels it, the field decaying inside within the **London penetration depth** $\lambda_L$ (typically 40–200 nm). Superconductivity is therefore a thermodynamic phase with its own free energy, not merely a limit of high conductivity.
-
-The microscopic picture (BCS theory, belonging to Engineering Physics) is that electrons near the Fermi surface form bound **Cooper pairs** through an attraction mediated by lattice vibrations, condensing into a single coherent quantum state separated from excited states by an energy gap of order $3.5k_BT_c$. Two lengths characterize it: $\lambda_L$, over which fields are screened, and the **coherence length** $\xi$, over which the pair density can vary. This explains why Cu, Ag and Au do not superconduct: the weak electron–phonon coupling that makes their resistivity low also prevents pairing.
-
-> **Status of the principle: Meissner effect and BCS pairing**
-> *Fundamental* for the Meissner effect, which follows from the thermodynamics of a phase with zero magnetic induction inside. BCS theory is fundamental for conventional (phonon-mediated) superconductors; the pairing mechanism of the cuprates and iron pnictides is still unresolved.
-
-### Critical parameters and Type I versus Type II
-
-Superconductivity is destroyed by too high a temperature, field or current density. The three critical parameters $T_c$, $B_c$ and $J_c$ define a critical surface; a magnet must operate inside it with margin. The field dependence is approximately parabolic, $B_c(T)\approx B_c(0)[1-(T/T_c)^2]$.
-
-How the field is excluded divides superconductors into two types, decided by the **Ginzburg–Landau parameter** $\kappa=\lambda/\xi$:
-
-- **Type I** ($\kappa<1/\sqrt2$): mostly pure elements (Pb, Sn, Al, Hg). The surface energy between normal and superconducting regions is positive, so field is excluded completely up to a single, low critical field ($B_c=0.080$ T for Pb, 0.03 T for Sn, 0.01 T for Al), then the material goes normal. Useless for magnets.
-- **Type II** ($\kappa>1/\sqrt2$): alloys, compounds and oxides with short mean free paths and short coherence lengths. Above a lower critical field $B_{c1}$ (typically tens of millitesla) it becomes energetically favourable for the field to enter as quantized **flux vortices**, each carrying one flux quantum $\Phi_0=h/2e=2.07\times10^{-15}$ Wb in a normal core of radius about $\xi$. The material stays superconducting in this **mixed state** up to an upper critical field
-
-$$
-B_{c2}=\frac{\Phi_0}{2\pi\xi^2}
-$$
-
-which can exceed 100 T (Figure 25.5). Alloying shortens the electron mean free path and hence $\xi$, so impure, disordered materials have higher $B_{c2}$ — the reverse of what a conductor designer wants in Section 25.1, and a good example of the same microstructural variable serving opposite goals.
-
-<!-- FIGURE 25.5 | figures/ch25/fig-25-5-type-i-ii-magnetization.png | plot | Type I and Type II superconductors respond to an applied field differently: complete exclusion up to Bc, versus partial flux entry between Bc1 and Bc2. | Content: two panels, x-axis applied field B (arbitrary units), y-axis -mu0 M. Left (Type I): straight line rising with slope 1 to Bc, then vertical drop to zero; inset of field lines bending around a sphere. Right (Type II): linear rise to Bc1 (small), then gradual decline to zero at Bc2 (about 20 times Bc1); dashed Type I curve with the same thermodynamic Bc for comparison. Inset: hexagonal vortex lattice viewed along the field, cores of radius xi, field decaying over lambda. Label Meissner state, mixed state, normal state. -->
-
-### Flux pinning: why microstructure sets $J_c$
-
-A current flowing through the mixed state exerts a Lorentz force $\mathbf J\times\mathbf B$ on the vortices. If they move, they dissipate energy and the superconductor shows resistance. Useful current therefore requires **flux pinning**: microstructural defects that pin the normal vortex cores, since a vortex core sitting on a non-superconducting defect saves condensation energy. The best pins are of size comparable to $\xi$ (a few nanometres) and spaced like the vortex lattice. The critical current density is therefore not an intrinsic property at all; it is engineered by processing:
-
-- In **Nb–Ti**, cold drawing followed by precipitation heat treatments produces nanometre-thick ribbons of $\alpha$-Ti at the grain boundaries, which pin flux; $J_c$ reaches about 3000 A/mm² at 5 T and 4.2 K.
-- In **Nb$_3$Sn**, the grain boundaries of the A15 compound are the pins, so the reaction heat treatment is designed to give fine grains (100–200 nm).
-- In **REBCO** coated conductors, nanorods of BaZrO$_3$ or BaHfO$_3$ self-assemble in the film during deposition and act as columnar pins.
-
-This is the materials-science core of applied superconductivity: the same Hall–Petch-like logic of Chapter 13, with flux vortices playing the role of dislocations and precipitates and boundaries obstructing them.
-
-### The practical superconductors
-
-| Material | Structure | $T_c$ (K) | $B_{c2}$ (T) at 4.2 K | Form and main uses |
-|---|---|---|---|---|
-| Nb | BCC element | 9.2 | 0.4 | Superconducting RF accelerator cavities, Josephson junctions |
-| Nb–47Ti | BCC alloy | 9.5 | 10.5–11 | Wire; MRI, NMR, LHC dipoles; >90 % of the market |
-| Nb$_3$Sn | A15 compound | 18 | 25–27 | Brittle wire reacted after winding; NMR, ITER, HL-LHC |
-| MgB$_2$ | Hexagonal | 39 | 15–20 (at 0 K) | Wire; cryogen-free MRI, power cables at 20 K |
-| YBa$_2$Cu$_3$O$_{7-\delta}$ (REBCO) | Layered perovskite cuprate | 92 | > 100 | Coated tape; fusion magnets, high-field inserts, fault-current limiters |
-| Bi$_2$Sr$_2$CaCu$_2$O$_8$ (Bi-2212) | Layered cuprate | 85 | > 100 | Round wire; high-field inserts |
-| (Bi,Pb)$_2$Sr$_2$Ca$_2$Cu$_3$O$_{10}$ (Bi-2223) | Layered cuprate | 110 | > 100 | Silver-sheathed tape; current leads, cables |
-| Iron pnictides (e.g. Ba-122) | Layered | up to 55 | > 50 | Developmental wires |
-
-*Table 25.7 — The principal practical superconductors (typical values).*
-
-<!-- FIGURE 25.6 | figures/ch25/fig-25-6-superconductor-bc2-vs-t.png | plot | Upper critical field against temperature for the practical superconductors, with the operating windows of liquid helium, cryocoolers and liquid nitrogen. | Content: x-axis temperature 0 to 100 K; y-axis upper critical field (or irreversibility field for cuprates) 0 to 50 T, curves clipped at 50 with arrows for higher values. Curves (approx. Bc2(0)[1-(T/Tc)^2]): Nb-Ti (14.5 T, Tc 9.5 K, about 11.7 T at 4.2 K); Nb3Sn (30 T, Tc 18 K); MgB2 (wire, about 15 T at 0 K, Tc 39 K); REBCO (H parallel c, irreversibility line, well above 50 T below 30 K, reaching 0 at 92 K); Bi-2223 irreversibility line (much lower than REBCO at 77 K, about 0.2 T). Vertical bands at 1.9 K (superfluid He), 4.2 K (liquid He), 10-20 K (cryocooler), 77 K (liquid N2). Mark LHC operating point (8.3 T, 1.9 K) and MRI (3 T, 4.2 K). -->
-
-The family divides naturally (Figure 25.6). **Low-temperature superconductors** (Nb–Ti, Nb$_3$Sn) are cooled with liquid helium at 4.2 K or superfluid helium at 1.9 K. Nb–Ti is ductile, so it can be co-drawn with copper into fine multifilamentary wire, wound and used directly; it dominates because it is easy to make, not because it is the best superconductor. Nb$_3$Sn has double the $T_c$ and $B_{c2}$ but is a brittle intermetallic: wire is drawn from ductile precursors (Nb filaments in Cu–Sn bronze or with internal tin sources), wound into a coil, and only then reacted at 650–700 °C for days to form the compound, after which the coil cannot be bent. **High-temperature superconductors**, the cuprates, are layered oxides in which the superconductivity lives in CuO$_2$ planes. They are strongly anisotropic, their grain boundaries block current unless the grains are aligned within a few degrees, and their coherence lengths are only 1–2 nm. REBCO conductor is therefore made as a thin-film "coated conductor": a 1–2 µm epitaxial film deposited on a biaxially textured buffer stack on a Hastelloy tape, a triumph of thin-film processing (Chapter 41). MgB$_2$, discovered in 2001, sits between: cheap elements, 39 K, operable with cryocoolers at 10–20 K.
-
-A practical conductor is always a composite. Superconducting filaments are embedded in a copper or aluminium **stabilizer** of high RRR, which carries the current if a region goes normal and conducts heat away to prevent a local hot spot from spreading — a **quench**. Filaments are made fine (a few to tens of micrometres) and twisted to limit magnetization and AC losses. In a magnet, where the stored energy density at 3 T is $B^2/2\mu_0=3.6\ \mathrm{MJ/m^3}$, quench protection is a central design problem.
-
-**Worked example — the winding of an MRI magnet.** A whole-body MRI solenoid produces 3 T in its bore. For a long solenoid, $B=\mu_0NI/L$, so the required ampere-turns per metre of length are
-
-$$
-\frac{NI}{L}=\frac{B}{\mu_0}=\frac{3}{4\pi\times10^{-7}}=2.39\times10^6\ \mathrm{A/m}
-$$
-
-Take Nb–Ti with $J_c=3000$ A/mm² at the peak field in the winding and 4.2 K, in a wire with copper-to-superconductor ratio 1.5, so the engineering current density over the wire is $3000/2.5=1200$ A/mm². With insulation and packing reducing that to 80 %, the winding current density is $960$ A/mm² $=9.6\times10^8$ A/m². The radial build of winding needed is then
-
-$$
-\frac{2.39\times10^6\ \mathrm{A/m}}{9.6\times10^8\ \mathrm{A/m^2}}=2.5\ \mathrm{mm}
-$$
-
-at the critical current, or about 3.6 mm if the magnet is run at 70 % of critical current to leave a temperature and field margin. A copper solenoid at a typical 5 A/mm² would need a winding about half a metre thick and dissipate megawatts. Real magnets need more conductor (end corrections, shielding coils), but the comparison shows why superconductivity enables MRI, NMR, accelerators (the LHC's 1232 Nb–Ti dipoles run at 8.3 T and 1.9 K) and fusion magnets (REBCO coils have reached 20 T near 20 K).
-
-Beyond magnets, superconductors are used in power cables and fault-current limiters (cuprates cooled by cheap liquid nitrogen at 77 K), in high-Q niobium RF cavities for accelerators, in SQUID magnetometers sensitive to femtotesla fields, and in the Josephson-junction circuits of superconducting quantum computers. Hydrides such as H$_3$S superconduct above 200 K, but only above 100 GPa; room-temperature superconductivity at ambient pressure remains unachieved.
-
-> **Boundary.** BCS theory, Ginzburg–Landau theory and the quantum mechanics of the Josephson effect belong to the Engineering Physics book; conductor design, AC losses and quench protection are developed in depth in the *Materials Core (EEE)* book, Chapter 17.
 
 ---
 
@@ -483,16 +817,15 @@ Beyond magnets, superconductors are used in power cables and fault-current limit
 
 | Open question | Where it is answered |
 |---|---|
-| What makes some solids metals and others semiconductors or insulators? How are carrier density and mobility set in semiconductors? | Chapter 26 |
-| How does the magnetic analogue of ferroelectric domains and hysteresis work, and what limits core losses? | Chapter 27 |
-| How does the electronic polarization of Section 25.3 produce refractive index, dispersion and electro-optic effects? | Chapter 28 |
-| How are piezoelectric and electrostrictive materials used in actuators, and how do dielectric elastomers work? | Chapter 29 |
-| How do size effects change conduction in nanowires and graphene? | Chapter 30 |
-| How are solid electrolytes used in fuel cells, electrolysers and solid-state batteries? | Chapter 32 |
-| How do superconductors and insulators behave under irradiation and cryogenic conditions? | Chapter 33 |
-| How do electromigration, contact corrosion and insulation ageing appear in failure analysis? | Chapters 35 and 36 |
-| How are thin conductors, dielectrics and superconducting coated conductors deposited? | Chapter 41 |
-| How are resistivity, permittivity and ionic conductivity measured (four-point probe, impedance spectroscopy)? | Chapter 42 |
-| How are conductor and insulator choices made systematically with indices and cost? | Chapter 48 |
+| Why do metals have a fixed, high carrier density while semiconductors and insulators do not? What sets $v_F$ and the effective mass? | Chapter 31 |
+| How do mobility and scattering work in semiconductors, where both carrier density and mobility depend on doping and temperature? | Chapter 32 |
+| How do metal–semiconductor contacts differ from metal–metal contacts (Schottky barriers, ohmic contacts)? | Chapter 34 |
+| How do superconductors carry current with zero resistance, and why do practical wires still need a copper stabilizer? | Chapter 30 |
+| How do conduction and size effects change in nanowires, nanotubes and graphene? | Chapter 38 |
+| How are interconnect films deposited and their grain structure controlled? | Chapters 49 and 50 |
+| Which solders, bonding wires and conductive adhesives are used, and how do they fail in packages? | Chapter 51 |
+| How are resistivity and sheet resistance measured accurately (four-point probe, van der Pauw)? | Chapter 52 |
+| How do electromigration, fretting and contact degradation limit conductor life? | Chapter 44 |
+| How are conductor choices made systematically with performance indices and cost? | Chapter 58 |
 
-**Next:** Chapter 26 turns to the materials whose carrier density is not fixed but designed — semiconductors — and asks how band gaps, doping, mobility and interfaces make them the engine of electronics, photovoltaics and power conversion.
+**Next:** Chapter 26 turns from materials that must carry current to materials that must stop it, and asks what makes an insulator store field energy, lose some of it as heat, and eventually break down.

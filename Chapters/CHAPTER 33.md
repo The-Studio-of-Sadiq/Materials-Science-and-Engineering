@@ -1,344 +1,585 @@
-# Chapter 33 — Materials for Extreme Environments
+# Chapter 33 — Semiconductor Material Families
 
-*Part VII · Advanced and Emerging Materials*
+*Part VII · Semiconductor and Photonic Materials*
 
-The first-stage turbine blade of a modern jet engine sits in gas at about 1500 °C, some 150 °C above the melting point of the nickel alloy it is made of. It rotates at more than 10,000 revolutions per minute, so each gram of blade near the tip pulls outward with a force of a few hundred newtons, and it must do this for some 20,000 hours between overhauls without creeping more than a fraction of a millimetre toward the casing. Two metres away, the fan blade shrugs off bird strikes at −50 °C. A few hundred kilometres away a reactor pressure vessel absorbs a slow rain of fast neutrons that knock each of its atoms out of place again and again over sixty years, while its steel's ductile–brittle transition creeps upward toward the temperature of an emergency cooling injection. An LNG carrier's tank holds liquid at −162 °C in a membrane only 0.7 mm thick, and a re-entry capsule's heat shield is designed to burn away. These components share one feature: the environment has removed the safety margins that ordinary service allows. This chapter collects what materials science knows about such environments, where the physics of creep, diffusion, fracture and defects from earlier chapters is pushed to its limits.
+An electric-vehicle maker is redesigning its traction inverter for an 800 V battery. The existing design uses silicon IGBTs. A silicon carbide MOSFET of the same current rating costs about three times as much per die, yet the company switches, and the whole industry is doing the same. The drive-cycle losses fall by more than half, the cooling plate shrinks, and the extra range is worth more than the extra semiconductor cost. In the same year the company's radar supplier moves its power amplifiers to gallium nitride on silicon carbide, its lidar uses indium gallium arsenide detectors, its displays are driven by amorphous-oxide and polysilicon thin-film transistors, and the dashboard is lit by organic LEDs. Seven different semiconductors sit in one car, and each was chosen for reasons that trace back to the band structure and defect physics of Chapters 31 and 32. This chapter is the catalogue and the comparison: what each family offers, what limits it, and how an engineer ranks them for a given job.
 
-> **What sets the temperature ceiling of a structural material, and how do coatings, cooling and composites raise it?**
-> **How does radiation damage a crystal, and why do some alloys survive a hundred displacements per atom while others swell and crack?**
-> **Why do some metals stay tough at cryogenic temperatures while others shatter, and what do aerospace, hypersonic and space service add?**
+> **What does each semiconductor family offer, and what holds it back?**
+> **How do band gap, mobility, critical field, saturation velocity and thermal conductivity combine into figures of merit for power and RF?**
+> **Why does silicon still dominate, and where has it lost to other materials?**
 
 | Concept | Engineering destination |
 |---|---|
-| Homologous temperature, creep, Larson–Miller parameter | Turbine blades, boiler tubes, furnace hardware, rocket nozzles |
-| Superalloys, refractory metals, ceramics, CMCs, thermal barrier coatings | Gas turbines, reactors, hypersonic vehicles |
-| Protective oxide scales, hot corrosion | Turbine and boiler life, waste incinerators, petrochemical crackers |
-| Displacements per atom, swelling, embrittlement, helium | Reactor vessels, core internals, fuel cladding, fusion first wall |
-| Fuel and cladding behaviour | Fission reactor safety and burnup |
-| Specific stiffness and damage-tolerant design | Airframes, engine discs, launch vehicles |
-| Ductile–brittle transition, thermal contraction, Invar | LNG and liquid-hydrogen tanks, superconducting magnets |
-| Ablation, radiative cooling, atomic oxygen, outgassing | Re-entry shields, leading edges, satellites |
+| Silicon and germanium | Logic, memory, analog, sensors, power to about 1 kV; SiGe RF and photonics |
+| III–V compounds, alloys, lattice matching | Band-gap engineering for lasers, detectors, HEMTs and HBTs |
+| GaAs and InP | RF front-ends, mm-wave and THz transistors, 850 nm to 1.55 µm photonics |
+| Silicon carbide | 650 V–3.3 kV power MOSFETs and diodes; high-temperature sensors |
+| Gallium nitride | Fast power switches, RF power amplifiers, blue/green/UV LEDs and lasers |
+| Ga$_2$O$_3$, diamond, AlN | Next-generation ultra-high-voltage power, extreme environments, heat spreading |
+| Amorphous silicon and oxides | Large-area thin-film transistors, imagers, passivation layers |
+| Organic semiconductors | OLED displays, flexible and printed electronics |
+| Two-dimensional materials | Atomically thin channels, sensors, ultimate scaling |
+| Baliga and Johnson figures of merit | First-pass material screening for power and RF |
 
-**Roadmap.** What makes an environment extreme (33.1) → high-temperature materials (33.2) and their chemical attack (33.3) → radiation damage (33.4) and nuclear materials (33.5) → aerospace structures (33.6) → cryogenic service (33.7) → hypersonic flight and space (33.8).
+**Roadmap.** The elemental semiconductors (33.1) → III–V compounds and alloy engineering (33.2) → GaAs and InP (33.3) → silicon carbide (33.4) → gallium nitride (33.5) → the ultra-wide-gap materials (33.6) → disordered and molecular semiconductors: amorphous silicon (33.7) and organics (33.8) → atomically thin materials (33.9) → systematic comparison for power, RF, sensing and optoelectronics (33.10).
 
-> **Boundary.** The creep, fracture and fatigue mechanics used here are developed in Chapter 14, the alloys in Chapters 15 and 16, the ceramics and composites in Chapters 17, 22 and 23, and the corrosion science in Chapters 34 and 35. Nuclear reactions and neutron physics belong to Engineering Physics; radiation effects on semiconductor devices are treated in the *Materials Core (EEE)* book.
-
----
-
-## 33.1 What makes an environment extreme
-
-An environment is extreme for a material when it activates a degradation mechanism that is negligible in ordinary service. Temperature does this through the **homologous temperature** $T/T_m$ (both in kelvin): diffusion-controlled processes such as creep, coarsening and oxidation become important above about $0.4T_m$ for metals and $0.5T_m$ for ceramics (Chapters 8 and 14). Radiation does it by creating point defects far above their thermal-equilibrium concentration. Low temperature does it by suppressing the thermally activated dislocation motion that makes BCC metals ductile. Chemistry does it by dissolving or oxidizing the protective layers on which materials depend, and the vacuum, ultraviolet light and atomic oxygen of orbit add mechanisms that never occur on the ground.
-
-**Table 33.1 — Representative extreme environments (typical values).**
-
-| Component | Temperature | Other loads | $T/T_m$ of material | Dominant mechanisms |
-|---|---|---|---|---|
-| HP turbine blade (Ni single crystal) | ≈1100 °C metal, ≈1500 °C gas | Centrifugal stress 150–250 MPa; thermal cycling | ≈0.83 | Creep, oxidation, thermomechanical fatigue |
-| Ultra-supercritical boiler tube | 600–650 °C | Steam at 25–30 MPa | ≈0.5 | Creep, steam oxidation |
-| Ethylene cracker tube (HP-40 cast steel) | 1000–1100 °C | Hydrocarbons | ≈0.8 | Creep, carburization |
-| Light-water reactor pressure vessel | ≈290 °C | Fast neutrons, ≈0.1 dpa over 60 years | ≈0.3 | Irradiation embrittlement |
-| Fast-reactor fuel cladding | 400–650 °C | 100–200 dpa | 0.4–0.5 | Void swelling, irradiation creep |
-| Fusion divertor (tungsten) | up to ≈1200 °C surface | ≈10 MW/m² heat flux; He and H plasma | ≈0.4 | Recrystallization, cracking, He blistering |
-| LNG tank | −162 °C | Thermal cycling | — | Brittle fracture, contraction |
-| Re-entry heat shield | 1500–3000 °C surface | Shear, oxidation | ablating | Ablation, oxidation |
-| Low-Earth-orbit surface | −100 to +120 °C | Atomic oxygen, UV, vacuum | — | Erosion, outgassing, cycling |
+> **Boundary.** This chapter compares materials. How a MOSFET, HEMT, HBT, LED or laser built from them operates belongs in the Electronics & Computing core. Interfaces and heterojunctions are developed in Chapter 34, optoelectronic devices' material requirements in Chapter 35, and 2D materials and nanostructures in depth in Chapter 38. Crystal growth and wafer manufacture are in Chapter 50. All property values are typical room-temperature values for good-quality material. Where values vary with growth method, orientation or doping, ranges are given.
 
 ---
 
-## 33.2 High-temperature materials
+## 33.1 Silicon and germanium
 
-### What a high-temperature material must do
+### Why silicon dominates
 
-A material for hot structural service must resist creep (Chapter 14), keep its microstructure stable for tens of thousands of hours, form a protective oxide (Section 33.3), resist thermomechanical fatigue as the component heats and cools, and, in anything that flies or rotates, do all this at low density, since the centrifugal stress in a rotating blade scales with its density. No single material does everything, so the hottest components are **material systems**: a creep-resistant substrate, a bond coat that forms a protective oxide, a ceramic thermal barrier and internal cooling.
+On band structure alone, silicon is unremarkable. Its gap is indirect, its electron mobility is a sixth of GaAs's, its critical field is a tenth of SiC's, and its thermal conductivity is a fifteenth of diamond's. It dominates semiconductor production, at over 95 % of devices by value, because of a combination of material properties that no other semiconductor matches.
 
-### Nickel-base superalloys
+1. **A near-perfect native oxide.** Thermal oxidation grows amorphous SiO$_2$, with a band gap of about 9 eV, a breakdown field above 10 MV/cm and an interface-trap density as low as about $10^{10}\ \mathrm{cm^{-2}\,eV^{-1}}$ after hydrogen annealing (Chapter 34). That oxide made the MOSFET and planar processing possible. The native oxides of Ge, GaAs and InP are unstable, water-soluble or electrically poor.
+2. **Crystal perfection at scale.** Silicon is grown as dislocation-free single crystals 300 mm in diameter and two metres long, with purity of 9N–11N (Chapter 50). No other semiconductor comes close.
+3. **Abundance and safety.** Silicon makes up 28 % of the Earth's crust by mass, and silicon and its oxide are non-toxic.
+4. **A moderate, useful gap.** At 1.12 eV the gap is wide enough for low leakage up to about 150 °C (Chapter 31) and narrow enough for easy doping and low-voltage operation. It also matches the solar spectrum well (Chapter 40).
+5. **Mechanical and thermal robustness.** Silicon is stronger than steel in flexure when defect-free, has a thermal conductivity of about 148 W/(m K), comparable to many engineering alloys and about five times that of alumina, and a low thermal expansion (2.6 ppm/K).
+6. **Well-behaved dopants.** B, P, As and Sb are shallow, highly soluble and controllable, giving p- and n-type doping over $10^{13}$–$10^{21}\ \mathrm{cm^{-3}}$.
 
-Nickel-base superalloys (Chapter 16) owe their strength to the **γ/γ′ microstructure**: 60–70 vol% of cuboidal, coherent precipitates of ordered Ni$_3$(Al,Ti,Ta) (γ′, L1$_2$ structure) in an FCC nickel solid solution (γ). A dislocation entering γ′ creates an antiphase boundary (Chapter 3) and must travel in pairs; the yield strength of γ′ even rises with temperature up to about 800 °C because cross-slip locks screw dislocations. Refractory solutes (Re, W, Mo, Ta, Ru) slow diffusion and therefore creep and γ′ coarsening. The FCC matrix keeps good ductility and toughness at all temperatures.
+### Silicon's limits
 
-Processing has been as important as alloying. Conventionally cast blades fail by creep cavitation on transverse grain boundaries. **Directional solidification** aligns columnar grains along the blade axis, removing transverse boundaries; **single-crystal** casting, with a helical grain selector, removes boundaries altogether, so grain-boundary strengtheners (C, B, Zr), which lower the melting point, can be omitted and the solution-heat-treatment temperature raised. Each step added roughly 25–50 °C of metal-temperature capability; together with cooling and coatings they let turbine entry temperatures exceed the alloy's melting point.
+The same properties set the boundaries of silicon's domain.
 
-**Worked example — what 50 °C costs in creep life.** Creep-rupture data are compared through the Larson–Miller parameter $\mathrm{LMP}=T(C+\log_{10}t_r)$, with $T$ in kelvin, $t_r$ in hours and $C\approx20$ (Chapter 14). A blade alloy has a rupture life of 1000 h at 1000 °C (1273 K) at its design stress, so
+- **Indirect gap.** Radiative recombination is $10^4$ times slower than in GaAs (Chapter 31). Silicon makes excellent detectors and solar cells but very poor light emitters. Silicon photonics uses Ge for detection and bonded III–V material for lasers.
+- **Moderate critical field** (about 0.3 MV/cm). A silicon power device needs a thick, lightly doped drift layer, and its on-resistance rises steeply with voltage (Section 33.10). Above about 600 V, silicon power devices must be bipolar (IGBTs), which conduct well but switch slowly.
+- **Temperature.** Intrinsic conduction and leakage limit junction temperatures to about 150–175 °C.
+- **Saturation velocity** (about $10^7$ cm/s) and mobility limit the highest-frequency analog circuits, though aggressive scaling has taken Si CMOS to transit frequencies of several hundred GHz.
 
-$$
-\mathrm{LMP}=1273\times(20+3)=29\,279
-$$
+### Germanium
 
-At the same stress the life at 950 °C (1223 K) is $\log_{10}t_r=29\,279/1223-20=3.94$, so $t_r=8700$ h; at 1050 °C (1323 K), $\log_{10}t_r=2.13$ and $t_r=135$ h. A 50 °C overtemperature cuts life by a factor of about 7, and 50 °C of extra cooling multiplies it by nearly 9. This exponential sensitivity is why a few tens of degrees from a better coating or alloy are worth decades of development (Figure 33.1).
+Germanium was the material of the first transistor (1947) and lost to silicon in the 1960s for three reasons: its oxide is water-soluble and unstable, its 0.66 eV gap gives large leakage currents, and its intrinsic temperature (about 390 K at $10^{15}\ \mathrm{cm^{-3}}$, Chapter 31) is too low for many applications. It has returned in roles that use its strengths.
 
-> **Status of the principle: Larson–Miller parameter**
-> *Empirical.* It follows from an Arrhenius rate with a single activation energy; it interpolates well within the tested range for one alloy and microstructure, but extrapolations far beyond the data, or across a change of creep mechanism, are unreliable.
+- **Highest hole mobility of the common semiconductors** (about 1900 cm²/(V s), four times Si) and high electron mobility (3900 cm²/(V s)), from its light conductivity masses (Chapter 31). Ge and high-Ge SiGe channels are used in advanced p-type transistors.
+- **Direct gap close to the indirect gap.** The Γ-valley gap of 0.80 eV gives strong absorption at 1.55 µm. Ge-on-Si photodetectors are the standard detector of silicon photonics.
+- **Lattice match to GaAs** (5.658 Å versus 5.653 Å) makes Ge the substrate and bottom junction of high-efficiency multi-junction space solar cells.
+- **Radiation detection.** High-purity Ge, with net impurity concentrations near $10^{10}\ \mathrm{cm^{-3}}$, cooled to 77 K, gives the best energy resolution of any gamma-ray detector.
 
-<!-- FIGURE 33.1 | figures/ch33/fig-33-1-larson-miller-alloys.png | plot | Larson-Miller master curves rank high-temperature alloys: each 1000 units of LMP is worth roughly 40-50 C at constant life. | Content: log y-axis stress 20-1000 MPa vs x-axis LMP = T(K)(20+log t_h) from 16,000 to 32,000. Representative curves: 9Cr-1Mo (Grade 91) steel (300 MPa at 18,000 to 50 MPa at 23,000), 316 stainless (250 MPa at 18,000 to 40 MPa at 24,000), Ti-6242 (500 MPa at 16,000 to 150 MPa at 19,500), wrought Ni superalloy IN718 (700 MPa at 20,000 to 150 MPa at 25,000), cast polycrystal IN738 (500 MPa at 22,000 to 100 MPa at 27,000), single-crystal CMSX-4 (600 MPa at 24,000 to 100 MPa at 29,500). Mark the worked-example point LMP 29,279. Secondary top axis: temperature for 10,000 h life. -->
+### Silicon–germanium alloys
 
-### Refractory metals
+Si and Ge are fully miscible, and Si$_{1-x}$Ge$_x$ alloys span lattice constants from 5.431 to 5.658 Å (a 4.2 % mismatch) and gaps from 1.12 to 0.66 eV. Thin SiGe layers grown on Si are compressively strained, which raises hole mobility and lowers the gap. These are used in SiGe heterojunction bipolar transistors (with $f_T$ and $f_{\max}$ of 300–700 GHz for mm-wave radar and optical links) and in strained-channel CMOS. Strain and critical thickness are treated in Chapter 34.
 
-Molybdenum (melting point 2623 °C), niobium (2477 °C), tantalum (3017 °C) and tungsten (3422 °C) keep useful strength far above any superalloy. Their weaknesses are equally fundamental. They oxidize catastrophically: MoO$_3$ and WO$_3$ volatilize above about 700–800 °C, so these metals serve in vacuum or inert gas (furnace elements and heat shields, X-ray targets, glass-melting electrodes) or under coatings. They are dense (W 19.3 g/cm³, Mo 10.2 g/cm³), and the BCC metals Mo and W have ductile–brittle transitions near or above room temperature, made worse by interstitial oxygen and recrystallization. Niobium alloy C-103 with a silicide coating forms the radiation-cooled nozzle extensions of upper-stage rocket engines; molybdenum TZM, with fine TiC and ZrC particles, serves in forging dies and furnace hardware; tungsten is the plasma-facing armour of fusion devices (Section 33.5). Refractory high-entropy alloys and Mo–Si–B alloys aim to combine strength above 1200 °C with self-protecting oxides.
-
-### Ceramics and ceramic-matrix composites
-
-Covalent ceramics (SiC, Si$_3$N$_4$) keep their strength to 1200–1400 °C, are a third of the density of superalloys and form protective silica (Chapter 17). Monolithic, they are flaw-sensitive (Weibull moduli of 10–20) and so are used where stresses are modest or compressive: silicon nitride bearing balls and turbocharger rotors, SiC heat-exchanger tubes and kiln furniture.
-
-**Ceramic-matrix composites** (Chapter 23) supply the missing toughness. In SiC/SiC, silicon carbide fibres are embedded in a SiC matrix with a thin boron nitride or pyrolytic carbon interphase that deflects cracks along the fibres, so cracks bridge rather than run straight through. The composite fails gracefully, with a stress–strain curve that bends over rather than snapping. SiC/SiC operates to about 1300 °C at a density of about 2.7 g/cm³, and has entered service in turbine shrouds, combustor liners and low-pressure turbine blades, where it saves cooling air and weight. Carbon–carbon composites keep strength above 2000 °C in inert atmosphere and serve as aircraft and racing-car brakes and rocket nozzles, but they oxidize above about 450 °C and need SiC conversion coatings or short service times.
-
-### Thermal barrier coatings
-
-A **thermal barrier coating** (TBC) is a ceramic layer, 100–500 µm thick, on the hot surface of an internally cooled metal part. The standard topcoat is zirconia stabilized with 7–8 wt% yttria (7YSZ), chosen for a rare combination: low thermal conductivity (about 2–3 W m$^{-1}$ K$^{-1}$ dense, 0.8–1.2 W m$^{-1}$ K$^{-1}$ with the porosity and microcracks of the coating), the highest thermal expansion of common oxides (about 11 ppm/K, closest to the metal), phase stability to about 1200 °C, and toughness from its metastable tetragonal phase (Chapter 14). Plasma spraying gives a splat structure with low conductivity; electron-beam physical-vapour deposition gives columns that open and close as the metal expands, tolerating strain better on blades.
-
-Between the topcoat and the superalloy is an aluminium-rich **bond coat** (MCrAlY or Pt-modified aluminide) that grows a **thermally grown oxide** (TGO) of α-Al$_2$O$_3$, because zirconia is transparent to oxygen. The TGO is the TBC's life clock: as it thickens to about 5–10 µm, the compressive stress it stores on cooling, and the bond coat's rumpling, drive delamination and spallation of the topcoat (Figure 33.2). A newer threat is CMAS, calcium–magnesium–aluminosilicate deposits from ingested sand and volcanic ash, which melt on the hot surface, infiltrate the porous topcoat and stiffen it so that it spalls on cooling.
-
-**Worked example — how much a coating buys.** A blade wall carries a heat flux $q=1$ MW/m² from the gas to the cooling air. Through a 300 µm topcoat of conductivity $k=1.0$ W m$^{-1}$ K$^{-1}$, Fourier's law gives the temperature drop
-
-$$
-\Delta T=\frac{q\,t}{k}=\frac{10^6\times3\times10^{-4}}{1.0}=300\ \mathrm K
-$$
-
-By the Larson–Miller arithmetic above, even a third of that drop multiplies creep life by an order of magnitude. Conversely, losing a patch of coating by spallation exposes the metal to a temperature rise of a couple of hundred kelvin, which is why TBC spallation is treated as a life-limiting event rather than a cosmetic one.
-
-> **Status of the principle: one-dimensional Fourier conduction through a coating**
-> *Approximate.* Valid for a uniform layer much thinner than the component's curvature, with constant conductivity; radiation through the translucent ceramic, sintering of the topcoat (which raises $k$ with time) and edge effects modify it.
-
-<!-- FIGURE 33.2 | figures/ch33/fig-33-2-tbc-system-temperature-profile.png | schematic | A thermal barrier coating system: the ceramic topcoat carries most of the temperature drop, and the thermally grown oxide at the bond coat sets its life. | Content: cross-section of a cooled turbine blade wall, left to right: hot gas (1500 C), 7YSZ topcoat 300 um (columnar EB-PVD texture, porosity), TGO alumina 1-10 um, MCrAlY or PtAl bond coat 50-100 um, single-crystal superalloy wall 1-2 mm, cooling air (600 C). Overlaid temperature profile: gas 1500 C, topcoat surface ~1300 C, topcoat/bond-coat interface ~1000 C (300 K drop across topcoat), metal inner wall ~900 C. Callouts: CMAS infiltration at surface, TGO thickening and rumpling leading to spallation, film-cooling hole. -->
-
-**Table 33.2 — High-temperature structural materials (typical values).**
-
-| Material | Density (g/cm³) | Approx. maximum service temperature | Oxidation protection | Typical use |
-|---|---|---|---|---|
-| Ti-6242 / near-α Ti | 4.5 | ≈550 °C | Limited (α-case) | Compressor discs and blades |
-| γ-TiAl | 3.9–4.2 | ≈750 °C | Marginal alumina | Low-pressure turbine blades |
-| 9–12 % Cr ferritic steels | 7.8 | ≈620 °C | Chromia | Steam pipes, boiler headers |
-| Ni superalloy, single crystal | 8.6–9.0 | ≈1100 °C metal (higher with TBC) | Alumina via bond coat | HP turbine blades |
-| Nb alloy C-103 (coated) | 8.9 | ≈1300 °C | Silicide coating | Rocket nozzle extensions |
-| Mo-TZM | 10.2 | ≈1400 °C (vacuum/inert) | None in air | Furnace hardware, dies |
-| W | 19.3 | >2000 °C (vacuum/inert) | None in air | Fusion armour, filaments |
-| Si$_3$N$_4$, SiC (monolithic) | 3.2 | 1200–1400 °C | Silica | Bearings, heat exchangers |
-| SiC/SiC CMC | 2.6–2.8 | ≈1300 °C (with EBC) | Silica + environmental barrier | Shrouds, liners, LPT blades |
-| C/C composite | 1.6–1.9 | >2000 °C inert; ≈450 °C in air unprotected | SiC coating | Brakes, nozzles, leading edges |
-
----
-
-## 33.3 High-temperature oxidation and hot corrosion
-
-Every material in Table 33.2 survives in air only behind a slow-growing, adherent oxide. The thermodynamics (Ellingham diagrams, Chapter 6) and kinetics (Wagner's parabolic law, the Pilling–Bedworth ratio) of oxide growth are developed in Chapter 34; here the question is which scale to rely on.
-
-- **Chromia (Cr$_2$O$_3$)** formers, alloys with about 18–25 % Cr, protect up to about 950–1000 °C. Above that, chromia oxidizes further to volatile CrO$_3$ (and in steam to CrO$_2$(OH)$_2$), so the scale thins as it grows.
-- **Alumina (α-Al$_2$O$_3$)** formers, alloys with enough Al (about 5 % in FeCrAl, or via aluminide coatings), grow scales one to two orders of magnitude more slowly and protect to about 1300 °C. Small additions of reactive elements (Y, Hf, Zr) segregate to the scale's grain boundaries, slow its growth and dramatically improve adhesion.
-- **Silica (SiO$_2$)** on SiC and Si$_3$N$_4$ is the slowest-growing scale of all, but water vapour converts it to volatile Si(OH)$_4$. In a gas turbine's combustion products, silica recedes at rates of the order of micrometres per hour, so SiC/SiC parts need **environmental barrier coatings** of rare-earth silicates (Yb$_2$Si$_2$O$_7$). At low oxygen pressure SiC oxidizes *actively* to gaseous SiO and recedes rapidly, a concern for re-entry.
-
-**Hot corrosion** is accelerated attack under a thin molten salt film. Sodium sulfate, formed from sulfur in fuel and sodium chloride in marine air, condenses on turbine parts. In **Type I** (high-temperature) hot corrosion, at about 850–950 °C, the molten Na$_2$SO$_4$ dissolves the protective oxide (fluxing) and leads to sulfidation beneath it. In **Type II** (low-temperature) hot corrosion, at about 650–750 °C, low-melting eutectics with cobalt or nickel sulfates cause pitting. Vanadium from residual fuel oil forms vanadates that melt near 600–700 °C, which is why heavy-fuel boilers and marine diesels need special alloys or fuel additives. Related attacks include sulfidation in coal gasifiers, chloride attack in waste-to-energy boilers, and carburization and **metal dusting** in petrochemical furnaces, where carbon diffuses into nickel–chromium alloys and disintegrates them into graphite and metal powder. The materials responses are higher chromium for hot corrosion, alumina-forming coatings, and silicon and aluminium additions against carburization.
-
----
-
-## 33.4 Radiation damage
-
-### Displacements and the dpa
-
-A fast neutron carries no charge and passes through the electron cloud untouched until it collides with a nucleus. In an elastic collision a neutron of energy $E$ can transfer at most
-
-$$
-T_{max}=\frac{4A}{(1+A)^2}E
-$$
-
-to a nucleus of mass number $A$. The struck atom, the **primary knock-on atom** (PKA), recoils through the lattice and displaces others if it gives them more than the **displacement threshold energy** $E_d$, about 25–40 eV for metals (40 eV is the conventional value for iron). The resulting **displacement cascade** (Figure 33.3) lasts a few picoseconds: a core of a few nanometres is briefly molten-like, most displaced atoms recombine, and the survivors are vacancies at the centre and self-interstitials, singly and in small clusters, around the edge.
-
-The standard measure of damage is the number of **displacements per atom** (dpa), estimated by the Norgett–Robinson–Torrens (NRT) model, which counts the displacements a PKA of damage energy $T_{dam}$ would create:
-
-$$
-N_d=\frac{0.8\,T_{dam}}{2E_d}
-$$
-
-where $T_{dam}$ is the PKA energy minus what it loses to electronic excitation.
-
-> **Status of the principle: NRT displacement estimate**
-> *Approximate.* A binary-collision estimate that counts displacements, not surviving defects; molecular dynamics shows that only about a third survive cascade recombination. The dpa is nonetheless the accepted exposure unit because it lets damage from different neutron spectra and ion beams be compared.
-
-**Worked example — damage from one fast neutron in steel.** For a 1 MeV neutron striking iron ($A=55.85$),
-
-$$
-T_{max}=\frac{4\times55.85}{56.85^2}\times1\ \mathrm{MeV}=0.0691\ \mathrm{MeV}=69\ \mathrm{keV}
-$$
-
-For isotropic elastic scattering the average transfer is half of this, about 35 keV. Roughly a quarter goes into electronic excitation, leaving $T_{dam}\approx25$ keV, so $N_d=0.8\times25\,000/(2\times40)=250$ displacements, of which some 80 survive as Frenkel pairs. In a fast-reactor core with a flux of $2\times10^{15}$ neutrons cm$^{-2}$ s$^{-1}$ and a spectrum-averaged displacement cross-section of about 400 barn ($4\times10^{-22}$ cm²), the damage rate is $2\times10^{15}\times4\times10^{-22}=8\times10^{-7}$ dpa/s, or $8\times10^{-7}\times3.16\times10^7\approx25$ dpa per year: each atom in the cladding is knocked out of its site about twenty-five times a year. By contrast a light-water reactor pressure vessel, shielded by water and core internals, accumulates only about 0.1 dpa in sixty years.
-
-**Table 33.3 — Typical radiation exposures (approximate).**
-
-| Component | Temperature | Damage | Helium generation |
+| Property (300 K) | Si | Ge | Units |
 |---|---|---|---|
-| LWR pressure vessel (60 years) | ≈290 °C | 0.05–0.15 dpa | Negligible |
-| LWR core baffle bolts (60 years) | 300–380 °C | up to ≈80–100 dpa | Several appm/dpa (Ni transmutation) |
-| LWR Zr-alloy cladding (fuel life) | 300–400 °C | ≈10–15 dpa | — |
-| Fast-reactor cladding and ducts | 400–650 °C | 100–200 dpa | Low |
-| Fusion first wall (DEMO-class), per full-power year | 300–550 °C | ≈10–20 dpa | ≈10–15 appm/dpa |
-| Spallation neutron-source target window | 100–400 °C | ≈5–10 dpa/year | Hundreds of appm/dpa |
-
-<!-- FIGURE 33.3 | figures/ch33/fig-33-3-displacement-cascade.png | schematic | A fast neutron's knock-on atom creates a displacement cascade: most displaced atoms recombine within picoseconds, leaving a vacancy-rich core and interstitial clusters at the periphery. | Content: three panels on a 2D atomic lattice of Fe (~30x30 atoms). (a) t = 0: 1 MeV neutron enters, transfers ~35 keV to a PKA (arrow). (b) t ~ 0.5 ps: branching cascade, ~250 atoms displaced (NRT count), disordered thermal-spike core ~5 nm across shaded. (c) t ~ 10 ps: surviving ~80 Frenkel pairs: vacancies (open squares) clustered at the centre, self-interstitials and small dislocation loops (filled dots, short lines) at the edge. Scale bar 2 nm; timeline arrow below. -->
-
-### Consequences of displacement damage
-
-Surviving defects migrate, recombine, cluster or annihilate at sinks (dislocations, grain boundaries, surfaces), and their fate depends on temperature in the same way as the processes of Chapters 8 and 10.
-
-- **Irradiation hardening and embrittlement** (roughly $T<0.35T_m$). Interstitial loops, vacancy clusters and solute clusters obstruct dislocations, raising yield strength and lowering work-hardening capacity and uniform elongation. In BCC steels the hardening raises the ductile–brittle transition temperature (Chapter 14). In reactor pressure-vessel steels (bainitic SA508 and A533B), copper precipitates as nanometre clusters, with nickel, manganese and silicon, and shifts the transition by tens of degrees; older vessels with 0.2–0.3 % Cu shifted by 100 °C or more. Modern steels limit copper below about 0.05 %, and surveillance capsules of the vessel steel, placed nearer the core, are tested periodically to measure the shift before the vessel itself reaches that dose.
-- **Void swelling** (roughly $0.3$–$0.55T_m$). Interstitials are absorbed slightly more readily by dislocations than vacancies are (dislocation bias), so excess vacancies condense into voids, stabilized by dissolved gas. After an incubation dose, annealed austenitic 316 stainless steel swells at about 1 % per dpa, so cladding and ducts of early fast reactors swelled by tens of percent and bowed. Ferritic–martensitic steels (9–12 % Cr) swell an order of magnitude less, because their BCC structure, high sink density and low bias suppress it (Figure 33.4).
-- **Radiation-induced segregation.** Defect fluxes to grain boundaries drag or deplete solutes; in stainless steels, chromium is depleted and nickel and silicon enriched at boundaries, which, together with hardening, causes **irradiation-assisted stress-corrosion cracking** of core internals (Chapter 35).
-- **Irradiation creep and growth.** Under stress, irradiation produces creep at temperatures where thermal creep is negligible, at rates proportional to dose; anisotropic crystals such as zirconium and graphite change shape even without stress (irradiation growth).
-- **Helium embrittlement.** Transmutation reactions of the $(n,\alpha)$ type generate helium, which is insoluble, diffuses to grain boundaries and forms bubbles that turn creep fracture intergranular at high temperature. Thermal neutrons do this in nickel-bearing alloys through $^{58}$Ni; the 14 MeV neutrons of deuterium–tritium fusion produce about ten times more helium per dpa in steel than fission spectra, which is why fusion materials must be tested in dedicated high-energy neutron sources.
-
-<!-- FIGURE 33.4 | figures/ch33/fig-33-4-void-swelling-dose.png | plot | Void swelling grows roughly linearly after an incubation dose; ferritic-martensitic steels swell an order of magnitude less than austenitic steels. | Content: x-axis dose 0-200 dpa, y-axis volumetric swelling 0-50 %. Curves (fast-reactor irradiation, ~400-550 C): annealed 316 SS (incubation ~10-20 dpa then ~1 %/dpa, reaching ~40 % at 60 dpa, curve clipped), 20 % cold-worked 316 / D9 Ti-modified (incubation ~40-60 dpa then ~1 %/dpa), HT-9 / 9-12Cr F/M steel (<1 % up to 200 dpa), ODS ferritic (lowest). Inset: swelling vs irradiation temperature 300-700 C for 316 SS at fixed dose, bell-shaped with peak near 450-500 C (~0.4 T_m). -->
+| Crystal structure | Diamond cubic | Diamond cubic | — |
+| Lattice constant | 5.431 | 5.658 | Å |
+| Density | 2.33 | 5.32 | g/cm³ |
+| Melting point | 1414 | 938 | °C |
+| Band gap | 1.12 (indirect) | 0.66 (indirect; direct 0.80) | eV |
+| Relative permittivity | 11.7 | 16.0 | — |
+| Electron / hole mobility | 1400 / 450 | 3900 / 1900 | cm²/(V s) |
+| Intrinsic concentration | $1.0\times10^{10}$ | $2\times10^{13}$ | cm⁻³ |
+| Critical field (about $10^{16}$ cm⁻³) | 0.3 | 0.1 | MV/cm |
+| Electron saturation velocity | 1.0 | 0.6 | $10^7$ cm/s |
+| Thermal conductivity | 148 | 60 | W/(m K) |
+| Thermal expansion | 2.6 | 5.9 | ppm/K |
+| Largest production wafer | 300 mm | 200 mm | — |
 
 ---
 
-## 33.5 Nuclear materials
+## 33.2 III–V compound semiconductors
 
-### Fuels
+### Structure and bonding
 
-The standard fuel is **uranium dioxide**, pressed and sintered into pellets about 8 mm in diameter. It is chosen for its fluorite structure, which accommodates fission products and the extra oxygen they release, its melting point of about 2850 °C, and its inertness in hot water. Its handicap is low thermal conductivity, about 2.5–3 W m$^{-1}$ K$^{-1}$ at operating temperature and falling further with burnup as fission products and defects scatter phonons (Chapter 24).
+Combining a group-III element (Al, Ga, In) with a group-V element (N, P, As, Sb) gives an average of four valence electrons per atom, as in silicon, and the same tetrahedral bonding. The arsenides, phosphides and antimonides crystallize in the **zincblende** structure, the diamond structure with the two fcc sublattices occupied by different atoms (Chapter 2). The nitrides crystallize in the hexagonal **wurtzite** structure (Section 33.5). The bond is partly ionic, which, as Chapter 31 showed, widens the gap relative to the isoelectronic group-IV element. It also makes the compounds piezoelectric (Chapter 27), gives polar-optical-phonon scattering (Chapter 32), and makes {110} the natural cleavage planes, which form the mirrors of edge-emitting lasers.
 
-**Worked example — fuel centreline temperature.** In a cylindrical pellet generating heat uniformly, the temperature difference between centre and surface depends only on the **linear heat rating** $q'$ (power per unit length of fuel rod), not on the pellet radius:
+### A continuous menu of band gaps
 
-$$
-T_0-T_s=\frac{q'}{4\pi k}
-$$
-
-At a typical average rating of 20 kW/m and $k=3$ W m$^{-1}$ K$^{-1}$, $T_0-T_s=20\,000/(4\pi\times3)=530$ K, so with a pellet surface at about 450 °C the centre runs near 1000 °C. At a peak rating of 40 kW/m and $k=2.5$ W m$^{-1}$ K$^{-1}$, $T_0-T_s=40\,000/(4\pi\times2.5)=1270$ K and the centre approaches 1700 °C. Fuel temperature, not neutronics, limits the power a rod may produce, and it drives the release of fission gases (xenon and krypton) from the pellet into the rod, raising its internal pressure.
-
-> **Status of the principle: centreline temperature of a cylindrical heat source**
-> *Derived* from steady radial heat conduction with uniform heat generation and constant conductivity; in real pellets, temperature-dependent $k$, radial power depression and cracking require numerical fuel-performance codes, but the result gives the correct scale.
-
-With burnup (typically 45–60 MWd per kg of uranium in light-water reactors), pellets swell with solid and gaseous fission products, crack, and at the high-burnup rim develop a fine-grained, porous "rim structure". Swelling eventually closes the pellet–cladding gap, and **pellet–cladding interaction**, mechanical contact aided by corrosive iodine, can crack the cladding during rapid power increases. Mixed oxide (U,Pu)O$_2$ recycles plutonium. Accident-tolerant fuels include U$_3$Si$_2$ and UN, denser and with several times the thermal conductivity of UO$_2$. **TRISO particles** for high-temperature gas reactors coat sub-millimetre kernels of UO$_2$ or uranium oxycarbide with porous carbon, pyrolytic carbon and a SiC pressure vessel a few tens of micrometres thick, so that each particle retains its fission products to about 1600 °C.
-
-### Cladding
-
-Light-water reactor fuel is clad in **zirconium alloys** (Zircaloy-4, Zr–Nb alloys such as ZIRLO and M5) because zirconium's thermal-neutron absorption cross-section, about 0.18 barn, is an order of magnitude below iron's 2.6 barn, it resists hot water well, and it is ductile. Its service limitations are materials science: waterside corrosion to ZrO$_2$, with 10–20 % of the corrosion hydrogen absorbed into the metal; precipitation of brittle zirconium hydride platelets, which, if reoriented radially by hoop stress during cooling, embrittle the tube; and irradiation growth of the HCP crystal. In a loss-of-coolant accident the reaction
+The real power of the III–V family is alloying. The binaries form solid solutions on each sublattice: Al$_x$Ga$_{1-x}$As, In$_x$Ga$_{1-x}$As, GaAs$_{1-y}$P$_y$, and quaternaries such as In$_{1-x}$Ga$_x$As$_y$P$_{1-y}$ and (Al$_x$Ga$_{1-x}$)$_{0.5}$In$_{0.5}$P. Their band gaps interpolate with the bowing law of Chapter 31, and their lattice constants follow **Vegard's law**:
 
 $$
-\mathrm{Zr}+2\,\mathrm{H_2O}\rightarrow\mathrm{ZrO_2}+2\,\mathrm{H_2}
+a(x)=x\,a_{AC}+(1-x)\,a_{BC}
 $$
 
-accelerates above about 1200 °C, releasing about 6.8 MJ per kilogram of zirconium in addition to decay heat, together with hydrogen that can explode outside the core, as happened at Fukushima Daiichi in 2011. **Accident-tolerant cladding** responds with chromium-coated zirconium (a protective chromia layer), FeCrAl alloys (an alumina former, but with higher neutron absorption that requires thinner walls), and SiC/SiC composite tubes.
+> **Status of the principle: Vegard's law**
+> *Empirical.* A linear interpolation of the lattice constant with composition. It holds to within about 0.1 % for most III–V alloys, whose constituents have similar bonding, and fails more seriously for highly mismatched systems such as GaN–InN and for alloys with strong ordering.
 
-### Structural materials
+| Binary | Lattice constant (Å) | $E_g$ at 300 K (eV) | Gap type |
+|---|---|---|---|
+| AlP | 5.464 | 2.45 | indirect |
+| GaP | 5.451 | 2.26 | indirect |
+| AlAs | 5.661 | 2.16 | indirect |
+| GaAs | 5.653 | 1.42 | direct |
+| InP | 5.869 | 1.34 | direct |
+| AlSb | 6.136 | 1.6 | indirect |
+| GaSb | 6.096 | 0.73 | direct |
+| InAs | 6.058 | 0.35 | direct |
+| InSb | 6.479 | 0.17 | direct |
 
-Light-water reactor **pressure vessels** are forged bainitic low-alloy steels (SA508 Grade 3), clad internally with austenitic stainless steel against corrosion, and their life is governed by irradiation embrittlement (Section 33.4). **Core internals** are austenitic stainless steels (304, 316), limited by irradiation-assisted stress-corrosion cracking and, at high doses, swelling. Advanced fission reactors push temperatures higher. Sodium-cooled fast reactors use ferritic–martensitic steels (Grade 91, HT-9) for their swelling resistance, and **oxide-dispersion-strengthened** (ODS) ferritic steels contain $10^{23}$–$10^{24}$ nanoclusters of Y–Ti–O per cubic metre that pin dislocations for creep strength and trap helium in tiny, harmless bubbles. High-temperature gas reactors at 750–950 °C use nickel alloys (Alloy 617, 800H) and nuclear-grade graphite, whose dimensional changes under irradiation limit its life. Molten-salt reactors use Ni–Mo–Cr alloys (Hastelloy N type) that resist fluoride salts, which dissolve chromium rather than form passive films.
+Figure 33.1 plots band gap against lattice constant. It is the map on which every heterostructure is designed.
 
-### Fusion first wall and plasma-facing materials
+<!-- FIGURE 33.1 | figures/ch33/fig-33-1-bandgap-vs-lattice-constant.png | map | Band gap versus lattice constant for the group-IV and III–V semiconductors, with alloy lines; vertical bands mark the lattice constants of GaAs, InP and Si substrates. | Content: x axis lattice constant 5.4 to 6.5 Å, y axis band gap 0 to 2.6 eV, right axis wavelength (0.5, 0.6, 0.8, 1.0, 1.55, 3, 5 µm). Points: Si 5.431/1.12, Ge 5.658/0.66, GaP 5.451/2.26, AlP 5.464/2.45, AlAs 5.661/2.16, GaAs 5.653/1.42, InP 5.869/1.34, AlSb 6.136/1.6, GaSb 6.096/0.73, InAs 6.058/0.35, InSb 6.479/0.17. Filled symbols direct, open symbols indirect. Connect binaries with alloy curves (solid where direct, dashed where indirect): AlAs–GaAs, GaAs–InAs, InP–InAs, GaAs–GaP, InP–GaP, GaSb–InAs, InSb–InAs. Vertical shaded strips at 5.653 (GaAs, Ge) labelled AlGaAs, InGaP lattice-matched and 5.869 (InP) labelled In0.53Ga0.47As, InGaAsP 1.3 and 1.55 µm. Inset or separate small panel: wurtzite nitrides AlN (3.11 Å, 6.1 eV), GaN (3.19, 3.4), InN (3.54, 0.7) on the a-axis lattice constant. -->
 
-The first wall and blanket of a deuterium–tritium fusion reactor face the harshest combination known: 14 MeV neutrons with high helium production, surface heat fluxes of about 1 MW/m² on the first wall and up to 10–20 MW/m² on the divertor, and bombardment by hydrogen isotopes and helium from the plasma.
+![Figure 33.1 — Band gap versus lattice constant for the group-IV and III–V semiconductors, with alloy lines; vertical bands mark the lattice constants of GaAs, InP and Si substrates](../figures/ch33/fig-33-1-bandgap-vs-lattice-constant.png)
 
-- **Plasma-facing armour** is tungsten: the highest melting point of any metal, a low sputtering yield and low tritium retention. Its problems are a ductile–brittle transition between about 200 and 400 °C (worse after irradiation), recrystallization above about 1200 °C, which raises that transition further, and surface damage from helium (nanometre bubbles and "fuzz") and from transient heat pulses.
-- **Structural blanket steels** are **reduced-activation ferritic–martensitic** (RAFM) steels such as EUROFER97, in which molybdenum and niobium, whose transmutation products stay radioactive for millennia, are replaced by tungsten and tantalum, so that the structure can be recycled or disposed of as low-level waste within about a century. Their window is roughly 350–550 °C: below it irradiation embrittlement, above it loss of creep strength. ODS variants and SiC/SiC composites aim to widen the window.
-- **Breeding materials** produce the tritium fuel from lithium: ceramic pebbles of Li$_4$SiO$_4$ or Li$_2$TiO$_3$, or liquid lead–lithium, whose corrosion of steels and magnetohydrodynamic drag are design problems in their own right.
+*Figure 33.1 — Band gap versus lattice constant for the group-IV and III–V semiconductors, with alloy lines; vertical bands mark the lattice constants of GaAs, InP and Si substrates.*
+
+### Lattice matching
+
+A layer grown epitaxially on a substrate must either match its lattice constant or accommodate the mismatch by elastic strain (if thin) or misfit dislocations (if thick, Chapter 34). Dislocations are recombination centres and leakage paths (Chapter 32). High-quality optoelectronic and high-speed layers are therefore designed along the vertical lines of Figure 33.1.
+
+- **On GaAs** (5.653 Å): AlAs differs by only 0.14 %, so the entire Al$_x$Ga$_{1-x}$As range is nearly lattice-matched. This accident of nature made GaAs/AlGaAs the first heterostructure system, and gave the double-heterostructure laser and the HEMT. Ga$_{0.51}$In$_{0.49}$P and AlGaInP are also matched (red LEDs, HBT emitters).
+- **On InP** (5.869 Å): In$_{0.53}$Ga$_{0.47}$As, InAlAs and InGaAsP of chosen composition, covering 0.75–1.34 eV, which includes the 1.3 µm and 1.55 µm optical-fibre windows.
+
+**Worked example — designing the 1.55 µm detector alloy.** Find the composition of In$_x$Ga$_{1-x}$As that is lattice-matched to InP, and its band gap. Vegard's law with $a_{\mathrm{InAs}}=6.0583$ Å and $a_{\mathrm{GaAs}}=5.6533$ Å requires $x\,6.0583+(1-x)\,5.6533=5.8687$, so $x=(5.8687-5.6533)/(6.0583-5.6533)=0.2154/0.4050=0.532$. With a bowing parameter $b\approx0.48$ eV, the gap is $E_g=0.532\times0.354+0.468\times1.424-0.48\times0.532\times0.468=0.188+0.666-0.119=0.736$ eV. The cut-off wavelength is $1.24/0.736=1.68$ µm. In$_{0.53}$Ga$_{0.47}$As absorbs strongly across both telecommunication windows (1.31 and 1.55 µm) while growing on InP without dislocations. This is why it is the standard material for fibre-optic photodiodes and for eye-safe lidar receivers. A composition error of 1 % in $x$ produces a mismatch of 0.07 %, which is tolerable in layers a few micrometres thick.
+
+### Practical issues
+
+- **Toxicity and handling.** Arsenic and phosphorus compounds, and the arsine and phosphine gases used in epitaxy, are highly toxic. Fabrication needs gas monitoring, abatement and waste handling (Chapter 59).
+- **Brittleness and wafer size.** III–V wafers are mechanically weaker than Si. GaAs wafers reach 150 mm (200 mm in limited use), and InP 100–150 mm, and both cost far more per unit area than silicon.
+- **No good native oxide.** Surfaces have high recombination velocities and high interface-trap densities, so III–V transistors use Schottky gates, heterojunction barriers or deposited high-κ dielectrics (Chapter 34).
+- **Low thermal conductivity** of the arsenides and phosphides (Section 33.3) limits power density.
 
 ---
 
-## 33.6 Aerospace materials
+## 33.3 Gallium arsenide and indium phosphide
 
-### Lightweighting
+### Gallium arsenide
 
-In aircraft and launch vehicles, mass is the master variable. A kilogram removed from an airliner's structure reduces fuel burn for every flight of its 25–30-year life, and a kilogram removed from a launch vehicle's upper stage becomes a kilogram of payload. The materials question is therefore never "how strong?" but "how strong or stiff per unit mass, in the right loading mode?". For a tie loaded in tension the merit index of stiffness is $E/\rho$; for a panel in bending or buckling at fixed stiffness it is $E^{1/3}/\rho$ (performance indices are derived in Chapter 48).
+GaAs is the workhorse III–V compound. Its electron mobility of about 8500 cm²/(V s) (six times Si) and its direct 1.42 eV gap follow from the strongly curved Γ valley ($m^*=0.067\,m_0$, Chapter 31).
 
-**Table 33.4 — Specific stiffness of aerospace structural materials (typical values).**
+**Semi-insulating substrates.** Undoped GaAs grown by the liquid-encapsulated Czochralski or vertical-gradient-freeze methods is compensated by the EL2 mid-gap donor (Chapter 32), with resistivities of $10^7$–$10^8\ \Omega$ cm. Passive components and transmission lines can be built directly on the substrate with low RF loss, and devices are isolated by implantation. This is a decisive advantage over silicon, whose substrates conduct, for monolithic microwave integrated circuits (MMICs).
 
-| Material | $E$ (GPa) | $\rho$ (g/cm³) | $E/\rho$ (GPa cm³/g) | $E^{1/3}/\rho$ (GPa$^{1/3}$ cm³/g) |
+**Heterostructure transistors.** The AlGaAs/GaAs and InGaP/GaAs systems give pseudomorphic HEMTs (pHEMTs) with InGaAs channels for low-noise amplifiers and switches, and InGaP/GaAs HBTs that still dominate the power amplifiers of mobile handsets, where their high power-added efficiency at 1–6 GHz and a few volts of supply is hard to beat.
+
+**Optoelectronics.** GaAs, AlGaAs and InGaAs give the 850–940 nm vertical-cavity lasers (VCSELs) of data-centre links, face recognition and automotive lidar, infrared LEDs, and the most efficient single-junction solar cells (about 29 %), used with InGaP and Ge in multi-junction space cells.
+
+**Limits.** The thermal conductivity of 55 W/(m K), about a third of Si's, limits power density. The critical field (0.4 MV/cm) and saturation velocity (about $10^7$ cm/s, after the transient peak of $2\times10^7$ cm/s, Chapter 32) are only modestly better than Si's. The surface is hard to passivate, and arsenic toxicity and wafer cost restrict GaAs to applications where its RF or optical advantages are decisive.
+
+### Indium phosphide
+
+InP has a direct gap of 1.34 eV, electron mobility of about 5400 cm²/(V s), a higher peak velocity than GaAs (about $2.5\times10^7$ cm/s) because its L valleys lie about 0.6 eV above Γ, a slightly higher breakdown field (about 0.5 MV/cm) and better thermal conductivity (68 W/(m K)). Its importance comes from the alloys it supports.
+
+- **The fastest transistors.** In$_{0.53}$Ga$_{0.47}$As channels on InP have electron mobilities of 10 000–14 000 cm²/(V s). InP HEMTs and InP/InGaAs HBTs reach $f_{\max}$ above 1 THz and are used in sub-THz communications, radio astronomy receivers and the lowest-noise cryogenic amplifiers.
+- **Fibre-optic photonics.** InGaAsP and InGaAlAs on InP emit and detect at 1.3 and 1.55 µm. Practically every long-haul and data-centre laser, modulator and receiver is InP-based, and InP photonic integrated circuits combine all of them on one chip.
+- **Semi-insulating substrates** are made by Fe doping, which provides a deep acceptor that compensates residual donors.
+
+InP is more brittle and more expensive than GaAs, and its wafers are smaller. The high Auger coefficient of narrow-gap InGaAsP (Chapter 32) makes 1.55 µm lasers more temperature-sensitive than GaAs lasers. They are usually temperature-stabilized.
+
+### Narrow-gap III–Vs
+
+InAs (0.35 eV), InSb (0.17 eV) and their alloys have the lightest electron masses (0.023 and 0.014 $m_0$) and highest mobilities (up to about 40 000 and 77 000 cm²/(V s)) of any common semiconductors. Their high mobility makes them the material of choice for **Hall-effect magnetic sensors**, where the Hall voltage per unit current and field is proportional to mobility. Their small gaps make them mid-infrared detectors (3–5 µm), cooled to suppress the large $n_i$. Type-II InAs/GaSb superlattices are an engineered alternative to HgCdTe for infrared imaging (Chapter 35).
+
+---
+
+## 33.4 Silicon carbide
+
+### Structure and polytypes
+
+SiC is a covalent compound of two group-IV elements with a very strong, short Si–C bond (0.189 nm). Each atom is tetrahedrally bonded, and the structure is a stack of close-packed Si–C bilayers. The bilayers can stack in many sequences, called **polytypes**, which have the same chemistry but different band structures:
+
+| Polytype | Stacking sequence | Hexagonality | $E_g$ (eV) | Electron mobility (cm²/(V s)) |
 |---|---|---|---|---|
-| Steel (300M, high-strength) | 205 | 7.85 | 26 | 0.75 |
-| Ti-6Al-4V | 114 | 4.43 | 26 | 1.09 |
-| Al 7075-T6 | 71 | 2.81 | 25 | 1.47 |
-| Al–Li 2099-T8 | 78 | 2.63 | 30 | 1.62 |
-| Mg alloy AZ31 | 45 | 1.77 | 25 | 2.01 |
-| CFRP, quasi-isotropic laminate | 60 | 1.55 | 39 | 2.53 |
-| CFRP, unidirectional (fibre direction) | 135 | 1.58 | 85 | 3.25 |
+| 3C (cubic, zincblende) | ABC | 0 % | 2.36 | about 900 |
+| 4H | ABCB | 50 % | 3.26 | about 950 (⊥ c), 1150 (∥ c) |
+| 6H | ABCACB | 33 % | 3.02 | about 400 (⊥ c), 60–100 (∥ c) |
 
-The metals all have nearly the same $E/\rho$, about 25 GPa cm³/g, because modulus and density both scale with atomic packing and bond density; alloying hardly changes it. Lithium is the exception, the only element that both lowers density and raises modulus of aluminium, which is why third-generation Al–Li alloys (2050, 2099, 2196) are used in fuselage and wing structure. For thin panels, where $E^{1/3}/\rho$ governs, low-density materials gain enormously, and carbon-fibre composites win outright; they make up about half the structural mass of the newest wide-body airliners (Chapters 22 and 23). Titanium carries the hot and highly loaded parts (engine pylons, landing-gear beams, fan blades) and is galvanically compatible with carbon fibre, whereas aluminium in contact with CFRP corrodes (Chapter 35). In engines, the materials sequence along the gas path follows temperature: titanium in the fan and compressor, nickel superalloys and CMCs in the combustor and turbine, with γ-TiAl in the last turbine stages.
+Figure 33.2 shows the stacking sequences.
 
-### Fatigue-critical design
+<!-- FIGURE 33.2 | figures/ch33/fig-33-2-sic-polytypes.png | crystal | Stacking sequences of the 3C, 4H and 6H polytypes of silicon carbide, viewed along the [11-20] direction, with the hexagonal and cubic lattice sites marked. | Content: three side-by-side columns of Si–C bilayers drawn as zigzag chains (Si large light spheres, C small dark spheres) with positions A, B, C marked on the left. 3C: ABCABC... repeat 3 bilayers. 4H: ABCB repeat with c = 10.05 Å marked. 6H: ABCACB repeat with c = 15.12 Å. Mark hexagonal (h) and cubic (k) sites next to each bilayer (4H: h, k; 6H: h, k1, k2). Below each column print Eg (2.36, 3.26, 3.02 eV) and in-plane electron mobility (900, 950, 400 cm2/Vs). Arrow indicating the c axis. -->
 
-Aircraft structures are designed for fatigue more than for static strength, because they experience a pressurization cycle on every flight and millions of gust and manoeuvre cycles. The history of the discipline is a sequence of materials lessons: the de Havilland Comet losses of 1954, from fatigue cracks at window corners in a pressurized fuselage; the F-111 wing-pivot failure of 1969, from an undetected manufacturing flaw; and the 1988 Aloha Airlines fuselage separation, from multiple-site cracking at corroded lap joints in an aircraft that had flown nearly 90,000 cycles. Three design philosophies resulted:
+![Figure 33.2 — Stacking sequences of the 3C, 4H and 6H polytypes of silicon carbide, viewed along the 11-20 direction, with the hexagonal and cubic lattice sites marked](../figures/ch33/fig-33-2-sic-polytypes.png)
 
-- **Safe-life**: the part is retired after a demonstrated life with a large scatter factor (helicopter rotor components, landing gear).
-- **Fail-safe**: multiple load paths so that the failure of one member is not catastrophic.
-- **Damage tolerance**: assume a crack of the largest size that inspection might miss, predict its growth by fracture mechanics, and set inspection intervals so that it will be found before it reaches critical size. This is now mandatory for primary airframe structure and, for rotating engine parts, is combined with probabilistic assessments of melt-related defects such as hard-alpha inclusions in titanium.
+*Figure 33.2 — Stacking sequences of the 3C, 4H and 6H polytypes of silicon carbide, viewed along the [11-20] direction, with the hexagonal and cubic lattice sites marked.*
 
-**Worked example — setting an inspection interval.** A wing lower-skin panel of 7075-T6 ($K_{Ic}\approx28$ MPa m$^{1/2}$) sees a ground–air–ground stress range $\Delta\sigma=100$ MPa (with $R\approx0$, so $\sigma_{max}=100$ MPa) once per flight. Eddy-current inspection reliably finds edge cracks of $a_0=2$ mm. With a geometry factor $Y=1.12$, the critical crack size is
+**4H-SiC is the polytype of power electronics** because it combines the widest gap with high and nearly isotropic electron mobility. 6H-SiC has a strongly anisotropic mobility that is poor along the c axis, the direction current flows in a vertical power device. 3C-SiC can be grown on Si but contains high defect densities and has a smaller gap.
 
-$$
-a_c=\frac1\pi\left(\frac{K_{Ic}}{Y\sigma_{max}}\right)^2=\frac1\pi\left(\frac{28}{1.12\times100}\right)^2=0.0199\ \mathrm m\approx20\ \mathrm{mm}
-$$
+### Properties
 
-Integrating the Paris law $da/dN=C(\Delta K)^m$ (Chapter 14) with $\Delta K=Y\Delta\sigma\sqrt{\pi a}$, representative constants $C=1\times10^{-11}$ m/cycle (with $\Delta K$ in MPa m$^{1/2}$) and $m=3$:
+4H-SiC has a band gap of 3.26 eV (indirect), a critical field of about 2–3 MV/cm (2.5 MV/cm is typical at the doping of a 1.2 kV drift layer), an electron saturation velocity of about $2\times10^7$ cm/s, and a thermal conductivity of 330–490 W/(m K) depending on orientation and doping (about 370 W/(m K) is typical), which is higher than copper's. Its intrinsic concentration at room temperature is about $10^{-8}\ \mathrm{cm^{-3}}$ (Chapter 31), so leakage is set by defects and the material remains extrinsic far above any temperature a package can survive. It is extremely hard (Mohs 9.5), chemically inert, and resistant to radiation.
 
-$$
-N=\frac{a_0^{-1/2}-a_c^{-1/2}}{\tfrac12\,C\,(Y\Delta\sigma\sqrt\pi)^3}=\frac{22.36-7.07}{0.5\times10^{-11}\times(198.5)^3}=3.9\times10^5\ \text{cycles}
-$$
+### The defect story
 
-Halving this for scatter in growth rate and stress gives an inspection interval of about 200,000 flights, far beyond an airliner's life, so this location is not fatigue-critical at this stress. At a stress hot-spot of twice the nominal value, the growth rate rises by $2^3=8$ and $a_c$ falls by $2^2=4$, to 5 mm, so $N=(22.36-14.14)/(8\times3.91\times10^{-5})\approx26\,000$ cycles: fifteen times shorter, and an inspection interval of about 13,000 flights. The cubic dependence on stress is why design detail (fillet radii, fastener holes, cold-expanded holes and residual compressive stresses) matters more than alloy choice.
+SiC power devices became commercial in 2001 (Schottky diodes) and mainstream around 2018 (MOSFETs in electric vehicles) only after decades of defect reduction.
 
-> **Status of the principle: damage-tolerant life by Paris-law integration**
-> *Empirical* in its growth law and constants, which are fitted to test data for each alloy, environment and load ratio; it is reliable between the near-threshold and near-critical regimes but must be corrected for load sequence (overload retardation) and short-crack behaviour.
+- **Growth.** SiC does not melt at atmospheric pressure. It sublimes above about 2700 °C. Boules are grown by physical vapour transport at about 2300 °C, slowly (0.2–0.5 mm/h) and with difficult thermal control (Chapter 50). This is the root of SiC's cost.
+- **Micropipes**, hollow-core screw dislocations that destroy any device they cross, were once present at hundreds per cm². They are now below 0.1 cm⁻².
+- **Basal-plane dislocations** in the epilayer expand into stacking faults when electron–hole pairs recombine on them, increasing the forward voltage of bipolar devices and of the body diode of MOSFETs (Chapter 32). Epitaxy on 4°-off-axis substrates converts more than 99 % of them into harmless threading-edge dislocations.
+- **Point defects.** The $Z_{1/2}$ carbon-vacancy centre limits the bulk lifetime to about 1 µs (Chapter 32).
+- **The oxide interface.** SiC is the only wide-gap semiconductor with a thermal native oxide, SiO$_2$, which made the SiC MOSFET possible. But the interface contains carbon-related defects, with trap densities of $10^{12}$–$10^{13}\ \mathrm{cm^{-2}\,eV^{-1}}$ near the conduction band, so channel mobility is only 20–50 cm²/(V s) even after nitridation anneals. In low-voltage SiC MOSFETs the channel, not the drift layer, dominates the on-resistance (Chapter 34).
 
----
+### Doping
 
-## 33.7 Cryogenic materials
+Nitrogen (donor, 61 and 125 meV for the two inequivalent sites) and aluminium (acceptor, about 0.2 eV) are the standard dopants. Dopant diffusion in SiC is negligibly slow, so all selective doping is by ion implantation, which needs implantation at elevated temperature and activation anneals at 1600–1800 °C with a carbon cap to protect the surface. Al acceptors are only partly ionized at room temperature (Chapter 32), so p-type SiC is resistive.
 
-### Ductile or brittle in the cold
+### Applications
 
-Cryogenic engineering spans liquefied natural gas (−162 °C, 111 K), liquid oxygen (90 K), liquid nitrogen (77 K), liquid hydrogen (20 K) and liquid helium (4.2 K). The first question for any structural material is whether it stays tough. **FCC metals**—austenitic stainless steels, aluminium, copper and nickel alloys—have no ductile–brittle transition: their dislocations glide on close-packed planes with a negligible Peierls barrier (Chapter 12), and strength and often toughness rise as temperature falls. **BCC metals**, including ordinary ferritic steels, need thermal activation for screw dislocations to move, so below their transition temperature yield strength soars past the cleavage stress and they fracture in a brittle manner (Chapter 14). This is why the steel of the *Titanic* and the welded Liberty ships cracked in cold seas, and why a carbon-steel pipe exposed to an LNG spill can shatter.
-
-The cryogenic materials palette follows directly (Figure 33.5):
-
-- **9 % nickel steel**, quenched and tempered, is a ferritic steel whose nickel content and fine microstructure (with a little stable retained austenite) push its transition below −196 °C. It is the standard for large land-based LNG storage tanks: cheaper and stronger than austenitic steel, tough enough to meet Charpy requirements at −196 °C.
-- **Austenitic stainless steels** (304L, 316LN) serve down to 4 K in liquid-hydrogen and liquid-helium systems and in the cases of superconducting magnets; nitrogen additions stabilize the austenite against strain-induced martensite and raise strength.
-- **Aluminium alloys** such as 5083-O are used for spherical LNG ship tanks and, as 2219 and Al–Li 2195, for rocket propellant tanks of liquid hydrogen and oxygen.
-- **Titanium alloys** in extra-low-interstitial grades (Ti-5Al-2.5Sn ELI) are used for hydrogen-rocket pressure vessels, where oxygen and nitrogen content must be minimized to keep toughness.
-
-<!-- FIGURE 33.5 | figures/ch33/fig-33-5-cryogenic-charpy.png | plot | FCC metals and 9 % Ni steel stay tough at cryogenic temperatures, while ordinary ferritic steel becomes brittle below its transition. | Content: x-axis temperature -270 to +50 C, y-axis Charpy V-notch absorbed energy 0-250 J. Curves: plain carbon structural steel (upper shelf ~150 J above 0 C, transition -20 to 0 C, lower shelf ~10 J below -50 C), 9 % Ni steel (~150 J at 20 C falling slowly to ~100 J at -196 C), 304L austenitic stainless (~200 J nearly flat to -269 C), 5083-O aluminium (plotted as notch toughness, flat). Vertical dashed lines at LNG (-162 C), LN2 (-196 C), LH2 (-253 C), LHe (-269 C). Horizontal dashed line at 34 J acceptance level. -->
-
-### Thermal contraction and Invar
-
-Cooling a structure from room temperature to cryogenic temperature contracts it by a fraction that, for most metals, is a few tenths of a percent, most of it occurring before 77 K because thermal expansion falls with heat capacity (Chapter 24). Integrated contraction from 293 K to 4 K is about 0.30 % for austenitic stainless steel, 0.42 % for aluminium alloys, 0.33 % for copper and 0.17 % for Ti-6Al-4V; polymers contract far more (epoxy about 1 %, PTFE about 2 %).
-
-**Worked example — contraction of an LNG transfer line.** A 100 m stainless steel line cooled from 20 °C to −196 °C contracts by about 0.28 %, or $0.0028\times100=0.28$ m: 280 mm that must be absorbed by bellows, expansion loops or sliding supports, or it appears as a thermal stress of order $E\varepsilon=195\ \mathrm{GPa}\times0.0028\approx550$ MPa, more than double the yield strength of annealed 304L. The same line in **Invar** (Fe–36 % Ni) would contract by about 0.04 %, or 40 mm.
-
-Invar's near-zero expansion (about 1.2 ppm/K at room temperature) comes from magnetism: in this ferromagnetic alloy, the spontaneous magnetization expands the lattice (a magnetovolume effect), and as the alloy cools the growing magnetization compensates the normal anharmonic contraction. The membrane tanks of most LNG carriers are lined with 0.7 mm Invar sheet that needs no expansion corrugations; Invar also serves in precision instruments, composite-moulding tools for CFRP aerospace parts, and shadow masks.
-
-### Polymers, composites and insulation
-
-Most polymers become glassy and brittle far below their glass transitions; PTFE, polyimides and some polyethylenes retain useful ductility and are used for seals, while elastomeric O-rings fail. Composites microcrack at cryogenic temperatures because fibre and matrix contract differently; leakage of liquid hydrogen through microcracked laminates caused the failure of a composite hydrogen tank in 1999 and delayed composite cryotanks for a decade.
-
-Insulation is a materials system of its own. Closed-cell polyurethane foam (thermal conductivity about 0.02 W m$^{-1}$ K$^{-1}$) insulates LNG tanks and rocket tanks; foam shed from the Space Shuttle's external tank struck the wing leading edge of *Columbia* in 2003 and led to its loss. Vacuum-jacketed perlite powder and **multilayer insulation**, tens of layers of aluminized polyester separated by spacers in vacuum, which suppress radiation layer by layer to give effective conductivities of order $10^{-5}$ W m$^{-1}$ K$^{-1}$, serve liquid-hydrogen and helium vessels and spacecraft.
+SiC Schottky diodes and MOSFETs dominate new designs from 650 V to 3.3 kV: EV traction inverters and on-board chargers, solar and storage inverters, industrial drives, rail traction. Devices to 10 kV and beyond are emerging for medium-voltage grid applications. Semi-insulating SiC (vanadium-doped or high-purity) is also the preferred substrate for GaN RF transistors, because of its thermal conductivity. Wafers of 150 mm are mainstream and 200 mm is ramping. Substrate cost and yield remain the main obstacles to replacing silicon IGBTs completely.
 
 ---
 
-## 33.8 Hypersonic and space environments
+## 33.5 Gallium nitride
 
-### Hypersonic flight and re-entry
+### Structure and polarization
 
-Air brought to rest against a vehicle's nose at Mach number $M$ reaches the stagnation temperature $T_0=T(1+\tfrac{\gamma-1}{2}M^2)$; with $\gamma=1.4$ and an ambient 220 K, that is 1320 K at Mach 5, 2380 K at Mach 7 and about 4600 K at Mach 10 (real-gas effects lower the last figure). The surface does not reach $T_0$, because it radiates heat away. A surface that loses its heat input $q$ only by radiation reaches the **radiative-equilibrium temperature**
+GaN crystallizes in the wurtzite structure ($a=3.189$ Å, $c=5.185$ Å). The Ga–N bond is short and strongly polar, and the wurtzite structure lacks inversion symmetry along the c axis. As a result, GaN and its alloys with AlN and InN carry a large **spontaneous polarization** along [0001], and any strain adds a **piezoelectric polarization** (Chapter 27). At an interface between two nitrides with different polarization, a fixed sheet of bound charge appears equal to the difference in polarization:
 
 $$
-T_{rad}=\left(\frac{q}{\varepsilon\sigma_{SB}}\right)^{1/4}
+\sigma_{\mathrm{pol}}=\left(P_{\mathrm{sp}}+P_{\mathrm{pz}}\right)_{\mathrm{AlGaN}}-P_{\mathrm{sp,GaN}}
 $$
 
-**Worked example — leading-edge temperature.** For a heat flux of 1 MW/m² and emissivity $\varepsilon=0.85$, $T_{rad}=[10^6/(0.85\times5.67\times10^{-8})]^{1/4}=2130$ K (about 1860 °C); at 2 MW/m², 2540 K. Because $T$ rises only as $q^{1/4}$, a high emissivity is worth as much as a large increase in temperature capability, and sharp leading edges, which concentrate heat flux, push surface temperatures past 2000 °C.
+For Ga-face AlGaN grown on GaN, this charge is positive at the interface, of order $10^{13}\ q\ \mathrm{cm^{-2}}$ for 25–30 % Al. Electrons, supplied mostly by donor-like surface states on the AlGaN, accumulate in the triangular well on the GaN side to neutralize it, forming a **two-dimensional electron gas** (2DEG) without any intentional doping (Figure 33.3).
 
-> **Status of the principle: radiative equilibrium**
-> *Approximate.* A steady energy balance assuming all incident heat is reradiated; conduction into the structure, catalytic recombination of dissociated air on the surface, and ablation alter the real temperature.
+> **Status of the principle: polarization-induced 2DEG**
+> *Derived.* The sheet charge follows from the discontinuity of polarization (Gauss's law applied to bound charge), with polarization constants taken from calculation and experiment. The electron density that actually forms also depends on the barrier thickness and surface states, and is predicted only approximately. It is measured, typically $(0.8\text{–}1.2)\times10^{13}\ \mathrm{cm^{-2}}$.
 
-Three strategies follow (Figure 33.6):
+<!-- FIGURE 33.3 | figures/ch33/fig-33-3-algan-gan-2deg.png | band-diagram | Conduction-band diagram of an AlGaN/GaN heterostructure, showing the polarization sheet charge at the interface and the two-dimensional electron gas confined in the triangular well. | Content: horizontal axis depth from the surface 0 to 60 nm: 20 nm Al0.25Ga0.75N barrier then GaN. Vertical axis energy, with the Fermi level EF as a horizontal reference line. Conduction band Ec sloping down through the AlGaN (strong field from polarization), a conduction-band offset of about 0.4 eV up at the interface at 20 nm, then a sharp triangular well dipping below EF in the GaN with the first sub-band E0 marked and the electron density ns plotted as a shaded peak about 2 to 3 nm from the interface. Arrows for Psp and Ppz in the AlGaN and Psp in the GaN; plus signs at the interface labelled sigma_pol ~ +1e13 q cm^-2; surface donor states at x = 0. Label ns ≈ 1e13 cm^-2, mu ≈ 1500–2000 cm2/Vs. -->
 
-- **Reusable insulating and radiating surfaces.** The Space Shuttle's tiles were rigid silica-fibre foam (density about 0.14 g/cm³) that could be held at 1260 °C on one face and touched on the other; its nose cap and wing leading edges were reinforced carbon–carbon with a SiC coating, good to about 1650 °C.
-- **Ablators.** Capsules returning from the Moon or from interplanetary trajectories meet heat fluxes of several MW/m² for minutes. Charring ablators (Avcoat on Apollo and Orion; phenolic-impregnated carbon ablator, PICA, on sample-return and commercial capsules) absorb heat by pyrolysis of their resin, block convective heating with the gas this releases, and radiate from a hot char surface, sacrificing millimetres to centimetres of thickness.
-- **Ultra-high-temperature ceramics.** ZrB$_2$ and HfB$_2$ (melting points above 3200 °C), usually with 20–30 vol% SiC for oxidation resistance, and carbides such as HfC and TaC (melting points near 3900 °C) are candidates for sharp leading edges of hypersonic cruise vehicles. Their oxides are refractory, but the borosilicate glass that protects them evaporates above about 1800 °C, and their fracture toughness is only 3–5 MPa m$^{1/2}$, so fibre-reinforced UHTC composites are under development.
+![Figure 33.3 — Conduction-band diagram of an AlGaN/GaN heterostructure, showing the polarization sheet charge at the interface and the two-dimensional electron gas confined in the triangular well](../figures/ch33/fig-33-3-algan-gan-2deg.png)
 
-<!-- FIGURE 33.6 | figures/ch33/fig-33-6-radiative-equilibrium-tps.png | plot | Radiative-equilibrium surface temperature versus heat flux, with the temperature capabilities of thermal-protection materials. | Content: log x-axis heat flux 0.01-10 MW/m^2, y-axis surface temperature 500-3500 K. Curves for emissivity 0.85 (solid) and 0.5 (dashed), T = (q/(eps sigma))^0.25; mark worked-example points (1 MW/m^2, 2130 K) and (2 MW/m^2, 2540 K). Horizontal bands: Ni superalloy / Inconel blankets (~1300 K), silica tiles (~1530 K), RCC and C/SiC (~1920 K), ZrB2-SiC UHTC (~2300 K, limited by borosilicate evaporation), ablators (no limit, sacrificial; shaded region above 3 MW/m^2). Annotations: Shuttle acreage, Shuttle nose cap, hypersonic sharp leading edge, lunar-return capsule. -->
+*Figure 33.3 — Conduction-band diagram of an AlGaN/GaN heterostructure, showing the polarization sheet charge at the interface and the two-dimensional electron gas confined in the triangular well.*
 
-### The space environment
+The 2DEG combines a high sheet density with a mobility of 1500–2000 cm²/(V s), because the electrons are separated from ionized donors (Chapter 32). With $n_s=10^{13}\ \mathrm{cm^{-2}}$ and $\mu=1800\ \mathrm{cm^2/(V\,s)}$ its sheet resistance is $1/(qn_s\mu)=1/(1.602\times10^{-19}\times10^{13}\times1800)=350\ \Omega$ per square, together with GaN's critical field of 3.3 MV/cm. The **high-electron-mobility transistor** (HEMT) built on it is the basis of GaN power and RF electronics. Because the channel is on without a gate bias, making normally-off power switches requires additional structures (p-GaN gates, recessed gates or cascodes), which is a materials problem with device consequences.
 
-Spacecraft materials face a different set of extremes.
+### Substrates, dislocations and stress
 
-- **Vacuum.** Polymers, adhesives and lubricants outgas volatile species that condense on cold optics and sensors; space-qualified materials must lose less than 1 % of their mass and leave less than 0.1 % of collectable condensable material in a standard vacuum bake. Clean metal surfaces in contact can cold-weld, so mechanisms use dissimilar materials and solid lubricants such as MoS$_2$.
-- **Atomic oxygen.** In low Earth orbit, ultraviolet light dissociates the thin residual atmosphere, and a spacecraft moving at 7.8 km/s strikes the oxygen atoms with about 5 eV each. Polymers erode: polyimide (Kapton) loses about $3.0\times10^{-24}$ cm³ per incident atom. At an annual fluence of $10^{21}$–$10^{22}$ atoms/cm², depending on altitude and solar activity, that is $3\times10^{-24}\times10^{21}=3\times10^{-3}$ cm, or 30 µm to 300 µm, per year, enough to destroy a thin film in months. Protective SiO$_2$ coatings, silicone-based and fluorinated polymers, and metals that form stable oxides are used.
-- **Ultraviolet and charged-particle radiation** darken polymers and glasses and shift the absorptance of thermal-control coatings, so a radiator that starts white ends its mission warmer; cerium-doped cover glasses protect solar cells. Accumulated dose and single-particle strikes on electronics are covered in the *Materials Core (EEE)* book.
-- **Thermal cycling.** A satellite in low orbit passes in and out of Earth's shadow about sixteen times a day, swinging between roughly −100 and +120 °C, some 5800 cycles a year; mismatched expansion between solar-cell glass, cells, interconnects and substrate is a principal fatigue mechanism of solar arrays (Chapter 36).
-- **Micrometeoroids and debris.** Particles at 10 km/s carry far more energy per unit mass than explosives; Whipple shields, a thin sacrificial bumper spaced in front of the wall, shatter and spread the particle so the wall survives.
+Native GaN substrates exist but are small (50–100 mm) and expensive. Most GaN is grown heteroepitaxially:
+
+| Substrate | Lattice mismatch with GaN (in-plane) | Thermal conductivity (W/(m K)) | Typical use |
+|---|---|---|---|
+| Sapphire (Al$_2$O$_3$) | about 16 % (after rotation) | 35–42 | LEDs (lowest cost) |
+| 4H/6H-SiC (semi-insulating) | 3.5 % | about 370–490 | RF power HEMTs |
+| Si(111) | about 17 % | 148 | Power HEMTs, some LEDs, 200 mm CMOS-line compatible |
+| GaN (bulk) | 0 | 130–230 | Lasers, vertical power devices |
+
+The mismatch to Si(111) follows from comparing the GaN $a$-axis constant with the Si surface-atom spacing $a_{\mathrm{Si}}/\sqrt2=3.840$ Å: $(3.189-3.840)/3.840=-17$ %. Heteroepitaxial GaN contains $10^8$–$10^{10}$ threading dislocations per cm², densities that would make GaAs or Si unusable. GaN devices work because the large gap, and in InGaN strong carrier localization, make each dislocation less damaging. The thermal-expansion mismatch on Si (5.6 versus 2.6 ppm/K) puts the GaN in tension by about 0.3 % on cooling from growth temperature, enough to crack it unless compressive AlGaN or AlN/GaN superlattice buffers are inserted. The buffers are made semi-insulating with C or Fe (Chapter 32), and the traps they introduce cause the dynamic on-resistance ("current collapse") that GaN reliability work still addresses (Chapters 34 and 44).
+
+### Doping
+
+Si and Ge are shallow donors. Mg is the only practical acceptor, with an ionization energy of 160–200 meV, so only a few per cent ionize at room temperature (Chapter 32), and hole mobilities are 10–30 cm²/(V s). In MOCVD growth, hydrogen passivates Mg, and p-type GaN only became possible when Amano and Akasaki (electron-beam irradiation, 1989) and Nakamura (thermal annealing, 1992) learned to activate it. This made the blue LED and the white LED possible (2014 Nobel Prize). Poor p-type conductivity still limits GaN bipolar devices and lasers.
+
+### Applications
+
+- **Power switching.** Lateral GaN-on-Si HEMTs, at 15–650 V, switch with very low charge and are used in compact chargers, data-centre power supplies, LiDAR drivers and motor drives. Their figure of merit (Section 33.10) exceeds SiC's at these voltages. Vertical GaN-on-GaN devices for higher voltages are under development.
+- **RF power.** GaN-on-SiC HEMTs deliver 5–10 W per mm of gate width at frequencies to 100 GHz and beyond, about ten times GaAs, and have taken over radar, base-station and satellite power amplifiers.
+- **Optoelectronics.** InGaN quantum wells emit from violet to green (blue LEDs reach external quantum efficiencies above 80 %), AlGaN emits in the UV, and GaN lasers write Blu-ray discs and drive projectors and automotive headlamps (Chapter 35).
+
+---
+
+## 33.6 Other wide-bandgap semiconductors
+
+Materials with gaps above about 4 eV are called **ultra-wide-bandgap** (UWBG). Their critical fields, scaling roughly as $E_g^2$–$E_g^{2.5}$ (Chapter 32), promise power devices beyond SiC and GaN. Each has a serious materials obstacle.
+
+### Gallium oxide (β-Ga$_2$O$_3$)
+
+- **Gap** 4.8–4.9 eV, with an estimated critical field of about 8 MV/cm (fields above 5 MV/cm have been demonstrated in devices).
+- **Melt growth.** Unlike SiC and GaN, β-Ga$_2$O$_3$ can be grown from the melt by edge-defined film-fed growth or Czochralski methods, like sapphire. Large, low-cost, low-defect substrates (100 mm, 150 mm demonstrated) are therefore realistic.
+- **Controllable n-type doping** with Sn, Si or Ge from about $10^{15}$ to $10^{19}\ \mathrm{cm^{-3}}$.
+- **Obstacles.** There is no p-type doping: the valence band is very flat (heavy holes) and holes self-trap on oxygen sites. The electron mobility is limited by polar-optical-phonon scattering to about 150–200 cm²/(V s). Most seriously, the thermal conductivity is only 11–27 W/(m K) (anisotropic), lower than GaAs, so heat removal must come from the top side or from bonding to SiC or diamond.
+
+### Diamond
+
+Diamond has the most extreme properties of any semiconductor: a gap of 5.47 eV (indirect), an estimated critical field of about 10 MV/cm, electron and hole mobilities of about 2000 cm²/(V s) or more in the purest CVD material, a saturation velocity of about $2.7\times10^7$ cm/s (electrons), and the highest thermal conductivity of any bulk material, 2000–2200 W/(m K). On paper, its Baliga figure of merit is tens of thousands of times silicon's (Section 33.10). In practice:
+
+- **Dopants are deep.** Boron is an acceptor at 0.37 eV and phosphorus a donor at about 0.57 eV, so few carriers are free at room temperature. A hydrogen-terminated diamond surface develops a two-dimensional hole gas by surface transfer doping, which is the basis of most diamond transistors.
+- **Substrates are small.** High-pressure–high-temperature and CVD single crystals are about 10 mm across. Mosaic and heteroepitaxial wafers of 50 mm are emerging.
+
+Today diamond's main electronic role is as a **heat spreader**, polycrystalline CVD diamond bonded under GaN HEMTs and laser diodes. It also serves in radiation detectors and quantum sensors (nitrogen–vacancy centres).
+
+### Aluminium nitride and AlGaN
+
+AlN has a direct gap of 6.0–6.2 eV, a thermal conductivity of 285–320 W/(m K) for single crystals, and is strongly piezoelectric (Chapter 27). Bulk AlN substrates (50–100 mm) are used for deep-UV AlGaN LEDs (disinfection at 260–280 nm), and high-Al-content AlGaN channels are being explored for UWBG transistors. Doping becomes progressively harder as the Al fraction rises. Polycrystalline AlN ceramic (170–200 W/(m K)) is a standard power-module substrate (Chapter 51).
+
+### Zinc oxide and others
+
+ZnO (3.37 eV, direct) has an exciton binding energy of 60 meV, more than twice $k_BT$ at room temperature, which promises efficient excitonic UV emission, but reliable p-type doping has never been achieved. It is used instead as a transparent conductor (Al-doped ZnO), in varistors (Chapter 26), and as a piezoelectric (Chapter 27). Cubic boron nitride (about 6.4 eV) can be doped both n- and p-type but cannot yet be grown as device-quality films.
+
+| UWBG material | Main advantage | Main obstacle | Status |
+|---|---|---|---|
+| β-Ga$_2$O$_3$ | Cheap melt-grown substrates; high $\mathcal E_c$ | No p-type; low thermal conductivity | Early commercial diodes and transistors |
+| Diamond | Highest $\mathcal E_c$ and thermal conductivity | Deep dopants; small substrates | Heat spreaders, detectors, research devices |
+| AlN/AlGaN | Very wide direct gap; high thermal conductivity | Doping at high Al content; substrate cost | Deep-UV LEDs; research transistors |
+| cBN | Ambipolar doping possible | Film growth | Research |
+
+---
+
+## 33.7 Amorphous silicon
+
+### Structure: bonds without long-range order
+
+**Hydrogenated amorphous silicon** (a-Si:H) is deposited by plasma-enhanced chemical vapour deposition from silane at about 200–300 °C over areas of square metres, on glass, metal foil or polymer. Each Si atom is still tetrahedrally bonded to about four neighbours, but bond angles and lengths vary by several per cent, and there is no long-range order (Chapter 2). Some atoms end up with only three neighbours, leaving **dangling bonds**. In pure amorphous Si their density is $10^{19}$–$10^{20}\ \mathrm{cm^{-3}}$, pinning the Fermi level and making the material useless. Adding 8–15 at.% hydrogen during deposition saturates most of them and reduces the density to $10^{15}$–$10^{16}\ \mathrm{cm^{-3}}$. That reduction made a-Si:H dopable (Spear and LeComber, 1975) and created a large-area electronics industry.
+
+### Electronic structure: band tails and a mobility gap
+
+Because short-range bonding is preserved, a-Si:H still has a valence band and a conduction band (the tight-binding argument of Chapter 31 needs only bonds, not periodicity). Disorder has three effects, shown in Figure 33.4.
+
+- **Band tails.** The distribution of bond angles and lengths smears the band edges into exponential tails of localized states, $g(E)\propto e^{-(E_c-E)/E_0}$, with characteristic energies $E_0\approx$ 45–50 meV (valence tail) and about 25 meV (conduction tail). The same exponential tail appears in the optical absorption edge (the Urbach edge).
+- **Mobility edges.** States deep in the bands are extended and conduct. States in the tails are localized and do not. The energy separating them is the **mobility edge**, and the separation between the two mobility edges, about 1.7–1.8 eV, is the **mobility gap**.
+- **Defect states.** The remaining dangling bonds form a band of deep states near mid-gap that act as recombination centres and traps.
+
+<!-- FIGURE 33.4 | figures/ch33/fig-33-4-asi-density-of-states.png | plot | Density of states of hydrogenated amorphous silicon: extended band states, exponential band tails of localized states, mobility edges and mid-gap dangling-bond states. | Content: x axis energy from Ev - 0.5 eV to Ec + 0.5 eV (absolute scale 0 to about 2.3 eV with Ev = 0.5, Ec = 2.25), y axis log density of states 1e15 to 1e22 cm^-3 eV^-1. Square-root-like extended-state bands above Ec and below Ev; exponential valence tail with E0 = 45 meV and conduction tail with E0 = 25 meV extending into the gap; Gaussian dangling-bond bands near midgap with total density 1e16 cm^-3 (and a dashed variant 1e19 for unhydrogenated a-Si). Vertical dashed lines at the mobility edges Ev and Ec labelled mobility gap ≈ 1.75 eV. Shade localized states differently from extended states. Small inset: crystalline Si DOS with a sharp gap for comparison. -->
+
+![Figure 33.4 — Density of states of hydrogenated amorphous silicon: extended band states, exponential band tails of localized states, mobility edges and mid-gap dangling-bond states](../figures/ch33/fig-33-4-asi-density-of-states.png)
+
+*Figure 33.4 — Density of states of hydrogenated amorphous silicon: extended band states, exponential band tails of localized states, mobility edges and mid-gap dangling-bond states.*
+
+**Consequences.** Electrons in extended states have a mobility of about 10–20 cm²/(V s), but they spend most of their time trapped in tail states and released thermally. The resulting *effective* (trap-limited) mobility in thin-film transistors is only about 0.5–1 cm²/(V s). Because $k$ is not conserved in a disordered solid (Chapter 31), absorption above the gap is much stronger than in crystalline Si (about $10^5\ \mathrm{cm^{-1}}$ at 2.2 eV), so a few hundred nanometres absorb most visible light.
+
+**The Staebler–Wronski effect.** Prolonged illumination creates additional dangling bonds, as the energy of recombination breaks weak Si–Si bonds. This reduces the efficiency of a-Si:H solar cells by 10–30 % in the first months of operation before it stabilizes. Annealing at about 150 °C reverses it. This metastability is a fundamental property of a hydrogenated disordered network and was one reason for the decline of a-Si:H thin-film photovoltaics.
+
+### Applications and competitors
+
+a-Si:H remains in use for display backplanes (large LCD panels), flat-panel X-ray imagers, and, as a thin intrinsic passivation layer, in the silicon **heterojunction** solar cells that hold the efficiency record for crystalline silicon (Chapter 40), because it passivates the c-Si surface almost perfectly. For higher-performance thin-film transistors two competitors have emerged:
+
+| Thin-film channel material | Effective mobility (cm²/(V s)) | Process temperature | Main use |
+|---|---|---|---|
+| a-Si:H | 0.5–1 | 200–300 °C | Large LCD, X-ray imagers |
+| Amorphous oxide (InGaZnO, IGZO) | 10–30 | Room temperature to 400 °C | Large OLED/LCD panels, low-leakage backplanes |
+| Low-temperature polysilicon (LTPS) | 50–150 | Laser crystallization, < 500 °C on glass | Mobile OLED displays |
+| Organic semiconductors | 0.1–10 | Room temperature to 150 °C | Flexible and printed circuits |
+
+Amorphous oxides such as IGZO conduct well despite their disorder because their conduction band is built from spherical metal $s$ orbitals, whose overlap is insensitive to bond-angle disorder. This is a nice example of the tight-binding picture applied to a real material choice.
+
+---
+
+## 33.8 Organic semiconductors
+
+### Molecular solids
+
+Organic semiconductors are π-conjugated molecules (pentacene, rubrene, DNTT, C$_{60}$) or polymers (P3HT, PEDOT, diketopyrrolopyrrole copolymers) whose alternating single and double bonds produce delocalized π orbitals within each molecule (Advanced Chemistry core). The highest occupied molecular orbital (HOMO) plays the role of the valence-band edge and the lowest unoccupied orbital (LUMO) that of the conduction-band edge. Their separation, 1.5–3 eV, is set by the conjugation length.
+
+Between molecules, however, there are only weak van der Waals forces. The intermolecular transfer integral $t$ is about 0.01–0.1 eV, compared with 1–3 eV in Si. In the tight-binding picture of Chapter 31, this gives bandwidths of a few tenths of an electron-volt at most and heavy effective masses. In real films the bands are further broken up by **energetic disorder**: each molecule's HOMO and LUMO energies are shifted by its particular environment, with a roughly Gaussian spread of width $\sigma\approx$ 0.05–0.15 eV.
+
+### Transport by hopping
+
+When the disorder exceeds the bandwidth, carriers localize on individual molecules or polymer segments and move by thermally activated **hopping** between them. The Gaussian disorder model (Bässler) describes the low-field mobility as
+
+$$
+\mu(T)=\mu_0\exp\!\left[-\left(\frac{2\sigma}{3k_BT}\right)^2\right]
+$$
+
+> **Status of the principle: Gaussian disorder model**
+> *Empirical.* Derived from Monte Carlo simulation of hopping in a Gaussian density of states and fitted to time-of-flight data. It captures the strong temperature dependence and, with a further factor, the Poole–Frenkel-like field dependence ($\ln\mu\propto\sqrt{\mathcal E}$) of disordered organic films. It does not describe highly ordered single crystals, where band-like transport is observed.
+
+With $\sigma=0.1$ eV at 300 K, the exponent is $(2\times0.1/(3\times0.02585))^2=(2.58)^2=6.65$, and the mobility is reduced by a factor of $e^{-6.65}=1.3\times10^{-3}$ from its disorder-free value $\mu_0$. Reducing disorder through molecular design and crystallinity has raised organic mobilities by five orders of magnitude since the 1980s.
+
+| Organic material | Form | Typical mobility (cm²/(V s)) |
+|---|---|---|
+| P3HT (polymer) | Solution-processed film | 0.01–0.1 (holes) |
+| Pentacene | Evaporated film | 0.5–3 (holes) |
+| C$_{60}$ | Evaporated film | 0.5–5 (electrons) |
+| DPP-based donor–acceptor polymers | Solution-processed film | 1–10 |
+| C8-BTBT, DNTT | Small-molecule films | 1–10 or more |
+| Rubrene | Single crystal | 10–40 (holes) |
+
+### Excitons
+
+Organic solids have low permittivity ($\varepsilon_r\approx3$–4) and localized states, so an absorbed photon creates a tightly bound electron–hole pair, a Frenkel **exciton**, with binding energy 0.3–1 eV, compared with a few meV in GaAs. Excitons do not separate into free carriers at room temperature on their own. Organic solar cells therefore need a donor–acceptor interface (a "bulk heterojunction") to split them, and now reach 19–20 % efficiency in the laboratory. In organic LEDs, conversely, excitons are formed deliberately and emit efficiently. Phosphorescent and thermally activated delayed-fluorescence emitters harvest both singlet and triplet excitons, giving internal quantum efficiencies near 100 %. OLED displays are the largest commercial application of organic semiconductors.
+
+### Strengths and weaknesses
+
+Organic semiconductors are processed at low temperature, from solution or by evaporation, onto flexible substrates over large areas, and their properties can be tuned by molecular synthesis. Against this they have low mobility, sensitivity to oxygen and water (which demands encapsulation, Chapter 51), limited thermal stability, and poorly controlled doping. Their thermal conductivity, about 0.1–0.5 W/(m K), makes self-heating a concern even at low power.
+
+---
+
+## 33.9 Two-dimensional materials
+
+Layered crystals such as graphite, MoS$_2$ and hexagonal boron nitride consist of covalently bonded sheets held together by van der Waals forces. Single sheets can be isolated or grown, giving semiconductors, metals and insulators one atom (or three atoms) thick. Their electronic structure, size effects and synthesis are treated fully in Chapter 38. Here the question is how they compare as semiconductor materials.
+
+| 2D material | Band gap | Typical room-temperature mobility (cm²/(V s)) | Notes |
+|---|---|---|---|
+| Graphene | 0 (semimetal, linear bands) | $10^4$ on SiO$_2$; $>10^5$ hBN-encapsulated | Cannot switch off; RF, sensors, transparent electrodes |
+| MoS$_2$ (monolayer) | 1.8–1.9 eV direct (bulk 1.2–1.3 eV indirect) | 10–100 (phonon limit about 200) | n-type channel; leading 2D transistor candidate |
+| WSe$_2$ (monolayer) | about 1.6 eV direct | 10–200 | p-type or ambipolar |
+| Black phosphorus | 0.3 eV (bulk) to about 1.5–2 eV (monolayer), direct | 100–1000, anisotropic | Degrades in air |
+| hBN | about 6 eV | Insulator | Atomically flat substrate and gate dielectric |
+
+Three properties make 2D semiconductors attractive.
+
+- **Thickness without surface damage.** A monolayer has no dangling bonds on its faces, so it can be thinned to under a nanometre without the mobility collapse that roughness and surface states cause in ultrathin silicon. This gives the best electrostatic control of a channel, the main argument for 2D materials at the end of transistor scaling.
+- **Layer-dependent band structure.** MoS$_2$ changes from an indirect gap of about 1.2 eV in bulk to a direct gap of about 1.9 eV in a monolayer. Thickness becomes a design variable, an extreme form of the quantum confinement of Chapter 38.
+- **Stacking.** Van der Waals heterostructures can be assembled without lattice matching, in contrast to the epitaxial constraints of Section 33.2.
+
+Against these, wafer-scale growth of defect-free monolayers, low-resistance contacts and reliable doping remain unsolved, and mobilities of transition-metal dichalcogenides are lower than those of silicon. Graphene's lack of a gap gives on/off ratios of only about 10, which rules it out for logic. Two-dimensional materials are today used in sensors, photodetectors and research devices. Their role in mainstream electronics is a question for the 2030s.
+
+---
+
+## 33.10 Material comparison for power, RF, sensing and optoelectronics
+
+### The master table
+
+| Property (300 K) | Si | Ge | GaAs | InP | 4H-SiC | GaN | β-Ga$_2$O$_3$ | Diamond | AlN |
+|---|---|---|---|---|---|---|---|---|---|
+| $E_g$ (eV) | 1.12 | 0.66 | 1.42 | 1.34 | 3.26 | 3.39 | 4.85 | 5.47 | 6.1 |
+| Gap type | I | I | D | D | I | D | I (nearly D) | I | D |
+| $\varepsilon_r$ | 11.7 | 16.0 | 12.9 | 12.5 | 9.7 | 9.0 | 10 | 5.7 | 8.5 |
+| $\mu_n$ (cm²/(V s)) | 1400 | 3900 | 8500 | 5400 | 950 | 1000–1300 (2DEG 1500–2000) | 150–200 | 2000–4500 | about 300 |
+| $\mu_p$ (cm²/(V s)) | 450 | 1900 | 400 | 200 | 115 | 10–30 | — (no p-type) | 2000–3800 | about 14 |
+| $\mathcal E_c$ (MV/cm) | 0.3 | 0.1 | 0.4 | 0.5 | 2.5 (2–3) | 3.3 | 8 (est.) | 10 (est.) | 12–15 (est.) |
+| $v_{\mathrm{sat}}$ ($10^7$ cm/s) | 1.0 | 0.6 | 1.0 (peak 2) | 1.0 (peak 2.5) | 2.0 | 2.5 | 1.1–2 (est.) | 2.7 | about 1.5 |
+| $\kappa$ (W/(m K)) | 148 | 60 | 55 | 68 | 330–490 | 130–230 | 11–27 | 2000–2200 | 285–320 |
+| $n_i$ (cm⁻³) | $1\times10^{10}$ | $2\times10^{13}$ | $2\times10^{6}$ | $1\times10^{7}$ | $\sim10^{-8}$ | $\sim10^{-10}$ | $\sim10^{-22}$ | $\sim10^{-27}$ | negligible |
+| Largest wafer (2026) | 300 mm | 200 mm | 150–200 mm | 100–150 mm | 150–200 mm | 200 mm (on Si); 100 mm bulk | 100–150 mm | about 10 mm (single crystal) | 50–100 mm |
+
+Values marked "est." are theoretical or extrapolated, not yet measured in bulk breakdown. The critical field depends on doping (Chapter 32), and values here refer to the moderately doped drift layers of kilovolt-class devices.
+
+### Power: the Baliga figure of merit
+
+A unipolar power device (Schottky diode, MOSFET, HEMT) must block a voltage $V_B$ in its off state and conduct with as low a resistance as possible in its on state. Both are set by the **drift region**, a lightly doped layer of thickness $W$ and doping $N_D$. Its design is a materials problem that can be solved in four lines.
+
+At breakdown, the field in a non-punch-through drift region is triangular, peaking at $\mathcal E_c$, and from Poisson's equation its slope is $qN_D/\varepsilon$. Therefore
+
+$$
+W=\frac{\varepsilon\mathcal E_c}{qN_D},\qquad V_B=\frac12\mathcal E_cW
+$$
+
+Eliminating $W$ gives the maximum doping allowed for a given blocking voltage and the corresponding thickness:
+
+$$
+N_D=\frac{\varepsilon\mathcal E_c^2}{2qV_B},\qquad W=\frac{2V_B}{\mathcal E_c}
+$$
+
+The specific on-resistance (resistance × area) of the drift region in the on state is $R_{\mathrm{on,sp}}=W/(q\mu_nN_D)$, so
+
+$$
+R_{\mathrm{on,sp}}=\frac{4V_B^2}{\varepsilon\mu_n\mathcal E_c^3}
+$$
+
+The denominator depends only on the material. It is the **Baliga figure of merit**:
+
+$$
+\mathrm{BFOM}=\varepsilon\mu_n\mathcal E_c^3
+$$
+
+> **Status of the principle: Baliga figure of merit and the unipolar limit**
+> *Approximate.* Derived for a one-dimensional, uniformly doped, non-punch-through drift region with a constant critical field and constant mobility. Real devices add channel, substrate and contact resistance, and the critical field rises with doping. The resulting limit is optimistic by a factor of about two for Si, and it ignores switching losses and thermal limits entirely. It is a screening tool, not a design equation.
+
+The cube of the critical field dominates. A tenfold increase in $\mathcal E_c$ is worth a thousandfold reduction in on-resistance, while mobility enters only linearly. This is why 4H-SiC, with a sixth of the mobility of GaAs, beats it by a factor of twenty, and why the critical fields marked "est." in the master table carry such large uncertainties in the FOM: changing the SiC critical field from 2.5 to 3.0 MV/cm raises its BFOM by $1.2^3=1.73$.
+
+**Worked example — a 1200 V drift layer in silicon and in 4H-SiC.** For silicon, take $\varepsilon=11.7\times8.854\times10^{-14}=1.036\times10^{-12}$ F/cm, $\mu_n=1400\ \mathrm{cm^2/(V\,s)}$ and $\mathcal E_c=3\times10^5$ V/cm. Then
+
+$$
+N_D=\frac{1.036\times10^{-12}\times(3\times10^5)^2}{2\times1.602\times10^{-19}\times1200}=2.4\times10^{14}\ \mathrm{cm^{-3}},\qquad W=\frac{2\times1200}{3\times10^5}=8.0\times10^{-3}\ \mathrm{cm}=80\ \mu\mathrm m
+$$
+
+$$
+R_{\mathrm{on,sp}}=\frac{4\times1200^2}{1.036\times10^{-12}\times1400\times(3\times10^5)^3}=\frac{5.76\times10^6}{3.92\times10^7}=0.147\ \Omega\,\mathrm{cm^2}
+$$
+
+For 4H-SiC, $\varepsilon=9.7\times8.854\times10^{-14}=8.59\times10^{-13}$ F/cm, $\mu_n=950\ \mathrm{cm^2/(V\,s)}$ and $\mathcal E_c=2.5\times10^6$ V/cm give $N_D=1.4\times10^{16}\ \mathrm{cm^{-3}}$, $W=9.6$ µm and
+
+$$
+R_{\mathrm{on,sp}}=\frac{5.76\times10^6}{8.59\times10^{-13}\times950\times1.5625\times10^{19}}=\frac{5.76\times10^6}{1.275\times10^{10}}=4.5\times10^{-4}\ \Omega\,\mathrm{cm^2}
+$$
+
+The SiC drift layer is about 8 times thinner, about 60 times more heavily doped, and has about 330 times lower specific resistance. For a 100 A device conducting at 1 V drop (10 mΩ), the silicon drift region alone would need an area of $0.147/0.01=14.7\ \mathrm{cm^2}$, a die nearly 4 cm on a side, which is impractical. That is why silicon at 1200 V must use the bipolar IGBT, which floods the drift region with carriers to lower its resistance at the cost of slow switching. The SiC drift region needs $0.045\ \mathrm{cm^2}$ (about 2 mm × 2 mm). Real 1200 V SiC MOSFETs reach total values of 2–3 mΩ cm², dominated by the channel and substrate rather than the drift layer, which is why the SiC/SiO$_2$ interface of Section 33.4 matters so much.
+
+Repeating the calculation for each material with the master-table values gives the BFOM ranking and the "unipolar limit" lines of Figure 33.5.
+
+| Material | Values used ($\varepsilon_r$, $\mu_n$, $\mathcal E_c$) | BFOM relative to Si | $R_{\mathrm{on,sp}}$ limit at 1200 V (mΩ cm²) |
+|---|---|---|---|
+| Ge | 16.0, 3900, 0.1 | 0.14 | 1040 |
+| Si | 11.7, 1400, 0.3 | 1 | 147 |
+| GaAs | 12.9, 8500, 0.4 | 16 | 9.3 |
+| InP | 12.5, 5400, 0.5 | 19 | 7.7 |
+| 4H-SiC | 9.7, 950, 2.5 | 330 | 0.45 |
+| GaN | 9.0, 1250, 3.3 | 910 | 0.16 |
+| β-Ga$_2$O$_3$ | 10, 200, 8 | 2300 | 0.064 |
+| Diamond | 5.7, 2000, 10 | 26 000 | 0.0057 |
+
+Published BFOM tables differ by factors of two or more because they use different critical fields and mobilities. Only the ordering, and the orders of magnitude, are robust.
+
+<!-- FIGURE 33.5 | figures/ch33/fig-33-5-unipolar-limits.png | map | Theoretical unipolar limit of specific on-resistance versus breakdown voltage for Si, GaAs, 4H-SiC, GaN, β-Ga2O3 and diamond, with the operating windows of commercial devices. | Content: log-log plot, x axis breakdown voltage 100 V to 20 kV, y axis specific on-resistance 1e-3 to 1e3 mOhm cm2. Straight lines of slope 2 from Ron,sp = 4 VB^2/(eps mu Ec^3) using the table values: Si passing through 147 mOhm cm2 at 1200 V, GaAs 9.3, 4H-SiC 0.45, GaN 0.16, Ga2O3 0.064, diamond 0.0057 at 1200 V. Shaded clouds of commercial devices: Si superjunction MOSFETs near 600–900 V and 10–20 mOhm cm2 (below the Si line, labelled superjunction beats 1D limit), SiC MOSFETs 650–3300 V at 1–10 mOhm cm2, GaN HEMTs 100–650 V at 0.5–5 mOhm cm2. Vertical dotted lines at 650 V, 1200 V, 3300 V. -->
+
+![Figure 33.5 — Theoretical unipolar limit of specific on-resistance versus breakdown voltage for Si, GaAs, 4H-SiC, GaN, β-Ga2O3 and diamond, with the operating windows of commercial devices](../figures/ch33/fig-33-5-unipolar-limits.png)
+
+*Figure 33.5 — Theoretical unipolar limit of specific on-resistance versus breakdown voltage for Si, GaAs, 4H-SiC, GaN, β-Ga2O3 and diamond, with the operating windows of commercial devices.*
+
+Two caveats keep this ranking honest. **Superjunction** silicon MOSFETs use alternating p and n pillars to break the one-dimensional assumption, and they beat the silicon line at 600–900 V. And the BFOM says nothing about the cost of the substrate, the quality of the gate dielectric, p-type doping, or **heat removal**, the next consideration.
+
+### Thermal conductivity: where the heat goes
+
+A device dissipating power $P$ over area $A$ through a die of thickness $t$ has a one-dimensional thermal resistance $t/(\kappa A)$ (Chapter 24). The temperature rise in the semiconductor itself varies inversely with $\kappa$.
+
+**Worked example — temperature drop across the die.** A 1 mm × 1 mm hot spot dissipates 10 W through a 100 µm thick die. The temperature drop is $\Delta T=Pt/(\kappa A)=10\times10^{-4}/(\kappa\times10^{-6})=1000/\kappa$ (with $\kappa$ in W/(m K)): 6.8 K for Si, 18 K for GaAs, 15 K for InP, 7.7 K for GaN ($\kappa=130$), 2.7 K for 4H-SiC, 50 K for β-Ga$_2$O$_3$ ($\kappa=20$), and 0.5 K for diamond. Heat spreading in a real die reduces all of these numbers but not their ratios. GaN RF transistors, whose power densities exceed 5 W/mm of gate, are grown on SiC substrates to use SiC's conductivity, and the highest-power ones are bonded to diamond. Ga$_2$O$_3$, despite its high BFOM, would run 18 times hotter than SiC for the same loss unless it is thinned and bonded to a better conductor. Thermal conductivity can overrule the electrical figures of merit.
+
+### RF: the Johnson figure of merit
+
+A high-frequency transistor must be short, so that carriers cross it quickly, and it must withstand a voltage, so that it can deliver power. These conflict. The transit time across a region of length $L$ at saturation velocity is $L/v_{\mathrm{sat}}$, giving a cut-off frequency $f_T\approx v_{\mathrm{sat}}/2\pi L$, while the maximum voltage is about $\mathcal E_cL$. The product does not depend on $L$:
+
+$$
+V_{\max}f_T=\frac{\mathcal E_cv_{\mathrm{sat}}}{2\pi}\equiv\mathrm{JFOM}
+$$
+
+> **Status of the principle: Johnson figure of merit**
+> *Approximate.* It assumes uniform saturated transport and a uniform critical field over the same length. It ignores parasitic capacitances, contact resistances, mobility (important at low fields and for noise) and thermal limits. Some authors quote its square, $(\mathcal E_cv_{\mathrm{sat}}/2\pi)^2$, so relative values in the literature may be the square of those given here.
+
+| Material | $\mathcal E_c$ (MV/cm) | $v_{\mathrm{sat}}$ ($10^7$ cm/s) | JFOM (V/s) | JFOM relative to Si | $V_{\max}$ at $f_T=100$ GHz (V) |
+|---|---|---|---|---|---|
+| Ge | 0.1 | 0.6 | $9.5\times10^{10}$ | 0.2 | 1.0 |
+| Si | 0.3 | 1.0 | $4.8\times10^{11}$ | 1 | 4.8 |
+| GaAs | 0.4 | 1.0 | $6.4\times10^{11}$ | 1.3 | 6.4 |
+| InP | 0.5 | 1.0 | $8.0\times10^{11}$ | 1.7 | 8.0 |
+| 4H-SiC | 2.5 | 2.0 | $8.0\times10^{12}$ | 17 | 80 |
+| GaN | 3.3 | 2.5 | $1.3\times10^{13}$ | 28 | 131 |
+| β-Ga$_2$O$_3$ | 8 | 1.1 | $1.4\times10^{13}$ | 29 | 140 |
+| Diamond | 10 | 2.7 | $4.3\times10^{13}$ | 90 | 430 |
+
+GaN's place follows from this table: at 10 GHz it can sustain voltages of tens of volts, so for a given output power it presents a higher load impedance and needs less current, which simplifies matching and raises efficiency. Combined with the high 2DEG density and SiC's thermal conductivity, this is why GaN-on-SiC HEMTs replaced GaAs pHEMTs and silicon LDMOS in radar and base-station amplifiers. SiC's own low channel mobility keeps it out of RF. GaAs and InP still win where **low noise** and the highest frequencies at low voltage matter, because noise and $f_{\max}$ at small dimensions depend on low-field mobility and light effective mass, which the JFOM omits. A related index, Baliga's high-frequency figure of merit $\mu\mathcal E_c^2$, estimates switching loss in fast power converters. With the master-table values it ranks GaN (about 110 × Si) above Ga$_2$O$_3$ (about 100 ×), 4H-SiC (about 47 ×) and GaAs (about 11 ×), which is why GaN dominates the fastest power converters below 650 V. Figure 33.6 places all the materials on one map of the two figures of merit, with thermal conductivity shown as marker size, so that the trade-offs of this section can be seen at a glance.
+
+<!-- FIGURE 33.6 | figures/ch33/fig-33-6-fom-map.png | map | Materials map for power and RF: Johnson figure of merit versus Baliga figure of merit (both relative to Si), with marker size proportional to thermal conductivity and colour indicating technology maturity. | Content: log-log scatter, x axis BFOM relative to Si from 0.1 to 1e5, y axis JFOM relative to Si from 0.1 to 200. Points: Ge (0.14, 0.2), Si (1, 1), GaAs (16, 1.3), InP (19, 1.7), 4H-SiC (330, 17), GaN (910, 28), beta-Ga2O3 (2300, 29), diamond (26000, 90). Bubble area proportional to thermal conductivity (Ga2O3 smallest at ~20 W/mK, diamond largest at ~2000 W/mK, SiC ~370, Si 148, GaN 130–230, GaAs 55). Colour: mature (Si, GaAs, InP), production (SiC, GaN), emerging (Ga2O3, diamond). Annotated arrows: power switching to the right, RF power upward. -->
+
+![Figure 33.6 — Materials map for power and RF: Johnson figure of merit versus Baliga figure of merit (both relative to Si), with marker size proportional to thermal conductivity and colour indicating technology maturity](../figures/ch33/fig-33-6-fom-map.png)
+
+*Figure 33.6 — Materials map for power and RF: Johnson figure of merit versus Baliga figure of merit (both relative to Si), with marker size proportional to thermal conductivity and colour indicating technology maturity.*
+
+### Sensing
+
+Sensor materials are chosen for different properties than power or RF materials. The quantity that converts the measurand into an electrical signal determines the choice.
+
+| Sensing function | Key material property | Typical materials | Why |
+|---|---|---|---|
+| Magnetic field (Hall sensors) | High electron mobility | InSb, InAs, GaAs; Si for integrated sensors | Hall voltage ∝ $\mu$; Si integrates with signal processing |
+| Temperature | Exponential $n_i$ or $E_g(T)$; mobility $T$-dependence | Si diodes and transistors; Ge for cryogenics | $V_{BE}$ changes about −2 mV/K; bandgap references |
+| Strain and pressure | Piezoresistance (strain-induced valley repopulation) | Si (gauge factor about 100) | Large piezoresistive coefficients of Si; MEMS integration |
+| High-temperature and harsh environments | Wide gap, chemical inertness | 4H-SiC, GaN, diamond | Low $n_i$ to 500 °C and beyond |
+| Visible/NIR light | Absorption edge, low dark current | Si (to 1.1 µm), InGaAs (0.9–1.7 µm), Ge (to 1.6 µm) | Cut-off set by $E_g$ (Chapter 35) |
+| Mid/long-wave IR | Narrow gap | InSb, HgCdTe, InAs/GaSb superlattices | Gaps of 0.1–0.3 eV, cooled |
+| UV (solar-blind) | Wide gap | AlGaN, Ga$_2$O$_3$, diamond, SiC | Insensitive to visible light |
+| Ionizing radiation | Gap (pair energy $\approx3E_g$), purity, $Z$ | Si, HPGe, CdZnTe, diamond, SiC | Signal per keV; radiation hardness |
+| Gas and chemical | Surface states, adsorption | SnO$_2$, ZnO, WO$_3$, 2D materials, graphene | Surface-to-volume ratio (Chapters 34, 35, 38) |
+
+Silicon dominates wherever the sensor can be integrated with its readout circuit: CMOS image sensors, MEMS pressure sensors and accelerometers, Hall sensors, temperature sensors. Other materials win where silicon's band gap or temperature range is wrong.
+
+### Optoelectronics
+
+For light emission only direct-gap materials qualify (Chapter 31), and the emission wavelength is set by the gap of the active layer:
+
+| Wavelength band | Active material | Substrate | Application |
+|---|---|---|---|
+| Deep UV (210–280 nm) | AlGaN | AlN, sapphire | Disinfection, sensing |
+| UV-A, violet, blue (365–470 nm) | InGaN/GaN | Sapphire, Si, SiC, GaN | White LEDs (with phosphor), lasers |
+| Green (520–550 nm) | InGaN (high In) | Sapphire, GaN | Displays (efficiency gap "green gap") |
+| Red, orange, amber (590–650 nm) | AlGaInP | GaAs | Automotive lamps, displays |
+| Near-IR (780–980 nm) | AlGaAs/GaAs, InGaAs/GaAs | GaAs | VCSELs, sensing, pump lasers |
+| Telecom (1.3–1.6 µm) | InGaAsP, InGaAlAs | InP | Fibre-optic lasers and modulators |
+| Mid-IR (3–12 µm) | Quantum-cascade structures (InGaAs/InAlAs), GaSb-based | InP, GaSb | Gas sensing, spectroscopy |
+
+For detection and photovoltaics, indirect-gap materials work well, as Chapter 31 showed: Si for visible imaging and solar cells, Ge and InGaAs for telecom wavelengths. Chapter 35 treats emission, absorption and the material requirements of each device class in detail.
+
+### Selection summary
+
+| Application | First-choice material(s) | Decisive properties | Main alternative |
+|---|---|---|---|
+| Logic and memory | Si (with SiGe, strained Si) | Native oxide, crystal perfection, scale, cost | 2D channels (future) |
+| Power, < 100 V | Si MOSFETs | Cost, maturity | GaN HEMTs (speed) |
+| Power, 100–650 V, fast switching | GaN-on-Si HEMTs | High BFOM, low charge, 2DEG | Si superjunction, SiC |
+| Power, 650 V–3.3 kV | 4H-SiC MOSFETs and diodes | BFOM, thermal conductivity, native oxide | Si IGBT (cost) |
+| Power, > 3.3 kV | Si IGBT and thyristors; 4H-SiC emerging | Bipolar conductivity modulation; SiC BFOM | Ga$_2$O$_3$, diamond (research) |
+| RF power, 1–100 GHz | GaN-on-SiC HEMTs | JFOM, power density, thermal conductivity | GaAs pHEMT, Si LDMOS (< 4 GHz) |
+| RF handset PAs | GaAs HBTs | Efficiency at low voltage, maturity | GaN, Si CMOS/SOI |
+| Low-noise and sub-THz | InP HEMTs/HBTs, SiGe HBTs | Light $m^*$, high mobility | GaAs pHEMT |
+| Hall sensors | InSb, InAs, GaAs, Si | Mobility; integration | Graphene (research) |
+| Harsh-environment electronics | 4H-SiC | Low $n_i$, inertness | GaN, diamond |
+| Visible and IR LEDs/lasers | InGaN, AlGaInP, (Al)GaAs, InGaAsP | Direct gap, lattice match | Organic (displays), perovskites (research) |
+| Displays (backplane) | a-Si:H, IGZO, LTPS | Large area, low temperature | Organic TFTs |
+| Flexible, printed electronics | Organic semiconductors, oxides | Low-temperature processing | — |
+
+> **Status of the principle: figure-of-merit ranking**
+> *Approximate.* Figures of merit compress the properties of a material into one number for a stated, idealized device. They correctly identify which materials can never compete for a task (Ge for power, Ga$_2$O$_3$ for heat-limited RF) and which might. The final choice is decided by factors outside the formula: substrate cost and size, defect density, dielectric interfaces, p-type doping, packaging, reliability and supply chain (Chapter 58).
 
 ---
 
@@ -346,13 +587,14 @@ Spacecraft materials face a different set of extremes.
 
 | Open question | Where it is answered |
 |---|---|
-| What are the thermodynamics and kinetics of oxide-scale growth, and why do some scales protect and others spall? | Chapter 34 |
-| How do stress-corrosion cracking, hydrogen embrittlement and irradiation-assisted cracking proceed, and how are they prevented? | Chapter 35 |
-| How are lives of hot parts, reactor components and spacecraft predicted, and how are failures analysed? | Chapter 36 |
-| How do coatings, surface engineering and wear behave in extreme environments? | Chapters 37, 41 |
-| How are single-crystal blades, ODS steels and CMCs manufactured, and how are they joined? | Chapters 38–40 |
-| How are radiation damage and helium bubbles observed at the atomic scale? | Chapters 43, 44 |
-| How are radiation cascades and creep simulated, and how are new alloys designed computationally? | Chapters 46, 47 |
-| How are materials selected when temperature, mass, cost and supply risk all compete? | Chapter 48 |
+| How do band offsets, strain and critical thickness control heterostructures such as AlGaAs/GaAs, InGaAs/InP and AlGaN/GaN? | Chapter 34 |
+| What sets interface-trap density at SiC/SiO$_2$, GaN/dielectric and high-κ/Si interfaces, and how does it limit channel mobility and reliability? | Chapter 34 |
+| What are the material requirements for LEDs, lasers, photodetectors and solar absorbers built from these families? | Chapter 35 |
+| How do graphene and other 2D materials behave as their thickness and lateral size shrink? | Chapter 38 |
+| Which semiconductors make the best photovoltaic and thermoelectric materials? | Chapter 40 |
+| How are Si, SiC, GaN, GaAs and Ga$_2$O$_3$ crystals and wafers grown, and how are they doped and implanted? | Chapter 50 |
+| How do packages remove heat from SiC and GaN dies and cope with their thermal-expansion mismatch? | Chapter 51 |
+| How do wide-gap devices degrade in service (bipolar degradation, current collapse, gate-oxide wear-out)? | Chapter 44 |
+| How are figures of merit combined with cost, reliability and sustainability in a formal selection process? | Chapter 58 |
 
-**Next:** Part VIII opens with Chapter 34, which develops the thermodynamics and kinetics of corrosion in water and of oxidation in hot gas, the chemistry that underlies the protective scales on which so many materials in this chapter depend.
+**Next:** Chapter 34 moves from bulk materials to the interfaces and thin films where devices are built: heterostructures and band alignment, surface and interface states, thin-film stress and defects, contacts and gate dielectrics.

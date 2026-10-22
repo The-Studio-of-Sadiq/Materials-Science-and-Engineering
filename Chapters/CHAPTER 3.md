@@ -12,11 +12,11 @@ Symmetry is the most economical description of a crystal: instead of listing eve
 | Concept | Engineering destination |
 |---|---|
 | Symmetry operations, including screw axes and glide planes | Reading structure files; predicting diffraction absences (Chapter 4) |
-| 32 point groups and 7 crystal systems | Which tensor properties exist: piezo-, pyro- and ferroelectricity (Chapters 4, 25) |
-| 14 Bravais lattices | Choosing cells; recognizing equivalent descriptions; lattice-based calculations (Chapters 4, 45) |
-| 230 space groups; International Tables | Atomic positions, Wyckoff sites, databases and simulation inputs (Chapters 45–47) |
-| Stereographic projection and pole figures | Texture control in sheet, wire, cladding and additively manufactured parts (Chapters 38, 40, 42) |
-| Symmetry of real structures; symmetry breaking | Domains in ferroelectrics, variants in martensite and shape-memory alloys (Chapters 10, 29) |
+| 32 point groups and 7 crystal systems | Which tensor properties exist: piezo-, pyro- and ferroelectricity (Chapters 4, 27) |
+| 14 Bravais lattices | Choosing cells; recognizing equivalent descriptions; lattice-based calculations (Chapters 4, 55) |
+| 230 space groups; International Tables | Atomic positions, Wyckoff sites, databases and simulation inputs (Chapters 55–57) |
+| Stereographic projection and pole figures | Texture control in sheet, wire, cladding and additively manufactured parts (Chapters 46, 48, 52) |
+| Symmetry of real structures; symmetry breaking | Domains in ferroelectrics, variants in martensite and shape-memory alloys (Chapters 10, 37) |
 | Superlattices, ordering, antiphase boundaries | Superalloys, intermetallics, magnetic alloys (Chapters 12, 16) |
 | Quasicrystals and incommensurate structures | Coatings, modulated martensites, the modern definition of a crystal |
 
@@ -53,6 +53,10 @@ Figure 3.1 summarizes these operations. An infinite crystal can also be invarian
 Screw axes and glide planes are invisible in the external shape of a crystal and in its macroscopic properties, because over macroscopic distances the fractional translation is negligible; a $2_1$ axis and a $2$ axis produce the same symmetry of a property tensor. But they are clearly visible in diffraction, where they cause certain reflections to vanish (*systematic absences*, Chapter 4), which is how they are detected.
 
 <!-- FIGURE 3.1 | figures/ch03/fig-3-1-symmetry-operations.png | schematic | The crystallographic symmetry operations acting on a motif: rotation, reflection, inversion, rotoinversion, screw axis and glide plane. | Content: six panels, each using a small asymmetric motif (a comma or a "right hand" shape) with "+"/"−" height labels and open/filled shading for mirror images, in the style of International Tables stereograms. (a) 4-fold rotation: four equivalent commas around an axis, graphic symbol ■. (b) mirror m: pair of mirror-image commas across a plane. (c) inversion 1-bar: comma at +z and its inverted, mirror-image partner at −z through a centre. (d) 4-bar rotoinversion: four commas alternating +/− and right/left handed, symbol ■ with inscribed ellipse. (e) screw axis 2_1 along c: helix of two commas, rotated 180° and raised by c/2; contrast with a plain 2 axis. (f) c-glide: comma reflected across a plane and translated by c/2. Each panel labelled with Hermann–Mauguin and Schoenflies symbols (4/C4, m/σ, 1-bar/i, 4-bar/S4, 2_1, c). -->
+
+![Figure 3.1 — The crystallographic symmetry operations acting on a motif: rotation, reflection, inversion, rotoinversion, screw axis and glide plane](../figures/ch03/fig-3-1-symmetry-operations.png)
+
+*Figure 3.1 — The crystallographic symmetry operations acting on a motif: rotation, reflection, inversion, rotoinversion, screw axis and glide plane.*
 
 ### Groups
 
@@ -97,6 +101,10 @@ The equalities of lattice parameters are consequences of the symmetry, not its d
 
 <!-- FIGURE 3.2 | figures/ch03/fig-3-2-restriction-bravais.png | crystal | Why only 1-, 2-, 3-, 4- and 6-fold axes are compatible with a lattice, and the 14 Bravais lattices. | Content: top strip: plane tilings by regular polygons — triangles, squares and hexagons fill the plane; pentagons leave rhombic gaps (shaded red) and octagons leave square gaps; label "trace 1 + 2cos(2π/n) must be an integer: n = 1, 2, 3, 4, 6". Main panel: the 14 Bravais lattices as conventional cells, grouped by crystal system in rows: triclinic P; monoclinic P, C; orthorhombic P, C, I, F; tetragonal P, I; hexagonal P (with primitive cell outlined in the hexagonal prism); rhombohedral R (drawn both as rhombohedron and in hexagonal setting with the extra points at (2/3,1/3,1/3) and (1/3,2/3,2/3)); cubic P, I, F. Lattice points as spheres, centring points in a second colour. Inset: "C-centred tetragonal = smaller primitive tetragonal" with the a/√2 cell drawn inside the C cell. -->
 
+![Figure 3.2 — Why only 1-, 2-, 3-, 4- and 6-fold axes are compatible with a lattice, and the 14 Bravais lattices](../figures/ch03/fig-3-2-restriction-bravais.png)
+
+*Figure 3.2 — Why only 1-, 2-, 3-, 4- and 6-fold axes are compatible with a lattice, and the 14 Bravais lattices.*
+
 ### Laue classes and the properties symmetry allows
 
 Point groups decide which physical properties a crystal can have, through **Neumann's principle**: the symmetry of any physical property must include the symmetry of the crystal's point group (developed with tensors in Chapter 4).
@@ -108,7 +116,7 @@ Three consequences sort the 32 point groups.
 
 - **Eleven point groups are centrosymmetric** ($\bar1$, $2/m$, $mmm$, $4/m$, $4/mmm$, $\bar3$, $\bar3m$, $6/m$, $6/mmm$, $m\bar3$, $m\bar3m$). These are the **Laue classes**: because diffraction intensities normally add a centre of symmetry, a diffraction pattern reveals only the Laue class of a crystal, not its full point group.
 - **The other 21 lack a centre of symmetry**, and 20 of them (all except $432$) allow **piezoelectricity**, the polarization produced by stress. Quartz ($32$), GaN and ZnO ($6mm$), GaAs ($\bar43m$) and poled PZT ($4mm$ or $3m$) are piezoelectric; silicon, iron and alumina ($m\bar3m$, $m\bar3m$, $\bar3m$) are not.
-- **Ten of the 20 are polar** ($1$, $2$, $m$, $mm2$, $4$, $4mm$, $3$, $3m$, $6$, $6mm$): they have a direction that no symmetry operation reverses, so they can carry a spontaneous polarization. These crystals are **pyroelectric**: their polarization changes with temperature, the basis of infrared detectors. If the spontaneous polarization can be switched by a field, the crystal is **ferroelectric** (BaTiO$_3$, PZT, LiNbO$_3$; Chapter 25).
+- **Ten of the 20 are polar** ($1$, $2$, $m$, $mm2$, $4$, $4mm$, $3$, $3m$, $6$, $6mm$): they have a direction that no symmetry operation reverses, so they can carry a spontaneous polarization. These crystals are **pyroelectric**: their polarization changes with temperature, the basis of infrared detectors. If the spontaneous polarization can be switched by a field, the crystal is **ferroelectric** (BaTiO$_3$, PZT, LiNbO$_3$; Chapter 27).
 
 | Property | Symmetry requirement | Number of point groups | Examples |
 |---|---|---|---|
@@ -150,7 +158,7 @@ Each missing combination fails one of the tests.
 - **C-centred cubic** would put extra points on only one pair of faces, destroying the threefold axes along the body diagonals; the result would no longer be cubic, but tetragonal.
 - **C-centred tetragonal** is identical to a smaller primitive tetragonal lattice. In a C-centred tetragonal cell of side $a$, the face-centre point and the corners together form a square net of side $a/\sqrt2$ rotated by 45°; the new cell has the same $c$, edge $a/\sqrt2$, half the volume and only corner points.
 - **F-centred tetragonal** is similarly identical to an I-centred tetragonal cell with edge $a/\sqrt2$.
-- **Body-centred or face-centred hexagonal** would break the sixfold symmetry, and **base-centred hexagonal** reduces to a smaller primitive cell.
+- **Body-centred or face-centred hexagonal** would break the sixfold symmetry, and **base-centred hexagonal** either reduces to a smaller primitive hexagonal cell (centring at $\tfrac23,\tfrac13,0$) or, with ordinary C-centring at $\tfrac12,\tfrac12,0$, destroys the sixfold axis and gives an orthorhombic lattice.
 
 **Worked example — Two descriptions of one lattice.** A tetragonal crystal is reported with a C-centred cell $a=b=0.600$ nm, $c=0.400$ nm. Its conventional cell contains $8\times\tfrac18+2\times\tfrac12=2$ lattice points in volume $a^2c=0.1440\ \mathrm{nm^3}$, i.e. $0.0720\ \mathrm{nm^3}$ per point. The primitive tetragonal cell spanned by $\tfrac12(\mathbf a+\mathbf b)$, $\tfrac12(\mathbf a-\mathbf b)$ and $\mathbf c$ has edges $0.600/\sqrt2=0.4243$ nm, perpendicular to each other, and $c=0.400$ nm, so its volume is $0.4243^2\times0.400=0.0720\ \mathrm{nm^3}$ with one lattice point: the same lattice, described by a cell of half the size, and still tetragonal. The reverse effect occurs in FCC metals. The primitive cell of copper is a rhombohedron with edge $a/\sqrt2=0.2556$ nm and interaxial angles of 60°, volume $a^3/4=0.01181\ \mathrm{nm^3}$; it is perfectly valid but hides the cubic symmetry, which is why the four-point conventional cube is used. Neither description is "the" lattice; one is chosen for convenience and the conventions of the International Tables fix the choice so that databases agree.
 
@@ -206,9 +214,13 @@ The *International Tables for Crystallography, Volume A* devotes a page or two t
 - **Reflection conditions**: the systematic absences produced by centring, screw axes and glides (Chapter 4).
 - **Maximal subgroups and minimal supergroups**: the symmetry relations used to analyse phase transitions (Section 3.6).
 
-A crystal structure is then completely specified (Figure 3.3) by its space group, its lattice parameters and the Wyckoff positions (with any free parameters) of the atoms in the **asymmetric unit**. This is exactly the content of a crystallographic information file (CIF) in databases such as the ICSD, and of the input to electronic-structure and molecular-dynamics codes (Chapters 45–47).
+A crystal structure is then completely specified (Figure 3.3) by its space group, its lattice parameters and the Wyckoff positions (with any free parameters) of the atoms in the **asymmetric unit**. This is exactly the content of a crystallographic information file (CIF) in databases such as the ICSD, and of the input to electronic-structure and molecular-dynamics codes (Chapters 55–57).
 
 <!-- FIGURE 3.3 | figures/ch03/fig-3-3-wyckoff-positions.png | crystal | Building structures from Wyckoff positions: rock salt, fluorite and spinel in space groups Fm-3m and Fd-3m. | Content: three panels. (a) Fm-3m cell with Wyckoff sites colour-coded: 4a (0,0,0) red, 4b (½,½,½) blue, 8c (¼,¼,¼) green, one 24e (x,0,0) site grey; table beside: letter, multiplicity, site symmetry (4a m-3m, 4b m-3m, 8c -43m, 24d m.mm, 24e 4m.m, 192l 1). (b) "Choose sites": NaCl = Na 4a + Cl 4b; CaF2 = Ca 4a + F 8c; Cu = Cu 4a; each drawn as a small cell. (c) Spinel MgAl2O4 in Fd-3m (origin choice 2): Mg 8a, Al 16d, O 32e (x,x,x) with x ≈ 0.26; one-eighth of the cell shown with tetrahedral Mg and octahedral Al; count 8 + 16 + 32 = 56 atoms. -->
+
+![Figure 3.3 — Building structures from Wyckoff positions: rock salt, fluorite and spinel in space groups Fm-3m and Fd-3m](../figures/ch03/fig-3-3-wyckoff-positions.png)
+
+*Figure 3.3 — Building structures from Wyckoff positions: rock salt, fluorite and spinel in space groups Fm-3m and Fd-3m.*
 
 **Worked example — Building three structures from the tables.** *Rock salt.* $Fm\bar3m$ has point group order 48 and 4 lattice points per cell, so its general position $192l$ has multiplicity $48\times4=192$. The special positions $4a$ at $(0,0,0)$ and $4b$ at $(\tfrac12,\tfrac12,\tfrac12)$ each have site symmetry $m\bar3m$ and multiplicity 4: the four points are the origin plus the F-centring translations $(0,\tfrac12,\tfrac12)$, $(\tfrac12,0,\tfrac12)$, $(\tfrac12,\tfrac12,0)$. Placing Na at $4a$ and Cl at $4b$ gives the whole structure: 4 Na and 4 Cl per cell, each ion octahedrally surrounded by six of the other. With $a=0.5640$ nm,
 
@@ -254,6 +266,10 @@ The cubic symmetry divides the projection into 48 identical spherical triangles.
 
 <!-- FIGURE 3.4 | figures/ch03/fig-3-4-stereographic-pole-figures.png | plot | The stereographic projection of a cubic crystal and the {111} pole figures of rolled and recrystallized FCC sheet. | Content: (a) Construction: reference sphere with crystal at centre, pole P at angle φ from north pole N, line from P to south pole S crossing equatorial plane at P′, label r = R tan(φ/2). (b) Standard (001) projection of a cubic crystal on the primitive circle: poles 001 (centre), 100, 010, -100, 0-10 on rim; 011-type at r = 0.414R and on rim; 111-type at r = 0.518R at 45° azimuths; 112-type at 0.318R; 012-type at 0.236R; great circles for {100} and {110} zones drawn; one standard triangle 001–011–111 shaded. (c) {111} pole figure (RD up, TD right, ND at centre) for ideal cube texture {001}<100>: four peaks at r = 0.518R on the 45° diagonals, contour levels 1, 2, 4, 8, 16 MRD. (d) {111} pole figure for cold-rolled copper (typical β-fibre: copper {112}<111>, S {123}<634>, brass {110}<112> components), maximum about 8 MRD, with ideal component positions marked by symbols. -->
 
+![Figure 3.4 — The stereographic projection of a cubic crystal and the {111} pole figures of rolled and recrystallized FCC sheet](../figures/ch03/fig-3-4-stereographic-pole-figures.png)
+
+*Figure 3.4 — The stereographic projection of a cubic crystal and the {111} pole figures of rolled and recrystallized FCC sheet.*
+
 **Worked example — Locating texture components on a pole figure.** An aluminium sheet recrystallized after rolling has the **cube texture** $\{001\}\langle100\rangle$: most grains have a cube face in the sheet plane and a cube edge along the rolling direction (RD). A $\{111\}$ pole figure is plotted with the sheet normal (ND) at the centre, RD at the top and the transverse direction (TD) at the right. Where do the peaks appear?
 
 In each cube-oriented grain, $[001]$ is parallel to ND and $[100]$ to RD. The four $\langle111\rangle$ poles in the upper hemisphere, $[111]$, $[\bar111]$, $[1\bar11]$ and $[\bar1\bar11]$, all make $54.74^\circ$ with $[001]$, so they lie at
@@ -262,15 +278,15 @@ $$
 r=R\tan\frac{54.74^\circ}{2}=R\tan27.37^\circ=0.518R
 $$
 
-from the centre. Their projections on the sheet plane point along $[110]$, $[\bar110]$, $[1\bar10]$ and $[\bar1\bar10]$, that is, at 45° between RD and TD. The pole figure therefore shows four sharp peaks at about half the radius, on the diagonals. If instead the texture were the Goss component $\{110\}\langle001\rangle$ of electrical steel, with $[110]$ along ND and $[001]$ along RD, the $\langle111\rangle$ poles would lie at $35.26^\circ$ from ND ($r=0.318R$) in the TD–ND plane and at $90^\circ$ (on the rim) along TD: a quite different, immediately recognizable pattern. Reading which ideal orientations a measured pole figure contains is the first step in controlling texture.
+from the centre. Their projections on the sheet plane point along $[110]$, $[\bar110]$, $[1\bar10]$ and $[\bar1\bar10]$, that is, at 45° between RD and TD. The pole figure therefore shows four sharp peaks at about half the radius, on the diagonals. If instead the texture were the Goss component $\{110\}\langle001\rangle$ of electrical steel, with $[110]$ along ND and $[001]$ along RD, the $\langle111\rangle$ poles would lie at $35.26^\circ$ from ND ($r=0.318R$) in the RD–ND plane and at $90^\circ$ (on the rim) at $\pm35.26^\circ$ from TD: a quite different, immediately recognizable pattern. Reading which ideal orientations a measured pole figure contains is the first step in controlling texture.
 
 ### Pole figures and texture
 
-A **pole figure** is a stereographic (or equal-area) map, in the *sample* reference frame (RD, TD, ND for sheet), of the density of poles of one family of crystal planes, summed over all grains. It is measured by X-ray or neutron diffraction, tilting and rotating the sample with the detector fixed on one Bragg reflection, or calculated from orientation maps obtained by electron backscatter diffraction (Chapter 42). Intensities are expressed in **multiples of a random distribution** (MRD): 1 everywhere for a random polycrystal, peaks of 5–20 for strongly textured sheet.
+A **pole figure** is a stereographic (or equal-area) map, in the *sample* reference frame (RD, TD, ND for sheet), of the density of poles of one family of crystal planes, summed over all grains. It is measured by X-ray or neutron diffraction, tilting and rotating the sample with the detector fixed on one Bragg reflection, or calculated from orientation maps obtained by electron backscatter diffraction (Chapter 52). Intensities are expressed in **multiples of a random distribution** (MRD): 1 everywhere for a random polycrystal, peaks of 5–20 for strongly textured sheet.
 
 Because one pole figure shows only one family of planes, the full description of texture is the **orientation distribution function** (ODF), the probability density of grain orientations expressed in three Euler angles, computed from several pole figures. Its complement, the **inverse pole figure**, plots the density of crystal directions parallel to one sample axis inside the standard triangle; it is the natural display for wires, fibres, thin films and additively manufactured parts, whose textures are fibres about one axis.
 
-Texture is not an academic curiosity. In deep-drawing steel the γ-fibre ($\{111\}\parallel$ ND) raises the plastic strain ratio $r$ (the ratio of width to thickness strain in a tensile test) above 1.5, so the sheet resists thinning. In aluminium can stock the balance of rolling and cube components sets the height of ears on the drawn cup. In titanium and zirconium alloys, basal textures control anisotropy of strength and hydride orientation. In additively manufactured nickel alloys, the $\langle100\rangle$ fibre along the build direction lowers the modulus along that direction by about a third compared with a random polycrystal. Chapters 13, 38 and 40 develop how processing produces these textures.
+Texture is not an academic curiosity. In deep-drawing steel the γ-fibre ($\{111\}\parallel$ ND) raises the plastic strain ratio $r$ (the ratio of width to thickness strain in a tensile test) above 1.5, so the sheet resists thinning. In aluminium can stock the balance of rolling and cube components sets the height of ears on the drawn cup. In titanium and zirconium alloys, basal textures control anisotropy of strength and hydride orientation. In additively manufactured nickel alloys, the $\langle100\rangle$ fibre along the build direction lowers the modulus along that direction by about a third compared with a random polycrystal. Chapters 13, 46 and 48 develop how processing produces these textures.
 
 ---
 
@@ -304,9 +320,9 @@ $$
 N=\frac{48}{8}=6
 $$
 
-ferroelectric domain states, with polarization along $[100]$, $[\bar100]$, $[010]$, $[0\bar10]$, $[001]$ or $[00\bar1]$. The rhombohedral phase ($3m$, order 6) has $48/6=8$ states, polarized along the eight body diagonals; the orthorhombic phase ($mm2$, order 4) has 12. PZT near its morphotropic phase boundary, where tetragonal and rhombohedral phases coexist, offers $6+8=14$ possible polarization directions, which helps explain why compositions near that boundary pole most completely and give the highest piezoelectric coefficients (Chapter 25).
+ferroelectric domain states, with polarization along $[100]$, $[\bar100]$, $[010]$, $[0\bar10]$, $[001]$ or $[00\bar1]$. The rhombohedral phase ($3m$, order 6) has $48/6=8$ states, polarized along the eight body diagonals; the orthorhombic phase ($mm2$, order 4) has 12. PZT near its morphotropic phase boundary, where tetragonal and rhombohedral phases coexist, offers $6+8=14$ possible polarization directions, which helps explain why compositions near that boundary pole most completely and give the highest piezoelectric coefficients (Chapter 27).
 
-The same arithmetic counts martensite variants. If the cubic-to-tetragonal transformation of steel kept only the tetragonal holohedry $4/mmm$ (order 16), there would be $48/16=3$ Bain variants, one for each cube axis that becomes the $c$ axis. The cubic-to-monoclinic transformation of NiTi gives $48/4=12$ lattice-correspondence variants (24 habit-plane variants when the two twin solutions per correspondence are counted). The rich variety of variants is what lets shape-memory alloys accommodate the transformation strain by arranging variants into self-accommodating groups, and then reorient them under stress (Chapters 10 and 29).
+The same arithmetic counts martensite variants. If the cubic-to-tetragonal transformation of steel kept only the tetragonal holohedry $4/mmm$ (order 16), there would be $48/16=3$ Bain variants, one for each cube axis that becomes the $c$ axis. The cubic-to-monoclinic transformation of NiTi gives $48/4=12$ lattice-correspondence variants (24 habit-plane variants when the two twin solutions per correspondence are counted). The rich variety of variants is what lets shape-memory alloys accommodate the transformation strain by arranging variants into self-accommodating groups, and then reorient them under stress (Chapters 10 and 37).
 
 ---
 
@@ -331,7 +347,7 @@ $$
 
 where $p_A$ is the probability that a site of the A sublattice is occupied by an A atom and $x_A$ the overall atom fraction of A; $S=1$ for perfect order and $S=0$ for a random alloy. The thermodynamics of ordering, and why $S$ falls continuously to zero in some alloys (B2) but discontinuously in others (L1$_2$), are developed in Chapter 6.
 
-Ordering matters for properties. Ordered Ni$_3$Al precipitates are what make nickel superalloys strong at high temperature (Chapter 16); L1$_0$ FePt has enormous magnetocrystalline anisotropy, used in high-density magnetic recording; ordering in FeCo and Ni$_3$Fe (permalloy) changes magnetic softness; ordering usually raises electrical resistivity less and strength more than disorder would suggest.
+Ordering matters for properties. Ordered Ni$_3$Al precipitates are what make nickel superalloys strong at high temperature (Chapter 16); L1$_0$ FePt has enormous magnetocrystalline anisotropy, used in high-density magnetic recording; ordering in FeCo and Ni$_3$Fe (permalloy) changes magnetic softness; long-range ordering lowers electrical resistivity (Cu$_3$Au drops several-fold on ordering) and generally raises strength and hardness.
 
 ### Detecting order: superlattice reflections
 
@@ -343,7 +359,7 @@ $$
 \frac{I_{\mathrm{super}}}{I_{\mathrm{fund}}}=\left(\frac{50S}{166}\right)^2=0.091\,S^2
 $$
 
-so a fully ordered alloy shows superlattice peaks about 9 % as strong as the fundamentals (before angle-dependent corrections), easily measured; at $S=0.5$ they fall to 2.3 %. For B2 CuZn, $f_{\mathrm{Cu}}\approx29$ and $f_{\mathrm{Zn}}\approx30$ differ by one electron, and the ratio is $(1/59)^2=2.9\times10^{-4}$: the order is practically invisible to X-rays. Neutrons, which scatter from nuclei with lengths unrelated to atomic number ($b_{\mathrm{Cu}}=7.72$ fm, $b_{\mathrm{Zn}}=5.68$ fm), give a ratio of $\left(\frac{2.04}{13.40}\right)^2=0.023$, eighty times better, which is why the ordering of β-brass was first measured by neutron diffraction (Chapter 43). For Ni$_3$Al with X-rays, $(28-13)/(13+3\times28)=0.155$, a ratio of 0.024: the γ′ superlattice reflections are weak but routine.
+so a fully ordered alloy shows superlattice peaks about 9 % as strong as the fundamentals (before angle-dependent corrections), easily measured; at $S=0.5$ they fall to 2.3 %. For B2 CuZn, $f_{\mathrm{Cu}}\approx29$ and $f_{\mathrm{Zn}}\approx30$ differ by one electron, and the ratio is $(1/59)^2=2.9\times10^{-4}$: the order is practically invisible to X-rays. Neutrons, which scatter from nuclei with lengths unrelated to atomic number ($b_{\mathrm{Cu}}=7.72$ fm, $b_{\mathrm{Zn}}=5.68$ fm), give a ratio of $\left(\frac{2.04}{13.40}\right)^2=0.023$, eighty times better, which is why the ordering of β-brass was first measured by neutron diffraction (Chapter 53). For Ni$_3$Al with X-rays, $(28-13)/(13+3\times28)=0.155$, a ratio of 0.024: the γ′ superlattice reflections are weak but routine.
 
 ### Antiphase boundaries
 
@@ -352,6 +368,10 @@ Ordering nucleates independently in different regions of a crystal. Because the 
 APBs cost energy, because they create wrong A–A and B–B bonds; typical APB energies are 0.1–0.3 J m$^{-2}$ for Ni$_3$Al on $\{111\}$. They are also created whenever a dislocation of the disordered lattice passes through an ordered crystal: its Burgers vector shifts the sublattices. A single such dislocation would leave a sheet of APB behind it, so dislocations in ordered alloys (Figure 3.5) travel in pairs, **superdislocations**, the second restoring order behind the first. This is the central mechanism of precipitation strengthening by γ′ and of the anomalous rise in strength of Ni$_3$Al with temperature (Chapters 12, 13 and 16).
 
 <!-- FIGURE 3.5 | figures/ch03/fig-3-5-ordering-apb.png | crystal | Order–disorder in alloys: the L1₂ and B2 superlattices, an antiphase boundary, and superlattice reflections in diffraction. | Content: (a) disordered FCC cell with all sites half-shaded (mixed Cu/Au) beside ordered L1₂ Cu3Au cell (Au corners gold, Cu face centres copper colour). (b) disordered BCC beside ordered B2 CuZn (Cu corners, Zn body centre). (c) 2D square-lattice section of an ordered AB alloy with two antiphase domains; boundary drawn where A–A and B–B nearest-neighbour pairs occur, highlighted in red; displacement vector ½<110> arrow; label "APB energy ≈ 0.1–0.3 J/m² (Ni3Al)". (d) schematic powder diffraction patterns, 2θ from 20° to 80° (Cu Kα) for Cu3Au, a = 0.375 nm: disordered (only 111, 200, 220, 311, 222 peaks) and ordered (additional weak 100, 110, 210, 211 superlattice peaks at about 9 % relative intensity), with "S = 1" and "S = 0" labels. -->
+
+![Figure 3.5 — Order–disorder in alloys: the L1₂ and B2 superlattices, an antiphase boundary, and superlattice reflections in diffraction](../figures/ch03/fig-3-5-ordering-apb.png)
+
+*Figure 3.5 — Order–disorder in alloys: the L1₂ and B2 superlattices, an antiphase boundary, and superlattice reflections in diffraction.*
 
 ### Artificial superlattices
 
@@ -371,11 +391,15 @@ $$
 \tau=\frac{1+\sqrt5}{2}=1.6180\ldots,\qquad \tau^2=\tau+1
 $$
 
-The ratio of fat to thin tiles tends to $\tau$, and the pattern is self-similar under scaling by $\tau$. The one-dimensional analogue, the Fibonacci chain of long (L) and short (S) segments generated by repeatedly replacing L → LS and S → L, makes the point most simply: the numbers of L and S segments are successive Fibonacci numbers, their ratio converges to $\tau$ (after 15 generations it is 1.618034, against $\tau=1.618034$), and the chain is ordered but never periodic. Diffraction from such structures gives sharp peaks indexed by six integers (icosahedral) instead of three, with intensities forming self-similar patterns related by powers of $\tau$.
+The ratio of fat to thin tiles tends to $\tau$, and the pattern is self-similar under scaling by $\tau$. The one-dimensional analogue, the Fibonacci chain of long (L) and short (S) segments generated by repeatedly replacing L → LS and S → L, makes the point most simply: the numbers of L and S segments are successive Fibonacci numbers, their ratio converges to $\tau$ (after 16 generations it is 1.618034, against $\tau=1.618034$), and the chain is ordered but never periodic. Diffraction from such structures gives sharp peaks indexed by six integers (icosahedral) instead of three, with intensities forming self-similar patterns related by powers of $\tau$.
 
 Hundreds of stable quasicrystals are now known, in Al–Cu–Fe, Al–Pd–Mn, Zn–Mg–RE, Ti–Zr–Ni and other systems; a natural one was found in a meteorite. Their properties reflect their unusual structure: high hardness, low friction and surface energy (hence non-stick and wear-resistant coatings), low thermal and electrical conductivity for metallic alloys, and brittleness at room temperature. Closely related **approximants** are periodic crystals with very large cells whose local structure mimics the quasicrystal; they bridge the two descriptions.
 
 <!-- FIGURE 3.6 | figures/ch03/fig-3-6-quasicrystal-modulated.png | schematic | Order without periodicity: a Penrose tiling and its tenfold diffraction pattern, the Fibonacci chain, and an incommensurately modulated structure with its satellite reflections. | Content: (a) Penrose rhombus tiling patch (~150 tiles), fat rhombi (72°/108°) light blue, thin rhombi (36°/144°) dark blue, a local fivefold star highlighted; label "fat/thin → τ = 1.618". (b) Calculated diffraction pattern of the tiling: sharp spots with tenfold symmetry, intensities as dot sizes, rings of spots whose radii scale by τ. (c) 1D Fibonacci chain L S L L S L S L L S L L S ... generated by L → LS, S → L, with its construction as a cut through a 2D square lattice at slope 1/τ (strip-projection sketch). (d) 1D chain of atoms with a sinusoidal displacement modulation of wavelength 3.7a (incommensurate), and its diffraction: main reflections at integer h with first- and second-order satellites at h ± q, q = 0.27 a*. -->
+
+![Figure 3.6 — Order without periodicity: a Penrose tiling and its tenfold diffraction pattern, the Fibonacci chain, and an incommensurately modulated structure with its satellite reflections](../figures/ch03/fig-3-6-quasicrystal-modulated.png)
+
+*Figure 3.6 — Order without periodicity: a Penrose tiling and its tenfold diffraction pattern, the Fibonacci chain, and an incommensurately modulated structure with its satellite reflections.*
 
 ### Incommensurate and modulated structures
 
@@ -389,7 +413,7 @@ with at least one of $\alpha$, $\beta$, $\gamma$ irrational, where $\mathbf a^*$
 
 Engineering and scientific examples include:
 
-- **Modulated martensites** in Ni–Mn–Ga magnetic shape-memory alloys (the "5M" and "7M" structures), whose modulation makes twin boundaries so mobile that a magnetic field produces strains of several per cent (Chapter 29);
+- **Modulated martensites** in Ni–Mn–Ga magnetic shape-memory alloys (the "5M" and "7M" structures), whose modulation makes twin boundaries so mobile that a magnetic field produces strains of several per cent (Chapter 37);
 - the narrow **incommensurate phase of quartz**, about 1.4 K wide, between the α and β forms near 573 °C;
 - **charge-density waves** in layered compounds such as NbSe$_2$ and TaS$_2$, and **spin-density waves** and helical magnetic structures in chromium and rare-earth metals;
 - **composite (misfit) crystals** in which two interpenetrating substructures have incommensurate repeats along a common direction, as in the misfit-layer sulphides and in the host–guest high-pressure phases of barium and bismuth.
@@ -413,11 +437,11 @@ Quasicrystals and modulated phases show that the classical crystallography of Se
 | What thermodynamics controls order–disorder transitions, and why are some continuous and some discontinuous? | Chapter 6 |
 | How do martensite variants form and accommodate transformation strain? | Chapter 10 |
 | How do superdislocations and APB energy strengthen γ′ and other ordered intermetallics? | Chapters 12, 13 and 16 |
-| How do texture and the plastic strain ratio govern formability? | Chapters 13 and 38 |
-| How do ferroelectric domains, poling and the morphotropic phase boundary set piezoelectric performance? | Chapter 25 |
-| How are shape-memory and magnetic shape-memory alloys designed? | Chapter 29 |
-| How are pole figures, ODFs and orientation maps measured in practice? | Chapter 42 |
-| How do neutrons and synchrotron X-rays reveal ordering, modulations and light atoms? | Chapter 43 |
-| How do electronic-structure and database tools use space groups and Wyckoff positions? | Chapters 45 and 47 |
+| How do texture and the plastic strain ratio govern formability? | Chapters 13 and 46 |
+| How do ferroelectric domains, poling and the morphotropic phase boundary set piezoelectric performance? | Chapter 27 |
+| How are shape-memory and magnetic shape-memory alloys designed? | Chapter 37 |
+| How are pole figures, ODFs and orientation maps measured in practice? | Chapter 52 |
+| How do neutrons and synchrotron X-rays reveal ordering, modulations and light atoms? | Chapter 53 |
+| How do electronic-structure and database tools use space groups and Wyckoff positions? | Chapters 55 and 57 |
 
 **Next:** Chapter 4 turns from real space to reciprocal space: the reciprocal lattice, Bragg's law and the Ewald sphere, structure factors and intensities, peak broadening, and the tensor description of properties that symmetry constrains.

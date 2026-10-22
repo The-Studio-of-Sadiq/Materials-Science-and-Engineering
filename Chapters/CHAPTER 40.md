@@ -1,375 +1,504 @@
-# Chapter 40 — Additive Manufacturing
+# Chapter 40 — Materials for Energy
 
-*Part IX · Processing and Manufacturing*
+*Part VIII · Advanced and Emerging Materials*
 
-A jet-engine fuel nozzle tip used to be brazed together from about twenty separately machined parts. Printed by laser powder-bed fusion in a cobalt–chromium alloy, it became one part with internal cooling passages that could not have been drilled, a quarter lighter and several times more durable, and it went into service in tens of thousands of engines. In the same years, a titanium hip cup printed with a porous outer lattice let bone grow into it; a rocket maker printed combustion chambers in a copper alloy with hundreds of internal coolant channels; and a dental lab replaced hand-cast crowns with printed ones. There were also failures: printed titanium brackets that failed in fatigue at a fraction of the wrought value because of unfused powder pockets a tenth of a millimetre across; aluminium alloys that cracked like poorly welded seams; and parts whose properties changed when the same file was printed on another machine. **Additive manufacturing (AM)** — building a part layer by layer directly from a digital model — is at once a new freedom of shape and a new metallurgy. Every millimetre of a printed metal part is a weld track, solidified at rates closer to a weld or a splat than to a casting.
+A city transit authority orders three hundred electric buses and must choose between two battery chemistries. Cells with a nickel-rich layered-oxide cathode store about a quarter more energy per kilogram. Cells with an iron-phosphate cathode are heavier but cheaper, contain no cobalt or nickel, survive two to three times as many cycles and are far less prone to thermal runaway in a depot full of parked vehicles. The authority picks iron phosphate. In the same month, a pipeline operator learns that fatigue cracks in the steel of a gas line it hoped to convert would grow ten to a hundred times faster in hydrogen, and an electrolyser maker discovers that the world mines less iridium in a year than its order book needs. Each was a materials decision, and in none did the best laboratory figure of merit win outright. Energy materials must be deployed at the scale of the whole energy system, last for decades and be cheap per unit of energy delivered over their life; this chapter surveys them with those constraints in view.
 
-> **What happens to a material when it is built from millions of tiny melt pools, sintered layers or cured slices?**
-> **Which process conditions avoid porosity, cracking and distortion, and how does one prove that a printed part is as good as a forged one?**
+> **Which structural features make a material a good light absorber, battery electrode, ion conductor, catalyst, thermoelectric or capacitor electrode?**
+> **Why do the materials with the best figures of merit so often lose to cheaper, more durable or more abundant ones?**
 
 | Concept | Engineering destination |
 |---|---|
-| Process families (PBF, DED, binder jetting, material extrusion, vat photopolymerization) | Choice of machine and route for a part, material and batch size |
-| Energy density, melt-pool modes, process windows | Parameter development, avoiding lack of fusion and keyhole porosity |
-| Rapid solidification, $G$ and $R$, columnar growth | Fine strong microstructures, texture and anisotropy of printed alloys |
-| Porosity, residual stress, cracking | Fatigue life of printed brackets and implants, distortion, build failures |
-| HIP, heat treatment, machining | Turning as-built material into certifiable material |
-| Polymer and ceramic AM | Prototypes, jigs, dental aligners, surgical guides, ceramic cores |
-| Design for AM, lattices, topology optimization | Lightweight brackets, heat exchangers, porous implants, consolidated assemblies |
-| Qualification and certification | Flight hardware, medical devices, pressure equipment |
+| Absorber band gap, absorption coefficient, defect tolerance | Choice of photovoltaic technology; module efficiency and lifetime |
+| Intercalation hosts, specific capacity, volume change | Cell chemistry for vehicles, grid storage, consumer devices, aircraft |
+| Liquid, polymer and ceramic electrolytes | Solid-state batteries, safety of cells and packs |
+| Proton and oxide-ion conductors, catalysts, interconnects | PEM and solid-oxide fuel cells and electrolysers |
+| Hydride thermodynamics, embrittlement of steels | Hydrogen tanks, pipelines, fittings and refuelling stations |
+| Seebeck coefficient, figure of merit $ZT$ | Waste-heat recovery, Peltier coolers, radioisotope generators |
+| Double-layer and pseudocapacitive storage | Regenerative braking, grid frequency support, crane and lift buffers |
+| Fuel and cladding requirements | Fission power (developed in Chapter 41) |
+| Material intensity, critical raw materials | Supply risk and the deployable scale of each technology |
 
-**Roadmap.** What AM is (40.1) → the process families (40.2) → melt-pool physics and solidification (40.3) → microstructure and defects (40.4) → post-processing (40.5) → polymer and ceramic AM (40.6) → design for AM (40.7) → qualification and certification (40.8).
+**Roadmap.** Converting light (40.1) → storing charge in electrode hosts (40.2) and carrying ions through electrolytes (40.3) → converting fuel and making hydrogen (40.4) → storing hydrogen and resisting it (40.5) → converting heat (40.6) → storing charge at surfaces (40.7) → nuclear fuels in brief (40.8) → degradation, critical materials and scale (40.9).
 
-> **Boundary.** Heat flow and solidification are developed in Chapters 9 and 39 and used here; powder production and sintering in Chapters 38 and 17; photopolymer chemistry in Chapter 19. Laser optics, machine design and slicing software belong to manufacturing engineering. Process simulation is introduced in Chapter 46.
-
----
-
-## 40.1 What additive manufacturing is
-
-Subtractive manufacturing removes material from a block; formative manufacturing (casting, forging, moulding) shapes it in a die or mould. **Additive manufacturing** builds a part by joining material, usually layer upon layer, from a 3D model sliced into layers 0.02–1 mm thick. The international terminology standard ISO/ASTM 52900 groups AM processes into seven families: **powder bed fusion**, **directed energy deposition**, **binder jetting**, **material extrusion**, **vat photopolymerization**, **material jetting** and **sheet lamination**.
-
-AM's value lies in three things that other routes do poorly:
-
-1. **Geometric freedom.** Internal channels, lattices, undercuts and organic shapes cost nothing extra; complexity is "free" while volume and build height are not.
-2. **No tooling.** The economics favour low volumes, customization (implants, dental restorations, hearing-aid shells) and fast iteration.
-3. **Part consolidation.** Assemblies of many brazed or bolted pieces become one part, eliminating joints and their failure modes.
-
-Its costs are equally clear: slow build rates (tens of cm$^3$/h per laser for metals), expensive feedstock, surface roughness, anisotropic properties and process-sensitive defects. AM therefore complements casting, forging and machining rather than replacing them, and its engineering success depends on understanding the materials science of this chapter.
+> **Boundary.** Electrode potentials, the Nernst equation, Faraday's laws and reaction kinetics are electrochemistry fundamentals from the Advanced Chemistry book; they are used here without derivation (Chapter 42 applies them to corrosion). Band structure and carrier transport are in Chapters 31 and 32, light absorption in Chapter 36, ionic conduction in Chapter 25. Sizing of packs, stacks, arrays and power electronics is systems engineering, outside this book. Chapter 35 treats solar-cell absorbers at greater electronic depth.
 
 ---
 
-## 40.2 Process families
+## 40.1 Photovoltaic absorbers
 
-### Powder-bed fusion
+### What a good absorber must do
 
-In **powder-bed fusion (PBF)** a thin layer of powder is spread over a build plate by a recoater blade or roller, a heat source melts (or, for polymers, sinters) the cross-section of the part, the plate drops by one layer thickness, and the cycle repeats. Unmelted powder supports the part and is recovered and sieved for reuse.
+The thermodynamic limit for a single-junction solar cell under the unconcentrated solar spectrum is the detailed-balance (Shockley–Queisser) efficiency, about 33 % at a band gap near 1.34 eV (Chapters 35 and 36). The maximum is flat: any gap between roughly 1.1 and 1.6 eV allows more than 30 %. So the band gap narrows the search but does not decide it. A practical absorber must in addition:
 
-- **Laser powder-bed fusion (PBF-LB, also called SLM or DMLS)** scans one or more 200–1000 W fibre lasers, focused to 50–100 µm, at 0.5–2 m/s over layers 20–60 µm thick, under argon or nitrogen. It gives the finest features and best surface of the metal processes and dominates metal AM for Ti–6Al–4V, Inconel 718 and 625, 316L and 17-4PH stainless steels, AlSi10Mg, CoCr and copper alloys. The part is welded to the build plate and needs supports under overhangs, both to anchor it against distortion and to conduct heat away.
-- **Electron-beam powder-bed fusion (PBF-EB)** scans a beam of several kilowatts in vacuum, deflected electromagnetically at speeds up to several km/s, over 50–100 µm layers. Each layer is first preheated by a defocused beam, lightly sintering the powder (which stops it being blown away by charge build-up) and keeping the whole bed hot — 650–750 °C for Ti–6Al–4V, over 1000 °C for TiAl. Residual stress is therefore low and crack-prone alloys such as γ-TiAl turbine blades and some nickel superalloys can be built, at the cost of rougher surfaces and coarser features.
-- **Polymer PBF (laser sintering)** sinters polyamide 12, PA11 or TPU powder held just below its melting point; the surrounding powder supports the part, so no supports are needed (Section 40.6).
+1. **Absorb strongly** so that it can be thin. Direct-gap semiconductors reach absorption coefficients $\alpha$ of $10^4$–$10^5$ cm$^{-1}$ just above the gap; indirect-gap silicon manages $10^2$–$10^3$ cm$^{-1}$ in the near infrared, because a phonon must take part in each absorption event.
+2. **Let carriers reach the contacts before they recombine.** The minority-carrier diffusion length $L=\sqrt{D\tau}$ must exceed the absorber thickness. The lifetime $\tau$ is set by recombination through deep levels of point defects, dislocations and grain boundaries (Chapter 5), so this is a statement about defect chemistry.
+3. **Be either nearly perfect or defect-tolerant.** Silicon and GaAs succeed because they can be grown with vanishingly few deep-level defects; CdTe, CIGS and the halide perovskites succeed because their native defects and grain boundaries happen to be electrically benign or can be made so.
+4. **Survive** 25–30 years of ultraviolet light, module temperatures up to about 85 °C, humidity and thermal cycling, and be made cheaply from available elements.
 
-### Directed energy deposition
+**Worked example — how thick must the absorber be?** By the Beer–Lambert law the fraction of light absorbed in one pass through a thickness $t$ is $1-e^{-\alpha t}$. Absorbing 90 % needs $e^{-\alpha t}=0.1$, so $t=\ln 10/\alpha=2.303/\alpha$.
 
-In **directed energy deposition (DED)** powder or wire is fed into a melt pool created by a laser, electron beam or arc that moves with the feed nozzle, like automated welding. Layers are 0.25–3 mm thick and deposition rates range from about 0.1 kg/h for fine laser-powder DED to several kg/h for **wire-arc additive manufacturing (WAAM)**, which uses a GMAW or plasma torch on a robot. DED builds large near-net shapes (titanium aircraft frames, steel ship propellers, large valve bodies), adds features to existing parts and **repairs** worn turbine blades, moulds and shafts. Resolution is coarse, so DED parts are machined, and the large melt pools give coarser microstructures than PBF.
+- Crystalline silicon at 900 nm, $\alpha\approx306$ cm$^{-1}$: $t=2.303/306=7.5\times10^{-3}$ cm, or 75 µm.
+- CdTe at 800 nm, $\alpha\approx1\times10^4$ cm$^{-1}$: $t=2.3\times10^{-4}$ cm, or 2.3 µm.
+- A lead halide perovskite at 600 nm, $\alpha\approx5\times10^4$ cm$^{-1}$: $t=4.6\times10^{-5}$ cm, or 0.46 µm.
 
-### Binder jetting
+Silicon needs some thirty times the thickness of CdTe and about 160 times that of the perovskite. Surface texturing and rear reflectors lengthen the light path (ideally by up to $4n^2\approx50$ for a randomizing surface), which is why commercial wafers are 130–160 µm thick rather than several hundred. The thin-film absorbers need only micrometres, so their carriers have to travel only micrometres, and polycrystalline films deposited cheaply on glass or foil are good enough (Figure 40.1).
 
-**Binder jetting** spreads powder and prints a liquid binder onto each layer with inkjet heads, like a paper printer. No melting occurs during the build, so there is no residual stress, no supports and very high throughput; the whole bed can be filled with nested parts. The printed "green" part is cured, removed from the powder, debound and **sintered** (Chapter 38), shrinking 15–20 % linearly — for a green density of 55 % sintered to 97 %, the linear shrinkage is $1-(0.55/0.97)^{1/3}=17$ % — or **infiltrated** with bronze. Stainless steels, tool steels, tungsten carbide, sand moulds and cores for casting, and ceramics are printed this way. Dimensional control of sintering shrinkage and slumping is its main difficulty.
+> **Status of the principle: Beer–Lambert absorption**
+> *Approximate.* Exact for a homogeneous, non-scattering medium in a single pass; light trapping, thin-film interference and photon recycling modify it in real cells.
 
-### Material extrusion
+<!-- FIGURE 40.1 | figures/ch40/fig-40-1-pv-absorption-coefficients.png | plot | Direct-gap thin-film absorbers absorb sunlight within a micrometre or two, whereas indirect-gap silicon needs about a hundred. | Content: log y-axis absorption coefficient 10^1-10^6 cm^-1 vs photon energy 1.0-3.0 eV (top axis wavelength 1240-410 nm). Curves: c-Si (slow rise from 1.12 eV, ~3x10^2 at 1.38 eV/900 nm, ~10^3 at 1.5 eV, ~10^4 near 2.5 eV), GaAs (sharp edge at 1.42 eV to ~10^4), CdTe (edge 1.45-1.5 eV, ~10^4 at 1.55 eV/800 nm, ~5x10^4 by 2 eV), CIGS (edge ~1.15 eV), FAPbI3-type perovskite (edge ~1.55 eV, ~5x10^4 at 2.07 eV/600 nm). Right y-axis: 90 % absorption depth 2.303/alpha from 230 um to 0.046 um. Faint AM1.5G spectrum shape in background. -->
 
-**Material extrusion (MEX)**, best known as fused filament fabrication, pushes a thermoplastic filament through a heated nozzle of 0.2–1 mm and deposits beads layer by layer. It is the cheapest and most widespread AM process — from desktop printers to large-format machines that print car moulds and boat hulls — and also deposits metal- or ceramic-filled filaments that are then debound and sintered, as well as concrete (Section 40.6).
+![Figure 40.1 — Direct-gap thin-film absorbers absorb sunlight within a micrometre or two, whereas indirect-gap silicon needs about a hundred](../figures/ch40/fig-40-1-pv-absorption-coefficients.png)
 
-### Vat photopolymerization
+*Figure 40.1 — Direct-gap thin-film absorbers absorb sunlight within a micrometre or two, whereas indirect-gap silicon needs about a hundred.*
 
-**Vat photopolymerization (VPP)** cures a liquid photopolymer resin layer by layer with ultraviolet light: a scanned laser (**stereolithography, SLA**), a projected image (**digital light processing, DLP**) or continuous variants that cure through an oxygen-permeable window. It gives the finest resolution (25–100 µm) and smoothest surfaces of common AM processes and is used for dental models and aligner moulds, hearing-aid shells, jewellery casting patterns, microfluidics and, with ceramic-filled resins, ceramic parts.
+### Crystalline silicon
 
-### Material jetting and sheet lamination
+About 95 % of the photovoltaic capacity installed each year is crystalline silicon: its 1.12 eV gap is near the optimum, the element is abundant, and microelectronics has made it the purest crystal produced at scale. Minority-carrier lifetimes above 1 ms in n-type wafers give millimetre diffusion lengths, more than compensating for weak absorption. The frontier is now at **surfaces and contacts**, where passivating layers (SiO$_2$ tunnel oxide plus doped polysilicon in TOPCon cells, amorphous silicon in heterojunction cells) suppress recombination; records exceed 27 % against a practical limit of about 29.4 % set by Auger recombination. Bulk degradation is point-defect chemistry: boron–oxygen complexes cause light-induced degradation in p-type wafers, one reason for the move to n-type.
 
-**Material jetting** deposits droplets of photopolymer (or wax, or metal nanoparticle inks) from inkjet heads and cures them, allowing multi-material and full-colour parts. **Sheet lamination** bonds stacked sheets — paper, polymer, or metal foils joined by ultrasonic welding (ultrasonic additive manufacturing) — and machines each layer's contour.
+### CdTe and CIGS
 
-| Process family | Feedstock | Energy / bonding | Layer thickness | Typical resolution | Typical materials | Typical applications |
-|---|---|---|---|---|---|---|
-| PBF-LB (metal) | Powder 15–45 µm | Laser melting | 20–60 µm | 0.1–0.2 mm | Ti–6Al–4V, IN718, 316L, AlSi10Mg, CoCr | Brackets, fuel nozzles, implants, heat exchangers |
-| PBF-EB (metal) | Powder 45–105 µm | Electron-beam melting, hot bed | 50–100 µm | 0.3–0.5 mm | Ti–6Al–4V, γ-TiAl, CoCr | Implants, TiAl blades |
-| DED (laser, arc) | Powder or wire | Laser, EB or arc melting | 0.25–3 mm | 0.5–5 mm | Ti alloys, steels, Ni alloys | Large preforms, repair, cladding |
-| Binder jetting | Powder 5–30 µm | Binder, then sinter | 30–100 µm | 0.1–0.3 mm | Stainless, tool steel, WC–Co, sand, ceramics | Volume metal parts, casting moulds |
-| Material extrusion | Filament, pellets, paste | Melt and fuse | 0.1–1 mm | 0.2–1 mm | PLA, ABS, PC, PEEK, composites, concrete | Prototypes, jigs, tooling, buildings |
-| Vat photopolymerization | Liquid resin | UV curing | 25–100 µm | 25–100 µm | Acrylates, epoxies, ceramic slurries | Dental, hearing aids, microfluidics |
-| Polymer PBF | Powder 50–80 µm | Laser sintering | 80–120 µm | 0.3–0.5 mm | PA12, PA11, TPU | Functional plastic parts, ducts |
+**Cadmium telluride** (direct gap 1.45–1.5 eV), deposited a few micrometres thick onto glass at 500–600 °C, is the most successful thin film. Its grain boundaries, normally fatal in a polycrystalline semiconductor, are made benign by a CdCl$_2$ treatment near 400 °C. Modules reach 19–20 %; the liabilities are cadmium toxicity, handled by encapsulation and take-back recycling, and tellurium supply (Section 40.9).
 
-*Typical ranges.*
+**Cu(In,Ga)Se$_2$ (CIGS)** is a chalcopyrite whose gap rises from 1.0 to 1.7 eV with Ga/(In+Ga); grading it through the film builds in a field that drives electrons to the junction, and alkali atoms passivate its grain boundaries. Deposited on steel or polyimide foil, it gives flexible modules for façades and vehicles, at the cost of multi-element process control and indium and gallium supply.
 
-<!-- FIGURE 40.1 | figures/ch40/fig-40-1-am-process-families.png | schematic | Five principal additive manufacturing process families shown as simplified machine cross-sections. | Content: five panels side by side. (a) PBF-LB: build plate on piston, powder bed, recoater blade moving across, powder supply piston, laser beam from galvo scanner focused on bed, melted tracks, part with support structures, argon flow arrow. (b) DED: nozzle with coaxial powder streams (or wire) feeding a melt pool on a substrate, laser/arc from above, several tall deposited layers, robot arm hint. (c) Binder jetting: inkjet printhead depositing binder droplets on a powder layer, recoater; inset arrow to 'sinter furnace' with part shrinking ~17 %. (d) Material extrusion: heated nozzle depositing a thermoplastic bead from a filament, layers of rounded beads with voids between them. (e) Vat photopolymerization (bottom-up DLP): resin vat with transparent window, UV projector below, build platform lifting the part upward. Labels: typical layer thickness under each (30 µm, 1 mm, 50 µm, 0.2 mm, 50 µm). -->
+### Halide perovskites
 
-Figure 40.1 sketches the five main families. The rest of the chapter concentrates on metal PBF and DED, where the materials science is most demanding, and returns to polymers and ceramics in Section 40.6.
+Metal halide perovskites ABX$_3$ (A = methylammonium, formamidinium or Cs; B = Pb or Sn; X = I, Br, Cl) went from first use as absorbers in 2009 to certified single-junction efficiencies near 27 % in about fifteen years. Three structural features explain the speed:
 
----
+- **A direct, tunable gap**, from about 1.5 eV (FAPbI$_3$) to 2.3 eV (pure bromide), adjustable by halide mixing, which suits them for the top cell of a tandem.
+- **Strong absorption**: half a micrometre absorbs most above-gap light, as the worked example showed.
+- **Defect tolerance**: the dominant native defects, vacancies, form shallow rather than deep levels because the band edges derive from antibonding orbitals. Films spin-coated or slot-die coated from solution and annealed near 100 °C have diffusion lengths above 1 µm.
 
-## 40.3 Melt-pool physics and solidification
+The soft, ionic lattice that makes them easy to process is also their weakness. Halide vacancies migrate under light and field, causing hysteresis, halide segregation and electrode corrosion; moisture and heat decompose them; and each square metre contains a few grams of soluble lead. Caesium–formamidinium compositions and barrier encapsulation have improved stability greatly, though not yet to silicon's 25-year standard. The most promising route is the **perovskite-on-silicon tandem**, which has exceeded 34 %, beyond any single-junction limit.
 
-### Energy input and absorption
+### III–V multijunctions and the space market
 
-A laser track in PBF-LB is a miniature keyhole or conduction weld, a fraction of a millimetre wide, made in a few milliseconds. Only part of the beam power is absorbed: the **absorptivity** $\eta$ of a flat metal surface to near-infrared light is only 0.05–0.4, but a powder bed traps light by multiple reflections and absorbs more (often 0.4–0.7), and a keyhole absorbs most of it. Highly reflective, highly conductive metals — copper, silver, gold, and to a lesser extent aluminium — are the hardest to print for this reason.
+Epitaxial GaAs reaches about 29 % as a single junction, closest of any material to its limit. Stacking junctions (GaInP 1.9 eV / GaAs 1.42 eV / Ge 0.67 eV, or newer four- to six-junction designs) gives each part of the spectrum a matching gap and cuts thermalization loss, to about 39 % at one sun and 47 % under concentration. Single-crystal substrates and slow epitaxy (Chapter 49) make them 100–1000 times costlier per unit area than silicon, so they are used where watts per kilogram and radiation hardness justify any cost: satellites and high-altitude aircraft (Chapter 41).
 
-The process parameters are commonly combined into a **volumetric energy density**
+**Table 40.1 — Photovoltaic absorbers (typical values; records as of the mid-2020s, rounded).**
 
-$$
-E_v=\frac{P}{v\,h\,t}
-$$
-
-for laser power $P$, scan speed $v$, hatch spacing $h$ (distance between adjacent tracks) and layer thickness $t$. Typical PBF-LB values are 50–70 J/mm$^3$ for Ti–6Al–4V and IN718, 40–60 J/mm$^3$ for AlSi10Mg and 60–100 J/mm$^3$ for 316L. For example, Ti–6Al–4V at 280 W, 1200 mm/s, 0.14 mm hatch and 30 µm layers gives $280/(1200\times0.14\times0.03)=56$ J/mm$^3$. The same numbers give the theoretical build rate per laser, $vht=5.0$ mm$^3$/s or about 18 cm$^3$/h, before recoating and scan-jump time are subtracted — which is why production machines carry four to twelve lasers.
-
-> **Status of the principle: volumetric energy density as a process variable**
-> *Empirical.* $E_v$ correlates density with parameters within one machine, alloy and parameter neighbourhood, but it is not a physical invariant: two parameter sets of equal $E_v$ can give different melt-pool shapes and defects, because $P$ and $v$ act differently on melt-pool depth. Normalized enthalpy and melt-pool-geometry criteria are more transferable.
-
-### Melt-pool modes
-
-As in welding (Chapter 39), the melt pool operates in one of two modes.
-
-- **Conduction mode**: the surface melts but does not vaporize significantly; the pool is shallow and roughly semicircular in cross-section, and heat flows outward from the surface.
-- **Keyhole mode**: at high power and low speed, the surface temperature exceeds the boiling point, recoil pressure from evaporation depresses the surface into a deep, narrow cavity, and absorption rises sharply. A stable keyhole gives deep penetration; an unstable one collapses intermittently and traps vapour bubbles, leaving round **keyhole pores** at the bottom of the track.
-
-Inside the pool, the surface tension of most liquid metals decreases with temperature, so surface tension is highest at the cool edges and pulls liquid outward from the hot centre: the **Marangoni flow** that widens pools. Surface-active elements such as oxygen and sulfur can reverse the sign of $d\gamma/dT$ and deepen the pool. Fluid velocities reach around 1 m/s, so convection, not conduction alone, shapes the pool and mixes the melt.
-
-At the other extreme, too little energy or too fast a scan produces either **lack of fusion** between tracks and layers or, at high speed, **balling**: the long, thin liquid track breaks up into droplets by the Plateau–Rayleigh instability, because a liquid cylinder longer than about its circumference is unstable. A process map in the $P$–$v$ plane (Figure 40.2) therefore shows a window of dense parts bounded by lack of fusion (low $P$, high $v$), keyholing (high $P$, low $v$) and balling (high $P$ and high $v$).
-
-<!-- FIGURE 40.2 | figures/ch40/fig-40-2-process-window.png | map | Laser power–scan speed process map for PBF-LB of Ti–6Al–4V with 30 µm layers and 0.14 mm hatch, showing the dense-part window and the defect regimes around it. | Content: x-axis scan speed 200–2500 mm/s; y-axis laser power 50–450 W. Dashed lines of constant energy density E_v = 30, 56 and 120 J/mm³ (straight lines P ∝ v). Regions: 'lack of fusion' at low P / high v (lower right); 'keyhole porosity' at high P / low v (upper left); 'balling / humping' at high P and very high v (upper right); central 'dense (> 99.5 %)' window around the 56 J/mm³ line from ~150 W/600 mm/s to ~370 W/1600 mm/s. Marked point at 280 W, 1200 mm/s labelled 'worked example'. Arrow from that point to 280 W, 1500 mm/s crossing into lack of fusion. Inset sketches of melt-pool cross-sections: shallow conduction, deep keyhole with trapped pore, and irregular lack-of-fusion gap between tracks. -->
-
-### Melt-pool size and the lack-of-fusion criterion
-
-The Rosenthal solution for a moving point source (Chapter 39) gives a useful estimate of melt-pool size in conduction mode. At the high speeds of PBF the melt-pool cross-section approaches a semicircle whose width $w$ follows from maximizing the isotherm radius behind the source:
-
-$$
-w^{2}=\frac{8\,\eta P}{\pi e\,\rho c\,v\,(T_m-T_0)}
-$$
-
-with $\rho c$ the volumetric heat capacity and $e$ the base of natural logarithms; the depth is then about $w/2$. A simple geometric condition for full fusion, due to Tang, Pistorius and Beuth, requires adjacent tracks and layers to overlap: for hatch $h$, layer thickness $t$, pool width $W$ and depth $D$,
-
-$$
-\left(\frac{h}{W}\right)^{2}+\left(\frac{t}{D}\right)^{2}\le1
-$$
-
-If the sum exceeds 1, unmelted pockets remain between tracks.
-
-**Worked example — Is this parameter set in the dense window?** Take Ti–6Al–4V with $\eta=0.5$, $P=280$ W, $v=1.2$ m/s, $\rho c=4430\times670=2.97\times10^{6}$ J/m$^3$K, solidus $T_m=1604$ °C and $T_0=35$ °C, so $T_m-T_0=1569$ K. Then
-
-$$
-w^{2}=\frac{8\times0.5\times280}{\pi\times2.718\times2.97\times10^{6}\times1.2\times1569}=2.35\times10^{-8}\ \mathrm{m^2},\qquad w=153\ \mu\mathrm{m}
-$$
-
-and the depth is about 77 µm, enough to remelt two layers of 30 µm. With $h=140$ µm,
-
-$$
-\left(\frac{140}{153}\right)^{2}+\left(\frac{30}{77}\right)^{2}=0.84+0.15=0.99\le1
-$$
-
-The parameter set just satisfies the overlap condition. Increase the scan speed to 1.5 m/s to build faster and $w$ falls as $v^{-1/2}$, to 137 µm with depth 69 µm; the sum becomes $1.04+0.19=1.24$, and lack-of-fusion porosity appears between tracks. A 25 % gain in speed has crossed the boundary in Figure 40.2. In practice the pool also contains a partial keyhole and Marangoni flow, so Rosenthal underestimates depth, and parameter development confirms windows by building cubes and measuring density; but the scaling — $w\propto\sqrt{\eta P/v}$ — is the right guide.
-
-> **Status of the principle: Rosenthal melt-pool estimate and overlap criterion**
-> *Approximate.* A point source moving over a semi-infinite solid with constant properties, no latent heat and no fluid flow. It predicts trends and order of magnitude in conduction mode; it underestimates depth in keyhole mode and ignores the powder layer, heat accumulation in thin features and the previous tracks.
-
-### Cooling rate, thermal gradient and solidification rate
-
-From the same solution, the cooling rate at the solidus on the track centreline is
-
-$$
-\dot T=\frac{2\pi k\,(T_m-T_0)^2\,v}{\eta P}
-$$
-
-With $k=20$ W/m K for Ti–6Al–4V near its solidus and the parameters above, $\dot T=2\pi\times20\times1569^2\times1.2/140=2.7\times10^{6}$ K/s. The thermal gradient behind the pool is $G=\dot T/v=2.2\times10^{6}$ K/m, or 2.2 K/µm, and the solidification rate on the centreline equals the scan speed, $R\approx v=1.2$ m/s, falling toward zero at the bottom of the pool. Compare a sand casting with $G\sim10^{3}$ K/m and $R\sim10^{-4}$ m/s, or an arc weld with $\dot T\sim10^{2}$–$10^{3}$ K/s. PBF solidifies three to four orders of magnitude faster than conventional welding, and DED and WAAM, with larger pools, lie in between (about 10$^2$–10$^4$ K/s).
-
-The consequences follow from Chapter 9:
-
-- **Fine solidification structures.** Primary dendrite or cell spacing scales roughly as $\lambda_1\propto\dot T^{-1/3}$ to $\dot T^{-1/2}$. In PBF it is 0.3–1 µm: 316L shows a cellular substructure of about 0.5 µm with Cr and Mo segregated to cell walls and a high dislocation density, which gives a yield strength of 450–550 MPa, roughly double that of annealed wrought 316L, with good ductility. AlSi10Mg forms a fine cellular network of eutectic silicon around α-Al cells, giving higher strength than the cast alloy.
-- **Columnar, epitaxial growth.** Each new track remelts the one below and grows epitaxially from it, as in a multipass weld. With high $G/R$ at the pool bottom, grains grow as columns along the build direction across many layers, often with a ⟨100⟩ fibre texture along the build direction. The **columnar-to-equiaxed transition (CET)**, predicted by Hunt's criterion to occur when $G^n/R$ falls below an alloy-dependent constant (with $n\approx3$–$4$), is hard to reach in PBF because $G$ is so high; equiaxed grains need potent inoculants or alloys designed for AM.
-- **Metastable phases.** Ti–6Al–4V cools fast enough to form **α′ martensite** within the columnar prior-β grains: high strength (tensile strength 1100–1300 MPa) but limited ductility (5–10 %). Rapid cooling also extends solid solubility, suppresses equilibrium precipitates in nickel alloys, and can retain austenite in martensitic steels.
-- **Intrinsic heat treatment.** Each layer is reheated many times by the tracks above it, with peaks that diminish with distance. These cycles temper martensite, precipitate phases or (in PBF-EB, with its hot bed) decompose α′ into fine α+β during the build. Properties therefore vary with height and with the time between layers — a feature of AM with no counterpart in casting.
-
-<!-- FIGURE 40.3 | figures/ch40/fig-40-3-g-r-solidification-map.png | map | Solidification map of thermal gradient G versus solidification rate R, locating casting, welding, DED and PBF and the morphology regions. | Content: log–log axes: x-axis R from 10^-6 to 10 m/s; y-axis G from 10^2 to 10^8 K/m. Diagonal lines of constant cooling rate G·R = 1, 10^2, 10^4, 10^6 K/s (finer structure toward upper right); lines of constant G/R separating 'planar' (upper left), 'cellular', 'columnar dendritic' and 'equiaxed dendritic' (lower right) regions for a generic alloy. Process ellipses: sand casting (G 10^2–10^3, R 10^-5–10^-4), directional solidification (G ~10^3–10^4, R ~10^-5), arc welding (G 10^4–10^5, R 10^-3–10^-2), DED/WAAM (G 10^4–10^6, R 10^-3–10^-2), PBF-LB (G 10^5–10^7, R 10^-2–1). Point marked for worked example: G = 2.2×10^6 K/m, R = 1.2 m/s (cooling rate 2.7×10^6 K/s). Arrow along PBF ellipse from pool bottom (low R, high G/R → columnar) to top centreline (high R). -->
-
-Figure 40.3 locates the AM processes among other solidification routes; the high-$G$, high-$R$ corner occupied by PBF explains both its fine structure and its stubbornly columnar grains.
-
----
-
-## 40.4 Microstructure and defects
-
-### Porosity
-
-Three kinds of pore dominate metal AM, each with a characteristic shape and cause (Figure 40.4):
-
-- **Lack-of-fusion (LOF) pores**: irregular, flat, crack-like voids between tracks or layers, often containing unmelted powder particles, caused by insufficient energy or overlap (the criterion above), spatter particles landing on the bed, or recoating defects. They are the most damaging because they are large (50–500 µm), sharp and often oriented parallel to the layers.
-- **Keyhole pores**: spherical voids of 20–100 µm at the bottom of tracks, caused by keyhole collapse at excessive energy density, particularly at the turnaround points of scan vectors where the laser slows.
-- **Gas pores**: small (5–30 µm) spherical pores from argon trapped inside gas-atomized powder particles or from dissolved hydrogen (moisture on aluminium powder). They are relatively benign but cannot be removed by HIP if they contain insoluble argon.
-
-Well-optimized PBF-LB routinely achieves 99.5–99.9 % density; the defect population that remains, and its largest member, decide fatigue.
-
-### Spatter, powder and surface
-
-The laser ejects **spatter** — molten droplets and entrained powder particles — that can land on the bed, become larger than the layer thickness, and cause LOF in the next layer; gas flow across the bed is designed to carry it away. Powder recycled many times picks up oxygen and coarse spatter particles, so powder chemistry and size distribution are monitored lot by lot. **Surface roughness** of as-built PBF-LB metal surfaces is typically Ra 5–20 µm (worse on down-facing surfaces, which sit on loose powder), and PBF-EB and DED surfaces are rougher still. Partly fused particles and notch-like valleys between layers act as surface cracks in fatigue.
-
-### Residual stress, distortion and cracking
-
-Residual stresses arise as in a weld (Chapter 39), with an AM-specific twist known as the **temperature-gradient mechanism**: the newly melted layer is hot and expands against cooler material beneath, yields in compression, and on cooling contracts and is left in tension, while the material below is put in compression. Layer upon layer, this builds tensile stresses near the top surface and the edges, often reaching the yield strength. While the part is welded to its build plate the stresses are balanced; when the part is cut off, it distorts. Stresses can also crack the part or the supports, or lift the part off the plate during the build. Remedies include preheating the plate (200 °C for aluminium, up to 500 °C or more for crack-prone alloys), island or rotating scan strategies that shorten scan vectors and change their direction every layer, adequate supports, and a **stress-relief anneal before removal** from the plate.
-
-**Cracking** in AM follows the welding classification. **Solidification cracking** limits the high-strength aluminium alloys 2024, 6061 and 7075, whose wide freezing range and long columnar grains with continuous interdendritic liquid films make them crack in PBF just as they do in autogenous welds. Two strategies work: alloys designed for AM, such as Al–Mg–Sc–Zr, in which Al$_3$(Sc,Zr) particles formed in the melt nucleate fine equiaxed grains, and **inoculating** conventional alloys with nanoparticles (for example Zr-based or TiB$_2$ additions) that do the same — breaking the columnar structure and allowing crack-free 7075 and 6061. Nickel superalloys with high γ′ fractions (such as IN738LC and CM247LC) suffer solidification and liquation cracking and **strain-age cracking**, which PBF-EB with its hot bed partly avoids. Carbon steels and tool steels with high hardenability suffer cold cracking from martensite, mitigated by plate preheating.
-
-### Anisotropy
-
-Columnar grains along the build direction, crystallographic texture, layer-aligned LOF defects and the "stacking" of melt-pool boundaries make as-built AM metals **anisotropic**. Typically, Ti–6Al–4V tested with the load parallel to the build direction (vertical specimens) has lower elongation and lower fatigue strength than horizontal specimens, because flat LOF defects lie perpendicular to the load. Elastic modulus also varies with texture. Specifications therefore require testing in several build orientations, and HIP and recrystallization treatments reduce, though rarely remove, the anisotropy.
-
-<!-- FIGURE 40.4 | figures/ch40/fig-40-4-am-defects.png | micrograph-style | Characteristic defects in laser powder-bed-fused metal: lack-of-fusion voids, keyhole pores, gas pores, columnar grains, and the residual-stress mechanism. | Content: left: schematic polished cross-section (build direction vertical, 1 mm field) showing stacked melt-pool boundaries as overlapping arcs; an irregular flat lack-of-fusion void ~200 µm wide with an unmelted powder particle between two layers; spherical keyhole pores ~50 µm at melt-pool bottoms; tiny gas pores ~10 µm; columnar prior grains crossing many layers along build direction; rough top surface with partly fused particles (Ra ~10 µm). Right: two-panel cartoon of the temperature-gradient mechanism: (1) heated top layer expanding, compressive yielding; (2) after cooling, top layer in tension (+) and layers beneath in compression (−); below, distortion of a cantilever after cutting from the build plate. -->
-
-### Fatigue: why the largest defect matters
-
-Static strength of well-made AM metal matches or exceeds wrought material, but fatigue does not, unless defects and surfaces are dealt with. Fatigue cracks start at the largest near-surface defect or at the rough as-built surface. Murakami's empirical $\sqrt{\mathrm{area}}$ model relates the fatigue limit to hardness and the square root of the defect's projected area normal to the stress:
-
-$$
-\sigma_w=\frac{C\,(\mathrm{HV}+120)}{\left(\sqrt{\mathrm{area}}\right)^{1/6}}
-$$
-
-with $\sigma_w$ in MPa, HV the Vickers hardness, $\sqrt{\mathrm{area}}$ in µm, and $C=1.43$ for surface defects and 1.56 for internal ones.
-
-> **Status of the principle: Murakami's $\sqrt{\mathrm{area}}$ model**
-> *Empirical.* Fitted to steels with small defects and inclusions; it treats a defect as an equivalent small crack whose threshold for growth depends on its size and the matrix hardness. It is widely used for ranking AM defects in titanium and nickel alloys, but its constants are not universal and it applies to defects small enough to behave as short cracks (roughly below 1000 µm).
-
-**Worked example — How much does a lack-of-fusion pore cost?** For as-built Ti–6Al–4V of about 350 HV, a surface-connected LOF defect with $\sqrt{\mathrm{area}}=100$ µm gives
-
-$$
-\sigma_w=\frac{1.43\times(350+120)}{100^{1/6}}=\frac{672}{2.15}=312\ \mathrm{MPa}
-$$
-
-If HIP closes the internal defects and machining removes the surface layer so that the largest remaining defect is an internal gas pore of $\sqrt{\mathrm{area}}=30$ µm,
-
-$$
-\sigma_w=\frac{1.56\times470}{30^{1/6}}=\frac{733}{1.76}=416\ \mathrm{MPa}
-$$
-
-and for a 10 µm pore, about 500 MPa. These estimates bracket what is observed: fatigue strengths at 10$^7$ cycles of about 200–350 MPa for as-built PBF Ti–6Al–4V with as-built surfaces, against 500–600 MPa for HIPed and machined material — comparable to wrought. A defect only a tenth of a millimetre across is enough to cut the fatigue limit by a third; this is why AM qualification focuses on the size of the largest defect, not on the average density.
-
----
-
-## 40.5 Post-processing
-
-Almost no metal AM part goes into service as built. A typical sequence for a PBF-LB aerospace or medical part is:
-
-1. **Stress relief** on the build plate (for example 650–800 °C for Ti–6Al–4V, 300 °C for AlSi10Mg, 1065 °C for IN718 in some routes) to prevent distortion and cracking on removal.
-2. **Removal** from the plate by wire electrical-discharge machining or band saw, and **support removal**.
-3. **Hot isostatic pressing** to close internal porosity: typically 920 °C, 100 MPa, 2 h for Ti–6Al–4V; around 1160–1200 °C and 100–150 MPa for nickel superalloys. HIP closes LOF and keyhole pores that are not connected to the surface, but not surface-connected ones, and not argon-filled gas pores, which can reappear on subsequent heat treatment. It also coarsens the microstructure: α′ martensite in Ti–6Al–4V decomposes to a lamellar α+β structure, trading strength for ductility.
-4. **Heat treatment** to the required condition: solution and age for IN718 and 17-4PH, which also dissolves the Laves and δ phases that segregation creates; annealing to recrystallize and homogenize the cellular structure of 316L if corrosion or isotropy demands it; T6 for AlSi10Mg (which, unlike the cast alloy, loses strength because the fine as-built silicon network coarsens).
-5. **Machining** of critical surfaces, threads and interfaces, and **surface finishing** — abrasive blasting, chemical or electrochemical polishing, abrasive-flow machining of internal channels — to remove the rough surface layer and its partly fused particles.
-6. **Inspection**: computed tomography for internal defects and geometry, dye penetrant, dimensional checks, and testing of witness coupons built alongside the part.
-
-| Ti–6Al–4V condition | Microstructure | Yield strength (MPa) | Tensile strength (MPa) | Elongation (%) | Fatigue strength at 10⁷ cycles (MPa) |
+| Absorber | Band gap (eV) | Gap type | Typical thickness | Record cell efficiency | Main materials limitation |
 |---|---|---|---|---|---|
-| PBF-LB, as built | α′ martensite in columnar prior β | 1000–1150 | 1100–1300 | 5–10 | 200–350 (as-built surface) |
-| PBF-LB, stress relieved | Tempered α′ / fine α+β | 950–1050 | 1050–1150 | 8–12 | 250–400 (as-built surface) |
-| PBF-LB, HIP + machined | Lamellar α+β | 850–950 | 950–1050 | 12–16 | 500–600 |
-| PBF-EB, as built | Fine α+β (hot bed) | 850–950 | 950–1050 | 12–16 | 250–350 (as-built surface) |
-| DED/WAAM, as deposited | Coarse columnar prior β, basketweave α | 800–950 | 900–1000 | 8–15 | — |
-| Wrought, mill annealed | Equiaxed α+β | 830–900 | 900–1000 | 12–16 | 500–600 |
-
-*Typical values; fatigue strength depends on stress ratio, surface and defect content.*
-
-The table shows the general pattern: as-built PBF material is stronger and less ductile than wrought, HIP and machining bring it to wrought-equivalent behaviour, and fatigue — governed by surface and defects — is the property most sensitive to post-processing. Figure 40.5 shows the same pattern as S–N curves.
-
-<!-- FIGURE 40.5 | figures/ch40/fig-40-5-ti64-fatigue-postprocessing.png | plot | Fatigue S–N curves of Ti–6Al–4V made by PBF-LB in different post-processing conditions compared with wrought material. | Content: x-axis cycles to failure 10^4–10^8 (log); y-axis maximum stress 100–1000 MPa (R = 0.1). Curves (schematic, typical): as-built surface, as built (endurance ~250 MPa at 10^7); stress relieved, as-built surface (~300 MPa); HIP, as-built surface (~350 MPa, little gain because surface dominates); machined, not HIPed (~450 MPa, internal LOF initiation, large scatter band shaded); HIP + machined (~550 MPa); wrought mill-annealed (~550–600 MPa, dashed). Inset fractograph sketches at right: crack initiation at a surface LOF defect with unmelted particles vs at an internal 30 µm pore vs at α-lath boundaries. Annotations of the worked-example Murakami estimates: 312 MPa (100 µm surface defect) and 416 MPa (30 µm internal pore). -->
+| c-Si (monocrystalline) | 1.12 | Indirect | 130–160 µm | ≈27 % | Weak absorption; surface recombination; Ag contacts |
+| CdTe | 1.45–1.5 | Direct | 2–4 µm | ≈23 % | p-doping; Te supply; Cd toxicity |
+| CIGS | 1.0–1.2 (graded) | Direct | 1.5–2.5 µm | ≈23.6 % | Process complexity; In and Ga supply |
+| Halide perovskite | 1.5–1.7 (to 2.3) | Direct | 0.4–0.8 µm | ≈27 % (≈34 % on Si tandem) | Ion migration; moisture and heat stability; Pb |
+| GaAs | 1.42 | Direct | 1–3 µm | ≈29 % | Substrate and growth cost |
+| III–V multijunction | 0.7–1.9 stack | Direct | 5–10 µm total | ≈39 % (1 sun), ≈47 % (concentrated) | Cost; space and concentrator niches |
 
 ---
 
-## 40.6 Polymer and ceramic additive manufacturing
+## 40.2 Battery materials I: intercalation electrodes
 
-### Polymers
+### Storing ions in a host
 
-Polymers were the first AM materials and still account for most printed parts by number.
-
-- **Material extrusion** deposits beads of molten thermoplastic: PLA, ABS, PETG, polycarbonate, nylon and high-temperature PEEK and PEI, often filled with chopped or continuous carbon or glass fibre. The weakness is the **interface between beads and layers**: a new bead must reheat the previous one above its glass transition long enough for chains to diffuse across the interface and entangle. The time for this healing scales with the reptation time (Chapter 21), and if the interface cools too quickly only partial interdiffusion occurs. Strength perpendicular to the layers is therefore typically 30–70 % of that along the beads, and parts are oriented so that the main loads run along the beads. Voids between rounded beads add to the anisotropy.
-- **Polymer PBF** (laser sintering) holds a bed of PA12 or PA11 powder a few degrees below its melting point, inside the **sintering window** between melting on heating and recrystallization on cooling of the semicrystalline polymer; the laser supplies the last increment of energy to melt and coalesce the scanned particles. Because the whole bed stays above the recrystallization temperature during the build, the part does not curl, and because the surrounding powder supports it, no supports are needed — enabling nested batches of functional ducts, housings and orthotics. Parts are 95–97 % dense with near-isotropic properties close to moulded PA12.
-- **Vat photopolymerization** cures acrylate or epoxy resins by UV-initiated radical or cationic polymerization (Chapter 19). Light is absorbed exponentially with depth (Beer–Lambert), and the resin cures where the dose exceeds a critical dose $E_c$. The cured depth follows the **Jacobs working curve**:
+A lithium-ion cell stores energy by moving Li$^+$ ions between two host materials through an electrolyte while electrons travel through the external circuit. On discharge, lithium leaves the negative electrode (conventionally the anode) and enters the positive electrode (the cathode). The best hosts work by **intercalation**: ions slide into vacant sites between layers or along channels of a crystal whose framework stays essentially intact, and an equal number of electrons reduces a transition metal (or carbon) in the host. For a layered oxide cathode,
 
 $$
-C_d=D_p\ln\frac{E}{E_c}
+\mathrm{Li_{1-x}CoO_2}+x\,\mathrm{Li^+}+x\,e^-\ \rightleftharpoons\ \mathrm{LiCoO_2}
 $$
 
-where $E$ is the surface exposure and $D_p$ the depth at which the light falls to $1/e$. Each layer must cure slightly deeper than the layer thickness so that it bonds to the one below.
+The cell voltage equals the difference in lithium chemical potential between the two electrodes divided by the elementary charge; why that difference takes the value it does is electrochemistry. The materials questions are four: how much lithium the host accepts per unit mass (**capacity**), at what potential, how fast ions and electrons move through it (**rate**), and how much the lattice changes when they do (**cycle life**). The same logic applies to sodium-ion, magnesium-ion and other intercalation chemistries.
 
-**Worked example — Choosing the exposure.** A resin has $D_p=0.15$ mm and $E_c=10$ mJ/cm$^2$. For 0.1 mm layers with 50 % overcure, $C_d=0.15$ mm and
+### Specific capacity
+
+If a host of molar mass $M$ (g/mol) reversibly exchanges $n$ electrons and ions per formula unit, Faraday's constant gives its theoretical **specific capacity**
 
 $$
-E=E_c\exp\!\left(\frac{C_d}{D_p}\right)=10\times e^{1.0}=27\ \mathrm{mJ/cm^2}
+Q=\frac{nF}{3.6\,M}\quad(\mathrm{mAh\,g^{-1}})
 $$
 
-A 0.2 mm cure depth needs $10\times e^{1.33}=38$ mJ/cm$^2$: cure depth grows only logarithmically with exposure. A ceramic-filled slurry scatters light strongly and might have $D_p=0.05$ mm; curing 0.075 mm then needs $10\times e^{1.5}=45$ mJ/cm$^2$, and the shallower penetration forces thinner layers. Overexposure enlarges features laterally and over-cures down-facing surfaces, so exposure, layer thickness and resolution are set together.
+where the factor 3.6 converts coulombs per gram into milliampere-hours per gram.
 
-Polymer parts printed by VPP are post-cured under UV and heat to complete the reaction; incompletely cured resins contain residual monomer, which matters for skin-contact and dental parts.
+> **Status of the principle: theoretical specific capacity**
+> *Derived* from Faraday's law and stoichiometry. Practical capacities are lower because only part of the lithium can be cycled without destroying the host, and because binder, conductive carbon, current collectors and electrolyte add inactive mass.
 
-### Ceramics
+**Worked example — capacities of common electrodes.** With $F=96\,485$ C/mol:
 
-Ceramics cannot be melted layer by layer without cracking, so most ceramic AM is **indirect**: shape a powder–binder green body, then debind and sinter it (Chapters 17 and 38).
+- Graphite to LiC$_6$, one Li per six carbons, $M=6\times12.011=72.07$ g/mol: $Q=96\,485/(3.6\times72.07)=372$ mAh/g.
+- LiCoO$_2$, $M=97.87$: $Q=274$ mAh/g theoretical. Only about 0.5–0.65 Li can be removed before the layered structure transforms and loses oxygen, so practical values are 140–185 mAh/g.
+- LiFePO$_4$, $M=157.76$: $Q=170$ mAh/g; practical 155–165 mAh/g, since nearly all the lithium can be cycled.
+- LiNi$_{0.8}$Mn$_{0.1}$Co$_{0.1}$O$_2$ (NMC811), $M=97.28$: $Q=276$ mAh/g theoretical, about 200 mAh/g practical.
+- Silicon to Li$_{15}$Si$_4$, 3.75 Li per Si, $M=28.09$: $Q=3.75\times96\,485/(3.6\times28.09)=3578$ mAh/g, almost ten times graphite.
+- Li$_4$Ti$_5$O$_{12}$ to Li$_7$Ti$_5$O$_{12}$, three Li per formula unit, $M=459.1$: $Q=175$ mAh/g.
 
-- **Vat photopolymerization of ceramic slurries** (40–60 vol% alumina, zirconia, silicon nitride or hydroxyapatite in a photocurable resin) gives the best resolution and density, reaching 99 %+ after sintering for alumina and zirconia. Debinding is slow (often days) because the polymer must leave without cracking the part, which limits wall thickness to a few millimetres. Applications include ceramic cores for turbine-blade casting, dental zirconia, and bioceramic bone scaffolds.
-- **Binder jetting** of ceramic powders gives porous parts that are infiltrated or used porous (sand moulds and cores for metal casting are its largest application, eliminating patterns entirely).
-- **Material extrusion of pastes** ("robocasting") prints ceramic lattices and scaffolds, and on a much larger scale, **3D concrete printing** extrudes stiff cementitious mortar to build walls without formwork. Printable concrete must be fluid enough to pump yet develop a yield stress fast enough to support the layers above it — a rheology problem — and its interlayer bond, like FFF polymers, is a weak plane (Chapter 18).
-- **Direct laser melting** of ceramics is limited to special cases (eutectic oxide ceramics, small parts with preheating) because thermal shock cracks them.
+### Anode materials
 
-Sintering shrinkage of 15–25 % linear must be compensated in the model, and like MIM (Chapter 38), uniform green density is the key to dimensional control.
+**Graphite** is the near-universal anode. Lithium enters between the graphene layers in ordered stages up to LiC$_6$ at 0.05–0.25 V versus Li/Li$^+$, with only about 10 % volume expansion. The low potential is also its difficulty: no practical organic electrolyte is stable there, and on the first charge the electrolyte is reduced to a nanometre-scale **solid–electrolyte interphase** (SEI) of lithium carbonate, fluoride and organic salts. A good SEI conducts Li$^+$ but not electrons and so stops further reaction; its formation consumes 5–10 % of the cell's lithium, and its slow growth is the main ageing mechanism of most cells. At high charging rates or low temperature lithium plates as metal on the graphite instead, which usually limits fast charging.
+
+**Silicon** stores lithium by **alloying**, at about 0.4 V, with a volume expansion of about 280 %. Micrometre particles crack on the first cycles (Chapter 14), lose contact and expose fresh surface that grows new SEI. Nanostructuring is the remedy (Chapter 38): particles below about 150 nm do not fracture, and SiO$_x$ or porous Si–C composites buffer the swelling. Commercial anodes blend 5–15 % silicon or SiO$_x$ into graphite.
+
+**Lithium titanate** (spinel Li$_4$Ti$_5$O$_{12}$) changes volume by only about 0.2 % and works at 1.55 V, above the potential where the electrolyte is reduced, so it forms almost no SEI, cannot plate lithium and survives tens of thousands of fast-charge cycles, at the cost of 1.4 V of cell voltage and half of graphite's capacity.
+
+**Lithium metal** (3861 mAh/g) is the limiting anode, but in liquid electrolytes it deposits unevenly as mossy or dendritic lithium; it is the main motivation for solid electrolytes (Section 40.3).
+
+### Cathode materials
+
+**LiCoO$_2$ (LCO)** has the layered α-NaFeO$_2$ structure, with alternating layers of Li and CoO$_2$ octahedra. It has the highest volumetric energy density of the common cathodes and still dominates phones and laptops, but cobalt is costly and its supply concentrated.
+
+**NMC** (LiNi$_x$Mn$_y$Co$_z$O$_2$) keeps the layered structure but replaces most cobalt with nickel, the main redox-active ion, and manganese, which stays as Mn$^{4+}$ and stabilizes the lattice. Raising nickel trades stability for capacity: high-nickel cathodes release lattice oxygen at lower temperature, feeding thermal runaway, and near full charge an abrupt anisotropic lattice contraction cracks polycrystalline particles along their internal grain boundaries. Single-crystal particles, oxide coatings and nickel-rich-core, manganese-rich-shell particles are the materials responses.
+
+**LiFePO$_4$ (LFP)** has the olivine structure, with lithium in one-dimensional channels and oxygen locked in PO$_4$ tetrahedra by strong covalent P–O bonds. That polyanion framework is why LFP does not release oxygen even when abused. Its lower potential (3.45 V) and poor conductivity (overcome by 100–300 nm carbon-coated particles) cost energy, but it is cheap, free of cobalt and nickel and long-lived, which is why it now dominates stationary storage and much of the vehicle market, as in the bus decision that opened this chapter.
+
+**Table 40.2 — Lithium-ion electrode materials (typical values).**
+
+| Material | Structure / mechanism | Average potential vs Li/Li$^+$ (V) | Theoretical capacity (mAh/g) | Practical capacity (mAh/g) | Volume change | Key limitation |
+|---|---|---|---|---|---|---|
+| Graphite | Layered, intercalation | ≈0.1 | 372 | 340–360 | ≈10 % | SEI growth; Li plating at fast charge |
+| Si | Alloying | ≈0.4 | 3578 (Li$_{15}$Si$_4$) | 1000–3000 (in composites) | ≈280 % | Fracture; continual SEI growth |
+| Li$_4$Ti$_5$O$_{12}$ | Spinel, intercalation | 1.55 | 175 | 160–170 | ≈0.2 % | Low cell voltage |
+| Li metal | Plating | 0 | 3861 | — | No host | Dendrites; reactivity |
+| LiCoO$_2$ | Layered | ≈3.9 | 274 | 140–185 | 2–3 % | Co cost; instability at deep delithiation |
+| NMC811 | Layered | ≈3.75 | 276 | 190–210 | ≈5 % (abrupt near top of charge) | Particle cracking; O$_2$ release |
+| LiFePO$_4$ | Olivine, two-phase | 3.45 | 170 | 155–165 | ≈6.5 % | Low conductivity; lower energy |
+| LiMn$_2$O$_4$ | Spinel | ≈4.0 | 148 | 100–120 | ≈7 % | Mn dissolution above ≈50 °C |
+
+<!-- FIGURE 40.2 | figures/ch40/fig-40-2-electrode-potential-capacity-map.png | map | Electrode materials by potential and specific capacity: cell voltage is the vertical gap between cathode and anode, and the electrolyte must survive the whole span. | Content: x-axis specific capacity 0-4000 mAh/g (broken axis: 0-400 linear, then 400-4000), y-axis potential vs Li/Li+ 0-5 V. Points with practical-capacity ellipses: LCO (160, 3.9 V), NMC811 (200, 3.75 V), LFP (160, 3.45 V), LMO (110, 4.0 V), graphite (350, 0.1 V), LTO (165, 1.55 V), Si (3578 theor., 0.4 V), Li metal (3861, 0 V). Label each with volume change (%). Shade the stability window of carbonate electrolytes (~1.0-4.3 V) and mark 'SEI forms' below it. Double arrow for cell voltage between NMC811 and graphite (~3.65 V). -->
+
+![Figure 40.2 — Electrode materials by potential and specific capacity: cell voltage is the vertical gap between cathode and anode, and the electrolyte must survive the whole span](../figures/ch40/fig-40-2-electrode-potential-capacity-map.png)
+
+*Figure 40.2 — Electrode materials by potential and specific capacity: cell voltage is the vertical gap between cathode and anode, and the electrolyte must survive the whole span.*
+
+### Matching the electrodes
+
+Because the same charge passes through both electrodes, the masses needed per unit charge add, and the combined capacity of the pair per gram of total active material is $Q_{pair}=(1/Q_c+1/Q_a)^{-1}$ (Figure 40.2).
+
+**Worked example — what a better anode buys.**
+
+- LFP (160 mAh/g) with graphite (350 mAh/g): $Q_{pair}=(0.00625+0.00286)^{-1}=110$ mAh/g. At about 3.3 V, that is $110\times3.3=363$ Wh per kilogram of active material.
+- NMC811 (200 mAh/g) with graphite: $Q_{pair}=(0.00500+0.00286)^{-1}=127$ mAh/g, or about 465 Wh/kg at 3.65 V.
+- NMC811 with a silicon-rich anode at 2000 mAh/g: $Q_{pair}=(0.00500+0.00050)^{-1}=182$ mAh/g.
+- NMC811 with lithium metal (3861 mAh/g): $Q_{pair}=190$ mAh/g.
+
+A nearly sixfold increase in anode capacity raises the pair by 43 %, and going on to lithium metal adds only another 4–5 %, because the cathode now dominates the active mass. The cathode is the bottleneck of lithium-ion energy density, which is why most research effort goes into cathode nickel content and voltage. (Lithium metal's real advantage is volumetric and in removing the host altogether.) A finished cell reaches roughly half the active-material figure, 160–300 Wh/kg, once electrolyte, separator, current collectors and casing are added.
+
+### Beyond lithium-ion
+
+**Sodium-ion** cells apply intercalation to abundant sodium, with **hard-carbon** anodes (graphite barely accepts sodium) and layered-oxide, phosphate or Prussian-blue cathodes: 20–30 % less energy than LFP, but no lithium, cobalt or nickel, and aluminium instead of copper foil. **Conversion chemistries** (Li–S, metal–air) promise more energy because the host disappears, which is exactly why they suffer the volume changes and poor reversibility that intercalation avoids.
 
 ---
 
-## 40.7 Design for additive manufacturing
+## 40.3 Battery materials II: electrolytes and the solid-state cell
 
-Design for AM exploits geometric freedom while respecting what the processes cannot do.
+### What an electrolyte must do
 
-### Process constraints
+The standard liquid electrolyte, LiPF$_6$ in mixed carbonates, conducts Li$^+$ at about $10^{-2}$ S/cm, but it is flammable, decomposes above about 4.3 V and below about 1 V versus Li/Li$^+$ (it survives only behind passivating interphases, which sacrificial additives such as fluoroethylene carbonate help build), and cannot stop lithium dendrites. A **solid electrolyte** with comparable conductivity would allow a lithium-metal anode and a non-flammable cell. It needs a room-temperature conductivity above about $10^{-3}$ S/cm with negligible electronic leakage, a transference number near 1, stability against lithium and a 4 V cathode (or a self-limiting interphase), mechanical properties that keep contact and resist filament growth, and low processing cost.
 
-- **Overhangs and supports.** In metal PBF, surfaces inclined at less than about 40–45° to the build plate need supports, which consume time and powder and must be removed; down-facing surfaces are rough. Designers orient parts and use self-supporting shapes (teardrop or diamond channels instead of circles).
-- **Minimum features.** Walls of about 0.3–0.5 mm, holes of about 0.5–1 mm and channels that powder can be removed from; trapped powder in closed cavities is a defect.
-- **Thermal mass and distortion.** Large flat areas, abrupt section changes and long scan vectors build residual stress; thin features overheat because heat cannot escape, changing microstructure locally.
-- **Build orientation** sets anisotropy, surface quality on critical faces, support needs and build height (and so time and cost).
+### Ion transport in solids
 
-### Topology optimization and part consolidation
-
-**Topology optimization** distributes material within a design space to minimize compliance or mass for given loads and constraints; the organic, truss-like results are often manufacturable only by AM. Typical aerospace brackets redesigned this way lose 30–60 % of their mass. **Part consolidation** replaces assemblies — the fuel-nozzle example of the opening, heat exchangers with thousands of brazed fins, hydraulic manifolds with drilled cross-holes and plugs — by single parts with internal passages shaped for flow rather than for drilling. Each eliminated joint removes a leak path and a failure mode (Chapter 39), but the consolidated part must be inspectable, and internal surfaces cannot be machined.
-
-### Lattices and architected materials
-
-AM can build **lattices** — periodic or stochastic cellular structures — whose properties follow the scaling laws of cellular solids. For a lattice of relative density $\bar\rho=\rho^*/\rho_s$ made of a solid with modulus $E_s$ and yield strength $\sigma_s$, Gibson–Ashby analysis gives
+Ions move through a crystal by thermally activated hops between sites, via vacancies or interstitials (Chapters 8 and 25). The conductivity follows
 
 $$
-\frac{E^*}{E_s}\approx\bar\rho^{\,2},\qquad\frac{\sigma^*}{\sigma_s}\approx0.3\,\bar\rho^{\,3/2}
+\sigma T=A\exp\left(-\frac{E_a}{k_BT}\right)
 $$
 
-for **bending-dominated** lattices (such as open-cell foams and many strut lattices with low nodal connectivity), and
+> **Status of the principle: Arrhenius ionic conductivity**
+> *Empirical* in practice. The form follows from activated hopping (Chapter 8), but $A$ and $E_a$ are fitted, and many electrolytes show curvature or a change of slope at phase transitions or, in polymers, near the glass transition.
 
-$$
-\frac{E^*}{E_s}\approx\frac{\bar\rho}{3}
-$$
+**Superionic conductors** reach liquid-like conductivity because their structure offers many more equivalent sites than mobile ions, joined by wide bottlenecks, so the barrier falls to 0.2–0.4 eV; large, polarizable anions (S$^{2-}$ more than O$^{2-}$) lower it further, which is why sulfides conduct best.
 
-for **stretch-dominated** lattices (such as the octet truss), whose struts carry axial load.
+### The main solid-electrolyte families
 
-> **Status of the principle: Gibson–Ashby scaling of cellular solids**
-> *Approximate.* Derived from beam theory for idealized cells, with prefactors fitted to experiment. It holds for relative densities below about 0.3; at higher densities nodes and strut thickness dominate. Printed lattices fall below the predictions when strut diameters approach the melt-track width, because of surface roughness, waviness and porosity in the struts.
+**Garnet oxides.** Cubic Li$_7$La$_3$Zr$_2$O$_{12}$ (LLZO, doped with Al, Ga or Ta) is stable against lithium metal. Its problems are a ceramic's (Chapter 17): sintering above 1100 °C while lithium evaporates, stiffness (about 150 GPa) and brittleness that spoil contact with electrodes, and an insulating Li$_2$CO$_3$ skin in moist air. Lithium filaments still penetrate it near 1 mA/cm² along grain boundaries and from surface flaws: a lithium-filled crack is driven by pressure like a hydraulic fracture (Chapter 14), so stiffness alone does not stop dendrites.
 
-**Worked example — A titanium lattice that matches bone.** A femoral stem made of solid Ti–6Al–4V ($E_s=114$ GPa) is about six times stiffer than cortical bone (15–20 GPa); the stiff implant carries load that the bone around it would otherwise carry, and the unloaded bone resorbs (**stress shielding**, Chapter 31). A bending-dominated Ti–6Al–4V lattice at $\bar\rho=0.2$ has
+**Sulfides.** Li$_{10}$GeP$_2$S$_{12}$ (LGPS) matches liquids; the argyrodites Li$_6$PS$_5$X (X = Cl, Br) give 1–5 mS/cm without germanium. Sulfides are soft (20–30 GPa) and densify by cold pressing, giving good particle contact without sintering. But they are reduced by lithium and oxidized by cathodes above about 2.5 V, so cathode particles need coatings, and moisture releases toxic H$_2$S, so cells are made in dry rooms.
 
-$$
-E^*\approx114\times0.2^{2}=4.6\ \mathrm{GPa},\qquad\sigma^*\approx0.3\times950\times0.2^{1.5}=25\ \mathrm{MPa}
-$$
+**NASICON phosphates** such as LATP are air-stable and tolerate high-voltage cathodes, but their Ti$^{4+}$ is reduced by lithium; the sodium analogues, with sodium β″-alumina, serve hot sodium–sulfur grid batteries. **Polymers** such as PEO–LiTFSI are easy to process, but ions move only with polymer segments above the glass transition, so such cells run warm, at 60–80 °C.
 
-between trabecular and cortical bone, and far closer to bone than solid titanium. At $\bar\rho=0.3$ the modulus is 10 GPa and the strength 47 MPa; a stretch-dominated octet lattice at $\bar\rho=0.2$ gives 7.6 GPa. By grading the density through the part, a designer can make an implant that is stiff where it must carry bending and compliant where it meets bone, and whose open pores of 300–700 µm allow bone ingrowth. Figure 40.6 places these lattices against bone on a log–log chart. The same scaling guides lightweight sandwich cores, energy-absorbing crash structures and heat-exchanger lattices.
+**Table 40.3 — Ionic conductors for batteries, fuel cells and electrolysers (typical values; Figure 40.3).**
 
-<!-- FIGURE 40.6 | figures/ch40/fig-40-6-lattice-scaling.png | plot | Relative modulus of printed lattices versus relative density, comparing bending- and stretch-dominated architectures with bone. | Content: log–log axes: x-axis relative density 0.01–1; y-axis modulus E* 0.01–200 GPa for Ti–6Al–4V (E_s = 114 GPa), secondary axis E*/E_s. Lines: bending-dominated E* = E_s ρ̄² (slope 2), stretch-dominated E* = E_s ρ̄/3 (slope 1), meeting near ρ̄ = 1. Points: worked example at ρ̄ = 0.2 (4.6 GPa bending, 7.6 GPa stretch) and ρ̄ = 0.3 (10.3 GPa). Shaded horizontal bands: trabecular bone 0.1–2 GPa, cortical bone 15–20 GPa. Scatter of typical measured PBF lattice data lying slightly below the bending line. Small unit-cell sketches: body-centred cubic strut cell (bending), octet truss (stretch), gyroid sheet (intermediate). -->
+| Electrolyte | Mobile ion | Conductivity (S/cm) | At | $E_a$ (eV) | Main limitation |
+|---|---|---|---|---|---|
+| LiPF$_6$ in carbonates (liquid reference) | Li$^+$ and anions | $10^{-2}$ | 25 °C | ≈0.1–0.2 | Flammable; narrow window; dendrites |
+| PEO–LiTFSI | Li$^+$ | $10^{-5}$ / $10^{-4}$–$10^{-3}$ | 25 / 60–80 °C | ≈0.5–1 | Low room-temperature conductivity |
+| LLZO (doped garnet) | Li$^+$ | $10^{-4}$–$10^{-3}$ | 25 °C | 0.3–0.4 | Brittle; sintering; Li$_2$CO$_3$ |
+| Li$_6$PS$_5$Cl (argyrodite) | Li$^+$ | $1$–$5\times10^{-3}$ | 25 °C | 0.2–0.3 | Narrow window; H$_2$S |
+| Li$_{10}$GeP$_2$S$_{12}$ | Li$^+$ | $1.2\times10^{-2}$ | 25 °C | ≈0.25 | Ge cost; reduced by Li |
+| LATP (NASICON) | Li$^+$ | $10^{-4}$–$10^{-3}$ | 25 °C | 0.3–0.4 | Ti$^{4+}$ reduced by Li |
+| Na-β″-alumina | Na$^+$ | 0.2–0.4 | 300 °C | ≈0.3 | Brittle; hot operation |
+| 8YSZ | O$^{2-}$ | 0.01 / 0.1 | 700 / 1000 °C | 0.8–1.0 | Needs high temperature |
+| Nafion (hydrated) | H$^+$ | ≈0.1 | 80 °C, humidified | ≈0.1–0.2 | Needs water; below 100 °C |
+
+<!-- FIGURE 40.3 | figures/ch40/fig-40-3-ionic-conductivity-arrhenius.png | plot | Arrhenius plot of ionic conductors: sulfides rival liquid electrolytes at room temperature, while oxide-ion conductors need several hundred degrees. | Content: y-axis log10 sigma (S/cm) from -7 to 0; bottom x-axis 1000/T (K^-1) 0.7-3.7; top axis temperature in degC (1000, 700, 500, 300, 100, 25). Lines: liquid LiPF6/EC-DMC (1e-2 at 25 C, shallow), LGPS (1.2e-2 at 25 C), Li6PS5Cl (3e-3), LLZO (5e-4), LATP (3e-4), PEO-LiTFSI (curved, 1e-5 at 25 C to 1e-3 at 80 C), Nafion (0.1 at 80 C, ends at 100 C), 8YSZ (0.1 at 1000 C, 0.01 at 700 C, slope 0.9 eV), GDC (above YSZ at 500-700 C), Na-beta''-alumina (0.2-0.4 at 300 C). Horizontal dashed target line at 1e-3 S/cm. -->
+
+![Figure 40.3 — Arrhenius plot of ionic conductors: sulfides rival liquid electrolytes at room temperature, while oxide-ion conductors need several hundred degrees](../figures/ch40/fig-40-3-ionic-conductivity-arrhenius.png)
+
+*Figure 40.3 — Arrhenius plot of ionic conductors: sulfides rival liquid electrolytes at room temperature, while oxide-ion conductors need several hundred degrees.*
+
+### Interfaces are the real problem
+
+A liquid wets every particle; a solid touches its neighbours only at points. Cycling particles swell and shrink, opening gaps; reactions grow resistive interphases. Stack pressures of several megapascals, nanometre interlayers deposited by atomic-layer deposition (Chapter 49) and composite cathodes are the current remedies, and operando methods (Chapter 54) are how these interfaces are studied.
 
 ---
 
-## 40.8 Qualification and certification
+## 40.4 Fuel-cell and electrolyser materials
 
-A forged aircraft part is trusted because its material comes from a mature specification — a defined alloy, a controlled melting and forging process, and decades of statistical property data. An AM part breaks that model: the material is created at the same moment as the part, by a process with dozens of parameters, on machines whose behaviour can drift, and its properties depend on geometry, orientation and location on the build plate. **Qualification** is the demonstration that a material, process and machine reliably produce parts with the required properties; **certification** is a regulator's or customer's acceptance that a particular part meets requirements for its application.
+A fuel cell is an electrochemical cell fed continuously with fuel at the anode and oxygen at the cathode, separated by an electrolyte that passes ions but not electrons. An electrolyser runs the same reactions backwards to make hydrogen from water and electricity. Every layer of both is a materials problem (Figure 40.4).
 
-### The elements of AM qualification
+### Proton-exchange membrane cells
 
-1. **Feedstock control**: powder chemistry (particularly oxygen, nitrogen and hydrogen), size distribution, morphology, flowability and reuse limits; wire chemistry for DED.
-2. **A frozen process**: machine, software, parameter set, scan strategy, gas flow, plate preheat and post-processing are fixed and documented; any change triggers requalification. Machine qualification checks laser power, beam focus, recoater and gas-flow performance.
-3. **Material property databases**: tensile, fatigue, fracture-toughness and crack-growth data from many builds, machines and powder lots, in several orientations, giving statistically based design allowables (for example values that 99 % or 90 % of the population exceed with 95 % confidence, as for conventional aerospace materials).
-4. **Part qualification**: first-article inspection, CT scanning, destructive sectioning of sample parts, proof testing.
-5. **Production control**: **witness coupons** built with each lot and tested; **in-situ monitoring** of melt-pool emission, layer images and thermal fields, which can detect recoater streaks, spatter and LOF as they occur and is increasingly used to flag parts for extra inspection; and statistical process control.
-6. **Defect-tolerant design**: since the largest defect governs fatigue, designs use damage-tolerance analysis with an assumed initial flaw size set by what inspection can reliably find, and **classify parts by criticality**, from non-structural parts that need little qualification to fracture-critical parts that need the most.
+**Membrane.** Perfluorosulfonic-acid (PFSA) ionomers such as Nafion have a PTFE-like backbone with side chains ending in sulfonic acid groups. When hydrated, the acid groups cluster into nanometre water channels that carry protons; dry, the membrane hardly conducts. Membranes 10–50 µm thick conduct about 0.1 S/cm at 80 °C when humidified, which keeps operation below about 100 °C; swelling and shrinking with humidity cycles fatigues them and opens pinholes.
 
-Standards organizations (ISO/ASTM, SAE's Aerospace Material Specifications, ASME, NASA, and medical-device regulators) have published AM-specific standards covering terminology, feedstock, process control, testing and inspection, and the number grows each year. In medicine, porous printed titanium acetabular cups and spinal cages have been cleared for routine clinical use, with patient-specific implants and surgical guides regulated as custom devices.
+**Catalyst layer.** At 80 °C oxygen reduction is slow and only platinum-group metals catalyse it adequately: Pt or Pt alloy particles 2–5 nm across on carbon, in a porous layer that must also conduct protons (ionomer), electrons (carbon) and gas (pores), a three-phase nanocomposite. Loadings have fallen to 0.1–0.4 mg Pt/cm², a few tenths of a gram per kilowatt. Bipolar plates of graphite composite or coated stainless steel or titanium must resist warm acid without growing an insulating oxide: the passivity of Chapter 42 is here a liability.
 
-### Why qualification is hard, and how it is getting easier
+**Degradation.** Under voltage cycling, platinum nanoparticles dissolve and redeposit on larger ones, Ostwald ripening driven by the Gibbs–Thomson effect (Chapter 10); the carbon support oxidizes during start-up and shut-down; and peroxide radicals attack the membrane.
 
-The fundamental difficulty is that AM properties are path-dependent at fine scale. A change in part geometry changes local heat accumulation, which changes melt-pool size, cooling rate, porosity and microstructure. Two approaches reduce the cost of proving each new part: **process–structure–property models** (melt-pool, solidification and microstructure simulations linked to property models in an ICME framework, Chapter 46) that predict where in a part defects and weak microstructures will occur, and **in-situ monitoring plus closed-loop control**, which aims to certify the part by its own build record rather than by sacrificial testing. Neither yet replaces testing for critical parts, but together they are moving AM from "qualify every part" toward "qualify the process".
+### Solid oxide cells
 
-| Concern | Root cause | Control | Verification |
+Solid oxide fuel cells (SOFCs) use an oxide-ion conductor and run at 600–1000 °C, hot enough that no precious metal is needed and hydrocarbon fuels can be used.
+
+**Electrolyte.** Yttria-stabilized zirconia (8 mol% Y$_2$O$_3$, "8YSZ") stabilizes the cubic fluorite phase, and each pair of Y$^{3+}$ ions substituting for Zr$^{4+}$ creates one oxygen vacancy, written in Kröger–Vink notation (Chapter 5) as
+
+$$
+\mathrm{Y_2O_3}\xrightarrow{\mathrm{ZrO_2}}2\,\mathrm{Y'_{Zr}}+3\,\mathrm{O_O^\times}+\mathrm{V_O^{\bullet\bullet}}
+$$
+
+Oxide ions hop through these vacancies. Gadolinium-doped ceria (GDC) and scandia-stabilized zirconia conduct better at lower temperatures, though ceria becomes partly electronically conducting in reducing gas.
+
+**Electrodes and interconnects.** The anode is a porous Ni–YSZ cermet in which nickel conducts electrons and catalyses fuel oxidation, YSZ conducts oxide ions, and pores admit fuel, so reaction occurs at the triple-phase boundary; the cathode is a perovskite such as (La,Sr)(Co,Fe)O$_3$. Interconnects are ferritic stainless steels with about 22 % Cr, whose expansion (11–12 ppm/K) matches the cell, but whose chromia scale evaporates chromium species that poison the cathode unless coated. Matching the expansion of every layer is the central thermomechanical problem (Chapter 24).
+
+**Worked example — electrolyte thickness and operating temperature.** A cell is useful only if the electrolyte's area-specific resistance $\mathrm{ASR}=t/\sigma$ is below about 0.15 Ω cm². 8YSZ conducts about 0.1 S/cm at 1000 °C with $E_a=0.9$ eV. At 700 °C (973 K) its conductivity is lower by
+
+$$
+\frac{\sigma(1273\ \mathrm K)}{\sigma(973\ \mathrm K)}=\frac{973}{1273}\exp\left[\frac{0.9}{8.617\times10^{-5}}\left(\frac1{973}-\frac1{1273}\right)\right]=0.764\times12.55=9.6
+$$
+
+so $\sigma(700\ ^\circ\mathrm C)\approx0.010$ S/cm.
+
+- An electrolyte-supported cell with $t=150$ µm (0.015 cm): ASR $=0.015/0.1=0.15$ Ω cm² at 1000 °C, acceptable, but $0.015/0.0104=1.4$ Ω cm² at 700 °C, about ten times too high.
+- An anode-supported cell with a 10 µm electrolyte at 700 °C: ASR $=0.001/0.0104=0.096$ Ω cm².
+
+Making the electrolyte fifteen times thinner allows operation 300 °C cooler, which permits stainless-steel interconnects and slows every diffusion-driven degradation process. Modern SOFCs are therefore anode-supported, with a thin dense electrolyte film on a thick porous cermet, and cells for 500–650 °C move to GDC.
+
+<!-- FIGURE 40.4 | figures/ch40/fig-40-4-pemfc-sofc-cross-sections.png | schematic | PEM and solid-oxide cells are layered materials systems: every layer must conduct the right species and match its neighbours chemically and thermally. | Content: two side-by-side cross-sections, not to scale, layer thicknesses labelled. (a) PEMFC at 80 C: bipolar plate with flow channels (graphite or coated steel), gas-diffusion layer carbon paper (~200 um), anode catalyst layer Pt/C + ionomer (5-10 um) with zoom of 3 nm Pt particles on 30 nm carbon, PFSA membrane (15-25 um) with H+ arrows, cathode catalyst layer, GDL, plate; H2 in, O2/air in, water out. (b) Anode-supported SOFC at 700 C: Fe-22Cr interconnect, porous Ni-YSZ support (300-500 um), Ni-YSZ functional layer (~10 um), dense 8YSZ electrolyte (10 um) with O2- arrows, GDC barrier (~2 um), porous LSCF cathode (~30 um), triple-phase-boundary zoom. Thermal expansion per layer: Ni-YSZ ~12.5, YSZ 10.5, LSCF ~15, Fe-22Cr ~11.5 ppm/K. -->
+
+![Figure 40.4 — PEM and solid-oxide cells are layered materials systems: every layer must conduct the right species and match its neighbours chemically and thermally](../figures/ch40/fig-40-4-pemfc-sofc-cross-sections.png)
+
+*Figure 40.4 — PEM and solid-oxide cells are layered materials systems: every layer must conduct the right species and match its neighbours chemically and thermally.*
+
+### Electrolysers
+
+Water electrolysis is a fuel cell in reverse, and the slow step becomes oxygen evolution at the anode, whose catalyst must survive strongly oxidizing potentials.
+
+- **PEM electrolysers** have an acidic membrane, so only **iridium oxide** is both active and stable at the anode. At 1–2 mg Ir/cm², a few hundred kilograms of iridium per gigawatt, against world production of about 7–8 tonnes a year, deployment at hundreds of gigawatts is impossible; tenfold lower loadings and iridium-free catalysts are urgent targets.
+- **Alkaline electrolysers** run in 25–30 wt% KOH, where nickel is passive (Chapter 42), so nickel-based electrodes avoid precious metals entirely, at lower current density.
+- **Solid-oxide electrolysers** reuse SOFC materials at 700–850 °C, where heat supplies part of the energy; the oxygen electrode tends to delaminate.
+
+---
+
+## 40.5 Hydrogen storage and hydrogen embrittlement
+
+### Storing hydrogen
+
+Hydrogen carries more energy per unit mass than any fuel, about 120 MJ/kg (lower heating value), but very little per unit volume: about 40 kg/m³ as a gas at 700 bar and 71 kg/m³ as a liquid at 20 K. Compressed storage is a composites problem. Type IV vessels wind carbon fibre in epoxy (Chapters 22 and 23) over a polyamide or high-density polyethylene liner that blocks permeation and has no metal to embrittle; the fibre carries the pressure and accounts for most of the tank's cost. Liquid storage is a cryogenic-materials problem (Chapter 41).
+
+**Metal hydrides** store hydrogen as atoms in interstitial sites and exceed the volumetric density of liquid hydrogen. Because the entropy of formation is roughly the same for all hydrides (the loss of gaseous H$_2$ entropy), the formation enthalpy decides the temperature of release at 1 bar through the van 't Hoff relation (Advanced Chemistry): near-ambient cycling needs about −30 kJ per mol H$_2$.
+
+**Worked example — mass of hydride to store 5 kg of hydrogen.** The gravimetric capacity is the mass fraction of hydrogen in the hydride.
+
+- MgH$_2$: $2.016/(24.305+2.016)=7.66$ wt%. Storing 5 kg of H$_2$ needs $5/0.0766=65$ kg of MgH$_2$.
+- LaNi$_5$H$_6$: $6.048/(432.4+6.048)=1.38$ wt%. Storing 5 kg needs $5/0.0138=362$ kg of hydride.
+
+LaNi$_5$H$_6$ cycles quickly at a few bar near room temperature, but 362 kg is far too heavy for a car, even though it occupies only about 53 L (at 6.9 g/cm³) against 125 L for the gas at 700 bar. MgH$_2$ is light, but its formation enthalpy of about −75 kJ/mol H$_2$ means it releases hydrogen at 1 bar only near 300 °C, and slowly unless catalysed and nanostructured. This is the central trade-off: **strong metal–hydrogen bonds give light, dense storage that is hard to release; weak bonds release easily but only from heavy transition-metal hosts.** Hydrides therefore find use where weight is welcome or irrelevant: forklift counterweights, submarines, stationary buffers and hydrogen compressors that exploit the steep pressure–temperature dependence.
+
+**Table 40.4 — Hydrogen storage options (approximate material-level values).**
+
+| Medium | Gravimetric H (wt%) | Volumetric H (kg/m³) | Release conditions | Comment |
+|---|---|---|---|---|
+| Compressed gas, 700 bar | 100 (gas); ≈5–6 (system) | ≈40 | Ambient | Composite tanks; compression energy |
+| Liquid H$_2$, 20 K | 100 (liquid); ≈5–7 (system) | 71 | 20 K | Boil-off; liquefaction uses ≈30 % of LHV |
+| LaNi$_5$H$_6$ | 1.4 | ≈95 | ≈2 bar, 20–40 °C | Heavy; rare earth |
+| TiFeH$_2$ | 1.9 | ≈100 | Few bar, ambient | Cheap; needs activation |
+| MgH$_2$ | 7.7 | ≈110 | 1 bar at ≈300 °C | Slow kinetics; high enthalpy |
+| NaAlH$_4$ (Ti-doped) | 5.6 (total) | ≈95 | 100–180 °C | Two-step release; limited reversibility |
+| Ammonia (as carrier) | 17.8 | ≈120 (liquid) | Catalytic cracking, >400 °C | Toxic; established shipping |
+
+### Hydrogen embrittlement
+
+Atomic hydrogen, from dissociating H$_2$ gas or from cathodic reactions in corrosion, plating or cathodic protection, diffuses interstitially into metals and collects at dislocations, grain boundaries and, above all, in the dilated region ahead of a crack tip. There it lowers lattice cohesion and localizes plastic flow, so a ductile metal fails well below its usual strength, often after a delay (mechanisms and tests in Chapter 43). The factors that matter for energy infrastructure:
+
+- **Strength.** Susceptibility rises steeply with yield strength; steels above about 800–1000 MPa, as in fittings, bolts and compressor springs, are at serious risk.
+- **Crystal structure.** Hydrogen diffuses fast in BCC ferrite and very slowly in FCC austenite.
+- **Fatigue.** In pressurized hydrogen, fatigue-crack growth in pipeline steels rises ten- to a hundredfold, which limits conversion of gas pipelines; hydrogen codes cap pipe grade (about X52–X70) and weld hardness.
+- **Hydride formers.** Ti, Zr and Nb precipitate brittle hydrides instead (Chapter 41).
+
+**Worked example — why austenite resists hydrogen.** Take room-temperature lattice diffusion coefficients of hydrogen of $D\approx1\times10^{-8}$ m²/s in pure ferrite and $D\approx1\times10^{-16}$ m²/s in austenite. In one hour ($t=3600$ s) the diffusion length $\sqrt{Dt}$ (Chapter 8) is
+
+$$
+\sqrt{10^{-8}\times3600}=6.0\times10^{-3}\ \mathrm m=6\ \mathrm{mm}\quad\text{(ferrite)},\qquad \sqrt{10^{-16}\times3600}=6\times10^{-7}\ \mathrm m=0.6\ \mu\mathrm m\quad\text{(austenite)}
+$$
+
+Hydrogen reaches a crack tip in ferritic steel within minutes but barely penetrates austenite in a year of service (trapping slows real steels below the pure-lattice value, but the ratio of about $10^4$ in distance remains). Stable austenitic stainless steels, such as 316L with enough nickel that strain does not transform it to martensite, together with aluminium and copper alloys, are therefore the preferred materials for hydrogen valves, tubing and tank bosses.
+
+---
+
+## 40.6 Thermoelectric materials
+
+### Seebeck, Peltier and the figure of merit
+
+When one end of a conductor is hotter than the other, the hot carriers diffuse toward the cold end until an opposing voltage builds up. The open-circuit voltage per kelvin is the **Seebeck coefficient** $S=-\Delta V/\Delta T$, positive for p-type and negative for n-type material. In metals it is a few µV/K, enough for thermocouples but not for power; in optimally doped semiconductors it is 150–250 µV/K. The reverse **Peltier effect** pumps heat $\Pi I$ at a junction carrying current $I$, with $\Pi=ST$. A module connects p- and n-type legs electrically in series and thermally in parallel between a hot and a cold plate, so their voltages add (Figure 40.5).
+
+Three properties compete inside each leg: $S$ generates voltage, the electrical resistivity wastes it as Joule heat, and the thermal conductivity $\kappa$ leaks heat from hot to cold without generating anything. For a leg between $T_h$ and $T_c$ with constant properties and an optimized load, the maximum efficiency is
+
+$$
+\eta_{max}=\frac{T_h-T_c}{T_h}\cdot\frac{\sqrt{1+Z\bar T}-1}{\sqrt{1+Z\bar T}+T_c/T_h},\qquad Z\bar T=\frac{S^2\sigma}{\kappa}\bar T,\quad \kappa=\kappa_e+\kappa_L
+$$
+
+with $\bar T$ the mean temperature. The first factor is the Carnot efficiency; the second, which approaches 1 only as $ZT\to\infty$, depends entirely on the material through the dimensionless **figure of merit** $ZT$. The product $S^2\sigma$ is the **power factor**.
+
+> **Status of the principle: thermoelectric efficiency in terms of $ZT$**
+> *Derived* from the coupled heat and charge transport equations for a single leg with constant properties. With temperature-dependent properties it remains a good estimate when an averaged $ZT$ is used; contact resistance and heat losses lower real module efficiency further.
+
+**Worked example — exhaust heat recovery.** A generator on an industrial furnace flue or a truck exhaust runs between $T_h=800$ K and $T_c=300$ K, so the Carnot efficiency is $500/800=0.625$.
+
+- With $Z\bar T=1$: $\sqrt2=1.414$, and $\eta_{max}=0.625\times0.414/(1.414+0.375)=0.625\times0.232=0.145$, or 14.5 %.
+- With $Z\bar T=2$: $\sqrt3=1.732$, and $\eta_{max}=0.625\times0.732/(1.732+0.375)=0.625\times0.347=0.217$, or 21.7 %.
+
+Doubling $ZT$ raises efficiency by half, and even at $ZT=2$ a thermoelectric reaches only a third of Carnot, whereas a steam or organic Rankine cycle reaches well over half. For the same 800 K source, a material with $ZT=1$ in a 300–500 K window would give only about 8 %. Thermoelectrics win where their other virtues dominate: no moving parts, silence, scalability down to milliwatts and decades of unattended operation.
+
+### Why $ZT$ is hard to raise
+
+The properties are tied together through the carrier concentration $n$. Conductivity $\sigma=ne\mu$ rises with $n$; the Seebeck coefficient falls, roughly as $n^{-2/3}$ in a degenerate semiconductor with one parabolic band (the Pisarenko relation, *Approximate*), because in a metal all carriers sit near the Fermi level and carry nearly the same energy; and $\kappa_e$ rises with $\sigma$ by the Wiedemann–Franz law, $\kappa_e=L\sigma T$ (Chapter 24). The power factor therefore peaks in heavily doped semiconductors at $n\approx10^{19}$–$10^{20}$ cm$^{-3}$. For a p-type Bi$_2$Te$_3$ alloy at 300 K with $S=200$ µV/K, $\sigma=1\times10^5$ S/m and $\kappa=1.5$ W m$^{-1}$ K$^{-1}$, the power factor is $(2\times10^{-4})^2\times10^5=4\times10^{-3}$ W m$^{-1}$ K$^{-2}$ and $ZT=4\times10^{-3}\times300/1.5=0.80$; the electronic part of $\kappa$ is $2.44\times10^{-8}\times10^5\times300=0.73$ W m$^{-1}$ K$^{-1}$, about half. That half cannot be removed without losing conductivity. The lattice half can, and three structural strategies attack it or the band structure:
+
+1. **Band engineering.** Many degenerate band valleys (band convergence, as in PbTe at high temperature) raise the density-of-states effective mass and hence $S$ without lowering mobility much.
+2. **Heavy atoms and soft or anharmonic bonds.** Bi, Pb, Te, Sb and Se give low sound velocities; "rattler" atoms in cage structures (skutterudites, clathrates) and strongly anharmonic bonds (SnSe) scatter phonons.
+3. **Phonon glass, electron crystal.** Phonons that carry heat have mean free paths from nanometres to micrometres, while electrons in doped semiconductors scatter over shorter distances. Point defects from alloying, nanoprecipitates and grain boundaries at all length scales scatter phonons while leaving electrons almost untouched; alloying (SiGe, Bi$_2$Te$_3$–Sb$_2$Te$_3$) and nanostructuring have each roughly halved $\kappa_L$.
+
+<!-- FIGURE 40.5 | figures/ch40/fig-40-5-thermoelectric-tradeoff.png | plot | Seebeck coefficient falls and electrical conductivity rises with carrier concentration, so the power factor and ZT peak in heavily doped semiconductors. | Content: log x-axis carrier concentration 10^17-10^22 cm^-3 with bands labelled insulators / semiconductors / metals. Curves on normalized or separate log axes: S falling from ~500 to ~5 uV/K, sigma rising, S^2 sigma peaking near 10^19-10^20, kappa_e rising above a constant kappa_L, ZT peaking near 10^19.5 at ~1. Inset: module with p and n legs between hot plate (top) and cold plate (bottom), current path and heat-flow arrows. -->
+
+![Figure 40.5 — Seebeck coefficient falls and electrical conductivity rises with carrier concentration, so the power factor and ZT peak in heavily doped semiconductors](../figures/ch40/fig-40-5-thermoelectric-tradeoff.png)
+
+*Figure 40.5 — Seebeck coefficient falls and electrical conductivity rises with carrier concentration, so the power factor and ZT peak in heavily doped semiconductors.*
+
+### Material families
+
+Table 40.5 lists the main families. **Bi$_2$Te$_3$ alloys**, layered compounds of heavy atoms, are in essentially every Peltier cooler, from laser-diode stabilization to laboratory PCR machines, but cleave easily and are weak. **PbTe** powers the radioisotope generators of Mars rovers, and **SiGe**, whose alloy disorder makes it outperform both elements, powered Voyager and Cassini. Half-Heuslers are the robust candidates for vehicle exhausts.
+
+**Table 40.5 — Thermoelectric materials (typical peak values).**
+
+| Material | Type | Peak-$ZT$ temperature (K) | Peak $ZT$ | $\kappa$ (W m$^{-1}$ K$^{-1}$) | Notes |
+|---|---|---|---|---|---|
+| Bi$_2$Te$_3$ alloys | p and n | 300–400 | 0.9–1.2 | 1.2–1.6 | All Peltier coolers; Te supply |
+| PbTe-based | p and n | 600–850 | 1.5–2.2 | 0.8–1.5 | Space generators; Pb toxicity |
+| Si$_{80}$Ge$_{20}$ | n / p | 1100–1200 | ≈1.0 / ≈0.7 | 3–5 | Rugged; Ge cost |
+| Filled CoSb$_3$ | n and p | 700–850 | 1.2–1.7 | 2–3 | Sb sublimation |
+| Half-Heusler | n / p | 900–1000 | 1.0–1.5 | 3–5 | Mechanically strong |
+| SnSe (single crystal) | p | 900–930 | ≈2.6 (one axis) | 0.3–0.5 | Brittle, anisotropic |
+| Mg$_3$(Sb,Bi)$_2$ | n | 300–700 | 0.8–1.5 | ≈1 | Te-free |
+
+Real modules are limited as often by **interfaces** as by $ZT$: contact resistance below about $10^{-6}$ Ω cm², diffusion barriers that keep solder out of the legs, and joints that survive expansion mismatch during thermal cycling.
+
+---
+
+## 40.7 Supercapacitor materials
+
+### The double layer
+
+At an electrode in an electrolyte, ions of opposite sign accumulate within a fraction of a nanometre of the surface, forming the **electric double layer**. To first order it is a parallel-plate capacitor whose gap $d$ is about the radius of a solvated ion:
+
+$$
+\frac CA\approx\frac{\varepsilon_0\varepsilon_r}{d}
+$$
+
+> **Status of the principle: Helmholtz double-layer estimate**
+> *Approximate.* A parallel-plate model that ignores the diffuse layer, the ion-size distribution and confinement in sub-nanometre pores (where capacitance per unit area anomalously rises); it gives the right order of magnitude.
+
+**Worked example — from surface area to stored energy.** With $\varepsilon_r\approx6$ for the oriented solvent in the layer and $d\approx0.5$ nm, $C/A=8.854\times10^{-12}\times6/(0.5\times10^{-9})=0.106$ F/m², about 10 µF/cm², consistent with measured values of 5–20 µF/cm². An activated carbon of 2000 m²/g would therefore give about $2000\times0.106=212$ F/g. Measured values are 100–150 F/g in organic electrolytes, because not all the area is accessible to ions.
+
+A symmetric cell has two electrodes in series, so for equal masses its capacitance per gram of total active material is a quarter of the single-electrode value: 120 F/g per electrode gives 30 F/g for the cell. At 2.7 V, the stability limit of acetonitrile-based electrolytes,
+
+$$
+E=\tfrac12CV^2=\tfrac12\times30\times2.7^2=109\ \mathrm{J/g}=30\ \mathrm{Wh/kg}
+$$
+
+of active material, and 5–8 Wh/kg for a packaged cell: twenty to forty times less than a lithium-ion cell. But charge is stored by ion adsorption, without chemical change or solid-state diffusion, so a supercapacitor delivers 5–10 kW/kg and survives $10^5$–$10^6$ cycles. Because energy scales as $V^2$, the electrolyte's stability window matters as much as the electrode: about 1 V for aqueous, 2.5–2.85 V for organic and 3–4 V for ionic-liquid electrolytes. These properties suit jobs measured in seconds: braking-energy recovery in trams and cranes, wind-turbine pitch systems and aircraft emergency actuators.
+
+### Carbons and pseudocapacitors
+
+**Activated carbons**, made by steam or KOH activation of coconut shell, wood or pitch, dominate because they are cheap and have 1000–2500 m²/g of surface in 0.5–5 nm pores. The engineering variable is **pore size**: pores matched to the desolvated ion use their area best, but a connected network of wider pores is needed for fast transport. Graphene and nanotubes serve mainly as conductive additives (Chapter 38).
+
+**Pseudocapacitive** materials (hydrous RuO$_2$, MnO$_2$, MXenes such as Ti$_3$C$_2$T$_x$) store charge by fast surface or near-surface redox reactions whose response looks capacitive. MnO$_2$ is the cheap case: one electron per Mn over 0.8 V would give about $96\,485/(86.94\times0.8)\approx1400$ F/g, but poor conductivity limits real electrodes to 150–300 F/g. The boundary with batteries is kinetic: current proportional to sweep rate means capacitive storage; current proportional to its square root means solid-state diffusion control, which is battery-like.
+
+---
+
+## 40.8 Nuclear fuels and cladding
+
+Fission releases about 200 MeV per event, so a gram of uranium-235 fully fissioned yields about $200\times10^6\times1.602\times10^{-19}\times6.022\times10^{23}/235\approx8\times10^{10}$ J, some two million times the chemical energy of a gram of oil. Nuclear energy is therefore limited not by fuel energy but by what the surrounding materials survive.
+
+The workhorse fuel is **uranium dioxide**, a fluorite-structured ceramic chosen for its high melting point (about 2850 °C), chemical stability in water and ability to hold fission products in its lattice. Its weakness is low thermal conductivity, about 2.5–3 W m$^{-1}$ K$^{-1}$ at operating temperature, which makes pellet centres run near 1000–1500 °C. **Zirconium alloys** (Zircaloy, Zr–Nb) clad it because zirconium absorbs few thermal neutrons; their oxidation, hydrogen pick-up and violent reaction with steam above about 1200 °C are the reasons for accident-tolerant fuels with chromium-coated cladding, FeCrAl alloys or SiC/SiC composites. Radiation damage, nuclear fuels, cladding, reactor-vessel steels and fusion first-wall materials are developed in Chapter 41.
+
+---
+
+## 40.9 Degradation, critical raw materials and scalability
+
+### Degradation is a materials property
+
+Every technology in this chapter fails through mechanisms rooted in its structure (Table 40.6).
+
+**Table 40.6 — Characteristic degradation mechanisms of energy materials.**
+
+| Technology | Dominant degradation | Structural origin |
+|---|---|---|
+| c-Si PV | Light-induced degradation, LeTID | Point-defect complexes (B–O, H) |
+| Perovskite PV | Ion migration; moisture and heat decomposition | Soft ionic lattice; volatile organic cation |
+| Li-ion graphite anode | SEI growth; Li plating | Electrolyte instability at low potential |
+| High-Ni cathode | Particle cracking; O$_2$ release | Anisotropic lattice change; unstable high-valent Ni |
+| PEM fuel cell / electrolyser | Pt and Ir dissolution and ripening; carbon corrosion | Nanoparticle surface energy; potential cycling |
+| SOFC / SOEC | Ni coarsening; Cr poisoning; delamination | High-temperature diffusion; volatile Cr |
+| Thermoelectric | Sublimation; contact interdiffusion; cracking | Volatile Sb, Te; expansion mismatch |
+| Hydrogen infrastructure | Embrittlement; accelerated fatigue | Interstitial H at crack tips |
+
+Degradation is accelerated by temperature, often with an Arrhenius dependence, which is the basis of accelerated tests used to predict 10–30-year lives from months of data (Chapter 44).
+
+### Critical raw materials
+
+A material can be technically superb and still unusable at scale if its elements are scarce, geographically concentrated, produced only as by-products, or toxic. Energy technologies are uniquely exposed because they must be deployed at the size of the whole energy system; the elements in Table 40.7 appear on most national critical-raw-materials lists.
+
+**Table 40.7 — Critical elements in energy materials (approximate, mid-2020s).**
+
+| Element | Where used | Annual primary production (approx.) | Supply feature |
 |---|---|---|---|
-| Lack of fusion | Low energy, poor overlap, spatter, recoating faults | Parameter window, gas flow, powder quality | CT, density cubes, in-situ layer imaging |
-| Keyhole porosity | Excess energy, scan turnarounds | Parameter window, scan-strategy design | CT, metallography |
-| Residual stress and distortion | Thermal gradients | Plate preheat, scan strategy, supports, stress relief | Dimensional inspection, diffraction |
-| Cracking | Alloy freezing range, hardenability | Alloy design, inoculants, preheat | CT, penetrant, metallography |
-| Anisotropy | Columnar grains, texture, oriented defects | Orientation choice, HIP, heat treatment | Tests in several orientations |
-| Surface-initiated fatigue | Roughness, partly fused particles | Machining, polishing | Surface metrology, fatigue coupons |
-| Powder degradation | Oxygen pick-up, spatter in reused powder | Reuse limits, sieving, lot testing | Chemistry and size analysis |
+| Li | All Li-ion cells | ≈200–250 kt (as Li) | Few producers; refining concentrated |
+| Co | LCO, NMC cathodes | ≈200–250 kt | ≈70 % from one country |
+| Ni | NMC cathodes; alloys | ≈3.5 Mt | Majority from one country |
+| Natural graphite | Anodes | ≈1.5 Mt | >90 % of processing in one country |
+| Nd, Dy | NdFeB magnets in wind turbines and motors (Chapter 29) | Nd ≈40 kt oxide; Dy ≈2 kt | Mining and separation concentrated |
+| Pt | PEM cathodes | ≈180 t | ≈70 % from one country |
+| Ir | PEM electrolyser anodes | ≈7–8 t | By-product of Pt mining |
+| Te | CdTe, Bi$_2$Te$_3$ | ≈500–700 t | By-product of Cu refining |
+| In, Ga | CIGS, III–V, transparent contacts | In ≈1000 t; Ga several hundred t | By-products of Zn and Al refining |
+| Ag | c-Si contacts | ≈25,000 t | PV uses over a tenth |
+
+**Worked example — lithium for a terawatt-hour of batteries.** Take an LFP cell at an average 3.3 V. One kilowatt-hour requires $1000/3.3=303$ Ah of charge, or $303\times3600=1.09\times10^6$ C. Each Li$^+$ carries one elementary charge, so the lithium that must shuttle is
+
+$$
+m_{Li}=\frac{1.09\times10^6}{96\,485}\times6.941=78\ \mathrm g\ \text{per kWh}
+$$
+
+Real cells contain more (SEI losses, incomplete cycling, lithium in the electrolyte salt): about 0.1 kg of lithium per kilowatt-hour. Producing 1 TWh of cells a year therefore needs about $10^9\times0.1=10^8$ kg, or 100 kt, of lithium, around half of mid-2020s world production, and several TWh a year implies a several-fold expansion of mining and refining. Lithium is not geologically scarce, but mines and refineries take 5–15 years to build, so recycling and sodium-ion cells are supply strategies, not only environmental ones.
+
+> **Status of the principle: material-intensity scaling limits**
+> *Approximate.* A first-order bound from production rates and material intensity; supply responds to price and technology changes intensity, but the calculation correctly identifies which materials will constrain growth.
+
+The same arithmetic applied to CdTe gives about 6 g of tellurium per square metre of 2 µm absorber, or about 33 t of tellurium per gigawatt at 19 % efficiency; the world's roughly 600 t of annual tellurium production could then support only about 18 GW of new CdTe modules a year, against several hundred gigawatts of total PV installations (Figure 40.6). Silicon, made from the crust's second most abundant element, faces no such ceiling for its absorber, though its silver contacts, at roughly 10 mg per watt, already consume over a tenth of world silver output.
+
+### Cost and scalability
+
+Three lessons recur throughout this chapter.
+
+1. **Abundant beats optimal.** Silicon beat better absorbers, LFP is overtaking NMC, and coconut-shell carbon beats graphene: at system scale, cost and availability outweigh a 20 % gain in a figure of merit.
+2. **Processing sets cost.** A film coated from solution at 100 °C or a ceramic sintered in air is cheaper than one grown epitaxially in vacuum or made in a dry room (Chapters 46–49).
+3. **Lifetime is part of cost.** The cost per unit of energy stored or generated divides capital cost by lifetime throughput, so a cell with twice the cycle life at the same price halves the cost of stored energy. Degradation science is therefore as central to energy materials as performance.
+
+Recycling closes the loop for valuable elements such as Co, Ni, Li, Pt, Ir, Ag and Te, but only if devices are designed to be separated; lifecycle assessment and the circular economy are the subject of Chapter 59, and the formal trade-off between performance, cost and supply risk is the selection methodology of Chapter 58.
+
+<!-- FIGURE 40.6 | figures/ch40/fig-40-6-material-intensity-supply.png | plot | Material intensity times deployment rate, compared with world production, shows which elements constrain each energy technology. | Content: horizontal bar chart on log x-axis 'fraction of current world primary production needed' from 0.01 to 10 (1 = all current production, vertical red line). Bars: Li for 1 TWh/yr Li-ion (~0.45), Li for 4 TWh/yr (~1.8), Co for 1 TWh/yr all-NMC811 at ~83 g Co/kWh (~0.35), Te for 100 GW/yr CdTe (~5.5), Ir for 100 GW/yr PEM electrolysers at 0.4 g/kW (~5) and at 0.04 g/kW (~0.5), Ag for 500 GW/yr c-Si at 10 mg/W (~0.2), Dy for 100 GW/yr wind with NdFeB at ~10 kg Dy/MW (~0.5). Label each bar with assumed intensity. Note: order-of-magnitude illustration. -->
+
+![Figure 40.6 — Material intensity times deployment rate, compared with world production, shows which elements constrain each energy technology](../figures/ch40/fig-40-6-material-intensity-supply.png)
+
+*Figure 40.6 — Material intensity times deployment rate, compared with world production, shows which elements constrain each energy technology.*
 
 ---
 
@@ -377,17 +506,13 @@ The fundamental difficulty is that AM properties are path-dependent at fine scal
 
 | Open question | Where it is answered |
 |---|---|
-| What sets dendrite spacing, CET and segregation during rapid solidification? | Chapter 9 |
-| How do martensite, precipitation and recrystallization respond to AM thermal cycles and post-build heat treatment? | Chapter 10 |
-| How do defects and surfaces control fatigue and fracture? | Chapter 14 |
-| How are Ti, Ni and Al alloys designed and processed conventionally for comparison? | Chapter 16 |
-| How are ceramic powders sintered, and polymers processed and degraded? | Chapters 17 and 21 |
-| How do printed implants interact with bone, and what is stress shielding? | Chapter 31 |
-| How are AM parts used in high-temperature and aerospace service? | Chapter 33 |
-| How is surface roughness modified by finishing and coating? | Chapters 37 and 41 |
-| How are porosity, texture and residual stress measured (CT, EBSD, synchrotron and neutron methods)? | Chapters 42–43 |
-| How do in-situ X-ray imaging and melt-pool monitoring reveal defect formation? | Chapter 44 |
-| How are melt pools, microstructures and properties simulated and linked in ICME? | Chapter 46 |
-| How is AM chosen against casting, forging and machining on cost and performance, and what is its environmental footprint? | Chapters 48–49 |
+| How do radiation, extreme heat and cryogenic temperatures degrade fuels, cladding, turbine blades and hydrogen tanks? | Chapter 41 |
+| What are the electrochemical thermodynamics and kinetics behind electrode potentials, catalysts and corrosion of cell components? | Chapter 42; Advanced Chemistry |
+| How does hydrogen embrittlement proceed, and how is it tested and prevented? | Chapter 43 |
+| How are lifetimes of cells, modules and stacks predicted, and how are failures analysed? | Chapter 44 |
+| How are absorbers, electrolyte films and catalyst layers deposited and sintered? | Chapters 17, 49 |
+| How are capacity, ionic conductivity and interphase growth measured while a cell operates? | Chapters 52, 54 |
+| How are candidate energy materials screened computationally? | Chapters 55, 57 |
+| How are energy materials compared on cost, lifetime, supply risk and recyclability? | Chapters 58, 59 |
 
-**Next:** Chapter 41 moves from bulk parts to layers — films and coatings from nanometres to millimetres thick — and to the crystal growth and device processing on which electronic materials depend.
+**Next:** Chapter 41 takes materials into the harshest service conditions engineers impose on them, from turbine blades and reactor cores to cryogenic tanks and hypersonic leading edges.

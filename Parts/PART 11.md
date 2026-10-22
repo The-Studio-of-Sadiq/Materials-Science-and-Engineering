@@ -1,0 +1,27 @@
+# Part XI — Characterization, Computation and Design
+
+The first ten parts of this book built a chain from atomic structure through thermodynamics, kinetics and properties to the materials classes and the processes that make them. Every link of that chain rests on two kinds of evidence: measurement, which shows what structure a material actually has, and modelling, which explains and predicts it. This final part makes both explicit and then turns them toward the engineer's ultimate question: which material, made how, for this component, at what cost to the user and to the planet? It begins with laboratory instruments, moves to synchrotrons, neutron sources and atom-by-atom microscopes, and follows materials while they are processed or in service. It then climbs the ladder of computation, from the electronic structure of a few atoms through molecular dynamics, phase-field and crystal-plasticity models to data-driven discovery. It ends with selection and design, and with the sustainability of the materials economy as a whole.
+
+By the end of this part you should understand:
+
+- what each characterization technique probes, from what volume, with what resolution and detection limit, and how much to trust the number it gives;
+- when a question requires synchrotron X-rays, neutrons, atom-probe tomography or aberration-corrected microscopy, and what each of them delivers;
+- how in-situ, operando and correlative experiments link observed structure to behaviour under real conditions;
+- what density functional theory can and cannot predict, and how to judge a calculation;
+- how atomistic, mesoscale and continuum simulations are chained together in integrated computational materials engineering;
+- how databases, machine learning and autonomous laboratories accelerate discovery, and where data-driven methods fail;
+- how performance indices, property charts and cost models turn requirements into a rational choice of material and process;
+- how embodied energy, lifecycle assessment, criticality and recycling reshape that choice.
+
+| Chapter | Central question | What it delivers |
+|---|---|---|
+| 52 Materials Characterization: The Laboratory Toolkit | How are structure, composition and properties measured in an ordinary materials laboratory, and how certain are the results? | Optical metallography and stereology, SEM/EDS/EBSD, TEM and diffraction, practical XRD, XPS/AES/SIMS, Raman/FTIR/UV–Vis, thermal analysis, mechanical and electrical tests, GUM uncertainty budgets |
+| 53 Large-Facility and Nanoscale Characterization | What can be seen only with a synchrotron, a neutron source or an atom-resolving instrument? | XAS, SAXS, high-resolution diffraction and PDF, tomography, neutron scattering and deep residual stress, atom-probe tomography, aberration-corrected STEM with EELS and 4D-STEM, cryo-EM |
+| 54 In-Situ, Operando and Correlative Methods | How does a material's structure change while it is heated, strained, biased or cycled? | In-situ electron microscopy, operando battery and catalyst studies, positron, Mössbauer and NMR spectroscopy, micropillar testing, correlative workflows and automated analysis |
+| 55 Electronic-Structure Methods | How can properties be calculated from the electrons up, and how reliable are such calculations? | Born–Oppenheimer and Kohn–Sham foundations, functionals, basis sets, convergence, the known successes and failures of DFT, practical workflows |
+| 56 Atomistic and Mesoscale Simulation | How are atomic motions, microstructure evolution and plasticity simulated across scales? | Molecular dynamics and potentials, Monte Carlo and kinetic Monte Carlo, phase-field models, dislocation dynamics and crystal plasticity, CALPHAD, ICME |
+| 57 Materials Informatics | How can data and machine learning find materials faster than intuition and trial? | Materials databases, descriptors, ML property prediction and graph networks, machine-learned potentials, high-throughput and autonomous discovery, inverse design and uncertainty |
+| 58 Materials Selection and Design | Which material and process best meet a set of competing requirements? | Design process, derived performance indices, Ashby charts, multi-objective selection, shape factors, process selection and cost models, case studies across engineering |
+| 59 Sustainability, Lifecycle and the Circular Economy | What does a material cost the planet over its life, and how can that cost be reduced? | Material flows, embodied energy and carbon, lifecycle assessment, critical materials, design for recycling and reuse, recycling technologies, the circular economy and the future of the discipline |
+
+Part XI connects to everything that came before. Characterization supplies the evidence for the crystal structures and diffraction of Part I, the phase diagrams and transformation kinetics of Part II, the dislocation and fracture mechanisms of Part III, and the microstructures of the metals, ceramics, polymers and composites of Parts IV and V; it also underpins failure analysis in Part IX and the qualification of processed and additively manufactured parts in Part X. The computational chapters turn the thermodynamics, diffusion and plasticity of earlier parts into calculable models. Selection and sustainability gather the property data of Parts III to VIII into decisions an engineer must defend. The book thus ends where engineering practice begins: with a material that has been seen, understood, predicted and chosen.

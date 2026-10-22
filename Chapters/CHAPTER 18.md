@@ -47,7 +47,7 @@ Cement chemistry uses a shorthand for the oxides: C = CaO, S = SiO₂, A = Al₂
 | C₃A (aluminate) | Ca₃Al₂O₆ | 5–10 | Very fast (minutes) | Flash set if uncontrolled; sulfate-attack susceptibility |
 | C₄AF (ferrite) | Ca₂(Al,Fe)₂O₅ | 5–15 | Moderate | Little strength; grey colour |
 
-The real phases are impure solid solutions measured by quantitative XRD (Chapter 42), but the phase content is still estimated routinely from the oxide analysis by the **Bogue calculation**, which assumes ideal phase compositions.
+The real phases are impure solid solutions measured by quantitative XRD (Chapter 52), but the phase content is still estimated routinely from the oxide analysis by the **Bogue calculation**, which assumes ideal phase compositions.
 
 **Worked example — Bogue phase composition.** A clinker-based cement has the oxide analysis CaO 64.5 %, SiO₂ 21.0 %, Al₂O₃ 5.5 %, Fe₂O₃ 3.0 %, SO₃ 2.8 % (free lime neglected). With the Bogue equations for $\mathrm{Al_2O_3/Fe_2O_3}>0.64$,
 
@@ -90,6 +90,10 @@ Isothermal calorimetry shows the stages of hydration (Figure 18.1): a brief init
 
 <!-- FIGURE 18.1 | figures/ch18/fig-18-1-hydration-calorimetry.png | plot | Rate of heat release during hydration of a Portland cement paste at 20 °C, measured by isothermal calorimetry, with the cumulative heat. | Content: x-axis time after mixing 0–48 h; left y-axis heat flow 0–4 mW per g cement; right y-axis cumulative heat 0–300 J/g. Heat flow curve: sharp initial peak (off-scale, labelled "wetting, C3A dissolution, ettringite") in the first minutes; low dormant period 1–3 h (~0.3 mW/g); main peak (C3S hydration) rising to ~3 mW/g at ~9–10 h; shoulder at ~14–18 h labelled "renewed C3A reaction (sulfate depletion)"; decay to ~0.5 mW/g at 48 h. Cumulative curve rising to ~200 J/g at 48 h. Mark stages I–IV: initial, induction, acceleration, deceleration; mark initial and final set with arrows at ~4 h and ~6 h. -->
 
+![Figure 18.1 — Rate of heat release during hydration of a Portland cement paste at 20 °C, measured by isothermal calorimetry, with the cumulative heat](../figures/ch18/fig-18-1-hydration-calorimetry.png)
+
+*Figure 18.1 — Rate of heat release during hydration of a Portland cement paste at 20 °C, measured by isothermal calorimetry, with the cumulative heat.*
+
 ### C–S–H and the pore structure
 
 C–S–H, 50–60 % of a mature paste, is the glue of concrete: a poorly crystalline, layered calcium silicate hydrate (Ca/Si about 1.7, related to tobermorite and jennite) formed as nanometre globules with a specific surface of 100–700 m²/g and an intrinsic **gel porosity** of about 28 % in 0.5–10 nm pores. CH forms large crystals that add little strength but buffer the pore solution at pH 12.5–13.5, which keeps reinforcing steel passive.
@@ -119,7 +123,7 @@ Adjusting the phase balance and fineness gives the standard types: ordinary (CEM
 
 Concrete is a particulate composite: hydrated cement paste binding coarse aggregate (gravel or crushed rock, 4–20 mm or larger) and sand. Per cubic metre it typically contains 300–450 kg of cement, 150–200 kg of water and about 1700–1900 kg of aggregate, which fills 65–75 % of the volume and reduces the amount of paste, the part that is expensive, shrinks and generates heat.
 
-**Superplasticizers** (today polycarboxylate ethers with comb-like side chains) disperse cement particles by electrostatic and steric repulsion (Chapter 29) and cut the water needed by 10–40 %; **air-entraining agents** stabilize bubbles for frost resistance; **retarders** and **accelerators** adjust setting. **Supplementary cementitious materials** (SCMs) replace part of the cement: **fly ash** and **silica fume** are pozzolans whose silica reacts with CH to form more C–S–H, and **ground granulated blast-furnace slag** (GGBS) is latently hydraulic. SCMs refine the pores and cut heat and CO₂, at the cost of slower early strength.
+**Superplasticizers** (today polycarboxylate ethers with comb-like side chains) disperse cement particles by electrostatic and steric repulsion (Chapter 37) and cut the water needed by 10–40 %; **air-entraining agents** stabilize bubbles for frost resistance; **retarders** and **accelerators** adjust setting. **Supplementary cementitious materials** (SCMs) replace part of the cement: **fly ash** and **silica fume** are pozzolans whose silica reacts with CH to form more C–S–H, and **ground granulated blast-furnace slag** (GGBS) is latently hydraulic. SCMs refine the pores and cut heat and CO₂, at the cost of slower early strength.
 
 ### The water–cement ratio
 
@@ -137,6 +141,10 @@ where $A$ and $B$ are empirical constants for given materials, age and curing. F
 Without admixtures, a mix with $w/c=0.35$ is too stiff to compact, and its voids make it weaker. Superplasticizers removed this limit: $w/c$ of 0.25–0.35 with silica fume gives 80–120 MPa, and ultra-high-performance concretes ($w/b$ about 0.2, steel fibres) reach 150–200 MPa.
 
 <!-- FIGURE 18.2 | figures/ch18/fig-18-2-strength-wc-ratio.png | plot | Compressive strength of concrete versus water–cement ratio (Abrams' law) at 3, 7, 28 and 90 days, with the low-w/c limit set by compaction. | Content: x-axis w/c ratio 0.30–0.80; y-axis cylinder compressive strength 0–60 MPa. 28-day curve fc = 117/13^(w/c): 47.7 MPa at 0.35, 39.8 at 0.42, 32.4 at 0.50, 25.1 at 0.60, 19.4 at 0.70. Curves at other ages scaled by exp{0.25[1 − (28/t)^0.5]}: 3 d ×0.60, 7 d ×0.78, 90 d ×1.12. ACI 211.1 tabulated points (0.42, 40), (0.47, 35), (0.54, 30), (0.61, 25), (0.69, 20) as open circles on the 28-day curve. Dashed line bending down below w/c ≈ 0.35 labelled "incomplete compaction (no superplasticizer)". Mark the worked-example point w/c = 0.43, fcr = 38.3 MPa. -->
+
+![Figure 18.2 — Compressive strength of concrete versus water–cement ratio (Abrams' law) at 3, 7, 28 and 90 days, with the low-w/c limit set by compaction](../figures/ch18/fig-18-2-strength-wc-ratio.png)
+
+*Figure 18.2 — Compressive strength of concrete versus water–cement ratio (Abrams' law) at 3, 7, 28 and 90 days, with the low-w/c limit set by compaction.*
 
 ### Mix design
 
@@ -177,7 +185,7 @@ Nearly all deterioration requires water, CO₂, chloride, sulfate or oxygen to e
 
 ### Steel in concrete: passivation and its loss
 
-Above pH about 11.5, steel in concrete carries a nanometre-thick passive film (Chapter 34). Two processes destroy it.
+Above pH about 11.5, steel in concrete carries a nanometre-thick passive film (Chapter 42). Two processes destroy it.
 
 **Carbonation.** Atmospheric CO₂ diffuses into the concrete and reacts with CH and C–S–H:
 
@@ -187,7 +195,7 @@ $$
 
 The pH drops from about 13 to below 9 behind a front that advances as $x=K\sqrt t$, since CO₂ must diffuse through the carbonated layer. $K$ is 1–2 mm/yr$^{1/2}$ for dense concrete and 3–6 for ordinary concrete; with $K=4$ the front reaches 25 mm in $(25/4)^2=39$ years and 40 mm in 100 years.
 
-**Chloride attack.** Chlorides from seawater or de-icing salts break the passive film locally once they exceed a **critical chloride content** at the steel, typically 0.2–0.5 % by mass of cement (often 0.4 %), even at high pH, causing pitting (Chapter 35). Ingress is commonly modelled with the error-function solution of Fick's second law for a constant surface concentration $C_s$:
+**Chloride attack.** Chlorides from seawater or de-icing salts break the passive film locally once they exceed a **critical chloride content** at the steel, typically 0.2–0.5 % by mass of cement (often 0.4 %), even at high pH, causing pitting (Chapter 43). Ingress is commonly modelled with the error-function solution of Fick's second law for a constant surface concentration $C_s$:
 
 $$
 C(x,t)=C_s\left[1-\operatorname{erf}\left(\frac{x}{2\sqrt{D\,t}}\right)\right]
@@ -208,7 +216,11 @@ With 60 mm cover it is about 25 years; with a slag concrete of $D=2\times10^{-13
 
 <!-- FIGURE 18.3 | figures/ch18/fig-18-3-chloride-profiles.png | plot | Chloride content versus depth in concrete after 10, 25 and 50 years for a surface content of 3.0 % by mass of cement and D = 1.0e-12 m²/s, with the critical threshold and two cover depths. | Content: x-axis depth 0–100 mm; y-axis chloride content 0–3.0 % by mass of cement. Three erf curves: 10 y (2.07 % at 10 mm, 1.28 at 20 mm, 0.33 at 40 mm, 0.05 at 60 mm), 25 y (2.40, 1.84, 0.94 at 40 mm, 0.39 at 60 mm, 0.13 at 80 mm), 50 y (2.58, 2.17, 1.43 at 40 mm, 0.86 at 60 mm, 0.46 at 80 mm). Horizontal dashed line at 0.4 % labelled "critical chloride content". Vertical dotted lines at 40 mm and 60 mm cover labelled "cover". Inset or second panel: time to initiation (years, log axis 1–200) versus cover 20–80 mm for D = 1e-12 (11 y at 40 mm, 25 y at 60 mm) and D = 2e-13 (56 y at 40 mm, 127 y at 60 mm). -->
 
-Rust occupies two to six times the volume of the steel consumed, so 0.02–0.1 mm of section loss cracks the cover, which then spalls. Protection is, in order of preference: good concrete and cover (EN 1992 asks 40–55 mm for de-icing and marine exposure over 50 years), SCMs, silane impregnation, inhibitors, coated or stainless bars, and cathodic protection (Chapter 35).
+![Figure 18.3 — Chloride content versus depth in concrete after 10, 25 and 50 years for a surface content of 3.0 % by mass of cement and D = 1.0e-12 m²/s, with the critical threshold and two cover depths](../figures/ch18/fig-18-3-chloride-profiles.png)
+
+*Figure 18.3 — Chloride content versus depth in concrete after 10, 25 and 50 years for a surface content of 3.0 % by mass of cement and D = 1.0e-12 m²/s, with the critical threshold and two cover depths.*
+
+Rust occupies two to six times the volume of the steel consumed, so 0.02–0.1 mm of section loss cracks the cover, which then spalls. Protection is, in order of preference: good concrete and cover (EN 1992 asks 40–55 mm for de-icing and marine exposure over 50 years), SCMs, silane impregnation, inhibitors, coated or stainless bars, and cathodic protection (Chapter 43).
 
 ### Sulfate attack and alkali–silica reaction
 
@@ -220,7 +232,7 @@ Rust occupies two to six times the volume of the steel consumed, so 0.02–0.1 m
 
 Water expands by 9 % on freezing; in saturated paste, ice in larger pores drives water through fine pores and builds hydraulic pressure (Powers' mechanism), cracking the paste and scaling the surface, worse with de-icing salts. The cure, found empirically in the 1930s, is **air entrainment**: 4–7 % by volume of 10–1000 μm bubbles, with no point in the paste more than about 0.2 mm (the **spacing factor**) from an empty bubble into which water can escape.
 
-> **Boundary.** The electrochemistry of steel corrosion in concrete (passivity, pitting, cathodic protection) is developed in Chapters 34–35; degradation of concrete compared with other materials, and failure investigation, in Chapter 36.
+> **Boundary.** The electrochemistry of steel corrosion in concrete (passivity, pitting, cathodic protection) is developed in Chapters 42–43; degradation of concrete compared with other materials, and failure investigation, in Chapter 44.
 
 ---
 
@@ -253,7 +265,11 @@ $$
 
 <!-- FIGURE 18.4 | figures/ch18/fig-18-4-prestress-stresses.png | schematic | Stress distributions at midspan of the worked-example beam: load alone, prestress alone and combined, plus a reinforced (cracked) section for comparison. | Content: elevation of a 10 m simply supported beam with a parabolic draped tendon (e = 200 mm at midspan, ~0 at supports) and uniform load 30 kN/m. Below, four stress-block diagrams over the 600 mm depth: (a) load only: +20.8 MPa bottom (tension), −20.8 top; (b) axial prestress P/A: −6.9 uniform; (c) prestress bending Pe/Z: +13.9 top, −13.9 bottom; (d) sum: 0 at bottom, −13.9 MPa top. Separate small panel (e): cracked reinforced section with compression block at top, neutral axis, tension crack below, steel force T at the bars. Sign convention: compression negative, drawn to the left. -->
 
-Prestressed concrete is crack-free in service and spans 30–50 m as girders and over 200 m in segmental box-girder bridges. Its vulnerability is the tendon: highly stressed high-strength steel suffers stress-corrosion cracking and hydrogen embrittlement (Chapter 35) where grouting is incomplete, a cause of several bridge collapses.
+![Figure 18.4 — Stress distributions at midspan of the worked-example beam: load alone, prestress alone and combined, plus a reinforced (cracked) section for comparison](../figures/ch18/fig-18-4-prestress-stresses.png)
+
+*Figure 18.4 — Stress distributions at midspan of the worked-example beam: load alone, prestress alone and combined, plus a reinforced (cracked) section for comparison.*
+
+Prestressed concrete is crack-free in service and spans 30–50 m as girders and over 200 m in segmental box-girder bridges. Its vulnerability is the tendon: highly stressed high-strength steel suffers stress-corrosion cracking and hydrogen embrittlement (Chapter 43) where grouting is incomplete, a cause of several bridge collapses.
 
 ---
 
@@ -276,7 +292,7 @@ Structural steels are low-carbon (≤ 0.20–0.24 % C), carbon–manganese or mi
 | ASTM A36 | ASTM | 250 | 400–550 | Supplementary | US general grade |
 | ASTM A992 | ASTM | 345–450 | ≥ 450 | Supplementary | US wide-flange sections; yield-to-tensile ratio ≤ 0.85 |
 
-The designation encodes the design data. "S355" is the minimum yield strength in MPa, which falls with thickness (345 MPa for 16–40 mm) because thick sections cool slowly and have coarser grains. "J2" and "K2" guarantee Charpy energy at a temperature, the codified response to the ductile–brittle transition of BCC iron (Chapter 14) and to the brittle fractures of welded ships and bridges in the 1940s–50s; EN 1993-1-10 tabulates permissible thickness by grade and service temperature. "M" and "N" denote thermomechanically rolled and normalized steels, "Z" grades guarantee through-thickness ductility, and a maximum carbon equivalent keeps welds from cracking (Chapter 39). **Weathering steels** form a protective patina in wet–dry cycles. Seismic frames need steel that work hardens after yield and does not greatly exceed its nominal yield, hence the cap on yield-to-tensile ratio in A992.
+The designation encodes the design data. "S355" is the minimum yield strength in MPa, which falls with thickness (345 MPa for 16–40 mm) because thick sections cool slowly and have coarser grains. "J2" and "K2" guarantee Charpy energy at a temperature, the codified response to the ductile–brittle transition of BCC iron (Chapter 14) and to the brittle fractures of welded ships and bridges in the 1940s–50s; EN 1993-1-10 tabulates permissible thickness by grade and service temperature. "M" and "N" denote thermomechanically rolled and normalized steels, "Z" grades guarantee through-thickness ductility, and a maximum carbon equivalent keeps welds from cracking (Chapter 47). **Weathering steels** form a protective patina in wet–dry cycles. Seismic frames need steel that work hardens after yield and does not greatly exceed its nominal yield, hence the cap on yield-to-tensile ratio in A992.
 
 ### Reinforcing and prestressing steels
 
@@ -304,6 +320,10 @@ Wood is a natural cellular, fibre-reinforced polymer composite. Seasonal growth 
 The cell wall is itself a composite (Figure 18.5): partly crystalline **cellulose** microfibrils, 3–4 nm across with an axial modulus of about 130 GPa, in a matrix of **hemicellulose** and **lignin**. In the thick S2 layer they wind at only 5–30° to the cell axis (the **microfibril angle**), which controls stiffness as ply angle does in a laminate (Chapter 22): juvenile wood near the pith, with large angles, is compliant and shrinks lengthwise.
 
 <!-- FIGURE 18.5 | figures/ch18/fig-18-5-wood-hierarchy.png | schematic | Hierarchical structure of softwood from the trunk to the cellulose microfibril, with the principal axes L, R and T. | Content: four linked panels. (a) Log cross-section showing pith, heartwood, sapwood, cambium, bark, annual rings; principal axes L (along trunk), R (radial), T (tangential) drawn on a cut wedge. (b) Cube of softwood (~1 mm) showing tracheids (rectangular cells 30 μm wide) in earlywood (thin walls, large lumens) and latewood (thick walls), a ray running radially, and bordered pits. (c) Single tracheid cell-wall layers: middle lamella, primary wall, S1 (microfibrils near 60–80° to axis), S2 (thick, 5–30°, labelled "microfibril angle"), S3. (d) Microfibril: crystalline cellulose core (~3 nm) with hemicellulose and lignin matrix. Annotate stiffness ratios E_L : E_R : E_T ≈ 20 : 1.6 : 1. -->
+
+![Figure 18.5 — Hierarchical structure of softwood from the trunk to the cellulose microfibril, with the principal axes L, R and T](../figures/ch18/fig-18-5-wood-hierarchy.png)
+
+*Figure 18.5 — Hierarchical structure of softwood from the trunk to the cellulose microfibril, with the principal axes L, R and T.*
 
 ### Anisotropy and strength
 
@@ -422,13 +442,17 @@ Concrete is the most-used material after water, and its environmental burden com
 
 <!-- FIGURE 18.6 | figures/ch18/fig-18-6-binder-carbon.png | plot | Cradle-to-gate CO₂ intensity of cementitious binders, and embodied carbon of common construction materials per kilogram. | Content: two panels. (a) Horizontal bars, x-axis t CO2 per t binder 0–1.0: CEM I (95 % clinker) 0.83; CEM II/A-LL (85 % clinker) 0.74; LC3-50 0.51; CEM III/A (50 % GGBS) 0.47; CEM III/B (75 % GGBS) 0.27; alkali-activated slag 0.15–0.35 (range bar). Split each bar into "process (calcination)" and "fuel + electricity" shades where applicable (process ≈ 0.51 × clinker fraction). (b) Horizontal bars on log x-axis, kg CO2e per kg, 0.01–20, typical ranges: aggregate 0.005; concrete C30 CEM I 0.13–0.16; concrete with 50 % GGBS 0.08–0.10; asphalt mix 0.05–0.08; fired brick 0.2–0.25; glulam/CLT (fossil only) 0.3–0.5; rebar (EAF) 0.5–1.0 and (BOF) 1.8–2.2; structural steel sections (EAF) 0.6–1.2 and (BOF) 1.8–2.5; float glass 1.0–1.4; aluminium recycled 0.5–1.0 and primary 8–16. -->
 
+![Figure 18.6 — Cradle-to-gate CO₂ intensity of cementitious binders, and embodied carbon of common construction materials per kilogram](../figures/ch18/fig-18-6-binder-carbon.png)
+
+*Figure 18.6 — Cradle-to-gate CO₂ intensity of cementitious binders, and embodied carbon of common construction materials per kilogram.*
+
 ### Construction as a whole
 
-Typical cradle-to-gate footprints (Figure 18.6, right panel) are 0.13–0.16 kg CO₂e/kg for CEM I concrete (300–400 kg/m³), 0.2–0.25 for brick, 0.5–1.0 for scrap-based (EAF) steel against about 2 for blast-furnace steel, and 0.3–0.5 of fossil emissions for glulam and CLT, which also store about 1.6 kg of biogenic CO₂ per kg in use. They vary with plant and energy mix and must be compared per functional unit, such as a square metre of floor, not per kilogram (Chapter 49).
+Typical cradle-to-gate footprints (Figure 18.6, right panel) are 0.13–0.16 kg CO₂e/kg for CEM I concrete (300–400 kg/m³), 0.2–0.25 for brick, 0.5–1.0 for scrap-based (EAF) steel against about 2 for blast-furnace steel, and 0.3–0.5 of fossil emissions for glulam and CLT, which also store about 1.6 kg of biogenic CO₂ per kg in use. They vary with plant and energy mix and must be compared per functional unit, such as a square metre of floor, not per kilogram (Chapter 59).
 
 Three conclusions follow. Because concrete is used in such quantity, blended cements and lower binder intensity are the largest immediate lever, and the durability science of Section 18.3 mostly supports them. Steel's footprint falls sharply with scrap-based production, and reinforcement and sections are among the most recycled products in the economy. Timber stores carbon, which explains the growth of mass timber, subject to sustainable forestry, fire and moisture design. And durability is itself sustainability: a car park demolished after 40 years must be built, and its carbon spent, twice within the life of one designed with deeper cover and a slag concrete.
 
-> **Boundary.** Life-cycle assessment methodology, critical materials and the circular economy are developed in Chapter 49; this section gives only the materials data and levers specific to construction.
+> **Boundary.** Life-cycle assessment methodology, critical materials and the circular economy are developed in Chapter 59; this section gives only the materials data and levers specific to construction.
 
 ---
 
@@ -441,11 +465,11 @@ Three conclusions follow. Because concrete is used in such quantity, blended cem
 | How are the ferrite–pearlite and quenched-and-tempered structures of construction steels produced? | Chapter 15 (back reference) |
 | How do creep, viscoelasticity and the ductile–brittle transition enter concrete, asphalt, timber and steel design? | Chapter 14 (back reference) |
 | How do fibre-reinforced polymers compare with steel as reinforcement and with timber as a cellulose composite? | Chapters 22–23 |
-| How do steel reinforcement and prestressing tendons corrode, and how is cathodic protection sized? | Chapters 34–35 |
-| How are deteriorated concrete, masonry and timber structures diagnosed? | Chapter 36 |
-| How are construction steels welded without cracking? | Chapter 39 |
-| How are cement phases and hydration products characterized? | Chapters 42–43 |
-| How are materials selected for minimum embodied carbon at the design stage? | Chapter 48 |
-| How are life-cycle assessment and circular-economy strategies applied to construction? | Chapter 49 |
+| How do steel reinforcement and prestressing tendons corrode, and how is cathodic protection sized? | Chapters 42–43 |
+| How are deteriorated concrete, masonry and timber structures diagnosed? | Chapter 44 |
+| How are construction steels welded without cracking? | Chapter 47 |
+| How are cement phases and hydration products characterized? | Chapters 52–53 |
+| How are materials selected for minimum embodied carbon at the design stage? | Chapter 58 |
+| How are life-cycle assessment and circular-economy strategies applied to construction? | Chapter 59 |
 
 **Next:** Chapter 19 begins Part V with the third great class of materials, explaining how polymers are synthesized from small molecules and how their chain length, architecture and chemistry set the properties of plastics, rubbers and fibres.

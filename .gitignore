@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 .obsidian/
 .writer-brief.md
+.figure-brief.md
+_old/
+.merge-brief.md

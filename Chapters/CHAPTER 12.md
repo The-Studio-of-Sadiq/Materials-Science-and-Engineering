@@ -45,6 +45,10 @@ $$
 
 <!-- FIGURE 12.1 | figures/ch12/fig-12-1-frenkel-and-slip.png | schematic | Rigid shear of a perfect crystal compared with slip by dislocation motion. | Content: Top panel: two rows of atoms (circles), upper row displaced by x relative to lower; below it a plot of shear stress τ versus x/b from 0 to 1, sinusoid with maximum τmax = G b/(2π d) at x/b = 0.25, labelled "theoretical shear strength ≈ G/2π ≈ 7–9 GPa for Cu", initial slope labelled "G x/d". Bottom panel: three-frame sequence of an edge dislocation (extra half-plane marked ⊥) moving across a block of 8 × 6 atoms from left to right under shear arrows τ, ending in a step of one Burgers vector b on the right surface; small inset of a carpet with a ruck being pushed across the floor labelled "a ruck moves a carpet with little force". -->
 
+![Figure 12.1 — Rigid shear of a perfect crystal compared with slip by dislocation motion](../figures/ch12/fig-12-1-frenkel-and-slip.png)
+
+*Figure 12.1 — Rigid shear of a perfect crystal compared with slip by dislocation motion.*
+
 **Worked example — How weak is a real copper crystal?** For copper, the polycrystalline shear modulus is $G=48$ GPa. Slip occurs on $\{111\}$ planes, spaced $d=a/\sqrt3=0.3615/1.732=0.2087$ nm apart, in $\langle110\rangle$ directions, where the repeat distance is $b=a/\sqrt2=0.2556$ nm. Then
 
 $$
@@ -130,6 +134,10 @@ All components fall as $1/r$, so the field is long-ranged. In copper ($G=48$ GPa
 
 <!-- FIGURE 12.2 | figures/ch12/fig-12-2-edge-stress-field.png | plot | Stress field of an edge dislocation: contour maps of σxx, σxy and the hydrostatic stress around a dislocation at the origin. | Content: Three square panels, x and y from −5 to +5 nm, dislocation symbol ⊥ at origin with b along +x, slip plane y = 0 drawn dashed. Filled contours normalized by D = Gb/(2π(1−ν)) with diverging colour map (blue compressive/negative, red tensile/positive), colour bar ±0.5 D/nm, core r < 0.5 nm masked. Panel (a) σxx: two-lobed, compressive above, tensile below. Panel (b) σxy: four-lobed pattern with zero along x = ±y and x = 0. Panel (c) hydrostatic stress σm: compressive half-space above slip plane, tensile below, labelled "large solutes attracted here" below and "small solutes / vacancies attracted here" above. -->
 
+![Figure 12.2 — Stress field of an edge dislocation: contour maps of σxx, σxy and the hydrostatic stress around a dislocation at the origin](../figures/ch12/fig-12-2-edge-stress-field.png)
+
+*Figure 12.2 — Stress field of an edge dislocation: contour maps of σxx, σxy and the hydrostatic stress around a dislocation at the origin.*
+
 ### Line energy
 
 The elastic energy stored per unit length of dislocation is found by integrating the strain-energy density from the core radius $r_0$ to an outer cut-off $R$:
@@ -208,7 +216,7 @@ A screw dislocation has no unique slip plane and can switch from one glide plane
 
 An edge dislocation can move out of its slip plane only by adding or removing atoms at the edge of its extra half-plane: absorbing vacancies makes it climb up, emitting vacancies (or absorbing interstitials) makes it climb down. **Climb** is therefore **non-conservative** and requires diffusion. It is negligible at low temperature but becomes important above about $0.3$–$0.4\,T_m$, where it lets dislocations climb over obstacles they cannot cut or bypass by glide, and lets them rearrange into low-energy walls. Climb is the rate-controlling step in **recovery** (Chapter 10) and in **dislocation creep** of metals at high temperature (Chapter 14), which is why creep rates have activation energies close to that of self-diffusion.
 
-The climb force can come from an applied normal stress or from a non-equilibrium vacancy concentration: a supersaturation $c/c_0$ produces an **osmotic** (chemical) force of $(kT/\Omega)\,b\ln(c/c_0)$ per unit length, where $\Omega$ is the atomic volume. Quenched-in vacancies, or those produced by irradiation, therefore drive climb and form prismatic loops — an important source of swelling and hardening in reactor materials (Chapter 33).
+The climb force can come from an applied normal stress or from a non-equilibrium vacancy concentration: a supersaturation $c/c_0$ produces an **osmotic** (chemical) force of $(kT/\Omega)\,b\ln(c/c_0)$ per unit length, where $\Omega$ is the atomic volume. Quenched-in vacancies, or those produced by irradiation, therefore drive climb and form prismatic loops — an important source of swelling and hardening in reactor materials (Chapter 41).
 
 ### Image forces
 
@@ -230,7 +238,7 @@ For like-signed edges, $F_x$ vanishes and is stable at $x=0$: they line up one a
 
 ### Junctions and locks
 
-When two dislocations gliding on intersecting planes meet, they may react to form a third segment along the line of intersection, provided this lowers the energy by Frank's rule. In FCC metals the most important are the **Lomer** and **Lomer–Cottrell locks**, formed when dislocations on two $\{111\}$ planes combine to give a segment with Burgers vector $\tfrac a2\langle110\rangle$ lying on neither glide plane — or, after dissociation, a sessile configuration with a stair-rod partial at the apex. Such junctions cannot glide and become strong obstacles that anchor the dislocations that formed them. **Glissile junctions** and **Hirth locks** are other products. Dislocation-dynamics simulations (Chapter 46) show that the strength of these junctions, more than the elastic interaction of distant dislocations, sets the forest-hardening stress.
+When two dislocations gliding on intersecting planes meet, they may react to form a third segment along the line of intersection, provided this lowers the energy by Frank's rule. In FCC metals the most important are the **Lomer** and **Lomer–Cottrell locks**, formed when dislocations on two $\{111\}$ planes combine to give a segment with Burgers vector $\tfrac a2\langle110\rangle$ lying on neither glide plane — or, after dissociation, a sessile configuration with a stair-rod partial at the apex. Such junctions cannot glide and become strong obstacles that anchor the dislocations that formed them. **Glissile junctions** and **Hirth locks** are other products. Dislocation-dynamics simulations (Chapter 56) show that the strength of these junctions, more than the elastic interaction of distant dislocations, sets the forest-hardening stress.
 
 ### Jogs and kinks
 
@@ -267,6 +275,10 @@ The fourth row reproduces the 300–400 MPa yield strength of hard-drawn copper 
 
 <!-- FIGURE 12.3 | figures/ch12/fig-12-3-taylor-hardening.png | plot | Flow stress versus square root of dislocation density for FCC metals, showing the Taylor relation. | Content: x-axis √ρ from 0 to 1.2 × 10^8 m⁻¹ (i.e. ρ up to 1.44 × 10^16 m⁻²), with a secondary top axis labelled ρ at 10^12, 10^14, 10^15, 10^16 m⁻². y-axis tensile flow stress 0–1200 MPa. Solid line for Cu: σ = 3.06 × 0.3 × 48 GPa × 0.2556 nm × √ρ (passes through 356 MPa at √ρ = 3.16 × 10^7 and 1126 MPa at 10^8). Dashed lines for Al (G = 26 GPa, b = 0.286 nm) and Ni (G = 76 GPa, b = 0.249 nm), same α and M. Scattered illustrative points (open circles) clustered around the Cu line labelled "TEM and XRD measurements (schematic)". Shaded vertical band at ρ = 10^14–10^15 labelled "cold-worked sheet and wire". -->
 
+![Figure 12.3 — Flow stress versus square root of dislocation density for FCC metals, showing the Taylor relation](../figures/ch12/fig-12-3-taylor-hardening.png)
+
+*Figure 12.3 — Flow stress versus square root of dislocation density for FCC metals, showing the Taylor relation.*
+
 ---
 
 ## 12.6 Multiplication: Frank–Read and other sources
@@ -291,6 +303,10 @@ Beyond it the loop becomes unstable and expands at decreasing stress, wrapping a
 For copper with $L=1$ μm, $\tau_{\text{FR}}\approx48\times10^9\times2.556\times10^{-10}/10^{-6}=12$ MPa; for $L=10$ μm, 1.2 MPa; for $L=0.1$ μm, 120 MPa. Long segments operate first; as deformation proceeds and the forest densifies, the free segment lengths shorten, and higher stresses are needed — another way of seeing work hardening. Frank–Read sources were first observed directly as spiral etch figures and as concentric loops decorated with copper in silicon (Dash, 1956).
 
 <!-- FIGURE 12.4 | figures/ch12/fig-12-4-frank-read-source.png | schematic | Operation of a Frank–Read source: successive configurations of a pinned dislocation segment under increasing shear stress, ending in an emitted loop and a regenerated segment. | Content: Five panels in a row on the slip plane, pinning points A and B (filled black dots) a distance L apart. (1) straight segment AB, shear stress τ arrow and Burgers vector b arrow; (2) bowed arc, radius R > L/2; (3) semicircle, radius L/2, labelled "maximum stress τ ≈ Gb/L"; (4) unstable expansion wrapping around A and B, the two back segments approaching each other, with screw and edge character labelled at different points and arrows showing the meeting point P; (5) complete expanding loop plus new straight segment AB, labelled "cycle repeats". Use one colour for the line, light grey for previous positions. -->
+
+![Figure 12.4 — Operation of a Frank–Read source: successive configurations of a pinned dislocation segment under increasing shear stress, ending in an emitted loop and a regenerated segment](../figures/ch12/fig-12-4-frank-read-source.png)
+
+*Figure 12.4 — Operation of a Frank–Read source: successive configurations of a pinned dislocation segment under increasing shear stress, ending in an emitted loop and a regenerated segment.*
 
 ### Other sources
 
@@ -323,6 +339,10 @@ $$
 
 <!-- FIGURE 12.5 | figures/ch12/fig-12-5-partials-stacking-fault.png | schematic | Dissociation of a perfect FCC dislocation into two Shockley partials bounding an intrinsic stacking fault. | Content: Left: plan view of a close-packed (111) layer of A atoms (large circles) with B and C sites marked; vector b = a/2[-101] from one B site to the next, and the two partial vectors a/6[-211] and a/6[-1-12] via the C site, forming a triangle (Frank's rule annotation b² = a²/2 > 2 × a²/6). Right: side view (cross-section) of the dissociated dislocation: leading and trailing partials (⊥ symbols) separated by width d, stacking sequence above and below annotated ABCABC outside the ribbon and ABCACABC within, fault region shaded. Inset table: d ≈ 0.7 nm (Al), 2 nm (Ni), 3.7 nm (Cu), 13 nm (austenitic stainless steel). -->
 
+![Figure 12.5 — Dissociation of a perfect FCC dislocation into two Shockley partials bounding an intrinsic stacking fault](../figures/ch12/fig-12-5-partials-stacking-fault.png)
+
+*Figure 12.5 — Dissociation of a perfect FCC dislocation into two Shockley partials bounding an intrinsic stacking fault.*
+
 **Worked example — Partial separations in FCC metals.** For copper, $a=0.3615$ nm, so $b_p=a/\sqrt6=0.1476$ nm; $G=48$ GPa and $\gamma_{\text{SF}}=45$ mJ/m². Then
 
 $$
@@ -350,13 +370,13 @@ A dissociated screw dislocation cannot cross-slip as two separate partials, beca
 - **Work hardening.** Planar slip keeps dislocations confined to their planes, where they pile up and interact; low-SFE alloys therefore work-harden faster and to higher stresses, with higher strain-hardening exponents $n$. This is why brass and austenitic stainless steels are favoured for deep drawing.
 - **Twinning and phase transformation.** At SFE below about 20 mJ/m², partials separate so widely that deformation twinning or the formation of HCP ε-martensite competes with slip. **TWIP** (twinning-induced plasticity) steels, Fe–(15–25)Mn–C alloys with SFE of 20–40 mJ/m², and **TRIP** steels with lower SFE exploit this to combine strengths of 800–1000 MPa with elongations of 50–60 % for automotive crash structures (Chapter 15).
 - **Annealing twins** are abundant in low-SFE metals (copper, brass, austenitic steel) and rare in aluminium.
-- **Environmental cracking.** Planar slip concentrates deformation in narrow bands that rupture protective films, one reason austenitic stainless steels are susceptible to chloride stress-corrosion cracking (Chapter 35).
+- **Environmental cracking.** Planar slip concentrates deformation in narrow bands that rupture protective films, one reason austenitic stainless steels are susceptible to chloride stress-corrosion cracking (Chapter 43).
 
 Solute additions change the SFE: zinc and aluminium lower it in copper, nickel raises it in iron–manganese steels, which is how alloy designers select the deformation mode.
 
 ### Other partials and faults
 
-A **Frank partial**, $\mathbf b=\tfrac a3\langle111\rangle$, bounds a stacking fault formed by inserting or removing part of a close-packed layer — for example, when a disc of condensed vacancies collapses after quenching or irradiation. Its Burgers vector is normal to the fault plane, so it is **sessile** and can move only by climb. Frank loops are a principal irradiation defect in austenitic steels used in reactor cores (Chapter 33). At the intersection of two faults on different $\{111\}$ planes, short **stair-rod** partials such as $\tfrac a6\langle110\rangle$ form, as in the Lomer–Cottrell lock. The **Thompson tetrahedron** is the standard bookkeeping device for all these Burgers vectors in FCC crystals.
+A **Frank partial**, $\mathbf b=\tfrac a3\langle111\rangle$, bounds a stacking fault formed by inserting or removing part of a close-packed layer — for example, when a disc of condensed vacancies collapses after quenching or irradiation. Its Burgers vector is normal to the fault plane, so it is **sessile** and can move only by climb. Frank loops are a principal irradiation defect in austenitic steels used in reactor cores (Chapter 41). At the intersection of two faults on different $\{111\}$ planes, short **stair-rod** partials such as $\tfrac a6\langle110\rangle$ form, as in the Lomer–Cottrell lock. The **Thompson tetrahedron** is the standard bookkeeping device for all these Burgers vectors in FCC crystals.
 
 ---
 
@@ -379,7 +399,7 @@ The exponential is the essential feature. With $\nu=0.3$, a core of width $w=0.5
 
 ### FCC metals
 
-In FCC metals, slip on the widely spaced $\{111\}$ planes by dissociated dislocations with planar cores meets very little lattice resistance: Peierls stresses are of order $10^{-5}G$ or less, well below 1 MPa. The critical resolved shear stress of a pure FCC crystal is therefore set by other dislocations and impurities, and depends only weakly on temperature and strain rate. FCC metals stay ductile down to liquid-helium temperatures and show no ductile–brittle transition — the basis of their use in cryogenic tanks and LNG carriers (Chapter 33).
+In FCC metals, slip on the widely spaced $\{111\}$ planes by dissociated dislocations with planar cores meets very little lattice resistance: Peierls stresses are of order $10^{-5}G$ or less, well below 1 MPa. The critical resolved shear stress of a pure FCC crystal is therefore set by other dislocations and impurities, and depends only weakly on temperature and strain rate. FCC metals stay ductile down to liquid-helium temperatures and show no ductile–brittle transition — the basis of their use in cryogenic tanks and LNG carriers (Chapter 41).
 
 ### BCC metals
 
@@ -388,6 +408,10 @@ BCC metals have no truly close-packed plane. Their $\tfrac a2\langle111\rangle$ 
 The steep rise of flow stress on cooling is the physical root of the **ductile–brittle transition** of ferritic steels and refractory metals (Chapters 11 and 14): at low temperature the stress needed to move dislocations and blunt a crack tip exceeds the stress needed for cleavage. Tungsten, molybdenum and chromium have transition temperatures above room temperature unless very pure and fine-grained, which is why tungsten plasma-facing components in fusion reactors must be operated hot.
 
 <!-- FIGURE 12.6 | figures/ch12/fig-12-6-crss-temperature.png | plot | Temperature dependence of the critical resolved shear stress of FCC, BCC and HCP single crystals, normalized by shear modulus. | Content: x-axis homologous temperature T/Tm from 0 to 0.5; y-axis τc/G on log scale from 1e-6 to 1e-2. Curves: FCC (Cu, Al) nearly flat at ~1e-5, slight decrease with T; BCC (Fe, Nb, W) steep fall from ~5e-3 at T/Tm = 0 to ~1e-4 at the "knee" T/Tm ≈ 0.15–0.2, then flat athermal plateau; HCP Mg basal slip flat at ~1e-5 and Mg prismatic/pyramidal ⟨c+a⟩ slip falling from ~5e-3 to ~3e-4 by T/Tm = 0.5 (dashed); ceramic NaCl/MgO band at 1e-4 to 1e-3, and Al2O3 basal slip ~1e-2 falling to ~1e-3 near T/Tm = 0.5 (dotted). Annotate "Peierls-controlled (thermally activated)" over the BCC low-temperature region and "athermal (forest, solutes)" over plateaus; marker at room temperature for Fe (T/Tm ≈ 0.16). -->
+
+![Figure 12.6 — Temperature dependence of the critical resolved shear stress of FCC, BCC and HCP single crystals, normalized by shear modulus](../figures/ch12/fig-12-6-crss-temperature.png)
+
+*Figure 12.6 — Temperature dependence of the critical resolved shear stress of FCC, BCC and HCP single crystals, normalized by shear modulus.*
 
 ### HCP metals
 
@@ -403,7 +427,7 @@ In ordered alloys such as Ni₃Al (γ′), a perfect FCC lattice translation $\t
 
 In ionic and covalent crystals dislocations exist, but they move with difficulty, for three reasons. **Long Burgers vectors**: the lattice translation must connect ions of the same sign, so $b$ is large (0.399 nm in NaCl; 0.476 nm in Al₂O₃ for the shortest $\tfrac13\langle11\bar20\rangle$ vector), and energy and lattice friction rise with $b$. **Electrostatic constraints**: in rock-salt crystals, slip on $\{110\}\langle1\bar10\rangle$ avoids bringing like ions face to face, but this gives only two independent systems; slip on $\{100\}$, needed for general deformation, is much harder. **Directional bonds**: in covalent solids such as silicon, SiC and diamond, moving a dislocation requires breaking and re-forming directional bonds, giving very high Peierls stresses.
 
-As a result, ceramic single crystals such as MgO and NaCl can deform plastically at room temperature in favourable orientations, but polycrystalline ceramics fracture before enough slip systems activate. Alumina deforms by basal slip only above about 900–1000 °C. Silicon is brittle below about 500–600 °C but deforms plastically at higher temperatures — the slip that ruined the wafers in this chapter's opening, generated by thermal stresses during furnace processing, which is why wafer boats, ramp rates and furnace profiles are designed to keep the resolved shear stress below the threshold at every temperature. In semiconductors, dislocations are also electrically active, introducing levels in the band gap that act as recombination centres; GaN light-emitting diodes are remarkably tolerant of threading dislocation densities of $10^8$–$10^9$ cm⁻² ($10^{12}$–$10^{13}$ m⁻²) that would destroy GaAs devices (Chapter 26). Ceramics are toughened therefore not by encouraging dislocations but by crack bridging and transformation toughening (Chapter 14).
+As a result, ceramic single crystals such as MgO and NaCl can deform plastically at room temperature in favourable orientations, but polycrystalline ceramics fracture before enough slip systems activate. Alumina deforms by basal slip only above about 900–1000 °C. Silicon is brittle below about 500–600 °C but deforms plastically at higher temperatures — the slip that ruined the wafers in this chapter's opening, generated by thermal stresses during furnace processing, which is why wafer boats, ramp rates and furnace profiles are designed to keep the resolved shear stress below the threshold at every temperature. In semiconductors, dislocations are also electrically active, introducing levels in the band gap that act as recombination centres; GaN light-emitting diodes are remarkably tolerant of threading dislocation densities of $10^8$–$10^9$ cm⁻² ($10^{12}$–$10^{13}$ m⁻²) that would destroy GaAs devices (Chapter 33). Ceramics are toughened therefore not by encouraging dislocations but by crack bridging and transformation toughening (Chapter 14).
 
 **Table 12.4 — Dislocation behaviour by crystal class.**
 
@@ -434,16 +458,16 @@ $$
 \mathbf g\cdot\mathbf b=0
 $$
 
-By finding two reflections for which a dislocation is invisible, its Burgers vector is determined as their cross product. **Weak-beam dark-field** imaging narrows the image of a dislocation to about 1.5 nm, enough to resolve the two partials of a dissociated dislocation and measure stacking-fault energies from their separation. Densities are measured by counting intersections of lines with a test grid: $\rho=2N/(L_t\,t)$ for $N$ intersections with test lines of total length $L_t$ in a foil of thickness $t$. **In-situ** straining and heating stages show sources operating, dislocations cutting precipitates and boundaries migrating (Chapter 44).
+By finding two reflections for which a dislocation is invisible, its Burgers vector is determined as their cross product. **Weak-beam dark-field** imaging narrows the image of a dislocation to about 1.5 nm, enough to resolve the two partials of a dissociated dislocation and measure stacking-fault energies from their separation. Densities are measured by counting intersections of lines with a test grid: $\rho=2N/(L_t\,t)$ for $N$ intersections with test lines of total length $L_t$ in a foil of thickness $t$. **In-situ** straining and heating stages show sources operating, dislocations cutting precipitates and boundaries migrating (Chapter 54).
 
-**High-resolution TEM and aberration-corrected STEM** image the core itself as an atomic column arrangement, so that a Burgers circuit can be drawn directly around it, and atom-probe tomography (Chapter 43) reveals the solute atmospheres segregated to dislocations.
+**High-resolution TEM and aberration-corrected STEM** image the core itself as an atomic column arrangement, so that a Burgers circuit can be drawn directly around it, and atom-probe tomography (Chapter 53) reveals the solute atmospheres segregated to dislocations.
 
 ### X-ray, electron-backscatter and other methods
 
 - **X-ray topography** (Lang, 1958) images individual dislocations over whole wafers and large crystals with micrometre resolution, using the strain contrast in a diffracted X-ray beam; synchrotron topography is used to map slip in silicon wafers and defects in SiC and diamond.
 - **X-ray and neutron line broadening** (Chapter 4) gives average dislocation densities in bulk polycrystals from the strain broadening of diffraction peaks — the source of the densities in Table 12.2.
-- **Electron backscatter diffraction** (EBSD) maps local lattice misorientation in the SEM. Gradients of misorientation give the density of **geometrically necessary dislocations** required to accommodate lattice curvature, around indents, cracks and grain boundaries; **electron channelling contrast imaging** (ECCI) images near-surface dislocations in bulk samples without thin-foil preparation (Chapter 42).
-- **Simulation** complements observation: discrete dislocation dynamics follows millions of dislocation segments with the fields and interactions of this chapter, and atomistic simulation resolves cores, junctions and kink-pair mechanisms (Chapters 45 and 46).
+- **Electron backscatter diffraction** (EBSD) maps local lattice misorientation in the SEM. Gradients of misorientation give the density of **geometrically necessary dislocations** required to accommodate lattice curvature, around indents, cracks and grain boundaries; **electron channelling contrast imaging** (ECCI) images near-surface dislocations in bulk samples without thin-foil preparation (Chapter 52).
+- **Simulation** complements observation: discrete dislocation dynamics follows millions of dislocation segments with the fields and interactions of this chapter, and atomistic simulation resolves cores, junctions and kink-pair mechanisms (Chapters 55 and 56).
 
 **Table 12.5 — Typical dislocation densities.**
 
@@ -470,9 +494,9 @@ By finding two reflections for which a dislocation is invisible, its Burgers vec
 | How does the competition between crack-tip dislocation emission and cleavage set the ductile–brittle transition and fracture toughness? | Chapter 14 |
 | How do dislocations rearrange during recovery and recrystallization? | Chapter 10 (back reference) |
 | How do TWIP and TRIP steels and nickel superalloys exploit stacking-fault energy and superdislocations? | Chapters 15 and 16 |
-| How do irradiation loops and dislocations cause swelling and hardening in reactor materials? | Chapter 33 |
-| Why do nanocrystalline metals soften at the smallest grain sizes? | Chapter 30 |
-| How are dislocations imaged in practice and measured with uncertainty? | Chapters 42, 43 and 44 |
-| How are dislocation ensembles simulated (discrete dislocation dynamics, crystal plasticity)? | Chapter 46 |
+| How do irradiation loops and dislocations cause swelling and hardening in reactor materials? | Chapter 41 |
+| Why do nanocrystalline metals soften at the smallest grain sizes? | Chapter 38 |
+| How are dislocations imaged in practice and measured with uncertainty? | Chapters 52, 53 and 54 |
+| How are dislocation ensembles simulated (discrete dislocation dynamics, crystal plasticity)? | Chapter 56 |
 
 **Next:** Chapter 13 scales up from single dislocations to the plasticity of real crystals and polycrystals, deriving Schmid's law, yield criteria and the strengthening mechanisms that let engineers set yield strength over two orders of magnitude.

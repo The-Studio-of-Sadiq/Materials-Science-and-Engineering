@@ -73,7 +73,7 @@ $$
 \dot\varepsilon_{\mathrm C}=\dot\varepsilon_{\mathrm{NH}}\times\frac{\pi\,\delta D_{gb}}{D_L\,d}=1.1\times10^{-7}\times\frac{\pi\times1.78\times10^{-19}}{4.75\times10^{-15}\times10^{-4}}=1.3\times10^{-7}\ \mathrm{s^{-1}}
 $$
 
-The two are nearly equal: the crossover grain size $d^*=\pi\delta D_{gb}/D_L$ is 117 μm at this temperature. At 1000 K ($0.58\,T_m$) the lower activation energy of boundary diffusion makes $d^*$ about 39 mm, so Coble creep dominates any practical grain size; at 1600 K, $d^*$ falls to 19 μm. Both rates, about $10^{-7}$ s⁻¹, would accumulate 1 % strain in a day. This is why turbine blades are made with very coarse grains or none at all: directionally solidified blades eliminate transverse boundaries and single-crystal blades eliminate boundaries entirely, removing Coble creep and boundary cavitation together (Chapter 16).
+The two are nearly equal: the crossover grain size $d^*=\pi\delta D_{gb}/D_L$ is 117 μm at this temperature. At 1000 K ($0.58\,T_m$) the lower activation energy of boundary diffusion makes $d^*$ about 39 mm, so Coble creep dominates any practical grain size; at 1600 K, $d^*$ falls to 19 μm. (This compares only the two diffusional paths: at 10 MPa and 1400 K, the full map of Figure 14.2 shows power-law creep running faster still.) Both rates, about $10^{-7}$ s⁻¹, would accumulate 1 % strain in a day. This is why turbine blades are made with very coarse grains or none at all: directionally solidified blades eliminate transverse boundaries and single-crystal blades eliminate boundaries entirely, removing Coble creep and boundary cavitation together (Chapter 16).
 
 ---
 
@@ -133,6 +133,10 @@ with $T$ in kelvin, $t_r$ in hours and $C\approx20$ for steels and many other al
 
 <!-- FIGURE 14.1 | figures/ch14/fig-14-1-larson-miller.png | plot | Larson–Miller master curves of stress-rupture strength for 2.25Cr–1Mo steel, Grade 91 steel, 316 stainless steel and a single-crystal nickel superalloy. | Content: x-axis LMP = T(20 + log10 t_r), T in K, t_r in h, range 16 000–30 000 (secondary top axis showing rupture time at 565 °C); y-axis stress 10–1000 MPa (log). Curves: 2.25Cr–1Mo from ~300 MPa at LMP 17 000 down to ~30 MPa at 22 500; Grade 91 from ~350 MPa at 18 000 to ~50 MPa at 24 000; 316 stainless from ~300 MPa at 18 000 to ~30 MPa at 24 500; single-crystal superalloy from ~900 MPa at 22 000 to ~100 MPa at 29 000. Mark the worked example: a test point at 650 °C/1000 h (LMP 21 232) and the arrow to 600 °C / 20 800 h on the same curve. -->
 
+![Figure 14.1 — Larson–Miller master curves of stress-rupture strength for 2.25Cr–1Mo steel, Grade 91 steel, 316 stainless steel and a single-crystal nickel superalloy](../figures/ch14/fig-14-1-larson-miller.png)
+
+*Figure 14.1 — Larson–Miller master curves of stress-rupture strength for 2.25Cr–1Mo steel, Grade 91 steel, 316 stainless steel and a single-crystal nickel superalloy.*
+
 **Worked example — Extrapolating a rupture test.** A batch of 2.25Cr–1Mo pipe ruptures in 1000 h at 650 °C under the design stress. What life does the Larson–Miller parameter predict at 600 °C and at 550 °C under the same stress?
 
 $\mathrm{LMP}=923.15\times(20+3)=21\,232$.
@@ -156,6 +160,10 @@ A material at a given temperature, stress and grain size deforms by whichever me
 - **Elastic**: below a chosen minimum strain rate, typically $10^{-10}$ s⁻¹, nothing significant happens.
 
 <!-- FIGURE 14.2 | figures/ch14/fig-14-2-deformation-map.png | map | Deformation-mechanism map for pure nickel of grain size 100 μm, showing fields of plasticity, power-law creep, Coble and Nabarro–Herring diffusional creep, with strain-rate contours. | Content: x-axis homologous temperature T/Tm 0–1.0 (top axis temperature in °C from −273 to 1455); y-axis normalized shear stress σs/G from 1e-6 to 1e-1 (log), right axis shear stress in MPa at room-temperature G ≈ 79 GPa. Fields: "ideal strength" above ~5e-2; "dislocation glide" above ~2e-3 at low T; "power-law creep" between ~1e-4 and 2e-3 for T/Tm > 0.3 (dashed internal line splitting core- and lattice-diffusion-controlled); "Coble creep" at low stress for T/Tm 0.4–0.8; "Nabarro–Herring creep" at low stress above T/Tm ≈ 0.8 (boundary consistent with the 117 μm crossover at 1400 K); "elastic" region below 1e-10 s⁻¹ contour at low T. Strain-rate contours 1e-10, 1e-8, 1e-6, 1e-4, 1e-2 s⁻¹. Mark the worked-example point (T/Tm 0.81, σ = 10 MPa → σs/G ≈ 1e-4 taking σs ≈ σ/√3 at reduced G) and a shaded box labelled "turbine blade". Inset: a smaller map at d = 1 μm with the Coble field expanded. -->
+
+![Figure 14.2 — Deformation-mechanism map for pure nickel of grain size 100 μm, showing fields of plasticity, power-law creep, Coble and Nabarro–Herring diffusional creep, with strain-rate contours](../figures/ch14/fig-14-2-deformation-map.png)
+
+*Figure 14.2 — Deformation-mechanism map for pure nickel of grain size 100 μm, showing fields of plasticity, power-law creep, Coble and Nabarro–Herring diffusional creep, with strain-rate contours.*
 
 The maps make engineering conclusions visible at once. Finer grains enlarge the diffusional fields ($\dot\varepsilon\propto d^{-2}$ or $d^{-3}$), so materials that are excellent at room temperature can be poor at high temperature — a 1 μm-grained ceramic creeps faster than a 20 μm one. Solid-solution and precipitate strengthening push the power-law field to higher stress. Maps exist for metals, ceramics, ice and mantle rocks; each assumes a fixed microstructure.
 
@@ -203,6 +211,10 @@ $$
 
 <!-- FIGURE 14.3 | figures/ch14/fig-14-3-viscoelastic-models.png | plot | Creep and stress-relaxation responses of the Maxwell, Kelvin–Voigt and standard linear solid models, with their spring–dashpot diagrams. | Content: top row: three small spring–dashpot schematics (Maxwell series, Kelvin–Voigt parallel, SLS spring parallel to Maxwell arm). Middle panel: creep under constant stress σ0 applied at t = 0 and removed at t/τ = 3; normalized strain ε E/σ0 vs t/τ from 0 to 6; Maxwell: jump to 1, linear rise, drop by 1 on unloading leaving permanent strain; Kelvin–Voigt: 1 − exp(−t/τ) rise, exponential recovery; SLS: jump to σ0/EU, approach σ0/ER, recovery. Bottom panel: stress relaxation at constant strain; σ/(EU ε0) vs t/τ 0–5; Maxwell decays to zero; SLS decays from 1 to ER/EU = 0.4 (match worked example: EU = 2.5 GPa, ER = 1.0 GPa); Kelvin–Voigt marked "cannot relax (instantaneous step impossible)". -->
 
+![Figure 14.3 — Creep and stress-relaxation responses of the Maxwell, Kelvin–Voigt and standard linear solid models, with their spring–dashpot diagrams](../figures/ch14/fig-14-3-viscoelastic-models.png)
+
+*Figure 14.3 — Creep and stress-relaxation responses of the Maxwell, Kelvin–Voigt and standard linear solid models, with their spring–dashpot diagrams.*
+
 **Worked example — Clamp force in a polymer clip.** A moulded polymer clip is pushed onto a pipe and held at a constant strain of 1 %. Its behaviour at 23 °C is represented by a standard linear solid with $E_U=2.5$ GPa, $E_R=1.0$ GPa and $\tau=1\times10^5$ s (about 28 h).
 
 At $t=0$: $\sigma=0.01\times2500=25.0$ MPa.
@@ -220,7 +232,7 @@ $$
 E(t)=E_\infty+\sum_{i=1}^{N}E_i\,e^{-t/\tau_i}
 $$
 
-a **Prony series**; its continuous limit defines the **relaxation spectrum** $H(\tau)$. Under sinusoidal loading at angular frequency $\omega$ the same material shows a **storage modulus** $E'(\omega)$ (in phase) and a **loss modulus** $E''(\omega)$ (out of phase), with loss tangent $\tan\delta=E''/E'$. For a single Maxwell element, $E'=E\omega^2\tau^2/(1+\omega^2\tau^2)$ and $E''=E\omega\tau/(1+\omega^2\tau^2)$, so the loss peaks at $\omega\tau=1$. Dynamic mechanical analysis (Chapter 42) measures these against temperature and frequency; the loss peak defines $T_g$, and vibration-damping materials (constrained layers on car floor pans, viscoelastic dampers in tall buildings) are chosen to have their loss peak at the service temperature and frequency.
+a **Prony series**; its continuous limit defines the **relaxation spectrum** $H(\tau)$. Under sinusoidal loading at angular frequency $\omega$ the same material shows a **storage modulus** $E'(\omega)$ (in phase) and a **loss modulus** $E''(\omega)$ (out of phase), with loss tangent $\tan\delta=E''/E'$. For a single Maxwell element, $E'=E\omega^2\tau^2/(1+\omega^2\tau^2)$ and $E''=E\omega\tau/(1+\omega^2\tau^2)$, so the loss peaks at $\omega\tau=1$. Dynamic mechanical analysis (Chapter 52) measures these against temperature and frequency; the loss peak defines $T_g$, and vibration-damping materials (constrained layers on car floor pans, viscoelastic dampers in tall buildings) are chosen to have their loss peak at the service temperature and frequency.
 
 ### Time–temperature superposition
 
@@ -297,7 +309,7 @@ so the stress and energy criteria are equivalent: fracture occurs when $K_I$ rea
 
 ### The plastic zone and plane strain
 
-Close to the tip the elastic stresses exceed the yield strength. Setting $\sigma_{yy}=\sigma_y$ on the crack plane and correcting for load redistribution gives the plastic-zone size
+Close to the tip the elastic stresses exceed the yield strength. Setting $\sigma_{yy}=\sigma_y$ on the crack plane gives the (uncorrected) plastic-zone size
 
 $$
 r_p=\frac{1}{2\pi}\left(\frac{K_I}{\sigma_y}\right)^2\ \text{(plane stress)},\qquad r_p\approx\frac{1}{6\pi}\left(\frac{K_I}{\sigma_y}\right)^2\ \text{(plane strain)}
@@ -310,6 +322,10 @@ B,\ a\ \ge\ 2.5\left(\frac{K_{Ic}}{\sigma_y}\right)^2
 $$
 
 <!-- FIGURE 14.4 | figures/ch14/fig-14-4-crack-tip-field.png | schematic | Crack-tip stress field: the three loading modes, the K-dominated elastic singularity and the plastic zone, and the variation of apparent fracture toughness with specimen thickness. | Content: left: three small blocks showing mode I (opening), mode II (sliding), mode III (tearing) displacements. Centre: plot of σyy versus distance r ahead of the tip (0–2 mm) for K = 26 MPa·m^1/2: elastic curve K/√(2πr) (dashed), truncated at σy = 500 MPa with plastic zone of size rp = 0.43 mm (plane stress) and 0.14 mm (plane strain) marked; label "K-dominated zone" further out. Right: apparent toughness Kc versus thickness B (0–30 mm) for 7075-T651: high (~50 MPa·m^1/2) at 2 mm falling to a plateau 26 MPa·m^1/2 beyond B = 6.8 mm; label "plane strain: B ≥ 2.5 (K/σy)²". -->
+
+![Figure 14.4 — Crack-tip stress field: the three loading modes, the K-dominated elastic singularity and the plastic zone, and the variation of apparent fracture toughness with specimen thickness](../figures/ch14/fig-14-4-crack-tip-field.png)
+
+*Figure 14.4 — Crack-tip stress field: the three loading modes, the K-dominated elastic singularity and the plastic zone, and the variation of apparent fracture toughness with specimen thickness.*
 
 **Table 14.2 — Fracture toughness of engineering materials (room temperature, typical).**
 
@@ -331,7 +347,7 @@ $$
 | Pressure-vessel steel A533B (upper shelf) | 150–200+ | 480 | Reactor vessels (EPFM needed) |
 | Austenitic stainless steel | >200 | 250 | Cryogenic vessels |
 
-**Worked example — Critical crack in an aircraft wing plate.** A lower wing skin of 7075-T651 aluminium ($K_{Ic}=26$ MPa m$^{1/2}$, $\sigma_y=500$ MPa, $E=71$ GPa, $\nu=0.33$) carries a limit tensile stress of 200 MPa. What edge-crack depth will cause fracture, and does LEFM apply?
+**Worked example — Critical crack in an aircraft wing plate.** A 7075-T651 aluminium plate in a wing stringer ($K_{Ic}=26$ MPa m$^{1/2}$, $\sigma_y=500$ MPa, $E=71$ GPa, $\nu=0.33$) carries a limit tensile stress of 200 MPa. What edge-crack depth will cause fracture, and does LEFM apply?
 
 Critical depth with $Y=1.12$:
 
@@ -386,7 +402,7 @@ A specified minimum weld-metal CTOD of 0.10–0.25 mm at the design temperature 
 
 ### Resistance curves in ductile materials
 
-Ductile metals do not fracture at a single $J$: a crack grows stably by void nucleation, growth and coalescence (Chapter 36), and its resistance rises with extension $\Delta a$ along a **J–R curve**. Instability occurs when the applied $J$ rises faster with $\Delta a$ than the resistance — the tearing criterion behind leak-before-break arguments for piping.
+Ductile metals do not fracture at a single $J$: a crack grows stably by void nucleation, growth and coalescence (Chapter 44), and its resistance rises with extension $\Delta a$ along a **J–R curve**. Instability occurs when the applied $J$ rises faster with $\Delta a$ than the resistance — the tearing criterion behind leak-before-break arguments for piping.
 
 ---
 
@@ -398,20 +414,24 @@ In January 1943 the T-2 tanker *Schenectady*, lying at her fitting-out dock in c
 
 BCC metals — ferritic and martensitic steels, molybdenum, tungsten, chromium — and many HCP metals show a **ductile–brittle transition** (Figure 14.5). Measured by the absorbed energy in a notched-bar impact (Charpy) test, the behaviour changes over a temperature range of 30–80 °C from a high **upper shelf** (ductile tearing, fibrous fracture surface) to a low **lower shelf** (cleavage, crystalline fracture surface). The **ductile-to-brittle transition temperature** (DBTT) is defined conventionally at an energy level (27 J or 40 J for structural steels), at 50 % shear fracture appearance, or by a lateral expansion criterion. FCC metals — austenitic stainless steels, aluminium, copper, nickel — show no transition and remain tough down to liquid-helium temperature, which is why they are used for LNG tanks (9 % Ni ferritic steels being the notable exception, made tough by fine grains and retained austenite) and cryogenic propellant tanks.
 
-<!-- FIGURE 14.5 | figures/ch14/fig-14-5-charpy-transition.png | plot | Charpy V-notch impact energy versus temperature for a low-carbon structural steel, a fine-grained normalized steel, the same steel after irradiation, a 9 % Ni steel and an austenitic stainless steel. | Content: x-axis temperature −200 to +100 °C; y-axis Charpy energy 0–300 J. Curves (tanh shape): plain C–Mn steel, coarse grain (lower shelf ~5 J, upper shelf ~150 J, 27 J transition at ~0 °C); fine-grained normalized steel (upper shelf 200 J, 27 J at ~ −50 °C); irradiated pressure-vessel steel shifted +80 °C with upper shelf reduced to ~120 J (arrow "ΔT41J shift, Ch 33"); 9 % Ni steel (27 J at below −196 °C, high shelf ~150 J); 304 austenitic (flat ~250 J, no transition). Horizontal dashed line at 27 J. Insets: fibrous (ductile) and crystalline (cleavage) fracture surface sketches. -->
+<!-- FIGURE 14.5 | figures/ch14/fig-14-5-charpy-transition.png | plot | Charpy V-notch impact energy versus temperature for a low-carbon structural steel, a fine-grained normalized steel, the same steel after irradiation, a 9 % Ni steel and an austenitic stainless steel. | Content: x-axis temperature −200 to +100 °C; y-axis Charpy energy 0–300 J. Curves (tanh shape): plain C–Mn steel, coarse grain (lower shelf ~5 J, upper shelf ~150 J, 27 J transition at ~0 °C); fine-grained normalized steel (upper shelf 200 J, 27 J at ~ −50 °C); irradiated pressure-vessel steel shifted +80 °C with upper shelf reduced to ~120 J (arrow "ΔT41J shift, Ch 41"); 9 % Ni steel (27 J at below −196 °C, high shelf ~150 J); 304 austenitic (flat ~250 J, no transition). Horizontal dashed line at 27 J. Insets: fibrous (ductile) and crystalline (cleavage) fracture surface sketches. -->
+
+![Figure 14.5 — Charpy V-notch impact energy versus temperature for a low-carbon structural steel, a fine-grained normalized steel, the same steel after irradiation, a 9 % Ni steel and an austenitic stainless steel](../figures/ch14/fig-14-5-charpy-transition.png)
+
+*Figure 14.5 — Charpy V-notch impact energy versus temperature for a low-carbon structural steel, a fine-grained normalized steel, the same steel after irradiation, a 9 % Ni steel and an austenitic stainless steel.*
 
 ### The physical origin
 
 The transition is a competition between yielding and cleavage. The yield strength of BCC metals rises steeply on cooling because the Peierls stress for screw dislocations is thermally activated (Section 12.8), whereas the **cleavage fracture stress** $\sigma_f$ — the local stress needed to propagate a microcrack nucleated at a cracked carbide or a dislocation pile-up across a grain — is almost independent of temperature. At a notch tip, plastic constraint raises the maximum tensile stress to about $2.5$–$3\,\sigma_y$. At high temperature the material yields and blunts before this reaches $\sigma_f$; below a critical temperature, constraint brings the local stress to $\sigma_f$ first and the steel cleaves (the Yoffe or Davidenkov diagram). FCC metals lack the steep temperature dependence of yield, and their dislocations remain mobile.
 
-Anything that raises $\sigma_y$ relative to $\sigma_f$, or raises constraint, raises the DBTT: higher strain rate (impact), thicker sections, sharper notches, higher carbon and phosphorus, coarse grains, neutron irradiation (which raises $\sigma_y$ by forming defect clusters, shifting the DBTT of reactor-vessel steels by tens to over 100 °C, Chapter 33) and temper embrittlement (phosphorus segregation to grain boundaries, Chapter 15). Grain refinement is the one strengthening mechanism that *lowers* it, because $\sigma_f$ scales with $d^{-1/2}$ more strongly than $\sigma_y$ does; the Cottrell–Petch analysis gives the DBTT falling roughly linearly with $\ln d^{-1/2}$. Nickel also lowers the DBTT by easing cross-slip of screw dislocations.
+Anything that raises $\sigma_y$ relative to $\sigma_f$, or raises constraint, raises the DBTT: higher strain rate (impact), thicker sections, sharper notches, higher carbon and phosphorus, coarse grains, neutron irradiation (which raises $\sigma_y$ by forming defect clusters, shifting the DBTT of reactor-vessel steels by tens to over 100 °C, Chapter 41) and temper embrittlement (phosphorus segregation to grain boundaries, Chapter 15). Grain refinement is the one strengthening mechanism that *lowers* it, because $\sigma_f$ scales with $d^{-1/2}$ more strongly than $\sigma_y$ does; the Cottrell–Petch analysis gives the DBTT falling roughly linearly with $\ln d^{-1/2}$. Nickel also lowers the DBTT by easing cross-slip of screw dislocations.
 
 > **Status of the principle: Yield–cleavage competition for the DBTT**
 > *Approximate.* A qualitative to semi-quantitative model; it correctly predicts the effects of strain rate, constraint, grain size and irradiation, but the DBTT itself depends on the test (Charpy energy level, specimen size), and transfer from Charpy to structural fracture needs empirical correlations such as the master-curve method (ASTM E1921).
 
 ### Engineering control
 
-The lessons of the Liberty ships and later bridge and offshore failures are written into today's specifications. Structural and ship steels are graded by guaranteed Charpy energy at a test temperature (for example S355J2: 27 J at −20 °C; S355ML: 27 J at −50 °C; ship grade EH36: 34 J at −40 °C); welding procedures are qualified for HAZ and weld-metal toughness (Chapter 39); reactor-vessel steels are monitored by surveillance capsules. Polymers have their own analogue: below $T_g$, or at high rates, PVC, PMMA and polystyrene fail in a brittle manner, and impact-modified grades (ABS, high-impact polystyrene, rubber-toughened nylon) contain dispersed rubber particles that cavitate and promote shear yielding (Chapter 21).
+The lessons of the Liberty ships and later bridge and offshore failures are written into today's specifications. Structural and ship steels are graded by guaranteed Charpy energy at a test temperature (for example S355J2: 27 J at −20 °C; S355ML: 27 J at −50 °C; ship grade EH36: 34 J at −40 °C); welding procedures are qualified for HAZ and weld-metal toughness (Chapter 47); reactor-vessel steels are monitored by surveillance capsules. Polymers have their own analogue: below $T_g$, or at high rates, PVC, PMMA and polystyrene fail in a brittle manner, and impact-modified grades (ABS, high-impact polystyrene, rubber-toughened nylon) contain dispersed rubber particles that cavitate and promote shear yielding (Chapter 21).
 
 ---
 
@@ -462,6 +482,10 @@ with $m\approx2$–$4$ for metals; and a final regime of accelerating growth as 
 
 <!-- FIGURE 14.6 | figures/ch14/fig-14-6-paris-law.png | plot | Fatigue crack growth rate versus stress-intensity range showing threshold, Paris and final-fracture regimes for a ferritic steel and an aluminium alloy, with the effect of load ratio. | Content: log-log axes; x-axis ΔK 1–100 MPa·m^1/2; y-axis da/dN 1e-11 to 1e-5 m/cycle. Ferritic steel R = 0.1: threshold ~7 MPa·m^1/2, Paris line C = 6.9e-12, m = 3 (passing through 4.8e-9 m/cycle at ΔK = 8.9 — worked-example start point — and 6.9e-9 at 10 MPa·m^1/2), rising steeply near Kc ~100. Aluminium 2024-T3 R = 0.1: threshold ~2.5, Paris line about 30× faster than steel at equal ΔK, final fracture near 35. Dashed curves for steel at R = 0.7 showing lower threshold (~3) and slightly higher rates (crack closure effect). Label regimes I (threshold), II (Paris), III (final fracture). -->
 
+![Figure 14.6 — Fatigue crack growth rate versus stress-intensity range showing threshold, Paris and final-fracture regimes for a ferritic steel and an aluminium alloy, with the effect of load ratio](../figures/ch14/fig-14-6-paris-law.png)
+
+*Figure 14.6 — Fatigue crack growth rate versus stress-intensity range showing threshold, Paris and final-fracture regimes for a ferritic steel and an aluminium alloy, with the effect of load ratio.*
+
 **Worked example — Fatigue life of a cracked crane hook.** A steel crane component contains a surface-breaking forging lap that behaves as an edge crack of initial depth $a_0=2$ mm. It sees a stress range $\Delta\sigma=100$ MPa (zero to 100 MPa) at every lift. Take $Y=1.12$ (assumed constant), $C=6.9\times10^{-12}$ m/cycle with $\Delta K$ in MPa m$^{1/2}$, and $m=3$, typical for ferritic steel. Inspection rules require repair before the crack reaches 20 mm. How many lifts does that take?
 
 Initial $\Delta K=1.12\times100\times\sqrt{\pi\times0.002}=8.9$ MPa m$^{1/2}$, just above threshold; initial growth rate $6.9\times10^{-12}\times8.9^3=4.8\times10^{-9}$ m/cycle. Integrating the Paris law with $m=3$,
@@ -484,7 +508,7 @@ Elber (1970) observed that fatigue cracks close before the load reaches its mini
 
 ### Fatigue in practice
 
-At a weld toe — a sharp notch with tensile residual stress and pre-existing flaws — fatigue strength is almost independent of parent-steel strength, so codes (Eurocode 3, BS 7608, IIW) assign fixed S–N curves by detail category, and high-strength steel helps only with toe grinding or peening. Coronary stents, which see about $4\times10^7$ heartbeat cycles a year, are designed with Goodman-type margins (Chapter 31).
+At a weld toe — a sharp notch with tensile residual stress and pre-existing flaws — fatigue strength is almost independent of parent-steel strength, so codes (Eurocode 3, BS 7608, IIW) assign fixed S–N curves by detail category, and high-strength steel helps only with toe grinding or peening. Coronary stents, which see about $4\times10^7$ heartbeat cycles a year, are designed with Goodman-type margins (Chapter 39).
 
 ---
 
@@ -507,12 +531,12 @@ with $e^T$ the volumetric transformation strain and $V_f$ the fraction of transf
 > **Status of the principle: Transformation-toughening shielding estimate**
 > *Approximate.* From the McMeeking–Evans continuum analysis of a dilatant zone of uniform height in steady state; it ignores the shear component of the transformation and zone-shape details, and the estimate can be off by a factor of about two.
 
-Transformation toughening makes zirconia the toughest single-phase oxide ceramic, used in femoral heads, dental crowns, wire-drawing dies and oxygen-sensor electrolytes. The same metastability allows **low-temperature degradation**, slow surface transformation in water at body temperature, which caused failures of a batch of zirconia femoral heads in 2001; zirconia-toughened alumina is now preferred for hip bearings (Chapter 31).
+Transformation toughening makes zirconia the toughest single-phase oxide ceramic, used in femoral heads, dental crowns, wire-drawing dies and oxygen-sensor electrolytes. The same metastability allows **low-temperature degradation**, slow surface transformation in water at body temperature, which caused failures of a batch of zirconia femoral heads in 2001; zirconia-toughened alumina is now preferred for hip bearings (Chapter 39).
 
 ### Crack bridging and other mechanisms
 
 - **Grain bridging.** In coarse or elongated-grain alumina and in self-reinforced silicon nitride (grown with rod-like β-grains), intact grains span the crack behind its tip and must be pulled out by friction. Silicon nitride reaches 6–10 MPa m$^{1/2}$ this way and is used for bearing balls, cutting tools and diesel-engine parts.
-- **Fibre bridging and pull-out.** In ceramic-matrix composites (SiC fibres in SiC, oxide fibres in alumina), a weak fibre–matrix interface coating (pyrolytic carbon or BN) deflects cracks along the fibres, which then bridge and pull out. Toughness rises to 20–30 MPa m$^{1/2}$ and the stress–strain curve becomes "graceful", so CMC shrouds and combustor liners now fly in jet engines (Chapters 23 and 33).
+- **Fibre bridging and pull-out.** In ceramic-matrix composites (SiC fibres in SiC, oxide fibres in alumina), a weak fibre–matrix interface coating (pyrolytic carbon or BN) deflects cracks along the fibres, which then bridge and pull out. Toughness rises to 20–30 MPa m$^{1/2}$ and the stress–strain curve becomes "graceful", so CMC shrouds and combustor liners now fly in jet engines (Chapters 23 and 41).
 - **Crack deflection and microcracking.** Particles or platelets tilt and twist the crack, and stress-induced microcracks dissipate energy around it; both give modest gains.
 - **Ductile-phase toughening.** Metal particles (cobalt in WC–Co cemented carbides, nickel in alumina) bridge cracks and deform plastically; WC–Co reaches 10–20 MPa m$^{1/2}$.
 
@@ -561,7 +585,7 @@ A material whose bend strength appears to be 400 MPa must be designed at 70 MPa 
 
 ### Weibull beyond ceramics
 
-The same statistics describe fibre strength in composites (Chapter 22), component lifetimes in reliability engineering (Chapter 36), glass façade panels and the size effect in concrete beams: when failure is governed by the worst of many independent defects, bigger is weaker and scatter must be designed for.
+The same statistics describe fibre strength in composites (Chapter 22), component lifetimes in reliability engineering (Chapter 44), glass façade panels and the size effect in concrete beams: when failure is governed by the worst of many independent defects, bigger is weaker and scatter must be designed for.
 
 ---
 
@@ -575,10 +599,10 @@ The same statistics describe fibre strength in composites (Chapter 22), componen
 | Where does the WLF equation come from, and how does $T_g$ depend on molecular structure? | Chapter 20 |
 | How do polymers craze and crack under long-term load, and how is the design life of plastic pipe set? | Chapter 21 |
 | How do fibres and laminates fail, and what is compression after impact? | Chapters 22 and 23 |
-| How do irradiation, hydrogen and high temperature shift the DBTT and creep life? | Chapters 32 and 33 |
-| How do corrosion and environment interact with fatigue and cracking? | Chapter 35 |
-| How are fracture surfaces read to identify fatigue, cleavage and creep in a failure investigation? | Chapter 36 |
-| How are welds assessed for toughness and fatigue? | Chapter 39 |
-| How are creep and fracture simulated across scales? | Chapter 46 |
+| How do irradiation, hydrogen and high temperature shift the DBTT and creep life? | Chapters 40 and 41 |
+| How do corrosion and environment interact with fatigue and cracking? | Chapter 43 |
+| How are fracture surfaces read to identify fatigue, cleavage and creep in a failure investigation? | Chapter 44 |
+| How are welds assessed for toughness and fatigue? | Chapter 47 |
+| How are creep and fracture simulated across scales? | Chapter 56 |
 
 **Next:** Chapter 15 opens Part IV with the most important engineering alloy family of all, steel, where every mechanism of Chapters 9–14 — transformation, precipitation, grain refinement, martensite, the ductile–brittle transition — is put to work through composition and heat treatment.

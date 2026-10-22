@@ -71,6 +71,10 @@ Figure 23.1 shows the geometry and resultants.
 
 <!-- FIGURE 23.1 | figures/ch23/fig-23-1-laminate-geometry.png | schematic | Laminate geometry in classical laminate theory: ply numbering and z-coordinates, linear strain and piecewise-constant stress through the thickness, and the force and moment resultants. | Content: left: exploded stack of eight plies [0/±45/90]_s, each with fibre lines at its angle, z-axis pointing down through the stack, mid-plane dashed, interface coordinates z_0 = −h/2 … z_8 = +h/2 labelled. Centre: through-thickness plot of strain ε_x(z) under combined stretching and bending (straight inclined line). Right: through-thickness plot of σ_x(z) for the same deformation, jumping at each ply interface (large in 0° plies, small in 90° plies, intermediate in ±45°). Bottom: small plate element with N_x, N_y, N_xy arrows on edges and M_x, M_y, M_xy double-headed moment arrows, units N/mm and N mm/mm. -->
 
+![Figure 23.1 — Laminate geometry in classical laminate theory: ply numbering and z-coordinates, linear strain and piecewise-constant stress through the thickness, and the force and moment resultants](../figures/ch23/fig-23-1-laminate-geometry.png)
+
+*Figure 23.1 — Laminate geometry in classical laminate theory: ply numbering and z-coordinates, linear strain and piecewise-constant stress through the thickness, and the force and moment resultants.*
+
 ### Coupling and how to avoid it
 
 The terms of $[A]$, $[B]$ and $[D]$ that would be zero for an isotropic plate describe coupling between deformation modes:
@@ -93,6 +97,10 @@ A laminate with equal stiffness in every in-plane direction — **quasi-isotropi
 Figure 23.2 shows what the coupling terms do to a flat plate.
 
 <!-- FIGURE 23.2 | figures/ch23/fig-23-2-laminate-coupling.png | schematic | Coupling effects in laminates: extension–shear in an unbalanced laminate, extension–bending and thermal warping of an unsymmetric laminate, and bend–twist coupling. | Content: three columns. (a) Unbalanced [30]_4 coupon under tension N_x: original rectangle (dashed) and deformed parallelogram showing shear, label "A_16 ≠ 0". (b) Unsymmetric [0/90]_T plate after cooling 150 K from cure: saddle/cylindrical curvature with radius ≈ 98 mm for 0.25 mm total thickness, label "B ≠ 0: thermal warping"; beside it a flat [0/90]_s plate, label "symmetric: B = 0". (c) Cantilever [+30/−30/+30/−30]-type strip under tip bending load showing tip twist, label "D_16 ≠ 0: bend–twist coupling (aeroelastic tailoring)". -->
+
+![Figure 23.2 — Coupling effects in laminates: extension–shear in an unbalanced laminate, extension–bending and thermal warping of an unsymmetric laminate, and bend–twist coupling](../figures/ch23/fig-23-2-laminate-coupling.png)
+
+*Figure 23.2 — Coupling effects in laminates: extension–shear in an unbalanced laminate, extension–bending and thermal warping of an unsymmetric laminate, and bend–twist coupling.*
 
 **Worked example — ABD matrices of three carbon/epoxy laminates.** Use T300/epoxy plies (Table 22.3: $Q_{11}=181.8$, $Q_{22}=10.35$, $Q_{12}=2.90$, $Q_{66}=7.17$ GPa) of thickness 0.125 mm.
 
@@ -161,6 +169,10 @@ Figure 23.3 compares the envelopes.
 
 <!-- FIGURE 23.3 | figures/ch23/fig-23-3-failure-envelopes.png | plot | Failure envelopes of a T300/epoxy ply in the σ1–σ2 plane (τ12 = 0) and off-axis uniaxial strength versus angle, for the maximum stress, Tsai–Hill and Tsai–Wu criteria. | Content: left panel: x-axis σ1 −1800 to +1800 MPa, y-axis σ2 −300 to +100 MPa (note very different scales). Strengths X_t = X_c = 1500, Y_t = 40, Y_c = 246 MPa. Maximum-stress rectangle; Tsai–Hill piecewise ellipse; Tsai–Wu ellipse (F12 = −½√(F11F22)), shifted towards compression in σ2. Label quadrants. Right panel: x-axis θ 0–90°, y-axis strength 10–2000 MPa on log scale: Tsai–Hill (1500 at 0°, 690 at 5°, 370 at 10°, 245 at 15°, 112 at 30°, 69 at 45°, 50.5 at 60°, 40 at 90°) and maximum stress (1500, 783, 398, 272, 157, 80, 53, 40) with regions labelled "fibre", "shear", "transverse" for the max-stress mode. -->
 
+![Figure 23.3 — Failure envelopes of a T300/epoxy ply in the σ1–σ2 plane (τ12 = 0) and off-axis uniaxial strength versus angle, for the maximum stress, Tsai–Hill and Tsai–Wu criteria](../figures/ch23/fig-23-3-failure-envelopes.png)
+
+*Figure 23.3 — Failure envelopes of a T300/epoxy ply in the σ1–σ2 plane (τ12 = 0) and off-axis uniaxial strength versus angle, for the maximum stress, Tsai–Hill and Tsai–Wu criteria.*
+
 ### First-ply failure, last-ply failure and residual stress
 
 In a laminate the first ply to fail rarely ends the laminate's life. **First-ply failure** (FPF) is usually transverse matrix cracking in the plies most nearly perpendicular to the load. The cracks multiply, the cracked plies lose transverse and shear stiffness, and their load is shed to neighbours. **Last-ply failure** (LPF) is fibre fracture in the load-aligned plies. Progressive failure analysis follows this sequence by **ply discount**: when a ply fails in a matrix mode its $E_2$ and $G_{12}$ are reduced (to zero or to a small fraction), the ABD matrix is recomputed and the load increased again. Continuum damage mechanics replaces the sudden discount with gradual stiffness degradation driven by damage variables, and is the basis of modern finite-element progressive damage models.
@@ -176,6 +188,10 @@ In a laminate the first ply to fail rarely ends the laminate's life. **First-ply
 Two lessons follow. First, residual cure stresses are not a correction but often the largest single term in matrix-cracking predictions; that is why aerospace resins were toughened in the 1980s and why thin plies, which resist transverse cracking better than thick ones (the **in-situ strength** effect, which can raise effective $Y_t$ by 50–100 % in plies 0.1 mm thick), are favoured. Second, matrix cracks are not structurally fatal in tension, but they open paths for moisture and fuel, lower compressive and shear stiffness, and initiate delaminations; pressure vessels and fuel tanks are therefore often designed to first-ply failure, primary structure to ultimate. Figure 23.4 shows the load–strain record.
 
 <!-- FIGURE 23.4 | figures/ch23/fig-23-4-progressive-failure.png | plot | Progressive failure of a T300/epoxy [0/90]s laminate in tension, with and without cure residual stress. | Content: x-axis laminate strain ε_x 0–0.9 %; y-axis average laminate stress 0–850 MPa. Curve: linear slope 96 GPa; first-ply failure marked at 76 MPa (ε ≈ 0.08 %) for the laminate with residual stress (ΔT = −150 K), and alternative FPF marker at 374 MPa (ε ≈ 0.39 %) for the hypothetical stress-free laminate; after FPF a slightly reduced slope ≈ 91 GPa; final failure (last-ply failure, 0° fibre fracture) at about 760 MPa and ε ≈ 0.83 %. Small inset: edge view of the laminate showing transverse cracks multiplying in the inner 90° plies with increasing load (crack spacing decreasing), label "matrix crack saturation". -->
+
+![Figure 23.4 — Progressive failure of a T300/epoxy 0/90s laminate in tension, with and without cure residual stress](../figures/ch23/fig-23-4-progressive-failure.png)
+
+*Figure 23.4 — Progressive failure of a T300/epoxy [0/90]s laminate in tension, with and without cure residual stress.*
 
 ---
 
@@ -210,6 +226,10 @@ The interlaminar normal stress depends on the stacking sequence, not just on the
 Mode II toughness is several times mode I, which is why delaminations grow most easily under peel and why bonded and co-cured joints are designed to minimize peel stress. Numerically, delamination growth is predicted with the **virtual crack closure technique** (VCCT) or with **cohesive-zone elements** placed between plies, whose traction–separation law is calibrated so that its area equals $G_c$. Through-thickness reinforcement — stitching, tufting, z-pins, and 3D weaving — raises $G_{Ic}$ several-fold by bridging the crack, at some cost in in-plane properties.
 
 <!-- FIGURE 23.5 | figures/ch23/fig-23-5-free-edge-and-impact.png | schematic | Interlaminar stresses near a laminate free edge, and the internal damage under a low-velocity impact. | Content: left: cut-away of a [±45]_s coupon in tension: in-plane shear τ_xy of each ply constant across the width in the interior and dropping to zero at the free edge over a boundary layer of width ≈ h; interlaminar shear τ_xz rising sharply at the +45/−45 interface near the edge (plotted against y/b from 0 to 1). Below: mid-plane σ_z versus y/b near the edge for [±30/90]_s (tensile at the edge, labelled "delamination-prone") versus [90/±30]_s (compressive). Right: cross-section through an impacted quasi-isotropic laminate, 4–6 mm thick: small surface dent at top (≈0.3 mm, "barely visible"), conical array of delaminations widening towards the back face (each interface delamination shaped like a peanut aligned with the ply below), matrix cracks linking them, back-face fibre splitting. Inset C-scan plan view of the projected delamination area (≈ 25–40 mm across) much larger than the dent. -->
+
+![Figure 23.5 — Interlaminar stresses near a laminate free edge, and the internal damage under a low-velocity impact](../figures/ch23/fig-23-5-free-edge-and-impact.png)
+
+*Figure 23.5 — Interlaminar stresses near a laminate free edge, and the internal damage under a low-velocity impact.*
 
 ---
 
@@ -287,6 +307,10 @@ $$
 
 <!-- FIGURE 23.6 | figures/ch23/fig-23-6-sandwich-failure-modes.png | schematic | A sandwich beam in three-point bending and its failure modes. | Content: top: sandwich beam, faces t_f = 1 mm CFRP, core c = 20 mm honeycomb, span L, central load P; through-thickness distributions of bending normal stress (concentrated in faces, near zero in core) and shear stress (nearly uniform in core). Annotate D ≈ E_f t_f d²/2 and S ≈ G_c d²/c. Bottom row of six small sketches: face fracture (tension face), face wrinkling (short-wave buckles of the compression face into the core), intracell dimpling (face buckling into honeycomb cells), core shear failure (45° cracks in core), core indentation under the load, face–core debond. Small bar inset: equal-mass bending stiffness, sandwich 146 × solid 2.63 mm plate. -->
 
+![Figure 23.6 — A sandwich beam in three-point bending and its failure modes](../figures/ch23/fig-23-6-sandwich-failure-modes.png)
+
+*Figure 23.6 — A sandwich beam in three-point bending and its failure modes.*
+
 ---
 
 ## 23.6 Manufacturing polymer-matrix composites
@@ -348,7 +372,7 @@ where $\phi=1-V_f$ is the preform porosity.
 | AFP / ATL | Prepreg tow or tape | 0.55–0.65 | <1 (after cure) | hours | Fuselage barrels, wing skins |
 | Injection moulding (short fibre) | Chopped in pellets | 0.10–0.25 | <1 | 20–90 s | Housings, intake manifolds, brackets |
 
-> **Boundary.** Polymer flow, cure kinetics and the rheology of thermoset and thermoplastic matrices are developed in Chapters 19 and 21; here only the composite-specific steps are treated. Recycling of composites is taken up in Chapter 49.
+> **Boundary.** Polymer flow, cure kinetics and the rheology of thermoset and thermoplastic matrices are developed in Chapters 19 and 21; here only the composite-specific steps are treated. Recycling of composites is taken up in Chapter 59.
 
 ---
 
@@ -361,7 +385,7 @@ MMCs combine a metallic matrix — mostly aluminium, also magnesium, titanium an
 Processing routes are:
 
 - **Stir casting**: SiC or Al₂O₃ particles stirred into molten aluminium and cast. Cheap, but limited to about 20–25 vol% and prone to clustering and reaction ($4\mathrm{Al}+3\mathrm{SiC}\rightarrow\mathrm{Al_4C_3}+3\mathrm{Si}$, a brittle, moisture-sensitive carbide; adding Si to the melt suppresses it).
-- **Powder metallurgy**: blending alloy and ceramic powders, compacting, and extruding or forging (Chapter 38). Better distribution, up to about 40 vol%.
+- **Powder metallurgy**: blending alloy and ceramic powders, compacting, and extruding or forging (Chapter 46). Better distribution, up to about 40 vol%.
 - **Squeeze casting and pressure infiltration** of a porous ceramic preform with molten metal, reaching 50–70 vol% — the route for AlSiC electronic baseplates.
 - **Diffusion bonding** of foil–fibre–foil stacks for continuous-fibre titanium MMCs (SiC monofilament in Ti), used in a few aero-engine components.
 
@@ -387,7 +411,7 @@ The key is a deliberately **weak interface**. Fibres are coated with a thin inte
 
 Processing routes are **chemical vapour infiltration** (CVI), which deposits SiC within a fibre preform from methyltrichlorosilane gas over weeks, leaving 10–15 % porosity; **polymer infiltration and pyrolysis** (PIP), which repeatedly impregnates and pyrolyses a preceramic polymer; and **melt infiltration** (MI), which infiltrates a carbon-containing preform with molten silicon to react to SiC, giving near-full density but residual free silicon that limits service to about 1,350 °C. **C/C composites**, made by CVI of carbon or by repeated pitch impregnation, combine low density, high thermal conductivity and strength retention to over 2,000 °C in inert atmospheres, which makes them the material of aircraft and Formula 1 brakes and of re-entry nose caps — but they oxidize in air above about 450 °C and need protective coatings. C/SiC brakes now appear on high-performance cars.
 
-SiC/SiC CMCs entered commercial aero-engine service in the 2010s as high-pressure turbine shrouds, with a third of the density of the nickel superalloys they replace and capability about 150–200 K higher, cutting cooling air requirements (Chapter 33). Their limiting issues are oxidation of the interphase through matrix cracks at intermediate temperatures, recession of SiC by water vapour (mitigated by environmental barrier coatings) and cost.
+SiC/SiC CMCs entered commercial aero-engine service in the 2010s as high-pressure turbine shrouds, with a third of the density of the nickel superalloys they replace and capability about 150–200 K higher, cutting cooling air requirements (Chapter 41). Their limiting issues are oxidation of the interphase through matrix cracks at intermediate temperatures, recession of SiC by water vapour (mitigated by environmental barrier coatings) and cost.
 
 > **Status of the principle: Weak-interface toughening of CMCs**
 > *Approximate.* The crack-deflection criterion and the Aveston–Cooper–Kelly matrix-cracking stress follow from fracture mechanics and shear-lag analysis under idealized assumptions (uniform fibre spacing, constant frictional sliding stress, single fibre strength); they predict the trends that guide interphase design, while quantitative design relies on measured stress–strain behaviour.
@@ -400,13 +424,13 @@ SiC/SiC CMCs entered commercial aero-engine service in the 2010s as high-pressur
 |---|---|
 | How are ply properties obtained from fibre and matrix, and how do they transform with angle? | Chapter 22 (micromechanics, $Q$ and $\bar Q$) |
 | What fracture-mechanics concepts ($G$, $K$, R-curves, Weibull) underlie delamination and CMC toughening? | Chapter 14 (fracture, toughening, statistics) |
-| How do composites behave under cyclic loading and long-term environmental exposure? | Chapter 14 (fatigue), Chapter 36 (degradation and failure analysis) |
-| How are composite structures joined to each other and to metals? | Chapter 39 (adhesive bonding, mechanical fastening, dissimilar joints) |
-| How are CMCs and C/C used in turbines, hypersonic vehicles and re-entry? | Chapter 33 (extreme environments) |
+| How do composites behave under cyclic loading and long-term environmental exposure? | Chapter 14 (fatigue), Chapter 44 (degradation and failure analysis) |
+| How are composite structures joined to each other and to metals? | Chapter 47 (adhesive bonding, mechanical fastening, dissimilar joints) |
+| How are CMCs and C/C used in turbines, hypersonic vehicles and re-entry? | Chapter 41 (extreme environments) |
 | How do moisture, temperature and expansion mismatch interact in thermal design? | Chapter 24 (thermal properties, thermal stress) |
-| How are internal defects (voids, delaminations) detected? | Chapter 42 (laboratory characterization), Chapter 43 (tomography) |
-| How are composite laminates modelled in multiscale simulations? | Chapter 46 (multiscale modelling and ICME) |
-| How are composites chosen against metals for weight-critical parts? | Chapter 48 (materials selection) |
-| How can thermoset composites be recycled at end of life? | Chapter 49 (recycling, circular economy) |
+| How are internal defects (voids, delaminations) detected? | Chapter 52 (laboratory characterization), Chapter 53 (tomography) |
+| How are composite laminates modelled in multiscale simulations? | Chapter 56 (multiscale modelling and ICME) |
+| How are composites chosen against metals for weight-critical parts? | Chapter 58 (materials selection) |
+| How can thermoset composites be recycled at end of life? | Chapter 59 (recycling, circular economy) |
 
 **Next:** Chapter 24 opens Part VI with the thermal properties of materials — how solids store, conduct and expand with heat, and how temperature changes turn into stress.

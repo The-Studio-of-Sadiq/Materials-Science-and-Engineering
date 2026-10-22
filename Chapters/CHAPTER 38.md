@@ -1,449 +1,387 @@
-# Chapter 38 — Casting, Forming and Powder Processing
+# Chapter 38 — Nanomaterials and Two-Dimensional Materials
 
-*Part IX · Processing and Manufacturing*
+*Part VIII · Advanced and Emerging Materials*
 
-A car maker is choosing how to make the lower control arm of a front suspension. Three suppliers quote in nearly the same aluminium alloy family. The first offers a low-pressure die casting in A356-T6: cheap, near net shape, with a hollow section that saves mass. The second offers a closed-die forging in 6082-T6: more machining and more expensive, but with grain flow that follows the arm's contour. The third offers a press-and-sinter part in an aluminium powder alloy. On a static strength test all three pass. In a fatigue test at the same stress amplitude the cast arms fail first, from shrinkage pores a few hundred micrometres across near the ball joint; the forged arms last several times longer; the sintered arms fail from residual porosity at the surface. The chemistry is almost the same; the *route* has put different defects in different places. The same choice faces a turbine maker between investment-cast and forged blades, a civil contractor between rolled and cast steel nodes, an implant maker between forged and injection-moulded titanium, and a gear maker between machined bar and sintered powder.
+A car tyre made in 1910 was white, wore out in a few thousand kilometres and cracked in sunlight. Within two decades every tyre in the world was black, because manufacturers had learned that adding about 30 % by mass of carbon black, a soot of fused carbon particles 20–80 nm across, raised the tread's abrasion resistance several-fold and its tear strength and UV resistance with it. Carbon black is still the largest-tonnage nanomaterial made, at over 10 million tonnes a year, and nobody called it "nano" for most of its history. Today the same length scale appears everywhere: in the 1–2 nm platinum particles that carry the catalysis in a fuel cell and a catalytic converter, the 20 nm copper lines whose resistivity is three times the handbook value, the cadmium-free quantum dots whose diameter sets the colour of a television pixel, the electrodeposited nickel with 15 nm grains that is five times harder than ordinary nickel, and the few-layer graphene platelets now blended into concrete, coatings and battery electrodes. In each case a property has stopped being a property of the substance alone and has become a property of its **size**. This chapter asks when that happens, why, and what engineering can and cannot do with it.
 
-> **How does each bulk shaping route — casting, plastic deformation, powder consolidation — create the microstructure and the defects of the finished part?**
-> **Which simple physical rules predict how big a riser must be, how hard a mill must push, how far a sheet can be stretched and how much a sintered part will shrink?**
+> **At what size does a material stop behaving like its bulk self, and which properties change first?**
+> **What do nanoparticles, nanotubes, graphene and nanocrystalline metals offer engineers, how are they made and measured, and why are they mostly used as additives rather than as stand-alone materials?**
 
 | Concept | Engineering destination |
 |---|---|
-| Casting processes, feeding, Chvorinov's rule | Engine blocks, pump housings, turbine blades, riser design |
-| Casting defects | Fatigue of cast suspension parts, pressure tightness of valve bodies |
-| Rolling, forging, extrusion, drawing mechanics | Plate and strip mills, crankshafts, window profiles, wire |
-| Sheet forming, springback, deep drawing | Car body panels, beverage cans, aircraft skins |
-| Hot, warm and cold working; Zener–Hollomon parameter | Choice of forming temperature for steel, aluminium, titanium, magnesium |
-| Forming limit diagrams, $n$ and $r$ values | Stamping try-out, sheet-grade selection |
-| Thermomechanical processing, texture | HSLA pipeline and ship plate, can-body sheet, electrical steel |
-| Powder production, compaction, sintering | Press-and-sinter gears, self-lubricating bearings, hardmetal tools |
-| HIP and metal injection moulding | Superalloy discs, porosity-free castings, small complex medical parts |
+| Surface-to-volume ratio, specific surface area | Catalysts, sorbents, battery electrodes, sintering of nanopowders and printed inks |
+| Melting-point depression (Gibbs–Thomson) | Low-temperature sintering of silver and copper pastes, nanoparticle stability in catalysts |
+| Mean-free-path size effects | Interconnect resistivity, thermal conductivity of nanostructured thermoelectrics |
+| Quantum confinement, Brus equation | Quantum-dot displays and lighting, bio-imaging labels, photodetectors |
+| Carbon nanotubes, chirality | Conductive additives in Li-ion electrodes, composites, field emitters |
+| Graphene and other 2D materials | Barrier coatings, heat spreaders, transparent electrodes, membranes, ultrathin transistors |
+| Nanocrystalline metals, inverse Hall–Petch | Wear-resistant electrodeposited coatings, high-strength conductors, MEMS |
+| Nanocomposites, percolation, tortuosity | Antistatic plastics, gas-barrier packaging, low-rolling-resistance tyres |
+| Top-down and bottom-up synthesis | Choosing a route that delivers the size, purity and tonnage needed |
+| Nano-characterization and safety | Quality control, occupational exposure limits, regulation of nanoforms |
 
-**Roadmap.** Three routes and how they differ (38.1) → casting processes, design and defects (38.2–38.3) → mechanics of deformation processes (38.4) → hot, warm and cold working and formability (38.5) → thermomechanical processing and texture (38.6) → powder metallurgy, HIP and MIM (38.7) → ceramics and glasses in brief (38.8) → how the route reaches the property sheet (38.9).
+**Roadmap.** Why size changes properties: surfaces, melting and transport (38.1) → confinement of electrons (38.2) → zero- and one-dimensional objects: nanoparticles, quantum dots, nanowires and nanotubes (38.3) → two-dimensional materials (38.4) → nanostructured bulk: nanocrystalline metals (38.5) and nanocomposites (38.6) → how nanomaterials are made (38.7) → how they are measured and handled safely (38.8).
 
-> **Boundary.** The physics of solidification (nucleation, dendrites, constitutional supercooling, Scheil segregation) is in Chapter 9; recovery, recrystallization and grain growth in Chapter 10; flow stress and yield criteria in Chapter 13. This chapter uses those results to explain processes. Full forming mechanics (slip-line fields, finite-element process simulation) belongs to manufacturing engineering; only the estimates a materials engineer needs are given.
-
----
-
-## 38.1 Three routes to a shape
-
-Every metal part begins as liquid metal, and it can be given its shape in three ways.
-
-1. **Casting**: pour the liquid into a mould shaped like the part. Complex shapes are made in one step; the microstructure is a solidification structure, and the defects are those of freezing — shrinkage, gas porosity, segregation, inclusions.
-2. **Deformation processing**: cast a simple ingot, slab or billet, then shape it plastically by rolling, forging, extrusion, drawing or sheet forming. Deformation breaks up the cast structure and welds pores shut, and recrystallization produces a fine, uniform *wrought* structure. Shape complexity is limited and the equipment is heavy.
-3. **Powder processing**: atomize the liquid into powder, press it into shape and bond the particles by sintering or hot isostatic pressing. This reaches shapes and compositions the other routes cannot — immiscible mixtures, refractory metals, segregation-free alloys, net-shape parts without machining waste. Its characteristic defect is residual porosity.
-
-Most parts combine routes: a forging starts as a cast ingot; a cast turbine blade is hot isostatically pressed; a sintered gear is cold sized. Joining (Chapter 39) and additive manufacturing (Chapter 40), which combines local melting with powder feedstock, complete the set (Figure 38.1).
-
-| Route | Shape complexity | Typical tolerance | Microstructure | Characteristic defects | Examples |
-|---|---|---|---|---|---|
-| Sand casting | Very high, any size | ±0.5–2 mm | Coarse dendritic, segregated | Shrinkage, gas pores, sand inclusions | Engine blocks, pump casings |
-| Investment casting | Very high, small–medium | ±0.1–0.3 mm | Dendritic; directional or single crystal possible | Shrinkage, inclusions, freckles | Turbine blades, implants |
-| High-pressure die casting | High, thin walls | ±0.05–0.2 mm | Fine skin, porous core | Gas porosity, cold shuts | Gearbox housings, car nodes |
-| Forging | Moderate | ±0.2–1 mm | Wrought, grain flow along contour | Laps, folds | Crankshafts, landing gear, discs |
-| Rolling, extrusion, drawing | Constant section | ±0.01–0.5 mm | Wrought, textured | Edge cracks, tearing, central bursts | Plate, profiles, wire, tube |
-| Sheet forming | Thin shells | ±0.1–0.5 mm | Inherited from sheet | Splits, wrinkles, springback | Car panels, cans |
-| Press-and-sinter PM | Moderate, small | ±0.02–0.1 mm | Fine, 8–14 % porous | Porosity, density gradients | Gears, bushes |
-| MIM, powder HIP | High (MIM) / moderate (HIP) | ±0.3–0.5 % / machined | Fine, near full density | Distortion, prior-particle boundaries | Surgical tools, superalloy discs |
-
-*Typical ranges; tolerances depend strongly on part size and alloy.*
-
-<!-- FIGURE 38.1 | figures/ch38/fig-38-1-process-routes.png | flowchart | The three bulk shaping routes from liquid metal to finished part, with the characteristic microstructure and defects of each. | Content: left box 'Liquid metal'; three horizontal lanes. Casting: mould filling → solidification → shake-out → HIP (optional) → machining; side note 'dendritic; shrinkage, gas pores, segregation'. Deformation: ingot/continuous-cast slab → homogenize → hot rolling/forging/extrusion → cold work → anneal or heat treat; side note 'wrought, recrystallized, textured; laps, edge cracks'. Powder: atomization → compaction or MIM moulding → sintering or HIP → sizing; side note 'fine grains, porosity 0–15 %'. Arrows from casting and powder lanes to 'Ch 40 additive manufacturing'; from all lanes to 'Ch 39 joining'. -->
+> **Boundary.** Quantum confinement is treated here with the particle-in-a-box and effective-mass models of Chapter 31, as a materials phenomenon; rigorous quantum mechanics belongs to Engineering Physics. The electronic-device side of nanomaterials (nanosheet and 2D-channel transistors, interconnect scaling, quantum-dot lasers) is treated in more depth in Chapters 25, 33 and 35.
 
 ---
 
-## 38.2 Casting processes and casting design
+## 38.1 Size effects in classical materials science
 
-### Mould types
+### 38.1.1 Two ways size enters
 
-Casting processes differ mainly in the mould and in how the metal is driven into it.
+Size changes material behaviour through two different mechanisms, which it helps to keep apart:
 
-- **Sand casting** uses silica (or zircon, chromite) sand bonded by clay and water ("green sand") or a chemical binder, formed around a pattern; internal cavities are made with sand **cores**. Any alloy, any size from 1 kg to 200 t, lowest tooling cost; the insulating sand makes cooling slow and the structure coarse.
-- **Investment (lost-wax) casting** builds a ceramic shell around a wax pattern, melts out the wax and fires the shell. Accuracy and finish are excellent; it makes nickel-base turbine blades and Co–Cr and titanium implants.
-- **Permanent-mould** and **low-pressure die casting** use reusable metal dies; low pressure (0.03–0.1 MPa) pushes metal quietly up a riser tube, giving sound aluminium wheels and suspension parts.
-- **High-pressure die casting (HPDC)** injects Al, Mg or Zn alloys at 20–100 m/s gate velocity and holds them at 50–100 MPa while they freeze. Cycles take seconds and walls can be 1–3 mm thick, but the jet entrains air, so conventional HPDC parts cannot be solution treated (pores blister) or welded. Vacuum HPDC removes most of the air and now produces single structural "giga-castings" that replace dozens of stamped car-body parts.
-- **Continuous casting** withdraws a solidifying shell from a water-cooled oscillating copper mould; about 96 % of the world's steel is continuously cast into slabs, blooms or billets before rolling.
-- **Centrifugal casting** makes pipe, cylinder liners and bimetallic rolls; **directional solidification** withdraws an investment mould slowly from a hot zone so grains grow as ⟨001⟩ columns, and a helical grain selector produces single-crystal turbine blades (Chapter 16).
+1. **Classical size effects.** The fraction of atoms at a surface or interface becomes significant, or the object becomes smaller than a characteristic length of some process: the mean free path of electrons or phonons, the spacing of dislocation sources, a magnetic domain-wall width, the critical nucleus size. No quantum mechanics beyond that already in the bulk material is needed.
+2. **Quantum size effects.** The object becomes comparable to the de Broglie wavelength of its electrons (or the radius of its excitons), and their allowed energies become discrete. This is quantum confinement (Section 38.2).
 
-### Fluidity and mould filling
+Classical effects typically appear below about 100 nm. Quantum effects appear in semiconductors below about 10–20 nm, but in metals only below about 2 nm, because electrons at the Fermi level of a metal have wavelengths of about 0.5 nm. A **nanomaterial** is conventionally one with at least one external dimension, or an internal structure, between 1 and 100 nm; the European Union's regulatory definition counts a material as nano if at least half of its particles by number have one or more external dimensions in that range. The boundaries are conventions; what matters physically is which characteristic length the structure has passed below.
 
-**Fluidity**, the length a metal flows in a standard spiral channel before freezing, increases with superheat and is highest for pure metals and eutectics, which freeze with a smooth front. Alloys with a wide freezing range form a mushy dendrite network at the flow tip that chokes the channel. This is one reason casting alloys sit near eutectics: Al–Si alloys (A356 at 7 % Si, A380 at 8.5 % Si, eutectic 12.6 % Si), grey iron near the Fe–C eutectic, and solders.
+### 38.1.2 Surface-to-volume ratio
 
-The gating system must fill the mould without turbulence. When the surface of liquid aluminium folds over, its oxide skin is entrained as a doubled film, a **bifilm**, which is a ready-made crack. Gate velocities below about 0.5 m/s, tapered sprues and ceramic foam filters keep films out.
-
-### Solidification time: Chvorinov's rule
-
-In a sand mould, freezing is limited by how fast the mould absorbs heat. Treat the mould as a semi-infinite solid at $T_0$ whose surface is raised suddenly to the freezing temperature $T_m$; the heat it absorbs per unit area by time $t$ is
+For a sphere of diameter $d$ the surface-to-volume ratio is $A/V=6/d$. Dividing by density gives the **specific surface area** (SSA), the surface per unit mass, which is the number that matters for catalysts, adsorbents and electrodes:
 
 $$
-Q_A(t)=\frac{2}{\sqrt{\pi}}\,(T_m-T_0)\sqrt{k_m\rho_m c_m\,t}
+\mathrm{SSA}=\frac{6}{\rho\,d}
 $$
 
-Equating $Q_A A$ to the latent heat and superheat of the casting, $\rho_s V(L+c_s\Delta T_s)$, gives **Chvorinov's rule**:
+> **Status of the principle: Surface-to-volume scaling, $A/V=6/d$**
+> *Derived.* Pure geometry for spheres (and, with a different constant, for any fixed shape); real powders deviate because of polydispersity, agglomeration, necks and internal porosity, which is why measured gas-adsorption areas are usually lower than the geometric estimate.
+
+**Worked example — what fraction of atoms is at the surface?** Treat the outer shell of thickness $t\approx0.25$ nm (about one atomic layer) as surface. The fraction of the volume in that shell is
 
 $$
-t_f=B\left(\frac{V}{A}\right)^{2},\qquad B=\frac{\pi}{4}\left[\frac{\rho_s\,(L+c_s\Delta T_s)}{T_m-T_0}\right]^{2}\frac{1}{k_m\rho_m c_m}
+f_s=1-\left(1-\frac{2t}{d}\right)^3
 $$
 
-The **casting modulus** $M=V/A$ is volume per unit cooling surface: compact, heavy sections freeze last. The constant $B$ is measured; for steel in silica sand it is of order 1–2 s/mm$^2$.
+which gives 1.5 % for $d=100$ nm, 7.3 % at 20 nm, 14 % at 10 nm, 27 % at 5 nm and 58 % at 2 nm. The specific surface area of 5 nm gold particles ($\rho=19\,300$ kg/m³) is $6/(19\,300\times5\times10^{-9})=6.2\times10^{4}$ m²/kg, that is 62 m²/g, and of 21 nm titania ($\rho=4230$ kg/m³) about 68 m²/g; the commercial titania photocatalyst made of particles that size measures about 50 m²/g by gas adsorption, because the particles are fused into aggregates. A single gram of a 2 nm platinum catalyst exposes more than 100 m², and since only surface atoms do catalysis, this is why fuel-cell and automotive catalysts are dispersed as 1–5 nm particles on porous carbon or alumina supports, and why their slow coarsening in service (Ostwald ripening, Chapter 10) is a principal cause of catalyst ageing.
 
-> **Status of the principle: Chvorinov's rule**
-> *Approximate.* Derived for an insulating semi-infinite mould controlling heat flow. It works for compact sand and investment castings; it fails in metal moulds (interface resistance dominates and $t_f$ grows nearly linearly with $M$), in thin sections where superheat matters, and at corners. The exponent is often fitted as 1.5–2.
+<!-- FIGURE 38.1 | figures/ch38/fig-38-1-surface-fraction-melting.png | plot | As particles shrink below about 20 nm, the fraction of surface atoms rises steeply and the melting point falls below its bulk value. | Content: log x-axis particle diameter 1-1000 nm. Left y-axis: fraction of atoms in a 0.25 nm surface shell (0-1), curve f = 1-(1-0.5/d)^3 with points labelled at 2 nm (0.58), 5 nm (0.27), 10 nm (0.14), 20 nm (0.073), 100 nm (0.015). Right y-axis: melting temperature of Au (K, 600-1400), Gibbs-Thomson curve Tm = 1337(1 - 2 x 0.27/(1.23e9 x r)) giving 1220 K at 10 nm, 1102 K at 5 nm, 867 K at 2.5 nm; schematic experimental points lying close to the curve above 5 nm and below it at 2-3 nm (around 600-700 K). Bulk Tm = 1337 K dashed. Shade the 1-10 nm region "surface dominated". -->
 
-### Feeding and riser design
+![Figure 38.1 — As particles shrink below about 20 nm, the fraction of surface atoms rises steeply and the melting point falls below its bulk value](../figures/ch38/fig-38-1-surface-fraction-melting.png)
 
-Most metals shrink on freezing: about 3–4 % for steel, 6–7 % for aluminium alloys, 4–5 % for copper alloys. Castings are therefore fed from **risers** that must freeze after the section they feed, and are designed for **directional solidification** toward the riser, helped by tapers and **chills** (metal inserts that locally speed cooling). Grey and ductile irons are the exception: graphite precipitates with a volume expansion that offsets much of the shrinkage, which is one reason cast iron casts so readily.
+*Figure 38.1 — As particles shrink below about 20 nm, the fraction of surface atoms rises steeply and the melting point falls below its bulk value.*
 
-Two rules size a riser. The **modulus rule** asks for a riser modulus about 1.2 times that of the section it feeds. The **volume rule** asks for enough liquid: an open cylindrical riser delivers only about 14 % of its volume before its pipe reaches the casting; insulating or exothermic sleeves raise this to 30–60 %.
+### 38.1.3 Melting-point depression
 
-**Worked example — Sizing the riser of a steel plate casting.** A plate 250 mm × 250 mm × 50 mm is sand cast with a cylindrical side riser of height equal to its diameter. Take $B=1.5$ s/mm$^2$ and 3 % volumetric shrinkage.
+Atoms at a surface have fewer neighbours, so a small particle has a higher Gibbs energy per atom than bulk solid. The same is true of a small liquid droplet, but the solid–liquid interface energy $\sigma_{sl}$ is what matters for melting: a solid sphere of radius $r$ inside its own melt is in equilibrium at a lower temperature than a flat interface. Applying the Gibbs–Thomson relation of Chapter 6:
 
 $$
-V=3.125\times10^{6}\ \mathrm{mm^3},\qquad A=2(250\times250)+4(250\times50)=1.75\times10^{5}\ \mathrm{mm^2}
+\frac{T_m(r)}{T_{m,\mathrm{bulk}}}\approx1-\frac{2\sigma_{sl}}{\Delta H_v\,r}
 $$
 
-so $M_c=17.9$ mm and the plate freezes in $1.5\times17.9^2=478$ s, about 8 min. The riser face joined to the plate does not cool, so for $H=D$ the riser has volume $\pi D^3/4$ and cooling area $\pi D^2+\pi D^2/4$, giving $M_r=D/5$. The modulus rule $M_r=1.2\times17.9=21.4$ mm gives $D=107$ mm; choose $D=H=110$ mm, so $M_r=22$ mm and the riser freezes in $1.5\times22^2=726$ s, about 12 min — after the plate.
+where $\Delta H_v$ is the latent heat of fusion per unit volume.
 
-Volume check: the plate needs $0.03\times3.125\times10^6=9.4\times10^4$ mm$^3$ of feed metal; the riser holds $\pi(110)^3/4=1.05\times10^6$ mm$^3$, of which about 14 %, $1.46\times10^5$ mm$^3$, is usable — a 55 % margin. A last check is **feeding distance**: for steel plates a rule of thumb is about 4.5 plate thicknesses (a riser zone of 2 plus an end zone of 2.5), 225 mm here, slightly short of the 250 mm from one edge to the other. The foundry would add a chill at the far edge or a second riser. After cutting off the riser, the yield of a steel casting is typically only 50–70 %.
+> **Status of the principle: Gibbs–Thomson melting-point depression**
+> *Approximate.* Continuum thermodynamics with a size-independent interface energy; it captures the $1/r$ trend down to a few nanometres, but below about 3 nm interface energies, surface pre-melting and structural changes (icosahedral clusters) make the measured depression larger.
 
-### Designing for casting
+**Worked example — gold nanoparticles.** For gold, $T_{m,\mathrm{bulk}}=1337$ K, the latent heat is 12.55 kJ/mol and the molar volume $10.2\times10^{-6}$ m³/mol, so $\Delta H_v=1.23\times10^{9}$ J/m³; take $\sigma_{sl}\approx0.27$ J/m². For a 5 nm particle ($r=2.5$ nm), $2\sigma_{sl}/(\Delta H_v r)=0.54/(1.23\times10^{9}\times2.5\times10^{-9})=0.176$, so $T_m\approx1337\times0.824=1102$ K, 235 K below bulk. At 10 nm the depression is about 120 K (1220 K), and at 2.5 nm the formula gives 867 K, while experiments find even lower values, near 600–700 K, as the status box warns (Figure 38.1).
 
-The designer's rules follow from this physics: keep **sections uniform** and fillets generous, because junctions create hot spots (an inscribed-circle check finds them); provide 1–3° **draft**; add **pattern allowances** for solid contraction (about 2 % for steel, 1.3 % for aluminium, 1 % for grey iron) and machining stock; avoid **hindered contraction** that tears the casting; and place gates so that sealing and bearing faces are free of inclusions. Mould-filling and solidification simulation is now routine, and the **Niyama criterion** $G/\sqrt{\dot T}$ (thermal gradient over the square root of cooling rate; low values flag regions where feed metal cannot flow through the mush) predicts shrinkage porosity before a pattern is made.
+The same physics lowers the **sintering temperature** of nanopowders. Silver nanoparticle pastes sinter into conductive joints at 200–250 °C, far below silver's melting point of 962 °C, which is how power-electronic die attach and printed conductive tracks on polymer films are made; nanocrystalline ceramic powders densify several hundred kelvin lower than micrometre powders. The driving force that makes nanopowders useful also makes them unstable: they agglomerate, coarsen and, for reactive metals, oxidise or even ignite spontaneously, so nano-aluminium and nano-iron are handled under inert gas.
+
+### 38.1.4 Mean-free-path and characteristic-length effects
+
+When a structure is smaller than the distance a carrier travels between scattering events, the boundaries add scattering:
+
+- **Electrons in metals.** The electron mean free path in bulk copper at room temperature is about 39 nm. In interconnect lines 20 nm wide, surface and grain-boundary scattering raise the resistivity from 1.7 to about 4–6 µΩ cm (Chapter 25), which is driving the search for alternative interconnect metals with shorter mean free paths, such as ruthenium and molybdenum.
+- **Phonons in insulators and semiconductors.** Phonon mean free paths are spread from nanometres to micrometres; nanostructuring (grain boundaries, nanoprecipitates) scatters the long-wavelength phonons that carry much of the heat, cutting thermal conductivity while leaving electrical conductivity less affected, which is the basis of modern nanostructured thermoelectrics (Chapter 40). Silicon nanowires 50 nm across conduct heat about five times worse than bulk silicon (Chapter 24).
+- **Dislocations in metals.** Below about 100 nm, grains are too small to contain dislocation sources and pile-ups, which changes the strengthening law (Section 38.5).
+- **Magnetic domains.** Below a critical size of tens of nanometres a magnetic particle is a single domain, and below about 10 nm thermal energy can flip its magnetization (superparamagnetism, Chapter 28), the limit for magnetic recording grains and the basis of magnetic nanoparticle contrast agents and ferrofluids.
+- **Light.** Particles much smaller than the wavelength scatter weakly (Rayleigh scattering varies as $d^6/\lambda^4$), so 20–50 nm titania and zinc oxide in sunscreens absorb UV yet look transparent, whereas pigmentary 250 nm titania is a white scatterer. Metal nanoparticles show **surface plasmon resonances**: collective oscillation of their conduction electrons gives 20 nm gold particles a strong absorption near 520 nm and a ruby colour, used since Roman times in glass and today in lateral-flow (pregnancy and rapid antigen) test strips.
 
 ---
 
-## 38.3 Casting defects
+## 38.2 Quantum confinement as a materials phenomenon
 
-Each casting defect has a mechanism, and each mechanism a remedy.
+### 38.2.1 When does confinement matter?
 
-**Shrinkage porosity.** *Macroshrinkage* is a cavity or **pipe** at the last place to freeze. *Microshrinkage* is a sponge of jagged interdendritic cavities formed when liquid cannot flow through a wide mushy zone: the pressure drop for Darcy flow through the shrinking dendrite network rises steeply, so long-freezing-range alloys (bronzes, Al–Cu, Al–Zn–Mg) are prone to it.
-
-**Gas porosity.** Gases dissolve far more in liquid than solid metal. For a diatomic gas, **Sieverts' law** gives
+An electron in a semiconductor crystal behaves as a free particle with an **effective mass** $m^*$ (Chapter 31). Confining it to a box of size $L$ raises its lowest energy by roughly the particle-in-a-box value
 
 $$
-C_{\mathrm{H}}=K_S(T)\sqrt{p_{\mathrm{H_2}}}
+\Delta E\approx\frac{\hbar^2\pi^2}{2m^*L^2}
 $$
 
-In aluminium the hydrogen solubility drops about twentyfold on freezing (from about 0.69 to 0.036 mL per 100 g at 1 atm), so hydrogen is rejected into interdendritic liquid and forms round pores, often on bifilms. Melts are degassed with argon bubbled through a rotary impeller; dissolved hydrogen diffuses into the hydrogen-free bubbles and leaves. Steels are deoxidized with Al or Si to stop dissolved oxygen reacting with carbon to form CO. Gas pores are smooth and round, shrinkage pores jagged; telling them apart is the first step of any casting investigation (Chapter 36), because the remedies are opposite.
+This matters when $\Delta E$ is comparable to or larger than $k_BT$ (25.7 meV at 25 °C) and to the energy scale of interest. Small effective mass and small $L$ give large confinement. For GaAs ($m^*=0.067\,m_e$) a 10 nm layer raises the electron energy by about 56 meV, which is why quantum wells of that thickness define the emission wavelength of semiconductor lasers. A second length scale is the **exciton Bohr radius**, the size of the bound electron–hole pair created by light: about 5.6 nm in CdSe, 10 nm in InP, 18 nm in PbS. When a crystal is smaller than this, the exciton is squeezed and its energy rises.
 
-**Hot tears.** At solid fractions of roughly 0.9–0.99 the dendrites form a coherent network separated by thin liquid films with almost no strength. If contraction is hindered by a core, flange or thick neighbour, strain concentrates in these films and they separate into oxidized, branched, intergranular cracks. Susceptibility rises with freezing range — 2xxx and 7xxx aluminium alloys are hard to cast, weld (Chapter 39) and print (Chapter 40) — and falls with grain refinement.
+### 38.2.2 Dimensionality and the density of states
 
-**Other defects** include non-metallic inclusions and entrained films (fatigue initiators, controlled by filtration and clean melting), cold shuts and misruns (metal too cold or slow), macrosegregation such as centreline segregation in continuously cast slabs and "freckle" chains in directionally solidified superalloys, and mould–metal reactions.
+Confinement in one, two or three directions gives quantum wells (2D: free motion in a plane), quantum wires (1D) and quantum dots (0D). The electronic density of states changes shape accordingly: the square-root continuum of a bulk crystal becomes a staircase in a well, a series of $1/\sqrt{E}$ spikes in a wire and a set of discrete, atom-like levels in a dot (Figure 38.2a). Concentrating states at particular energies is what makes quantum-well lasers more efficient and quantum dots emit narrow spectral lines.
 
-| Defect | Appearance | Mechanism | Main remedies |
-|---|---|---|---|
-| Macroshrinkage / pipe | Cavity at hot spot | Insufficient feed metal | Risers, directional solidification, chills |
-| Microshrinkage | Jagged interdendritic pores | Feed flow blocked in mush | Steeper gradient, narrower freezing range, squeeze casting |
-| Gas porosity | Smooth round pores | Rejected H (Al, Cu, Mg), N or CO (steel) | Degassing, deoxidation, vacuum die casting |
-| Hot tear | Branched oxidized crack | Hindered contraction across liquid films | Grain refinement, compliant cores, fillets |
-| Inclusions, bifilms | Oxide films, sand, slag | Turbulent filling, dirty melt | Filters, quiescent gating |
-| Cold shut, misrun | Unfused seam, unfilled section | Metal too cold or slow | Superheat, gating, section thickness |
-| Macrosegregation, freckles | Composition bands | Convection of solute-rich liquid | Faster cooling, stirring, alloy balance |
+### 38.2.3 The Brus equation for quantum dots
 
-Castings are inspected by radiography or computed tomography, ultrasound and dye penetrant, and graded against reference radiographs. Internal pores can be closed by **hot isostatic pressing** (Section 38.7), which is why cast turbine blades and aerospace titanium castings are routinely HIPed; surface-connected pores cannot, because the gas enters them.
+For a spherical dot of radius $R$, the lowest excitation energy in the effective-mass approximation (Brus, 1984) is
 
-<!-- FIGURE 38.2 | figures/ch38/fig-38-2-feeding-and-defects.png | schematic | Section through a sand-cast steel plate with side riser, showing directional solidification toward the riser and where casting defects form. | Content: cross-section of the 250 × 50 mm plate with a 110 mm cylindrical riser at the right and tapered sprue, runner and gate at the left. Dashed isochrones at 2, 4, 6 and 8 min advancing from the walls toward the riser; shrinkage pipe in the riser top; chill block at the far left end. Insets: (a) jagged microshrinkage at an unfed T-junction hot spot; (b) round gas pores near the top surface; (c) branched hot tear at a corner restrained by a core; (d) oxide bifilm entrained at the gate. Labels M_c = 17.9 mm, M_r = 22 mm. -->
+$$
+E(R)\approx E_g+\frac{\hbar^2\pi^2}{2R^2}\left(\frac{1}{m_e^*}+\frac{1}{m_h^*}\right)-\frac{1.786\,e^2}{4\pi\varepsilon_0\varepsilon_rR}
+$$
 
-Figure 38.2 places these defects in the plate of the worked example.
+The second term is the confinement of electron and hole and grows as $1/R^2$; the third is their Coulomb attraction, screened by the dot's permittivity, which grows only as $1/R$. At small $R$ confinement wins, and the dot's absorption and emission shift to the blue as it shrinks.
+
+> **Status of the principle: Brus equation**
+> *Approximate.* Effective-mass, infinite-barrier model with parabolic bands; it gives the correct trend and order of magnitude, but overestimates the shift below about 3 nm, where band non-parabolicity, finite barriers and surface states matter. Engineering design uses measured sizing curves.
+
+**Worked example — the colour of a CdSe quantum dot.** For CdSe take $E_g=1.74$ eV, $m_e^*=0.13\,m_e$, $m_h^*=0.45\,m_e$, $\varepsilon_r=10.6$, and the constants $\hbar^2\pi^2/2m_e=0.376$ eV nm² and $e^2/4\pi\varepsilon_0=1.440$ eV nm. For a dot of diameter 5 nm ($R=2.5$ nm):
+
+$$
+\Delta E_{\mathrm{conf}}=\frac{0.376}{2.5^2}\left(\frac{1}{0.13}+\frac{1}{0.45}\right)=0.0602\times9.91=0.596\ \mathrm{eV}
+$$
+
+$$
+\Delta E_{\mathrm{Coul}}=\frac{1.786\times1.440}{10.6\times2.5}=0.097\ \mathrm{eV}
+$$
+
+so $E\approx1.74+0.596-0.097=2.24$ eV, a wavelength of $1239.8/2.24=554$ nm (green). The measured first-exciton energy of 5 nm CdSe dots is about 2.05 eV (605 nm, orange): the model overestimates the shift, as expected. At 7 nm the formula gives 1.97 eV (628 nm), at 4 nm 2.55 eV (486 nm). One composition therefore spans the visible simply by size, and a synthesis that controls diameter to ±5 % sets the colour to within about ±10 nm.
+
+<!-- FIGURE 38.2 | figures/ch38/fig-38-2-dos-dimensionality-qd-colour.png | plot | Confinement reshapes the density of states from a continuum in bulk to steps, spikes and discrete levels, and tunes the emission of quantum dots with their size. | Content: (a) four small panels of g(E) vs E: 3D (square-root curve), 2D (staircase), 1D (1/sqrt spikes), 0D (delta lines), each with a sketch (cube, slab, wire, dot). (b) Emission energy (eV, 1.7-3.0) vs CdSe dot diameter (2.5-8 nm): Brus-equation curve (solid; 2.55 eV at 4 nm, 2.24 eV at 5 nm, 1.97 eV at 7 nm) and representative experimental first-exciton energies (points: about 2.5 eV at 2.5 nm, 2.1 eV at 5 nm, 1.95 eV at 7 nm); bulk gap 1.74 eV dashed; colour bar along right axis from red to blue. -->
+
+![Figure 38.2 — Confinement reshapes the density of states from a continuum in bulk to steps, spikes and discrete levels, and tunes the emission of quantum dots with their size](../figures/ch38/fig-38-2-dos-dimensionality-qd-colour.png)
+
+*Figure 38.2 — Confinement reshapes the density of states from a continuum in bulk to steps, spikes and discrete levels, and tunes the emission of quantum dots with their size.*
 
 ---
 
-## 38.4 Deformation processing
+## 38.3 Nanoparticles, quantum dots, nanowires and nanotubes
 
-Deformation processes change shape by plastic flow at constant volume. Three ideas underlie the estimates below.
+### 38.3.1 Nanoparticles
 
-1. **Mean flow stress.** Below about $0.3T_m$ the Hollomon law $\sigma=K\varepsilon^n$ (Chapter 11) describes hardening. The work per unit volume to strain $\varepsilon_1$ is $\bar\sigma\varepsilon_1$, with
-$$
-\bar\sigma=\frac{K\varepsilon_1^{\,n}}{1+n}
-$$
-2. **Ideal work and efficiency.** Frictionless homogeneous deformation needs $\bar\sigma\varepsilon$ per unit volume. Friction and **redundant work** (internal shearing that does not change the shape) add to it; the ratio of ideal to actual work, the efficiency $\eta$, is typically 0.5–0.8.
-3. **Plane strain.** Where flow is prevented in one direction, as in rolling, the von Mises criterion (Chapter 13) raises the yield stress by $2/\sqrt3=1.155$.
+Zero-dimensional nanomaterials are by far the most used, mostly as additives:
 
-> **Status of the principle: ideal-work and slab estimates of forming loads**
-> *Approximate.* Energy balance and force equilibrium on thin slices with uniform flow stress and a simple friction law. Loads come within about 10–30 % for simple geometries; complex shapes and temperature fields need finite-element simulation.
-
-### Rolling
-
-Rolls of radius $R$ reduce a strip from $h_0$ to $h_1$ over a contact arc of projected length $L\approx\sqrt{R\,\Delta h}$. Friction drags the strip into the gap; it enters slower than the roll surface and leaves faster, with a **neutral point** between. Gripping requires $\tan\alpha\le\mu$ at entry, which gives the **maximum draft**
-
-$$
-\Delta h_{\max}=\mu^{2}R
-$$
-
-Friction also builds a pressure peak at the neutral point, the **friction hill**, because metal on both sides is pushed against friction toward it. The mean roll pressure is the plane-strain flow stress times a factor that grows with $\mu L/\bar h$, so thin strip needs disproportionate pressure — hence small work rolls supported by back-up rolls, and lubrication, for foil.
-
-**Worked example — Cold-rolling force for aluminium strip.** Annealed aluminium-alloy strip 1000 mm wide is rolled from 4.0 to 3.0 mm with $R=250$ mm and $\mu=0.08$; its flow curve is $\sigma=200\varepsilon^{0.2}$ MPa. Grip: $\Delta h_{\max}=0.08^2\times250=1.6$ mm exceeds the 1.0 mm draft. The contact length is $L=\sqrt{250\times1.0}=15.8$ mm, the strain $\varepsilon_1=\ln(4/3)=0.288$, and
-
-$$
-\bar\sigma=\frac{200\times0.288^{0.2}}{1.2}=130\ \mathrm{MPa}
-$$
-
-With $\bar h=3.5$ mm and the approximate friction factor $1+\mu L/(2\bar h)=1.18$,
-
-$$
-F\approx1.155\,\bar\sigma\,w\,L\left(1+\frac{\mu L}{2\bar h}\right)=1.155\times130\times1000\times15.8\times1.18=2.8\times10^{6}\ \mathrm{N}
-$$
-
-about 2.8 MN (285 tonnes-force) per metre of width. Each pass hardens the strip and raises the next pass's force, so cold-rolling schedules include intermediate anneals. Rolling defects come from inhomogeneous flow: edge cracks at free edges in tension, alligatoring (splitting of the slab end), wavy edges or centre buckles from roll bending.
-
-### Forging
-
-**Open-die forging** upsets and draws out metal between flat dies (large shafts, rings, generator rotors); **closed-die forging** fills a shaped cavity, with excess metal squeezed into a thin **flash** whose friction and chilling build up pressure to fill the corners (crankshafts, connecting rods, turbine discs, landing-gear beams). For upsetting a cylinder of diameter $d$ and height $h$, slab analysis gives an average pressure $\bar p\approx\sigma_f(1+2\mu d/3h)$, so squat workpieces need high pressures; closed-die loads with flash reach 3–10 times $\sigma_f$ times the projected area.
-
-Forging's materials advantage is **grain flow**: inclusions and segregation bands are elongated along the metal flow and, in a good design, follow the contour so that the weak direction never crosses a fillet. A crankshaft machined from bar cuts across these fibres at every web; a forged one does not, and its fatigue strength is higher. Forging defects are **laps** and **folds** (oxidized surface folded inward) and internal bursts where the core is in tension.
-
-### Extrusion
-
-**Extrusion** pushes a billet through a die to make constant-section products: aluminium window frames, heat sinks and rail-car profiles, copper tube and bus-bar. Direct extrusion suffers container friction; indirect extrusion avoids it. Hollow aluminium profiles are made in **porthole dies**, where the metal splits around a mandrel support and re-welds in the solid state inside the die. For extrusion ratio $R=A_0/A_f$, $p_{\mathrm{ideal}}=\bar\sigma\ln R$; empirically $p\approx\bar\sigma(0.8+1.2\ln R)$ plus container friction. Aluminium 6xxx alloys are extruded at 450–520 °C at ratios of 10–100. The speed limit is **surface tearing**: deformation heating in the die land can raise the surface to the incipient-melting temperature, so hard 7075 extrudes at a few metres per minute and dilute 6063 at 50–100 m/min. **Central bursts** (chevron cracks) form on the axis of extrusions and drawn bars at small reductions with large die angles, where the centre is in hydrostatic tension.
-
-### Drawing
-
-**Drawing** pulls rod, wire or tube through a converging die. Because the product is pulled, the drawing stress must stay below the flow stress of the exiting wire. The ideal drawing stress is $\sigma_d=\bar\sigma\varepsilon$ with $\varepsilon=\ln(A_0/A_f)$. For a non-hardening metal, $\sigma_d=\sigma_f$ gives $\varepsilon_{\max}=1$, a 63 % area reduction. For a Hollomon material, $K\varepsilon^{n+1}/(1+n)=K\varepsilon^n$ gives
-
-$$
-\varepsilon_{\max}=1+n
-$$
-
-Friction and redundant work limit real passes to 20–45 %, and fine wire passes through 10–30 dies with intermediate anneals.
-
-**Worked example — Drawing copper rod.** Annealed copper rod is drawn from 5.0 to 4.0 mm, with $\sigma=315\varepsilon^{0.54}$ MPa and efficiency $\eta=0.65$. The reduction is $r=1-(4/5)^2=36$ % and $\varepsilon=\ln(25/16)=0.446$.
-
-$$
-\bar\sigma=\frac{315\times0.446^{0.54}}{1.54}=132\ \mathrm{MPa},\qquad\sigma_f=315\times0.446^{0.54}=204\ \mathrm{MPa}
-$$
-
-The ideal drawing stress is $132\times0.446=59$ MPa and the actual $59/0.65=91$ MPa, 45 % of the exit flow stress — a safety factor of about 2.2 against breaking. The force is $91\times\pi(4.0)^2/4=1.14$ kN. The ideal limit $\varepsilon_{\max}=1.54$ would allow a 79 % reduction; efficiency and the need for a margin are what restrict practical passes.
-
-### Sheet-metal forming
-
-Sheet is **bent**, **stretched** over punches, **deep drawn** (flowing inward from a flange into a die) or combinations of these in stamping dies, and in hydroforming and incremental forming.
-
-**Springback.** On unloading a bend, elastic strain near the neutral axis recovers and the bend opens. For loaded radius $R_i$ and thickness $t$, an elastic–perfectly-plastic analysis gives
-
-$$
-\frac{R_i}{R_f}=4\left(\frac{\sigma_y R_i}{E t}\right)^{3}-3\,\frac{\sigma_y R_i}{E t}+1
-$$
-
-For 1 mm mild steel ($\sigma_y=200$ MPa) bent to $R_i=10$ mm, $\sigma_yR_i/Et=0.0095$ and the radius opens by about 3 %; for a 700 MPa dual-phase steel it opens by about 11 %. Higher strength or lower modulus (aluminium) means more springback, compensated by overbending, coining or stretching.
-
-**Deep drawing.** The flange is compressed circumferentially as it flows inward (and wrinkles unless held down), while the cup wall carries the punch force; failure is by necking in the wall near the punch radius. The **limiting drawing ratio** LDR $=D_{\text{blank,max}}/d_{\text{punch}}$ is about 2.0–2.3 and rises with the **plastic strain ratio**
-
-$$
-r=\frac{\varepsilon_w}{\varepsilon_t}
-$$
-
-the ratio of width to thickness strain in a tensile test. Sheet with $r>1$ resists thinning and draws in from the flange instead. The average $\bar r=(r_0+2r_{45}+r_{90})/4$ sets drawability; the **planar anisotropy** $\Delta r=(r_0-2r_{45}+r_{90})/2$ sets the height of **ears** on the cup rim. Both come from texture (Section 38.6). An 80 mm diameter cup 60 mm deep needs a blank of about $\sqrt{d^2+4dh}=160$ mm, a drawing ratio of 2.0: interstitial-free steel with $\bar r\approx1.9$ draws it in one stroke, while 5xxx aluminium with $\bar r\approx0.7$ is at its limit and would be drawn and redrawn.
-
-| Sheet material | Yield strength (MPa) | $n$ | $\bar r$ | $E$ (GPa) | Typical use |
-|---|---|---|---|---|---|
-| Interstitial-free steel DC06 | 120–180 | 0.22–0.25 | 1.8–2.2 | 210 | Deep-drawn inner panels, fuel tanks |
-| Mild drawing steel DC04 | 140–210 | 0.20–0.22 | 1.6–1.9 | 210 | Body panels, appliances |
-| Dual-phase steel DP600 | 340–420 | 0.14–0.17 | 0.9–1.0 | 210 | Crash structure |
-| Stainless 304, annealed | 230–300 | 0.40–0.50 | 0.9–1.1 | 193 | Sinks, food equipment |
-| Al 6016-T4 | 110–140 | 0.23–0.27 | 0.6–0.7 | 70 | Car outer panels |
-| Al 5182-O | 125–140 | 0.28–0.33 | 0.7–0.8 | 70 | Car inner panels, can ends |
-| CP titanium grade 2 | 275–350 | 0.12–0.16 | 2–4 | 105 | Heat-exchanger plates |
-
-*Typical values; $n$ and $r$ depend on gauge, supplier and test direction.*
-
----
-
-## 38.5 Hot, warm and cold working; formability
-
-### Homologous-temperature boundaries
-
-"Hot" and "cold" refer to the **homologous temperature** $T/T_m$ in kelvin.
-
-- **Cold working**, below about $0.3T_m$: dislocations accumulate and the metal hardens; accuracy and finish are excellent and the strength gained can be kept (hard-drawn wire, cold-rolled sheet), at the cost of high forces and intermediate anneals.
-- **Warm working**, about $0.3$–$0.5T_m$: dynamic recovery lowers the flow stress while scaling stays modest. Steel is warm forged at 650–900 °C for precision automotive parts; magnesium sheet, short of slip systems at room temperature, is formed at 200–300 °C.
-- **Hot working**, above about $0.6T_m$: recovery and recrystallization during or between passes prevent cumulative hardening, so huge strains are possible at low force; cast structures are broken up and pores welded shut. The penalties are scale, poorer tolerances and grain growth if finishing is too hot.
-
-| Metal | $T_m$ (K) | $T/T_m$ at 25 °C | Typical hot-working range (°C) | $T/T_m$ in that range |
-|---|---|---|---|---|
-| Lead | 601 | 0.50 | room temperature | 0.50 |
-| Tin | 505 | 0.59 | room temperature | 0.59 |
-| Aluminium (6xxx) | 933 | 0.32 | 450–520 | 0.77–0.85 |
-| Copper | 1358 | 0.22 | 750–950 | 0.75–0.90 |
-| Carbon steel | ≈ 1800 | 0.16 | 950–1250 | 0.68–0.85 |
-| Ti–6Al–4V | ≈ 1880 | 0.16 | 900–980 | 0.62–0.67 |
-| Tungsten | 3695 | 0.08 | 1200–1700 (warm) | 0.40–0.53 |
-
-*Lead and tin are effectively hot worked at room temperature, which is why lead flashing and solder can be bent repeatedly without hardening.*
-
-### Flow stress at high temperature
-
-In hot working, flow stress depends weakly on strain and strongly on rate and temperature. Over limited ranges $\sigma=C\dot\varepsilon^{\,m}$, with **strain-rate sensitivity** $m\approx0.1$–$0.2$ in hot working, below 0.02 at room temperature and 0.3–0.8 in superplastic alloys (Chapter 13). Rate and temperature combine in the **Zener–Hollomon parameter**
-
-$$
-Z=\dot\varepsilon\exp\!\left(\frac{Q}{RT}\right)
-$$
-
-with $Q$ close to the self-diffusion activation energy (about 150–160 kJ/mol for aluminium alloys, 270–420 kJ/mol for austenite). Flow stress is a single function of $Z$, usually fitted as $Z=A[\sinh(\alpha\sigma)]^{n'}$; high $Z$ (fast, cool) behaves like cold work, low $Z$ gives low stress, and the recrystallized grain size falls as $Z$ rises.
-
-> **Status of the principle: Zener–Hollomon scaling of hot flow stress**
-> *Empirical*, with a physical basis in thermally activated glide and climb. It collapses data for one alloy over wide ranges of rate and temperature; the constants are fitted and change with microstructure (for example across the α–γ transformation of steel).
-
-High-**stacking-fault-energy** metals — aluminium, ferritic steel — cross-slip and climb easily, reach a steady flow stress by **dynamic recovery**, and keep elongated grains filled with subgrains. Low- and medium-SFE metals — austenitic steels, copper, nickel alloys (Chapter 12) — store more dislocations and undergo **dynamic recrystallization**, with a peak in the flow curve followed by softening; between passes they also recrystallize statically. Which of these happens, and when, is the lever of thermomechanical processing.
-
-### Formability of sheet: the forming limit diagram
-
-Sheet fails by **localized necking**, a narrow groove where thinning concentrates. In uniaxial tension diffuse necking starts at a true strain equal to $n$ (Considère, Chapter 11), but sheet is stretched biaxially and the limit depends on strain path. The **forming limit diagram (FLD)** plots the major in-plane strain $\varepsilon_1$ at the onset of localized necking against the minor strain $\varepsilon_2$, for paths from uniaxial tension ($\varepsilon_2=-\varepsilon_1/2$) through plane strain ($\varepsilon_2=0$) to equibiaxial stretching. The **forming limit curve** is V-shaped with its minimum $\mathrm{FLC}_0$ at plane strain — which is why splits appear where sheet is stretched over long straight punch radii.
-
-FLCs are measured by stretching gridded sheets over punches (Nakajima, Marciniak tests), with circles deforming into ellipses or with digital image correlation; the same grid analysis on try-out stampings shows which regions lie near the limit, and a margin of about 10 % strain defines the safe zone. On the left side, Hill's analysis gives a neck along a direction of zero extension, so $\varepsilon_1+\varepsilon_2=n$; on the right, the Marciniak–Kuczyński model follows the growth of a slightly thinner band, slowed by strain hardening and rate sensitivity. Both make $\mathrm{FLC}_0$ rise with $n$, $m$ and thickness. For low-carbon steels the empirical Keeler–Brazier estimate, in engineering strain per cent, is
-
-$$
-\mathrm{FLC}_0\,(\%)\approx(23.3+14.1\,t)\,\frac{n}{0.21}
-$$
-
-for $t$ in millimetres and $n\le0.21$ (larger $n$ is capped at 0.21). A 1.0 mm DC04 sheet gives about 37 %, a true strain of 0.32. A 6xxx-T4 aluminium sheet has $\mathrm{FLC}_0$ near 0.21 true strain and DP600 near 0.18, and advanced high-strength steels can also fracture at sheared edges before any neck forms.
-
-> **Status of the principle: the forming limit curve**
-> *Empirical* as a measured characteristic, with *approximate* theoretical support from Hill and Marciniak–Kuczyński necking analyses. Valid only for proportional strain paths; multi-stage stamping changes the path and shifts the curve, so stress-based or path-independent criteria are then used.
-
-<!-- FIGURE 38.3 | figures/ch38/fig-38-3-forming-limit-diagram.png | plot | Forming limit diagram for a mild drawing steel, a 6xxx aluminium sheet and a dual-phase steel, with strain paths and a safety margin. | Content: x-axis minor true strain ε2 −0.4 to +0.4; y-axis major true strain ε1 0 to 0.7. V-shaped FLCs: DC04 1.0 mm with minimum 0.32 at ε2 = 0, rising to ~0.55 at ε2 = −0.3 and ~0.50 at +0.3; Al 6016-T4 minimum ≈ 0.21; DP600 minimum ≈ 0.18. Dashed strain paths from the origin labelled 'uniaxial (ε2 = −ε1/2)', 'plane strain', 'equibiaxial'. Shaded safe zone 0.10 below the DC04 curve, marginal band, failure region above. Scatter of grid measurements from a stamped panel with a few near plane strain in the marginal zone. Inset: circle grid deformed into ellipses. -->
-
-Figure 38.3 makes the cost of lightweighting visible: changing from mild steel to aluminium or a stronger steel lowers the forming limit, so the part geometry or process (hot stamping of boron steel, warm forming, hydroforming) must change with it.
-
-For forging and rolling, **workability** is limited by ductile fracture — void growth at inclusions under tensile hydrostatic stress (Chapter 14). Processes that keep the stress compressive (extrusion, closed-die forging) allow larger strains than those with free surfaces in tension, and **processing maps** from hot-torsion and upset tests identify windows free of flow localization and cracking, especially for titanium and nickel alloys.
-
----
-
-## 38.6 Thermomechanical processing and texture control
-
-**Thermomechanical processing (TMP)** combines deformation and thermal treatment in one controlled sequence, so that deformation alters how transformation, recrystallization or precipitation proceeds.
-
-### Controlled rolling of HSLA steel
-
-The classic case is **high-strength low-alloy (HSLA)** steel for pipelines, ships, offshore structures and bridges (Chapter 15), microalloyed with 0.02–0.10 wt% Nb, Ti or V (Figure 38.4):
-
-1. **Reheat** the slab to 1150–1250 °C to dissolve Nb carbonitrides; undissolved TiN pins austenite boundaries.
-2. **Rough roll** at 1000–1150 °C, where austenite recrystallizes between passes and refines to about 30–50 µm.
-3. **Finish roll** below the **non-recrystallization temperature** $T_{nr}$, about 900–1000 °C for Nb steels. Strain-induced Nb(C,N) on dislocations stops recrystallization, so grains are **pancaked** to a few micrometres thick and filled with deformation bands — a large density of ferrite nucleation sites.
-4. **Accelerated cooling** with water at 10–30 K/s raises the undercooling further, giving ferrite grains of 3–5 µm instead of the 15–25 µm of a normalized C–Mn steel.
-
-By Hall–Petch (Chapter 13) the finer grain adds roughly 150–200 MPa of yield strength while *lowering* the ductile–brittle transition temperature. Pipeline grades API 5L X70 (yield ≥ 485 MPa) and X80 (≥ 555 MPa) reach their strength with only 0.04–0.08 % carbon, which keeps their welds free of cold cracks (Chapter 39).
-
-<!-- FIGURE 38.4 | figures/ch38/fig-38-4-tmcp-schedule.png | plot | Temperature–time schedule for thermomechanically controlled rolling and accelerated cooling of a Nb-microalloyed HSLA plate, with the corresponding microstructures. | Content: x-axis time 0–15 min (schematic), y-axis temperature 400–1300 °C. Dashed horizontal lines: Nb(C,N) solution ~1150 °C, T_nr ~950 °C, Ar3 ~780 °C, Ar1 ~680 °C. Trace: reheat plateau 1200 °C; roughing passes as steps 1150–1000 °C ('recrystallizing passes'); hold to below T_nr; finishing passes 930–800 °C ('pancaking'); accelerated cooling 800 → 500 °C at ~20 K/s; air cool. Insets: coarse equiaxed austenite; recrystallized austenite ~40 µm; pancaked austenite with deformation bands; ferrite 3–5 µm with some bainite. Comparison note: 'normalized C–Mn steel ferrite 15–25 µm'. -->
-
-### Aluminium sheet and plate
-
-Aluminium ingots are homogenized to dissolve eutectic phases and precipitate **dispersoids** (Mn-, Cr- or Zr-bearing, 0.05–0.5 µm), then hot rolled at 450–550 °C. Coarse constituent particles above about 1 µm nucleate recrystallization (**particle-stimulated nucleation**) with random orientations, while fine dispersoids pin boundaries (Zener pinning, Chapter 10); the balance sets grain size and texture. In 7xxx aerospace plate, Zr dispersoids keep the structure unrecrystallized, improving short-transverse toughness and stress-corrosion resistance.
-
-### Texture by design
-
-Deformation rotates crystals toward stable orientations and recrystallization selects new ones, so rolled and annealed sheet has a **texture**, described by pole figures (Chapter 3). Because single-crystal properties are anisotropic (Chapter 4), texture makes sheet anisotropic, and TMP is used to engineer it.
-
-- **Deep-drawing steel**: a strong **{111} "γ-fibre"** texture, with {111} planes parallel to the surface, gives $\bar r\ge2$. It is produced by 70–85 % cold reduction and recrystallization of interstitial-free steel whose C and N are tied up by Ti and Nb.
-- **Beverage cans**: can-body stock (3104-H19) is drawn and ironed to a 0.1 mm wall. Recrystallized **cube texture** {001}⟨100⟩ makes ears at 0° and 90° to the rolling direction; cold-rolling textures make ears at ±45°. Mills balance the two so the ears nearly cancel, because earing wastes metal and causes tears and jams on lines making thousands of cans per minute.
-- **Electrical steel**: grain-oriented Fe–3 % Si develops the **Goss texture** {110}⟨001⟩, with the easy ⟨001⟩ axis along the rolling direction, by inhibitor-controlled abnormal grain growth (Chapters 10 and 27); core losses fall to about 1 W/kg at 1.7 T and 50 Hz.
-- **Titanium and magnesium**: HCP rolling produces basal textures and strong anisotropy; α+β forging schedules of Ti–6Al–4V balance primary α, transformed β and texture to tune fatigue in fan discs.
-
-> **Status of the principle: texture–anisotropy relation**
-> *Derived.* Given single-crystal properties and an orientation distribution, polycrystal averaging (Voigt, Reuss, Taylor or self-consistent models) predicts anisotropy — quantitatively for elastic and magnetic properties, semi-quantitatively for $r$-values.
-
----
-
-## 38.7 Powder metallurgy
-
-**Powder metallurgy (PM)** is chosen for *economics* (net-shape mass production with over 95 % material use), *microstructure* (porous filters and bearings, WC–Co hardmetals, segregation-free tool steels, dispersion-strengthened alloys) or *unmeltable materials* (W, Mo, Ta, melting at 2600–3400 °C).
-
-### Powder production
-
-- **Gas atomization**: argon or nitrogen jets break a melt stream into spherical droplets of 10–150 µm that freeze at 10$^3$–10$^5$ K/s; they flow and pack well and feed HIP, MIM and additive manufacturing (Chapter 40). Titanium is atomized crucible-free from induction- or plasma-melted electrodes.
-- **Water atomization**: cheaper, irregular, slightly oxidized particles whose interlocking gives green strength; most press-and-sinter iron powder.
-- **Chemical reduction** of oxides (sponge iron; W and Mo from oxides by hydrogen), **electrolysis** (dendritic copper), the **carbonyl process** (1–10 µm Fe and Ni spheres for MIM and magnetic cores), and **mechanical alloying** in ball mills (oxide-dispersion-strengthened alloys).
-
-Powders are specified by size distribution, shape, apparent and tap density, flow rate and oxygen content, which forms oxide films on particle boundaries in the final part.
-
-### Compaction
-
-Powder mixed with 0.5–1 % lubricant is pressed in a hardened die at 400–800 MPa. Densification proceeds by particle rearrangement, then plastic deformation of contacts, and slows as the contacts work harden. The **Heckel equation** fits the relation between relative density $D$ and pressure $P$:
-
-$$
-\ln\frac{1}{1-D}=KP+A
-$$
-
-with $K$ inversely proportional to the powder's yield strength. Soft iron powder reaches 6.8–7.2 g/cm$^3$ (86–92 % of 7.87 g/cm$^3$) at 600–800 MPa (Figure 38.5).
-
-> **Status of the principle: Heckel compaction equation**
-> *Empirical.* It treats pore removal as first order in pressure; it fits the plastic-deformation stage of ductile powders, not low-pressure rearrangement or the approach to full density.
-
-The defining limitation is **die-wall friction**: pressure falls with distance from the moving punch, so density gradients limit height-to-diameter ratios to about 2–3 and cause non-uniform shrinkage on sintering. Double-action pressing, multi-level punches, **warm compaction** at 120–150 °C (up to 7.3–7.4 g/cm$^3$) and **cold isostatic pressing** in flexible moulds at 100–400 MPa (uniform density, no wall friction) address it.
-
-<!-- FIGURE 38.5 | figures/ch38/fig-38-5-compaction-curve.png | plot | Green density versus compaction pressure for iron and pre-alloyed steel powders, with the stages of compaction and the Heckel linearization. | Content: (a) x-axis pressure 0–1000 MPa; y-axis green density 4.5–7.8 g/cm³ (right axis relative density 57–99 %). Water-atomized iron: ≈ 6.4 g/cm³ at 400 MPa, 7.0 at 600, 7.2 at 800 MPa; pre-alloyed Fe–Mo 0.15–0.2 g/cm³ lower. Stage labels 'rearrangement', 'plastic deformation of contacts', 'work hardening'. Dashed line 7.87 g/cm³ 'pore-free iron'. (b) inset Heckel plot ln[1/(1−D)] vs pressure, linear 200–800 MPa. (c) small sketch of density contours in a single-action pressed cylinder, densest near the upper punch, least dense at the bottom corner. -->
-
-### Sintering
-
-Green compacts are sintered in protective atmosphere at about 0.7–0.9$T_m$: 1120–1150 °C for iron and steel, 1250–1300 °C for high-temperature and stainless grades. The physics — surface-energy reduction, curvature-driven vacancy flow, densifying versus non-densifying paths, three geometric stages — is common to metals and ceramics and is developed in Chapter 17. For press-and-sinter steels:
-
-- **Little densification**: necks grow and strength develops, but most of the 8–14 % porosity remains, so dimensional change is small and tolerances tight.
-- **Alloying in the furnace**: graphite dissolves into iron within minutes; copper (1–3 %) melts at 1083 °C, spreads through the pores and swells the part, offsetting the shrinkage from carbon.
-- **Liquid-phase sintering** gives full density. In **cemented carbides**, WC with 6–12 % Co sinters at 1350–1500 °C: a Co-rich liquid dissolves some WC, pulls grains together by capillarity and densifies the compact in under an hour with 17–20 % linear shrinkage, combining the hardness of WC with a tough binder for cutting inserts, drills and mining tools.
-- **Infiltration** fills a porous skeleton with a lower-melting metal: copper into steel, copper or silver into tungsten for arcing contacts.
-
-Porosity lowers properties more than in proportion to its volume. Empirically, for PM steels
-
-$$
-\frac{E}{E_0}\approx\left(\frac{\rho}{\rho_0}\right)^{3.4}
-$$
-
-so steel at 7.0 g/cm$^3$ (89 % dense) has $E\approx210\times0.89^{3.4}=141$ GPa. Fatigue strength and toughness fall faster still because pores and sharp necks initiate cracks, which is why gear makers use double pressing, sinter hardening and rolling densification of tooth surfaces. Porosity can also be the point: oil-impregnated bronze bearings are 20–30 % porous, filters and implant coatings 30–50 %.
-
-| PM material | Density (g/cm³) | Relative density | Tensile strength (MPa) | Elongation (%) | Application |
-|---|---|---|---|---|---|
-| Fe–2Cu–0.8C, sintered | 6.8 | 0.86 | 450–550 | ≈ 1 | Gears, sprockets |
-| Fe–2Ni–0.5Mo–0.5C, sintered and hardened | 7.1 | 0.90 | 900–1200 | < 1 | Transmission gears |
-| Bronze Cu–10Sn, oil impregnated | 6.4 | 0.73 | 100–150 | 2–5 | Self-lubricating bushes |
-| WC–10Co hardmetal | 14.5 | ≈ 1.00 | TRS 3000–4000 | — | Cutting inserts |
-| Ti–6Al–4V, MIM + HIP | 4.43 | ≈ 1.00 | 900–950 | 12–16 | Medical, aerospace small parts |
-| IN718 powder, HIPed and aged | 8.2 | ≈ 1.00 | 1250–1400 | 15–20 | Turbine discs, rings |
-
-*Typical values; TRS = transverse rupture strength in bending.*
-
-### Hot isostatic pressing
-
-**Hot isostatic pressing (HIP)** applies 100–200 MPa of argon at about 0.7–0.9$T_m$ (900–950 °C for titanium alloys, 1150–1250 °C for superalloys and tool steels) for one to several hours. Closed pores collapse by yielding, then creep and diffusion, and their surfaces bond. HIP is used to **densify castings and printed parts** (Chapter 40) — though not surface-connected pores or pores filled with insoluble argon, which can re-expand during later heat treatment — and to **consolidate powder** sealed in an evacuated steel can. Powder HIP gives segregation-free material with fine, uniform carbides or γ′: PM superalloy turbine discs, high-speed and tool steels with 10–20 % carbides, and large near-net valve bodies for oil, gas and nuclear plant. Powder at a tap density of about 65 % shrinks linearly by $1-0.65^{1/3}=13$ % on reaching full density, and the can must be designed for that, often non-uniform, shrinkage. The defect peculiar to powder HIP is the **prior-particle boundary** network of oxides and carbides on the original powder surfaces, controlled by low powder oxygen.
-
-### Metal injection moulding
-
-**Metal injection moulding (MIM)** mixes fine powder (2–20 µm) with a thermoplastic binder to a **feedstock** of about 55–65 vol% powder, injection moulds it into an oversized cavity, removes the binder by solvent, catalytic or thermal debinding, and sinters the fragile "brown" part at 0.85–0.95$T_m$ (about 1350 °C for 17-4PH and 316L stainless steels) to 95–99 % density.
-
-**Worked example — Mould oversize for a MIM part.** A feedstock with 60 vol% stainless-steel powder sinters to 98 % density. For isotropic shrinkage,
-
-$$
-\frac{L_f}{L_0}=\left(\frac{0.60}{0.98}\right)^{1/3}=0.849
-$$
-
-so the part shrinks 15.1 % in every dimension and the cavity is oversized by $1/0.849=1.178$: a 40.0 mm watch case is moulded at 47.1 mm. A ±0.5 vol% variation in powder loading changes the final size by about ±0.3 %, ±0.11 mm on 40 mm — which is why feedstocks are compounded tightly and MIM tolerances are typically ±0.3–0.5 %. Gravity and friction on the setter plate distort thin or overhanging features, so MIM parts have uniform 1–6 mm walls.
-
-MIM is economic for small (0.1–100 g), complex parts made in large numbers: orthodontic brackets, surgical-instrument jaws, watch and phone parts, firearm components and turbocharger vanes.
-
-<!-- FIGURE 38.6 | figures/ch38/fig-38-6-pm-routes.png | flowchart | Powder-metallurgy routes from powder to part: press-and-sinter, metal injection moulding and HIP consolidation, with typical densities. | Content: top row of powder types with sketches and sizes (water-atomized irregular 20–200 µm, gas-atomized spherical 10–150 µm, reduced sponge, carbonyl 1–10 µm). Three columns. Press-and-sinter: mix with graphite/Cu/lubricant → die compaction 400–800 MPa (green 86–92 %) → sinter 1120–1300 °C (86–92 %) → sizing, hardening or oil impregnation. MIM: compound with binder (60 vol% powder) → mould (oversized ~18 %) → debind (brown) → sinter ~1350 °C (95–99 %, 15 % linear shrinkage). HIP: fill and evacuate can (≈ 65 %) → HIP 100–200 MPa, 0.7–0.9 Tm (100 %, 13 % linear shrinkage) → remove can, machine. Side panel: liquid-phase sintering of WC–Co. Density scale bar 60–100 % along the bottom. -->
-
-Figure 38.6 sets the three powder routes side by side; part size, complexity, volume and tolerance of porosity decide between them.
-
----
-
-## 38.8 Processing of ceramics and glasses
-
-Ceramics and glasses use the same routes with different emphasis. Most technical ceramics — alumina, zirconia, SiC, Si$_3$N$_4$ — cannot practically be melt-cast, so they are made by **powder processing**: fine-powder synthesis, shaping by die pressing, CIP, slip casting, tape casting, extrusion or ceramic injection moulding, then sintering (often liquid-phase), hot pressing or HIP. The agglomerates, large pores and inclusions left by these steps set the statistical strength of ceramics (Weibull, Chapter 14). Glasses, by contrast, are formed almost entirely from the melt, exploiting the steady rise of viscosity on cooling: float glass on molten tin, bottles by press-and-blow, fibres drawn through bushings. Ceramic shaping and sintering, glass forming, annealing, tempering and glass-ceramics are treated in **Chapter 17**; polymer processing in **Chapter 21**.
-
----
-
-## 38.9 How the route reaches the property sheet
-
-| Route | Structural variables set | Property consequences |
+| Nanoparticle | Typical size | Use and the property exploited |
 |---|---|---|
-| Sand or gravity casting | Coarse dendrites, pores, segregation | Lower, scattered fatigue and ductility; section-size dependence |
-| Die casting | Fine skin, porous core | Good static strength; limited heat treatment and welding unless vacuum cast |
-| Investment casting + HIP | Controlled grains, pores closed | Creep strength (DS/SX); fatigue raised by HIP |
-| Hot working | Recrystallized grains, closed pores, elongated inclusions | Toughness and fatigue anisotropic, grain flow along contour |
-| Cold working | Dislocations, deformation texture | Strength up, ductility down |
-| Thermomechanical processing | Fine ferrite, controlled texture | Strength with toughness; high $\bar r$; low earing |
-| Press-and-sinter PM | 8–14 % porosity, fine grains | Lower modulus and fatigue; excellent dimensional control |
-| MIM, powder HIP | Near full density, homogeneous | Wrought-like properties in complex or segregation-prone alloys |
+| Carbon black | 20–80 nm primary, fused aggregates | Tyre reinforcement, pigment, conductive filler |
+| Fumed (pyrogenic) silica | 7–40 nm primary | Thickener, anti-settling agent, tyre filler, insulation |
+| Titania, zinc oxide | 20–50 nm | Transparent UV filters, photocatalytic self-cleaning glass |
+| Pt, Pd, Rh on supports | 1–5 nm | Fuel-cell, automotive and chemical catalysts |
+| Silver | 10–100 nm | Antimicrobial coatings, sintered die attach, printed conductors |
+| Ceria | 5–50 nm | Chemical–mechanical polishing slurries, fuel additives, catalysts |
+| Iron oxide | 5–20 nm | MRI contrast, ferrofluids, magnetic separation |
+| Gold | 2–50 nm | Diagnostics (plasmonic colour), catalysis |
 
-Three lessons stand out. **Defects control the dangerous properties**: static strength follows the average microstructure, but fatigue, toughness and pressure tightness follow the largest defect, so a route is chosen as much for the defects it avoids as for the shape it makes. **Deformation is a microstructural tool**: hot working welds pores and replaces dendrites, controlled rolling refines grains beyond what heat treatment can, and rolling plus annealing writes texture. **Shape, quantity and material are chosen together**: the same alloy made as a die casting, a forging or a sintered part has different design allowables, which is why process selection and cost enter materials selection (Chapter 48).
+Colloidal nanoparticles are stabilised against aggregation by the charge, steric and ligand mechanisms of Chapter 37; gas-phase products such as carbon black and fumed silica are deliberately aggregated into branched, chain-like clusters, which is what lets them build networks in rubber and liquids.
+
+### 38.3.2 Quantum dots
+
+Commercial quantum dots are core–shell crystals made by colloidal synthesis (Section 38.7): an emitting core (CdSe, or cadmium-free InP or perovskite CsPbBr₃) coated with a few monolayers of a wider-gap shell (ZnS, ZnSe) that passivates surface dangling bonds, which would otherwise trap carriers and quench emission, and capped with organic ligands for solubility. Photoluminescence quantum yields above 90 % and emission linewidths of 20–35 nm make them ideal colour converters: in quantum-dot displays a blue LED backlight excites red and green dots in a film, giving a wider colour gamut than phosphors. They are also used as fluorescent labels in biology, where their brightness and photostability beat organic dyes, and are studied for solar cells and infrared detectors (PbS dots). Cadmium toxicity has pushed displays towards InP under the EU's hazardous-substance rules.
+
+### 38.3.3 Nanowires
+
+Nanowires have one long free dimension and diameters of 5–200 nm. Semiconductor nanowires (Si, Ge, GaN, ZnO, InP) are grown mostly by the **vapour–liquid–solid** (VLS) mechanism: a gold or other catalyst droplet dissolves vapour-phase precursor, becomes supersaturated and precipitates a single-crystal wire beneath it, so wire diameter follows droplet diameter. Their uses exploit geometry: a wire relaxes lattice-mismatch strain sideways, so heterostructures impossible in films can be grown (nanowire LEDs and solar cells); silicon nanowires and nanostructured silicon accommodate the 300 % volume expansion of lithiation without pulverising, which motivates silicon-rich battery anodes (Chapter 40); and the enormous surface sensitivity of a thin wire makes it a chemical or biological sensor. Metal nanowires (silver, copper) of high aspect ratio form percolating transparent conducting films, a flexible alternative to indium tin oxide.
+
+### 38.3.4 Carbon nanotubes
+
+A single-walled carbon nanotube (SWCNT) is a graphene sheet (Section 38.4) rolled into a seamless cylinder about 1 nm in diameter and up to millimetres long; multi-walled tubes (MWCNTs) are several such cylinders nested with the 0.34 nm graphite interlayer spacing, outer diameters 5–50 nm. How the sheet is rolled is given by the **chiral vector** $\mathbf{C}_h=n\mathbf{a}_1+m\mathbf{a}_2$ on the graphene lattice (Figure 38.3), which becomes the tube's circumference. The diameter follows directly:
+
+$$
+d=\frac{a\sqrt{n^2+nm+m^2}}{\pi},\qquad a=0.246\ \mathrm{nm}
+$$
+
+Tubes with $m=0$ are **zigzag**, $n=m$ are **armchair**, all others are **chiral**. Rolling quantises the electron wavevector around the circumference, and whether the allowed wavevectors pass through graphene's Dirac points (Section 38.4) decides the electrical character: a tube is metallic if $(n-m)$ is divisible by 3 and semiconducting otherwise, with a band gap $E_g\approx0.8\ \mathrm{eV}/d(\mathrm{nm})$.
+
+> **Status of the principle: The $(n-m)\ \mathrm{mod}\ 3$ rule**
+> *Approximate.* Derived from zone-folding of graphene's band structure; curvature opens small gaps (meV to tens of meV) in non-armchair "metallic" tubes, and only armchair tubes are truly metallic.
+
+**Worked example — three tubes.** A (10,10) armchair tube has $d=0.246\sqrt{300}/\pi=1.36$ nm and $n-m=0$: metallic. A (10,0) zigzag tube has $d=0.783$ nm and $n-m=10$, not divisible by 3: semiconducting with $E_g\approx0.8/0.78\approx1.0$ eV. A (13,0) tube has $d=1.02$ nm and is semiconducting with $E_g\approx0.8$ eV. Since synthesis produces a statistical mixture, about one third of tubes are metallic, which is fatal for transistors (separation by density-gradient centrifugation or selective polymer wrapping is needed) but irrelevant for the main markets.
+
+<!-- FIGURE 38.3 | figures/ch38/fig-38-3-cnt-chiral-map.png | schematic | The chiral vector (n,m) on the graphene lattice fixes a nanotube's diameter, chiral angle and whether it is metallic or semiconducting. | Content: (a) honeycomb lattice with unit vectors a1, a2 (a = 0.246 nm) from an origin; chiral vector C_h for (4,2) and the perpendicular translation vector T; zigzag (theta = 0) and armchair (theta = 30 deg) directions marked. (b) Map of lattice points (n,m) for 0 <= m <= n <= 12 as small hexagons: metallic ((n-m) mod 3 = 0) filled dark, semiconducting open; label (10,0) d = 0.78 nm, (13,0) d = 1.02 nm, (10,10) d = 1.36 nm. (c) Three short tube sketches: zigzag, armchair, chiral. -->
+
+![Figure 38.3 — The chiral vector (n,m) on the graphene lattice fixes a nanotube's diameter, chiral angle and whether it is metallic or semiconducting](../figures/ch38/fig-38-3-cnt-chiral-map.png)
+
+*Figure 38.3 — The chiral vector (n,m) on the graphene lattice fixes a nanotube's diameter, chiral angle and whether it is metallic or semiconducting.*
+
+Individual nanotubes have extraordinary properties: Young's modulus about 1 TPa, tensile strength of tens of GPa measured on defect-free tubes, axial thermal conductivity of about 3000 W m⁻¹ K⁻¹, current densities above $10^{9}$ A/cm² (a thousand times copper's electromigration limit). Bulk products capture only a fraction of this, because load and current must pass between tubes through weak van der Waals contacts: CNT yarns and sheets reach 1–5 GPa strength and $10^{6}$ S/m conductivity at best. The largest market is therefore as a **conductive additive**: about 0.5–2 wt% of MWCNTs or SWCNTs in lithium-ion cathodes and silicon-containing anodes replaces several times more carbon black, freeing volume for active material; smaller markets are antistatic plastics (fuel lines, electronics trays), conductive coatings and sporting goods. Boron nitride nanotubes, insulating and stable to about 900 °C in air, and natural halloysite clay nanotubes are related one-dimensional fillers.
+
+---
+
+## 38.4 Graphene and other two-dimensional materials
+
+### 38.4.1 Graphene
+
+**Graphene** is a single layer of sp²-bonded carbon atoms in a honeycomb lattice, with C–C bond length 0.142 nm and lattice constant 0.246 nm; stacking layers at 0.335 nm gives graphite. It was isolated in 2004 by peeling graphite with adhesive tape and identifying monolayers optically on oxidised silicon, the work recognised by the 2010 Nobel Prize in Physics.
+
+Its electronic structure is unusual. The conduction and valence bands touch at the six corners ($K$ points) of the hexagonal Brillouin zone, and near them the energy is linear in wavevector, $E=\pm\hbar v_F\lvert\mathbf{k}\rvert$ with $v_F\approx1\times10^{6}$ m/s: a **Dirac cone**, so electrons behave as massless particles. Graphene is a zero-gap semimetal whose carrier type and density are set by a gate field or by chemical doping. That gives very high mobility (above $10^{5}$ cm² V⁻¹ s⁻¹ in clean, h-BN-encapsulated samples, $10^{3}$–$10^{4}$ on SiO₂), but no off-state for digital logic, which is why graphene has not replaced silicon in transistors.
+
+Its other properties (Table 38.1) explain where it *is* used. One atom thick and with the in-plane covalent bond of graphite, it has a Young's modulus of about 1 TPa and an intrinsic strength of about 130 GPa (measured by nanoindentation of suspended membranes), the strongest material known. It absorbs 2.3 % of visible light per layer (the value $\pi\alpha$, with $\alpha$ the fine-structure constant), so a monolayer is nearly transparent yet conductive. It is impermeable to gases, even helium, in perfect form. Its theoretical specific surface area, with both faces counted, is
+
+$$
+\mathrm{SSA}=\frac{2\times A_{\mathrm{cell}}}{2m_{\mathrm{C}}}=\frac{2\times0.0524\ \mathrm{nm^2}}{2\times1.994\times10^{-23}\ \mathrm{g}}\approx2630\ \mathrm{m^2/g}
+$$
+
+(the unit cell of area $\sqrt3a^2/2=0.0524$ nm² contains two carbon atoms), which makes it a candidate for supercapacitor electrodes (Chapter 40), though restacking of sheets loses most of that area.
+
+**Table 38.1 — Properties of graphene and benchmarks (typical; monolayer values are for high-quality samples)**
+
+| Property | Graphene | Benchmark |
+|---|---|---|
+| Young's modulus | ~1.0 TPa | Steel 200 GPa; CFRP ply 130–180 GPa |
+| Intrinsic tensile strength | ~130 GPa | High-strength steel ~2 GPa; carbon fibre 3–7 GPa |
+| Thermal conductivity (suspended, room T) | 2000–5000 W m⁻¹ K⁻¹ | Copper 400; diamond 2000 |
+| Carrier mobility (room T) | $10^{4}$–$10^{5}$ cm² V⁻¹ s⁻¹ | Silicon electrons ~1400 |
+| Optical absorption per layer | 2.3 % | ITO film ~10 % at similar sheet resistance |
+| Sheet resistance (CVD, doped) | 100–500 Ω/sq | ITO 10–100 Ω/sq |
+| Specific surface area | ~2630 m²/g | Activated carbon 1000–3000 m²/g |
+
+In practice "graphene" sold by the tonne is something else: **few-layer graphene** and **graphene nanoplatelets** (5–100 layers) made by liquid-phase exfoliation of graphite, and **graphene oxide** (GO), a heavily oxidised, insulating, water-dispersible sheet made by chemical oxidation, partly reconverted to conductive **reduced graphene oxide** (rGO). These platelets are used as additives: in anticorrosion and barrier coatings, heat-spreading films in smartphones (actually graphitised polyimide or graphene-laminate films with in-plane conductivities of 1000–1900 W m⁻¹ K⁻¹), conductive inks, battery electrodes and as reinforcement in concrete and polymers. Continuous monolayer films are grown by chemical vapour deposition on copper foil (Section 38.7) and transferred, for sensors, transparent electrodes and research devices; transfer damage, wrinkles and grain boundaries make large-area quality the persistent problem.
+
+### 38.4.2 Beyond graphene
+
+Graphene opened a family of layered crystals that can be thinned to one or a few layers (Figure 38.4):
+
+- **Hexagonal boron nitride (h-BN)**, "white graphene", is isostructural with graphene but has alternating B and N, a band gap near 6 eV, and an atomically flat, charge-trap-free surface. It is the ideal insulating substrate and encapsulant for other 2D materials, and bulk h-BN powder is a high-temperature lubricant and thermally conductive, electrically insulating filler.
+- **Transition-metal dichalcogenides (TMDs)**, MX₂ with M = Mo, W and X = S, Se, Te: a metal layer sandwiched between two chalcogen layers. MoS₂ has an indirect gap of about 1.2–1.3 eV in bulk that becomes a direct gap of about 1.8–1.9 eV in a monolayer, so monolayers luminesce strongly; WSe₂ and MoTe₂ give other gaps. They are the leading candidates for transistor channels thinner than silicon can be made, and bulk MoS₂ has long been a solid lubricant for vacuum and aerospace mechanisms.
+- **Phosphorene** (black phosphorus) has a puckered structure, a direct gap that rises from about 0.3 eV in bulk to about 1.5–2 eV in a monolayer, and strong in-plane anisotropy; it degrades rapidly in air unless encapsulated.
+- **MXenes**, such as Ti₃C₂T$_x$, are made by etching the A-layer out of MAX-phase ceramics (Ti₃AlC₂), leaving metallic carbide or nitride sheets terminated by –O, –OH and –F groups ($T_x$). They combine metallic conductivity (up to about $10^{4}$ S/cm) with hydrophilicity, so they can be processed from water into films for electromagnetic-interference shielding, supercapacitor electrodes and conductive inks.
+- **Van der Waals heterostructures** stack different 2D crystals (graphene, h-BN, TMDs) like Lego; because layers bond by van der Waals forces, lattice matching is unnecessary. Twisting two graphene layers to the "magic angle" of about 1.1° even produces superconductivity, an example of designing properties by stacking geometry alone.
+
+<!-- FIGURE 38.4 | figures/ch38/fig-38-4-2d-materials-family.png | schematic | The two-dimensional materials family spans metals, semimetals, semiconductors and insulators, with band gaps from zero to about 6 eV. | Content: top row: ball-and-stick top and side views of graphene, h-BN, MoS2 (Mo between two S layers), black phosphorus (puckered), Ti3C2Tx (Ti-C-Ti-C-Ti with surface terminations). Bottom: horizontal band-gap ladder 0-6 eV placing graphene (0, semimetal, Dirac cone icon), MXene (metal), phosphorene (bar 0.3 bulk to ~1.8 mono), MoS2 (bar 1.25 bulk indirect to 1.9 mono direct), WSe2 (~1.65), h-BN (~6.0); colour code metal/semimetal/semiconductor/insulator; overlay visible-spectrum band 1.65-3.1 eV. -->
+
+![Figure 38.4 — The two-dimensional materials family spans metals, semimetals, semiconductors and insulators, with band gaps from zero to about 6 eV](../figures/ch38/fig-38-4-2d-materials-family.png)
+
+*Figure 38.4 — The two-dimensional materials family spans metals, semimetals, semiconductors and insulators, with band gaps from zero to about 6 eV.*
+
+---
+
+## 38.5 Nanocrystalline metals
+
+### 38.5.1 Extrapolating Hall–Petch
+
+Grain boundaries obstruct dislocations, and Chapter 13 derived the Hall–Petch relation from dislocation pile-ups:
+
+$$
+\sigma_y=\sigma_0+k_y\,d^{-1/2}
+$$
+
+Since strength rises without limit as $d\to0$ in this formula, it is natural to ask how strong a metal with nanometre grains can be. **Nanocrystalline** metals, with grain sizes below 100 nm (and *ultrafine-grained* metals at 100–1000 nm), test the question.
+
+**Worked example — how strong could nanocrystalline copper be?** Take $\sigma_0=25$ MPa and $k_y=0.11$ MPa m^1/2 for copper. Hall–Petch predicts 60 MPa at $d=10$ µm, 135 MPa at 1 µm, $25+0.11/\sqrt{10^{-7}}=373$ MPa at 100 nm, 803 MPa at 20 nm and 1125 MPa at 10 nm. Measured yield strengths of fully dense nanocrystalline copper follow the line down to roughly 20–30 nm, reaching about 0.8–1 GPa, five to ten times annealed copper, but below about 10–15 nm strength stops rising and then falls (Figure 38.5). Extrapolation to 5 nm (1.58 GPa) would be badly wrong.
+
+> **Status of the principle: Hall–Petch relation at the nanoscale**
+> *Empirical.* Valid from coarse grains down to a few tens of nanometres; it fails below about 10–20 nm, where grains are too small to support pile-ups and grain-boundary-mediated deformation takes over.
+
+### 38.5.2 The inverse Hall–Petch regime
+
+The breakdown has a physical reason. A pile-up needs room: a grain of 10 nm can hold only one or two dislocations, and the Frank–Read sources of Chapter 12 need a pinned segment that cannot fit. Instead, dislocations are emitted from grain boundaries, cross the grain and are absorbed at the opposite boundary. As grains shrink further, the volume fraction of grain-boundary material approaches that of the grain interiors (the surface-fraction arithmetic of Section 38.1 applies to grain boundaries too), and deformation shifts to **grain-boundary sliding**, grain rotation and diffusion along boundaries, mechanisms that become easier, not harder, as grains shrink. Molecular-dynamics simulations (Chapter 56) and experiments place the strength maximum near 10–15 nm for copper and nickel. Below it, softening (the **inverse Hall–Petch** effect) is observed, though early reports of it were complicated by porosity and impurities in the samples.
+
+<!-- FIGURE 38.5 | figures/ch38/fig-38-5-hall-petch-inverse.png | plot | Strength of copper rises with the inverse square root of grain size down to a few tens of nanometres, then saturates and falls in the inverse Hall-Petch regime. | Content: x-axis d^(-1/2) in m^(-1/2) from 0 to 15000 (top axis labelled with grain sizes 10 um, 1 um, 100 nm, 20 nm, 10 nm, 5 nm), y-axis yield strength 0-1600 MPa. Straight Hall-Petch line sigma = 25 + 0.11 d^(-1/2) MPa (60 MPa at 10 um, 135 at 1 um, 373 at 100 nm, 803 at 20 nm, 1125 at 10 nm, 1581 at 5 nm), dashed beyond 20 nm. Schematic experimental band following the line to ~25 nm, peaking at ~0.9-1.0 GPa near 10-15 nm, then falling. Shaded zones: "pile-up regime", "boundary-emitted dislocations", "grain-boundary sliding / inverse Hall-Petch". Point for nanotwinned Cu (~0.9 GPa) labelled. -->
+
+![Figure 38.5 — Strength of copper rises with the inverse square root of grain size down to a few tens of nanometres, then saturates and falls in the inverse Hall-Petch regime](../figures/ch38/fig-38-5-hall-petch-inverse.png)
+
+*Figure 38.5 — Strength of copper rises with the inverse square root of grain size down to a few tens of nanometres, then saturates and falls in the inverse Hall-Petch regime.*
+
+### 38.5.3 Stability, ductility and practical nanocrystalline metals
+
+Two problems limit bulk use. **Thermal stability**: the grain-boundary energy per unit volume is enormous, so nanocrystalline grains coarsen readily, in pure copper and aluminium even near room temperature. Stabilisation comes from solute segregation to boundaries, which lowers boundary energy (Ni–W, Cu–Ta, Fe–Zr), and from Zener pinning by fine particles (Chapter 10), as in oxide-dispersion-strengthened steels for reactor cladding (Chapter 41). **Ductility**: with no room for dislocation storage, nanocrystalline metals work-harden little, neck early and often show only a few percent uniform elongation.
+
+**Nanotwinned** copper offers a way round. Pulsed electrodeposition can produce grains of 400–500 nm containing growth twins spaced 15–50 nm apart. Twin boundaries block dislocations like grain boundaries do, giving strength near 0.9–1 GPa, but because they are coherent, low-energy boundaries they scatter electrons very weakly, and the conductivity stays near 95 % of annealed copper, whereas ordinary nanocrystalline copper loses much more. They also allow dislocations to slip along them, which preserves some ductility.
+
+Practical nanocrystalline metals are made in forms that do not need large bulk sections. Electrodeposited nanocrystalline nickel and nickel–tungsten or cobalt–phosphorus alloys, with grains of 10–20 nm and hardness of 5–7 GPa (about five times that of conventional nickel), are wear coatings that replace hard chromium plating, whose hexavalent-chromium chemistry is being phased out. Severe plastic deformation (Section 38.7) produces ultrafine-grained titanium for dental implants (Chapter 39) and aluminium for high-strength wires. Nanocrystalline soft magnetic alloys (Fe–Si–B–Nb–Cu, Chapter 29), with 10 nm grains in an amorphous matrix, owe their very low coercivity to grains smaller than the magnetic exchange length, another case where a characteristic length decides the effect.
+
+---
+
+## 38.6 Nanocomposites
+
+Most nanomaterials reach products as fillers in a matrix. A nanocomposite differs from the conventional composites of Chapter 22 in two ways that follow from size. First, at the same volume fraction the filler has orders of magnitude more interface with the matrix, so a few percent of filler can change properties that a conventional filler changes only at 20–50 %. Second, nanoscale fillers are too small to scatter light, to act as strength-limiting flaws or to roughen a surface, so properties can be added without the usual penalties. The difficulty is that their high surface energy makes them aggregate, and an agglomerated nanofiller behaves like a poor micro-filler. Dispersion and interface chemistry decide success.
+
+### 38.6.1 Mechanical reinforcement
+
+The first commercial polymer nanocomposite, nylon 6 with about 4 wt% of exfoliated montmorillonite clay platelets (1 nm thick, 100–500 nm across), was developed by Toyota around 1990 for a timing-belt cover: the modulus roughly doubled and the heat-deflection temperature rose by about 80 K with no loss of density or processability. Clay, CNT and graphene stiffening follows the Halpin–Tsai estimates of Chapter 22 with the platelet or tube aspect ratio, provided the fillers are individually dispersed and bonded. **Silica** nanoparticles bonded to rubber with silane coupling agents lowered the rolling resistance of "green" passenger tyres by about 20 % while keeping wet grip, which is now standard practice; **nano-silica** and **rubber nanoparticles** toughen epoxy matrices for aerospace composites; dental restorative nanocomposites combine 20–75 nm silica and zirconia clusters with polymer resins to give polishable, wear-resistant fillings. In concrete, nano-silica accelerates hydration and densifies the C–S–H, and graphene-oxide additions of 0.01–0.05 % are marketed to reduce cement content.
+
+### 38.6.2 Barrier properties
+
+Impermeable platelets aligned in a film force a diffusing gas molecule to take a detour, increasing the path length. The **Nielsen** tortuosity model for platelets of aspect ratio $\alpha$ (width/thickness) at volume fraction $\phi$, aligned perpendicular to the diffusion direction, gives the ratio of composite to matrix permeability:
+
+$$
+\frac{P_c}{P_m}=\frac{1-\phi}{1+\dfrac{\alpha}{2}\phi}
+$$
+
+> **Status of the principle: Nielsen tortuosity model**
+> *Approximate.* Assumes perfectly aligned, impermeable, uniformly spaced platelets and an unchanged matrix; misalignment and agglomeration reduce the benefit, while changes in matrix crystallinity or chain mobility near the filler can add to it.
+
+**Worked example — a clay barrier film.** Adding 3 vol% clay platelets with aspect ratio 100 gives $P_c/P_m=0.97/(1+50\times0.03)=0.97/2.5=0.39$: the oxygen permeability falls by 61 %. At 5 vol% it falls to 0.27; with aspect ratio 300 at 3 vol%, to 0.18. The same reduction with a conventional filler would need far higher loadings and would cloud the film. Clay- and graphene-filled barrier layers are used in food and pharmaceutical packaging, in the inner liners of tyres (butyl rubber nanocomposites hold pressure longer) and in polymer fuel tanks and hydrogen-tank liners, where permeation of small molecules is a regulatory and safety issue.
+
+### 38.6.3 Electrical and thermal percolation
+
+A conducting filler in an insulating polymer forms a connected network above a **percolation threshold** $\phi_c$ (Chapter 25). For spheres $\phi_c\approx0.16$; for randomly oriented sticks of length $L$ and diameter $d$, excluded-volume arguments give $\phi_c\approx0.7\,d/L$. Nanotubes with $L/d=1000$ therefore percolate at about 0.07 vol%, roughly 0.1 wt%: some 200 times less filler than carbon black spheres need. In practice thresholds of 0.01–0.5 wt% are measured for well-dispersed tubes, rising to several percent if tubes bundle or break during mixing. Such loadings make plastics antistatic (surface resistivity $10^{6}$–$10^{9}$ Ω) for fuel systems, electronics packaging and mining equipment, without changing their mechanical behaviour. Thermal percolation is much weaker, because phonons do not tunnel efficiently across filler–filler contacts, so thermally conductive polymers still need 30–60 vol% of fillers such as h-BN or alumina (Chapter 24).
+
+---
+
+## 38.7 Synthesis: top-down and bottom-up
+
+Nanomaterials are made either by carving or breaking bulk material (**top-down**) or by assembling atoms and molecules (**bottom-up**). Figure 38.6 and Table 38.2 summarise the routes.
+
+### 38.7.1 Top-down routes
+
+- **High-energy ball milling** fractures and cold-welds powders, producing nanocrystalline grains (10–30 nm) inside micrometre particles and mechanically alloying immiscible elements, as in ODS steels (Chapter 41). It is cheap and scalable but introduces contamination and wide size distributions.
+- **Severe plastic deformation** imposes enormous strains without changing shape: **equal-channel angular pressing** (ECAP) pushes a billet repeatedly through a die with a 90° bend; **high-pressure torsion** twists a disc under several GPa. Grains refine to 100–300 nm (ECAP) or below 100 nm (HPT) in bulk, fully dense metal.
+- **Lithography and etching**, the semiconductor industry's route, pattern features to below 20 nm with extreme-UV lithography (Chapter 49); electron-beam lithography is precise but slow.
+- **Exfoliation** separates layered crystals: micromechanical cleavage (adhesive tape) for research-grade flakes, and **liquid-phase exfoliation** by ultrasound or shear mixing in solvents or surfactant solutions for tonnage graphene nanoplatelets and h-BN; chemical oxidation and exfoliation gives graphene oxide.
+
+### 38.7.2 Bottom-up routes
+
+- **Gas-phase synthesis.** Flame pyrolysis makes fumed silica (SiCl₄ burned in a hydrogen–oxygen flame), pigmentary and nano titania and carbon black, at millions of tonnes per year; laser ablation and spark discharge make research-scale metal nanoparticles.
+- **Colloidal (wet-chemical) synthesis.** In the **hot-injection** method, precursors injected into a hot coordinating solvent nucleate in a short burst (a LaMer supersaturation spike, Chapter 9), after which growth without new nucleation gives size distributions of ±5 %, the basis of quantum-dot manufacture. Citrate reduction of gold salts, polyol synthesis of silver nanowires and co-precipitation of iron oxide are other examples.
+- **Sol–gel and hydrothermal** routes make oxide nanoparticles, aerogels and coatings at low temperature (Chapter 49).
+- **Chemical vapour deposition (CVD).** Hydrocarbons decompose on catalysts: on iron, cobalt or nickel nanoparticles they grow carbon nanotubes (fluidised-bed reactors make tonnes per year of MWCNTs); on copper foil at about 1000 °C, methane gives self-limiting monolayer graphene, because carbon is nearly insoluble in copper and growth stops once the surface is covered. VLS growth of nanowires is a CVD variant.
+- **Atomic layer deposition** (ALD) builds films one atomic layer per cycle by self-limiting surface reactions, giving perfectly conformal nanometre coatings inside pores and on nanoparticles (Chapter 49).
+- **Electrodeposition** with pulsed current and grain-refining additives yields nanocrystalline and nanotwinned metals directly.
+- **Self-assembly** of block copolymers, surfactants and colloids (Chapter 37) builds ordered nanostructures and templates.
+
+**Table 38.2 — Comparison of synthesis routes (indicative)**
+
+| Route | Typical products | Size control | Throughput | Main limitation |
+|---|---|---|---|---|
+| Ball milling | Nanocrystalline powders, ODS alloys | Poor | High (tonnes) | Contamination, broad distribution |
+| Severe plastic deformation | Bulk UFG metals | Moderate (100–300 nm) | Moderate | Size of billets, cost per kg |
+| Lithography | Device features, patterned arrays | Excellent | High area, high cost | Capital cost, resolution limits |
+| Liquid-phase exfoliation | Graphene and h-BN platelets | Poor in thickness | High | Defects, polydispersity |
+| Flame pyrolysis | SiO₂, TiO₂, carbon black | Moderate | Very high (Mt/yr) | Aggregated particles |
+| Hot-injection colloidal | Quantum dots, metal nanocrystals | Excellent (±5 %) | Low–moderate | Solvents, ligands, cost |
+| CVD | CNTs, graphene films, nanowires | Good | Moderate | Transfer, catalyst residues |
+| ALD | Conformal films, coatings | Atomic | Low (per layer) | Slow, precursor cost |
+| Electrodeposition | Nanocrystalline coatings | Good | High | Conductive substrates only |
+
+<!-- FIGURE 38.6 | figures/ch38/fig-38-6-synthesis-routes.png | flowchart | Top-down routes break or carve bulk material; bottom-up routes assemble atoms and molecules; the two meet in the 1-100 nm range. | Content: vertical log length-scale axis on the left from 0.1 nm (atoms) to 1 mm (bulk). Top half, arrows pointing down from "bulk material": ball milling (to 10-30 nm grains), severe plastic deformation (100-300 nm), lithography + etching (~10-20 nm), exfoliation (graphene flakes). Bottom half, arrows pointing up from "atoms/molecules": gas-phase pyrolysis (fumed silica, carbon black), hot-injection colloidal synthesis (quantum dots, +/-5 %), sol-gel, CVD on catalysts (CNT, graphene on Cu), VLS nanowires, ALD (atomic layers), electrodeposition (nc-Ni), self-assembly. Central shaded band 1-100 nm labelled "nanoscale". Small icons for each product. -->
+
+![Figure 38.6 — Top-down routes break or carve bulk material; bottom-up routes assemble atoms and molecules; the two meet in the 1-100 nm range](../figures/ch38/fig-38-6-synthesis-routes.png)
+
+*Figure 38.6 — Top-down routes break or carve bulk material; bottom-up routes assemble atoms and molecules; the two meet in the 1-100 nm range.*
+
+---
+
+## 38.8 Characterization and safety of nanomaterials
+
+### 38.8.1 Seeing and measuring the nanoscale
+
+No single method characterises a nanomaterial; several are combined (details in Chapters 52–54):
+
+- **Transmission electron microscopy** images individual particles, tubes and grain boundaries at atomic resolution, and electron diffraction identifies phases; it samples only a tiny amount of material, so statistics need many images and automated analysis.
+- **Scanning electron microscopy** shows morphology and agglomeration of powders and composites down to a few nanometres.
+- **Atomic force microscopy** measures the thickness of 2D flakes (a graphene monolayer appears 0.3–1 nm high depending on substrate and adsorbates) and maps surface topography and mechanical properties.
+- **X-ray diffraction** gives crystallite size from peak broadening (the Scherrer and Williamson–Hall analyses of Chapter 4) averaged over billions of crystals; small-angle X-ray scattering gives particle size distributions in dispersions.
+- **Dynamic light scattering** measures the hydrodynamic diameter of particles in liquid from their Brownian motion, which includes ligand shells and reports agglomerates.
+- **Gas adsorption (BET)** measures specific surface area, comparable with the $6/(\rho d)$ estimate of Section 38.1.
+- **Raman spectroscopy** is the workhorse for carbon: the G band near 1580 cm⁻¹ (in-plane C–C stretching), the D band near 1350 cm⁻¹ (activated only by defects) and the 2D band near 2700 cm⁻¹, whose shape distinguishes monolayer from few-layer graphene. The D/G intensity ratio measures defect density, and radial breathing modes give nanotube diameters.
+- **Optical spectroscopy**: the first-exciton absorption peak of quantum dots gives their size via sizing curves; the plasmon peak position and width of gold and silver particles report size and aggregation.
+
+Reporting a nanomaterial properly means giving the size distribution (not just a mean), the method and its basis (number-, volume- or intensity-weighted), the state of agglomeration, the surface chemistry and the specific surface area. A "graphene" product should state layer number distribution, lateral size and oxygen content; surveys of commercial graphene have found many products to be mostly graphite.
+
+### 38.8.2 Why nanomaterials raise safety questions
+
+Risk is hazard multiplied by exposure, and nanomaterials raise both in specific ways:
+
+- **Dose metric.** For poorly soluble particles, lung inflammation in animal studies correlates better with the *surface area* inhaled than with the mass, so the same mass of a nanopowder can be more toxic than its micrometre counterpart. Recommended exposure limits reflect this: NIOSH recommends 0.3 mg/m³ for ultrafine titania against 2.4 mg/m³ for fine titania.
+- **Reactivity.** High surface area and surface defects can generate reactive oxygen species; soluble particles such as silver, zinc oxide and copper oxide release ions locally.
+- **Translocation.** Particles below about 100 nm deposit efficiently in the deep lung, and a small fraction crosses into the blood; very small particles can reach other organs.
+- **The fibre paradigm.** Long, thin, biopersistent fibres that macrophages cannot engulf (longer than about 15–20 µm) cause chronic inflammation, fibrosis and mesothelioma, as asbestos did. Long, rigid multi-walled carbon nanotubes behave this way in animal studies, and one type (MWNT-7) is classified as possibly carcinogenic to humans. NIOSH recommends an exposure limit of 1 µg/m³ for carbon nanotubes and nanofibres. Short, tangled or flexible tubes are much less hazardous.
+- **Environment.** Nanoparticles released from products (silver from antimicrobial textiles during washing, titania from sunscreens and paints) enter waste-water and soils, where aggregation, dissolution and transformation (silver to silver sulfide) usually reduce toxicity, but the life-cycle fate is still being studied.
+
+Exposure occurs mainly during manufacture and handling of dry powders, and during machining, sanding or burning of nanocomposites, rather than in using finished products, where the nanomaterial is bound in a matrix. Engineering control is therefore familiar industrial hygiene: handling dispersions or masterbatches instead of dry powder, enclosure and local exhaust ventilation, HEPA filtration (which captures nanoparticles very efficiently, because they diffuse to fibres), and respiratory protection. Regulation now treats nanoforms explicitly: since 2020 the EU REACH regulation requires registrants to characterise nanoforms separately, cosmetics containing nanomaterials must be notified and labelled "(nano)", and international standards (ISO/TR 12885 on occupational health and safety; ISO 80004 on vocabulary) define terms and practices. **Safe-by-design** asks the materials engineer to choose shapes, sizes, coatings and matrices that deliver the function at least hazard: shorter or tangled tubes, dissolvable or bound forms, surface coatings that suppress reactivity.
+
+> **Status of the principle: Surface-area dose metric for nanoparticle toxicity**
+> *Empirical.* Fitted to inhalation studies of poorly soluble, low-toxicity particles; it does not apply to soluble particles (where released ions dominate) or to fibres (where length and biopersistence dominate).
+
+### 38.8.3 Why nanomaterials are mostly additives
+
+Looking back over the chapter, a pattern emerges. Nanomaterials have succeeded where a small amount of a very fine phase changes a bulk property (carbon black, silica, CNT conductive additives, clay barriers, catalysts, pigments and UV filters), where size itself is the function (quantum-dot colour, plasmonic test strips) or where a thin layer is all that is needed (coatings, ALD films, electrodeposits). They have struggled where the outstanding property of an individual object (a nanotube's strength, graphene's mobility) must survive assembly into a macroscopic part, because the weak links between nano-objects, defects introduced during processing, and cost then dominate. The same structure–property logic that governs any material governs this one: a material is as good as its worst connection, and processing decides what the connections are.
 
 ---
 
@@ -451,18 +389,16 @@ Three lessons stand out. **Defects control the dangerous properties**: static st
 
 | Open question | Where it is answered |
 |---|---|
-| What sets nucleation, dendrite spacing and Scheil segregation during casting? | Chapter 9 |
-| How do recovery, recrystallization, grain growth and Zener pinning proceed during and after working? | Chapter 10 |
-| What slip systems, Taylor factors and Hall–Petch constants lie behind texture and grain refinement? | Chapter 13 |
-| How do porosity and inclusions control fatigue and fracture? | Chapter 14 |
-| How are hot-rolled steels heat treated, and how do HSLA and AHSS grades differ? | Chapter 15 |
-| How are aluminium, titanium and superalloy products processed and tempered? | Chapter 16 |
-| How are ceramic powders shaped and sintered, and glasses formed and tempered? | Chapter 17 |
-| How are polymers moulded and composites laid up and cured? | Chapters 21 and 23 |
-| What does welding do to cast, wrought and PM parts? | Chapter 39 |
-| When is building a part from tiny melt pools better than casting or forging? | Chapter 40 |
-| How are porosity, texture and residual stress measured (CT, EBSD, diffraction)? | Chapters 42–43 |
-| How are casting, forging and HIP simulated and linked to properties? | Chapter 46 |
-| How is a manufacturing route selected and costed? | Chapter 48 |
+| How do surface energy and the Gibbs–Thomson effect follow from thermodynamics? | Chapter 6 |
+| How do nucleation bursts and Ostwald ripening control particle size distributions? | Chapters 9 and 10 |
+| How are dislocation pile-ups and Hall–Petch derived for coarse grains? | Chapter 13 |
+| How do micromechanics models (Halpin–Tsai, shear lag) predict the stiffness of filled polymers? | Chapter 22 |
+| What sets electron and phonon transport in bulk conductors and semiconductors? | Chapters 24, 25, 31 and 32 |
+| How are nanomaterials used in batteries, supercapacitors, catalysts and thermoelectrics? | Chapter 40 |
+| How do nanoscale oxide dispersions make steels resistant to radiation and creep? | Chapter 41 |
+| How are thin films and ALD layers grown and patterned? | Chapter 49 |
+| How do atom-probe tomography and aberration-corrected STEM resolve nanostructures? | Chapter 53 |
+| Can molecular dynamics predict the inverse Hall–Petch transition and 2D-material properties? | Chapters 55 and 56 |
+| How are the environmental footprint and end-of-life of nanomaterials assessed? | Chapter 59 |
 
-**Next:** Chapter 39 takes shaped parts and asks how to join them — by melting, solid-state bonding, brazing, adhesives or fasteners — without making the joint the weakest link.
+**Next:** Chapter 39 places materials inside the human body, where the environment is warm, wet, salty and alive, and asks what makes a material biocompatible.

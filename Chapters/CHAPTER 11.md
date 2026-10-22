@@ -43,6 +43,10 @@ $$
 
 <!-- FIGURE 11.1 | figures/ch11/fig-11-1-stress-tensor-mohr.png | schematic | The stress tensor: components acting on the faces of a cubic element, and the Mohr circle for a two-dimensional stress state showing principal stresses and maximum shear. | Content: Left: isometric unit cube with axes x, y, z; on the three visible faces, arrows for σxx, σyy, σzz (normal) and τxy, τxz, τyx, τyz, τzx, τzy (shear), labelled. Right: Mohr circle with horizontal axis normal stress σ (−50 to 150 MPa) and vertical axis shear stress τ; example state σxx = 120 MPa, σyy = 20 MPa, τxy = 40 MPa; centre at 70 MPa, radius 64 MPa; principal stresses σ1 = 134 MPa and σ2 = 6 MPa marked; maximum in-plane shear 64 MPa marked; angle 2θp = 38.7° shown. -->
 
+![Figure 11.1 — The stress tensor: components acting on the faces of a cubic element, and the Mohr circle for a two-dimensional stress state showing principal stresses and maximum shear](../figures/ch11/fig-11-1-stress-tensor-mohr.png)
+
+*Figure 11.1 — The stress tensor: components acting on the faces of a cubic element, and the Mohr circle for a two-dimensional stress state showing principal stresses and maximum shear.*
+
 ### Principal stresses, hydrostatic and deviatoric parts
 
 Because $\sigma_{ij}$ is symmetric, there is always a set of three mutually perpendicular directions — the **principal axes** — on whose planes the shear stresses vanish. The normal stresses on them, the **principal stresses** $\sigma_1\ge\sigma_2\ge\sigma_3$, are the eigenvalues of the tensor. In two dimensions they are
@@ -153,7 +157,7 @@ For steel with $E=207$ GPa and $\nu=0.30$: $G=79.6$ GPa and $K=172.5$ GPa. Two f
 | HDPE | 0.8–1.2 | 0.42 | 0.95 | ~1 |
 | Natural rubber (vulcanized) | 0.001–0.005 | 0.4999 | 0.92–1.0 | ~0.003 |
 
-A striking feature of the table is that steel, aluminium, titanium and magnesium alloys all have almost the same **specific modulus** $E/\rho\approx25$ GPa per Mg/m³. Substituting one metal for another does not make a stiff structure lighter unless the geometry changes; the large gains come from ceramics and from carbon-fibre composites, which is why aircraft structures moved from aluminium to CFRP (Chapters 22 and 48).
+A striking feature of the table is that steel, aluminium, titanium and magnesium alloys all have almost the same **specific modulus** $E/\rho\approx25$ GPa per Mg/m³. Substituting one metal for another does not make a stiff structure lighter unless the geometry changes; the large gains come from ceramics and from carbon-fibre composites, which is why aircraft structures moved from aluminium to CFRP (Chapters 22 and 58).
 
 ### Anisotropic crystals: the cubic case
 
@@ -190,9 +194,13 @@ An untextured polycrystal averages over all orientations. The Voigt bound (unifo
 
 <!-- FIGURE 11.2 | figures/ch11/fig-11-2-directional-modulus.png | plot | Directional Young's modulus of cubic single crystals of copper, iron, aluminium and tungsten in the (1-10) plane, compared with the isotropic polycrystal values. | Content: polar plot, angle from [001] (0°) through [111] (54.7°) to [110] (90°) and on to [00-1], radius E in GPa from 0 to 300. Curves computed from the compliances: Cu (E100 = 66.7, E111 = 191, E110 = 130), Fe (132, 283, 220), Al (63.9, 76.1, 72.6), W (~408 constant, drawn as near-circle, scale capped at 450 if needed — alternatively draw W in an inset). Dashed circles at polycrystal Hill averages: Cu 127, Fe 211. Mark the [001], [111], [110] directions with radial lines. -->
 
+![Figure 11.2 — Directional Young's modulus of cubic single crystals of copper, iron, aluminium and tungsten in the (1-10) plane, compared with the isotropic polycrystal values](../figures/ch11/fig-11-2-directional-modulus.png)
+
+*Figure 11.2 — Directional Young's modulus of cubic single crystals of copper, iron, aluminium and tungsten in the (1-10) plane, compared with the isotropic polycrystal values.*
+
 Elastic anisotropy has direct engineering consequences, shown in Figure 11.2:
 
-- **Single-crystal turbine blades** of nickel superalloys are grown with $\langle001\rangle$ along the blade axis. Their modulus in that direction, about 125–130 GPa at room temperature, is roughly 60 % of a polycrystal's (about 210–220 GPa), so thermal strains during engine start-up produce proportionately lower thermal stresses and the blades survive more thermal-fatigue cycles (Chapter 33).
+- **Single-crystal turbine blades** of nickel superalloys are grown with $\langle001\rangle$ along the blade axis. Their modulus in that direction, about 125–130 GPa at room temperature, is roughly 60 % of a polycrystal's (about 210–220 GPa), so thermal strains during engine start-up produce proportionately lower thermal stresses and the blades survive more thermal-fatigue cycles (Chapter 41).
 - **Silicon MEMS** resonators and cantilevers have moduli from 130 GPa ($\langle100\rangle$) to 188 GPa ($\langle111\rangle$) depending on the direction they are etched along.
 - **Textured sheet** has a modulus varying by several percent in its plane, which matters for spring-back in forming.
 
@@ -236,9 +244,13 @@ The depth of the potential well sets the melting temperature and its curvature s
 Modulus is called **structure-insensitive** because cold work, grain size and modest alloying change it by only a few percent. Two microstructural features do change it strongly:
 
 - **Second phases** in large volume fractions, as in composites, where the modulus follows rule-of-mixtures bounds (Chapter 22). Tungsten carbide particles raise the modulus of a cobalt matrix to 550–650 GPa in cemented carbides.
-- **Porosity.** A widely used empirical fit for isolated pores is $E=E_0(1-1.9p+0.9p^2)$, so 5 % porosity lowers the modulus of a sintered ceramic or powder-metallurgy part by 9 % and 10 % porosity by 18 %. For highly porous **cellular solids** — polymer and metal foams, balsa, trabecular bone, additively manufactured lattices — bending of cell walls dominates and $E/E_s\approx(\rho/\rho_s)^2$, so a foam of 10 % relative density has only about 1 % of the solid's stiffness. Bone-replacement scaffolds and porous titanium implant surfaces are designed with this scaling to match the stiffness of bone and avoid **stress shielding**, the bone loss that occurs when an implant much stiffer than bone carries most of the load (Chapter 31).
+- **Porosity.** A widely used empirical fit for isolated pores is $E=E_0(1-1.9p+0.9p^2)$, so 5 % porosity lowers the modulus of a sintered ceramic or powder-metallurgy part by 9 % and 10 % porosity by 18 %. For highly porous **cellular solids** — polymer and metal foams, balsa, trabecular bone, additively manufactured lattices — bending of cell walls dominates and $E/E_s\approx(\rho/\rho_s)^2$, so a foam of 10 % relative density has only about 1 % of the solid's stiffness. Bone-replacement scaffolds and porous titanium implant surfaces are designed with this scaling to match the stiffness of bone and avoid **stress shielding**, the bone loss that occurs when an implant much stiffer than bone carries most of the load (Chapter 39).
 
 <!-- FIGURE 11.3 | figures/ch11/fig-11-3-modulus-by-class.png | plot | Young's modulus of engineering materials grouped by class and bond type, on a logarithmic scale from 10⁻⁴ to 10³ GPa. | Content: horizontal bar ranges on log x-axis (E, GPa, 1e-4 to 2e3); rows grouped and colour-coded: elastomers (natural rubber 0.001–0.005, silicone 0.001–0.01), foams (PU foam 0.001–0.1), polymers (HDPE 0.8–1.2, PMMA 2.4–3.3, epoxy 2.5–3.5, PEEK 3.6–4), natural (wood across grain 0.5–0.8, along grain 10–13, cortical bone 15–20), concrete 25–40, glass 70–74, metals (Mg 45, Al 70, Ti 115, Cu 125, steel 205, W 411), technical ceramics (Si3N4 310, Al2O3 380, SiC 420, WC 600), composites (GFRP 20–45, CFRP UD 130–180), diamond 1050. Vertical annotations "van der Waals / H-bond", "metallic", "ionic–covalent", "covalent" above corresponding regions; "entropic" above elastomers. -->
+
+![Figure 11.3 — Young's modulus of engineering materials grouped by class and bond type, on a logarithmic scale from 10⁻⁴ to 10³ GPa](../figures/ch11/fig-11-3-modulus-by-class.png)
+
+*Figure 11.3 — Young's modulus of engineering materials grouped by class and bond type, on a logarithmic scale from 10⁻⁴ to 10³ GPa.*
 
 Figure 11.3 summarizes the result: moduli span about seven orders of magnitude, and the main divisions follow bond type, with entropy taking over at the soft end.
 
@@ -328,6 +340,10 @@ For the Hollomon law this gives necking at $\varepsilon_T=n$: the strain-hardeni
 > *Derived.* Follows exactly from the load maximum and volume constancy; its accuracy is that of the hardening law inserted, and it ignores strain-rate sensitivity, which delays necking in superplastic alloys and polymers.
 
 <!-- FIGURE 11.4 | figures/ch11/fig-11-4-tensile-true-engineering.png | plot | Engineering and true stress–strain curves for a normalized medium-carbon steel (worked example), showing yield, uniform elongation, necking, fracture and the Considère construction. | Content: x-axis strain 0–0.8 (engineering strain for the engineering curve, true strain for the true curve); y-axis stress 0–1200 MPa. Engineering curve: linear to ~412 MPa (0.2 % offset construction shown in an inset at strains 0–0.01), rising to UTS 623 MPa at engineering strain 0.221, falling to fracture at 0.30 with stress ~490 MPa. True curve: σT = 1050 εT^0.20 MPa from yield to εT = 0.20 (solid), then dashed extrapolation to the true fracture point (εT = 0.795, σT = 1083 MPa) marked with a cross labelled "true fracture stress (uncorrected)". Considère construction: dσT/dεT curve intersecting σT at εT = 0.20, labelled "necking". -->
+
+![Figure 11.4 — Engineering and true stress–strain curves for a normalized medium-carbon steel (worked example), showing yield, uniform elongation, necking, fracture and the Considère construction](../figures/ch11/fig-11-4-tensile-true-engineering.png)
+
+*Figure 11.4 — Engineering and true stress–strain curves for a normalized medium-carbon steel (worked example), showing yield, uniform elongation, necking, fracture and the Considère construction.*
 
 **Worked example — Reducing tensile-test data.** A round bar of normalized medium-carbon steel (similar to 1045) with $d_0=12.5$ mm and $L_0=50$ mm is tested. The record gives: 0.2 % offset yield load 50.5 kN; load 67.1 kN at engineering strain 0.05; 75.6 kN at 0.15; maximum load 76.4 kN; load at fracture 60.0 kN; final gauge length 65.0 mm; diameter at the fracture 8.4 mm.
 
@@ -431,9 +447,13 @@ where $A$ is the projected contact area ($A\approx24.5\,h_c^2$ for an ideal Berk
 > **Status of the principle: Oliver–Pharr analysis**
 > *Approximate.* Based on elastic contact solutions (Sneddon) applied to the unloading curve; accurate for materials that sink in around the indenter, but it overestimates $H$ and $E$ by up to 30 % for soft, non-hardening materials that pile up, and requires careful calibration of the tip area function.
 
-Nanoindentation is the standard tool for thin films and coatings (keeping the depth below about 10 % of the film thickness so that the substrate does not dominate), individual phases, ion-irradiated surface layers in nuclear materials (Chapter 33), bone lamellae and biomaterials. At small depths, hardness rises as the indent shrinks — the **indentation size effect**, caused by geometrically necessary dislocations (Chapter 12) — so nanoindentation hardnesses of metals are not directly comparable with macroscopic values.
+Nanoindentation is the standard tool for thin films and coatings (keeping the depth below about 10 % of the film thickness so that the substrate does not dominate), individual phases, ion-irradiated surface layers in nuclear materials (Chapter 41), bone lamellae and biomaterials. At small depths, hardness rises as the indent shrinks — the **indentation size effect**, caused by geometrically necessary dislocations (Chapter 12) — so nanoindentation hardnesses of metals are not directly comparable with macroscopic values.
 
 <!-- FIGURE 11.5 | figures/ch11/fig-11-5-indentation.png | schematic | Hardness indenter geometries and a nanoindentation load–displacement curve with the Oliver–Pharr quantities. | Content: Left half: three small sketches — Brinell ball (diameter D) with indent diameter d; Vickers 136° square pyramid with diagonals d1, d2 seen in plan view; Berkovich three-sided pyramid in plan view. Right half: plot of load P (0–10 mN) versus displacement h (0–300 nm) for fused silica-like material: loading curve rising to Pmax = 10 mN at hmax = 280 nm, short hold, unloading curve to final depth hf ≈ 150 nm. Tangent to the top of the unloading curve labelled "S = dP/dh"; depths hf, hc, hmax marked on the x-axis; shaded area between curves labelled "plastic work". -->
+
+![Figure 11.5 — Hardness indenter geometries and a nanoindentation load–displacement curve with the Oliver–Pharr quantities](../figures/ch11/fig-11-5-indentation.png)
+
+*Figure 11.5 — Hardness indenter geometries and a nanoindentation load–displacement curve with the Oliver–Pharr quantities.*
 
 ---
 
@@ -457,11 +477,15 @@ The notch, the high strain rate and the bending all promote brittle behaviour, w
 
 The most important use of impact testing is to find the **ductile-to-brittle transition** of ferritic (BCC) steels (Figure 11.6). At high temperature the fracture surface is fibrous and the energy is high (the **upper shelf**, often 100–300 J); at low temperature it is crystalline and shiny, made of cleavage facets, and the energy falls to a **lower shelf** of a few joules. Between them a transition range spans 30–80 °C. Specifications quote a transition temperature at a fixed energy, such as $T_{27\mathrm J}$, or a minimum energy at the service temperature: ship-plate grades, for example, require 27–34 J at 0, −20 or −40 °C depending on grade.
 
-The engineering record makes the importance clear. Of the roughly 2700 welded Liberty ships built during the Second World War, several hundred suffered serious brittle fractures, and about a dozen broke completely in two, many in cold North Atlantic water; the plate steels had transition temperatures near or above the sea temperature. The cause in BCC metals is the steep temperature dependence of their lattice friction for dislocations (Chapter 12), which lets cleavage win over plastic blunting at low temperature. FCC metals — austenitic stainless steel, aluminium, copper, nickel — have no such transition, which is why they are used for cryogenic tanks for liquefied natural gas and liquid hydrogen (Chapter 33). Polymers show a related transition near their glass-transition temperature, and impact tests at −20 or −40 °C qualify plastic housings and pipes for cold climates.
+The engineering record makes the importance clear. Of the roughly 2700 welded Liberty ships built during the Second World War, several hundred suffered serious brittle fractures, and about a dozen broke completely in two, many in cold North Atlantic water; the plate steels had transition temperatures near or above the sea temperature. The cause in BCC metals is the steep temperature dependence of their lattice friction for dislocations (Chapter 12), which lets cleavage win over plastic blunting at low temperature. FCC metals — austenitic stainless steel, aluminium, copper, nickel — have no such transition, which is why they are used for cryogenic tanks for liquefied natural gas and liquid hydrogen (Chapter 41). Polymers show a related transition near their glass-transition temperature, and impact tests at −20 or −40 °C qualify plastic housings and pipes for cold climates.
 
 <!-- FIGURE 11.6 | figures/ch11/fig-11-6-charpy-transition.png | plot | Charpy V-notch impact energy versus test temperature for a ferritic structural steel, a fine-grained low-temperature steel, austenitic stainless steel and an aluminium alloy. | Content: x-axis temperature −196 to +100 °C; y-axis absorbed energy 0–300 J. Curves (tanh-shaped for ferritic steels): structural steel S355J0, lower shelf ~5 J, upper shelf ~200 J, 27 J at about −10 °C, transition midpoint ~10 °C; fine-grained Ni-alloyed low-temperature steel, upper shelf ~250 J, 27 J at about −70 °C; austenitic 304 stainless steel nearly flat at ~150–200 J down to −196 °C; aluminium 5083-O nearly flat at ~30–40 J. Horizontal dashed line at 27 J labelled "typical specification level". Insets of fracture surfaces labelled "fibrous (ductile)" on upper shelf and "cleavage (brittle)" on lower shelf. -->
 
-Impact energies cannot be converted directly into fracture toughness, but empirical correlations between Charpy energy and $K_{Ic}$ are used for screening when fracture-toughness data are unavailable, and the **master-curve** method (ASTM E1921) links small-specimen toughness tests to the transition behaviour of reactor pressure-vessel steels, whose transition temperature shifts upward with neutron irradiation (Chapter 33).
+![Figure 11.6 — Charpy V-notch impact energy versus test temperature for a ferritic structural steel, a fine-grained low-temperature steel, austenitic stainless steel and an aluminium alloy](../figures/ch11/fig-11-6-charpy-transition.png)
+
+*Figure 11.6 — Charpy V-notch impact energy versus test temperature for a ferritic structural steel, a fine-grained low-temperature steel, austenitic stainless steel and an aluminium alloy.*
+
+Impact energies cannot be converted directly into fracture toughness, but empirical correlations between Charpy energy and $K_{Ic}$ are used for screening when fracture-toughness data are unavailable, and the **master-curve** method (ASTM E1921) links small-specimen toughness tests to the transition behaviour of reactor pressure-vessel steels, whose transition temperature shifts upward with neutron irradiation (Chapter 41).
 
 ---
 
@@ -481,7 +505,7 @@ for three-point loading (central load $F$) and four-point loading (total load $F
 
 **Compression** testing is used for materials that are mainly loaded in compression or that are brittle in tension: concrete, masonry, ceramics, rock, foams, bone and polymer-matrix composites. Concrete strength classes are defined by compression of 150 mm cubes or 150 × 300 mm cylinders at 28 days; a C30/37 concrete has a characteristic cylinder strength of 30 MPa, so a cylinder fails at about $30\times10^6\times\pi\times0.075^2=530$ kN (Chapter 18). Ceramics are 5–15 times stronger in compression than in tension, because cracks close rather than open.
 
-Platen friction restrains lateral expansion, causing **barrelling** and raising apparent strength, and slender specimens **buckle**; lubrication and a height-to-diameter ratio of 1.5–2 control both. Because compression avoids necking, hot compression tests supply the large-strain flow curves used in forging design (Chapter 38).
+Platen friction restrains lateral expansion, causing **barrelling** and raising apparent strength, and slender specimens **buckle**; lubrication and a height-to-diameter ratio of 1.5–2 control both. Because compression avoids necking, hot compression tests supply the large-strain flow curves used in forging design (Chapter 46).
 
 ### Shear and torsion tests
 
@@ -493,7 +517,7 @@ $$
 
 ($J=\pi d^4/32$ is the polar second moment of area). A 20 mm steel drive shaft carrying 200 N m therefore sees 127 MPa at its surface. Torsion tests give the shear modulus directly from the twist angle and, because no necking occurs, flow stresses to very large strains for hot-working studies.
 
-Other shear tests suit specific materials: **lap-shear** for adhesive joints (an average over a joint whose real stress peaks at the ends; Chapter 39), **short-beam shear** for the interlaminar strength of composites, and **V-notched** specimens for their in-plane shear.
+Other shear tests suit specific materials: **lap-shear** for adhesive joints (an average over a joint whose real stress peaks at the ends; Chapter 47), **short-beam shear** for the interlaminar strength of composites, and **V-notched** specimens for their in-plane shear.
 
 **Table 11.6 — Which test for which material and question.**
 
@@ -543,11 +567,11 @@ Effective volumes: three-point, $V_E=480/(2\times11^2)=1.98$ mm³; four-point (q
 
 A component stresses 10 cm³ ($10\,000$ mm³) in uniform tension. Its characteristic strength is $383\times(1.98/10\,000)^{1/10}=383\times0.426=163$ MPa. If the acceptable failure probability is $10^{-4}$ rather than 63.2 %, the allowable stress falls by a further factor $[-\ln(1-10^{-4})]^{1/10}=0.398$, to 65 MPa.
 
-A material whose bend bars average nearly 400 MPa can therefore be used at only about 65 MPa in a large, uniformly stressed part. Raising $m$ — through cleaner powders, hot isostatic pressing and better surface finishing — narrows the gap far more than raising the mean strength. It is also why ceramic hip heads are individually **proof-tested** to a load above the service load: the test breaks the parts that contain the worst flaws and truncates the low-strength tail of the distribution (Chapters 14 and 31).
+A material whose bend bars average nearly 400 MPa can therefore be used at only about 65 MPa in a large, uniformly stressed part. Raising $m$ — through cleaner powders, hot isostatic pressing and better surface finishing — narrows the gap far more than raising the mean strength. It is also why ceramic hip heads are individually **proof-tested** to a load above the service load: the test breaks the parts that contain the worst flaws and truncates the low-strength tail of the distribution (Chapters 14 and 39).
 
 ### Design values from scattered data
 
-Other fields handle scatter with their own conventions. Aerospace design uses **A-basis** allowables (a value exceeded by 99 % of the population with 95 % confidence) for single load paths and **B-basis** (90 % with 95 % confidence) for redundant structure, derived from many tests on several batches. Concrete design uses the **characteristic strength** $f_{ck}$, the 5 % fractile; for a normal distribution with standard deviation $s$, $f_{ck}=f_{cm}-1.645\,s$, so a mix with mean cylinder strength 38.5 MPa and $s=5$ MPa ($38.5-8.2=30.3$ MPa) just achieves a C30 class. Steel specifications quote guaranteed minimum yield strengths, with actual mill values usually 10–20 % higher. Fatigue lives scatter by factors of ten at a given stress, and their statistics return in Chapter 14; reliability statistics in service are the subject of Chapter 36.
+Other fields handle scatter with their own conventions. Aerospace design uses **A-basis** allowables (a value exceeded by 99 % of the population with 95 % confidence) for single load paths and **B-basis** (90 % with 95 % confidence) for redundant structure, derived from many tests on several batches. Concrete design uses the **characteristic strength** $f_{ck}$, the 5 % fractile; for a normal distribution with standard deviation $s$, $f_{ck}=f_{cm}-1.645\,s$, so a mix with mean cylinder strength 38.5 MPa and $s=5$ MPa ($38.5-8.2=30.3$ MPa) just achieves a C30 class. Steel specifications quote guaranteed minimum yield strengths, with actual mill values usually 10–20 % higher. Fatigue lives scatter by factors of ten at a given stress, and their statistics return in Chapter 14; reliability statistics in service are the subject of Chapter 44.
 
 ---
 
@@ -564,8 +588,8 @@ Other fields handle scatter with their own conventions. Aerospace design uses **
 | How does rubber elasticity follow from chain statistics? | Chapter 20 |
 | How are the stiffnesses of fibre composites and laminates built from their constituents? | Chapters 22 and 23 |
 | How are concrete strength classes, structural-steel grades and timber stiffness specified? | Chapter 18 |
-| How are mechanical tests performed at small scales and with what uncertainty? | Chapters 42 and 44 |
+| How are mechanical tests performed at small scales and with what uncertainty? | Chapters 52 and 54 |
 | How are tensor properties and Neumann's principle defined? | Chapter 4 (back reference) |
-| How are modulus, strength and density combined to select materials? | Chapter 48 |
+| How are modulus, strength and density combined to select materials? | Chapter 58 |
 
 **Next:** Chapter 12 asks why real crystals yield at stresses thousands of times below the strength of their bonds, and finds the answer in the dislocation — its stress field, the forces on it, and how it moves, multiplies and interacts.

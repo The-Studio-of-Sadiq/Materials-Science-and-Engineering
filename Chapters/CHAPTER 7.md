@@ -2,7 +2,7 @@
 
 *Part II · Thermodynamics and Kinetics*
 
-A foundry pours a batch of aluminium–copper aerospace castings and sends them for solution treatment. The furnace controller is set 15 °C higher than the specification, because the binary Al–Cu diagram in an old handbook shows that the alloy stays fully solid until well above 570 °C, and a hotter soak dissolves the copper faster. The castings come out with blistered surfaces and grain boundaries that look, under the microscope, like dried river beds: small pools of liquid had formed at the boundaries and then frozen. The alloy contained magnesium as well as copper, and the ternary Al–Cu–Mg system has a eutectic about 70 °C below the binary one. The engineer read a correct diagram for the wrong system. A few kilometres away, a refractory supplier is solving a mirror-image problem: which alumina–silica brick will survive the roof of a glass-melting furnace at 1600 °C without sagging. And at a dental laboratory a technician is choosing how much yttria to put into a zirconia crown so that it stays tetragonal at body temperature, and tough.
+A foundry pours a batch of aluminium–copper aerospace castings and sends them for solution treatment. The furnace controller is set 15 °C higher than the specification, because the binary Al–Cu diagram in an old handbook shows that the alloy stays fully solid until well above 570 °C, and a hotter soak dissolves the copper faster. The castings come out with blistered surfaces and grain boundaries that look, under the microscope, like dried river beds: small pools of liquid had formed at the boundaries and then frozen. The alloy contained magnesium as well as copper, and the ternary Al–Cu–Mg system has a eutectic about 40 °C below the binary one, and some 65 °C below the alloy's binary solidus. The engineer read a correct diagram for the wrong system. A few kilometres away, a refractory supplier is solving a mirror-image problem: which alumina–silica brick will survive the roof of a glass-melting furnace at 1600 °C without sagging. And at a dental laboratory a technician is choosing how much yttria to put into a zirconia crown so that it stays tetragonal at body temperature, and tough.
 
 All three questions are answered by the same kind of map. A phase diagram records, for each temperature, pressure and overall composition, which phases are present at equilibrium, what their compositions are and how much of each there is.
 
@@ -72,6 +72,10 @@ where $\Delta H$ and $\Delta V$ are the molar enthalpy and volume changes of the
 
 <!-- FIGURE 7.1 | figures/ch07/fig-7-1-unary-diagrams.png | plot | Unary phase diagrams of water, iron, carbon and silica, showing the stable phases as functions of temperature and pressure. | Content: 2x2 panels. (a) Water: log pressure 1 Pa to 1 GPa versus temperature −50 to 400 °C; ice Ih, liquid, vapour; triple point 0.01 °C / 611.657 Pa; critical point 373.9 °C / 22.06 MPa; melting line with negative slope (−13.5 MPa/K) labelled. (b) Iron: pressure 0–20 GPa versus temperature 0–1800 °C; α (BCC) to 912 °C, γ (FCC) 912–1394 °C, δ (BCC) 1394–1538 °C, liquid above 1538 °C at 1 atm; ε (HCP) above ~13 GPa at room temperature. (c) Carbon: pressure 0–20 GPa versus temperature 0–5000 K; graphite/diamond line from ~1.7 GPa at 0 K rising to ~6 GPa at 1700 K; shaded box "HPHT synthesis 5–6 GPa, 1600–1900 K, metal solvent"; label "CVD diamond: metastable, low pressure". (d) Silica at 1 atm as a horizontal temperature bar 0–1800 °C: α-quartz → β-quartz 573 °C → tridymite 870 °C → cristobalite 1470 °C → liquid 1713 °C; inset pressure axis to 12 GPa showing coesite (~2–3 GPa) and stishovite (>~8 GPa). -->
 
+![Figure 7.1 — Unary phase diagrams of water, iron, carbon and silica, showing the stable phases as functions of temperature and pressure](../figures/ch07/fig-7-1-unary-diagrams.png)
+
+*Figure 7.1 — Unary phase diagrams of water, iron, carbon and silica, showing the stable phases as functions of temperature and pressure.*
+
 ### Water
 
 Water is the familiar example, and its oddity is instructive. Ice Ih is less dense than liquid water, so $\Delta V$ for melting is negative and the melting line slopes backwards. With $\Delta H_m=6.01$ kJ/mol, molar volumes of 19.65 cm³/mol for ice and 18.02 cm³/mol for water at 0 °C, Clausius–Clapeyron gives
@@ -105,6 +109,10 @@ When two components have the same crystal structure, similar atomic sizes and el
 Cu–Ni is the textbook case: both FCC, radii 0.128 and 0.125 nm. The lens runs from the melting point of copper (1085 °C) to that of nickel (1455 °C). Other isomorphous systems include Si–Ge (used in heterojunction transistors and thermoelectrics), Au–Ag, Nb–Ti (the superconducting wire in MRI magnets), Al₂O₃–Cr₂O₃ (ruby is the dilute end) and NiO–MgO.
 
 <!-- FIGURE 7.2 | figures/ch07/fig-7-2-cu-ni-isomorphous.png | plot | The Cu–Ni isomorphous diagram with a tie line through Cu–30 wt% Ni, comparing the measured diagram with the ideal-solution prediction. | Content: x-axis wt% Ni 0–100, y-axis temperature 1000–1500 °C. Solid lines: measured liquidus and solidus from 1085 °C (Cu) to 1455 °C (Ni); at 30 wt% Ni the liquidus is ~1240 °C and solidus ~1170 °C. Dashed lines: ideal-solution liquidus and solidus computed with ΔHm(Cu) = 13.26 kJ/mol, ΔHm(Ni) = 17.48 kJ/mol (at 30 wt% Ni: liquidus 1217 °C, solidus 1193 °C). Horizontal tie line at 1205 °C on the ideal curves from C_L = 26.9 to C_α = 33.2 wt% Ni with overall composition 30 wt% Ni marked; label lengths "R" and "S" for the lever rule. Shade fields L, α, L+α. Small marker "70/30 cupronickel" on the composition axis. -->
+
+![Figure 7.2 — The Cu–Ni isomorphous diagram with a tie line through Cu–30 wt% Ni, comparing the measured diagram with the ideal-solution prediction](../figures/ch07/fig-7-2-cu-ni-isomorphous.png)
+
+*Figure 7.2 — The Cu–Ni isomorphous diagram with a tie line through Cu–30 wt% Ni, comparing the measured diagram with the ideal-solution prediction.*
 
 ### Where the lens comes from
 
@@ -192,6 +200,10 @@ $$
 Al–Si, the basis of most aluminium casting alloys, is a nearly ideal example. Aluminium melts at 660 °C; silicon at 1414 °C. The eutectic lies at 577 °C and 12.6 wt% Si. Silicon dissolves in solid aluminium up to 1.65 wt% at 577 °C (falling to almost zero at room temperature); aluminium is practically insoluble in silicon, so β is essentially pure Si. The eutectic composition melts at a temperature 83 °C below pure Al and has a narrow freezing range, the two features that make Al–Si alloys flow well and fill thin moulds: engine blocks, cylinder heads, wheels, pump housings.
 
 <!-- FIGURE 7.3 | figures/ch07/fig-7-3-al-si-eutectic.png | plot | The Al–Si eutectic diagram with microstructures of hypoeutectic, eutectic and hypereutectic alloys. | Content: main panel x-axis wt% Si 0–30 (break, then 100), y-axis temperature 400–900 °C; Al melting 660 °C; eutectic horizontal at 577 °C from 1.65 to ~100 wt% Si; eutectic point 12.6 wt% Si; liquidus rising toward Si (≈ 800 °C at 25 wt% Si). Vertical dashed lines at 7 wt% Si (A356), 12.6 wt% (eutectic, e.g. A413) and 18 wt% Si (A390). Three circular micrograph-style insets: A356 with ~51 % primary α-Al dendrites in eutectic; eutectic with fine Al + Si lamellae/plates; A390 with ~6 % blocky primary Si crystals in eutectic. Fields labelled L, α, L+α, L+Si, α+Si. -->
+
+![Figure 7.3 — The Al–Si eutectic diagram with microstructures of hypoeutectic, eutectic and hypereutectic alloys](../figures/ch07/fig-7-3-al-si-eutectic.png)
+
+*Figure 7.3 — The Al–Si eutectic diagram with microstructures of hypoeutectic, eutectic and hypereutectic alloys.*
 
 Other eutectics of engineering importance: Pb–Sn at 183 °C and 61.9 wt% Sn (the classic solder), Sn–Ag–Cu near 217 °C (lead-free solder), Ag–Cu at 779 °C and 28 wt% Cu (silver brazing alloy BAg-8), Au–Si at 363 °C (die attach in microelectronics), Fe–C at 1147 °C (cast irons), Al₂O₃–ZrO₂ near 1860 °C (eutectic ceramics for abrasives), and the CaO–SiO₂–Al₂O₃ eutectics that govern slag fluidity in steelmaking.
 
@@ -290,6 +302,10 @@ Steels and cast irons are the most used engineering materials, and the iron–ca
 
 <!-- FIGURE 7.4 | figures/ch07/fig-7-4-fe-fe3c-diagram.png | plot | The metastable Fe–Fe₃C phase diagram with the steel and cast-iron regions and the key invariant points. | Content: x-axis wt% C 0–6.70 (top axis wt% Fe3C 0–100), y-axis temperature 400–1600 °C. Phases: δ, γ (austenite), α (ferrite), Fe3C, L. Points: peritectic 1495 °C (δ 0.09, γ 0.17, L 0.53 wt% C); eutectic 1147 °C at 4.30 wt% C, γ max solubility 2.14 wt% C; eutectoid 727 °C at 0.76 wt% C; α max solubility 0.022 wt% C at 727 °C. Lines labelled A1 (727 °C), A3 (from 912 °C at 0 C to 727 °C at 0.76 C), Acm (from 727 °C at 0.76 C to 1147 °C at 2.14 C). Bracket "steels" 0–2.14 wt% C and "cast irons" 2.14–6.70. Dashed vertical at 0.40 wt% C labelled "AISI 1040" and at 1.0 wt% C labelled "AISI 52100 bearing steel". Dotted lines for the Fe–graphite eutectic (1153 °C) and eutectoid (738 °C). -->
 
+![Figure 7.4 — The metastable Fe–Fe₃C phase diagram with the steel and cast-iron regions and the key invariant points](../figures/ch07/fig-7-4-fe-fe3c-diagram.png)
+
+*Figure 7.4 — The metastable Fe–Fe₃C phase diagram with the steel and cast-iron regions and the key invariant points.*
+
 ### The landmarks
 
 The key features of Figure 7.4, which every metallurgist knows by heart:
@@ -361,15 +377,19 @@ Pure zirconia is monoclinic up to about 1170 °C, tetragonal up to about 2370 °
 
 <!-- FIGURE 7.5 | figures/ch07/fig-7-5-zro2-y2o3.png | plot | The zirconia-rich end of the ZrO₂–Y₂O₃ diagram, with the compositions used for dental and implant ceramics, thermal-barrier coatings and fuel-cell electrolytes. | Content: x-axis mol% Y2O3 0–12, y-axis temperature 0–2800 °C. Fields: monoclinic (m) at low Y and low T; tetragonal (t) from ~1170 °C at 0 % falling with Y content; cubic (c) above ~2370 °C at 0 % and extending to room temperature above ~8 mol%; two-phase t + c and m + c fields; liquid above ~2700 °C. Vertical markers: 3 mol% "3Y-TZP: crowns, hip heads (metastable t)"; ~4–4.5 mol% "7–8 wt% YSZ: thermal-barrier coatings (t′)"; 8 mol% "8YSZ: SOFC electrolytes, oxygen sensors (cubic)". Arrow at 3 mol% at room temperature labelled "t→m under crack-tip stress: transformation toughening". -->
 
+![Figure 7.5 — The zirconia-rich end of the ZrO₂–Y₂O₃ diagram, with the compositions used for dental and implant ceramics, thermal-barrier coatings and fuel-cell electrolytes](../figures/ch07/fig-7-5-zro2-y2o3.png)
+
+*Figure 7.5 — The zirconia-rich end of the ZrO₂–Y₂O₃ diagram, with the compositions used for dental and implant ceramics, thermal-barrier coatings and fuel-cell electrolytes.*
+
 Three compositions illustrate the engineering use of one diagram (Figure 7.5):
 
-- **3 mol% Y₂O₃ (about 5.4 wt%), 3Y-TZP.** Fine-grained tetragonal zirconia polycrystal, metastable at room temperature because the grains are too small to transform spontaneously. At a crack tip the stress triggers the t→m change; the expansion squeezes the crack shut. This **transformation toughening** gives fracture toughness of 5–10 MPa√m, two to three times that of alumina, and makes zirconia suitable for dental crowns, bridges and femoral heads of hip replacements (Chapters 14 and 31). The same metastability is a weakness: in warm moisture the surface slowly transforms ("low-temperature degradation").
-- **About 4–4.5 mol% (7–8 wt%) Y₂O₃.** Plasma-sprayed or electron-beam-deposited thermal-barrier coatings on turbine blades are quenched into a non-transformable tetragonal phase (t′) that resists both destabilization and the t→m change during thermal cycling (Chapter 33).
-- **8 mol% Y₂O₃ (about 13.7 wt%), 8YSZ.** Fully cubic. Each pair of Y³⁺ ions replacing Zr⁴⁺ creates one oxygen vacancy, giving high oxide-ion conductivity at 700–1000 °C: the electrolyte of solid-oxide fuel cells and of lambda sensors in car exhausts (Chapters 8 and 32).
+- **3 mol% Y₂O₃ (about 5.4 wt%), 3Y-TZP.** Fine-grained tetragonal zirconia polycrystal, metastable at room temperature because the grains are too small to transform spontaneously. At a crack tip the stress triggers the t→m change; the expansion squeezes the crack shut. This **transformation toughening** gives fracture toughness of 5–10 MPa√m, two to three times that of alumina, and makes zirconia suitable for dental crowns, bridges and femoral heads of hip replacements (Chapters 14 and 39). The same metastability is a weakness: in warm moisture the surface slowly transforms ("low-temperature degradation").
+- **About 4–4.5 mol% (7–8 wt%) Y₂O₃.** Plasma-sprayed or electron-beam-deposited thermal-barrier coatings on turbine blades are quenched into a non-transformable tetragonal phase (t′) that resists both destabilization and the t→m change during thermal cycling (Chapter 41).
+- **8 mol% Y₂O₃ (about 13.7 wt%), 8YSZ.** Fully cubic. Each pair of Y³⁺ ions replacing Zr⁴⁺ creates one oxygen vacancy, giving high oxide-ion conductivity at 700–1000 °C: the electrolyte of solid-oxide fuel cells and of lambda sensors in car exhausts (Chapters 8 and 40).
 
 ### MgO–Al₂O₃: spinel
 
-MgO (melting near 2830 °C) and Al₂O₃ (2054 °C) form the compound **spinel**, MgAl₂O₄ (71.7 wt% Al₂O₃), which melts congruently near 2105 °C and dissolves excess alumina at high temperature. Eutectics lie on both sides, near 1995 °C toward MgO and near 1925 °C toward Al₂O₃. Because spinel melts congruently, the diagram splits into two simple eutectic sub-systems. Steel ladles are lined with magnesia–spinel or alumina–spinel castables, chosen because spinel resists penetration by basic slags and because its thermal expansion is moderate. Transparent polycrystalline spinel serves as infrared windows and armour (Chapter 28).
+MgO (melting near 2830 °C) and Al₂O₃ (2054 °C) form the compound **spinel**, MgAl₂O₄ (71.7 wt% Al₂O₃), which melts congruently near 2105 °C and dissolves excess alumina at high temperature. Eutectics lie on both sides, near 1995 °C toward MgO and near 1925 °C toward Al₂O₃. Because spinel melts congruently, the diagram splits into two simple eutectic sub-systems. Steel ladles are lined with magnesia–spinel or alumina–spinel castables, chosen because spinel resists penetration by basic slags and because its thermal expansion is moderate. Transparent polycrystalline spinel serves as infrared windows and armour (Chapter 36).
 
 ---
 
@@ -394,6 +414,10 @@ A three-dimensional diagram is communicated by two-dimensional slices (Figure 7.
 
 <!-- FIGURE 7.6 | figures/ch07/fig-7-6-ternary-gibbs-triangle.png | schematic | Reading a ternary system: the Gibbs triangle with a composition point, an isothermal section with tie lines and a tie triangle, and a liquidus projection with a ternary eutectic. | Content: three panels. (a) Gibbs triangle A–B–C with gridlines every 10 %, point P = 50 % A, 30 % B, 20 % C marked with its three read-off lines. (b) Schematic isothermal section of a simple eutectic ternary below all binary eutectics but above the ternary eutectic: corner solid solutions α, β, γ, two-phase fields with fanning tie lines, central liquid region, three-phase tie triangles; a point inside a tie triangle with the centre-of-gravity construction. (c) Liquidus projection with binary eutectics e1, e2, e3 on the edges, three valleys with arrows of decreasing temperature meeting at ternary eutectic E; isotherms drawn every 50 °C. Optional annotation in (c): "Sn–Ag–Cu: E ≈ 217 °C near Sn–3.5Ag–0.9Cu". -->
 
+![Figure 7.6 — Reading a ternary system: the Gibbs triangle with a composition point, an isothermal section with tie lines and a tie triangle, and a liquidus projection with a ternary eutectic](../figures/ch07/fig-7-6-ternary-gibbs-triangle.png)
+
+*Figure 7.6 — Reading a ternary system: the Gibbs triangle with a composition point, an isothermal section with tie lines and a tie triangle, and a liquidus projection with a ternary eutectic.*
+
 ### Engineering ternaries
 
 **Lead-free solder.** Sn–Ag–Cu has a ternary eutectic near 217 °C, close to Sn–3.5Ag–0.9Cu. Commercial SAC305 (Sn–3.0Ag–0.5Cu) lies just off it and melts over a range of a few degrees. At room temperature the solder consists of tin with small particles of the intermetallics Ag₃Sn and Cu₆Sn₅.
@@ -411,7 +435,7 @@ $$
 
 About 4 % Ag₃Sn and 1.3 % Cu₆Sn₅ by mass, fine particles that strengthen the tin matrix much as precipitates strengthen an aluminium alloy. The composition lies inside the Sn–Ag₃Sn–Cu₆Sn₅ tie triangle, so these three are the only phases expected; the joint additionally forms a Cu₆Sn₅ interfacial layer by reaction with the copper pad, which the bulk calculation does not include.
 
-**Stainless steels.** The Fe–Cr–Ni system decides whether a stainless steel is ferritic (Fe–17Cr, 430), austenitic (Fe–18Cr–8Ni, 304), duplex (Fe–22Cr–5Ni, 2205) or martensitic. For fast-solidifying weld metal, welders use the empirical Schaeffler or WRC-1992 diagrams in chromium and nickel *equivalents* (Chapter 39).
+**Stainless steels.** The Fe–Cr–Ni system decides whether a stainless steel is ferritic (Fe–17Cr, 430), austenitic (Fe–18Cr–8Ni, 304), duplex (Fe–22Cr–5Ni, 2205) or martensitic. For fast-solidifying weld metal, welders use the empirical Schaeffler or WRC-1992 diagrams in chromium and nickel *equivalents* (Chapter 47).
 
 **Oxide systems.** The CaO–Al₂O₃–SiO₂ liquidus projection is the map of slags in blast furnaces and steelmaking, of Portland cement clinker (which lies in the field of tricalcium silicate, Chapter 18), of glass compositions and of the mineral wool used in building insulation.
 
@@ -447,9 +471,9 @@ The equilibrium state at a given $T$, $p$ and overall composition is the set of 
 ### What CALPHAD delivers
 
 - **Phase-fraction diagrams** for a single alloy as a function of temperature: the solvus of γ′ in a superalloy, the temperature where σ phase appears in a duplex stainless steel, the amount of liquid at each temperature in a brazing filler.
-- **Solidification paths** using the Scheil–Gulliver approximation (Chapter 9), which predict the non-equilibrium freezing range and the last phases to form; essential for castability, weldability and the design of alloys for additive manufacturing (Chapter 40).
+- **Solidification paths** using the Scheil–Gulliver approximation (Chapter 9), which predict the non-equilibrium freezing range and the last phases to form; essential for castability, weldability and the design of alloys for additive manufacturing (Chapter 48).
 - **Thermodynamic inputs to kinetics**: driving forces for nucleation, chemical potentials and thermodynamic factors for diffusion simulations (Chapter 8) and precipitation models (Chapter 10).
-- **Alloy design**: searching composition space for alloys with a target phase constitution. Computationally designed ultra-high-strength gear and landing-gear steels, developed this way (integrated computational materials engineering, ICME), reached aerospace qualification far faster than trial-and-error alloys (Chapters 45 and 47).
+- **Alloy design**: searching composition space for alloys with a target phase constitution. Computationally designed ultra-high-strength gear and landing-gear steels, developed this way (integrated computational materials engineering, ICME), reached aerospace qualification far faster than trial-and-error alloys (Chapters 55 and 57).
 
 The essential skill for the engineer is to know which subsystems are well assessed. A prediction for an alloy whose key ternary has never been measured is a hypothesis to be checked, not a design value.
 
@@ -481,12 +505,12 @@ The binary window appears to be about 500–573 °C, a comfortable 70 °C wide.
 
 The same reading habit serves elsewhere:
 
-- **Brazing.** The Ag–Cu eutectic (779 °C, 28 wt% Cu) melts at a single temperature, which makes BAg-8 ideal for vacuum brazing in a furnace where the filler must flow all at once. Fillers with a wide melting range liquate: the low-melting liquid runs out first (Chapter 39).
+- **Brazing.** The Ag–Cu eutectic (779 °C, 28 wt% Cu) melts at a single temperature, which makes BAg-8 ideal for vacuum brazing in a furnace where the filler must flow all at once. Fillers with a wide melting range liquate: the low-melting liquid runs out first (Chapter 47).
 - **Hot shortness.** The Fe–FeS eutectic at 988 °C leaves liquid grain-boundary films during hot rolling at 1100–1200 °C; manganese ties sulphur up as high-melting MnS.
 - **Heat treatment of steels.** A3 and Acm locate the austenitizing temperature; the eutectoid composition tells whether proeutectoid ferrite or cementite will form; alloy additions move both (Chapter 15).
 - **Refractory selection.** Read the liquid fraction at the service temperature with the lever rule (Section 7.8); a few percent of liquid is tolerable in a castable, tens of percent is not.
 - **Crystal growth and purification.** The partition coefficient, read from the slopes of liquidus and solidus near the pure component, predicts how dopants distribute along a Czochralski silicon ingot and how efficiently zone refining removes impurities (Chapter 9).
-- **Liquid-phase sintering.** Cemented carbides (WC–Co) and tungsten heavy alloys are sintered just above a binder eutectic so that a small, controlled liquid fraction speeds densification (Chapter 38).
+- **Liquid-phase sintering.** Cemented carbides (WC–Co) and tungsten heavy alloys are sintered just above a binder eutectic so that a small, controlled liquid fraction speeds densification (Chapter 46).
 
 > **Boundary.** Phase diagrams describe equilibrium. How long it takes to approach equilibrium, and what happens when it is not approached, is the subject of the next three chapters: diffusion (Chapter 8), nucleation and growth (Chapter 9) and solid-state transformations (Chapter 10). The thermodynamic laws used to build the diagrams are recapped in Chapter 6 and belong in full to the Advanced Chemistry book.
 
@@ -505,8 +529,8 @@ The same reading habit serves elsewhere:
 | Which non-ferrous alloy systems (Al, Ti, Ni, Cu, Mg) rely on which invariant reactions? | Chapter 16 |
 | How are zirconia, alumina and silicate ceramics processed and toughened? | Chapter 17 |
 | How do clinker phases in the CaO–SiO₂–Al₂O₃ system become cement? | Chapter 18 |
-| How do welding and brazing use eutectics, and how is weld-metal ferrite controlled? | Chapter 39 |
-| How are phase diagrams measured by thermal analysis and diffraction? | Chapter 42 |
-| How are first-principles energies and machine learning combined with CALPHAD? | Chapters 45 and 47 |
+| How do welding and brazing use eutectics, and how is weld-metal ferrite controlled? | Chapter 47 |
+| How are phase diagrams measured by thermal analysis and diffraction? | Chapter 52 |
+| How are first-principles energies and machine learning combined with CALPHAD? | Chapters 55 and 57 |
 
 **Next:** Chapter 8 supplies the clock that phase diagrams lack, deriving how atoms move through solids and how far they travel in the time a process allows.

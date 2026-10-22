@@ -1,10 +1,10 @@
 # House Style — Materials Science and Engineering
 
-The master outline is [`TOC.md`](TOC.md). It is fixed: 10 parts, 49 chapters. Do not skip, merge or rename listed topics; every bullet in the TOC must be covered by a section or subsection of its chapter.
+The master outline is [`TOC.md`](TOC.md). It is fixed: 11 parts, 59 chapters. Do not skip, merge or rename listed topics; every bullet in the TOC must be covered by a section or subsection of its chapter.
 
 ## Files
 
-- Chapters: `Chapters/CHAPTER N.md` (no zero padding). Part openers: `Parts/PART N.md` (N = 1..10).
+- Chapters: `Chapters/CHAPTER N.md` (no zero padding). Part openers: `Parts/PART N.md` (N = 1..11).
 - Markdown only. Math is GitHub-style LaTeX: `$...$` inline, `$$...$$` display (display math on its own lines). Never `\(...\)` or `\[...\]`.
 - In tables, never put a raw `|` inside math; use `\lvert ... \rvert` or `\Vert`.
 - Use `\mathrm{}` for units in math, e.g. `$\rho=1.68\times10^{-8}\ \Omega\,\mathrm{m}$`. Prefer plain text units outside math.
@@ -64,9 +64,8 @@ Use `### ` subsections freely inside sections. Separate `## ` sections with `---
 5. **Show why an approximation works, then where it fails.** A failure of a simple rule is missing physics or a changed regime, never an arbitrary exception.
 6. **Real numbers.** Give representative property values (with units) in tables: steel yield strengths, Al alloy tempers, alumina toughness, PMMA Tg, CFRP ply stiffnesses, concrete strength classes, corrosion rates. Values must be correct to typical handbook accuracy; say "typical" or give ranges where they vary with grade or processing. Recompute every worked example.
 7. **Worked examples** as `**Worked example — title.**` paragraphs with full numbers.
-8. **Respect the boundaries** (see the table at the end of `TOC.md`). This book is self-contained for materials science, but the laws of thermodynamics, bonding and electrochemistry fundamentals belong to the Advanced Chemistry book and quantum foundations to Engineering Physics: recap them in a paragraph where needed, do not re-derive them. Where the separate *Materials Core (EEE)* book treats an electronic topic in more depth, say so in one line. Add a short `> **Boundary.**` note where a chapter touches those.
+8. **Respect the boundaries** (see the table at the end of `TOC.md`). This book is self-contained for materials science, but the laws of thermodynamics, bonding and electrochemistry fundamentals belong to the Advanced Chemistry book and quantum foundations to Engineering Physics: recap them in a paragraph where needed, do not re-derive them. Add a short `> **Boundary.**` note where a chapter touches those.
 9. Do not overclaim. State domains of validity.
-10. **Chapters marked *Source* in the TOC** adapt a chapter of the Materials Core (EEE) book in `C:/obsidian/MS/Chapters`. Generalize it to the whole discipline: rewrite the opening problem, broaden examples beyond electronics, condense EEE-specific detail, and add what the new TOC lists. Do not copy passages verbatim.
 
 ## Figure markers
 

@@ -30,7 +30,7 @@ This chapter builds the first half of the tools needed to design with such mater
 
 Chapter 1 showed that property space is not filled evenly. Ceramics and fibres are stiff and strong but brittle; polymers are tough and easy to shape but compliant; metals are tough and stiff but dense. A **composite** combines two or more chemically distinct phases, separated by an interface, so that the combination occupies a region of property space that none of the constituents reaches alone. The phase that is continuous is the **matrix**; the dispersed phase is the **reinforcement**.
 
-The idea is ancient (straw in mud brick, laminated bows of horn and sinew) and it is everywhere in nature: wood is a composite of cellulose fibrils in a lignin–hemicellulose matrix (Chapter 18), bone is a composite of hydroxyapatite platelets in collagen (Chapter 31), and nacre is 95 % aragonite tiles bonded by a few percent of protein. Modern engineering composites run from glass-fibre polyester boats in the 1940s to carbon-fibre-reinforced polymer (CFRP) making up about half the structural weight of the Boeing 787 and Airbus A350.
+The idea is ancient (straw in mud brick, laminated bows of horn and sinew) and it is everywhere in nature: wood is a composite of cellulose fibrils in a lignin–hemicellulose matrix (Chapter 18), bone is a composite of hydroxyapatite platelets in collagen (Chapter 39), and nacre is 95 % aragonite tiles bonded by a few percent of protein. Modern engineering composites run from glass-fibre polyester boats in the 1940s to carbon-fibre-reinforced polymer (CFRP) making up about half the structural weight of the Boeing 787 and Airbus A350.
 
 The decisive advantage of a fibre composite is **specific stiffness and strength** — properties per unit density. A unidirectional carbon/epoxy ply has a modulus along the fibres of about 140–180 GPa at a density of about 1.6 g/cm³, giving $E/\rho\approx100$ GPa per g/cm³, against about 26 for steel, aluminium and titanium alike. The second advantage, less obvious but equally important, is **tailorability**: the designer chooses how much fibre goes in which direction, so stiffness and strength can be placed where the loads are.
 
@@ -50,6 +50,10 @@ Figure 22.1 shows the main architectures. **Particulate** composites contain rou
 
 <!-- FIGURE 22.1 | figures/ch22/fig-22-1-composite-architectures.png | schematic | The main composite architectures, from isotropic particulate to strongly anisotropic unidirectional plies, laminates and sandwich panels. | Content: six panels in a 3 × 2 grid, each a small 3D block with cut faces. (a) Particulate: equiaxed particles (~10–30 % volume) in a matrix, label "Al–SiCp, filled polymers, concrete". (b) Short fibre: fibres with aspect ratio ~30, partly aligned along a flow arrow, label "glass-filled PA66, SMC". (c) Unidirectional continuous fibres along axis 1, axes 1–2–3 drawn, label "UD prepreg ply". (d) Woven fabric (plain weave) showing warp and weft tows with crimp, label "woven fabric ply". (e) Laminate of four plies with fibre directions 0°, +45°, −45°, 90° shown on each exposed edge, label "laminate". (f) Sandwich: two thin face sheets on a honeycomb core, label "sandwich panel". Under the row, an arrow from "isotropic, modest reinforcement" (left) to "anisotropic, maximum reinforcement along fibres" (right). -->
 
+![Figure 22.1 — The main composite architectures, from isotropic particulate to strongly anisotropic unidirectional plies, laminates and sandwich panels](../figures/ch22/fig-22-1-composite-architectures.png)
+
+*Figure 22.1 — The main composite architectures, from isotropic particulate to strongly anisotropic unidirectional plies, laminates and sandwich panels.*
+
 The geometry of the reinforcement determines both the efficiency of reinforcement and the degree of anisotropy. A useful rule of thumb for stiffness in the loading direction: a unidirectional composite loaded along its fibres uses about 100 % of the fibres' stiffness contribution; a cross-ply [0/90] about 50 %; a quasi-isotropic laminate about 37 %; and a random three-dimensional short-fibre composite only about 20 %. These **orientation efficiency factors** (Krenchel factors) reappear in Section 22.5.
 
 ---
@@ -62,7 +66,7 @@ Bulk glass breaks at 50–100 MPa; a freshly drawn glass fibre 10 μm across bre
 
 ### The fibre families
 
-**Glass fibres** are drawn from melts of calcium aluminoborosilicate (E-glass, the general-purpose grade) or higher-alumina, magnesia-rich compositions (S- and R-glass, about 25 % stiffer and 30 % stronger). They are isotropic, cheap (about 1–3 USD/kg for E-glass roving), electrically insulating and moderately stiff. Their weaknesses are a modest modulus, a relatively high density and sensitivity to stress corrosion by water (static fatigue, Chapter 35).
+**Glass fibres** are drawn from melts of calcium aluminoborosilicate (E-glass, the general-purpose grade) or higher-alumina, magnesia-rich compositions (S- and R-glass, about 25 % stiffer and 30 % stronger). They are isotropic, cheap (about 1–3 USD/kg for E-glass roving), electrically insulating and moderately stiff. Their weaknesses are a modest modulus, a relatively high density and sensitivity to stress corrosion by water (static fatigue, Chapter 43).
 
 **Carbon fibres** are made by stabilizing and carbonizing polyacrylonitrile (PAN) precursor fibres at 1,000–1,500 °C, optionally graphitizing them at up to 3,000 °C, or by spinning and carbonizing mesophase pitch. Low graphitization temperatures give high-strength, standard-modulus fibres (T300, T700: about 230 GPa); higher temperatures give more perfect graphitic order and higher modulus (M55J: 540 GPa; pitch fibres up to about 900 GPa), at the cost of strain to failure. Carbon fibres have a slightly negative axial thermal expansion, are electrically conductive and galvanically noble (they corrode aluminium in contact), and cost about 15–40 USD/kg for standard grades.
 
@@ -189,6 +193,10 @@ Density: $\rho=0.6\times2.54+0.4\times1.20=2.00$ g/cm³. Measured values for suc
 Figure 22.2 plots the three estimates against fibre content. Two features stand out. First, $E_1$ rises linearly and is fibre-dominated; $E_2$ and $G_{12}$ stay close to the matrix value until $V_f$ exceeds about 0.4 and are **matrix-dominated**. Second, the matrix-dominated properties are where Halpin–Tsai and Reuss differ most, which is why they need the more careful model.
 
 <!-- FIGURE 22.2 | figures/ch22/fig-22-2-micromechanics-moduli.png | plot | Longitudinal and transverse moduli of E-glass/epoxy versus fibre volume fraction: the rule of mixtures, the Reuss lower bound and the Halpin–Tsai estimate. | Content: x-axis fibre volume fraction V_f 0 to 0.8; y-axis modulus 0–60 GPa. Curves for E_f = 72 GPa, ν_f = 0.22, E_m = 3.5 GPa, ν_m = 0.35: E_1 rule of mixtures (straight line from 3.5 to 58.3 at V_f = 0.8); E_2 Reuss (convex, 8.2 at V_f = 0.6); E_2 Halpin–Tsai ξ = 2 (14.9 at V_f = 0.6); G_12 Halpin–Tsai ξ = 1 (dashed, 4.46 at V_f = 0.6). Vertical dotted line at V_f = 0.6 with markers and values 44.6, 14.9, 8.2, 4.46 GPa. Shaded band labelled "typical measured E_2, 12–16 GPa" at V_f = 0.6. Second x-axis tick labels marking process windows: "hand lay-up 0.30–0.45", "RTM / infusion 0.50–0.60", "prepreg 0.55–0.65". -->
+
+![Figure 22.2 — Longitudinal and transverse moduli of E-glass/epoxy versus fibre volume fraction: the rule of mixtures, the Reuss lower bound and the Halpin–Tsai estimate](../figures/ch22/fig-22-2-micromechanics-moduli.png)
+
+*Figure 22.2 — Longitudinal and transverse moduli of E-glass/epoxy versus fibre volume fraction: the rule of mixtures, the Reuss lower bound and the Halpin–Tsai estimate.*
 
 ### Longitudinal strength
 
@@ -330,6 +338,10 @@ Figure 22.3 shows the stress profiles for fibres shorter than, equal to and long
 
 <!-- FIGURE 22.3 | figures/ch22/fig-22-3-shear-lag-critical-length.png | plot | Stress transfer into a short fibre: tensile stress along the fibre and interfacial shear stress, for fibres shorter than, equal to and longer than the critical length. | Content: left panel: normalized position x/L from 0 to 1 on x-axis; fibre tensile stress σ_f / σ_fu on y-axis 0–1.1. Three Kelly–Tyson profiles: L = 0.5 l_c (triangle peaking at 0.5), L = l_c (triangle peaking at 1.0 at mid-length), L = 3 l_c (trapezoid rising over l_c/2 at each end to 1.0 plateau). Dotted curve: Cox elastic profile (cosh shape) for comparison. Small panel underneath: interfacial shear stress τ, constant at ±τ over the ramp regions, zero on the plateau. Right panel: efficiency factors versus fibre length L (mm, log axis 0.05–10): Kelly–Tyson strength efficiency for l_c = 0.33 mm (0.45 at 0.3 mm, 0.5 at 0.33 mm, 0.94 at 3 mm), and Cox stiffness efficiency η_L for glass in PA66 with 1/β = 0.028 mm (0.47 at 0.1 mm, 0.81 at 0.3 mm, 0.94 at 1 mm). Shaded band 0.2–0.5 mm labelled "typical fibre length after injection moulding". -->
 
+![Figure 22.3 — Stress transfer into a short fibre: tensile stress along the fibre and interfacial shear stress, for fibres shorter than, equal to and longer than the critical length](../figures/ch22/fig-22-3-shear-lag-critical-length.png)
+
+*Figure 22.3 — Stress transfer into a short fibre: tensile stress along the fibre and interfacial shear stress, for fibres shorter than, equal to and longer than the critical length.*
+
 **Worked example — Glass-filled nylon 66.** A housing is injection-moulded in PA66 with 30 wt% E-glass ($\rho_f=2.54$, $\rho_m=1.14$ g/cm³, $d=10$ μm). Convert to volume: $V_f=(0.30/2.54)/(0.30/2.54+0.70/1.14)=0.1181/0.7321=0.161$.
 
 Critical length, with an in-situ fibre strength of 2,000 MPa and $\tau=30$ MPa: $l_c=2000\times10/(2\times30)=333$ μm, or $l_c/d=33$. The pellets contain fibres about 3–4 mm long, but screw shearing and gate passage break them to a typical mean of 0.2–0.5 mm. At $L=0.3$ mm, below $l_c$, the strength efficiency is $0.3/(2\times0.333)=0.45$: more than half of the fibres' strength potential is lost. Had the fibres survived at 3 mm, $\eta=1-0.333/6=0.94$. This is the reason for long-fibre thermoplastic granules (10–25 mm), which keep fibres 2–5 mm long in the part.
@@ -401,6 +413,10 @@ $$
 Figure 22.4 defines the material axes 1–2 and the structural axes $x$–$y$ that are used when the ply is rotated.
 
 <!-- FIGURE 22.4 | figures/ch22/fig-22-4-lamina-axes.png | schematic | A unidirectional lamina with material axes 1–2 rotated by angle θ from the structural axes x–y, and the stress components in each frame. | Content: top view of a rectangular ply with fibres drawn as fine parallel lines at θ = +30° to the horizontal x-axis. Material axis 1 along fibres, axis 2 perpendicular in plane; structural axes x (horizontal) and y (vertical); positive θ measured anticlockwise from x to 1. Two small stress elements: one aligned with x–y showing σ_x, σ_y, τ_xy; one aligned with 1–2 showing σ_1, σ_2, τ_12. Side inset: ply thickness 0.125 mm with axis 3 through-thickness. Annotation near a uniaxial load σ_x arrow: "off-axis load produces shear strain γ_xy: extension–shear coupling". -->
+
+![Figure 22.4 — A unidirectional lamina with material axes 1–2 rotated by angle θ from the structural axes x–y, and the stress components in each frame](../figures/ch22/fig-22-4-lamina-axes.png)
+
+*Figure 22.4 — A unidirectional lamina with material axes 1–2 rotated by angle θ from the structural axes x–y, and the stress components in each frame.*
 
 **Worked example — Reduced stiffness of a carbon/epoxy ply.** For T300/epoxy ($E_1=181$ GPa, $E_2=10.3$ GPa, $G_{12}=7.17$ GPa, $\nu_{12}=0.28$): $\nu_{21}=0.28\times10.3/181=0.01593$ and $1-\nu_{12}\nu_{21}=0.99554$. Then
 
@@ -493,9 +509,13 @@ The large $\bar Q_{66}$ (46.6 GPa against $Q_{66}=7.17$) is why ±45° plies are
 
 <!-- FIGURE 22.5 | figures/ch22/fig-22-5-off-axis-moduli.png | plot | Off-axis Young's modulus and shear modulus of single unidirectional plies of carbon/epoxy and glass/epoxy versus fibre angle. | Content: x-axis fibre angle θ 0–90°; left y-axis E_x 0–200 GPa. Curves: T300/epoxy E_x (181 at 0°, 154 at 5°, 108 at 10°, 72.6 at 15°, 28.8 at 30°, 16.7 at 45°, 12.4 at 60°, 10.3 at 90°); E-glass/epoxy E_x (38.6, 26.8 at 15°, 15.4 at 30°, 10.7 at 45°, 8.9 at 60°, 8.27 at 90°). Second panel or right axis 0–12 GPa: G_xy for T300/epoxy (7.17 at 0°, 8.76 at 30°, 9.46 at 45°, symmetric about 45°). Inset polar plot of E_x(θ) for T300/epoxy showing the narrow "peanut" lobe along the fibres. Annotate "5° misalignment: −15 % stiffness" on the carbon curve. -->
 
+![Figure 22.5 — Off-axis Young's modulus and shear modulus of single unidirectional plies of carbon/epoxy and glass/epoxy versus fibre angle](../figures/ch22/fig-22-5-off-axis-moduli.png)
+
+*Figure 22.5 — Off-axis Young's modulus and shear modulus of single unidirectional plies of carbon/epoxy and glass/epoxy versus fibre angle.*
+
 ### Off-axis strength in brief
 
-Strength transforms less simply than stiffness, because the ply fails by different mechanisms in different directions. An off-axis tensile load produces $\sigma_1=\sigma_xc^2$, $\sigma_2=\sigma_xs^2$ and $\tau_{12}=-\sigma_xsc$, and the ply fails by whichever mode is reached first: fibre fracture at very small angles, in-plane shear at intermediate angles (roughly 5–45° for carbon/epoxy) and transverse tension at large angles. Because $Y_t$ and $S$ are 20–40 times smaller than $X_t$, the off-axis strength drops even faster than the stiffness: a T300/epoxy ply loaded at 15° has a strength of only about 250 MPa. Interactive criteria that combine these modes — Tsai–Hill, Tsai–Wu and Puck — are developed in Chapter 23.
+Strength transforms less simply than stiffness, because the ply fails by different mechanisms in different directions. An off-axis tensile load produces $\sigma_1=\sigma_xc^2$, $\sigma_2=\sigma_xs^2$ and $\tau_{12}=-\sigma_xsc$, and the ply fails by whichever mode is reached first: fibre fracture at very small angles, in-plane shear at intermediate angles (roughly 3–30° for carbon/epoxy) and transverse tension at large angles. Because $Y_t$ and $S$ are 20–40 times smaller than $X_t$, the off-axis strength drops even faster than the stiffness: a T300/epoxy ply loaded at 15° has a strength of only about 250 MPa. Interactive criteria that combine these modes — Tsai–Hill, Tsai–Wu and Puck — are developed in Chapter 23.
 
 ---
 
@@ -548,6 +568,10 @@ where $\alpha_{xy}$ is an engineering shear-strain coefficient: an off-axis ply 
 
 <!-- FIGURE 22.6 | figures/ch22/fig-22-6-ply-thermal-expansion.png | plot | Thermal expansion coefficients of a unidirectional carbon/epoxy ply versus fibre angle, and the free thermal distortion of an off-axis ply. | Content: x-axis fibre angle θ 0–90°; y-axis expansion coefficient −25 to +25 ppm/K. Curves for T300/epoxy (α_1 = 0.02, α_2 = 22.5 ppm/K): α_x rising from 0.02 at 0° to 5.6 at 30°, 11.3 at 45°, 16.9 at 60°, 22.5 at 90°; α_y the mirror image; α_xy (dashed) from 0 at 0° to −22.5 at 45° back to 0 at 90°. Reference lines: aluminium 23, steel 12, Invar 1.2 ppm/K. Right inset: square ply element with fibres at 30°, heated by ΔT: exaggerated deformed shape (rhombus) showing extension mostly across fibres and shear distortion. Small note: "replace α by β and ΔT by ΔM for moisture swelling (β_2 ≈ 0.6)". -->
 
+![Figure 22.6 — Thermal expansion coefficients of a unidirectional carbon/epoxy ply versus fibre angle, and the free thermal distortion of an off-axis ply](../figures/ch22/fig-22-6-ply-thermal-expansion.png)
+
+*Figure 22.6 — Thermal expansion coefficients of a unidirectional carbon/epoxy ply versus fibre angle, and the free thermal distortion of an off-axis ply.*
+
 Carbon's slightly negative axial CTE also makes **near-zero-expansion laminates** possible: a layup dominated by 0° plies of high-modulus pitch fibre (ply $\alpha_1\approx-1.1$ ppm/K) with a few angle plies can be tuned through zero, which is how satellite optical benches and antenna reflectors hold their shape between sunlight and shadow; among metals only Invar (about 1.2 ppm/K) comes close, at five times the density.
 
 ---
@@ -562,10 +586,10 @@ Carbon's slightly negative axial CTE also makes **near-zero-expansion laminates*
 | How are fibres and matrix actually combined at scale, and how does the process set $V_f$, voids and waviness? | Chapter 23 (manufacturing); Chapter 21 (polymer processing) |
 | What sets the strength distribution of fibres and why does strength depend on size? | Chapter 14 (Weibull statistics), Chapter 17 (ceramic fibres and glass) |
 | How do matrix creep and viscoelasticity affect long-term composite behaviour? | Chapter 14 (viscoelasticity), Chapter 21 (polymer mechanics) |
-| How do MMCs and CMCs behave at high temperature, and how are CMCs toughened? | Chapter 23 (MMCs, CMCs), Chapter 33 (extreme environments) |
-| How do composites age, absorb moisture and degrade in service? | Chapter 36 (degradation across classes) |
+| How do MMCs and CMCs behave at high temperature, and how are CMCs toughened? | Chapter 23 (MMCs, CMCs), Chapter 41 (extreme environments) |
+| How do composites age, absorb moisture and degrade in service? | Chapter 44 (degradation across classes) |
 | How do the elastic-tensor ideas used here generalize to arbitrary anisotropy? | Chapter 4 (tensor properties), Chapter 11 (anisotropic elasticity) |
-| How are composites chosen against metals using performance indices? | Chapter 48 (materials selection) |
-| How are nanocomposites (clay, graphene, nanotube) different? | Chapter 30 (nanocomposites) |
+| How are composites chosen against metals using performance indices? | Chapter 58 (materials selection) |
+| How are nanocomposites (clay, graphene, nanotube) different? | Chapter 38 (nanocomposites) |
 
 **Next:** Chapter 23 stacks oriented plies into laminates, derives the ABD matrix, predicts how laminates fail, and follows composites through their manufacture and into metal and ceramic matrices.

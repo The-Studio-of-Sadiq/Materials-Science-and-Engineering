@@ -1,552 +1,781 @@
-# Chapter 35 — Forms of Corrosion and Protection
+# Chapter 35 — Electronic and Optoelectronic Materials
 
-*Part VIII · Corrosion, Degradation and Surfaces*
+*Part VII · Semiconductor and Photonic Materials*
 
-In May 1985 the suspended concrete ceiling of an indoor swimming pool in Uster, Switzerland, fell onto the pool area, killing twelve people. The ceiling had hung for thirteen years from stainless-steel rods. The rods showed almost no loss of section and were loaded well below yield, yet their fracture surfaces revealed branched cracks driven by sustained tension and chloride-laden condensate from the pool air. The steel had not wasted away; it had cracked. Chapter 34 explained why metals corrode and how fast the electrochemistry runs. This chapter asks *where* and *in what form* the attack concentrates, because the distribution of attack, not its total amount, decides whether a structure fails. A millimetre per year spread evenly over a tank wall is a maintenance item; the same metal loss concentrated in a pit, a crevice, a grain boundary or a crack tip is a catastrophe.
+Silicon carries almost all the world's computation and most of its solar power, yet there is no silicon light-emitting diode in a phone, a car headlamp or a fibre-optic transmitter. Meanwhile the blue LED inside every white lamp is made of InGaN grown on sapphire. Its epitaxial layers contain $10^8$–$10^9$ threading dislocations per cm², a defect density that would make a silicon transistor useless, and it still converts more than 70% of its electrical input into light. The two facts point the same way. Whether a material emits, absorbs, detects or guides light is decided by its band structure, its defects and its interfaces. A material that is excellent for one function can be hopeless for another.
 
-> **Why does corrosion that removes almost no metal sometimes destroy a component, while heavy uniform rusting is harmless?**
-> **How do galvanic coupling, pitting, crevices, sensitization, stress and hydrogen turn a slow chemical process into localized failure?**
-> **How are coatings, inhibitors and cathodic or anodic protection sized and verified, and how are corrosion rates measured?**
+An engineer choosing materials for an optical link meets this at every step. The laser at 1550 nm must be InGaAsP on InP, because silicon cannot emit. The fibre must be ultrapure silica, whose loss is limited by the scattering of light from frozen-in density fluctuations. The modulator may be lithium niobate or silicon, for different physical reasons. The detector must be germanium or InGaAs, because silicon is transparent at 1550 nm. The transistors in the receiver amplifier may be SiGe or InP, chosen for electron velocity rather than optical properties. Each choice follows from a material property that this chapter derives.
+
+> **Why does a direct-gap material absorb and emit light so much more strongly than an indirect-gap one, and what decides the sharpness of the absorption edge?**
+> **What material limits the efficiency of LEDs, the sensitivity and wavelength range of photodetectors, and the efficiency of solar cells?**
+> **What makes a material suitable for guiding or modulating light?**
+> **Which material properties decide performance at radio and microwave frequencies, and in sensors?**
 
 | Concept | Engineering destination |
 |---|---|
-| Uniform corrosion rate and corrosion allowance | Wall thickness of tanks, pipes and steel piles; atmospheric-category design of bridges |
-| Galvanic series and area ratio | Fastener selection, dissimilar-metal joints in ships, aircraft and cars |
-| Pitting resistance equivalent number, critical pitting temperature | Choosing stainless grades for seawater, chemical plant, desalination |
-| Crevice geometry and differential aeration | Flange gaskets, lap joints, tube-sheet design, fastener heads |
-| Sensitization and intergranular attack | Low-carbon and stabilized stainless grades, weld procedures, marine aluminium |
-| Stress-corrosion cracking, $K_{\rm ISCC}$ | Pressure vessels, pipelines, aircraft forgings, nuclear steam generators |
-| Hydrogen embrittlement, hardness limits | High-strength fasteners, sour-gas equipment, hydrogen pipelines |
-| Corrosion fatigue | Offshore structures, pump shafts, implants, steel wire ropes |
-| MIC, dealloying, erosion–corrosion, cavitation | Water mains, oil pipelines, heat-exchanger tubes, pump impellers and propellers |
-| Coatings, galvanizing, inhibitors | Structural steel, automotive bodies, cooling water and oil production |
-| Cathodic and anodic protection | Buried pipelines, offshore platforms and wind foundations, ship hulls, acid tanks |
-| Salt spray, polarization, EIS | Qualification of coatings and alloys, field corrosion monitoring |
+| Absorption coefficient, penetration depth | Detector and solar-cell thickness, photolithography, laser processing |
+| Urbach tail | Solar-cell voltage loss, sub-gap absorption, material quality index |
+| Radiative recombination coefficient $B$ | LED and laser efficiency, solar-cell limits |
+| Photoconductive gain | Low-cost light sensors, X-ray imagers, IR photoconductors |
+| Phosphors, activators, Stokes shift | White LEDs, displays, X-ray and γ-ray scintillators |
+| Alloy band gap and lattice matching | LED colour, laser wavelength, detector cut-off |
+| Efficiency droop, green gap | High-power LED design, micro-LED displays |
+| Cut-off wavelength, dark current | IR cameras, optical receivers, spectroscopy |
+| Shockley–Queisser limit, $V_{oc}$ loss | Choice of photovoltaic absorber (with Chapter 40) |
+| Fibre loss, electro-optic coefficient, index contrast | Optical communications, silicon photonics, modulators |
+| Saturation velocity, substrate loss, loss tangent | RF transistors, mm-wave circuits, antennas, PCBs |
+| Transduction coefficients (TCR, gauge factor, Hall mobility) | Temperature, strain, magnetic, gas and IR sensors |
 
-**Roadmap.** Uniform and galvanic attack, where the whole surface or a whole metal is anodic (35.1–35.2) → localized attack on passive metals: pitting, crevice and intergranular corrosion (35.3–35.5) → corrosion combined with stress: SCC, hydrogen embrittlement, corrosion fatigue (35.6–35.8) → biological, chemical and mechanical accelerants: MIC, dealloying, erosion–corrosion, cavitation (35.9) → protection by material, coating and inhibitor (35.10) → electrochemical protection, cathodic and anodic, with sizing (35.11–35.12) → how corrosion is tested and measured (35.13).
+**Roadmap.** How light is absorbed and emitted (35.1) → materials whose conductivity responds to light (35.2) → materials that emit by luminescence (35.3) → emitters for LEDs and lasers (35.4) → detectors (35.5) → solar absorbers (35.6) → materials that guide and modulate light (35.7) → materials for high frequencies (35.8) → sensor materials (35.9).
 
----
-
-## 35.1 Uniform corrosion
-
-### Rate, allowance and the corrosion map of a structure
-
-Uniform (general) corrosion proceeds at roughly equal rate over the whole exposed surface. Anodic and cathodic sites exist, as Chapter 34 showed, but they are microscopic and shift continually, so on average every point is anodic for the same fraction of time. Uniform corrosion consumes the largest tonnage of metal of any form, but it is the least dangerous, because it is predictable: once a rate is known, a **corrosion allowance** is added to the wall thickness, or a coating is chosen whose life matches the inspection interval.
-
-The rate is quoted as penetration per year. Faraday's law (Chapter 34) converts a corrosion current density to penetration. For iron dissolving as Fe$^{2+}$:
-
-$$
-\mathrm{CR}=\frac{i\,M}{nF\rho}=\frac{i\times55.85\ \mathrm{g\,mol^{-1}}}{2\times96\,485\ \mathrm{C\,mol^{-1}}\times7.87\ \mathrm{g\,cm^{-3}}}
-$$
-
-which gives 1.16 mm/year for $i=1$ A/m$^2$, or the useful rule that **1 µA/cm$^2$ corresponds to about 11.6 µm/year for steel**.
-
-| Environment (carbon steel unless stated) | Typical uniform corrosion rate |
-|---|---|
-| Dry indoor air (ISO 9223 category C1) | below 1.3 µm/year |
-| Rural atmosphere (C2) | 1.3–25 µm/year |
-| Urban or mild industrial (C3) | 25–50 µm/year |
-| Industrial or coastal (C4) | 50–80 µm/year |
-| Severe marine or industrial (C5) | 80–200 µm/year |
-| Zinc in C3 atmosphere | 0.7–2.1 µm/year |
-| Seawater immersion, quiescent | 0.1–0.2 mm/year |
-| Splash zone of offshore structure | 0.3–0.5 mm/year, locally more |
-| Undisturbed soil | 0.01–0.05 mm/year |
-| Aerated fresh water, ambient | 0.05–0.15 mm/year |
-
-The ISO atmospheric categories are first-year rates measured on standard coupons. Rates fall with time as the rust layer thickens, roughly as a power law $d=At^{n}$ with $n$ between 0.3 and 0.8; **weathering steels** (Cor-Ten type, with small additions of Cu, Cr, Ni and P) exploit this by forming a dense, adherent rust that slows corrosion to a few micrometres per year in suitable atmospheres. They fail where the rust never dries out, a reminder that a protective film is a property of material *and* environment.
-
-> **Status of the principle: Corrosion allowance from a uniform rate**
-> *Empirical.* The rates are measured or categorized for each environment; adding rate × design life to the wall is valid only if attack stays uniform. It provides no protection against pitting, cracking or galvanic acceleration, which this chapter treats separately.
-
-Uniform corrosion governs buried steel piles, storage tanks, ship plating and rebar in carbonated concrete (Chapter 36). At small dimensions there is no allowance at all: a 1 µm bond pad or a 50 µm stent strut makes even slow uniform corrosion a design limit.
+> **Boundary.** This chapter explains the material mechanisms behind optoelectronic, RF and sensing devices. Device operation (diode equations, laser rate equations, transistor small-signal models) and circuit configurations belong to Electronics & Computing. The quantum mechanics of optical transitions (matrix elements, Fermi's golden rule) belongs to Engineering Physics. Bands, direct and indirect gaps, carrier statistics and recombination were set up in Chapters 31 and 32 and are used here without re-derivation.
 
 ---
 
-## 35.2 Galvanic corrosion
+## 35.1 Light absorption and emission in materials
 
-### The galvanic series
+### Photon energy and the band gap
 
-When two different metals are in electrical contact in a common electrolyte, the one with the more negative corrosion potential becomes the anode of a macroscopic cell and corrodes faster; the other is cathodically protected. Standard electrode potentials (Chapter 34) are a poor guide, because real metals carry oxide films and alloys have no standard potential. Engineers use instead the **galvanic series**: corrosion potentials measured in a specified environment, usually flowing seawater (Figure 35.1).
-
-| Metal or alloy | Corrosion potential in seawater (V vs SCE, typical) |
-|---|---|
-| Magnesium alloys | −1.60 to −1.63 |
-| Zinc | −0.98 to −1.03 |
-| Aluminium alloys | −0.76 to −1.00 |
-| Carbon steel, cast iron | −0.60 to −0.72 |
-| Austenitic stainless steel, active (in crevices) | −0.46 to −0.58 |
-| Copper, brass, bronze | −0.24 to −0.36 |
-| 90/10 copper–nickel | −0.21 to −0.28 |
-| Nickel–aluminium bronze | −0.15 to −0.22 |
-| Austenitic stainless steel, passive | −0.05 to −0.10 |
-| Titanium, Ni–Cr–Mo alloys | −0.05 to +0.06 |
-| Graphite, platinum | +0.20 to +0.25 |
-
-Note that stainless steel appears twice. A passive stainless surface is noble; the same alloy inside a crevice, where the film has broken down, is active. Passive metals move along the series as their film state changes.
-
-<!-- FIGURE 35.1 | figures/ch35/fig-35-1-galvanic-series.png | plot | Galvanic series of engineering metals in flowing seawater, with the active–passive double entry for stainless steel. | Content: horizontal bar chart; x-axis corrosion potential in V vs SCE from -1.7 to +0.3; one bar per row of the text table, spanning its range; austenitic SS active as a hatched bar. Arrow along bottom 'more active (anodic)' to the left, 'more noble (cathodic)' to the right. A bracket between steel and copper labelled 'ΔE ≈ 0.35 V: steel corrodes'. -->
-
-> **Status of the principle: Galvanic series**
-> *Empirical.* Measured corrosion potentials in one electrolyte at one flow rate and temperature; the order can change in other environments (zinc and steel reverse in some hot waters above about 60 °C), and the series ranks risk without giving rates.
-
-### Why area ratio controls the rate
-
-The potential difference says which metal corrodes; the rate is set by kinetics. In near-neutral aerated water the cathodic reaction, oxygen reduction, is usually limited by oxygen diffusion to the surface. The total cathodic current is then the limiting current density times the **cathode** area, and all of that current must be supplied by the anode. The galvanic current density on the anode is therefore
+A photon of wavelength $\lambda$ carries energy $E=h\nu=hc/\lambda$. In convenient units,
 
 $$
-i_a\approx i_{\rm L}\,\frac{A_c}{A_a}
+E\,[\mathrm{eV}]=\frac{1239.8}{\lambda\,[\mathrm{nm}]}
 $$
 
-A small anode coupled to a large cathode is the worst case.
+so 1550 nm corresponds to 0.80 eV, 850 nm to 1.46 eV, 550 nm (green) to 2.25 eV and 450 nm (blue) to 2.76 eV. A semiconductor absorbs a photon strongly by *interband* absorption, which lifts an electron from the valence band to the conduction band. Energy conservation requires $h\nu\ge E_g$. The same transition run backwards is *radiative recombination*, which emits a photon of energy close to $E_g$. Absorption and emission are two directions of one process, and a material that does one well does the other well, provided non-radiative paths do not compete (see radiative recombination, below).
 
-**Worked example — rivets and plates in seawater.** Take an oxygen-limited cathodic current density of $i_{\rm L}=0.1$ A/m$^2$ in quiescent seawater. In design A, a copper plate of area $A_c=1$ m$^2$ is held by carbon-steel rivets whose total wetted area is $A_a=0.01$ m$^2$ (area ratio 100). In design B the materials are swapped: a steel plate of 1 m$^2$ with copper rivets of 0.01 m$^2$.
+### The absorption coefficient
 
-*Design A.* The anodic current density on the rivets is
-
-$$
-i_a=0.1\times\frac{1}{0.01}=10\ \mathrm{A\,m^{-2}}
-$$
-
-and with 1.16 mm/year per A/m$^2$ the rivets corrode at about 11.6 mm/year. Rivet heads a few millimetres thick are gone within months.
-
-*Design B.* The steel plate already corrodes at about $0.1\times1.16=0.116$ mm/year on its own. The copper rivets add a cathodic current of only $0.1\times0.01=0.001$ A, spread over 1 m$^2$ of steel: an extra 1.2 µm/year, about 1 % of the self-corrosion rate. The copper rivets themselves are protected.
-
-The same metals, the same potential difference, a ten-thousand-fold difference in damage. This is the reason behind the rules **"fasteners more noble than the parts they join"** and **"never paint only the anode"**: painting the anodic member of a couple leaves small holidays (coating defects) as tiny anodes facing a huge bare cathode. If only one member can be coated, coat the cathode.
-
-### Galvanic corrosion across engineering
-
-- **Aerospace and automotive**: carbon-fibre composites conduct and sit near graphite in the series, so aluminium or magnesium touching CFRP corrodes rapidly unless isolated by glass plies, sealant or titanium fasteners.
-- **Marine and civil**: bronze propellers on steel hulls, aluminium superstructures on steel ships (joined by explosion-welded transition strips), copper pipe screwed into galvanized steel.
-- **Electronics**: pores in gold-over-nickel platings create small-anode geometries (anodic-index rules are in the Materials Core book, Ch 24).
-- **Biomedical**: a Co–Cr head on a Ti-alloy hip stem; small potential differences plus micromotion give **fretting-crevice corrosion** at the taper.
-
-Sacrificial anodes and zinc coatings (Sections 35.10–35.11) are galvanic corrosion engineered to happen to the right metal.
-
----
-
-## 35.3 Pitting corrosion
-
-### Breakdown of passivity
-
-Stainless steels, aluminium, titanium and nickel alloys owe their usefulness to a passive film a few nanometres thick (Chapter 34). **Pitting** is the local breakdown of that film, usually by chloride ions, at a weak point: a manganese sulfide inclusion in stainless steel, an intermetallic particle in aluminium, a scratch or a weld-heat tint. The rest of the surface remains passive and serves as a large cathode, so the pit is a tiny anode with a huge cathode, the area-ratio problem of Section 35.2 appearing on a single metal.
-
-### The autocatalytic pit
-
-A pit, once started, sustains itself (Figure 35.2):
-
-1. Metal dissolves at the pit bottom: $\mathrm{M\to M^{n+}+n\,e^-}$.
-2. The metal cations hydrolyse, for example $\mathrm{Cr^{3+}+3H_2O\to Cr(OH)_3+3H^+}$, acidifying the pit solution to pH 1–2 or below.
-3. To keep the solution electrically neutral, chloride ions migrate into the pit from outside.
-4. The concentrated acid chloride solution prevents repassivation, so dissolution continues.
-
-A cap of corrosion product or undercut metal over the mouth preserves the aggressive chemistry, so pits can perforate a tube wall while weight loss is negligible.
-
-<!-- FIGURE 35.2 | figures/ch35/fig-35-2-pit-crevice-cells.png | schematic | Autocatalytic chemistry of a corrosion pit and of a crevice, both driven by a small acidified anode coupled to a large passive cathode. | Content: two cross-section panels of stainless steel in aerated NaCl. (a) Pit under a porous cap: 'M → M^n+ + ne⁻', hydrolysis 'M^n+ + H2O → MOH + H⁺', 'pH 1–2, high Cl⁻', Cl⁻ migrating in; O2 reduction on the passive surface outside, electron arrows through the metal. (b) Crevice under a gasket, gap ~1–50 µm, several mm deep, stages '1 O2 depleted', '2 Cl⁻ migrates in', '3 pH falls, film breaks down'; cathode at the mouth. Acidic regions red-orange, passive film thin blue line. -->
-
-### Pitting potential and critical pitting temperature
-
-On a polarization curve, a passive metal in chloride solution shows a sharp rise in current at the **pitting potential** $E_{\rm pit}$. If the potential is then swept back, the current stays high until the **repassivation potential** $E_{\rm rp}$, below which pits stop growing. Pitting occurs in service when the free corrosion potential, raised by oxygen, chlorination or a noble couple, reaches $E_{\rm pit}$. $E_{\rm pit}$ falls with rising chloride concentration and temperature; for a given alloy and solution there is a fairly sharp **critical pitting temperature** (CPT) below which pits do not propagate at any potential.
-
-Alloying raises resistance. Chromium forms the film, molybdenum and nitrogen help it repair in acid chloride. An empirical index ranks stainless steels:
+Light of intensity $I_0$ entering a uniform absorbing material decays as
 
 $$
-\mathrm{PREN}=\%\mathrm{Cr}+3.3\,(\%\mathrm{Mo}+0.5\,\%\mathrm{W})+16\,\%\mathrm N
+I(x)=I_0\,e^{-\alpha x}
 $$
 
-(with 30 instead of 16 sometimes used for the nitrogen term in austenitic grades).
+where $\alpha$ (usually in cm$^{-1}$) is the *absorption coefficient* and $1/\alpha$ is the *penetration depth* (or absorption length). Within one penetration depth 63% of the light is absorbed. Within three, 95%. The absorption coefficient is related to the imaginary part $\kappa$ of the complex refractive index $\tilde n=n+i\kappa$ by $\alpha=4\pi\kappa/\lambda$, which links absorption to the dielectric function of Chapter 26.
 
-| Alloy (typical composition, wt %) | PREN | CPT in ferric chloride (ASTM G48 type), typical | Typical use |
-|---|---|---|---|
-| 304 (18Cr–8Ni, 0.05N) | 19 | below 5 °C | Food, architecture, dry indoor |
-| 316L (17Cr–12Ni–2.1Mo) | 24–25 | 10–20 °C | Chemical plant, mildly saline |
-| 2205 duplex (22Cr–5Ni–3.1Mo–0.17N) | 35 | 30–40 °C | Brackish water, oil and gas |
-| 2507 super duplex (25Cr–7Ni–4Mo–0.27N) | 42–43 | 70–80 °C | Seawater systems, offshore |
-| 6Mo superaustenitic (20Cr–18Ni–6.1Mo–0.2N) | 43 | 60–70 °C | Seawater, bleach plants |
+> **Status of the principle: Beer–Lambert attenuation $I=I_0e^{-\alpha x}$**
+> *Approximate.* It holds for a homogeneous medium at low intensity, where $\alpha$ does not depend on $I$. It fails at high intensity (saturable absorption, two-photon absorption), in strongly scattering media, and where interference in thin films matters. Surface reflection must be accounted for separately.
 
-A rule of thumb in offshore practice is that ambient seawater needs PREN of at least 40, which is why 316L is not a seawater alloy despite its "marine grade" nickname.
+### Direct versus indirect absorption
 
-> **Status of the principle: PREN**
-> *Empirical.* A linear regression of pitting resistance on composition for wrought stainless steels in chloride; it ignores microstructure (sigma phase, inclusions, weld segregation, surface finish), so two alloys of equal PREN can differ markedly, and it says nothing about stress-corrosion cracking.
+The shape of $\alpha(h\nu)$ just above $E_g$ follows from conservation of crystal momentum. A photon carries almost no momentum on the scale of the Brillouin zone, so an optical transition is vertical in $k$-space.
 
-### Pitting in other metals
+- **Direct gap** (GaAs, InP, GaN, CdTe, InGaAs). The valence-band maximum and conduction-band minimum lie at the same $k$, so the photon alone can drive the transition. With parabolic bands the joint density of states rises as $(h\nu-E_g)^{1/2}$, which gives
 
-Aluminium alloys pit around cathodic intermetallics (Al$_2$CuMg, Al$_7$Cu$_2$Fe), which is why 2xxx aircraft sheet is clad with pure aluminium. Because pit depths are statistically distributed, pipeline integrity uses **extreme-value (Gumbel) statistics** to predict the deepest pit over a large area from small coupons, weakest-link reasoning met again in Chapter 36.
+$$
+\alpha_{\rm dir}(h\nu)\approx A^*\,(h\nu-E_g)^{1/2}
+$$
 
----
+and $\alpha$ reaches $10^4$ cm$^{-1}$ within about 0.1 eV of the edge. A 1–2 µm layer of a direct-gap semiconductor absorbs nearly all light above its gap.
 
-## 35.4 Crevice corrosion
+- **Indirect gap** (Si, Ge, AlAs, GaP, SiC). The band extrema lie at different $k$, so the transition needs a phonon to supply the momentum difference, by absorbing or emitting one. A three-body event (photon, electron, phonon) is a second-order process and much less probable:
 
-A crevice is any narrow gap into which solution can enter but not circulate: under a gasket or washer, at a lap joint, between a tube and a tube sheet, under a barnacle or a deposit. The mechanism has the same end point as pitting but a different start (Figure 35.2b):
+$$
+\alpha_{\rm ind}(h\nu)\propto\frac{(h\nu-E_g+E_p)^2}{e^{E_p/kT}-1}+\frac{(h\nu-E_g-E_p)^2}{1-e^{-E_p/kT}}
+$$
 
-1. Initially the metal inside and outside corrodes at the same low passive rate, consuming oxygen.
-2. Oxygen inside the crevice is used up and cannot be replenished; the cathodic reaction moves outside, to the crevice mouth.
-3. Metal ions accumulate inside; chloride migrates in to balance them; hydrolysis lowers the pH.
-4. When the crevice solution reaches a critical acidity and chloride content, the passive film breaks down and active dissolution begins, driven by the large cathode outside.
+where $E_p$ is the phonon energy (about 50–60 meV for the relevant phonons in Si). The edge is weak, rising only to 10–$10^3$ cm$^{-1}$ over the first few tenths of an eV. In silicon, strong absorption begins only once the photon energy approaches the direct gap at the Γ point (about 3.4 eV), near 365 nm.
 
-The first stage is an **incubation period** that can last months, so crevice corrosion often appears long after commissioning. Tight, deep crevices are the most dangerous, and the ohmic drop along them lets the tip sit in the active range while the mouth stays passive. Crevices initiate attack at lower temperatures than open surfaces: the **critical crevice temperature** of a stainless steel is typically 15–30 °C below its CPT.
+> **Status of the principle: Square-root and quadratic absorption edges**
+> *Approximate.* These are derived from first- and second-order perturbation theory with parabolic bands and constant matrix elements. They hold within a few tenths of an eV of the edge. Plotting $(\alpha h\nu)^2$ or $(\alpha h\nu)^{1/2}$ against $h\nu$ (a Tauc plot) to extract $E_g$ relies on this. They fail close to the edge, where excitons and band tails (the Urbach tail, below) dominate, and far above it, where band non-parabolicity matters.
 
-A related form, **differential-aeration corrosion**, attacks carbon steel under deposits, at the waterline of a partly filled tank and in soil where a pipe crosses from sand into clay: the oxygen-starved region becomes anodic. **Filiform corrosion** is the crevice mechanism running under a paint film on steel, aluminium or magnesium, producing thread-like tracks from a scratch.
+Germanium shows both behaviours. Its indirect gap is 0.66 eV, but the direct gap at Γ is only 0.80 eV, so absorption jumps by two orders of magnitude near 1550 nm. That makes Ge a useful telecom detector (Section 35.5). Table 35.1 lists representative values, and Figure 35.1 plots $\alpha$ against photon energy.
 
-Defences are mainly design (welded rather than bolted joints, continuous welds, non-absorbent gaskets, sealed gaps, drainage) and, for seawater, crevice-resistant alloys (super duplex, 6Mo, titanium, Ni–Cr–Mo).
+**Table 35.1 — Absorption coefficient and penetration depth (300 K, typical values)**
 
----
+| Material | $E_g$ (eV), type | Wavelength | $\alpha$ (cm$^{-1}$) | $1/\alpha$ |
+|---|---|---|---|---|
+| Si | 1.12, indirect | 400 nm | $9.5\times10^{4}$ | 0.11 µm |
+| Si | | 600 nm | $4.1\times10^{3}$ | 2.4 µm |
+| Si | | 850 nm | $5.4\times10^{2}$ | 19 µm |
+| Si | | 1000 nm | 64 | 160 µm |
+| Si | | 1100 nm | 3.5 | 2.9 mm |
+| Ge | 0.66 indirect (0.80 direct) | 1310 nm | ≈ $7\times10^{3}$ | 1.4 µm |
+| Ge | | 1550 nm | ≈ 460 | 22 µm |
+| GaAs | 1.42, direct | 800 nm | ≈ $1.2\times10^{4}$ | 0.8 µm |
+| In$_{0.53}$Ga$_{0.47}$As | 0.75, direct | 1550 nm | ≈ $7\times10^{3}$ | 1.4 µm |
+| a-Si:H | ≈1.75 (mobility gap) | 600 nm | ≈ $4\times10^{4}$ | 0.25 µm |
+| CH$_3$NH$_3$PbI$_3$ | ≈1.6, direct | 700 nm | ≈ $3\times10^{4}$ | 0.3 µm |
+| GaN | 3.42, direct | 350 nm | ≈ $1\times10^{5}$ | 0.1 µm |
 
-## 35.5 Intergranular corrosion
+The table explains several engineering facts at once. A crystalline Si solar cell must be about 100–180 µm thick and needs light trapping to absorb its near-infrared photons. A GaAs or perovskite cell needs less than 1 µm. A silicon photodiode for 850 nm light must be tens of micrometres deep, which makes it slow, while a GaAs one needs only 1–2 µm.
 
-### Sensitization of stainless steels
+<!-- FIGURE 35.1 | figures/ch35/fig-35-1-absorption-coefficient.png | plot | Absorption coefficient versus photon energy for direct- and indirect-gap semiconductors, with the Urbach tail. | Content: Main panel — log y-axis α from 1 to 10^6 cm−1; x-axis photon energy 0.6–3.5 eV with top axis wavelength (2000, 1550, 1310, 1000, 850, 600, 400 nm). Curves: Si (slow indirect rise from 1.1 eV, reaching 10^4 near 2.5 eV and 10^5 above 3.2 eV), Ge (indirect foot from 0.66 eV then steep step near 0.80 eV), GaAs (sharp rise at 1.42 eV to >10^4), In0.53Ga0.47As (sharp at 0.75 eV), a-Si:H (broad edge near 1.7 eV with long exponential tail). Right axis: penetration depth 1/α (10 mm to 10 nm). Inset — log α vs E near the edge of GaAs (E_U ≈ 6 meV) and a-Si:H (E_U ≈ 50 meV) showing straight-line Urbach tails, with slope 1/E_U marked. -->
 
-Grain boundaries are higher in energy and chemically different from grain interiors (Chapter 5). **Intergranular corrosion** is attack confined to a narrow band along the boundaries, which can disintegrate a component into loose grains while the surface looks intact.
+![Figure 35.1 — Absorption coefficient versus photon energy for direct- and indirect-gap semiconductors, with the Urbach tail](../figures/ch35/fig-35-1-absorption-coefficient.png)
 
-The classic case is the **sensitization** of austenitic stainless steel. Held between roughly 500 and 800 °C, during welding or slow cooling or a stress-relief treatment, carbon combines with chromium to precipitate Cr$_{23}$C$_6$ carbides on grain boundaries. Carbon diffuses quickly; chromium slowly (Chapter 8). The carbides therefore draw chromium from a thin zone next to the boundary, and the chromium content there falls below the roughly 12 % needed for passivity (Figure 35.3). That depleted zone corrodes actively in acids while the grains stay passive. In welded 304, the sensitized band lies a few millimetres from the fusion line, where the heat-affected zone spent longest in the dangerous range: **weld decay**.
+*Figure 35.1 — Absorption coefficient versus photon energy for direct- and indirect-gap semiconductors, with the Urbach tail.*
 
-<!-- FIGURE 35.3 | figures/ch35/fig-35-3-sensitization-profile.png | plot | Chromium depletion next to a grain boundary carrying Cr23C6 carbides in sensitized 304 stainless steel. | Content: x-axis distance from grain boundary -300 to +300 nm; y-axis Cr 0–20 wt %. Bulk 18 %, V-shaped trough to ~9 % at the boundary, ~100 nm wide each side; dashed line at 12 % 'passivity threshold'; shaded band below 12 % 'depleted zone corrodes'. Inset: time–temperature–sensitization C-curves (time 0.1–1000 h log, 400–900 °C), nose near 700 °C at ~0.1–1 h for 0.06 %C, ~10–100 h for 0.02 %C (L grade). -->
+### The Urbach tail
 
-The remedies come straight from the mechanism:
+Measured below $E_g$, $\alpha$ does not drop to zero at the gap. It falls off exponentially:
 
-- **Less carbon**: L grades (304L, 316L) with C ≤ 0.03 % precipitate too little carbide in normal welding times; the C-curve of the time–temperature–sensitization diagram moves to longer times.
-- **Stabilization**: titanium (321) or niobium (347) ties carbon up as TiC or NbC, which form at higher temperature, leaving chromium in solution. A stabilized steel can still suffer **knife-line attack** in a very narrow band next to a weld where the stabilizing carbides were dissolved and chromium carbides formed on reheating.
-- **Solution annealing**: heating to about 1050 °C dissolves the carbides, and rapid cooling prevents their re-precipitation.
+$$
+\alpha(h\nu)=\alpha_0\exp\!\left(\frac{h\nu-E_0}{E_U}\right),\qquad h\nu<E_0
+$$
 
-### Intergranular attack in other alloys
+The *Urbach energy* $E_U$ measures how sharp the edge is. Its origin is disorder. Thermal vibrations (dynamic disorder) and structural defects, alloy fluctuations and strain (static disorder) make the local band edges vary from place to place, creating exponential *band tails* of localized states that extend into the gap. In a perfect crystal at low temperature $E_U$ approaches its phonon-limited minimum of a few meV. In an amorphous solid it is several tens of meV.
 
-- **Al–Mg (5xxx) alloys** with more than about 3 % Mg, used for ship hulls, slowly precipitate anodic β-phase (Al$_3$Mg$_2$) on grain boundaries at temperatures as low as 50–70 °C (decks in tropical sun), and then corrode and crack intergranularly in seawater.
-- **High-strength 2xxx and 7xxx aluminium** suffers **exfoliation**: attack along pancake-shaped grains of rolled plate, where voluminous corrosion product wedges the layers apart like leaves of a book. Over-aged tempers (7075-T73, -T76) trade a little strength for resistance.
+> **Status of the principle: Urbach rule**
+> *Empirical.* The exponential shape is observed in crystalline, alloyed and amorphous materials over two to four decades of $\alpha$. Models of disorder-induced band tails reproduce it, but $\alpha_0$, $E_0$ and $E_U$ are fitted parameters, and the form fails deep in the gap where discrete defect levels dominate.
 
-Susceptibility is screened by standard acid exposures (ASTM A262 for stainless steels, the nitric-acid mass-loss test ASTM G67 for 5xxx aluminium).
+**Table 35.2 — Typical Urbach energies at 300 K**
 
----
-
-## 35.6 Stress-corrosion cracking
-
-### The three necessary conditions
-
-**Stress-corrosion cracking (SCC)** is the growth of cracks under the combined action of a sustained tensile stress and a specific corrosive environment, in a susceptible material. All three must be present: remove any one and SCC stops. The stress need not be applied: residual stresses from welding, cold forming or interference fits are the usual cause, and they can approach the yield strength. The environment is often surprisingly mild, and it is specific: a system that cracks readily in one environment may be immune in another.
-
-| Alloy system | Environment that causes SCC | Typical engineering case |
+| Material | $E_U$ (meV) | Comment |
 |---|---|---|
-| Austenitic stainless steels | Chloride solutions above about 50–60 °C; also caustic, polythionic acids | Hot-water pipes under insulation, pool hangers, chemical plant |
-| Carbon and low-alloy steels | Hot caustic; nitrates; carbonate–bicarbonate; anhydrous ammonia; near-neutral groundwater | Boiler caustic embrittlement, gas-pipeline cracking, ammonia tanks |
-| Brass (Cu–Zn) | Ammonia and amines | "Season cracking" of cartridge cases; plumbing fittings |
-| High-strength aluminium (2xxx, 7xxx) | Moist air, chloride; worst in short-transverse direction | Aircraft forgings and extrusions |
-| Titanium alloys | Hot salt; methanol; N$_2$O$_4$ | Compressor discs, spacecraft propellant tanks |
-| Nickel alloys (Alloy 600) | High-temperature pure water | Steam-generator tubes and nozzles in pressurized-water reactors |
-| Glass, silicate ceramics | Water vapour | Slow crack growth (Chapter 36) |
-| Glassy polymers | Specific organic liquids, detergents | Environmental stress cracking (Chapter 36) |
+| GaAs (high quality) | 6–7 | Near phonon limit |
+| c-Si | 8–12 | Indirect edge complicates fitting |
+| CH$_3$NH$_3$PbI$_3$ (perovskite) | 13–16 | Remarkably ordered for a solution-processed film |
+| CdTe | 10–20 | Depends on CdCl$_2$ treatment |
+| Cu(In,Ga)Se$_2$ | 15–30 | Composition fluctuations |
+| Cu$_2$ZnSnS$_4$ (kesterite) | 40–70 | Cation disorder; large voltage loss |
+| a-Si:H | 45–55 | Amorphous network |
+| Organic semiconductors | 25–50 | Energetic disorder |
 
-Cracks may run between grains (intergranular, typical of sensitized stainless steel, brass in ammonia, aluminium alloys) or through them (transgranular, typical of chloride SCC of austenitic stainless steel), often with heavy branching that distinguishes them from fatigue cracks in failure analysis.
+The Urbach energy is more than a spectroscopic curiosity. The tail states it describes trap carriers and act as recombination channels, and they set the minimum voltage loss of a solar absorber (Section 35.6). Kesterite solar cells have stalled near 13–15% efficiency largely because of their large $E_U$, while perovskites reached above 25% partly because theirs is small.
 
-### Fracture mechanics of SCC
+### Radiative recombination
 
-Linear-elastic fracture mechanics (Chapter 14) gives the engineering description. A pre-cracked specimen held at constant stress intensity $K$ in the environment shows cracking only above a threshold $K_{\rm ISCC}$, often far below the fracture toughness $K_{\rm Ic}$. Above the threshold the crack velocity has three stages (Figure 35.4): stage I, rising steeply with $K$; stage II, a plateau where velocity is independent of $K$ and is controlled by transport of the environment to the crack tip or by the electrochemical reaction there; and stage III, accelerating to fast fracture as $K$ approaches $K_{\rm Ic}$.
-
-<!-- FIGURE 35.4 | figures/ch35/fig-35-4-scc-velocity-k.png | plot | Stress-corrosion crack velocity versus stress intensity, with threshold, plateau and final fracture. | Content: x-axis K 0–35 MPa√m; y-axis da/dt 1e-12 to 1e-5 m/s (log). 7xxx aluminium in 3.5 % NaCl: 'T651' with K_ISCC = 7 MPa√m and plateau ~1e-8 m/s; 'T73' with K_ISCC = 25 MPa√m and plateau ~1e-10 m/s; both rising near K_Ic = 29 MPa√m. Label stages I, II, III; dashed verticals at K_ISCC. -->
-
-The threshold gives a design rule. For a surface crack of depth $a$ under stress $\sigma$, $K\approx1.12\,\sigma\sqrt{\pi a}$, and SCC cannot grow if
+The radiative recombination rate per unit volume is proportional to the product of electron and hole densities, since an electron must meet a hole:
 
 $$
-a<a_{\rm SCC}=\frac{1}{\pi}\left(\frac{K_{\rm ISCC}}{1.12\,\sigma}\right)^{2}
+R_{\rm rad}=B\,(np-n_i^2)
 $$
 
-For 7075-T651 aluminium loaded in the short-transverse direction, $K_{\rm ISCC}$ is about 7 MPa√m. Under a residual or assembly stress of 200 MPa, $a_{\rm SCC}=(1/\pi)(7/224)^2=3.1\times10^{-4}$ m, about 0.3 mm: any machining mark or corrosion pit is enough. In the over-aged T73 temper, $K_{\rm ISCC}$ rises to about 25 MPa√m and the tolerable flaw grows to about 4 mm, a size that inspection can find. That is why aircraft forgings were changed from T6 to T73 tempers after service cracking in the 1960s, accepting about 10–15 % lower strength.
+where $B$ (cm³/s) is the *radiative recombination coefficient*. The $n_i^2$ term ensures that in equilibrium emission balances absorption of the surrounding thermal radiation. Indeed $B$ is not independent of $\alpha$. Detailed balance (the van Roosbroeck–Shockley relation) fixes the spontaneous emission spectrum from the absorption spectrum, so a material that absorbs weakly near its gap also emits weakly. For a doped material under low injection ($p\approx N_A\gg n$), the radiative lifetime of minority electrons is
 
-> **Status of the principle: $K_{\rm ISCC}$ threshold**
-> *Empirical.* A threshold measured on pre-cracked specimens in one environment, temperature and potential; it assumes a long, sharp crack (it does not cover initiation from smooth surfaces or short cracks) and it can drift with test duration, so it is quoted with the test standard and time.
+$$
+\tau_{\rm rad}=\frac{1}{BN_A}
+$$
 
-### Mechanisms
+> **Status of the principle: Radiative rate $R=B(np-n_i^2)$**
+> *Derived.* It follows from detailed balance between absorption and emission (van Roosbroeck–Shockley) for non-degenerate carriers. It holds until carrier densities approach degeneracy (above about $10^{18}$–$10^{19}$ cm$^{-3}$ in direct-gap III–Vs), where phase-space filling makes the effective $B$ fall.
 
-No single mechanism explains all SCC. The two most widely supported are:
+**Table 35.3 — Radiative recombination coefficients (300 K, typical)**
 
-- **Slip–dissolution (film rupture)**: crack-tip strain ruptures the passive film, bare metal dissolves until the film reforms, and repeated cycles advance the crack at a rate set by the charge per rupture and the tip strain rate. It underlies crack-growth models for stainless steels and nickel alloys in reactor water.
-- **Hydrogen-assisted cracking**: hydrogen from the crack-tip cathodic reaction embrittles the metal ahead of the tip (Section 35.7); it dominates in high-strength steels, many aluminium alloys and titanium.
-
-### Controlling SCC
-
-Three necessary conditions give three routes: lower the tensile stress (stress relief, shot peening); change the environment (remove chlorides or oxygen, control potential, keep insulation dry); or change the material (duplex instead of austenitic steel in hot chloride, over-aged tempers, Alloy 690 instead of 600 in steam generators).
-
----
-
-## 35.7 Hydrogen embrittlement
-
-### Sources and transport of hydrogen
-
-Hydrogen dissolves interstitially in metals and diffuses rapidly even at room temperature. Atomic hydrogen enters steel from cathodic reactions (acid corrosion, excessive cathodic protection and above all H$_2$S, which poisons recombination to H$_2$ and drives far more atoms into the metal), from processing (pickling, electroplating, welding with damp consumables) and from gaseous hydrogen in vessels, pipelines and refinery hydrotreaters.
-
-Its lattice diffusivity in ferritic steel at room temperature is of order $10^{-9}$–$10^{-8}$ m$^2$/s, but dislocations, grain boundaries, carbide interfaces and voids act as **traps** that lower the effective diffusivity to $10^{-11}$–$10^{-10}$ m$^2$/s in commercial steels. With $D_{\rm eff}=10^{-10}$ m$^2$/s, hydrogen penetrates the 5 mm half-thickness of a 10 mm plate in a time of order $L^2/D=(5\times10^{-3})^2/10^{-10}=2.5\times10^5$ s, about three days. Hydrogen picked up during plating must therefore be baked out promptly (typically 190–220 °C for several hours, within a few hours of plating) before it diffuses to a stress concentration.
-
-### Embrittlement mechanisms and susceptibility
-
-Hydrogen concentrates where the lattice is dilated: in the hydrostatic tension zone ahead of a crack or notch. There it lowers the cohesive strength of the lattice and interfaces (**hydrogen-enhanced decohesion**, HEDE) and makes dislocations more mobile in a localized band (**hydrogen-enhanced localized plasticity**, HELP). The consequence is delayed fracture: a bolt that was tightened correctly breaks hours or days later, without warning, with an intergranular or quasi-cleavage fracture surface.
-
-Susceptibility rises steeply with strength. Ferritic steels below about 700–800 MPa tensile strength are rarely affected in ordinary service; above about 1000–1200 MPa (hardness above about 35–39 HRC) they are highly susceptible. Hence the hardness limits that govern hydrogen-exposed equipment:
-
-| Situation | Typical rule |
-|---|---|
-| Carbon and low-alloy steel in sour (H$_2$S) service | Hardness ≤ 22 HRC (about 250 HV), including weld heat-affected zones (NACE MR0175/ISO 15156) |
-| Electroplated high-strength fasteners | Bake after plating if hardness > about 32–39 HRC; avoid zinc plating above class 12.9 |
-| Cathodically protected high-strength steels in seawater | Potential not more negative than about −1.0 to −1.05 V vs Ag/AgCl |
-| Steel for gaseous hydrogen pipelines | Lower-strength grades, toughness and hardness limits, fatigue curves measured in hydrogen |
-
-> **Status of the principle: Hardness limits for hydrogen service**
-> *Empirical.* Derived from service experience and threshold tests on carbon and low-alloy steels; they encode the strong correlation between strength and hydrogen susceptibility but are not transferable to other alloy families or to different microstructures at equal hardness.
-
-### Hydrogen damage without applied stress
-
-In low-strength steels hydrogen recombines to H$_2$ at elongated MnS inclusions, and the gas pressure causes **blistering** and stepwise **hydrogen-induced cracking (HIC)** parallel to the plate surface; sour-service line pipe therefore has very low sulfur and calcium-treated, rounded inclusions. At refinery temperatures hydrogen reacts with carbides to form methane (**high-temperature hydrogen attack**), and Cr–Mo steels are chosen from empirical Nelson curves.
-
-The energy transition makes hydrogen embrittlement a central materials question again: repurposing natural-gas pipelines for hydrogen raises fatigue crack-growth rates in pipeline steels by an order of magnitude or more at a given $\Delta K$, so existing defects must be reassessed (Chapter 32).
-
----
-
-## 35.8 Corrosion fatigue
-
-Fatigue in an inert environment and corrosion without stress are each understood; their combination is worse than either. **Corrosion fatigue** is crack initiation and growth under cyclic stress in a corrosive environment. Corrosion pits act as notches for initiation; at the crack tip, the environment dissolves freshly slipped metal or supplies hydrogen, accelerating growth per cycle.
-
-Two features matter for design:
-
-- **No endurance limit.** A steel that has a fatigue limit in air (Chapter 14) loses it in seawater: the S–N curve continues to fall at long lives because corrosion keeps creating new initiation sites. The fatigue strength at $10^8$ cycles of a carbon steel in seawater can be a third or less of its in-air endurance limit.
-- **Frequency matters.** In air, fatigue life depends on cycles, not time. In an environment, a slower cycle gives more time for corrosion per cycle, so crack growth per cycle increases as frequency falls. High-frequency laboratory tests therefore overestimate the life of offshore structures loaded by waves at 0.1–0.3 Hz.
-
-Offshore design codes (for example DNV-RP-C203) give separate S–N curves for welded steel details in air, in seawater with cathodic protection, and in seawater under free corrosion; the free-corrosion curves have no cut-off and give lives about a factor of three shorter than those in air. Cathodic protection restores much of the in-air behaviour, though very negative potentials can accelerate crack growth by hydrogen charging. Corrosion fatigue also governs wire ropes, mooring chains, pump shafts and orthopaedic implants loaded about $10^6$ times a year in body fluid (Chapter 31).
-
----
-
-## 35.9 Microbial, selective, flow-induced and cavitation corrosion
-
-### Microbially influenced corrosion
-
-Bacteria and archaea do not corrode metal directly, but their **biofilms** change the local chemistry under them. **Microbially influenced corrosion (MIC)** involves:
-
-- **Sulfate-reducing bacteria** (SRB, such as *Desulfovibrio*), anaerobes that reduce sulfate to sulfide under deposits, producing iron sulfide and deep pits in carbon steel.
-- **Acid-producing bacteria**, generating organic acids under the biofilm.
-- **Iron- and manganese-oxidizing bacteria**, building tubercles (differential aeration) and depositing manganese oxides that ennoble stainless steels toward pitting.
-
-MIC is diagnosed from clustered, cup-shaped pits under deposits, iron sulfide in the deposit, microbial culture or DNA sequencing, and the operating history. Classic cases are hydrotest water left for weeks in new stainless piping, sprinkler systems, water-injection pipelines and tank bottoms; mitigation is biocides, pigging, draining and drying, and cathodic protection.
-
-### Selective leaching (dealloying)
-
-**Selective leaching** removes the more active element of an alloy, leaving a porous, weak residue of the nobler one with the original shape:
-
-- **Dezincification** of brasses with more than about 15 % Zn: zinc dissolves, leaving spongy red copper. Plug-type dezincification can perforate a fitting under water pressure. Small additions of arsenic, antimony or phosphorus inhibit it (admiralty and naval brasses, dezincification-resistant brass for plumbing).
-- **Graphitic corrosion** of grey cast iron: the iron matrix corrodes, leaving a graphite network held by corrosion products. A cast-iron water main can look sound and keep its shape while having almost no strength, failing when the ground moves or the pressure surges.
-- **Dealuminification** of aluminium bronzes and **denickelification** of copper–nickel in hot or polluted water.
-
-The same process is used deliberately to make nanoporous gold and other high-surface-area catalysts and electrodes (Chapter 30).
-
-### Erosion–corrosion and flow-accelerated corrosion
-
-Flow increases corrosion in two ways: it brings more oxygen to the surface, and above a critical velocity it strips or prevents the protective film. **Erosion–corrosion** shows smooth grooves, gullies and horseshoe-shaped pits oriented with the flow, typically at bends, tees, pump casings and the inlet ends of heat-exchanger tubes, where turbulence is greatest; entrained sand or bubbles make it worse.
-
-| Tube or pipe material in seawater | Typical maximum design velocity |
-|---|---|
-| Copper | about 1 m/s |
-| Admiralty brass, aluminium brass | 2–2.5 m/s |
-| 90/10 copper–nickel | 2.5–3.5 m/s |
-| 70/30 copper–nickel | 3–4.5 m/s |
-| Super duplex stainless, titanium | above 10 m/s (practically unlimited by erosion–corrosion) |
-
-**Flow-accelerated corrosion (FAC)** is the carbon-steel version in hot deoxygenated water and wet steam of power plants. The magnetite film dissolves into the fast-flowing water, the wall thins uniformly downstream of fittings, and the pipe eventually bursts. FAC ruptures killed workers at Surry, USA (1986) and Mihama, Japan (2004). Remedies are chromium-bearing steels (even 0.1 % Cr helps markedly; 1.25–2.25 % Cr steels are essentially immune), higher-pH water chemistry and ultrasonic wall-thickness programmes.
-
-### Cavitation damage
-
-Where the local pressure in a liquid falls below its vapour pressure (on the suction side of pump impellers, on propeller blades, in hydro-turbine runners, in diesel-engine cylinder liners vibrating in coolant), vapour bubbles form and then collapse when they move into higher-pressure regions. Collapse near a surface produces a micro-jet and shock wave with local pressures of hundreds of megapascals or more, repeated millions of times. The sponge-like damage combines surface fatigue with film removal. Resistance correlates with hardness and work-hardening capacity (Stellite overlays, nickel–aluminium bronze propellers, martensitic stainless turbine runners) or with impact absorption (elastomeric coatings); the first defence is hydraulic, keeping pressures above the vapour pressure.
-
----
-
-## 35.10 Protection by material selection, coatings and inhibitors
-
-### Material selection and design
-
-The cheapest corrosion protection is chosen at the drawing board. Corrosion handbooks contain thousands of material–environment ratings, but they condense into a short list of pairings that usually work:
-
-| Environment | Materials that usually work |
-|---|---|
-| Atmosphere (mild) | Painted or galvanized carbon steel, weathering steel, aluminium |
-| Seawater, ambient | Super duplex, 6Mo stainless, titanium, 90/10 or 70/30 Cu–Ni, coated steel with CP |
-| Dilute sulfuric acid | Lead, high-silicon cast iron, Alloy 20, carbon steel only for concentrated acid |
-| Hydrochloric acid | Ni–Mo alloys (Hastelloy B type), tantalum, polymers and FRP, rubber-lined steel |
-| Hot caustic | Nickel and nickel alloys |
-| Oxidizing acids (nitric) | Austenitic stainless steels, titanium |
-| Human body | Ti–6Al–4V and CP Ti, Co–Cr–Mo, 316LVM stainless (short-term), alumina and zirconia |
-| Reinforced concrete in chloride exposure | Adequate cover and low-permeability concrete; stainless or epoxy-coated rebar where severe |
-
-Polymers and fibre-reinforced plastics (Chapters 21 and 23), ceramics and glass linings replace metals entirely in many chemical services. Design rules are collected in Section 35.12.
-
-### Coatings
-
-Coatings protect in three ways:
-
-1. **Barrier**: organic paints and linings (epoxy, polyurethane, fluoropolymer) and glass or vitreous enamel separate metal from electrolyte. No organic coating is impermeable to water and oxygen; good systems work because of very low ionic permeability and excellent wet adhesion, and they are built in several coats (primer, intermediate and top coat, with total dry film thicknesses of 250–500 µm for marine steelwork) so that pores do not line up.
-2. **Sacrificial**: coatings of a more active metal (zinc, zinc–aluminium, aluminium) on steel corrode preferentially and protect the steel at scratches and cut edges by galvanic action. Zinc-rich primers carry zinc dust at high loading for the same effect.
-3. **Inhibitive**: primers containing inhibitive pigments (formerly chromates, now phosphates, molybdates and other alternatives) release inhibitor into water that penetrates.
-
-**Noble metallic coatings** (nickel, chromium, tin on steel) protect only while continuous; at a pore the substrate is a small anode in a bad area ratio. **Conversion coatings** (phosphate on steel, trivalent-chromium or zirconium treatments, anodized Al$_2$O$_3$ 5–25 µm thick on aluminium) add corrosion resistance and paint adhesion. Deposition processes are covered in Chapter 41.
-
-### Galvanizing
-
-In **hot-dip galvanizing** clean steel is dipped into molten zinc at about 450 °C. Zinc and iron react to form a sequence of Fe–Zn intermetallic layers (Γ, δ, ζ) capped by nearly pure zinc (η), metallurgically bonded to the steel. The coating protects first as a barrier, by the slow-corroding zinc and its basic zinc carbonate patina, and then sacrificially at damage. Because zinc corrodes at a known rate in each atmospheric category, coating life is estimated as thickness divided by rate. A typical minimum mean thickness on steel over 6 mm thick is 85 µm (ISO 1461); at the C3 zinc rate of 0.7–2.1 µm/year this lasts roughly 40–120 years before the first maintenance, and in a C5 marine environment (4.2–8.4 µm/year) about 10–20 years. Silicon in the steel accelerates the Fe–Zn reaction (the Sandelin effect) and gives thick, brittle coatings, so steels for galvanizing have controlled silicon. Continuously galvanized car-body sheet carries only about 7–20 µm per side, often as galvannealed Zn–Fe or Zn–Al–Mg.
-
-### Inhibitors
-
-An **inhibitor** is a substance added in small concentration to an environment to reduce corrosion. Classes follow from which branch of the Evans diagram (Chapter 34) they suppress:
-
-- **Anodic (passivating) inhibitors** such as chromate, nitrite and molybdate raise the anodic polarization and promote passivity. They are "dangerous" inhibitors: below a critical concentration they leave small unpassivated areas that pit faster than with no inhibitor at all.
-- **Cathodic inhibitors** such as zinc salts, polyphosphates and controlled calcium carbonate scaling precipitate films on cathodic sites; they are "safe" because underdosing merely gives less protection.
-- **Mixed and film-forming inhibitors**, typically organic amines, imidazolines and phosphate esters, adsorb on the whole surface (Chapter 37) and are the workhorses of oil and gas production, injected continuously into wells and pipelines.
-- **Oxygen scavengers** (sulfite and hydrazine substitutes) in boiler feedwater, and **vapour-phase inhibitors** in packaging for machined parts.
-
-Benzotriazole on copper, calcium nitrite admixture for rebar and inhibited engine antifreeze are everyday examples. The efficiency of an inhibitor is $(\mathrm{CR}_0-\mathrm{CR})/\mathrm{CR}_0$, usually measured by the polarization and impedance methods of Section 35.13.
-
----
-
-## 35.11 Cathodic protection
-
-### Principle and criteria
-
-If the potential of a metal is lowered toward its equilibrium potential, the anodic dissolution current falls exponentially (Tafel kinetics, Chapter 34). **Cathodic protection (CP)** supplies electrons to the structure from an external anode so that the whole surface becomes a cathode. The protective current must equal the cathodic current at the protected potential, which in aerated water is essentially the oxygen-limited current density on bare metal (Figure 35.5).
-
-<!-- FIGURE 35.5 | figures/ch35/fig-35-5-cathodic-protection.png | plot | Cathodic protection of steel: Evans diagram showing the shift from the free corrosion potential to the protection potential, and the two ways of supplying the current. | Content: left panel E–log|i| plot: current density 1e-3 to 10 A/m² (log), potential -1.2 to -0.4 V vs Ag/AgCl. Fe anodic Tafel line; O2-reduction cathodic curve with diffusion plateau i_L = 0.1 A/m², hydrogen evolution below about -1.05 V. Mark E_corr ≈ -0.65 V, protection potential -0.80 V, arrow 'applied current ≈ i_L', shaded zone below -1.05 V 'overprotection'. Right panel: small schematics of (a) sacrificial Al-Zn-In anodes on a monopile and (b) rectifier, anode bed and buried pipeline. -->
-
-Practical protection criteria are potentials measured against a reference electrode near the surface:
-
-| Structure and environment | Typical protection criterion |
-|---|---|
-| Carbon steel in seawater | −0.80 V vs Ag/AgCl/seawater or more negative |
-| Carbon steel in soil | −0.85 V vs Cu/CuSO$_4$ (IR-free, "instant-off") |
-| Steel with active sulfate-reducing bacteria | −0.95 V vs Cu/CuSO$_4$ |
-| Alternative criterion | at least 100 mV of cathodic polarization from the free corrosion potential |
-| Limit for high-strength steel, coated structures | not more negative than about −1.05 to −1.10 V vs Ag/AgCl (hydrogen embrittlement, coating disbondment) |
-| Steel in concrete | 100 mV depolarization criterion |
-
-> **Status of the principle: Protection potential criteria**
-> *Empirical.* The −0.85 V (Cu/CuSO$_4$) and −0.80 V (Ag/AgCl) values are close to the potentials at which the iron dissolution rate becomes negligible (roughly the iron equilibrium potential at low ferrous ion activity), but they were established by field experience; they apply to carbon steel and must be corrected for IR drop in the electrolyte and adjusted for temperature and bacteria.
-
-### Sacrificial (galvanic) anodes
-
-A sacrificial anode is a more active metal connected to the structure. It needs no power supply, cannot be connected the wrong way round and rarely overprotects, but its driving voltage is small (about 0.25 V for aluminium or zinc anodes on steel in seawater), so it suits low-resistivity electrolytes.
-
-| Anode alloy | Typical closed-circuit potential | Practical electrochemical capacity | Use |
+| Material | Gap type | $B$ (cm³/s) | $\tau_{\rm rad}$ at $10^{17}$ cm$^{-3}$ |
 |---|---|---|---|
-| Al–Zn–In | −1.05 V vs Ag/AgCl | about 2000–2500 Ah/kg | Offshore structures, ship hulls, seawater |
-| Zinc | −1.03 V vs Ag/AgCl | about 780 Ah/kg | Seawater, brackish water, ballast tanks |
-| Magnesium (high-potential) | −1.75 V vs Cu/CuSO$_4$ | about 1100–1200 Ah/kg | Soil and fresh water (high resistivity), water heaters |
+| Si | indirect | ≈ $5\times10^{-15}$ | ≈ 2 ms |
+| Ge | indirect | ≈ $6\times10^{-14}$ | ≈ 0.16 ms |
+| GaAs | direct | $(1\text{–}7)\times10^{-10}$ | 15–100 ns |
+| InP | direct | ≈ $1\times10^{-10}$ | ≈ 100 ns |
+| In$_{0.53}$Ga$_{0.47}$As | direct | ≈ $1\times10^{-10}$ | ≈ 100 ns |
+| GaN / InGaN | direct | ≈ $(0.5\text{–}2)\times10^{-11}$ | ≈ 0.5–2 µs |
 
-### Impressed-current cathodic protection
-
-**Impressed-current cathodic protection (ICCP)** uses a DC power supply (transformer–rectifier or solar) with its positive terminal on inert anodes: mixed-metal-oxide-coated titanium, high-silicon cast iron, graphite or platinized niobium. Its adjustable driving voltage of up to tens of volts protects kilometres of pipeline in resistive soil, ship hulls and the rebar of whole bridge decks. Its drawbacks are the need for power and monitoring and **stray-current interference**: current picked up by a neighbouring pipeline corrodes it where it leaves again (DC railways are notorious sources).
-
-### Sizing a cathodic protection system
-
-The design logic (codified in DNV-RP-B401 for offshore structures and ISO 15589 for pipelines) is: area to protect by zone → design current densities (high **initial** values to polarize bare steel and build calcareous deposits, lower **mean** values for the life, **final** values for repolarization), multiplied by a coating breakdown factor for coated steel → anode mass from the mean current → number and geometry of anodes so that their output, limited by anode-to-electrolyte resistance, meets the initial and final demands.
-
-**Worked example — sacrificial anodes for an offshore wind monopile.** The submerged and buried bare steel of a monopile foundation has area $A=1500$ m$^2$. Design current densities in this sea area are $i_{\rm initial}=0.15$ A/m$^2$ and $i_{\rm mean}=0.06$ A/m$^2$; the design life is 25 years. Anodes are Al–Zn–In, capacity $\varepsilon=2000$ Ah/kg, utilization factor $u=0.9$ (slender stand-off anodes), each 1.5 m long with an equivalent radius of 0.1 m, in seawater of resistivity $\rho=0.3$ Ω m.
-
-*Mean current and mass.* $I_{\rm mean}=1500\times0.06=90$ A. The net anode mass is
+The direct-gap III–Vs have $B$ about $10^4$–$10^5$ times larger than silicon. Light emission is decided by the *competition* between radiative recombination and the non-radiative paths of Chapter 32: Shockley–Read–Hall (SRH) recombination through defects, with rate $\approx n/\tau_{SRH}$, and Auger recombination, with rate $\approx Cn^3$. The *internal quantum efficiency* is the radiative fraction:
 
 $$
-M=\frac{I_{\rm mean}\,t_{\rm life}\times8760\ \mathrm{h/yr}}{u\,\varepsilon}=\frac{90\times25\times8760}{0.9\times2000}=1.10\times10^{4}\ \mathrm{kg}
+\eta_{\rm IQE}=\frac{R_{\rm rad}}{R_{\rm rad}+R_{\rm SRH}+R_{\rm Auger}}=\frac{1/\tau_{\rm rad}}{1/\tau_{\rm rad}+1/\tau_{\rm SRH}+1/\tau_{\rm Auger}}
 $$
 
-that is 11 tonnes, or 44 anodes of 250 kg.
-
-*Initial current.* The demand is $1500\times0.15=225$ A. The resistance of one slender anode (Dwight's formula) is
+**Worked example — Why silicon does not glow.** Take p-type Si with $N_A=10^{17}$ cm$^{-3}$ and a good SRH lifetime of 100 µs. Then $\tau_{\rm rad}=1/(4.7\times10^{-15}\times10^{17})=2.1$ ms. Ignoring Auger, the IQE is
 
 $$
-R_a=\frac{\rho}{2\pi L}\left[\ln\!\left(\frac{4L}{r}\right)-1\right]=\frac{0.3}{2\pi\times1.5}\left[\ln(60)-1\right]=0.0318\times3.09=0.098\ \Omega
+\eta_{\rm IQE}=\frac{1}{1+\tau_{\rm rad}/\tau_{\rm SRH}}=\frac{1}{1+21.3}=4.5\%
 $$
 
-With a driving voltage of $\Delta E=-0.80-(-1.05)=0.25$ V, each anode delivers $I_a=0.25/0.098=2.54$ A. Meeting 225 A needs $225/2.54=89$ anodes.
-
-So the current, not the mass, governs this design: 44 anodes would hold enough aluminium for 25 years but could not polarize the structure at the start. The designer either installs about 89 anodes, carrying far more mass than needed, or changes the geometry: longer, more slender anodes have lower resistance per kilogram and can satisfy both checks with less metal. The same calculation for a 0.5 m diameter coated pipeline 10 km long (area $\pi\times0.508\times10\,000=1.60\times10^4$ m$^2$), with 5 % mean coating breakdown and 20 mA/m$^2$ on bare steel in soil, gives a current of only $1.60\times10^4\times0.05\times0.02=16$ A, the reason a good coating plus a modest impressed-current system protects long pipelines economically.
-
-> **Status of the principle: Dwight's anode resistance formula**
-> *Approximate.* The resistance of a long thin cylinder in an infinite uniform electrolyte, valid for $L\gg r$ and for anodes far from each other and from the structure; closely spaced anodes interact and their combined resistance is higher than the parallel value.
+Of that light, most is then trapped by total internal reflection or reabsorbed. For GaAs at the same doping, with $B=2\times10^{-10}$ cm³/s, $\tau_{\rm rad}=1/(2\times10^{-10}\times10^{17})=50$ ns. Even with a modest SRH lifetime of 100 ns the IQE is $1/(1+0.5)=67\%$, and at $10^{18}$ cm$^{-3}$ ($\tau_{\rm rad}=5$ ns) it is $1/(1+0.05)=95\%$. Silicon *can* emit, and laboratory devices with exceptionally clean surfaces have reached about 1% external efficiency. But it must compete against defects for millisecond timescales, while GaAs only has to win over nanoseconds. That is why every commercial light source uses a direct-gap material.
 
 ---
 
-## 35.12 Anodic protection and design rules
+## 35.2 Photoconductive materials
 
-### Anodic protection
+### Photoconductivity
 
-For metals that passivate, there is a second electrochemical option: raise the potential into the passive range instead of lowering it. **Anodic protection** uses a potentiostat to hold the structure at a potential between the passivation potential and the transpassive or pitting potential (Chapter 34). Once the film has formed, the current needed is tiny, the passive current density, often below 1 µA/cm$^2$, so power consumption is low and the system protects even in very aggressive media.
+The simplest optoelectronic effect is that light raises conductivity. Absorbed photons create excess electrons and holes at a generation rate $G$ (pairs per cm³ per s). In steady state each carrier lives for a lifetime $\tau$, so the excess densities are $\Delta n=\Delta p=G\tau$ and
 
-It protects steel and stainless tanks, coolers and pipes in concentrated sulfuric and phosphoric acid and in pulp-mill caustic. It works only where the passive range is wide and stable, it cannot be used with chlorides (pitting at the raised potential), and a control failure that drops the metal into the active range causes rapid attack.
+$$
+\Delta\sigma=q(\mu_n\Delta n+\mu_p\Delta p)=qG\tau(\mu_n+\mu_p)
+$$
 
-| | Cathodic protection | Anodic protection |
-|---|---|---|
-| Applicable metals | All | Only active–passive metals |
-| Environment | Weak to moderate (soil, water, seawater, concrete) | Weak to very aggressive acids and alkalis |
-| Operating current | Moderate to high | Very low (passive current) |
-| Effect of failure | Corrosion returns slowly | Rapid active corrosion |
-| Risks | Hydrogen embrittlement, coating disbondment, stray currents | Pitting if chlorides present; loss of control |
+A *photoconductor* is just a slab of such a material between two ohmic contacts. Its response depends on the product $\mu\tau$, a key material figure of merit. It is the same product that appears in the diffusion length $L=\sqrt{D\tau}$ (Chapter 32).
 
-### Design rules for corrosion protection
+### Photoconductive gain
 
-The chapter's mechanisms condense into rules applied on drawings and specifications:
+The photoconductor has a property a simple photodiode lacks: *gain*. Suppose electron–hole pairs are generated between contacts a distance $L$ apart under bias $V$. An electron crosses the device in the *transit time*
 
-1. **Design for the worst environment**, including condensation, deposits, stagnant periods, cleaning chemicals, hydrotest water and shutdowns, not only the nominal one.
-2. **Design against a form of attack**, not just a rate: pitting and SCC need different materials from uniform corrosion.
-3. **Couple metals close in the galvanic series**, keep the anode large, and isolate.
-4. **Eliminate crevices and dead legs**; weld rather than bolt; seal unavoidable gaps.
-5. **Control stress and hardness** where SCC or hydrogen are possible.
-6. **Respect velocity limits** and design for smooth flow.
-7. **Combine coatings with CP** for buried and submerged steel: the coating carries most of the protection, CP covers the holidays.
-8. **Design for inspection**: CP test points, coupons and probes, wall-thickness monitoring locations.
+$$
+t_{tr}=\frac{L}{\mu_nE}=\frac{L^2}{\mu_nV}
+$$
+
+If the hole is trapped (immobile) or simply slower, the electron leaves at the anode before recombining. Charge neutrality then requires another electron to enter from the cathode. The electron *recirculates* until the trapped hole recombines, after a time $\tau$. Each absorbed photon therefore sends $\tau/t_{tr}$ electrons around the circuit:
+
+$$
+G_{\rm pc}=\frac{\tau}{t_{tr}}=\frac{\tau\mu_nV}{L^2}
+$$
+
+> **Status of the principle: Photoconductive gain $G=\tau/t_{tr}$**
+> *Derived.* It follows from charge continuity with ohmic (injecting) contacts and a uniform field. It assumes the lifetime is not limited by sweep-out and the contacts can supply carriers freely. At high field, space-charge-limited current and carrier sweep-out cap the gain.
+
+The price of gain is speed. The photocurrent rises and decays with time constant $\tau$, so the bandwidth is roughly $f_{3\,dB}\approx1/(2\pi\tau)$. The gain–bandwidth product, about $1/(2\pi t_{tr})$, is fixed by geometry and mobility, not by $\tau$. Lengthening the lifetime with traps buys gain and loses speed in equal measure.
+
+**Worked example — A CdS light sensor.** A CdS photoresistor has electrode spacing $L=1$ mm, bias $V=10$ V, electron mobility 300 cm²/V s, and a trap-extended lifetime $\tau=1$ ms. The transit time is
+
+$$
+t_{tr}=\frac{(0.1\ \mathrm{cm})^2}{300\ \mathrm{cm^2/V\,s}\times10\ \mathrm{V}}=3.3\ \mathrm{\mu s}
+$$
+
+so the gain is $G=10^{-3}/3.3\times10^{-6}=300$ electrons per absorbed photon. The bandwidth is $1/(2\pi\times10^{-3})=160$ Hz, and the gain–bandwidth product is about 48 kHz. That is ideal for a street-light switch or a camera exposure meter and useless for data communication. Interdigitated electrodes, which shorten $L$ while keeping the illuminated area large, are the standard materials-and-geometry route to higher gain.
+
+### Photoconductive materials in use
+
+Gain in practical photoconductors usually comes from *sensitizing* centres. Deliberately added acceptor-like traps (Cu or Cl in CdS) capture holes and hold them for milliseconds, which slows recombination and lets electrons recirculate. This is defect engineering for a purpose, the reverse of the usual aim of removing traps. Table 35.4 lists the main materials.
+
+**Table 35.4 — Photoconductive materials (typical)**
+
+| Material | $E_g$ (eV) | Spectral range | Form | Use |
+|---|---|---|---|---|
+| CdS | 2.42 | 400–700 nm | Sintered or evaporated polycrystalline film | Light-dependent resistors (now restricted by RoHS) |
+| CdSe | 1.74 | 500–750 nm | Polycrystalline | Light sensors |
+| a-Se | ≈2.1 | X-ray, blue | Thick amorphous film (200–1000 µm) | Direct-conversion X-ray flat panels, mammography |
+| PbS | 0.37 | 1–3 µm | Chemically deposited polycrystalline | Uncooled SWIR detectors, flame sensors |
+| PbSe | 0.27 | 1.5–5 µm | Polycrystalline | MWIR gas analysers |
+| HgCdTe | 0.1–0.3 | 3–14 µm | Epitaxial | Cooled IR photoconductors (older systems) |
+| Si:As, Ge:Cu (extrinsic) | impurity levels ≈ 0.05 (Si:As), 0.04 (Ge:Cu) eV | 10–30 µm | Doped crystal at 4–30 K | Astronomy |
+
+In PbS, PbSe and amorphous selenium the grain boundaries and band tails of Chapter 34 and Section 35.1 are part of the mechanism. PbS films must be oxidized (sensitized) to form the hole-trapping boundary layers that give useful gain. Amorphous selenium is valued for X-ray imaging because it can be deposited uniformly over 40 × 40 cm, has a high X-ray stopping power, and under a high field ($\approx10$ V/µm) collects charge with negligible lateral spread, giving very sharp images.
 
 ---
 
-## 35.13 Corrosion testing
+## 35.3 Luminescent materials
 
-### Exposure and accelerated tests
+### Kinds of luminescence
 
-**Field and immersion tests** measure mass loss and pit depth on weighed coupons (ASTM G1, G31): slow but faithful. Specialized tests probe particular forms: U-bend, C-ring and slow-strain-rate tests for SCC, pre-cracked specimens for $K_{\rm ISCC}$, ferric chloride at rising temperature for CPT, NACE TM0177 and TM0284 for sour-service cracking and HIC.
+*Luminescence* is light emitted by a material after it absorbs energy, in excess of its thermal radiation. It is classified by the source of excitation:
 
-The **neutral salt-spray test** (ASTM B117, ISO 9227) exposes panels continuously to a 5 % NaCl fog at 35 °C. It is reproducible and simple but correlates poorly with service: no wet–dry cycles, no ultraviolet, no pollutants, and zinc corrodes unrealistically fast in permanent wetness. **Cyclic corrosion tests** (alternating salt, humidity and drying, as in SAE J2334 and ISO 16701) rank coatings much more like outdoor exposure and are now the automotive norm.
+- **Photoluminescence**: excitation by light (phosphors in white LEDs, fluorescent lamps).
+- **Electroluminescence**: excitation by current (LEDs, Section 35.4; thin-film EL displays).
+- **Cathodoluminescence**: excitation by electrons (CRTs historically; electron-microscope analysis, Chapter 52).
+- **Radioluminescence or scintillation**: excitation by X- or γ-rays (medical imaging, radiation detection).
 
-> **Status of the principle: Accelerated salt-spray ranking**
-> *Empirical.* A standardized exposure useful for quality control of a given coating process; acceleration factors relative to service are not constant across materials or environments, so it should not be used to predict life or to compare unlike coating systems.
+It is also classified by decay time. *Fluorescence* comes from spin-allowed transitions and decays in nanoseconds to microseconds. *Phosphorescence* comes from spin- or parity-forbidden transitions, or from slow trap release, and lasts milliseconds to hours.
 
-### Polarization methods
+### Phosphors: host plus activator
 
-The electrochemical methods of Chapter 34 turn into routine measurements:
+Most practical phosphors are insulating crystalline *hosts* (oxides, nitrides, fluorides, sulfides) doped at 0.1–5% with an *activator* ion that does the emitting. The host's job is to hold the activator in a well-defined, rigid site, to be transparent to the emitted light, to conduct away heat, and to resist chemical attack. The activator's electron configuration decides the character of the emission.
 
-- **Potentiodynamic polarization**: the potential is swept and current recorded. Tafel extrapolation of both branches to the corrosion potential gives $i_{\rm corr}$; the anodic branch of a passive metal shows the passive current density, $E_{\rm pit}$, and on reversal (cyclic polarization) the repassivation potential and the hysteresis that measures susceptibility to localized attack.
-- **Linear polarization resistance (LPR)**: a small sweep of ±10–20 mV around $E_{\rm corr}$ gives a straight line whose slope is the **polarization resistance** $R_p=\Delta E/\Delta i$. Linearizing the Butler–Volmer equation near $E_{\rm corr}$ gives the Stern–Geary relation:
+- **4f→4f transitions in trivalent rare earths** (Eu$^{3+}$, Tb$^{3+}$). The 4f electrons are shielded by filled 5s and 5p shells, so the host barely affects them. Emission occurs in sharp lines at nearly fixed wavelengths (Eu$^{3+}$: 611 nm red; Tb$^{3+}$: 545 nm green). These transitions are parity-forbidden, so decay times are milliseconds.
+- **5d→4f transitions in Ce$^{3+}$ and Eu$^{2+}$.** The 5d orbital extends out to the neighbouring ions, so its energy depends strongly on the host's *crystal field* and covalency (the nephelauxetic effect). The emission is broad (50–120 nm wide), allowed (decay of tens of ns to about 1 µs), and *tunable by choice of host*. Ce$^{3+}$ emits in the UV in fluorides, blue in some oxides, and yellow in YAG. This tunability is why Ce$^{3+}$ and Eu$^{2+}$ phosphors dominate white LEDs.
+- **3d transition-metal ions** (Mn$^{2+}$, Mn$^{4+}$, Cr$^{3+}$). Their emission depends on the crystal field. Mn$^{4+}$ in fluorides gives narrow red lines near 630 nm.
+- **Donor–acceptor pair** emission in semiconductors such as ZnS:Ag,Cl and ZnS:Cu,Al, the historic CRT phosphors.
 
-$$
-i_{\rm corr}=\frac{B}{R_p},\qquad B=\frac{\beta_a\beta_c}{2.303\,(\beta_a+\beta_c)}
-$$
+### Stokes shift and the configuration-coordinate picture
 
-where $\beta_a$ and $\beta_c$ are the Tafel slopes in V/decade. LPR is fast and non-destructive, so it is used in field corrosion probes in cooling-water, oil and chemical systems.
+The emitted photon always has less energy than the absorbed one. When the activator is excited, its electron distribution changes, so the equilibrium positions of the neighbouring ions shift. The excited ion relaxes to a new geometry by emitting phonons before it emits light, and after emission the ground state relaxes again. The energy difference between absorption and emission peaks is the *Stokes shift*. It is larger when the coupling between electron and lattice is stronger: small for 4f→4f, larger for 5d→4f.
 
-> **Status of the principle: Stern–Geary relation**
-> *Derived.* Follows from linearizing mixed-potential Butler–Volmer kinetics for small overpotentials, assuming both partial reactions are activation-controlled and the Tafel slopes are known; it fails for diffusion-limited cathodes (where $\beta_c\to\infty$ and $B=\beta_a/2.303$), for localized corrosion, and in high-resistivity media without IR correction.
+The Stokes shift is an unavoidable energy loss. A white LED that converts a 450 nm blue photon to a 555 nm yellow one keeps only $450/555=81\%$ of the photon energy, even at 100% quantum yield. The 19% balance appears as heat in the phosphor layer.
 
-### Electrochemical impedance spectroscopy
+### Quantum yield and thermal quenching
 
-**Electrochemical impedance spectroscopy (EIS)** applies a small sinusoidal potential (about 10 mV) over a range of frequencies, typically 100 kHz to 10 mHz, and measures the complex impedance $Z(\omega)$. The simplest model of a corroding electrode is the **Randles circuit**: the solution resistance $R_s$ in series with a parallel combination of the charge-transfer resistance $R_{ct}$ and the double-layer capacitance $C_{dl}$:
-
-$$
-Z(\omega)=R_s+\frac{R_{ct}}{1+j\omega R_{ct}C_{dl}}
-$$
-
-On a **Nyquist plot** ($-\mathrm{Im}\,Z$ against $\mathrm{Re}\,Z$) this traces a semicircle from $R_s$ at high frequency to $R_s+R_{ct}$ at low frequency, with its top at $\omega=1/(R_{ct}C_{dl})$ (Figure 35.6). The diameter $R_{ct}$ plays the role of $R_p$ in the Stern–Geary relation. Real electrodes give depressed semicircles, modelled with constant-phase elements, and extra arcs or diffusion (Warburg) tails. For coated metals, EIS is the main laboratory tool: the high-frequency capacitance of the coating rises as it absorbs water, and its pore resistance falls as ionic paths open, giving early warning long before rust is visible.
-
-<!-- FIGURE 35.6 | figures/ch35/fig-35-6-eis-randles.png | plot | Electrochemical impedance of a corroding electrode modelled by a Randles circuit: Nyquist and Bode plots. | Content: left: Nyquist plot, Re Z 0–2200 and −Im Z 0–1100 Ω cm² (equal aspect); semicircle from R_s = 10 to 2010 Ω cm² for C_dl = 50 µF/cm², apex marked 'f = 1.6 Hz'; dashed depressed semicircle (CPE exponent 0.85); inset circuit R_s – (R_ct ∥ C_dl). Right: Bode plot 10 mHz–100 kHz, |Z| (log) and phase angle with peak near 1–2 Hz. -->
-
-**Worked example — corrosion rate of a cooling-water pipe from LPR and EIS.** A probe in a recirculating cooling-water system gives a polarization resistance $R_p=2000$ Ω cm$^2$ on carbon steel. Tafel slopes measured on a laboratory sample are $\beta_a=\beta_c=0.12$ V/decade.
+The *quantum yield* (QY) is the number of photons emitted per photon absorbed. The best LED phosphors reach QY above 90% at room temperature. The yield falls at high temperature because the excited state can cross over to the ground state non-radiatively, through the crossing point of the two configuration-coordinate parabolas, or by thermal ionization of the 5d electron into the host conduction band. A common description is
 
 $$
-B=\frac{0.12\times0.12}{2.303\times(0.12+0.12)}=\frac{0.0144}{0.5527}=0.0261\ \mathrm V
+\frac{I(T)}{I(0)}=\frac{1}{1+C\exp(-\Delta E/kT)}
 $$
 
+with $\Delta E$ an activation energy for quenching.
+
+> **Status of the principle: Single-barrier thermal quenching**
+> *Approximate.* It assumes one thermally activated non-radiative channel with a single barrier $\Delta E$. It fits many phosphors over a limited temperature range. Multiple channels and distributions of activator sites give broader quenching curves.
+
+Thermal quenching is a design constraint, because phosphors in high-power LEDs run at 100–200 °C. YAG:Ce keeps about 90% of its room-temperature output at 150 °C. Substituting Gd for Y red-shifts the emission for warmer white light but lowers the quenching temperature. That is a typical colour-against-stability trade-off resolved by host chemistry.
+
+**Table 35.5 — Representative luminescent materials (typical values)**
+
+| Phosphor / scintillator | Transition | Excitation | Emission peak | Decay | Application |
+|---|---|---|---|---|---|
+| Y$_3$Al$_5$O$_{12}$:Ce$^{3+}$ (YAG:Ce) | 5d→4f | 440–470 nm | 550–560 nm, broad | ≈ 60–70 ns | White LEDs (with blue InGaN) |
+| CaAlSiN$_3$:Eu$^{2+}$ | 5d→4f | UV–blue | ≈ 650 nm, broad | ≈ 1 µs | Warm-white and high-CRI LEDs |
+| β-SiAlON:Eu$^{2+}$ | 5d→4f | UV–blue | ≈ 535 nm, FWHM ≈ 55 nm | ≈ 1 µs | LCD backlight green |
+| K$_2$SiF$_6$:Mn$^{4+}$ (KSF) | 3d (spin-forbidden) | blue | 631 nm, lines < 10 nm wide | ≈ 8–10 ms | Wide-gamut display red |
+| Y$_2$O$_3$:Eu$^{3+}$ | 4f→4f | 254 nm | 611 nm | ≈ 1–2 ms | Fluorescent lamps |
+| ZnS:Ag,Cl | D–A pair | electrons, UV | 450 nm | µs | CRTs (historic), EL |
+| Gd$_2$O$_2$S:Tb$^{3+}$ | 4f→4f | X-ray | 545 nm | ≈ 1 ms | X-ray intensifying screens |
+| CsI:Tl | Tl$^+$ centre | X/γ-ray | ≈ 550 nm | ≈ 1 µs; ≈ 54,000 photons/MeV | Indirect X-ray flat panels |
+| Lu$_{2(1-x)}$Y$_{2x}$SiO$_5$:Ce (LYSO) | 5d→4f | γ-ray | ≈ 420 nm | ≈ 40 ns; ≈ 30,000 photons/MeV | PET scanners |
+
+Two further families are worth noting. *Quantum-dot* emitters (CdSe, InP, perovskite nanocrystals) set their colour by size rather than by activator. They give very narrow emission (FWHM 20–40 nm) and are treated in Chapter 38. *Persistent* phosphors such as SrAl$_2$O$_4$:Eu$^{2+}$,Dy$^{3+}$ store charge in deep traps and release it for hours, the materials basis of glow-in-the-dark exit signs.
+
+---
+
+## 35.4 LED and laser semiconductor materials
+
+### What an emitter material must provide
+
+From Section 35.1, a material for efficient electroluminescence needs:
+
+1. a **direct band gap** of the right energy, $E_g\approx hc/\lambda$;
+2. **low non-radiative recombination**: few deep-level defects and low Auger rate at the operating carrier density;
+3. a **heterostructure partner** that is lattice-matched (or strain-managed, Chapter 34) and gives type-I confinement of both carriers;
+4. **dopability** both n- and p-type, so that a junction can inject carriers;
+5. for lasers, a **lower-index cladding** to confine the light, and optical gain at a reachable carrier density.
+
+These requirements are met by the III–V and III–N alloy families, in three main systems that together cover the ultraviolet to the mid-infrared.
+
+### Alloys, Vegard's law and bowing
+
+The emission wavelength is tuned by alloying. For a ternary alloy A$_x$B$_{1-x}$C, the lattice constant follows Vegard's law (linear interpolation), while the band gap bows below the linear interpolation:
+
 $$
-i_{\rm corr}=\frac{B}{R_p}=\frac{0.0261}{2000}=1.30\times10^{-5}\ \mathrm{A\,cm^{-2}}=13\ \mu\mathrm{A\,cm^{-2}}
+a(x)=xa_{AC}+(1-x)a_{BC},\qquad E_g(x)=xE_{g,AC}+(1-x)E_{g,BC}-b\,x(1-x)
 $$
 
-With 11.6 µm/year per µA/cm$^2$, the uniform rate is about 0.15 mm/year, too high for a cooling system designed for perhaps 0.05 mm/year, so the inhibitor dose is reviewed. An EIS check on the same probe, with $R_s=10$ Ω cm$^2$, $R_{ct}\approx2000$ Ω cm$^2$ and $C_{dl}=50$ µF/cm$^2$, should show a semicircle 2000 Ω cm$^2$ wide with its apex at $f=1/(2\pi\times2000\times50\times10^{-6})=1.6$ Hz; an LPR sweep must be slow compared with this to measure $R_p$ rather than capacitive charging. If the oxygen-reduction cathode were diffusion-limited, $B$ would become $\beta_a/2.303=0.052$ V and the corrosion rate estimate would double: the Tafel slopes are the largest uncertainty in the method.
+The bowing parameter $b$ comes from the different sizes and electronegativities of the mixed atoms. It is 1.4 eV for InGaN, about 1 eV for AlGaN, and 0.48 eV for InGaAs. Quaternary alloys (In$_{1-x}$Ga$_x$As$_y$P$_{1-y}$, (Al$_x$Ga$_{1-x}$)$_{0.5}$In$_{0.5}$P) have two composition variables, so the band gap can be tuned while the lattice constant stays matched to a substrate. Figure 35.2 is the map engineers use to plan such alloys.
 
-> **Boundary.** The derivation of Butler–Volmer kinetics and of the double-layer structure belongs to the Advanced Chemistry book; this section uses only their results. Corrosion monitoring in electronics (mixed-flowing-gas tests, copper and silver coupons, ISA-71.04 severity classes) is covered in the Materials Core book, Ch 24.
+> **Status of the principle: Vegard's law and quadratic band-gap bowing**
+> *Empirical.* Vegard's law holds for most III–V alloys to within about 0.1% in lattice constant. The quadratic bowing form fits band gaps with a composition-independent $b$ for most alloys, but $b$ itself depends on composition in highly mismatched alloys (InGaN at high In, GaAsN). Both describe random alloys and fail where atoms cluster or order.
+
+<!-- FIGURE 35.2 | figures/ch35/fig-35-2-bandgap-lattice-map.png | map | Band gap versus lattice constant for the principal semiconductors, with the visible spectrum and alloy lines. | Content: x-axis lattice constant 5.4–6.5 Å for cubic materials, with a separate left inset for wurtzite nitrides (a = 3.1–3.6 Å). y-axis band gap 0–6.2 eV with right axis wavelength. Points: Si, Ge, GaP, GaAs, AlAs, InP, InAs, GaSb, AlSb, InSb, CdTe, ZnSe; nitride inset: AlN (3.11, 6.1), GaN (3.19, 3.42), InN (3.54, 0.65). Solid lines for direct-gap alloys, dashed for indirect. Coloured horizontal band for visible light 1.65–3.1 eV. Vertical dashed lines at GaAs and InP lattice constants labelled "AlGaAs, AlGaInP on GaAs" and "InGaAsP, InGaAs, InAlAs on InP". Annotate: InGaN blue (450 nm) and green (530 nm), AlGaInP red/amber, InGaAsP 1.3/1.55 µm, HgCdTe line from CdTe to HgTe (negative gap). -->
+
+![Figure 35.2 — Band gap versus lattice constant for the principal semiconductors, with the visible spectrum and alloy lines](../figures/ch35/fig-35-2-bandgap-lattice-map.png)
+
+*Figure 35.2 — Band gap versus lattice constant for the principal semiconductors, with the visible spectrum and alloy lines.*
+
+### The three emitter systems
+
+**InGaN on GaN (violet, blue, green).** In$_x$Ga$_{1-x}$N spans from 3.42 eV (GaN) toward 0.65 eV (InN). With $b=1.43$ eV, $x=0.15$ gives $E_g=2.82$ eV (440 nm) and $x=0.3$ gives 2.29 eV (542 nm). In real quantum wells the polarization fields and strain shift the emission by a further 0.1–0.2 eV, so blue (450 nm) LEDs use about 15–18% In and green (530 nm) about 25–30%. The active layers are 2–3 nm quantum wells grown on GaN on sapphire, SiC or Si.
+
+The puzzle of why InGaN emits efficiently despite $10^8$–$10^9$ cm$^{-2}$ threading dislocations is resolved by *carrier localization*. Indium composition fluctuates on the nanometre scale, and the quantum-well width fluctuates by about a monolayer. Together these create potential minima, about 10–50 meV deep, that trap carriers within a few nanometres of where they are created. Since dislocations are typically 0.3–1 µm apart, most carriers recombine radiatively before they can diffuse to one. In addition, hexagonal "V-pits" that open around dislocations form thinner, wider-gap sidewall wells, which repel carriers from the dislocation core. Both mechanisms are properties of the material's nanostructure, not of the device design.
+
+**AlGaInP on GaAs (red, orange, amber, yellow).** (Al$_x$Ga$_{1-x}$)$_{0.5}$In$_{0.5}$P is lattice-matched to GaAs for all $x$. Its direct gap runs from 1.9 eV ($x=0$, about 650 nm) to the direct–indirect crossover near $x\approx0.53$, at about 2.3 eV (about 540 nm). Red (620–630 nm) devices are very efficient. Toward amber and yellow the efficiency collapses, because the active layer approaches the indirect crossover, where electrons spill into the X valleys and recombine non-radiatively. At the same time the conduction-band offset to the highest-Al cladding shrinks, so electrons leak out of the wells. High-brightness AlGaInP LEDs also needed a materials trick for extraction: the light-absorbing GaAs substrate is removed and the epitaxial layer is wafer-bonded to a transparent GaP or a reflective metal carrier.
+
+**InGaAsP and InGaAs on InP (1.3–1.65 µm).** In$_{1-x}$Ga$_x$As$_y$P$_{1-y}$ is lattice-matched to InP when $y\approx2.2x$. Its gap then runs from 1.35 eV (InP) to 0.75 eV (In$_{0.53}$Ga$_{0.47}$As), covering the two silica-fibre windows at 1310 and 1550 nm (Section 35.7). This is why every long-haul telecom laser is an InP-based device. GaAs/AlGaAs (780–870 nm) and strained InGaAs/GaAs (900–1100 nm) cover the near-infrared for short-reach links, VCSELs, 3D sensing and pump lasers. AlGaN reaches the deep UV (210–360 nm). UV-C emitters for disinfection are held to external efficiencies of a few percent to about 10% by poor p-type conductivity (the Mg acceptor in AlGaN is 0.2–0.6 eV deep) and by high dislocation densities.
+
+**Table 35.6 — LED and laser material systems (typical)**
+
+| Active material | Substrate | Wavelength range | Typical best external efficiency (LED) | Main limitations |
+|---|---|---|---|---|
+| Al$_x$Ga$_{1-x}$N | AlN, sapphire | 210–360 nm | 2–10% (UV-C) | p-doping, dislocations, light extraction |
+| In$_x$Ga$_{1-x}$N | sapphire, SiC, Si, GaN | 380–530 nm | 70–85% blue; 30–45% green | Droop, green gap |
+| (Al$_x$Ga$_{1-x}$)$_{0.5}$In$_{0.5}$P | GaAs (removed) | 560–650 nm | 50–60% red; < 20% yellow-amber | Indirect crossover, electron leakage, thermal drop |
+| Al$_x$Ga$_{1-x}$As / GaAs | GaAs | 650–870 nm | 40–60% | AlGaAs oxidation |
+| In$_x$Ga$_{1-x}$As (strained) / GaAs | GaAs | 900–1100 nm | lasers | Critical thickness (Chapter 34) |
+| In$_{1-x}$Ga$_x$As$_y$P$_{1-y}$ / InP | InP | 1100–1650 nm | lasers | Auger, temperature sensitivity |
+
+### Efficiency droop as a materials problem
+
+InGaN LEDs reach their peak internal efficiency at current densities of only a few A/cm². At the 35–100 A/cm² where high-power LEDs operate, efficiency falls by 20–40%. This *droop* limits how much light a given chip area can produce. It is understood today mainly as Auger recombination, plus carrier leakage and inhomogeneous injection, enhanced by features of the nitride material.
+
+The *ABC model* expresses the competition with three coefficients. Writing $n$ for the carrier density in the active layer (assumed $n=p$):
+
+$$
+\eta_{\rm IQE}(n)=\frac{Bn^2}{An+Bn^2+Cn^3},\qquad J=qd\,(An+Bn^2+Cn^3)
+$$
+
+Here $A$ is the SRH coefficient (s$^{-1}$), $B$ the radiative coefficient, $C$ the Auger coefficient (cm$^6$/s), and $d$ the total active thickness. The IQE peaks where $An=Cn^3$, at $n^*=\sqrt{A/C}$.
+
+> **Status of the principle: ABC recombination model**
+> *Approximate.* It assumes uniform carrier density in the active region, $n=p$, Boltzmann statistics and density-independent coefficients. In reality $B$ and $C$ fall at high density (phase-space filling), carriers are unevenly distributed among quantum wells, and leakage over the barriers is omitted. Fitted coefficients are therefore effective values for a given structure, but the model captures the shape of droop well.
+
+**Worked example — Droop in an InGaN quantum-well LED.** Take $A=10^7$ s$^{-1}$, $B=10^{-11}$ cm³/s, $C=10^{-30}$ cm$^6$/s and an active thickness $d=3$ nm. The peak is at $n^*=\sqrt{10^7/10^{-30}}=3.16\times10^{18}$ cm$^{-3}$. There $An=Cn^3=3.16\times10^{25}$ cm$^{-3}$s$^{-1}$ and $Bn^2=1.0\times10^{26}$ cm$^{-3}$s$^{-1}$, so
+
+$$
+\eta_{\rm IQE}^{\max}=\frac{1.0\times10^{26}}{3.16\times10^{25}+1.0\times10^{26}+3.16\times10^{25}}=61\%
+$$
+
+at $J=1.602\times10^{-19}\times3\times10^{-7}\ \mathrm{cm}\times1.63\times10^{26}=7.8$ A/cm². At $n=10^{19}$ cm$^{-3}$ the three rates are $10^{26}$, $10^{27}$ and $10^{27}$, so $\eta_{\rm IQE}=10^{27}/2.1\times10^{27}=48\%$ at $J=101$ A/cm². Raising the current density thirteenfold costs 21% of the relative efficiency. At $n=3\times10^{19}$ ($J\approx1.7$ kA/cm², laser-like densities) IQE falls to 25%.
+
+The materials levers follow directly from the formula. Since droop sets in once $Cn^3$ rivals $Bn^2$, anything that lowers $n$ at a given current helps: thicker or more numerous quantum wells, and better hole transport so that carriers spread over all the wells. The nitride's polarization fields work against this. They tilt the quantum wells, separating electrons and holes (the quantum-confined Stark effect), which lowers the effective $B$ and so raises $n$ at a given current. Growth on *non-polar* or *semi-polar* GaN planes removes or reduces the fields, at the cost of more expensive substrates.
+
+### The green gap
+
+The peak external efficiency of LEDs plotted against wavelength shows a deep valley between about 530 and 590 nm, the *green gap*, illustrated in Figure 35.3. Both material systems fail there, for different reasons.
+
+- **InGaN approaching green** needs 25–30% indium. Indium-rich InGaN must be grown at lower temperature (In–N bonds are weak and In desorbs), which raises point-defect densities. The lattice mismatch to GaN rises to about 3%, increasing strain and approaching the critical thickness of Chapter 34. The piezoelectric field grows with strain, which strengthens the Stark separation. Composition fluctuations become clustering. Each of these either adds non-radiative recombination or lowers the radiative rate.
+- **AlGaInP approaching yellow** reaches its direct–indirect crossover, as above.
+
+The green gap is therefore a materials limit, not a device-design limit. Its practical consequences are that white light is made from blue LEDs with phosphors rather than from red, green and blue chips, and that micro-LED displays struggle with the efficiency of their green and red pixels. Phosphor-converted green, InGaN red on relaxed InGaN templates, and nitride quantum dots are the active research routes.
+
+<!-- FIGURE 35.3 | figures/ch35/fig-35-3-droop-and-green-gap.png | plot | Efficiency droop and the green gap. | Content: Left panel — internal quantum efficiency (0–70%) vs current density (0.1–1000 A/cm², log x) from the ABC model with A = 1e7 s−1, B = 1e−11 cm3/s, C = 1e−30 cm6/s, d = 3 nm: rising to a peak of 61% at ≈8 A/cm², 48% at 100 A/cm², 25% at ≈1.7 kA/cm²; dashed curves for C = 0 (no droop) and for d = 9 nm (droop pushed to higher J). Right panel — peak external quantum efficiency (0–90%, log or linear y) vs emission wavelength 380–660 nm: InGaN curve from ≈80% at 450 nm falling to ≈35% at 530 nm and <10% at 580 nm; AlGaInP curve from ≈55% at 625 nm falling to ≈15% at 590 nm and a few % at 570 nm; shaded "green gap" between 530 and 590 nm; human eye sensitivity V(λ) curve dotted, peaking at 555 nm inside the gap. -->
+
+![Figure 35.3 — Efficiency droop and the green gap](../figures/ch35/fig-35-3-droop-and-green-gap.png)
+
+*Figure 35.3 — Efficiency droop and the green gap.*
+
+### Laser materials beyond the gain medium
+
+A semiconductor laser needs the same active materials plus three further material properties.
+
+- **Transparency and gain.** Optical gain requires population inversion, which happens once the carrier density exceeds the *transparency density*, about $1\text{–}2\times10^{18}$ cm$^{-3}$ in GaAs and InGaAsP wells. Compressively strained quantum wells (Chapter 34) lower the in-plane hole effective mass, which reduces the transparency density and the threshold. That is the main reason strained-layer lasers replaced lattice-matched ones in the 1990s.
+- **Index contrast for optical confinement.** The cladding must have a lower refractive index than the active region. Conveniently, wider-gap alloys usually have lower indices: at 850 nm GaAs has $n\approx3.6$ and AlAs $n\approx3.0$. In vertical-cavity lasers (VCSELs), the mirrors are *distributed Bragg reflectors* made of quarter-wave stacks of alternating high- and low-index layers. GaAs/AlAs gives enough contrast that 20–35 pairs exceed 99.5% reflectivity. GaN/AlN gives much less contrast and is badly mismatched, which is one reason blue VCSELs use dielectric (SiO$_2$/Ta$_2$O$_5$) mirrors.
+- **Oxidation-defined apertures.** Al$_{0.98}$Ga$_{0.02}$As oxidizes laterally in steam to insulating Al$_2$O$_3$ at a controllable rate, forming the current and optical aperture of every modern VCSEL. It is a remarkable case of a materials reaction becoming a device structure.
+
+Other laser materials follow the host-plus-activator logic of Section 35.3. Nd$^{3+}$:YAG emits at 1064 nm. Er$^{3+}$ in silica fibre, pumped at 980 or 1480 nm, gives optical gain from 1530 to 1565 nm with a 10 ms upper-state lifetime: the erbium-doped fibre amplifier on which long-haul optical networks depend.
+
+---
+
+## 35.5 Photodetector materials
+
+### Cut-off wavelength and responsivity
+
+A detector based on interband absorption responds only to photons with $h\nu\ge E_g$. Its *cut-off wavelength* is
+
+$$
+\lambda_c=\frac{hc}{E_g}=\frac{1.2398\ \mu\mathrm{m\,eV}}{E_g}
+$$
+
+> **Status of the principle: Cut-off wavelength $\lambda_c=hc/E_g$**
+> *Derived.* It follows from energy conservation in interband absorption. The real response falls off gradually near $\lambda_c$ because of band tails (Section 35.1), phonon-assisted absorption in indirect materials, and the temperature dependence of $E_g$.
+
+The *responsivity* is the photocurrent per watt of incident optical power:
+
+$$
+\mathcal R=\frac{I_{ph}}{P}=\eta\,\frac{q\lambda}{hc}=\eta\,\frac{\lambda\,[\mu\mathrm m]}{1.2398}\ \ \mathrm{A/W}
+$$
+
+where the quantum efficiency $\eta$ (electrons collected per incident photon) includes surface reflection $R_s$, absorption over the active thickness $d$, and collection:
+
+$$
+\eta\approx(1-R_s)\left(1-e^{-\alpha d}\right)\eta_{\rm coll}
+$$
+
+### Dark current and why IR detectors are cooled
+
+The noise floor of a detector is largely its *dark current*, the current flowing with no light. In a diode it is dominated by thermal generation in or near the depletion region, which scales with $n_i$ or $n_i^2$. Since $n_i^2\propto T^3\exp(-E_g/kT)$ (Chapter 32), dark current rises exponentially as the gap narrows. A material with $\lambda_c=10$ µm ($E_g\approx0.12$ eV) at room temperature has $E_g/kT\approx4.8$, so its thermally generated carriers swamp any signal. Cooling to 77 K raises $E_g/kT$ to about 19. For a 0.1 eV gap, the factor $\exp(-E_g/kT)$ falls by $\exp[0.1(1/0.00664-1/0.02585)]=e^{11.2}\approx7\times10^4$, and with the $T^3$ factor the total reduction of $n_i^2$ is about $4\times10^6$. That is why long-wavelength infrared cameras use Stirling coolers or liquid nitrogen. Uncooled thermal detectors (Section 35.9) avoid the problem by not using interband absorption at all.
+
+### The main detector materials
+
+**Silicon** ($E_g=1.12$ eV, $\lambda_c=1.1$ µm). It is the material of all visible image sensors and of short-wavelength detectors, with very low dark current, mature processing and integration with CMOS readout. Its indirect gap gives a long absorption length in the near-IR (Table 35.1), so its responsivity falls beyond about 900 nm unless the junction is deep. The quantum efficiency in the visible exceeds 80% with anti-reflection coatings. For high gain at low light, silicon avalanche photodiodes benefit from a material asymmetry: the impact-ionization coefficient of electrons is much larger than that of holes ($\alpha_n/\alpha_p\approx20$–50 at moderate fields), which gives low excess noise.
+
+**Germanium** ($E_g=0.66$ eV indirect, 0.80 eV direct, practical cut-off about 1.6 µm at 300 K). Ge has strong absorption at 1310 nm and adequate absorption at 1550 nm, and it can be grown epitaxially on silicon. Tensile strain of about 0.2%, from thermal mismatch on cooling, lowers its direct gap and extends the response to 1600 nm. Its drawback is higher dark current, from the small gap and from the misfit dislocations at the 4.2% mismatched Ge/Si interface (Chapter 34).
+
+**In$_{0.53}$Ga$_{0.47}$As** ($E_g=0.75$ eV, $\lambda_c=1.65$ µm). Lattice-matched to InP, with a direct gap and a strong absorption of about $7\times10^3$ cm$^{-1}$ at 1550 nm, it is the standard telecom and short-wave-infrared detector material. "Extended" InGaAs with more indium (lattice-mismatched, on graded buffers) reaches 2.2–2.6 µm, at the cost of dislocation-driven dark current.
+
+**HgCdTe** (Hg$_{1-x}$Cd$_x$Te). CdTe has a gap of 1.5 eV and HgTe a *negative* gap (a semimetal, about −0.3 eV). Between them the alloy gap can be set anywhere from 0 to 1.5 eV with almost no change in lattice constant (0.3% mismatch across the whole range), so a single substrate (CdZnTe) serves all wavelengths. An empirical fit (Hansen et al.) for the gap is
+
+$$
+E_g(x,T)=-0.302+1.93x-0.81x^2+0.832x^3+5.35\times10^{-4}\,T(1-2x)\ \ [\mathrm{eV}]
+$$
+
+> **Status of the principle: Hansen band-gap formula for HgCdTe**
+> *Empirical.* It is a polynomial fit to optical and electrical data over $0\le x\le0.6$ and 4–300 K, accurate to about ±10 meV in that range.
+
+At 77 K, $x=0.3$ gives $E_g=0.243$ eV ($\lambda_c=5.1$ µm, mid-wave IR), $x=0.22$ gives 0.115 eV ($\lambda_c=10.8$ µm, long-wave IR) and $x=0.2$ gives 0.083 eV ($\lambda_c=14.9$ µm). HgCdTe has a direct gap, high absorption, high electron mobility and a long intrinsic lifetime, and it remains the highest-performance IR material. Its weaknesses are materials ones. The Hg–Te bond is weak, so mercury vacancies form readily and act as acceptors. Composition uniformity is hard to achieve, and since $\lambda_c$ depends steeply on $x$ (near $x=0.22$, a change of 0.01 in $x$ shifts $\lambda_c$ at 77 K by more than 1 µm), uniformity matters a great deal. Wafers are also small and expensive. Competing materials are InSb (MWIR, 77 K), type-II InAs/GaSb superlattices (Chapter 34's broken-gap alignment, tunable from 3 to over 15 µm by layer thickness) and quantum-well infrared photodetectors.
+
+Table 35.7 and Figure 35.4 summarize the spectral coverage and responsivity of these materials.
+
+**Table 35.7 — Photodetector materials (typical)**
+
+| Material | $E_g$ (eV) | $\lambda_c$ (µm) | Operating T | Typical peak responsivity | Use |
+|---|---|---|---|---|---|
+| Al$_x$Ga$_{1-x}$N ($x\ge0.45$) | ≥ 4.4 | ≤ 0.28 | 300 K | 0.1–0.2 A/W | Solar-blind UV, flame detection |
+| Si | 1.12 | 1.1 | 300 K | 0.5–0.6 A/W at 800–900 nm | Imaging, 850 nm links, metrology |
+| Ge (on Si) | 0.66 / 0.80 | ≈1.6 | 300 K | 0.8–1.0 A/W at 1550 nm (waveguide) | Silicon photonics receivers |
+| In$_{0.53}$Ga$_{0.47}$As | 0.75 | 1.65 | 300 K or TE-cooled | ≈ 1.0 A/W at 1550 nm | Telecom, SWIR imaging |
+| PbS | 0.37 | ≈3 | 300 K | photoconductive | Low-cost SWIR |
+| InSb | 0.23 (77 K) | 5.4 | 77 K | — | MWIR imaging |
+| Hg$_{0.7}$Cd$_{0.3}$Te | 0.24 (77 K) | 5.1 | 77–150 K | — | MWIR imaging |
+| Hg$_{0.78}$Cd$_{0.22}$Te | 0.115 (77 K) | 10.8 | 77 K | — | LWIR imaging, thermography |
+| InAs/GaSb superlattice | 0.05–0.4 (effective) | 3–25 | 77 K | — | MWIR/LWIR focal planes |
+| VO$_x$ microbolometer | thermal | 8–14 (by absorber) | 300 K | TCR ≈ −2 to −3 %/K | Uncooled thermal cameras |
+
+**Worked example — Matching absorber thickness to wavelength.** Compare three detectors with anti-reflection coatings ($R_s\approx0$) and full collection.
+
+- *Si at 850 nm*, absorbing layer 10 µm, $\alpha=535$ cm$^{-1}$: $\alpha d=0.535$ and $\eta=1-e^{-0.535}=41\%$. The responsivity is $0.41\times0.85/1.2398=0.28$ A/W. Reaching $\eta=80\%$ needs $d=\ln5/535\ \mathrm{cm}=30$ µm. Carriers generated that deep diffuse slowly to the junction, which limits speed. This is why 850 nm receivers above about 10 Gb/s use GaAs photodiodes.
+- *In$_{0.53}$Ga$_{0.47}$As at 1550 nm*, 2 µm thick, $\alpha\approx7\times10^3$ cm$^{-1}$: $\alpha d=1.4$, $\eta=75\%$, and $\mathcal R=0.75\times1.55/1.2398=0.94$ A/W.
+- *Ge at 1550 nm*, 1 µm film on Si, $\alpha\approx460$ cm$^{-1}$: $\alpha d=0.046$ and $\eta=4.5\%$ for normal incidence. This is unusable. But if light travels *along* a Ge waveguide instead of across the film, the absorption length can be made 20–50 µm while the carriers cross only the 0.5–1 µm film thickness. With 20 µm, $\eta=1-e^{-0.92}=60\%$, and with 50 µm it is 90%. Separating the light path from the carrier path is the geometric solution that made germanium the standard detector of silicon photonics (Section 35.7).
+
+<!-- FIGURE 35.4 | figures/ch35/fig-35-4-detector-materials.png | plot | Spectral coverage and responsivity of photodetector materials. | Content: Upper panel — horizontal bars on a log wavelength axis 0.2–20 µm showing the useful range of each material: AlGaN (0.2–0.28), Si (0.3–1.1), Ge (0.8–1.6), InGaAs (0.9–1.7, extended to 2.6 dashed), PbS (1–3), InSb (1–5.4), HgCdTe MWIR (3–5), HgCdTe LWIR (8–12), T2SL (3–15), microbolometer (8–14, hatched as "thermal"); atmospheric transmission windows shaded (0.4–2.5, 3–5, 8–14 µm). Lower panel — responsivity (A/W, 0–1.4) vs wavelength 0.3–1.8 µm: ideal η = 1 line R = λ/1.24 (dashed), measured-style curves for Si (peak ≈0.6 A/W near 900 nm, dropping to zero at 1.1 µm), Ge (peak ≈0.8 A/W near 1.5 µm), InGaAs (≈1.0 A/W at 1.55 µm). -->
+
+![Figure 35.4 — Spectral coverage and responsivity of photodetector materials](../figures/ch35/fig-35-4-detector-materials.png)
+
+*Figure 35.4 — Spectral coverage and responsivity of photodetector materials.*
+
+---
+
+## 35.6 Solar-cell absorber materials
+
+Solar cells are treated in two places. This section asks what *intrinsic material property* limits the efficiency of a photovoltaic absorber. Chapter 40 treats photovoltaic absorbers as energy-conversion materials, including their processing, stability, cost and scalability, alongside thermoelectrics and batteries. Module and system engineering belong to Electrical Energy & Machines.
+
+> **Boundary.** Only the material-level efficiency limit and the absorber properties that control it are treated here. Junction design and cell operation belong to Electronics & Computing. Absorber manufacturing, degradation and cost are in Chapter 40. PV system sizing is in Electrical Energy & Machines.
+
+### The Shockley–Queisser limit as a material statement
+
+Shockley and Queisser (1961) asked: what is the highest efficiency possible for an absorber of band gap $E_g$, if the *only* loss allowed is the one required by thermodynamics? They made four assumptions:
+
+1. the absorber absorbs every photon with $h\nu\ge E_g$ and none below (a step-function absorptivity);
+2. each absorbed photon creates exactly one electron–hole pair, which relaxes (thermalizes) to the band edges, losing $h\nu-E_g$ as heat;
+3. the only recombination is *radiative*, as required by detailed balance, since a body that absorbs must also emit (Section 35.1);
+4. the cell is at 300 K under the unconcentrated solar spectrum.
+
+Two losses then fight each other. A large $E_g$ wastes all photons below the gap. A small $E_g$ absorbs most photons but throws away most of their energy as heat. The optimum under the AM1.5G spectrum is about 33.7% at $E_g\approx1.34$ eV. The curve is flat-topped: any gap between 1.1 and 1.4 eV allows 32–34%, as Figure 35.5 shows.
+
+> **Status of the principle: Shockley–Queisser detailed-balance limit**
+> *Derived.* It follows from detailed balance between absorbed sunlight and emitted thermal radiation for a single-gap absorber under the four assumptions above. It is a rigorous upper bound for that idealization. It is exceeded only by breaking an assumption: multiple junctions, concentration, or carrier multiplication.
+
+Real absorbers fall short of the limit for three material reasons, each of which can be stated as a property.
+
+**Incomplete absorption.** An absorber of finite thickness, especially an indirect one, does not absorb everything above the gap. Silicon needs about 100 µm plus light trapping.
+
+**Non-radiative recombination.** Every non-radiative path lowers the open-circuit voltage. Detailed balance gives an exact relation (Ross, Rau) between voltage loss and the absorber's *external radiative efficiency* (ERE), the fraction of recombination events that produce a photon escaping the cell:
+
+$$
+V_{oc}=V_{oc}^{\rm rad}+\frac{kT}{q}\ln(\mathrm{ERE})
+$$
+
+> **Status of the principle: Voltage loss from external radiative efficiency**
+> *Derived.* It follows from detailed balance and the reciprocity between light absorption and emission. It is exact under the assumptions that carriers are in quasi-equilibrium with uniform quasi-Fermi-level splitting and that the superposition principle holds.
+
+A good solar cell must therefore also be a good LED, which ties this section to Section 35.4.
+
+**Sub-gap tails.** A broad Urbach tail (Section 35.1) absorbs a little below the gap and therefore emits there too. It adds radiative recombination at energies below $E_g$ and lowers $V_{oc}^{\rm rad}$ itself.
+
+**Worked example — Voltage loss from non-radiative recombination.** At 300 K, $kT/q=25.85$ mV. A GaAs cell with ERE ≈ 0.3 (a record-class device that is also an excellent LED) loses $0.02585\times\ln(1/0.3)=31$ mV relative to the radiative limit. A silicon cell with ERE ≈ 0.005 loses $0.02585\times\ln200=137$ mV. A polycrystalline thin-film absorber with ERE ≈ $10^{-4}$ loses $0.02585\times\ln10^4=238$ mV. Since the radiative-limit voltage is roughly $E_g/q-0.25$ to $-0.3$ V, the observed deficits $E_g/q-V_{oc}$ are about 0.3 V (GaAs), 0.37–0.4 V (Si), and 0.45–0.6 V (CdTe, CIGS, kesterite). The differences trace directly to defect densities and tail widths.
+
+### What makes a good absorber
+
+From the above, the material properties that matter are:
+
+- **band gap** in or near 1.1–1.5 eV for a single junction, or a matched pair for tandems (about 1.7 eV on top of 1.1 eV);
+- **absorption coefficient**: direct-gap absorbers need only 0.5–3 µm;
+- **diffusion length** $L=\sqrt{D\tau}$ longer than the absorber thickness, so that carriers reach the junction. For silicon with $D\approx26$ cm²/s and $\tau=1$ ms, $L=\sqrt{0.026}\ \mathrm{cm}=1.6$ mm, so 150 µm is easily collected;
+- **defect tolerance**: intrinsic defects with shallow rather than midgap levels, and benign grain boundaries. Lead-halide perovskites owe much of their success to this. Their band edges are formed from antibonding states, so vacancies tend to produce shallow levels;
+- **small Urbach energy and high ERE**;
+- **stability, abundance and non-toxicity**, which are taken up in Chapter 40.
+
+**Table 35.8 — Solar absorber materials (typical; record efficiencies approximate as of the mid-2020s)**
+
+| Absorber | $E_g$ (eV) | Type | SQ limit (≈) | Record cell efficiency (≈) | Typical thickness | Key material issue |
+|---|---|---|---|---|---|---|
+| c-Si | 1.12 | indirect | 33% (practical limit 29.4% with Auger) | 27% | 100–180 µm | Weak absorption; surface passivation (Chapter 34) |
+| GaAs | 1.42 | direct | 33% | 29% | 1–3 µm | Cost of epitaxy and substrate |
+| CdTe | 1.45–1.5 | direct | 32% | 23% | 2–4 µm | p-doping, grain boundaries, Cd |
+| Cu(In,Ga)Se$_2$ | 1.0–1.2 | direct | 33% | 23–24% | 1.5–2.5 µm | Composition gradients, In and Ga supply |
+| CH$_3$NH$_3$PbI$_3$-type perovskite | 1.5–1.6 | direct | 31–32% | 26–27% | 0.4–0.8 µm | Stability, ion migration, Pb |
+| a-Si:H | 1.7–1.8 | (amorphous) | 28% | ≈ 10% (stabilized) | 0.3 µm | Urbach tail, light-induced degradation |
+| Cu$_2$ZnSnS$_4$ | 1.5 | direct | 32% | ≈ 14–15% | 1–2 µm | Cation disorder, large $E_U$ |
+
+<!-- FIGURE 35.5 | figures/ch35/fig-35-5-shockley-queisser.png | plot | Shockley–Queisser efficiency limit versus band gap, with real absorber materials. | Content: x-axis band gap 0.5–3.0 eV; y-axis efficiency 0–35%. Solid curve: SQ limit under AM1.5G, peaking at 33.7% near 1.34 eV with small dips from atmospheric absorption bands near 1.0–1.1 eV; plateau 32–34% between 1.1 and 1.45 eV, falling to ≈25% at 0.8 eV and ≈20% at 2.0 eV. Points (filled) for record cells: c-Si (1.12, 27%), GaAs (1.42, 29%), CdTe (1.5, 23%), CIGS (1.15, 23.5%), perovskite (1.55, 26.5%), a-Si:H (1.75, 10%), CZTS (1.5, 14%). Vertical arrows from each point to the curve labelled with the dominant material loss ("absorption + Auger", "non-radiative / E_U", etc.). Inset: spectral breakdown at E_g = 1.34 eV showing fractions lost to below-gap transmission, thermalization, and emission. -->
+
+![Figure 35.5 — Shockley–Queisser efficiency limit versus band gap, with real absorber materials](../figures/ch35/fig-35-5-shockley-queisser.png)
+
+*Figure 35.5 — Shockley–Queisser efficiency limit versus band gap, with real absorber materials.*
+
+---
+
+## 35.7 Optical and photonic materials
+
+A photonic material does not absorb or emit. Its job is to *guide*, *switch*, or *modulate* light with low loss. The relevant properties are the refractive index $n$ (and its contrast with neighbouring materials), the transparency window, the dispersion $dn/d\lambda$, and the electro-optic, thermo-optic and non-linear coefficients.
+
+**Table 35.9 — Photonic materials at 1550 nm (typical)**
+
+| Material | $n$ at 1550 nm | Transparency (µm) | Waveguide loss | Modulation mechanism | Role |
+|---|---|---|---|---|---|
+| SiO$_2$ (fibre, Ge-doped core) | 1.444–1.45 | 0.2–2.0 | 0.15–0.2 dB/km | — (very weak Kerr) | Transmission fibre, cladding |
+| Si (SOI strip) | 3.48 | 1.1–8 | 1–3 dB/cm | Plasma dispersion, thermo-optic ($dn/dT=1.8\times10^{-4}$ K$^{-1}$) | Silicon photonics circuits |
+| Si$_3$N$_4$ (LPCVD) | 1.99 | 0.4–6 | 0.001–0.5 dB/cm | Thermo-optic (weak) | Low-loss waveguides, filters, frequency combs |
+| LiNbO$_3$ (thin film) | $n_e$ 2.14, $n_o$ 2.21 | 0.35–5 | 0.03–0.3 dB/cm | Pockels, $r_{33}=30.8$ pm/V | High-speed modulators |
+| InP / InGaAsP | 3.17–3.4 | > 0.92 (InP; longer for quaternaries) | 1–3 dB/cm | Carrier injection, QCSE | Lasers, modulators, integrated transmitters |
+| Ge | ≈ 4.28 | 1.6–14 | absorbing below ≈ 1.6 µm | Franz–Keldysh | Detectors, electro-absorption modulators |
+| EO polymers | 1.6–1.8 | visible–IR | 1–2 dB/cm | Pockels, $r_{33}$ up to 100+ pm/V | Research modulators (thermal stability) |
+
+### Silica optical fibre
+
+Optical fibre is the lowest-loss engineered material for any wave. At 1550 nm standard fibre loses only about 0.2 dB/km. After 100 km, 1% of the light remains (20 dB). The record is about 0.14 dB/km in pure-silica-core fibre. The loss has three material contributions, shown in Figure 35.6.
+
+1. **Rayleigh scattering.** Silica is a glass. Its density and composition fluctuations were frozen in at the glass transition (about 1200 °C) and are much smaller than the wavelength. They scatter as
+
+$$
+\alpha_R=\frac{A_R}{\lambda^4},\qquad A_R\approx0.7\text{–}0.9\ \mathrm{dB\,km^{-1}\,\mu m^4}
+$$
+
+At 1550 nm, with $A_R=0.8$, $\alpha_R=0.8/1.55^4=0.14$ dB/km. At 1310 nm it is 0.27 dB/km, and at 850 nm 1.5 dB/km. $A_R$ is set by the fictive temperature and the dopant level. Pure-silica cores, which lack germania's composition fluctuations, have the lowest values.
+
+> **Status of the principle: Rayleigh $\lambda^{-4}$ scattering loss**
+> *Derived.* It follows from dipole scattering by inhomogeneities much smaller than the wavelength. The coefficient $A_R$ is a material parameter set by the thermodynamic density fluctuations frozen in at the fictive temperature and by compositional fluctuations from dopants.
+
+2. **Infrared absorption.** Si–O bond vibrations have their fundamental near 9 µm. The tail of their overtones and combinations rises steeply beyond 1.6 µm, which closes the window on the long side.
+3. **Impurity absorption.** Transition-metal ions (Fe, Cu) must be below parts per billion. The O–H vibration overtone at 1383 nm was once a strong peak of about 2 dB/km. Fibre-preform processes in dry chlorine have reduced it below the Rayleigh level in "low-water-peak" fibres.
+
+The minimum of Rayleigh plus infrared loss falls near 1550 nm. That, plus the erbium amplifier band (Section 35.4), fixed the wavelength of long-haul communications. The core is raised in index by about 0.35% with GeO$_2$, or the cladding is lowered with fluorine, to form the guide. Material dispersion in silica passes through zero near 1.27 µm, and fibre-design (waveguide) dispersion shifts the total zero to 1.31 µm in standard single-mode fibre.
+
+<!-- FIGURE 35.6 | figures/ch35/fig-35-6-silica-fibre-loss.png | plot | Attenuation spectrum of silica optical fibre and its material contributions. | Content: log y-axis attenuation 0.1–10 dB/km; x-axis wavelength 0.8–1.8 µm. Dashed curve: Rayleigh scattering 0.8/λ^4 (1.5 dB/km at 0.85 µm, 0.27 at 1.31, 0.14 at 1.55). Dashed rising curve: infrared Si–O vibrational absorption tail, steep beyond 1.6 µm. Solid total for standard fibre with an OH peak at 1.383 µm (≈1–2 dB/km, older fibre) and a low-water-peak variant (dotted, no peak). Mark minimum ≈0.18–0.2 dB/km near 1.55 µm. Shade telecom bands O (1260–1360), E, S, C (1530–1565), L (1565–1625 nm) along the top; show EDFA gain band over C. -->
+
+![Figure 35.6 — Attenuation spectrum of silica optical fibre and its material contributions](../figures/ch35/fig-35-6-silica-fibre-loss.png)
+
+*Figure 35.6 — Attenuation spectrum of silica optical fibre and its material contributions.*
+
+### Lithium niobate: electro-optic modulation
+
+To put data on light at tens of gigabits per second, an engineer needs a material whose refractive index changes, linearly and fast, with an applied field. That is the *Pockels* (linear electro-optic) effect, introduced in Chapter 27. It exists only in non-centrosymmetric crystals. For a field along the optic (c) axis of LiNbO$_3$ acting on light polarized along it,
+
+$$
+\Delta n_e=-\tfrac12\,n_e^3\,r_{33}\,E
+$$
+
+> **Status of the principle: Linear electro-optic (Pockels) effect**
+> *Approximate.* It is the first term of an expansion of the optical impermeability in the applied field. It is accurate for fields well below breakdown and for frequencies below the relevant lattice resonances. At very high fields the quadratic (Kerr) term and photorefractive effects appear.
+
+The electronic and ionic response of LiNbO$_3$ is fast (into the hundreds of GHz) and the effect is pure phase with no absorption. The material is a ferroelectric, poled into a single domain, with $r_{33}=30.8$ pm/V. For two decades it was used as Ti-diffused waveguides in bulk wafers. Since about 2018 *thin-film lithium niobate on insulator* (TFLN), a 300–600 nm LiNbO$_3$ layer bonded on SiO$_2$, has confined light so tightly that the electrodes can sit a few micrometres apart.
+
+**Worked example — Half-wave voltage of a thin-film LiNbO$_3$ modulator.** A push–pull Mach–Zehnder modulator has an electrode gap $d=5$ µm, a field–optical-mode overlap $\Gamma=0.7$, length $L=1$ cm, and works at $\lambda=1.55$ µm with $n_e=2.138$. The voltage needed for a $\pi$ phase difference between the two arms is
+
+$$
+V_\pi=\frac{\lambda\,d}{2\,n_e^3\,r_{33}\,\Gamma\,L}=\frac{1.55\times10^{-6}\times5\times10^{-6}}{2\times9.77\times30.8\times10^{-12}\times0.7\times0.01}=1.84\ \mathrm{V}
+$$
+
+so $V_\pi L\approx1.8$ V cm. Reported TFLN devices have $V_\pi L\approx2$–2.5 V cm. The older Ti:LiNbO$_3$ devices, with gaps of 15–20 µm and weaker overlap, need about 10–15 V cm. The materials change from bulk to thin film, not any new physics, gave a fivefold improvement, enough to drive the modulator directly from CMOS voltages.
+
+### Silicon photonics
+
+Silicon is transparent beyond 1.1 µm, can be patterned with CMOS tools, and comes as silicon-on-insulator (SOI) wafers. The Si/SiO$_2$ index contrast (3.48 against 1.44) is enormous compared with fibre (0.5%). A 450 × 220 nm silicon strip guides light around bends a few micrometres in radius, against centimetres for fibre, so thousands of components fit on a millimetre-scale chip. Silicon's material limits are the reasons silicon photonics is a *heterogeneous* platform:
+
+- **No emission.** Silicon has an indirect gap (Section 35.1). Lasers are InP-based dies bonded or flip-chipped onto the silicon, or quantum-dot lasers grown epitaxially on silicon.
+- **No Pockels effect.** Silicon's crystal is centrosymmetric, so $r=0$. Modulators use the *plasma-dispersion effect*: free carriers lower the refractive index and add absorption. At 1550 nm (the empirical Soref–Bennett relations),
+
+$$
+\Delta n=-\left(8.8\times10^{-22}\Delta N+8.5\times10^{-18}\Delta P^{0.8}\right),\qquad \Delta\alpha=8.5\times10^{-18}\Delta N+6.0\times10^{-18}\Delta P
+$$
+
+with densities in cm$^{-3}$ and $\Delta\alpha$ in cm$^{-1}$. Injecting $\Delta N=\Delta P=10^{18}$ cm$^{-3}$ gives $\Delta n=-3.0\times10^{-3}$, but also $\Delta\alpha=14.5$ cm$^{-1}$ (63 dB/cm), so the index change comes with loss. A $\pi$ phase shift needs $L_\pi=\lambda/(2\lvert\Delta n\rvert)=0.26$ mm of such a region. Depletion-mode modulators trade efficiency for speed (above 50 GHz).
+
+> **Status of the principle: Soref–Bennett plasma-dispersion relations**
+> *Empirical.* They are fits to Kramers–Kronig transforms of measured free-carrier absorption in silicon at 1310 and 1550 nm, valid for carrier densities of about $10^{17}$–$10^{20}$ cm$^{-3}$.
+
+- **Thermo-optic tuning** ($dn/dT=1.8\times10^{-4}$ K$^{-1}$) is strong. Ring resonators must be actively stabilized, since a 1 K change shifts a resonance by about 0.08 nm.
+- **Two-photon absorption** at 1550 nm (two photons together exceed $E_g$) limits optical power and non-linear devices. Si$_3$N$_4$, with its 5 eV gap, is chosen for high-power and frequency-comb applications.
+- **Detection** uses epitaxial Ge (Section 35.5).
+
+Sidewall roughness from etching scatters light in proportion to the square of the index contrast, which is why silicon wire waveguides lose 1–3 dB/cm while lower-contrast nitride guides can lose under 0.01 dB/cm.
+
+---
+
+## 35.8 Material properties for high-frequency electronics
+
+At radio and microwave frequencies, from hundreds of MHz to hundreds of GHz, three material questions dominate. How fast can carriers move? How much does the substrate absorb? How much do the dielectrics and conductors dissipate? Circuit topology belongs to Electronics & Computing. The material answers set the ceiling that topology cannot exceed.
+
+### Transport: mobility and saturation velocity
+
+The transit time of carriers under a transistor gate sets its current-gain cut-off frequency, roughly $f_T\approx v/(2\pi L_g)$. At low fields, velocity rises as $v=\mu E$. In short channels the field exceeds 10 kV/cm and carriers reach the *saturation velocity* $v_{sat}$, limited by optical-phonon emission (Chapter 32, high-field transport). In III–V materials the velocity overshoots before the electrons transfer into heavier upper valleys. A high mobility matters for low access resistance and low-field gain. A high $v_{sat}$, and peak velocity, matter for the intrinsic speed.
+
+The power a transistor can deliver at frequency $f$ also depends on the field the material can withstand before breakdown. The *Johnson figure of merit* combines the two:
+
+$$
+f_T\,V_{br}\approx\frac{E_{br}\,v_{sat}}{2\pi}
+$$
+
+> **Status of the principle: Johnson figure of merit**
+> *Approximate.* It is derived from the transit time across a region whose length is set by breakdown, for a uniform field at saturation velocity. It ranks materials for power at frequency within about a factor of two. Real devices depart from it because of field non-uniformity, velocity overshoot and thermal limits.
+
+**Table 35.10 — Material properties for high-frequency electronics (300 K, typical)**
+
+| Material | $E_g$ (eV) | $\mu_n$ (cm²/V s) | $v_{sat}$ (10$^7$ cm/s) | $E_{br}$ (MV/cm) | $\kappa$ (W/m K) | $\varepsilon_r$ | Johnson FOM (V GHz) |
+|---|---|---|---|---|---|---|---|
+| Si | 1.12 | 1400 | 1.0 | 0.3 | 150 | 11.7 | ≈ 480 |
+| GaAs | 1.42 | 8500 | 1.0 (peak 2) | 0.4 | 46 | 12.9 | ≈ 640 |
+| InP | 1.34 | 5400 | 1.0 (peak 2.5) | 0.5 | 68 | 12.5 | ≈ 800 |
+| In$_{0.53}$Ga$_{0.47}$As | 0.75 | 12000 | ≈1 (peak ≈3) | ≈0.2 | 5 | 13.9 | — |
+| 4H-SiC | 3.26 | 950 | 2.0 | 2.5–3 | 370–490 | 9.7 | ≈ 8000 |
+| GaN | 3.42 | 1000 (bulk); 1500–2200 (2DEG) | 2.5 (peak ≈3) | 3.3 | 130–230 | 9.0 | ≈ 13000 |
+| Diamond | 5.47 | 2000–4500 | 1.5–2.7 | ≈ 10 | 2000 | 5.7 | — |
+
+The table explains the division of labour in RF electronics. InP and InGaAs HEMTs and HBTs give the highest $f_T$ (above 1 THz in research devices) for low-noise amplifiers and sub-THz receivers. GaAs serves handset power amplifiers. GaN dominates high-power RF (base stations, radar), because its breakdown field and 2DEG (Chapter 34) give ten to twenty times the power density of GaAs, though its moderate thermal conductivity forces GaN-on-SiC substrates. SiGe and CMOS win on integration, with $f_T$ of 300–500 GHz in SiGe HBTs. The Ge in the base grades the band gap and so builds in a field that speeds electrons across, an application of Chapter 34's heterostructures.
+
+### Substrate loss
+
+Passive components (inductors, transmission lines, antennas) on a chip see the substrate as part of their dielectric. A semiconducting substrate of conductivity $\sigma$ and permittivity $\varepsilon$ has an effective loss tangent
+
+$$
+\tan\delta_{\rm sub}=\frac{\sigma}{\omega\varepsilon}
+$$
+
+It behaves as a conductor below its *dielectric relaxation frequency* $f_{rel}=\sigma/(2\pi\varepsilon)$ and as a lossy dielectric above it.
+
+**Worked example — Why RF front ends need high-resistivity substrates.** For silicon, $\varepsilon=11.7\varepsilon_0=1.036\times10^{-10}$ F/m.
+
+- Standard CMOS substrate, $\rho=10$ Ω cm ($\sigma=10$ S/m): $f_{rel}=10/(2\pi\times1.036\times10^{-10})=15$ GHz, and at 10 GHz $\tan\delta=1.5$. The substrate is closer to a conductor than to a dielectric. An on-chip inductor's quality factor collapses to below about 10, and transmission lines lose several dB per cm.
+- High-resistivity silicon, $\rho=1$ kΩ cm: $f_{rel}=154$ MHz, and at 10 GHz $\tan\delta=0.015$.
+- At 10 kΩ cm: $\tan\delta=1.5\times10^{-3}$, comparable with a good PCB laminate.
+
+There is an interface catch. Fixed positive charge in the buried oxide of an SOI wafer (Chapter 34's $Q_f$) induces an electron accumulation layer in high-resistivity silicon just beneath it. This *parasitic surface conduction* layer has a sheet resistance of only kΩ/□, which undoes the benefit of the high resistivity. RF-SOI wafers for smartphone switches therefore insert a *trap-rich* polysilicon layer under the buried oxide. Its grain-boundary traps (Chapter 34) pin the Fermi level and immobilize the induced carriers, restoring effective resistivities above 1 kΩ cm. It is a case where deliberately adding interface traps is the solution.
+
+The other RF substrates are intrinsically insulating. Semi-insulating GaAs ($10^7$–$10^9$ Ω cm, from Cr doping or the EL2 deep donor), semi-insulating SiC (above $10^9$ Ω cm, vanadium-doped or high-purity), and sapphire are the common choices.
+
+### Low-loss dielectrics and conductors
+
+Off-chip, the PCB laminate, ceramic substrate or package dielectric carries the signal. The dielectric attenuation of a TEM transmission line is approximately
+
+$$
+\alpha_d\approx\frac{27.3\sqrt{\varepsilon_r}\,\tan\delta}{\lambda_0}\ \ \mathrm{dB\ per\ unit\ length}
+$$
+
+with $\lambda_0$ the free-space wavelength in the same length unit. Loss mechanisms in dielectrics (dipolar relaxation, ionic resonance, conduction) were treated in Chapter 26, and laminate construction is in Chapter 51. Here the point is ranking. At 28 GHz ($\lambda_0=10.7$ mm), FR-4 ($\varepsilon_r=4.4$, $\tan\delta=0.02$) loses about 1.07 dB/cm, a hydrocarbon-ceramic laminate such as RO4350B (3.48, 0.0037) about 0.18 dB/cm, and PTFE (2.1, 0.0003) about 0.01 dB/cm. FR-4 is therefore excluded from mm-wave signal layers.
+
+> **Status of the principle: Dielectric attenuation $\alpha_d\propto\sqrt{\varepsilon_r}\tan\delta/\lambda_0$**
+> *Approximate.* It holds for a TEM or quasi-TEM line fully filled by a low-loss dielectric ($\tan\delta\ll1$). Microstrip with fields partly in air needs an effective-permittivity correction.
+
+**Table 35.11 — Low-loss dielectric materials (typical, near 10 GHz)**
+
+| Material | $\varepsilon_r$ | $\tan\delta$ | Typical use |
+|---|---|---|---|
+| PTFE | 2.1 | 0.0002–0.0004 | Coaxial cable, mm-wave laminates |
+| PTFE–glass/ceramic laminate | 2.2–3.0 | 0.0009–0.0015 | Radar, satellite boards |
+| Hydrocarbon–ceramic laminate | 3.4–3.7 | 0.003–0.004 | 5G, automotive radar boards |
+| Liquid-crystal polymer | 2.9–3.0 | 0.002–0.004 | Flexible mm-wave circuits, antennas-in-package |
+| Polyimide | 3.3–3.5 | 0.003–0.008 | Flex circuits |
+| FR-4 (epoxy–glass) | 4.2–4.7 | 0.015–0.025 | General PCBs below ≈ 3 GHz |
+| Fused silica | 3.8 | 0.0001–0.0002 | Thin-film circuits, interposers |
+| Alumina (99.6%) | 9.8 | 0.0001–0.0002 | Thin-film microwave substrates |
+| AlN | 8.6–8.9 | 0.0003–0.001 | High-power RF packages |
+| LTCC | 5.9–7.8 | 0.001–0.002 | Multilayer RF modules |
+| Sapphire | 9.4 (⊥c), 11.6 (∥c) | < 0.0001 | Low-loss substrates, resonators |
+| High-resistivity Si (10 kΩ cm) | 11.7 | ≈ 0.0015 | RF-SOI, interposers |
+
+Conductor loss completes the picture. At high frequency, current crowds into a skin depth $\delta_s=\sqrt{\rho/(\pi f\mu)}$, which is 0.65 µm in copper at 10 GHz (Chapter 25). Surface roughness of the copper foil comparable with $\delta_s$ lengthens the current path and can double conductor loss. Smooth "very-low-profile" foils are a materials response. Dielectric resonators and their high-$Q$ ceramics are covered in Chapter 27.
+
+---
+
+## 35.9 Sensor materials
+
+A sensor material converts a physical or chemical quantity into an electrical one. Its quality is described by a *transduction coefficient* (the fractional change of a property per unit of the quantity), by selectivity to the wanted quantity over others, by stability, and by noise. Most mechanisms in this book have a sensing counterpart. Table 35.12 collects them, and the most important are developed below.
+
+**Table 35.12 — Sensor materials and their transduction coefficients (typical)**
+
+| Quantity | Mechanism | Material | Figure of merit |
+|---|---|---|---|
+| Temperature | Metal resistivity (Chapter 25) | Pt (RTD) | $\alpha=0.00385$ K$^{-1}$ (IEC 60751) |
+| Temperature | Semiconducting oxide, hopping conduction | Mn–Ni–Co–O spinel (NTC thermistor) | $B=3000$–4500 K; ≈ −4.4 %/K at 25 °C ($B=3950$ K) |
+| Temperature | Ferroelectric grain-boundary barriers (Chapter 27) | Doped BaTiO$_3$ (PTC thermistor) | Resistance rise of $10^3$–$10^5$ above $T_C$ |
+| IR radiation (thermal) | Temperature coefficient of resistance | VO$_x$, a-Si:H microbolometers | TCR ≈ −2 to −3 %/K |
+| IR radiation (thermal) | Pyroelectric effect (Chapter 27) | LiTaO$_3$, PZT | $p\approx2\times10^{-4}$ C m$^{-2}$ K$^{-1}$ |
+| Strain, pressure | Metal geometry change | Constantan, Karma foils | Gauge factor ≈ 2 |
+| Strain, pressure | Piezoresistance (band-structure change) | p-type Si ⟨110⟩, n-type Si ⟨100⟩ | Gauge factor ≈ +100 to +175 (p), −100 to −130 (n) |
+| Force, acceleration | Piezoelectric (Chapter 27) | AlN, PZT, quartz | $d_{33}\approx5$ (AlN), 300–600 (PZT); $d_{11}\approx2.3$ (quartz) pC/N |
+| Magnetic field | Hall effect | InSb, InAs, GaAs, Si | $\mu_n$ = 78 000, 33 000, 8500, 1400 cm²/V s |
+| Magnetic field | Magnetoresistance (Chapters 28–29) | NiFe (AMR), multilayers (GMR), MgO junctions (TMR) | Δ$R/R$ = 2–3%, 10–20%, 100–600% |
+| Gas | Surface depletion of grains | SnO$_2$, WO$_3$, ZnO (200–400 °C) | Resistance ratio 10–1000 for ppm-level gases |
+| Humidity | Water uptake changes permittivity | Polyimide, porous Al$_2$O$_3$ | ≈ 0.2–0.5 pF per % RH (typical element) |
+| Light | Photoconduction, photodiodes | Sections 35.2, 35.5 | Responsivity, gain |
+
+### Temperature sensing materials
+
+**Platinum** is used for resistance thermometers because its resistivity is reproducible, its temperature coefficient is stable, and it resists oxidation up to about 850 °C. The standard Pt100 curve, $R(T)=R_0(1+AT+BT^2)$ above 0 °C (Callendar–Van Dusen), gives $\alpha=0.00385$ K$^{-1}$ between 0 and 100 °C. The coefficient depends on purity and strain, through Matthiessen's rule (Chapter 25). Thin-film Pt elements on alumina must be annealed to reach the standard value, since grain-boundary and defect scattering lower it.
+
+**NTC thermistors** are sintered ceramics of mixed transition-metal oxides with the spinel structure. Conduction is by electrons hopping between Mn$^{3+}$ and Mn$^{4+}$ ions on octahedral sites, a thermally activated process. Their resistance follows
+
+$$
+R(T)=R_{25}\exp\!\left[B\left(\frac1T-\frac{1}{298.15\ \mathrm K}\right)\right],\qquad \alpha=\frac{1}{R}\frac{dR}{dT}=-\frac{B}{T^2}
+$$
+
+For $B=3950$ K at 25 °C, $\alpha=-3950/298.15^2=-4.4\%$/K, about ten times the sensitivity of platinum. The cost is non-linearity and lower stability, from cation redistribution between lattice sites during ageing.
+
+> **Status of the principle: B-parameter thermistor equation**
+> *Empirical.* It is an Arrhenius-type fit valid over about 50 K around the reference temperature to within a fraction of a kelvin. The three-term Steinhart–Hart equation extends the range to better than 0.01 K over wider spans.
+
+### Piezoresistive silicon
+
+When silicon is strained, its conduction-band valleys shift relative to each other and its valence bands split and warp (Chapter 31). Carriers redistribute among valleys with different effective masses, so the conductivity changes by much more than the geometry alone would produce. The *piezoresistive coefficients* express this: for p-type silicon, $\pi_{44}\approx138\times10^{-11}$ Pa$^{-1}$, giving gauge factors of 100–175 along ⟨110⟩. For a metal foil the gauge factor is about 2. Silicon pressure sensors, accelerometers and the strain engineering of transistor channels in Chapter 34 all use the same physics. The coefficients fall with doping and temperature, so sensor diffusions are designed at doping levels that balance sensitivity against temperature drift.
+
+### Hall-effect materials
+
+A current $I$ through a slab of thickness $t$ in a perpendicular field $B$ produces a transverse Hall voltage $V_H=IB/(qnt)$ (Chapter 52 uses this for characterization). The *current sensitivity* $S_I=V_H/(IB)=1/(qnt)$ favours a low carrier density in a thin layer. For a given power dissipation, the output favours high mobility. InSb ($\mu_n\approx78\,000$ cm²/V s), InAs and GaAs are therefore used for discrete Hall elements. An InSb film 1 µm thick with $n=2\times10^{16}$ cm$^{-3}$ gives $S_I=1/(1.602\times10^{-19}\times2\times10^{22}\times10^{-6})\approx310$ V/(A T). InSb's small gap makes its carrier density, and therefore its sensitivity, strongly temperature-dependent. GaAs is chosen when stability matters, and silicon when the Hall plate must be integrated with CMOS electronics, which is the case in most current sensors and brushless-motor encoders.
+
+### Metal-oxide gas sensors
+
+Tin dioxide ($E_g=3.6$ eV, n-type from oxygen vacancies) is the archetypal chemoresistive material. In air at 200–400 °C, oxygen adsorbs on the grain surfaces and captures electrons, forming O$_2^-$, O$^-$ and O$^{2-}$ species. This creates a depletion layer at every grain surface and a potential barrier at every grain boundary. It is the grain-boundary barrier of Chapter 34 (Section 34.8), now set by surface chemistry rather than by bulk traps. A reducing gas (CO, H$_2$, ethanol) reacts with the adsorbed oxygen, returns electrons to the grains, lowers the barriers, and raises the conductance by orders of magnitude.
+
+The microstructure is the design variable. When the grain diameter $D$ is less than about twice the Debye length $L_D$ (about 3 nm in SnO$_2$ at operating temperature), each grain is fully depleted and the sensitivity rises sharply. Nanocrystalline films with 5–10 nm grains and noble-metal catalysts (Pt, Pd) on the surface, which spill reactive species onto the oxide, are the standard recipe. The chemistry of adsorption and catalysis belongs to the Advanced Chemistry core. The material lessons are that grain size sets sensitivity, that grain growth at operating temperature sets drift, and that selectivity remains the weak point, because any reducing gas lowers the barrier. Arrays of different oxides with pattern recognition are the usual workaround.
 
 ---
 
@@ -554,16 +783,14 @@ With 11.6 µm/year per µA/cm$^2$, the uniform rate is about 0.15 mm/year, too h
 
 | Open question | Where it is answered |
 |---|---|
-| Thermodynamic and kinetic foundations: Pourbaix diagrams, mixed potentials, Tafel kinetics, Faraday's law, passivity | Chapter 34 |
-| Why grain boundaries and carbides form where they do, and how diffusion controls sensitization | Chapters 5, 8 and 10 |
-| Fracture mechanics, fatigue and the endurance limit that corrosion removes | Chapter 14 |
-| Stainless, duplex and aluminium alloy metallurgy behind the corrosion-resistant grades | Chapters 15 and 16 |
-| Rebar corrosion, carbonation and chloride ingress in concrete; polymer environmental stress cracking | Chapter 36 |
-| Adsorption of inhibitors, surface energy and the wear part of erosion–corrosion | Chapter 37 |
-| Corrosion of implants in the body; hydrogen for energy; oxidation in extreme environments | Chapters 31, 32 and 33 |
-| Weld heat-affected zones and residual stress that drive weld decay and SCC | Chapter 39 |
-| Coating deposition processes: PVD, CVD, electroplating, thermal spray | Chapter 41 |
-| Surface analysis of passive films and corrosion products (XPS, AES, SIMS) | Chapter 42 |
-| Selecting a material for a corrosive duty against cost and other properties | Chapter 48 |
+| How do magnetic materials provide the magnetoresistive and Hall-complementary sensors and the inductors of RF circuits? | Chapters 28 and 29 |
+| How does quantum confinement tune emission and absorption in quantum dots, nanowires and 2D materials? | Chapter 38 |
+| How are photovoltaic absorbers manufactured, stabilized and scaled, and how do they compare with other energy-conversion materials? | Chapter 40 |
+| How are epitaxial optoelectronic layers, oxide films and dielectrics grown, and how does processing set their defect densities? | Chapters 49 and 50 |
+| How are RF laminates, LTCC and packages built, and how do their CTE and moisture behaviour affect high-frequency performance? | Chapter 51 |
+| How are absorption spectra, photoluminescence, Hall mobility and dielectric loss measured? | Chapter 52 |
+| How do LEDs, lasers, detectors and RF transistors degrade (dark-line defects, phosphor quenching, current collapse)? | Chapter 44 |
+| How are optoelectronic and RF materials selected against cost, reliability and environmental constraints (Cd, Pb, Hg, In)? | Chapter 58 |
+| How do LEDs, lasers, photodiodes, modulators and RF amplifiers operate as devices and in circuits? | Electronics & Computing |
 
-**Next:** Chapter 36 widens the view from corrosion to every way that metals, ceramics, polymers, composites and concrete degrade in service, and to the methods by which engineers analyse failures and predict reliability.
+**Next:** Chapter 36 (Optical and Photonic Materials) widens the view from semiconductors to all optical materials — how structure sets refractive index, absorption and colour, and how fibres, nonlinear crystals and photonic structures guide and control light.

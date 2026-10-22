@@ -11,15 +11,15 @@ The same disc also illustrates the opposite truth. Its strength came from defect
 
 | Concept | Engineering destination |
 |---|---|
-| Vacancies and interstitials, equilibrium concentration | Diffusion and heat treatment (Ch 8), creep (Ch 14), radiation damage (Ch 33) |
-| Defects in ionic crystals, Kröger–Vink notation | Solid electrolytes and fuel cells (Ch 25, 32), oxide nuclear fuel, catalysts, gas sensors, corrosion films (Ch 34) |
+| Vacancies and interstitials, equilibrium concentration | Diffusion and heat treatment (Ch 8), creep (Ch 14), radiation damage (Ch 41) |
+| Defects in ionic crystals, Kröger–Vink notation | Solid electrolytes and fuel cells (Ch 25, 40), oxide nuclear fuel, catalysts, gas sensors, corrosion films (Ch 42) |
 | Non-stoichiometry | UO$_{2+x}$ fuel, CeO$_{2-x}$ catalyst supports, FeO scales, n-type oxides |
-| Dislocations, Burgers vector | Plasticity and strengthening (Ch 12–13), threading dislocations in semiconductors (Ch 26) |
-| Grain boundaries, CSL, twins | Hall–Petch strengthening, intergranular corrosion and grain-boundary engineering (Ch 35), creep (Ch 14) |
+| Dislocations, Burgers vector | Plasticity and strengthening (Ch 12–13), threading dislocations in semiconductors (Ch 34) |
+| Grain boundaries, CSL, twins | Hall–Petch strengthening, intergranular corrosion and grain-boundary engineering (Ch 43), creep (Ch 14) |
 | Stacking faults | Work hardening of austenitic steels, TWIP and TRIP steels (Ch 15) |
-| Phase boundaries | Precipitation hardening (Ch 10), superalloys (Ch 16), thin-film epitaxy (Ch 41) |
-| Pores, inclusions, precipitates | Fatigue of castings and AM parts (Ch 14, 40), clean steel, ceramic strength (Ch 17), concrete durability (Ch 18) |
-| Stereology | Grain-size specifications, phase fractions, porosity limits, quality control (Ch 42) |
+| Phase boundaries | Precipitation hardening (Ch 10), superalloys (Ch 16), thin-film epitaxy (Ch 49) |
+| Pores, inclusions, precipitates | Fatigue of castings and AM parts (Ch 14, 48), clean steel, ceramic strength (Ch 17), concrete durability (Ch 18) |
+| Stereology | Grain-size specifications, phase fractions, porosity limits, quality control (Ch 52) |
 
 **Roadmap.** Point defects in metals and their equilibrium number (5.1) → point defects in ionic crystals and defect chemistry (5.2) → line defects (5.3) → planar defects: grain boundaries, twins, stacking faults, phase boundaries (5.4) → volume defects (5.5) → measuring microstructure: stereology (5.6) → how defects control properties (5.7).
 
@@ -42,17 +42,21 @@ The column "equilibrium?" is the key physical distinction. A defect is an equili
 
 ### Vacancies and self-interstitials
 
-A **vacancy** is an empty lattice site. A **self-interstitial** is a host atom squeezed into a site between normal positions. In close-packed metals the interstitial costs three to four times as much energy as a vacancy (about 3 eV against 1.3 eV in copper) because it must push its neighbours far apart; in thermal equilibrium vacancies outnumber self-interstitials by many orders of magnitude. Interstitials matter mainly when they are produced athermally, by irradiation. A fast neutron striking an atom in a reactor pressure vessel or a fusion first wall knocks it out of its site with tens of keV of energy and starts a **displacement cascade**, leaving behind equal numbers of vacancies and interstitials (Frenkel pairs). Their accumulation and clustering cause the swelling, hardening and embrittlement of nuclear materials (Chapter 33).
+A **vacancy** is an empty lattice site. A **self-interstitial** is a host atom squeezed into a site between normal positions. In close-packed metals the interstitial costs three to four times as much energy as a vacancy (about 3 eV against 1.3 eV in copper) because it must push its neighbours far apart; in thermal equilibrium vacancies outnumber self-interstitials by many orders of magnitude. Interstitials matter mainly when they are produced athermally, by irradiation. A fast neutron striking an atom in a reactor pressure vessel or a fusion first wall knocks it out of its site with tens of keV of energy and starts a **displacement cascade**, leaving behind equal numbers of vacancies and interstitials (Frenkel pairs). Their accumulation and clustering cause the swelling, hardening and embrittlement of nuclear materials (Chapter 41).
 
 ### Solutes: substitutional and interstitial
 
 A foreign atom can replace a host atom (**substitutional solute**) or occupy a gap between host atoms (**interstitial solute**). Substitution is favoured when the atoms are similar in size, crystal structure, electronegativity and valence — the Hume-Rothery rules (Chapter 7). Copper and nickel mix in all proportions; zinc dissolves in copper up to about 38 wt % to make α-brass; chromium, nickel and molybdenum substitute for iron in stainless steels.
 
-Interstitial solutes are small atoms — H, B, C, N, O — that fit, with distortion, into the octahedral and tetrahedral holes of the host lattice. In FCC metals the largest hole (octahedral) admits a sphere of radius $0.414R$ without distortion, where $R$ is the host atom radius; in BCC the largest hole (tetrahedral) admits only $0.291R$, and the octahedral one only $0.155R$. Carbon in iron, with a radius ratio near 0.57, fits better in FCC austenite than in BCC ferrite, so austenite dissolves up to 2.1 wt % carbon and ferrite only 0.022 wt %. The resulting supersaturation when austenite is quenched is the origin of martensite and of the whole heat-treatment practice of steels (Chapters 10 and 15). Hydrogen, the smallest interstitial, diffuses through steel even at room temperature and gathers at defects, which makes it the agent of hydrogen embrittlement in high-strength fasteners, pipelines and pressure vessels (Chapters 32 and 35).
+Interstitial solutes are small atoms — H, B, C, N, O — that fit, with distortion, into the octahedral and tetrahedral holes of the host lattice. In FCC metals the largest hole (octahedral) admits a sphere of radius $0.414R$ without distortion, where $R$ is the host atom radius; in BCC the largest hole (tetrahedral) admits only $0.291R$, and the octahedral one only $0.155R$. Carbon in iron, with a radius ratio near 0.57, fits better in FCC austenite than in BCC ferrite, so austenite dissolves up to 2.1 wt % carbon and ferrite only 0.022 wt %. The resulting supersaturation when austenite is quenched is the origin of martensite and of the whole heat-treatment practice of steels (Chapters 10 and 15). Hydrogen, the smallest interstitial, diffuses through steel even at room temperature and gathers at defects, which makes it the agent of hydrogen embrittlement in high-strength fasteners, pipelines and pressure vessels (Chapters 40 and 43).
 
 Every solute distorts the lattice around it: a large substitutional atom pushes neighbours out, a small one pulls them in, and an interstitial in a BCC octahedral site produces a tetragonal (non-spherical) distortion. These strain fields interact with dislocations, which is the basis of solid-solution strengthening (Chapter 13), and scatter electrons and phonons, which lowers electrical and thermal conductivity (Section 5.7).
 
 <!-- FIGURE 5.1 | figures/ch05/fig-5-1-point-defects.png | schematic | Point defects in an elemental metal and in an ionic crystal, with Kröger–Vink labels. | Content: panel (a) 2D close-packed-like array of grey host atoms showing a vacancy (empty site, neighbours relaxed inward), a self-interstitial (neighbours pushed out), a small substitutional solute (blue, neighbours pulled in), a large substitutional solute (red, neighbours pushed out) and an interstitial solute (small black atom, labelled "C in Fe"); displacement arrows show relaxations. Panel (b) 2D rock-salt-like array of small cations (+) and large anions (−): Schottky pair labelled V'_Na and V•_Cl; Frenkel pair in a silver-halide-like lattice labelled Ag•_i and V'_Ag; aliovalent Ca on Na site labelled Ca•_Na with a nearby compensating V'_Na. Panel (c) fluorite-type ZrO2 fragment with two Y'_Zr and one V••_O. Legend: main symbol = species (V = vacancy), subscript = site (i = interstitial), superscript = charge relative to perfect lattice (• positive, ' negative, × neutral). -->
+
+![Figure 5.1 — Point defects in an elemental metal and in an ionic crystal, with Kröger–Vink labels](../figures/ch05/fig-5-1-point-defects.png)
+
+*Figure 5.1 — Point defects in an elemental metal and in an ionic crystal, with Kröger–Vink labels.*
 
 ### The equilibrium concentration of vacancies
 
@@ -89,6 +93,10 @@ or $3.8\times10^{-5}\times8.47\times10^{28}=3.2\times10^{24}$ vacancies per cubi
 Two practical consequences follow. First, because diffusion in copper proceeds by atoms jumping into neighbouring vacancies, the diffusion rate inherits this enormous temperature dependence (Chapter 8): annealing, sintering, creep and homogenisation all happen at high temperature and essentially stop at low temperature. Second, a copper or aluminium alloy quenched from a high temperature keeps a large non-equilibrium vacancy population for minutes to hours, which accelerates room-temperature diffusion and makes natural ageing of aluminium alloys possible (Chapter 10).
 
 <!-- FIGURE 5.2 | figures/ch05/fig-5-2-vacancy-arrhenius.png | plot | Equilibrium vacancy fraction versus inverse temperature for several metals, and Schottky-pair fraction in NaCl, compared with an extrinsic (doping-controlled) level. | Content: x-axis 1000/T (K⁻¹) from 0.2 to 3.5, with a secondary top axis in °C; y-axis log10 c_v from −22 to −2. Straight lines c_v = exp(−ΔH/kT) (prefactor 1): Al (ΔH 0.67 eV) ending at its Tm 933 K, Cu (1.28 eV) ending at 1356 K, Ni (1.79 eV) ending at 1728 K, W (3.6 eV) ending at 3695 K; each line terminated with a dot labelled "Tm". NaCl Schottky fraction exp(−2.3 eV/2kT) dashed line ending at 1074 K. Horizontal dotted line at 10⁻⁴ labelled "cation vacancies from 100 ppm Ca²⁺ in NaCl (extrinsic)". Annotate the Cu point at 1273 K, c_v ≈ 3.8×10⁻⁵ with entropy factor. Shaded band 10⁻⁴–10⁻³ at the melting points labelled "most metals near Tm". -->
+
+![Figure 5.2 — Equilibrium vacancy fraction versus inverse temperature for several metals, and Schottky-pair fraction in NaCl, compared with an extrinsic (doping-controlled) level](../figures/ch05/fig-5-2-vacancy-arrhenius.png)
+
+*Figure 5.2 — Equilibrium vacancy fraction versus inverse temperature for several metals, and Schottky-pair fraction in NaCl, compared with an extrinsic (doping-controlled) level.*
 
 ---
 
@@ -134,7 +142,7 @@ $$
 \mathrm{Y_2O_3}\;\xrightarrow{\ \mathrm{ZrO_2}\ }\;2\,\mathrm{Y_{Zr}'}+3\,\mathrm{O_O^\times}+\mathrm{V_O^{\bullet\bullet}}
 $$
 
-One oxygen vacancy per two yttrium ions. In 3 mol % yttria-stabilised zirconia (3Y-TZP), a formula unit with 0.97 ZrO$_2$ and 0.03 Y$_2$O$_3$ contains 1.03 cations and 2.06 oxygen sites, of which 0.03 are vacant: 1.5 % of the oxygen sites are empty. In 8YSZ the figure is $0.08/2.16=3.7$ %. The vacancies stabilise the tetragonal and cubic forms of zirconia at room temperature, which is what makes 3Y-TZP a tough ceramic for hip-joint heads, dental crowns and cutting blades (Chapters 17 and 31); and they let oxide ions hop from vacancy to vacancy, which makes 8YSZ the electrolyte of solid-oxide fuel cells and of the oxygen sensors in every petrol-engine exhaust (Chapters 25 and 32).
+One oxygen vacancy per two yttrium ions. In 3 mol % yttria-stabilised zirconia (3Y-TZP), a formula unit with 0.97 ZrO$_2$ and 0.03 Y$_2$O$_3$ contains 1.03 cations and 2.06 oxygen sites, of which 0.03 are vacant: 1.5 % of the oxygen sites are empty. In 8YSZ the figure is $0.08/2.16=3.7$ %. The vacancies stabilise the tetragonal and cubic forms of zirconia at room temperature, which is what makes 3Y-TZP a tough ceramic for hip-joint heads, dental crowns and cutting blades (Chapters 17 and 39); and they let oxide ions hop from vacancy to vacancy, which makes 8YSZ the electrolyte of solid-oxide fuel cells and of the oxygen sensors in every petrol-engine exhaust (Chapters 25 and 40).
 
 > **Status of the principle: electroneutrality and site balance in defect reactions**
 > *Fundamental.* They express conservation of charge and of the crystal structure's site ratio; they hold for every defect reaction, and they — not the details of energetics — fix which compensating defects must form.
@@ -169,17 +177,17 @@ $$
 2\,\mathrm{Fe_{Fe}^\times}+\tfrac12\mathrm{O_2(g)}\;\rightleftharpoons\;2\,\mathrm{Fe_{Fe}^\bullet}+\mathrm{V_{Fe}''}+\mathrm{O_O^\times}
 $$
 
-In Fe$_{0.95}$O, 5 % of the iron sites are vacant and 10 % of the remaining iron is Fe$^{3+}$. Those vacancies are why iron ions diffuse quickly outward through the FeO layer of a steel oxide scale, and why FeO-rich scales grow fast above 570 °C (Chapter 34).
+In Fe$_{0.95}$O, 5 % of the iron sites are vacant and 10 % of the remaining iron is Fe$^{3+}$. Those vacancies are why iron ions diffuse quickly outward through the FeO layer of a steel oxide scale, and why FeO-rich scales grow fast above 570 °C (Chapter 42).
 
 Non-stoichiometry is engineered across the discipline:
 
 | Oxide | Defect | Engineering role |
 |---|---|---|
-| UO$_{2+x}$ | Oxygen interstitials $\mathrm{O_i''}$ | Nuclear fuel: $x$ changes thermal conductivity, creep and fission-gas release (Ch 33) |
+| UO$_{2+x}$ | Oxygen interstitials $\mathrm{O_i''}$ | Nuclear fuel: $x$ changes thermal conductivity, creep and fission-gas release (Ch 41) |
 | CeO$_{2-x}$ | $\mathrm{V_O^{\bullet\bullet}}$ + Ce$^{3+}$ | Three-way catalysts store and release oxygen as engine exhaust swings rich and lean |
 | SnO$_{2-x}$, ZnO$_{1-x}$, In$_2$O$_3$:Sn | $\mathrm{V_O^{\bullet\bullet}}$, donors | Gas sensors, transparent conducting electrodes for solar cells and displays |
-| Fe$_{1-x}$O, Ni$_{1-x}$O | Cation vacancies + holes | Growth of oxide scales on steels and nickel alloys (Ch 34) |
-| La$_{1-x}$Sr$_x$CoO$_{3-\delta}$ | $\mathrm{V_O^{\bullet\bullet}}$ | Mixed-conducting cathodes and oxygen-separation membranes (Ch 32) |
+| Fe$_{1-x}$O, Ni$_{1-x}$O | Cation vacancies + holes | Growth of oxide scales on steels and nickel alloys (Ch 42) |
+| La$_{1-x}$Sr$_x$CoO$_{3-\delta}$ | $\mathrm{V_O^{\bullet\bullet}}$ | Mixed-conducting cathodes and oxygen-separation membranes (Ch 40) |
 | BaTiO$_{3-\delta}$ | $\mathrm{V_O^{\bullet\bullet}}$ | Degradation of capacitor dielectrics fired in reducing atmosphere |
 
 > **Boundary.** The thermodynamics of defect equilibria — the law of mass action, defect formation energies and Brouwer diagrams — is developed in Chapter 6, and the electrical consequences in Chapter 25. The underlying chemical equilibrium theory belongs to the Advanced Chemistry book.
@@ -214,7 +222,11 @@ Dislocations choose the shortest available Burgers vector, because their line en
 
 A dislocation moves by **glide** in the plane containing its line and $\mathbf b$, which needs only shear stress, and an edge dislocation can also **climb** out of that plane by absorbing or emitting vacancies, which needs diffusion and becomes important above about $0.4\,T_m$ (creep, Chapter 14). Glide on the densest planes along the densest directions defines the **slip systems** — 12 $\{111\}\langle1\bar10\rangle$ systems in FCC metals, for example — whose number and ease of operation largely decide whether a material is ductile (Chapter 13).
 
-<!-- FIGURE 5.3 | figures/ch05/fig-5-3-dislocations-burgers.png | crystal | Edge, screw and mixed dislocations with Burgers circuits. | Content: panel (a) simple-cubic block with an extra half-plane inserted from the top; dislocation line ⊥ at its lower edge; a clockwise Burgers circuit of 4 steps up, 5 right, 4 down, 5 left around the line, and the same circuit in a perfect crystal failing to close by b (arrow perpendicular to line). Panel (b) block with a screw dislocation: front-right quarter sheared down one spacing; helical ramp of planes; circuit closure b parallel to line. Panel (c) a dislocation loop in a slip plane (top view), b constant (arrow), segments marked edge (b ⊥ line), screw (b ∥ line) and mixed; direction of glide expansion under shear stress τ; step of height b left on the crystal surface where the loop has exited. -->
+<!-- FIGURE 5.3 | figures/ch05/fig-5-3-dislocations-burgers.png | crystal | Edge, screw and mixed dislocations with Burgers circuits. | Content: panel (a) simple-cubic block with an extra half-plane inserted from the top; dislocation line ⊥ at its lower edge; a clockwise Burgers circuit of 4 steps up, 5 right, 4 down, 4 left around the line, and the same circuit in a perfect crystal failing to close by b (arrow perpendicular to line). Panel (b) block with a screw dislocation: front-right quarter sheared down one spacing; helical ramp of planes; circuit closure b parallel to line. Panel (c) a dislocation loop in a slip plane (top view), b constant (arrow), segments marked edge (b ⊥ line), screw (b ∥ line) and mixed; direction of glide expansion under shear stress τ; step of height b left on the crystal surface where the loop has exited. -->
+
+![Figure 5.3 — Edge, screw and mixed dislocations with Burgers circuits](../figures/ch05/fig-5-3-dislocations-burgers.png)
+
+*Figure 5.3 — Edge, screw and mixed dislocations with Burgers circuits.*
 
 ### How many dislocations?
 
@@ -259,7 +271,7 @@ which rises steeply from zero, flattens out and, beyond about 15°, merges into 
 > **Status of the principle: Read–Shockley energy of low-angle boundaries**
 > *Derived.* It follows from linear elasticity of a dislocation wall; valid below about $10$–$15^\circ$, where the dislocation cores are separate, and not applicable to high-angle boundaries.
 
-**High-angle boundaries.** Above about 15° the boundary is a disordered slab about 0.5–1 nm thick, with extra free volume and distorted bonds. Its energy is roughly constant, about a third of the surface energy: typically 0.3 J m$^{-2}$ in aluminium, 0.6 in copper, 0.8 in iron and about 1 J m$^{-2}$ in nickel. High-angle boundaries are fast diffusion paths (Chapter 8), sites for segregation, precipitation and corrosion (intergranular attack in sensitized stainless steel, Chapter 35), sources and sinks of vacancies, and obstacles to dislocations (Hall–Petch strengthening, Chapter 13).
+**High-angle boundaries.** Above about 15° the boundary is a disordered slab about 0.5–1 nm thick, with extra free volume and distorted bonds. Its energy is roughly constant, about a third of the surface energy: typically 0.3 J m$^{-2}$ in aluminium, 0.6 in copper, 0.8 in iron and about 1 J m$^{-2}$ in nickel. High-angle boundaries are fast diffusion paths (Chapter 8), sites for segregation, precipitation and corrosion (intergranular attack in sensitized stainless steel, Chapter 43), sources and sinks of vacancies, and obstacles to dislocations (Hall–Petch strengthening, Chapter 13).
 
 **Special boundaries and the coincidence site lattice.** At certain misorientations a fraction of the lattice sites of the two grains coincide. If the two lattices are imagined to interpenetrate, the coinciding points form a **coincidence site lattice** (CSL), and the boundary is labelled $\Sigma n$, where $1/n$ is the fraction of sites in coincidence. Low-$\Sigma$ boundaries pack well and often have low energy, low diffusivity and high resistance to segregation and corrosion. Real boundaries deviate slightly from exact coincidence; a boundary is usually counted as $\Sigma n$ if its deviation is below the **Brandon criterion** $\Delta\theta=15^\circ/\sqrt{n}$, which accommodates the deviation by a network of secondary dislocations.
 
@@ -278,6 +290,10 @@ which rises steeply from zero, flattens out and, beyond about 15°, merges into 
 **Grain-boundary engineering** exploits these differences. Repeated cycles of light deformation and annealing in low-stacking-fault-energy alloys (nickel alloys, austenitic stainless steels, lead alloys) raise the fraction of $\Sigma3^n$ boundaries ($\Sigma3$, $\Sigma9$, $\Sigma27$) above 50–70 % and break up the connectivity of the remaining random boundaries. Intergranular corrosion, stress-corrosion cracking and creep cavitation, which need a continuous path of susceptible boundaries, are then strongly reduced. Lead–acid battery grids, nuclear steam-generator tubing and superalloy components have been produced this way.
 
 <!-- FIGURE 5.4 | figures/ch05/fig-5-4-gb-energy-misorientation.png | plot | Grain-boundary energy versus misorientation: Read–Shockley rise for low-angle boundaries, a plateau for general high-angle boundaries, and cusps at special CSL boundaries. | Content: x-axis misorientation θ (degrees) 0–65 about a ⟨110⟩ tilt axis; y-axis boundary energy (J m⁻²) 0–0.8 for copper-like values. Curve: Read–Shockley γ = γ0 θ (A − ln θ) from 0 to ~15° rising to ~0.6; plateau ~0.6 J m⁻² beyond; cusps at Σ11 (50.5°, ~0.3), Σ9 (38.9°, ~0.5), and a deep cusp near Σ3 coherent twin (70.5° about ⟨110⟩, ~0.02–0.04; draw the axis to 75° to include it). Inset: low-angle tilt boundary as a wall of ⊥ symbols with spacing D = b/θ, labelled "θ = 2°, D = 8.2 nm for Al". Shade 0–15° "low-angle", rest "high-angle". -->
+
+![Figure 5.4 — Grain-boundary energy versus misorientation: Read–Shockley rise for low-angle boundaries, a plateau for general high-angle boundaries, and cusps at special CSL boundaries](../figures/ch05/fig-5-4-gb-energy-misorientation.png)
+
+*Figure 5.4 — Grain-boundary energy versus misorientation: Read–Shockley rise for low-angle boundaries, a plateau for general high-angle boundaries, and cusps at special CSL boundaries.*
 
 ### Twin boundaries
 
@@ -306,7 +322,7 @@ where $b_p=a/\sqrt6$ is the partial Burgers vector (with a correction factor of 
 | Silver | 30 | 0.4086 | 0.167 | 16 | 8.3 |
 | Austenitic stainless steel (316) | 77 | 0.359 | 0.147 | about 20 | 13 |
 
-For copper, $d=48\times10^9\times(0.1476\times10^{-9})^2/(2\pi\times0.045)=3.7\times10^{-9}$ m, about 25 atomic spacings along $\langle112\rangle$. In aluminium the partials are less than three spacings apart: effectively undissociated. The consequence is large. A widely dissociated dislocation must be constricted back to a perfect one before its screw segments can cross-slip onto another plane, which is hard when $d$ is large. Low-SFE metals therefore cannot easily bypass obstacles by cross-slip; they store dislocations in planar arrays, work-harden strongly, twin readily and keep high strength after cold work. This is why austenitic stainless steel and TWIP steel work-harden so much more than aluminium, why aluminium recovers rapidly during hot working while copper and stainless steel recrystallise, and why stacking-fault energy is a design variable in steels (Chapters 12, 13 and 15).
+For copper, $d=48\times10^9\times(0.1476\times10^{-9})^2/(2\pi\times0.045)=3.7\times10^{-9}$ m, about 14 nearest-neighbour distances. In aluminium the partials are about 2.5 nearest-neighbour distances apart: effectively undissociated. The consequence is large. A widely dissociated dislocation must be constricted back to a perfect one before its screw segments can cross-slip onto another plane, which is hard when $d$ is large. Low-SFE metals therefore cannot easily bypass obstacles by cross-slip; they store dislocations in planar arrays, work-harden strongly, twin readily and keep high strength after cold work. This is why austenitic stainless steel and TWIP steel work-harden so much more than aluminium, why aluminium recovers rapidly during hot working while copper and stainless steel recrystallise, and why stacking-fault energy is a design variable in steels (Chapters 12, 13 and 15).
 
 ### Phase boundaries
 
@@ -320,9 +336,13 @@ $$
 - **Semicoherent**: misfit too large to be accommodated elastically is relieved by **misfit dislocations** at a spacing $S\approx b/\lvert\delta\rvert$. Interface energy is 0.2–0.5 J m$^{-2}$. For a γ/γ′ interface with $b=0.254$ nm and $\lvert\delta\rvert=0.3$ %, $S\approx85$ nm; when γ′ particles grow beyond a few hundred nanometres, or after long creep exposure, such networks appear around them. The θ′ phase in Al–Cu, semicoherent on its broad faces, is another example.
 - **Incoherent**: no lattice continuity; the interface resembles a high-angle grain boundary, with energy 0.5–1 J m$^{-2}$ or more. Examples: equilibrium θ (Al$_2$Cu) particles, carbides on steel grain boundaries, oxide inclusions, fibre–matrix interfaces in metal-matrix composites.
 
-The sequence coherent → semicoherent → incoherent is the natural life history of a precipitate as it grows: small particles minimise interface energy by staying coherent, large ones minimise strain energy by losing coherency. It explains the precipitation sequence of age-hardening alloys and why their strength peaks and then falls (Chapter 10). The same classification applies to epitaxial thin films on substrates (Chapter 41), where the misfit-dislocation spacing and the threading dislocations that accompany them set the quality of LED, power-device and solar-cell layers (Chapter 26).
+The sequence coherent → semicoherent → incoherent is the natural life history of a precipitate as it grows: small particles minimise interface energy by staying coherent, large ones minimise strain energy by losing coherency. It explains the precipitation sequence of age-hardening alloys and why their strength peaks and then falls (Chapter 10). The same classification applies to epitaxial thin films on substrates (Chapter 49), where the misfit-dislocation spacing and the threading dislocations that accompany them set the quality of LED, power-device and solar-cell layers (Chapter 34).
 
 <!-- FIGURE 5.5 | figures/ch05/fig-5-5-phase-boundaries.png | schematic | Coherent, semicoherent and incoherent phase boundaries, and the Al–Cu precipitate sequence that passes through all three. | Content: top row, three 2D lattice schematics. (a) Coherent: matrix (grey) and precipitate (orange) lattices continuous across a flat interface; precipitate lattice spacing slightly larger, strain shown by bowed planes near interface; label "δ < ~1 %, γ_int < 0.2 J m⁻²". (b) Semicoherent: coherent patches separated by misfit edge dislocations (⊥) at spacing S = b/|δ|; label "γ/γ′ in Ni superalloy: δ = 0.3 %, S ≈ 85 nm". (c) Incoherent: unrelated lattices with disordered interface; label "γ_int 0.5–1 J m⁻²". Bottom row: schematic sequence in Al–4Cu: GP zone (single Cu layer, coherent) → θ″ (coherent plate) → θ′ (semicoherent plate, misfit dislocations on edges) → θ Al2Cu (incoherent, equiaxed), with arrow "ageing time / particle size" and small curve of yield strength vs ageing time peaking at θ″/θ′. -->
+
+![Figure 5.5 — Coherent, semicoherent and incoherent phase boundaries, and the Al–Cu precipitate sequence that passes through all three](../figures/ch05/fig-5-5-phase-boundaries.png)
+
+*Figure 5.5 — Coherent, semicoherent and incoherent phase boundaries, and the Al–Cu precipitate sequence that passes through all three.*
 
 ---
 
@@ -332,11 +352,11 @@ The sequence coherent → semicoherent → incoherent is the natural life histor
 
 **Pores** are the most common volume defect in cast, sintered, welded and additively manufactured parts, and in concrete.
 
-- **Castings** contain gas porosity (hydrogen rejected from solidifying aluminium, round pores 10–500 µm) and shrinkage porosity (irregular interdendritic cavities where liquid feeding failed). In cast aluminium suspension and engine components, fatigue cracks start at the largest pore near the surface; fatigue strength falls roughly with the square root of the pore's projected area (Chapters 14 and 38).
+- **Castings** contain gas porosity (hydrogen rejected from solidifying aluminium, round pores 10–500 µm) and shrinkage porosity (irregular interdendritic cavities where liquid feeding failed). In cast aluminium suspension and engine components, fatigue cracks start at the largest pore near the surface; fatigue strength falls roughly with the square root of the pore's projected area (Chapters 14 and 46).
 - **Sintered ceramics and powder metals** retain residual porosity between particles. Strength and stiffness fall steeply with porosity $P$; useful empirical fits are $\sigma\approx\sigma_0\,e^{-bP}$ with $b\approx4$–$7$ for strength, and $E\approx E_0(1-1.9P+0.9P^2)$ for modulus. For $b=7$, 5 % porosity costs 30 % of the strength but only about 9 % of the stiffness, because strength is controlled by the largest flaw and stiffness by the average section.
-- **Additive manufacturing** produces lack-of-fusion pores (irregular, between unmelted powder layers) and keyhole pores (spherical, trapped vapour), which dominate the fatigue scatter of printed titanium and nickel parts and are closed by hot isostatic pressing (Chapter 40).
+- **Additive manufacturing** produces lack-of-fusion pores (irregular, between unmelted powder layers) and keyhole pores (spherical, trapped vapour), which dominate the fatigue scatter of printed titanium and nickel parts and are closed by hot isostatic pressing (Chapter 48).
 - **Concrete** contains capillary pores from excess mixing water, which control strength and permeability, and deliberately **entrained air** — 4–7 % by volume of 10–100 µm bubbles — which gives freezing water room to expand and is essential for freeze–thaw resistance of bridge decks and pavements (Chapter 18).
-- **Irradiation and creep voids.** Vacancies produced by neutron irradiation condense into voids that swell austenitic steels by several percent (Chapter 33); vacancies flowing to grain boundaries under creep nucleate cavities that link into creep cracks (Chapter 14).
+- **Irradiation and creep voids.** Vacancies produced by neutron irradiation condense into voids that swell austenitic steels by several percent (Chapter 41); vacancies flowing to grain boundaries under creep nucleate cavities that link into creep cracks (Chapter 14).
 
 > **Status of the principle: exponential porosity–strength relation**
 > *Empirical.* A fit to data for ceramics and powder metals over porosities of roughly 0–30 %; the constant depends on pore shape and connectivity, and the relation has no meaning for isolated large flaws, which must be treated by fracture mechanics (Chapter 14).
@@ -351,7 +371,7 @@ The sequence coherent → semicoherent → incoherent is the natural life histor
 
 ### Precipitates and dispersoids
 
-**Precipitates** form within the material from a supersaturated solid solution, during heat treatment or service. They range from clusters of a few atoms to micrometre particles and can be coherent, semicoherent or incoherent (Section 5.4). Deliberately produced fine precipitates — θ″/θ′ in Al–Cu aerospace alloys, γ′ in turbine discs and blades, carbides in tempered martensite, NbC and VC in microalloyed steels — are the most powerful strengthening tool in metallurgy because they block dislocations (Chapter 13) while consuming little alloying. **Dispersoids** are fine particles that do not dissolve at all: Y–Ti–O nanoclusters in oxide-dispersion-strengthened steels for reactors, Al$_2$O$_3$ in dispersion-strengthened copper for welding electrodes, and Al–Mn–Fe dispersoids that control grain structure in aluminium alloys. Unwanted precipitates are equally important: chromium carbides on grain boundaries of sensitized stainless steel cause intergranular corrosion (Chapter 35), and σ phase in duplex steels and superalloys embrittles them.
+**Precipitates** form within the material from a supersaturated solid solution, during heat treatment or service. They range from clusters of a few atoms to micrometre particles and can be coherent, semicoherent or incoherent (Section 5.4). Deliberately produced fine precipitates — θ″/θ′ in Al–Cu aerospace alloys, γ′ in turbine discs and blades, carbides in tempered martensite, NbC and VC in microalloyed steels — are the most powerful strengthening tool in metallurgy because they block dislocations (Chapter 13) while consuming little alloying. **Dispersoids** are fine particles that do not dissolve at all: Y–Ti–O nanoclusters in oxide-dispersion-strengthened steels for reactors, Al$_2$O$_3$ in dispersion-strengthened copper for welding electrodes, and Al–Mn–Fe dispersoids that control grain structure in aluminium alloys. Unwanted precipitates are equally important: chromium carbides on grain boundaries of sensitized stainless steel cause intergranular corrosion (Chapter 43), and σ phase in duplex steels and superalloys embrittles them.
 
 ---
 
@@ -408,6 +428,10 @@ and to the number of grains per square millimetre of section, $N_A$, by $G=3.321
 
 <!-- FIGURE 5.6 | figures/ch05/fig-5-6-stereology-grid.png | micrograph-style | Stereological measurement on a section: line intercepts for grain size and interface area, point counting for volume fraction. | Content: synthetic 2D micrograph (Voronoi-like grains, mean intercept ~20 µm at a 100 µm scale bar) of a two-phase ferrite (light) + pearlite (dark, ~18 % area) steel. Overlay: five horizontal test lines with grain-boundary intersections marked as small ticks (count shown, e.g. "N = 125 on L_T = 2.5 mm → P_L = 50 mm⁻¹, L̄ = 20 µm, S_V = 0.1 µm⁻¹, G = 8.0"); a superimposed square grid of points with those falling in pearlite marked as filled dots ("P_P = 72/400 = 0.18 ± 0.02"). Side panel: small schematic of a sphere cut by random planes showing why section diameters are smaller than the true diameter, with mean intercept L̄ = 2D/3. -->
 
+![Figure 5.6 — Stereological measurement on a section: line intercepts for grain size and interface area, point counting for volume fraction](../figures/ch05/fig-5-6-stereology-grid.png)
+
+*Figure 5.6 — Stereological measurement on a section: line intercepts for grain size and interface area, point counting for volume fraction.*
+
 **Worked example — Grain size, interface area and phase fraction of a structural steel.** A polished and etched section of a ferrite–pearlite steel is photographed at 200× magnification. Five test lines, each 100 mm long on the print, are laid across it: $L_T=500\ \mathrm{mm}/200=2.5$ mm on the specimen. They cross 125 grain boundaries.
 
 $$
@@ -456,7 +480,7 @@ First, **the same defect can help or harm**. Grain boundaries strengthen at low 
 
 Second, **properties differ in their sensitivity to defect populations**. Elastic modulus, density and heat capacity are *structure-insensitive*: they change by at most a few percent with defect content. Yield strength, toughness, fatigue life, conductivity of semiconductors, creep rate, coercivity and corrosion rate are *structure-sensitive*: they can change by factors of ten to a million. Structure-sensitive properties are the ones processing can control, and the ones that show scatter.
 
-Third, **the weakest-link defects are rare**. Strength-limiting flaws in ceramics, rogue inclusions in turbine discs and the largest pore in a casting are, by definition, the extremes of a distribution. Average microstructural measures from stereology cannot see them; extreme-value statistics, Weibull analysis and non-destructive inspection are needed (Chapters 11, 14 and 42).
+Third, **the weakest-link defects are rare**. Strength-limiting flaws in ceramics, rogue inclusions in turbine discs and the largest pore in a casting are, by definition, the extremes of a distribution. Average microstructural measures from stereology cannot see them; extreme-value statistics, Weibull analysis and non-destructive inspection are needed (Chapters 11, 14 and 52).
 
 ---
 
@@ -471,8 +495,8 @@ Third, **the weakest-link defects are rare**. Strength-limiting flaws in ceramic
 | What are the stress fields, forces, interactions and sources of dislocations? | Chapter 12 |
 | How do dislocations, solutes, boundaries and precipitates combine to set strength? | Chapter 13 |
 | How do pores and inclusions control fatigue and fracture? | Chapter 14 |
-| How do defects set electrical, thermal, magnetic and optical behaviour? | Chapters 24–28 |
-| How are defects created by irradiation, and how are they managed in reactors? | Chapter 33 |
-| How are defects imaged and measured: TEM, EBSD, atom probe, positron annihilation, tomography? | Chapters 42–44 |
+| How do defects set electrical, thermal, magnetic and optical behaviour? | Chapters 24–36 |
+| How are defects created by irradiation, and how are they managed in reactors? | Chapter 41 |
+| How are defects imaged and measured: TEM, EBSD, atom probe, positron annihilation, tomography? | Chapters 52–54 |
 
 **Next:** Part II begins with Chapter 6, which supplies the thermodynamics behind the phases, solutions, interfaces and point defects met so far.

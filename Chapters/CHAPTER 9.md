@@ -86,6 +86,10 @@ Figure 9.1 plots the two terms and their sum for copper. Clusters smaller than $
 
 <!-- FIGURE 9.1 | figures/ch09/fig-9-1-nucleation-barrier.png | plot | Gibbs energy of a spherical solid cluster in undercooled liquid copper versus radius, showing the surface and volume terms and the critical nucleus at two undercoolings. | Content: x-axis radius r 0–6 nm, y-axis ΔG in units of 1e−18 J from −10 to +10. Copper data: γ_SL = 0.177 J/m², ΔH_v = 1.88e9 J/m³, Tm = 1358 K. Dashed curves: surface term +4πr²γ and volume term −(4/3)πr³ΔG_v for ΔT = 100 K. Solid curve: total ΔG for ΔT = 100 K, maximum at r* = 2.56 nm, ΔG* = 4.85e−18 J (marked). Second solid curve for ΔT = 236 K with r* = 1.08 nm, ΔG* = 0.87e−18 J. Label regions "embryos shrink" (r < r*) and "nuclei grow" (r > r*). -->
 
+![Figure 9.1 — Gibbs energy of a spherical solid cluster in undercooled liquid copper versus radius, showing the surface and volume terms and the critical nucleus at two undercoolings](../figures/ch09/fig-9-1-nucleation-barrier.png)
+
+*Figure 9.1 — Gibbs energy of a spherical solid cluster in undercooled liquid copper versus radius, showing the surface and volume terms and the critical nucleus at two undercoolings.*
+
 ### The nucleation rate
 
 The equilibrium number of critical clusters per unit volume follows a Boltzmann distribution, $N^*=N_0\exp(-\Delta G^*/kT)$, where $N_0$ is the number of atoms per unit volume. Each critical cluster becomes a growing nucleus when one more atom joins it, at a rate set by atomic jumps across the interface (a frequency $\nu$ that contains its own activation energy for atomic transport, as in Chapter 8). The steady-state **nucleation rate** is therefore
@@ -155,6 +159,10 @@ Figure 9.2 shows how steeply $f(\theta)$ falls with decreasing contact angle. Be
 
 <!-- FIGURE 9.2 | figures/ch09/fig-9-2-heterogeneous-nucleation.png | plot | Heterogeneous nucleation: a spherical-cap nucleus on a substrate, and the barrier-reduction factor f(θ) versus contact angle. | Content: left panel schematic: flat substrate S′, liquid L above, solid cap S with radius of curvature r and contact angle θ; tension vectors γ_LS′, γ_SS′, γ_SL at the triple line. Right panel: x-axis θ 0–180°, y-axis f(θ) on log scale 1e−5 to 1, solid curve f(θ) = (2+cosθ)(1−cosθ)²/4, secondary axis √f; markers at θ = 20° (f = 0.0027), 30° (0.013), 90° (0.5); shaded region θ < 30° labelled "potent nucleants (TiB2/Al3Ti in Al, AgI for ice)". -->
 
+![Figure 9.2 — Heterogeneous nucleation: a spherical-cap nucleus on a substrate, and the barrier-reduction factor f(θ) versus contact angle](../figures/ch09/fig-9-2-heterogeneous-nucleation.png)
+
+*Figure 9.2 — Heterogeneous nucleation: a spherical-cap nucleus on a substrate, and the barrier-reduction factor f(θ) versus contact angle.*
+
 ### What makes a good nucleant
 
 A low contact angle corresponds to a low interfacial energy between the nucleating solid and the substrate, which in turn requires good **lattice matching** and chemical affinity. The **planar disregistry** (lattice mismatch) between low-index planes of substrate and nucleus is a useful empirical guide: below about 6 % a substrate is usually a potent nucleant, above about 12 % rarely. Examples across engineering:
@@ -205,7 +213,7 @@ where $C_0$ is the far-field matrix concentration, $C_m$ the matrix concentratio
 
 Heat is the analogue of solute in solidification: the latent heat must flow away, either into the cold mould (columnar growth into a positive temperature gradient) or into an undercooled liquid (free equiaxed growth). Both diffusions, of heat and of solute, decide the shapes of crystals growing from the melt (Section 9.6).
 
-Many transformations have **mixed control**, with interface reaction dominating at first and diffusion later. The growth of ferrite from austenite in low-alloy steels, and of oxide scales (interface-controlled linear kinetics early, parabolic later, Chapter 34), are examples.
+Many transformations have **mixed control**, with interface reaction dominating at first and diffusion later. The growth of ferrite from austenite in low-alloy steels, and of oxide scales (interface-controlled linear kinetics early, parabolic later, Chapter 42), are examples.
 
 ---
 
@@ -263,6 +271,10 @@ Plotting, for each temperature, the time to reach a given fraction transformed (
 
 <!-- FIGURE 9.3 | figures/ch09/fig-9-3-jmak-ttt.png | plot | Overall transformation kinetics: JMAK curves for several Avrami exponents, and the construction of a C-shaped TTT curve from nucleation and growth rates. | Content: left panel: x-axis log time (min) 0.1–1000, y-axis fraction transformed 0–1; JMAK curves with n = 1, 1.72 and 4 all passing through f = 0.5 at 30 min; markers at (10 min, 0.10) and (60 min, 0.90) on the n = 1.72 curve (worked example). Right panel: y-axis temperature from Te (equilibrium) downward; left sub-plot sketches nucleation rate I(T) (zero at Te, peaking at large undercooling) and growth rate v(T) (peaking closer to Te); main plot x-axis log time with C-curves for 1 % and 99 % transformed, nose labelled, and a cooling path just missing the nose labelled "critical cooling rate". -->
 
+![Figure 9.3 — Overall transformation kinetics: JMAK curves for several Avrami exponents, and the construction of a C-shaped TTT curve from nucleation and growth rates](../figures/ch09/fig-9-3-jmak-ttt.png)
+
+*Figure 9.3 — Overall transformation kinetics: JMAK curves for several Avrami exponents, and the construction of a C-shaped TTT curve from nucleation and growth rates.*
+
 ---
 
 ## 9.6 Solidification: fronts, dendrites and constitutional supercooling
@@ -294,6 +306,10 @@ As $G/V$ falls below the critical value, the front evolves from **planar** to **
 
 <!-- FIGURE 9.4 | figures/ch09/fig-9-4-constitutional-supercooling.png | schematic | Constitutional supercooling ahead of a solidifying alloy front, and the sequence of interface morphologies as G/V decreases. | Content: top-left: solute profile C_L(x′) decaying from C0/k at the interface to C0 over distance D_L/V. Top-right: corresponding liquidus temperature T_L(x′) rising from the solidus to the liquidus of C0, with two straight actual-temperature lines: steep G (no supercooling) and shallow G (shaded supercooled zone between T_L and the line). Bottom strip: four sketches of the interface: planar, cellular, columnar dendritic, equiaxed dendritic, under an arrow of decreasing G/V; secondary axis showing "GV increasing → finer spacing". Annotation: Al–4.5Cu, ΔT0 = 75 K, critical G/V = 2.5e10 K·s/m². -->
 
+![Figure 9.4 — Constitutional supercooling ahead of a solidifying alloy front, and the sequence of interface morphologies as G/V decreases](../figures/ch09/fig-9-4-constitutional-supercooling.png)
+
+*Figure 9.4 — Constitutional supercooling ahead of a solidifying alloy front, and the sequence of interface morphologies as G/V decreases.*
+
 **Worked example — Can an aluminium–copper alloy freeze with a planar front?** For Al–4.5 wt% Cu, take the liquidus slope $m=3.4$ K per wt% Cu, $k=0.17$ and $D_L=3\times10^{-9}$ m²/s.
 
 *Freezing range.*
@@ -306,7 +322,7 @@ $$
 
 *Speed limit.* In a steep laboratory gradient of $G=10$ K/mm ($10^4$ K/m), a planar front requires $V\le10^4/2.5\times10^{10}=4\times10^{-7}$ m/s, or 0.4 µm/s (1.4 mm per hour). Even at 100 K/mm, the limit is only 4 µm/s.
 
-Planar solidification of a typical engineering alloy is possible only in slow laboratory crystal growth. Every casting, weld and additively manufactured part of such an alloy solidifies dendritically. Directionally solidified and single-crystal nickel-superalloy turbine blades, grown at 3–10 K/mm and a few mm/min, are still dendritic; "single crystal" means that all the dendrites belong to one crystal, selected by a spiral "grain selector" at the base of the mould, so that no grain boundaries are available for creep cavitation (Chapter 33). Semiconductor crystals are the exception: silicon is nearly pure, dopant concentrations are tiny, so $\Delta T_0$ is small and Czochralski growth at about 1 mm/min proceeds with a planar (or smoothly curved) interface.
+Planar solidification of a typical engineering alloy is possible only in slow laboratory crystal growth. Every casting, weld and additively manufactured part of such an alloy solidifies dendritically. Directionally solidified and single-crystal nickel-superalloy turbine blades, grown at 3–10 K/mm and a few mm/min, are still dendritic; "single crystal" means that all the dendrites belong to one crystal, selected by a spiral "grain selector" at the base of the mould, so that no grain boundaries are available for creep cavitation (Chapter 41). Semiconductor crystals are the exception: silicon is nearly pure, dopant concentrations are tiny, so $\Delta T_0$ is small and Czochralski growth at about 1 mm/min proceeds with a planar (or smoothly curved) interface.
 
 ### Dendrite arm spacing
 
@@ -367,11 +383,15 @@ The two limits differ qualitatively (Figure 9.5): equilibrium predicts a single-
 
 <!-- FIGURE 9.5 | figures/ch09/fig-9-5-scheil-vs-lever.png | plot | Solid composition and liquid composition versus fraction solid for Al–4.5 wt% Cu under equilibrium (lever rule) and Scheil solidification. | Content: x-axis fraction solid f_s 0–1, y-axis wt% Cu 0–35. Curves: Scheil C_S = kC0(1−f_s)^(k−1) with k = 0.17 from 0.77 wt% (f_s = 0) through 1.36 (0.5) and 5.2 (0.9), terminating at f_s = 0.91 where C_L reaches 33.2 wt% (eutectic, horizontal dashed line); Scheil C_L curve rising to 33.2; equilibrium lever-rule C_S and C_L curves ending at f_s = 1 with C_S = 4.5 wt%. Shade the final 9 % labelled "non-equilibrium eutectic (Scheil)". Inset: schematic of a cored dendrite with Cu-rich interdendritic regions. -->
 
+![Figure 9.5 — Solid composition and liquid composition versus fraction solid for Al–4.5 wt% Cu under equilibrium (lever rule) and Scheil solidification](../figures/ch09/fig-9-5-scheil-vs-lever.png)
+
+*Figure 9.5 — Solid composition and liquid composition versus fraction solid for Al–4.5 wt% Cu under equilibrium (lever rule) and Scheil solidification.*
+
 ### Macrosegregation and segregation in crystal growth
 
 Microsegregation occurs over dendrite arm spacings and can be removed by homogenization. **Macrosegregation**, composition variation over the scale of a whole ingot, arises when solute-rich liquid is moved by convection, shrinkage flow or buoyancy; it produces "A-segregates" and centre-line segregation in large steel ingots for forgings and in continuously cast slabs, which cannot be removed by heat treatment and must be controlled by casting practice.
 
-In crystal growth the Scheil equation, called the **normal-freezing** equation, gives the axial dopant distribution. For a Czochralski silicon ingot pulled from a melt doped with boron ($k=0.8$), the dopant concentration rises from $0.80C_0$ at the seed end to $0.92C_0$ at half length and $1.27C_0$ at 90 % solidified; with phosphorus ($k=0.35$) it rises from $0.35C_0$ through $0.55C_0$ to $1.56C_0$. Because resistivity tracks dopant concentration, wafers from different parts of a phosphorus-doped ingot differ in resistivity by a factor of more than four, and only part of each ingot meets a tight specification (Chapter 26).
+In crystal growth the Scheil equation, called the **normal-freezing** equation, gives the axial dopant distribution. For a Czochralski silicon ingot pulled from a melt doped with boron ($k=0.8$), the dopant concentration rises from $0.80C_0$ at the seed end to $0.92C_0$ at half length and $1.27C_0$ at 90 % solidified; with phosphorus ($k=0.35$) it rises from $0.35C_0$ through $0.55C_0$ to $1.56C_0$. Because resistivity tracks dopant concentration, wafers from different parts of a phosphorus-doped ingot differ in resistivity by a factor of more than four, and only part of each ingot meets a tight specification (Chapter 32).
 
 ### Zone refining
 
@@ -407,7 +427,7 @@ so doubling the growth rate reduces the spacing by $\sqrt2$. Lamellar structures
 In a peritectic $L+\alpha\to\beta$, the product β forms first at the α–liquid interface and then separates the reactants; the reaction can continue only by diffusion through β, so it is rarely completed. Three engineering examples:
 
 - **Steel continuous casting.** "Peritectic" steels (about 0.09–0.17 wt% C) undergo δ→γ near 1495 °C in the thin solid shell, with a contraction that pulls the shell from the mould and leads to uneven shell thickness, depressions and surface cracks (Chapter 7). Casters use special mould fluxes and reduced casting speeds.
-- **Nd–Fe–B magnets.** The magnetic phase Nd₂Fe₁₄B forms peritectically from primary iron and liquid. Ingot casting leaves soft-magnetic primary α-iron dendrites that degrade the magnet; rapid **strip casting** (cooling rates of order 10³ K/s) suppresses primary iron and gives the fine, uniform alloy used for sintered magnets in electric vehicle motors and wind turbines (Chapter 27).
+- **Nd–Fe–B magnets.** The magnetic phase Nd₂Fe₁₄B forms peritectically from primary iron and liquid. Ingot casting leaves soft-magnetic primary α-iron dendrites that degrade the magnet; rapid **strip casting** (cooling rates of order 10³ K/s) suppresses primary iron and gives the fine, uniform alloy used for sintered magnets in electric vehicle motors and wind turbines (Chapter 29).
 - **YBCO superconductors.** YBa₂Cu₃O₇₋δ forms peritectically near 1000 °C from Y₂BaCuO₅ and liquid. Slow "melt-texturing" through the peritectic grows large aligned grains for levitation magnets and current leads.
 
 ### Casting macrostructure
@@ -420,9 +440,13 @@ A metal poured into a mould typically develops three zones (Figure 9.6):
 
 The balance between columnar and equiaxed zones is a central control in casting. Large columnar grains give anisotropic properties, hot tearing and poor workability (the opening example); inoculation, low pouring temperature, stirring (mechanical or electromagnetic) and alloying with growth-restricting solutes (such as Ti in Al, quantified by a "growth-restriction factor" proportional to $mC_0(1-k)$) promote equiaxed grains. Conversely, directional solidification deliberately eliminates equiaxed grains to produce columnar or single-crystal turbine blades whose grain boundaries are aligned with, or absent from, the stress axis.
 
-Solidification time itself, which governs dendrite arm spacing and grain size, is estimated for sand castings by **Chvorinov's rule**, $t_s=B\,(V/A)^2$, where $V/A$ is the casting modulus (volume over cooling surface area) and $B$ is a mould constant. Feeders (risers) are designed to have a larger modulus than the section they feed, so that they freeze last and supply liquid to compensate for solidification shrinkage of 3–7 % in most metals (Chapter 38).
+Solidification time itself, which governs dendrite arm spacing and grain size, is estimated for sand castings by **Chvorinov's rule**, $t_s=B\,(V/A)^2$, where $V/A$ is the casting modulus (volume over cooling surface area) and $B$ is a mould constant. Feeders (risers) are designed to have a larger modulus than the section they feed, so that they freeze last and supply liquid to compensate for solidification shrinkage of 3–7 % in most metals (Chapter 46).
 
 <!-- FIGURE 9.6 | figures/ch09/fig-9-6-casting-macrostructure.png | schematic | Macrostructure of a cast ingot: chill zone, columnar zone and equiaxed zone, with the effect of grain-refiner addition. | Content: two side-by-side half-sections of a cylindrical ingot (about 100 mm diameter). Left "no refiner": thin chill zone of fine grains at the wall (~1 mm), long columnar grains (tens of mm) growing radially inward, small central equiaxed zone; annotations "⟨100⟩ ∥ heat flow", "hot tears between columnar grains". Right "with Al–5Ti–1B": fully fine equiaxed grains of ~150 µm (drawn schematically). Below: a cooling-rate/scale bar mapping process to secondary dendrite arm spacing: sand casting (~1 K/s, λ2 ≈ 50–100 µm), permanent mould (~10 K/s), pressure die casting (~100 K/s, λ2 ≈ 10 µm), atomization and additive manufacturing (1e3–1e6 K/s, sub-micrometre cells). -->
+
+![Figure 9.6 — Macrostructure of a cast ingot: chill zone, columnar zone and equiaxed zone, with the effect of grain-refiner addition](../figures/ch09/fig-9-6-casting-macrostructure.png)
+
+*Figure 9.6 — Macrostructure of a cast ingot: chill zone, columnar zone and equiaxed zone, with the effect of grain-refiner addition.*
 
 ---
 
@@ -442,7 +466,7 @@ Conventional casting cools at 0.1–100 K/s. Rapid solidification processes reac
 | Melt spinning | 10⁵–10⁶ | Amorphous and nanocrystalline ribbons 20–50 µm thick |
 | Splat quenching, laser surface glazing | 10⁶–10⁸ | Foils, surface layers |
 
-The effects of rapid solidification follow from this chapter's results. Higher cooling rates mean finer dendrites and eutectics (Sections 9.6 and 9.8), less segregation, **extended solid solubility** (solute trapped in the solid at concentrations far above the equilibrium solvus, as interface velocities approach the speed of solute diffusion and $k\to1$), and **metastable phases** that nucleate faster than the stable ones. Additively manufactured aluminium and nickel alloys owe their high as-built strength to sub-micrometre cells, and also their susceptibility to solidification cracking, to these effects (Chapter 40).
+The effects of rapid solidification follow from this chapter's results. Higher cooling rates mean finer dendrites and eutectics (Sections 9.6 and 9.8), less segregation, **extended solid solubility** (solute trapped in the solid at concentrations far above the equilibrium solvus, as interface velocities approach the speed of solute diffusion and $k\to1$), and **metastable phases** that nucleate faster than the stable ones. Additively manufactured aluminium and nickel alloys owe their high as-built strength to sub-micrometre cells, and also their susceptibility to solidification cracking, to these effects (Chapter 48).
 
 ### Bypassing crystallization: metallic glasses
 
@@ -473,7 +497,7 @@ Having no crystal lattice and therefore no dislocations, metallic glasses yield 
 
 | Application | Material | Property exploited |
 |---|---|---|
-| Distribution-transformer cores | Fe–Si–B ribbon (melt-spun) | Core loss about 60–75 % lower than grain-oriented Si steel; no grain boundaries or magnetocrystalline anisotropy (Chapter 27) |
+| Distribution-transformer cores | Fe–Si–B ribbon (melt-spun) | Core loss about 60–75 % lower than grain-oriented Si steel; no grain boundaries or magnetocrystalline anisotropy (Chapter 29) |
 | Anti-theft tags, magnetic sensors | Co- and Fe-based ribbons | Soft magnetism, magnetostriction |
 | Golf club faces, springs, watch parts | Zr- and Ti-based bulk glasses | High elastic strain and resilience |
 | Precision gears for micromotors, surgical blades | Zr-, Ni-based glasses | Net-shape moulding, sharp edges, wear |
@@ -497,8 +521,8 @@ The last row closes a circle: annealing a metallic glass just above $T_g$ trigge
 | How are cast irons and steels inoculated, cast and heat-treated? | Chapter 15 |
 | How are glasses formed and glass-ceramics crystallized? | Chapter 17 |
 | How do polymers crystallize, and how is crystallinity controlled in moulding? | Chapter 20 |
-| How are silicon crystals grown and doped for devices? | Chapter 26 |
-| How are casting, welding and additive manufacturing processes designed around solidification? | Chapters 38, 39 and 40 |
-| How are nucleation and dendritic growth simulated by phase-field and atomistic methods? | Chapter 46 |
+| How are silicon crystals grown and doped for devices? | Chapter 50 |
+| How are casting, welding and additive manufacturing processes designed around solidification? | Chapters 46, 47 and 48 |
+| How are nucleation and dendritic growth simulated by phase-field and atomistic methods? | Chapter 56 |
 
 **Next:** Chapter 10 carries nucleation and growth into the solid state, where strain energy, coherency and diffusionless shear produce the precipitates, pearlite, bainite and martensite that give engineering alloys their strength.

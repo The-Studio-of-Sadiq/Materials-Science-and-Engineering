@@ -13,13 +13,13 @@ In the same plant, stainless-steel tube leaving a bright-annealing furnace at 11
 |---|---|
 | Gibbs energy, chemical potential, equilibrium | Every phase diagram (Ch 7) and transformation (Ch 9–10) |
 | Ideal, regular and real solutions; activity | Alloy design, slag–metal refining, braze and solder chemistry, carbon potential of furnace atmospheres |
-| Gibbs–Duhem equation | Obtaining one component's activity from another's; consistency of thermodynamic databases (CALPHAD, Ch 7, 46) |
+| Gibbs–Duhem equation | Obtaining one component's activity from another's; consistency of thermodynamic databases (CALPHAD, Ch 7, 56) |
 | Free-energy curves, common tangent | Phase boundaries, lever rule, driving forces for precipitation |
 | Miscibility gaps and spinodals | 475 °C embrittlement, Alnico and Fe–Cr–Co magnets, phase-separated glasses, polymer blends (Ch 20) |
 | Sublattice models, ordering | Interstitial steels, intermetallics (Ni$_3$Al, TiAl), ordered superalloy phases |
-| Surface and interface energy, Gibbs–Thomson, wetting | Coarsening (Ch 10), nanoparticle melting (Ch 30), brazing and soldering (Ch 39), liquid-phase sintering (Ch 17) |
-| Thermodynamics of point defects | Vacancy equilibrium, oxide conductivity, fuel-cell and sensor ceramics (Ch 25, 32) |
-| Ellingham diagrams | Extractive metallurgy, heat-treatment atmospheres, oxidation resistance (Ch 34), brazing atmospheres |
+| Surface and interface energy, Gibbs–Thomson, wetting | Coarsening (Ch 10), nanoparticle melting (Ch 38), brazing and soldering (Ch 47), liquid-phase sintering (Ch 17) |
+| Thermodynamics of point defects | Vacancy equilibrium, oxide conductivity, fuel-cell and sensor ceramics (Ch 25, 40) |
+| Ellingham diagrams | Extractive metallurgy, heat-treatment atmospheres, oxidation resistance (Ch 42), brazing atmospheres |
 
 **Roadmap.** Gibbs energy and equilibrium (6.1) → solutions and activity (6.2) → free-energy curves and the common tangent (6.3) → miscibility gaps and spinodals (6.4) → sublattices and ordering (6.5) → surfaces and interfaces (6.6) → point defects (6.7) → oxidation and reduction: Ellingham diagrams (6.8).
 
@@ -114,6 +114,10 @@ $$
 The **interaction parameter** $\Omega$ summarises the chemistry. If unlike bonds are stronger (more negative) than the average of like bonds, $\Omega<0$: mixing is exothermic, the atoms prefer unlike neighbours and, at low temperature, may order (Section 6.5) or form compounds. If unlike bonds are weaker, $\Omega>0$: mixing is endothermic and, at low enough temperature, the solution splits into two (Section 6.4). The dimensionless ratio $\Omega/RT$ decides the shape of the curve (Figure 6.1).
 
 <!-- FIGURE 6.1 | figures/ch06/fig-6-1-regular-solution-curves.png | plot | Gibbs energy of mixing of a regular solution for several values of Ω/RT: a single minimum for Ω/RT < 2, two minima and a central hump for Ω/RT > 2. | Content: x-axis mole fraction x_B 0–1; y-axis ΔG_mix/RT from −0.8 to +0.3. Five curves: Ω/RT = −2 (deep single minimum, label "ordering tendency"), 0 (ideal, minimum −ln2 = −0.693), 1.5, 2.0 (flat bottom, label "critical"), 3.0 (two minima at x = 0.071 and 0.929 with ΔG/RT = −0.058, hump at x = 0.5 rising to +0.057). On the Ω/RT = 3 curve mark the inflection points (spinodal, x = 0.211 and 0.789) and draw the common tangent touching the two minima. Inset: separate ΔH_mix = Ω x(1−x) and −TΔS_mix curves for Ω/RT = 3. -->
+
+![Figure 6.1 — Gibbs energy of mixing of a regular solution for several values of Ω/RT: a single minimum for Ω/RT < 2, two minima and a central hump for Ω/RT > 2](../figures/ch06/fig-6-1-regular-solution-curves.png)
+
+*Figure 6.1 — Gibbs energy of mixing of a regular solution for several values of Ω/RT: a single minimum for Ω/RT < 2, two minima and a central hump for Ω/RT > 2.*
 
 > **Status of the principle: regular-solution model**
 > *Approximate.* It assumes random mixing, pairwise nearest-neighbour bonds independent of composition and temperature, and no size mismatch; it captures miscibility gaps and ordering tendencies qualitatively and fits some liquid and solid alloys well, but real interaction parameters vary with composition and temperature.
@@ -214,7 +218,11 @@ The tangent compositions, traced as temperature changes, become the phase bounda
 > **Status of the principle: common-tangent construction**
 > *Derived.* It is the geometric statement of equal chemical potentials in coexisting phases; exact within whatever $G(x)$ curves are used, and the basis of every computed phase diagram.
 
-<!-- FIGURE 6.2 | figures/ch06/fig-6-2-common-tangent.png | schematic | Common-tangent construction: two phases coexist at the compositions where a single straight line is tangent to both free-energy curves; the tangent's intercepts give the chemical potentials. | Content: x-axis x_B 0–1, y-axis molar G (arbitrary units). α curve (blue, minimum near x = 0.2) and β curve (orange, minimum near x = 0.75). Common tangent line touching α at x_α = 0.30 and β at x_β = 0.65, extended to x = 0 and x = 1 with intercepts labelled μ_A and μ_B. Alloy x_0 = 0.45 marked by a vertical dotted line: point on the α curve (higher) and point on the tangent (lower), the vertical gap labelled "energy gained by separating". Lever-rule bar under the axis: f_β = (x_0 − x_α)/(x_β − x_α) = 0.43. Also mark a precipitation driving force: from a supersaturated α of composition x_0, tangent to α at x_0 and its vertical distance to the β curve at the β composition labelled "ΔG_n, driving force for nucleating β" (link to Ch 9). -->
+<!-- FIGURE 6.2 | figures/ch06/fig-6-2-common-tangent.png | schematic | Common-tangent construction: two phases coexist at the compositions where a single straight line is tangent to both free-energy curves; the tangent's intercepts give the chemical potentials. | Content: x-axis x_B 0–1, y-axis molar G (arbitrary units). α curve (blue, minimum near x = 0.26) and β curve (orange, minimum near x = 0.63). Common tangent line touching α at x_α = 0.30 and β at x_β = 0.65, extended to x = 0 and x = 1 with intercepts labelled μ_A and μ_B. Alloy x_0 = 0.45 marked by a vertical dotted line: point on the α curve (higher) and point on the tangent (lower), the vertical gap labelled "energy gained by separating". Lever-rule bar under the axis: f_β = (x_0 − x_α)/(x_β − x_α) = 0.43. Also mark a precipitation driving force: from a supersaturated α of composition x_0, tangent to α at x_0 and its vertical distance to the β curve at the β composition labelled "ΔG_n, driving force for nucleating β" (link to Ch 9). -->
+
+![Figure 6.2 — Common-tangent construction: two phases coexist at the compositions where a single straight line is tangent to both free-energy curves; the tangent's intercepts give the chemical potentials](../figures/ch06/fig-6-2-common-tangent.png)
+
+*Figure 6.2 — Common-tangent construction: two phases coexist at the compositions where a single straight line is tangent to both free-energy curves; the tangent's intercepts give the chemical potentials.*
 
 ### Driving forces
 
@@ -265,12 +273,16 @@ At 700 K, the spinodal composition follows from $x(1-x)=RT/2\Omega=8.314\times70
 
 <!-- FIGURE 6.3 | figures/ch06/fig-6-3-miscibility-gap-spinodal.png | plot | Miscibility gap of a regular solution (Ω = 18.0 kJ mol⁻¹): free-energy curve at 700 K above, binodal and spinodal in temperature–composition space below. | Content: upper panel: ΔG_mix (J mol⁻¹) vs x from 0 to 1 at T = 700 K, curve ΔG = Ω x(1−x) + RT[x ln x + (1−x) ln(1−x)], value at x = 0.5 is +468 J mol⁻¹; minima at x = 0.063 and 0.937 joined by the common tangent; inflection points at x = 0.203 and 0.797 marked "spinodal". Lower panel: T (K) 400–1150 vs x; binodal (solid) through (0.015, 500), (0.063, 700), (0.169, 900), (0.268, 1000), peak (0.5, 1083); spinodal (dashed) through (0.133, 500), (0.203, 700), (0.295, 900), (0.362, 1000). Region between curves labelled "metastable: nucleation and growth"; inside spinodal "unstable: spinodal decomposition". Alloys x = 0.15 and x = 0.30 marked at 700 K with small sketches of discrete precipitates vs interconnected morphology. Dotted vertical lines connect the panels. -->
 
+![Figure 6.3 — Miscibility gap of a regular solution (Ω = 18.0 kJ mol⁻¹): free-energy curve at 700 K above, binodal and spinodal in temperature–composition space below](../figures/ch06/fig-6-3-miscibility-gap-spinodal.png)
+
+*Figure 6.3 — Miscibility gap of a regular solution (Ω = 18.0 kJ mol⁻¹): free-energy curve at 700 K above, binodal and spinodal in temperature–composition space below.*
+
 ### Where miscibility gaps matter
 
 | System | Gap | Engineering consequence |
 |---|---|---|
 | Fe–Cr (ferrite) | Below about 500–550 °C, α (Fe-rich) + α′ (Cr-rich) | 475 °C embrittlement of ferritic and duplex stainless steels and of cast duplex pipework in nuclear plants; service limits near 250–300 °C |
-| Fe–Cr–Co, Alnico (Fe–Ni–Al–Co) | Spinodal decomposition into elongated magnetic and non-magnetic phases | Permanent magnets whose coercivity comes from the spinodal shape anisotropy (Ch 27) |
+| Fe–Cr–Co, Alnico (Fe–Ni–Al–Co) | Spinodal decomposition into elongated magnetic and non-magnetic phases | Permanent magnets whose coercivity comes from the spinodal shape anisotropy (Ch 29) |
 | Al–Zn | Gap below about 350 °C | Rapid natural ageing of Al–Zn alloys; Zn-rich zones in 7xxx aerospace alloys |
 | Cu–Ni–Sn | Spinodal hardening | High-strength, high-conductivity spring and bearing alloys used in place of Cu–Be |
 | Na$_2$O–B$_2$O$_3$–SiO$_2$ glass | Liquid–liquid immiscibility | Vycor process: leach the borate phase, sinter the silica network into near-pure silica glass |
@@ -378,7 +390,7 @@ $$
 \Delta T_m\approx\frac{2\gamma_{sl}\,T_m\,V_m}{\Delta H_f\,r}
 $$
 
-where $\gamma_{sl}$ is the solid–liquid interface energy. This is the basis of low-temperature sintering of nanoparticle inks and pastes (silver and copper for printed electronics and die attach) and of the size-dependent properties of nanomaterials (Chapter 30). It also sets the critical nucleus size in solidification (Chapter 9), which is the same equation solved for $r$.
+where $\gamma_{sl}$ is the solid–liquid interface energy. This is the basis of low-temperature sintering of nanoparticle inks and pastes (silver and copper for printed electronics and die attach) and of the size-dependent properties of nanomaterials (Chapter 38). It also sets the critical nucleus size in solidification (Chapter 9), which is the same equation solved for $r$.
 
 > **Status of the principle: Gibbs–Thomson relation**
 > *Derived.* It follows from the Laplace pressure of a curved interface and equality of chemical potential; valid when the radius is large compared with atomic dimensions (above roughly 2 nm) and $\gamma$ is independent of size and orientation, which fails for the smallest clusters and for strongly faceted particles.
@@ -388,7 +400,7 @@ where $\gamma_{sl}$ is the solid–liquid interface energy. This is the basis of
 (b) Tin nanoparticles have been proposed for low-temperature solder pastes. With $\gamma_{sl}\approx0.06$ J m$^{-2}$, $T_m=505$ K, $V_m=16.3\times10^{-6}$ m$^3$ mol$^{-1}$ and $\Delta H_f=7.03$ kJ mol$^{-1}$:
 
 $$
-\Delta T_m=\frac{2\times0.06\times505\times16.3\times10^{-6}}{7030\times r}=\frac{1.41\times10^{-10}\ \mathrm{K\,m}}{r}
+\Delta T_m=\frac{2\times0.06\times505\times16.3\times10^{-6}}{7030\times r}=\frac{1.41\times10^{-7}\ \mathrm{K\,m}}{r}
 $$
 
 For $r=10$ nm, $\Delta T_m=14$ K; for $r=5$ nm, 28 K; for $r=50$ nm, under 3 K. Useful depression needs particles below about 10 nm in radius, which are difficult to keep from oxidising and agglomerating — the reason such pastes remain niche.
@@ -401,7 +413,7 @@ $$
 \gamma_{sv}=\gamma_{sl}+\gamma_{lv}\cos\theta
 $$
 
-A contact angle below 90° means the liquid **wets** the solid; $\theta\to0$ means it spreads, which requires the spreading coefficient $S=\gamma_{sv}-\gamma_{sl}-\gamma_{lv}$ to be non-negative. Wetting decides whether solder or braze flows into a joint (Sn–Ag–Cu on clean copper, $\theta\approx20$–$40^\circ$; on oxidised copper, no wetting at all — hence fluxes and reducing atmospheres), whether a liquid metal infiltrates a ceramic preform to make a metal-matrix composite (aluminium on alumina is non-wetting below about 900 °C), whether paints, adhesives and coatings adhere (Chapter 37), and whether a surface is self-cleaning (water on PTFE or textured surfaces, $\theta>110^\circ$).
+A contact angle below 90° means the liquid **wets** the solid; $\theta\to0$ means it spreads, which requires the spreading coefficient $S=\gamma_{sv}-\gamma_{sl}-\gamma_{lv}$ to be non-negative. Wetting decides whether solder or braze flows into a joint (Sn–Ag–Cu on clean copper, $\theta\approx20$–$40^\circ$; on oxidised copper, no wetting at all — hence fluxes and reducing atmospheres), whether a liquid metal infiltrates a ceramic preform to make a metal-matrix composite (aluminium on alumina is non-wetting below about 900 °C), whether paints, adhesives and coatings adhere (Chapter 45), and whether a surface is self-cleaning (water on PTFE or textured surfaces, $\theta>110^\circ$).
 
 > **Status of the principle: Young's equation**
 > *Derived.* It follows from minimising total interfacial energy at fixed liquid volume; exact for an ideal, smooth, chemically homogeneous, non-reactive surface, and modified by roughness (Wenzel, Cassie–Baxter), contact-angle hysteresis and reaction at the interface, which in brazing and soldering usually dominates.
@@ -416,7 +428,11 @@ $$
 
 If $\gamma_{gb}/\gamma_{sl}=1$, $\phi=120^\circ$ and the liquid forms isolated pockets at triple junctions. If the ratio is 1.8, $\phi=52^\circ$ and the liquid forms channels along triple lines. If $\gamma_{gb}\ge2\gamma_{sl}$, $\phi=0$ and the liquid penetrates every boundary as a continuous film. This single ratio controls the microstructure of liquid-phase-sintered ceramics and hard metals (WC–Co, silicon nitride), the high-temperature strength of materials with grain-boundary glass, and the catastrophic **liquid-metal embrittlement** of aluminium by gallium, of steels by zinc during galvanizing and welding, and of nickel alloys by bismuth or lead.
 
-<!-- FIGURE 6.4 | figures/ch06/fig-6-4-interfaces-wetting.png | schematic | Interface thermodynamics: Young's contact angle, the dihedral angle at a grain boundary, and the Gibbs–Thomson rise of solubility around small particles. | Content: panel (a) liquid drop on a solid with tension vectors γ_sv, γ_sl, γ_lv at the contact line, θ = 30° labelled "wetting (solder on clean Cu)" and a second drop with θ = 120° labelled "non-wetting (water on PTFE)". Panel (b) grain-boundary groove/triple junction with liquid: three sketches for γ_gb/γ_sl = 1.0 (φ = 120°, isolated pockets), 1.8 (φ = 52°, channels), ≥ 2 (φ = 0, film penetrating boundary, labelled "liquid-metal embrittlement"). Panel (c) plot of c(r)/c∞ = exp(2γV_m/rRT) vs r from 1 to 30 nm for γ = 0.2 J m⁻², V_m = 1.0×10⁻⁵ m³ mol⁻¹, T = 573 K; points marked at r = 2 nm (1.52), 5 nm (1.18), 20 nm (1.04); second axis or inset curve ΔT_m vs r for Sn: 1.41×10⁻¹⁰/r K (28 K at 5 nm, 14 K at 10 nm). -->
+<!-- FIGURE 6.4 | figures/ch06/fig-6-4-interfaces-wetting.png | schematic | Interface thermodynamics: Young's contact angle, the dihedral angle at a grain boundary, and the Gibbs–Thomson rise of solubility around small particles. | Content: panel (a) liquid drop on a solid with tension vectors γ_sv, γ_sl, γ_lv at the contact line, θ = 30° labelled "wetting (solder on clean Cu)" and a second drop with θ = 120° labelled "non-wetting (water on PTFE)". Panel (b) grain-boundary groove/triple junction with liquid: three sketches for γ_gb/γ_sl = 1.0 (φ = 120°, isolated pockets), 1.8 (φ = 52°, channels), ≥ 2 (φ = 0, film penetrating boundary, labelled "liquid-metal embrittlement"). Panel (c) plot of c(r)/c∞ = exp(2γV_m/rRT) vs r from 1 to 30 nm for γ = 0.2 J m⁻², V_m = 1.0×10⁻⁵ m³ mol⁻¹, T = 573 K; points marked at r = 2 nm (1.52), 5 nm (1.18), 20 nm (1.04); second axis or inset curve ΔT_m vs r for Sn: 1.41×10⁻⁷/r K (28 K at 5 nm, 14 K at 10 nm). -->
+
+![Figure 6.4 — Interface thermodynamics: Young's contact angle, the dihedral angle at a grain boundary, and the Gibbs–Thomson rise of solubility around small particles](../figures/ch06/fig-6-4-interfaces-wetting.png)
+
+*Figure 6.4 — Interface thermodynamics: Young's contact angle, the dihedral angle at a grain boundary, and the Gibbs–Thomson rise of solubility around small particles.*
 
 ---
 
@@ -442,7 +458,7 @@ $$
 \mu_v=\Delta G_v+k_BT\ln\frac{c_v}{1-c_v}
 $$
 
-Vacancies can be created and destroyed at sources and sinks (surfaces, grain boundaries, dislocations by climb), so at equilibrium no free energy is gained by creating more: $\mu_v=0$, which reproduces the result. The formulation pays off away from equilibrium. A crystal quenched from high temperature holds a vacancy supersaturation with $\mu_v>0$, which drives vacancies to sinks, makes dislocations climb and condenses vacancies into loops and voids. Under irradiation, both vacancies and interstitials are supersaturated, and their chemical potentials drive swelling (Chapter 33). Under creep stress, the vacancy chemical potential differs between boundaries in tension and compression, which drives diffusional creep (Chapter 14).
+Vacancies can be created and destroyed at sources and sinks (surfaces, grain boundaries, dislocations by climb), so at equilibrium no free energy is gained by creating more: $\mu_v=0$, which reproduces the result. The formulation pays off away from equilibrium. A crystal quenched from high temperature holds a vacancy supersaturation with $\mu_v>0$, which drives vacancies to sinks, makes dislocations climb and condenses vacancies into loops and voids. Under irradiation, both vacancies and interstitials are supersaturated, and their chemical potentials drive swelling (Chapter 41). Under creep stress, the vacancy chemical potential differs between boundaries in tension and compression, which drives diffusional creep (Chapter 14).
 
 > **Status of the principle: equilibrium vacancy concentration from minimum $G$**
 > *Derived.* Exact for dilute, non-interacting vacancies with a well-defined formation free energy; corrections are needed for divacancies near the melting point, for interactions with solutes, and in compounds where the vacancy chemical potential depends on the chemical potentials of the components.
@@ -475,7 +491,11 @@ Each mass-action constant is an exponential of the standard Gibbs energy of its 
 
 A log–log plot of defect concentrations against $p_{\mathrm{O_2}}$, built from these straight-line segments, is a **Brouwer diagram** (Figure 6.5). It is the map engineers use to choose operating windows for oxide materials. A YSZ electrolyte must work in the middle region, where the vacancy concentration (and so the ionic conductivity) is fixed by doping and electronic conduction is negligible, across the oxygen pressures between air and fuel ($10^{-21}$ to 0.21 atm at 800 °C). A ceria-based anode or catalyst is used precisely because it enters the reducing region easily and becomes a mixed conductor. A capacitor dielectric fired in a reducing atmosphere sits on the $-1/4$ or $-1/6$ line and becomes semiconducting unless acceptors are added. A UO$_2$ fuel pellet's oxygen-to-metal ratio, set by the oxygen potential during sintering and changed by fission, controls its thermal conductivity and creep.
 
-<!-- FIGURE 6.5 | figures/ch06/fig-6-5-brouwer-diagram.png | plot | Brouwer diagram for an acceptor-doped oxide: defect concentrations versus oxygen partial pressure, built from mass-action laws and limiting neutrality conditions. | Content: x-axis log10 pO2 (atm) from −30 to +5; y-axis log10 concentration (arbitrary, spanning ~10 decades). Three regions separated by dashed vertical lines and labelled: I "n = 2[V_O••]" (left), II "2[V_O••] = [A′]" (middle, widest), III "p = [A′]" (right). Lines: [V_O••] slope −1/6 in I, flat in II, slope −1/2 in III; n slope −1/6 in I, −1/4 in II, −1/2 in III; p slope +1/6 in I, +1/4 in II, flat in III; [A′] horizontal dotted line. Shaded band in region II from pO2 = 10⁻²¹ to 0.21 atm labelled "SOFC electrolyte window (YSZ, 800 °C)". Annotate total conductivity curve on a secondary axis showing a flat ionic plateau in II with rising n-type (left) and p-type (right) branches. -->
+<!-- FIGURE 6.5 | figures/ch06/fig-6-5-brouwer-diagram.png | plot | Brouwer diagram for an acceptor-doped oxide: defect concentrations versus oxygen partial pressure, built from mass-action laws and limiting neutrality conditions. | Content: x-axis log10 pO2 (atm) from −30 to +5; y-axis log10 concentration (arbitrary, spanning ~10 decades). Three regions separated by dashed vertical lines and labelled: I "n = 2[V_O••]" (left), II "2[V_O••] = [A′]" (middle, widest), III "p = [A′]" (right). Lines: [V_O••] slope −1/6 in I, flat in II, slope −1/2 in III; n slope −1/6 in I, −1/4 in II, flat in III; p slope +1/6 in I, +1/4 in II, flat in III; [A′] horizontal dotted line. Shaded band in region II from pO2 = 10⁻²¹ to 0.21 atm labelled "SOFC electrolyte window (YSZ, 800 °C)". Annotate total conductivity curve on a secondary axis showing a flat ionic plateau in II with rising n-type (left) and p-type (right) branches. -->
+
+![Figure 6.5 — Brouwer diagram for an acceptor-doped oxide: defect concentrations versus oxygen partial pressure, built from mass-action laws and limiting neutrality conditions](../figures/ch06/fig-6-5-brouwer-diagram.png)
+
+*Figure 6.5 — Brouwer diagram for an acceptor-doped oxide: defect concentrations versus oxygen partial pressure, built from mass-action laws and limiting neutrality conditions.*
 
 > **Status of the principle: mass-action treatment of defect equilibria**
 > *Approximate.* Exact thermodynamics for dilute, non-interacting defects with ideal (concentration-based) activities; it fails at high defect concentrations (above roughly 1 %), where defects associate into clusters and the simple power laws bend, as in heavily doped YSZ and strongly reduced ceria.
@@ -494,13 +514,13 @@ $$
 
 Over temperature ranges without phase changes, $\Delta H^\circ$ and $\Delta S^\circ$ are nearly constant, so $\Delta G^\circ$ is close to a straight line in $T$. Harold Ellingham plotted these lines for many oxides on one chart in 1944 (Figure 6.6). Its features follow from simple thermodynamics.
 
-- **Slopes.** The slope is $-\Delta S^\circ$. Forming a solid oxide from a solid metal consumes a mole of gas, so $\Delta S^\circ\approx-$ (entropy of O$_2$) and almost all metal lines rise with roughly the same slope, about $+0.17$–$0.21$ kJ mol$^{-1}$ K$^{-1}$. Kinks appear where the metal or oxide melts or boils (boiling of magnesium at 1090 °C steepens its line markedly).
+- **Slopes.** The slope is $-\Delta S^\circ$. Forming a solid oxide from a solid metal consumes a mole of gas, so $\Delta S^\circ\approx-$ (entropy of O$_2$) and almost all metal lines rise with roughly the same slope, about $+0.12$–$0.22$ kJ mol$^{-1}$ K$^{-1}$. Kinks appear where the metal or oxide melts or boils (boiling of magnesium at 1090 °C steepens its line markedly).
 - **Carbon.** $2\mathrm C+\mathrm O_2\rightarrow2\mathrm{CO}$ *creates* a mole of gas, so its line *falls* with temperature. $\mathrm C+\mathrm O_2\rightarrow\mathrm{CO_2}$ conserves gas moles and is nearly flat. This is why carbon becomes a stronger reducing agent the hotter it gets — the foundation of iron- and steelmaking.
 - **Position.** The lower a line, the more stable the oxide. Any metal can reduce the oxide of any metal whose line lies above its own at that temperature: aluminium reduces chromium oxide (the aluminothermic process), magnesium reduces titanium tetrachloride (the related chloride chart underlies the Kroll process for titanium sponge).
 - **Equilibrium oxygen pressure.** With pure metal and oxide (activities 1), the reaction is at equilibrium when $\Delta G^\circ=RT\ln p_{\mathrm{O_2}}$. Each line therefore also gives the oxygen partial pressure below which the oxide is reduced; nomographic scales of $p_{\mathrm{O_2}}$, $\mathrm{H_2/H_2O}$ and $\mathrm{CO/CO_2}$ ratios are printed around the edge of the chart.
 
 > **Status of the principle: Ellingham diagram**
-> *Derived* from reaction thermodynamics ($\Delta G^\circ=-RT\ln K$) with *approximate* linear fits for $\Delta G^\circ(T)$. It assumes pure condensed phases at unit activity and says nothing about rates: aluminium, chromium and silicon are thermodynamically far less noble than iron, yet resist oxidation better because their thin oxide films are protective (Chapter 34).
+> *Derived* from reaction thermodynamics ($\Delta G^\circ=-RT\ln K$) with *approximate* linear fits for $\Delta G^\circ(T)$. It assumes pure condensed phases at unit activity and says nothing about rates: aluminium, chromium and silicon are thermodynamically far less noble than iron, yet resist oxidation better because their thin oxide films are protective (Chapter 42).
 
 Representative linear fits (typical handbook values, per mole of O$_2$, valid over roughly 300–1500 K between phase changes):
 
@@ -520,6 +540,10 @@ Representative linear fits (typical handbook values, per mole of O$_2$, valid ov
 
 <!-- FIGURE 6.6 | figures/ch06/fig-6-6-ellingham-diagram.png | plot | Ellingham diagram for selected oxides: standard Gibbs energy of oxidation per mole of O2 versus temperature, with the C/CO line falling across the metal lines. | Content: x-axis T from 0 to 2000 °C (273–2273 K); y-axis ΔG° (kJ per mol O2) from −1200 to 0. Lines from the table: Cu/Cu2O, Ni/NiO, Fe/FeO, H2/H2O, Cr/Cr2O3, Si/SiO2, Ti/TiO2, Al/Al2O3, Mg/MgO (with kink at Mg boiling 1090 °C), C/CO (falling, slope −0.175), C/CO2 (flat). Mark crossings of C/CO with Fe/FeO at ~712 °C, Cr/Cr2O3 at ~1240 °C, Si/SiO2 at ~1670 °C, Ti/TiO2 at ~1760 °C, and Al/Al2O3 at ~2050 °C. Right-hand nomographic scale of pO2 from 10⁻⁵⁰ to 1 atm with a pivot at the origin "O" (T = 0 K, ΔG = 0); construction line drawn from O through the Cr/Cr2O3 line at 1100 °C to read pO2 ≈ 3×10⁻²⁰ atm; similar H2/H2O scale with pivot "H". Shade region above Fe/FeO at 1000 K labelled "oxidizing to Fe". -->
 
+![Figure 6.6 — Ellingham diagram for selected oxides: standard Gibbs energy of oxidation per mole of O2 versus temperature, with the C/CO line falling across the metal lines](../figures/ch06/fig-6-6-ellingham-diagram.png)
+
+*Figure 6.6 — Ellingham diagram for selected oxides: standard Gibbs energy of oxidation per mole of O2 versus temperature, with the C/CO line falling across the metal lines.*
+
 ### Reading the diagram
 
 Three readings cover most uses.
@@ -530,7 +554,7 @@ $$
 -519.2+0.1251\,T=-223.4-0.1753\,T\quad\Rightarrow\quad T=\frac{295.8}{0.3004}=985\ \mathrm K\ (712\ ^\circ\mathrm C)
 $$
 
-Above this temperature, carbon at unit activity reduces FeO with CO as the product — the chemistry of the blast furnace. The C/CO line crosses Cr$_2$O$_3$ near 1240 °C, SiO$_2$ near 1670 °C, TiO$_2$ near 1760 °C and Al$_2$O$_3$ only above 2000 °C. Ferrochromium and silicon are therefore made by carbothermic reduction in electric-arc furnaces at very high temperature, while aluminium is too stable to reduce with carbon at practical temperatures (and forms carbides instead) and is produced by electrolysis of alumina dissolved in molten cryolite — one of the most energy-intensive processes in materials production (Chapter 49). Titanium, likewise, would form carbides and dissolve oxygen, so it is made via the chloride route.
+Above this temperature, carbon at unit activity reduces FeO with CO as the product — the chemistry of the blast furnace. The C/CO line crosses Cr$_2$O$_3$ near 1240 °C, SiO$_2$ near 1670 °C, TiO$_2$ near 1760 °C and Al$_2$O$_3$ only above 2000 °C. Ferrochromium and silicon are therefore made by carbothermic reduction in electric-arc furnaces at very high temperature, while aluminium is too stable to reduce with carbon at practical temperatures (and forms carbides instead) and is produced by electrolysis of alumina dissolved in molten cryolite — one of the most energy-intensive processes in materials production (Chapter 59). Titanium, likewise, would form carbides and dissolve oxygen, so it is made via the chloride route.
 
 **Protective atmospheres.** For heat treatment, brazing and sintering, the atmosphere must hold the oxygen potential below the line of the most reactive alloying element that must stay metallic. Gas mixtures fix the oxygen potential: in H$_2$/H$_2$O, the ratio $p_{\mathrm{H_2O}}/p_{\mathrm{H_2}}$ does; in CO/CO$_2$, the ratio $p_{\mathrm{CO_2}}/p_{\mathrm{CO}}$. Because water vapour content is measured as a **dew point**, furnace specifications are written as dew points.
 
@@ -566,10 +590,10 @@ The same chart answers related questions in other fields: the CO/CO$_2$ ratio ne
 | How fast do atoms move down chemical-potential gradients, including uphill diffusion? | Chapter 8 |
 | How does the driving force from a common tangent translate into nucleation rates and growth? | Chapter 9 |
 | How does spinodal decomposition develop in time (Cahn–Hilliard), and how does Ostwald ripening proceed (LSW)? | Chapter 10 |
-| How do surface energy, adhesion and wetting control friction, coatings and joining? | Chapters 37 and 39 |
-| How do defect equilibria set ionic and electronic conductivity in ceramics? | Chapters 25 and 32 |
-| How do oxide scales grow, and why do some protect while others do not? | Chapter 34 |
-| How are Gibbs energies of solid phases calculated from first principles and stored in databases? | Chapters 45, 46 and 47 |
-| What is the environmental cost of the high-temperature reductions read from the Ellingham diagram? | Chapter 49 |
+| How do surface energy, adhesion and wetting control friction, coatings and joining? | Chapters 45 and 47 |
+| How do defect equilibria set ionic and electronic conductivity in ceramics? | Chapters 25 and 40 |
+| How do oxide scales grow, and why do some protect while others do not? | Chapter 42 |
+| How are Gibbs energies of solid phases calculated from first principles and stored in databases? | Chapters 55, 56 and 57 |
+| What is the environmental cost of the high-temperature reductions read from the Ellingham diagram? | Chapter 59 |
 
 **Next:** Chapter 7 uses free-energy curves and the phase rule to build and read the phase diagrams on which alloy and process design depend.

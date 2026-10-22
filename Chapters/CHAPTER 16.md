@@ -29,7 +29,7 @@ The same lesson repeats across the non-ferrous metals. A titanium fan disc is on
 
 ### Why aluminium
 
-Aluminium is FCC to its melting point (660 °C), with a density of 2.70 Mg/m³ and a modulus of about 70 GPa (each a third of steel's), about 62 % of copper's conductivity, and a self-healing Al₂O₃ film. Twelve slip systems and no ductile–brittle transition make it formable and suitable for cryogenic tanks. Its weaknesses are softening above about 150–200 °C, a modulus that alloying cannot raise, no true fatigue endurance limit, and pitting where chlorides break the film (Chapter 35). Its specific stiffness $E/\rho\approx26$ GPa/(Mg/m³) equals steel's, so its advantage in stiff designs comes from thicker sections (Section 16.8); in strong designs it comes from metallurgy, which raises yield strength from 10–30 MPa (pure) to above 550 MPa.
+Aluminium is FCC to its melting point (660 °C), with a density of 2.70 Mg/m³ and a modulus of about 70 GPa (each a third of steel's), about 62 % of copper's conductivity, and a self-healing Al₂O₃ film. Twelve slip systems and no ductile–brittle transition make it formable and suitable for cryogenic tanks. Its weaknesses are softening above about 150–200 °C, a modulus that alloying cannot raise, no true fatigue endurance limit, and pitting where chlorides break the film (Chapter 43). Its specific stiffness $E/\rho\approx26$ GPa/(Mg/m³) equals steel's, so its advantage in stiff designs comes from thicker sections (Section 16.8); in strong designs it comes from metallurgy, which raises yield strength from 10–30 MPa (pure) to above 550 MPa.
 
 ### The designation system
 
@@ -86,7 +86,11 @@ $$
 
 The peak strength corresponds to a dense dispersion of shearable or just-unshearable particles a few nanometres across, with a spacing of tens of nanometres, at the crossover between the cutting and Orowan mechanisms (Chapter 13). Underaged material is weaker because the particles are small and easily cut; overaged material is weaker because the particles have coarsened (Ostwald ripening, Chapter 10) and dislocations bow between them.
 
-<!-- FIGURE 16.1 | figures/ch16/fig-16-1-6061-ageing-curves.png | plot | Yield strength of 6061 versus artificial ageing time at 160, 175 and 190 °C after solution treatment at 530 °C and water quench, showing underageing, peak (T6) and overageing. | Content: x-axis ageing time 0.1–1000 h (log); y-axis 0.2 % yield strength 100–300 MPa. Starting value at short time ~145 MPa (T4-like, naturally aged). Curve at 175 °C peaking at ~280 MPa at ~8 h; curve at 160 °C peaking slightly higher (~285 MPa) at ~20 h; curve at 190 °C peaking lower (~265 MPa) at ~3.4 h and falling to ~200 MPa by 100 h. Label regions "underaged (β″ small, sheared)", "peak T6 (β″ needles)", "overaged (β′, β; Orowan bypass)". Horizontal dashed line at 276 MPa labelled "T6 design value", another at 55 MPa labelled "O temper". -->
+<!-- FIGURE 16.1 | figures/ch16/fig-16-1-6061-ageing-curves.png | plot | Yield strength of 6061 versus artificial ageing time at 160, 175 and 190 °C after solution treatment at 530 °C and water quench, showing underageing, peak (T6) and overageing. | Content: x-axis ageing time 0.1–1000 h (log); y-axis 0.2 % yield strength 40–305 MPa. Starting value at short time ~145 MPa (T4-like, naturally aged). Curve at 175 °C peaking at ~280 MPa at ~8 h; curve at 160 °C peaking slightly higher (~285 MPa) at ~20 h; curve at 190 °C peaking lower (~265 MPa) at ~3.4 h and falling to ~200 MPa by 100 h. Label regions "underaged (β″ small, sheared)", "peak T6 (β″ needles)", "overaged (β′, β; Orowan bypass)". Horizontal dashed line at 276 MPa labelled "T6 design value", another at 55 MPa labelled "O temper". -->
+
+![Figure 16.1 — Yield strength of 6061 versus artificial ageing time at 160, 175 and 190 °C after solution treatment at 530 °C and water quench, showing underageing, peak (T6) and overageing](../figures/ch16/fig-16-1-6061-ageing-curves.png)
+
+*Figure 16.1 — Yield strength of 6061 versus artificial ageing time at 160, 175 and 190 °C after solution treatment at 530 °C and water quench, showing underageing, peak (T6) and overageing.*
 
 Figure 16.1 shows the practical consequence: the peak shifts to shorter times and lower values as the ageing temperature rises. Lower temperatures give a higher, broader peak, because the driving force for nucleation is larger and the precipitates finer, but the treatment takes longer. Heat-treaters exploit the thermal activation of the process to convert one schedule into another.
 
@@ -105,9 +109,9 @@ With $T_1=448.15$ K and $T_2=433.15$ K, $1/T_2-1/T_1=7.73\times10^{-5}$ K⁻¹, 
 
 Some alloys age at room temperature: 2024 reaches its T3/T4 strength about four days after quenching, so 2024 rivets were kept in a freezer until driven ("icebox rivets"). Thick 7075 plate is **quench sensitive** (its centre precipitates coarse η on cooling), which is why thick-plate alloys like 7050 use a less quench-sensitive chemistry.
 
-Welding is the reverse problem. In the heat-affected zone, peak temperatures of 250–500 °C dissolve β″ and overage what remains. The as-welded heat-affected zone of 6061-T6 has a design tensile strength of about 165 MPa, compared with 290 MPa minimum for the parent metal, and a yield strength nearer 100–110 MPa. This is the bridge of the opening paragraph. The remedies are to place welds at low-stress locations, to use friction-stir welding with its lower peak temperature (Chapter 39), to re-solution-treat and age small welded assemblies, or to choose a 5xxx alloy, whose strength comes from Mg in solution and cold work and which loses only the cold-work increment on welding.
+Welding is the reverse problem. In the heat-affected zone, peak temperatures of 250–500 °C dissolve β″ and overage what remains. The as-welded heat-affected zone of 6061-T6 has a design tensile strength of about 165 MPa, compared with 290 MPa minimum for the parent metal, and a yield strength nearer 100–110 MPa. This is the bridge of the opening paragraph. The remedies are to place welds at low-stress locations, to use friction-stir welding with its lower peak temperature (Chapter 47), to re-solution-treat and age small welded assemblies, or to choose a 5xxx alloy, whose strength comes from Mg in solution and cold work and which loses only the cold-work increment on welding.
 
-> **Boundary.** Corrosion of aluminium (pitting, intergranular corrosion, exfoliation, stress-corrosion cracking) is treated in Chapters 34–35; the electrochemistry behind the passive film belongs to Advanced Chemistry.
+> **Boundary.** Corrosion of aluminium (pitting, intergranular corrosion, exfoliation, stress-corrosion cracking) is treated in Chapters 42–43; the electrochemistry behind the passive film belongs to Advanced Chemistry.
 
 ### Aluminium–lithium alloys
 
@@ -129,7 +133,11 @@ Brasses are copper–zinc alloys. Zinc is soluble in FCC copper up to about 35�
 
 <!-- FIGURE 16.2 | figures/ch16/fig-16-2-cu-zn-diagram.png | plot | Copper-rich part of the Cu–Zn phase diagram with the compositions of cartridge brass and Muntz metal, and the variation of tensile strength and elongation of annealed α brass with zinc content. | Content: main panel x-axis Zn 0–50 wt%, y-axis temperature 300–1100 °C. Liquidus from 1085 °C (pure Cu) falling to ~903 °C at the peritectic near 32.5–37.5 wt% Zn; α field boundary at ~32.5 wt% Zn at 903 °C, ~39 wt% at ~454 °C, returning to ~35 wt% at 300 °C; α+β field; β field above ~454 °C and β′ (ordered) below, separated by a dashed order–disorder line at ~454–468 °C. Vertical dashed lines at 30 wt% (C26000 cartridge brass) and 40 wt% (C28000 Muntz). Inset: x-axis Zn 0–40 wt%; left y-axis UTS 200–380 MPa rising from ~220 (pure Cu) to ~340 at 30 % Zn; right y-axis elongation 40–70 % rising from ~45 to ~65 % at 30 % Zn then falling. -->
 
-Brasses have two classic corrosion failures (Chapter 35). **Dezincification**, selective leaching of Zn in stagnant or chloride-bearing water, is suppressed in α brasses by 0.02–0.06 % As but not in β. **Season cracking**, the original stress-corrosion cracking, struck cold-drawn cartridge cases stored in ammonia-bearing air and was cured by a stress-relief anneal.
+![Figure 16.2 — Copper-rich part of the Cu–Zn phase diagram with the compositions of cartridge brass and Muntz metal, and the variation of tensile strength and elongation of annealed α brass with zinc content](../figures/ch16/fig-16-2-cu-zn-diagram.png)
+
+*Figure 16.2 — Copper-rich part of the Cu–Zn phase diagram with the compositions of cartridge brass and Muntz metal, and the variation of tensile strength and elongation of annealed α brass with zinc content.*
+
+Brasses have two classic corrosion failures (Chapter 43). **Dezincification**, selective leaching of Zn in stagnant or chloride-bearing water, is suppressed in α brasses by 0.02–0.06 % As but not in β. **Season cracking**, the original stress-corrosion cracking, struck cold-drawn cartridge cases stored in ammonia-bearing air and was cured by a stress-relief anneal.
 
 ### Bronzes and cupronickels
 
@@ -155,7 +163,7 @@ Beryllium copper is the strongest copper alloy and the reference for spring perf
 
 **Worked example — Copper or aluminium busbar?** A switchboard needs a busbar carrying 2000 A. A copper bar of 100 mm × 10 mm ($A=1000$ mm²) has a resistance per metre of $\rho/A=1.72\times10^{-8}/10^{-3}=1.72\times10^{-5}\ \Omega/\mathrm{m}$ and dissipates $I^2R=2000^2\times1.72\times10^{-5}=68.8$ W/m at 20 °C. An aluminium bar of grade 1350 ($\rho=2.82\times10^{-8}\ \Omega\,\mathrm{m}$) with the same resistance must have an area larger by the resistivity ratio, $2.82/1.72=1.64$, i.e. 1640 mm². Its mass per metre is $1.64\times10^{-3}\times2700=4.43$ kg/m, against $10^{-3}\times8960=8.96$ kg/m for copper: the aluminium bar is 0.49 times as heavy. At representative prices of about 9.5 USD/kg for copper and 2.6 USD/kg for aluminium, the metal costs about 85 and 12 USD per metre. Aluminium wins on mass and cost for the same losses; copper wins on volume and on joint reliability (aluminium creeps under bolts and forms an insulating oxide). Hence overhead lines and large busbars are aluminium, while motor windings and circuit conductors are copper.
 
-> **Boundary.** The electron-scattering physics behind Matthiessen's and Nordheim's rules, and EEE-specific conductor and connector materials, are treated in Chapter 25 and in more depth in the *Materials Core (EEE)* book.
+> **Boundary.** The electron-scattering physics behind Matthiessen's and Nordheim's rules, and EEE-specific conductor and connector materials, are treated in Chapter 25.
 
 ---
 
@@ -184,17 +192,21 @@ An aluminium equivalent, roughly $\mathrm{Al}+\tfrac13\mathrm{Sn}+\tfrac16\mathr
 | α and near-α | Ti-5Al-2.5Sn; Ti-6242S; IMI 834 | 800–1000 / 860–1050 | HCP, best creep resistance; not heat-treatable to high strength | Compressor discs and blades to 540–600 °C |
 | α+β | Ti-6Al-4V (Ti-6-4) | 880 / 950 annealed; 1100 / 1170 STA | Versatile, heat-treatable, weldable; about half of all titanium used | Fan blades, airframe fittings, implants, bicycle and automotive parts |
 | Metastable β | Ti-10V-2Fe-3Al; Ti-5553; Ti-15V-3Cr-3Sn-3Al | 1100–1300 / 1200–1400 | BCC, cold formable, deep hardenable, high strength; lower modulus | Landing-gear beams, springs, fasteners |
-| β (biomedical) | Ti-13Nb-13Zr; Ti-29Nb-13Ta-4.6Zr | 500–900 | Low modulus (55–80 GPa), Al- and V-free | Hip stems, spinal rods (Chapter 31) |
+| β (biomedical) | Ti-13Nb-13Zr; Ti-29Nb-13Ta-4.6Zr | 500–900 | Low modulus (55–80 GPa), Al- and V-free | Hip stems, spinal rods (Chapter 39) |
 
 ### Processing and microstructure
 
 Because the β transus of Ti-6-4 lies at about 995 °C, a forging or heat treatment above it makes the whole part β, and on cooling α forms as plates on {110} planes of the β (the Burgers orientation relationship) in colonies or as basketweave. This gives a **lamellar** (Widmanstätten) structure: good creep strength and fracture toughness and slow fatigue-crack growth, but lower ductility and lower high-cycle fatigue strength. Working below the transus, in the α+β field, breaks up the plates and recrystallizes them into **equiaxed** primary α grains; a subsequent treatment just below the transus gives a **bimodal** structure of equiaxed primary α in a matrix of transformed β lamellae, a common compromise for rotating parts (Figure 16.3). Solution treating high in the α+β field and quenching retains β (or forms α′ martensite); ageing at 480–600 °C precipitates fine α and gives the STA (solution treated and aged) condition.
 
-<!-- FIGURE 16.3 | figures/ch16/fig-16-3-ti64-microstructures.png | schematic | Pseudo-binary section through Ti-6Al-4V with the β transus and the processing routes that produce lamellar, bimodal and equiaxed microstructures. | Content: left panel: pseudo-binary diagram, x-axis β-stabilizer content (V, wt%) 0–15, y-axis temperature 600–1100 °C; β field at top; β transus line falling from ~1000 °C at 0 % to below 800 °C at 15 %; α+β field below; vertical dashed line at 4 % V meeting transus at ~995 °C; Ms line dashed. Three arrows from the 4 % V line: (a) heat to 1050 °C, slow cool → lamellar; (b) work at ~930 °C, recrystallize at ~950 °C, age 700 °C → bimodal; (c) work and anneal at ~900 °C → equiaxed (mill annealed). Right: three micrograph-style sketches, 50 μm scale bars: (a) prior-β grains ~500 μm with α colonies and grain-boundary α; (b) ~30 % equiaxed primary α (~15 μm) in lamellar transformed β; (c) equiaxed α ~10 μm with intergranular β. -->
+<!-- FIGURE 16.3 | figures/ch16/fig-16-3-ti64-microstructures.png | schematic | Pseudo-binary section through Ti-6Al-4V with the β transus and the processing routes that produce lamellar, bimodal and equiaxed microstructures. | Content: left panel: pseudo-binary diagram, x-axis β-stabilizer content (V, wt%) 0–15, y-axis temperature 600–1100 °C; β field at top; β transus line falling from ~1045 °C at 0 % to below 800 °C at 15 %; α+β field below; vertical dashed line at 4 % V meeting transus at ~995 °C; Ms line dashed. Three arrows from the 4 % V line: (a) heat to 1050 °C, slow cool → lamellar; (b) work at ~930 °C, recrystallize at ~950 °C, age 700 °C → bimodal; (c) work and anneal at ~900 °C → equiaxed (mill annealed). Right: three micrograph-style sketches, 50 μm scale bars: (a) prior-β grains ~500 μm with α colonies and grain-boundary α; (b) ~30 % equiaxed primary α (~15 μm) in lamellar transformed β; (c) equiaxed α ~10 μm with intergranular β. -->
 
-Titanium is expensive not because it is rare but because it is reactive. The batch **Kroll process** reduces TiCl₄ with magnesium to sponge, which is vacuum-arc remelted two or three times for rotating parts; a nitrogen-rich hard-α inclusion caused the 1989 Sioux City DC-10 fan-disc failure and led to cold-hearth melting. Above about 500 °C titanium picks up oxygen and forms a brittle **α case** that must be removed; it must be welded under full inert shielding, galls in sliding contact, and machines slowly because its low thermal conductivity (about 7 W m⁻¹ K⁻¹) concentrates heat at the tool. Processing dominates cost, which makes near-net-shape forging and additive manufacturing (Chapter 40) attractive.
+![Figure 16.3 — Pseudo-binary section through Ti-6Al-4V with the β transus and the processing routes that produce lamellar, bimodal and equiaxed microstructures](../figures/ch16/fig-16-3-ti64-microstructures.png)
 
-Titanium wins where specific strength matters at 150–600 °C, where it is joined to carbon-fibre composites (galvanically compatible, and its expansion of about 9 × 10⁻⁶ K⁻¹ is closer to the laminate's than aluminium's 23 × 10⁻⁶ K⁻¹), where chloride corrosion resistance is essential, and in the body (Chapter 31).
+*Figure 16.3 — Pseudo-binary section through Ti-6Al-4V with the β transus and the processing routes that produce lamellar, bimodal and equiaxed microstructures.*
+
+Titanium is expensive not because it is rare but because it is reactive. The batch **Kroll process** reduces TiCl₄ with magnesium to sponge, which is vacuum-arc remelted two or three times for rotating parts; a nitrogen-rich hard-α inclusion caused the 1989 Sioux City DC-10 fan-disc failure and led to cold-hearth melting. Above about 500 °C titanium picks up oxygen and forms a brittle **α case** that must be removed; it must be welded under full inert shielding, galls in sliding contact, and machines slowly because its low thermal conductivity (about 7 W m⁻¹ K⁻¹) concentrates heat at the tool. Processing dominates cost, which makes near-net-shape forging and additive manufacturing (Chapter 48) attractive.
+
+Titanium wins where specific strength matters at 150–600 °C, where it is joined to carbon-fibre composites (galvanically compatible, and its expansion of about 9 × 10⁻⁶ K⁻¹ is closer to the laminate's than aluminium's 23 × 10⁻⁶ K⁻¹), where chloride corrosion resistance is essential, and in the body (Chapter 39).
 
 > **Status of the principle: β-stabilizer and α-stabilizer classification**
 > *Empirical.* The classification summarizes measured binary phase diagrams; equivalence formulae combining several elements are linear fits that work for commercial composition ranges but not for highly alloyed or multicomponent β alloys, where CALPHAD calculations are used (Chapter 7).
@@ -230,6 +242,10 @@ At still higher temperatures the alloy fails by creep (Chapter 14): γ′ cubes 
 
 <!-- FIGURE 16.4 | figures/ch16/fig-16-4-turbine-temperature-history.png | plot | Temperature capability of turbine-blade alloys and turbine entry temperature versus year, showing the contributions of wrought, cast, directionally solidified and single-crystal alloys, cooling and thermal barrier coatings. | Content: x-axis year 1940–2020; y-axis temperature 700–1800 °C. Lower series (metal capability, temperature for 1000 h rupture life at 137 MPa): wrought alloys ~800 °C in 1945 rising to ~870 °C by 1960; conventionally cast ~900–950 °C (1960–1970); DS ~975 °C (1975); 1st-gen SX ~1000 °C (1982); 2nd-gen SX (3 % Re) ~1030 °C (1990); 3rd-gen SX (6 % Re) ~1060 °C (1995); 4th/5th-gen (Ru) ~1080–1100 °C (2005). Upper curve: turbine entry temperature rising from ~800 °C in 1945 to ~1600–1700 °C by 2015. Shade the gap between the curves and label it "film cooling + TBC". Mark the melting point of Ni (1455 °C) as a horizontal dotted line. -->
 
+![Figure 16.4 — Temperature capability of turbine-blade alloys and turbine entry temperature versus year, showing the contributions of wrought, cast, directionally solidified and single-crystal alloys, cooling and thermal barrier coatings](../figures/ch16/fig-16-4-turbine-temperature-history.png)
+
+*Figure 16.4 — Temperature capability of turbine-blade alloys and turbine entry temperature versus year, showing the contributions of wrought, cast, directionally solidified and single-crystal alloys, cooling and thermal barrier coatings.*
+
 **Worked example — What 50 K of metal temperature is worth.** For a given alloy and stress, the Larson–Miller parameter $P=T(C+\log_{10}t_r)$ with $C\approx20$ (Chapter 14) is constant along a line of equal stress. A single-crystal blade that ruptures after 100 h at a metal temperature of 1050 °C (1323 K) has $P=1323\times(20+2)=29\,106$. If a better coating or cooling scheme lowers the metal temperature by 50 K to 1273 K at the same stress, the rupture life becomes
 
 $$
@@ -246,14 +262,18 @@ a factor of about seven. Raising the metal temperature by 50 K to 1373 K cuts th
 Even a perfect single crystal cannot survive bare in a combustion gas at 1100 °C for long. Turbine blades carry a coating system with up to four layers (Figure 16.5):
 
 - a **bond coat**, either a Pt-modified **aluminide** diffusion coating (NiAl, 30–80 μm) or an **MCrAlY overlay** (M = Ni, Co), which is an aluminium reservoir;
-- the **thermally grown oxide** (TGO), a slow-growing α-Al₂O₃ scale 1–10 μm thick (Chapter 34);
+- the **thermally grown oxide** (TGO), a slow-growing α-Al₂O₃ scale 1–10 μm thick (Chapter 42);
 - a **thermal barrier coating** (TBC) of 7–8 wt% Y₂O₃-stabilized zirconia (7YSZ), 100–300 μm thick, with a conductivity of about 1 W m⁻¹ K⁻¹, across which an internally cooled blade sustains a drop of 100–200 K or more (Chapter 24). EB-PVD gives a columnar, strain-tolerant structure for blades.
 
 <!-- FIGURE 16.5 | figures/ch16/fig-16-5-blade-coating-stack.png | schematic | Cross-section of a cooled single-crystal turbine blade with its thermal barrier coating system and the temperature profile through it. | Content: left: blade cross-section with internal cooling passages and film-cooling holes, hot gas at ~1500 °C outside, cooling air ~650 °C inside. Right: magnified layer stack (not to scale): 7YSZ TBC 150–250 μm with columnar EB-PVD structure; TGO α-Al2O3 1–10 μm; Pt-aluminide or MCrAlY bond coat 50–100 μm; single-crystal superalloy wall 1–2 mm with γ/γ′ cuboids (~0.4 μm). Overlay a temperature profile: gas side ~1250 °C at TBC surface, falling steeply to ~1050 °C at the TBC/bond-coat interface (ΔT ~200 K across TBC), gently to ~950 °C at the inner wall. Label failure modes: TGO growth and spallation, CMAS infiltration, sintering of TBC. -->
 
-TBCs fail mainly by spallation near the TGO as the oxide thickens during thermal cycles, and by **CMAS** attack: molten silicate deposits from ingested sand and volcanic ash infiltrate the columns and destroy their strain tolerance. The longer-term successor in the hottest parts is the SiC/SiC ceramic-matrix composite (Chapters 23 and 33).
+![Figure 16.5 — Cross-section of a cooled single-crystal turbine blade with its thermal barrier coating system and the temperature profile through it](../figures/ch16/fig-16-5-blade-coating-stack.png)
 
-> **Boundary.** High-temperature oxidation kinetics and hot corrosion are developed in Chapter 34; extreme-environment materials as a system in Chapter 33; heat flow through coatings in Chapter 24.
+*Figure 16.5 — Cross-section of a cooled single-crystal turbine blade with its thermal barrier coating system and the temperature profile through it.*
+
+TBCs fail mainly by spallation near the TGO as the oxide thickens during thermal cycles, and by **CMAS** attack: molten silicate deposits from ingested sand and volcanic ash infiltrate the columns and destroy their strain tolerance. The longer-term successor in the hottest parts is the SiC/SiC ceramic-matrix composite (Chapters 23 and 41).
+
+> **Boundary.** High-temperature oxidation kinetics and hot corrosion are developed in Chapter 42; extreme-environment materials as a system in Chapter 41; heat flow through coatings in Chapter 24.
 
 ---
 
@@ -275,11 +295,11 @@ Most magnesium is used as castings. ASTM designations give the two main alloying
 
 The Mg–Al alloys are strengthened by solid solution and by Mg₁₇Al₁₂ (β) at grain boundaries, which softens above about 120 °C and limits creep resistance in powertrain applications; rare-earth and yttrium alloys form stable precipitates and are used for hotter components. Zirconium is a powerful grain refiner for Al-free alloys.
 
-Magnesium's other weakness is corrosion. It is the most electronegative structural metal, its hydroxide film is not protective in chlorides, and it corrodes galvanically against steel, copper and even aluminium; Fe, Ni and Cu impurities are capped in "high-purity" alloys (the D in AZ91D). The same corrosion becomes a virtue in **bioresorbable implants**: WE43-based scaffolds and bone screws dissolve over months in the body (Chapter 31). Its fire reputation concerns fine chips and powders; bulk castings are hard to ignite.
+Magnesium's other weakness is corrosion. It is the most electronegative structural metal, its hydroxide film is not protective in chlorides, and it corrodes galvanically against steel, copper and even aluminium; Fe, Ni and Cu impurities are capped in "high-purity" alloys (the D in AZ91D). The same corrosion becomes a virtue in **bioresorbable implants**: WE43-based scaffolds and bone screws dissolve over months in the body (Chapter 39). Its fire reputation concerns fine chips and powders; bulk castings are hard to ignite.
 
 ### Zinc: the die-caster's metal
 
-Zinc melts at only 419.5 °C (density 7.14 Mg/m³), ideal for **hot-chamber die casting** with dies lasting millions of shots, sub-millimetre walls and platable surfaces. The Zamak alloys (Zn–4Al with 0–3 % Cu and a trace of Mg; UTS about 280 MPa for Zamak 3, 330 MPa for Zamak 5) make locks, handles and connector shells; ZA alloys (8–27 % Al) reach 400–430 MPa. The weakness of zinc is creep: at 20 °C it is already at a homologous temperature of 0.42 (table below), so loaded clips and bosses relax, and long-term allowable stresses are much lower than short-term ones. Most zinc is used not for castings but to **galvanize** steel (Chapter 35).
+Zinc melts at only 419.5 °C (density 7.14 Mg/m³), ideal for **hot-chamber die casting** with dies lasting millions of shots, sub-millimetre walls and platable surfaces. The Zamak alloys (Zn–4Al with 0–3 % Cu and a trace of Mg; UTS about 280 MPa for Zamak 3, 330 MPa for Zamak 5) make locks, handles and connector shells; ZA alloys (8–27 % Al) reach 400–430 MPa. The weakness of zinc is creep: at 20 °C it is already at a homologous temperature of 0.42 (table below), so loaded clips and bosses relax, and long-term allowable stresses are much lower than short-term ones. Most zinc is used not for castings but to **galvanize** steel (Chapter 43).
 
 | Metal | Melting point (°C) | Homologous temperature at 20 °C ($T/T_m$) | Practical consequence |
 |---|---|---|---|
@@ -311,18 +331,18 @@ The **refractory metals** are conventionally the BCC metals of groups 5 and 6 wi
 
 Three problems limit their use. **Oxidation**: MoO₃ sublimes above about 700 °C and Nb and Ta absorb oxygen, so all need vacuum, inert gas or silicide coatings. **Low-temperature brittleness**: a high Peierls stress (Chapter 12) and boundary-segregated interstitials give W and Mo a ductile–brittle transition that depends sharply on purity and working; worked tungsten wire is ductile, recrystallized tungsten is not. **Density**: W and Ta are more than twice as dense as steel.
 
-Because their melting points are so high, refractory metals are made by **powder metallurgy** (Chapter 38): tungsten powder is pressed, sintered by resistance heating, then swaged and drawn; potassium-bubble "doping" pins the grain boundaries of lamp filaments against sag at 2700 °C. **Tungsten heavy alloys** (90–97 % W, liquid-phase sintered with Ni–Fe) serve as balance weights and radiation shielding, and carbide-strengthened **TZM** (Mo–0.5Ti–0.08Zr–C) as forging dies. Tungsten is also the leading plasma-facing material for fusion reactors (Chapter 33).
+Because their melting points are so high, refractory metals are made by **powder metallurgy** (Chapter 46): tungsten powder is pressed, sintered by resistance heating, then swaged and drawn; potassium-bubble "doping" pins the grain boundaries of lamp filaments against sag at 2700 °C. **Tungsten heavy alloys** (90–97 % W, liquid-phase sintered with Ni–Fe) serve as balance weights and radiation shielding, and carbide-strengthened **TZM** (Mo–0.5Ti–0.08Zr–C) as forging dies. Tungsten is also the leading plasma-facing material for fusion reactors (Chapter 41).
 
 ### Precious metals
 
 The **precious metals** (gold, silver and the platinum-group metals Pt, Pd, Rh, Ir, Ru, Os) are FCC (Ru and Os are HCP) and are used for what their electronic structure gives them: nobility (no stable oxide at ambient temperature for Au and Pt; Ag tarnishes in sulfur), electrical conductivity (Ag has the lowest resistivity of any metal, $1.59\times10^{-8}\ \Omega\,\mathrm{m}$), catalytic activity and high melting points for the platinum group (Pt 1768 °C, Rh 1964 °C, Ir 2446 °C).
 
-- **Catalysis**: Pt, Pd and Rh nanoparticles in automotive three-way catalysts; Pt and Ir in fuel cells and electrolysers (Chapter 32).
+- **Catalysis**: Pt, Pd and Rh nanoparticles in automotive three-way catalysts; Pt and Ir in fuel cells and electrolysers (Chapter 40).
 - **High-temperature hardware**: Pt–Rh bushings for drawing glass fibres (Chapter 17), crystal-growth crucibles, and type R, S and B thermocouples to about 1700 °C.
 - **Electronics and joining**: gold bond wires and platings, silver pastes, silver brazing alloys.
 - **Medicine and jewellery**: gold alloyed with Ag, Cu and Pd for hardness (18-carat is 75 wt% Au); Pt–Ir pacemaker electrodes.
 
-Precious-metal engineering is largely about **using less**: thin platings, high-surface-area nanoparticles and recycling (Chapter 49).
+Precious-metal engineering is largely about **using less**: thin platings, high-surface-area nanoparticles and recycling (Chapter 59).
 
 ---
 
@@ -339,9 +359,9 @@ An **intermetallic compound** is a phase with an ordered crystal structure and a
 | NiAl | B2 | 1638 | 5.9 | Bond coats; bulk use limited by brittleness |
 | Fe₃Al, FeAl | D0₃, B2 | ~1500 | 6.7 | Sulfidation-resistant hardware |
 | MoSi₂ | C11b | 2030 | 6.3 | Heating elements to 1800 °C (self-healing SiO₂ scale) |
-| NiTi | B2 / B19′ martensite | ~1310 | 6.45 | Shape-memory alloys (Chapter 29) |
+| NiTi | B2 / B19′ martensite | ~1310 | 6.45 | Shape-memory alloys (Chapter 37) |
 
-The γ-TiAl blade is the success story. At half the density of a superalloy, with adequate creep and oxidation resistance to about 750 °C, γ-TiAl low-pressure turbine blades halve blade mass and, through lighter discs, save hundreds of kilograms per engine. It took three decades because room-temperature ductility is only 1–2 % and toughness 10–20 MPa m$^{1/2}$, so design, casting (now also electron-beam powder-bed fusion, Chapter 40) and inspection had to adapt. Boron segregated to grain boundaries famously made polycrystalline Ni₃Al ductile, a reminder that boundary chemistry can matter more than the bulk crystal.
+The γ-TiAl blade is the success story. At half the density of a superalloy, with adequate creep and oxidation resistance to about 750 °C, γ-TiAl low-pressure turbine blades halve blade mass and, through lighter discs, save hundreds of kilograms per engine. It took three decades because room-temperature ductility is only 1–2 % and toughness 10–20 MPa m$^{1/2}$, so design, casting (now also electron-beam powder-bed fusion, Chapter 48) and inspection had to adapt. Boron segregated to grain boundaries famously made polycrystalline Ni₃Al ductile, a reminder that boundary chemistry can matter more than the bulk crystal.
 
 ### High-entropy alloys
 
@@ -358,9 +378,9 @@ which is $5.76$ J mol⁻¹ K⁻¹ for $N=2$ and $13.38$ J mol⁻¹ K⁻¹ for $N
 > **Status of the principle: Ideal configurational entropy of mixing**
 > *Derived.* Follows from Boltzmann's entropy for a random arrangement of atoms on one lattice; real alloys have short-range order, vibrational and magnetic entropy and non-zero mixing enthalpy, so the ideal value is an upper bound on the configurational term, not a prediction of phase stability.
 
-Of the four proposed "core effects" (high entropy, lattice distortion, sluggish diffusion, a "cocktail" of properties), experiments support lattice distortion, while sluggish diffusion is not generally true and enthalpy matters as much as entropy. The field has therefore broadened into **multi-principal-element alloys**, designed with CALPHAD and machine learning (Chapters 46–47). Two families are of engineering interest:
+Of the four proposed "core effects" (high entropy, lattice distortion, sluggish diffusion, a "cocktail" of properties), experiments support lattice distortion, while sluggish diffusion is not generally true and enthalpy matters as much as entropy. The field has therefore broadened into **multi-principal-element alloys**, designed with CALPHAD and machine learning (Chapters 56–57). Two families are of engineering interest:
 
-- **FCC 3d-transition-metal alloys** (CrMnFeCoNi, CrCoNi) become *stronger and tougher* on cooling: the Cantor alloy exceeds 1 GPa UTS and 200 MPa m$^{1/2}$ toughness at 77 K, because a low stacking-fault energy activates nanotwinning (as in TWIP steels, Chapter 15), a candidate for cryogenic and hydrogen service (Chapter 33).
+- **FCC 3d-transition-metal alloys** (CrMnFeCoNi, CrCoNi) become *stronger and tougher* on cooling: the Cantor alloy exceeds 1 GPa UTS and 200 MPa m$^{1/2}$ toughness at 77 K, because a low stacking-fault energy activates nanotwinning (as in TWIP steels, Chapter 15), a candidate for cryogenic and hydrogen service (Chapter 41).
 - **Refractory HEAs** such as NbMoTaW keep yield strengths of several hundred MPa at 1600 °C, but most are brittle at room temperature and oxidize catastrophically.
 
 ---
@@ -386,7 +406,7 @@ The prices are indicative only and move with markets; for components the cost of
 
 ### Performance indices
 
-Selection compares materials through **performance indices** that combine properties according to the loading and the objective (Chapter 48). For minimum mass:
+Selection compares materials through **performance indices** that combine properties according to the loading and the objective (Chapter 58). For minimum mass:
 
 | Component and constraint | Index to maximize |
 |---|---|
@@ -413,11 +433,15 @@ The aluminium panel is 45 % thicker than the steel panel but half its mass; the 
 
 ### Beyond the index
 
-A real selection screens with hard constraints (temperature, environment, conductivity, biocompatibility, approvals), ranks the survivors by an index, then examines the leaders for fatigue and fracture (Chapter 14), galvanic compatibility (Chapter 35), joinability (Chapter 39), product forms, supply risk (cobalt, rhenium, platinum-group metals and rare earths are critical, Chapter 49) and recyclability; remelting aluminium needs only about 5 % of the energy of primary production.
+A real selection screens with hard constraints (temperature, environment, conductivity, biocompatibility, approvals), ranks the survivors by an index, then examines the leaders for fatigue and fracture (Chapter 14), galvanic compatibility (Chapter 43), joinability (Chapter 47), product forms, supply risk (cobalt, rhenium, platinum-group metals and rare earths are critical, Chapter 59) and recyclability; remelting aluminium needs only about 5 % of the energy of primary production.
 
 <!-- FIGURE 16.6 | figures/ch16/fig-16-6-specific-strength-temperature.png | map | Specific yield strength versus temperature for the main non-ferrous alloy families and steel, showing the temperature windows in which each family is the lightest choice. | Content: x-axis temperature 0–1400 °C; y-axis specific 0.2 % yield strength σy/ρ, 0–300 MPa/(Mg/m³). Bands (shaded, labelled): Mg alloys ~110–150 at 20 °C falling to ~40 by 250 °C; Al alloys (7075-T6, 2618) ~180 at 20 °C falling to ~30 by 300 °C; Ti alloys (Ti-6-4, near-α) ~200 at 20 °C falling to ~110 at 500 °C and ~80 at 600 °C; steels (4340, maraging, Cr-Mo) ~180 at 20 °C falling to ~50 by 600 °C; γ-TiAl ~110 flat to 750 °C then falling; Ni superalloys (718 wrought, SX cast) ~120–130 at 20 °C, nearly flat to 750 °C, ~90 at 900 °C, ~30 at 1100 °C; refractory (C103 Nb, TZM, W) ~30–60 from 1000 to 1400 °C. Mark the worked-example points: Ti-6-4 at 199, 7075-T6 at 179, 4340 at 178 MPa/(Mg/m³) at 20 °C. -->
 
-Figure 16.6 adds temperature: magnesium and aluminium are lightest up to about 150–200 °C, titanium to about 550 °C, then nickel superalloys (with γ-TiAl around 600–750 °C), and beyond 1100 °C only refractory metals and ceramics. Each boundary reflects a structural limit met in this chapter: precipitate coarsening, oxygen pick-up, γ′ dissolution.
+![Figure 16.6 — Specific yield strength versus temperature for the main non-ferrous alloy families and steel, showing the temperature windows in which each family is the lightest choice](../figures/ch16/fig-16-6-specific-strength-temperature.png)
+
+*Figure 16.6 — Specific yield strength versus temperature for the main non-ferrous alloy families and steel, showing the temperature windows in which each family is the lightest choice.*
+
+Figure 16.6 adds temperature: by $\sigma_y/\rho$ titanium leads from room temperature to about 550 °C, while aluminium and magnesium win below about 150–200 °C only for bending-dominated indices ($\sigma_y^{1/2}/\rho$, $E^{1/3}/\rho$) and on cost; above that come nickel superalloys (with γ-TiAl around 600–750 °C), and beyond 1100 °C only refractory metals and ceramics. Each boundary reflects a structural limit met in this chapter: precipitate coarsening, oxygen pick-up, γ′ dissolution.
 
 ---
 
@@ -427,15 +451,15 @@ Figure 16.6 adds temperature: magnesium and aluminium are lightest up to about 1
 |---|---|
 | How were the precipitation sequences, coarsening and recrystallization used here derived? | Chapter 10 (back reference) |
 | How do cutting and Orowan bypass set the peak-aged strength? | Chapter 13 (back reference) |
-| How are creep rupture, Larson–Miller data and fatigue used in design? | Chapter 14 (back reference); Chapter 36 |
+| How are creep rupture, Larson–Miller data and fatigue used in design? | Chapter 14 (back reference); Chapter 44 |
 | How do steels compare in heat treatment and microstructure? | Chapter 15 (back reference) |
-| How do zirconia thermal barrier coatings and ceramic-matrix composites work as materials? | Chapters 17, 23 and 33 |
-| What sets the conductivity of alloys, and how are superconductors such as Nb–Ti made? | Chapter 25 |
-| How do NiTi shape-memory alloys work? | Chapter 29 |
-| Which titanium, cobalt and magnesium alloys are used in the body, and how do they corrode there? | Chapter 31 |
-| How do aluminium, magnesium and copper alloys corrode, and how are they protected? | Chapters 34–35 |
-| How are these alloys cast, forged, extruded, welded and additively manufactured? | Chapters 38–40 |
-| How are performance indices derived and used systematically? | Chapter 48 |
-| How do recycling and critical-material constraints change alloy choice? | Chapter 49 |
+| How do zirconia thermal barrier coatings and ceramic-matrix composites work as materials? | Chapters 17, 23 and 41 |
+| What sets the conductivity of alloys, and how are superconductors such as Nb–Ti made? | Chapters 25 and 30 |
+| How do NiTi shape-memory alloys work? | Chapter 37 |
+| Which titanium, cobalt and magnesium alloys are used in the body, and how do they corrode there? | Chapter 39 |
+| How do aluminium, magnesium and copper alloys corrode, and how are they protected? | Chapters 42–43 |
+| How are these alloys cast, forged, extruded, welded and additively manufactured? | Chapters 46–48 |
+| How are performance indices derived and used systematically? | Chapter 58 |
+| How do recycling and critical-material constraints change alloy choice? | Chapter 59 |
 
 **Next:** Chapter 17 leaves metals for materials held together by ionic and covalent bonds, explaining why ceramics and glasses are hard, stiff, refractory and brittle, and how powder processing, glass forming and toughening turn those properties into engineering components.

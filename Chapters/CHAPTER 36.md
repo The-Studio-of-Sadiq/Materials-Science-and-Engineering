@@ -1,382 +1,443 @@
-# Chapter 36 — Degradation and Failure Analysis
+# Chapter 36 — Optical and Photonic Materials
 
-*Part VIII · Corrosion, Degradation and Surfaces*
+*Part VII · Semiconductor and Photonic Materials*
 
-On 3 June 1998 a high-speed train passing Eschede in northern Germany at about 200 km/h derailed and struck a road bridge; 101 people died. The cause was a steel wheel tyre, part of a rubber-sprung wheel design adopted to reduce vibration. Each revolution flexed the tyre; over years of service a fatigue crack grew from its inner surface, helped by the tyre's wear to a thinner section that raised the cyclic stress. The crack grew silently until the remaining ligament broke. No single property of the steel was inadequate on the day the wheel entered service. What failed was the link between a degradation mechanism (fatigue crack growth), its rate under real service loads, and the inspection that should have caught it. This chapter is about that link: how materials of every class lose their properties in service, how the rate of loss is modelled and extrapolated, how failures are statistically distributed, and how an engineer reconstructs a failure from the broken parts to a root cause that can be corrected.
+A defence contractor needs a window for the nose of a missile that must see in the visible and mid-infrared, survive rain erosion at Mach 3, and withstand a thermal shock of several hundred kelvin in a second. Glass is too weak and absorbs beyond 3 µm. Germanium transmits the infrared but is opaque to visible light and loses transparency when hot. Single-crystal sapphire is strong and transparent from the ultraviolet to 5 µm, but expensive to grow and machine into domes. The answer that eventually flew was a polycrystalline ceramic — spinel or aluminium oxynitride — sintered to full density so that not one pore in a million remained, with grains of the right size and a cubic crystal structure so that the grain boundaries would not scatter light. The same materials problem, without the missile, arises in a watch crystal, a smartphone camera cover, a high-pressure sodium lamp, a laser gain medium and a transparent armour window: what makes a solid transparent, and what makes most of them not?
 
-> **By what mechanisms do metals, ceramics, polymers, composites and concrete degrade in service, and what do those mechanisms have in common?**
-> **Why do life laws (Paris, Coffin–Manson, Larson–Miller, Arrhenius, square-root ingress) take the forms they do, and how far can they be extrapolated?**
-> **How are failures statistically described, and how does an investigation get from fracture surfaces to a root cause?**
+This chapter explains how light interacts with matter and how structure sets the refractive index, dispersion, absorption, colour and scattering of materials; then turns to the materials that make light (phosphors, LEDs and lasers), guide it (optical fibres and waveguides), and control it (nonlinear, electro-optic, photonic-crystal and metamaterial structures). Chapter 35 treats optoelectronic semiconductor materials in more depth.
+
+> **Why is window glass transparent while the sand it is made from is white?**
+> **Why are gold and copper coloured, but silver and aluminium not?**
+> **Why does a polycrystalline alumina tube transmit light diffusely, but a polycrystalline spinel window can be read through?**
+> **Why do optical fibres carry signals for 100 km at 1.55 µm but only a few kilometres at 0.85 µm?**
 
 | Concept | Engineering destination |
 |---|---|
-| Driving force, mechanism, rate, end-of-life criterion | A common template for any life prediction |
-| Carbonation and chloride ingress, Tuutti model | Concrete cover and durability design of bridges, tunnels, marine structures |
-| Slow crack growth, hydrothermal aging of zirconia | Glass panels, ceramic implants, ceramic turbine and armour components |
-| Moisture uptake, matrix cracking, delamination | Composite airframes, wind-turbine blades, pressure vessels |
-| Thermo-oxidation, photo-oxidation, hydrolysis, stabilizers | Outdoor plastics, pipes, cable insulation, medical polymers |
-| Arrhenius extrapolation of oven aging | Thermal ratings and service lives of polymers and adhesives |
-| Paris law, Miner's rule, Larson–Miller | Inspection intervals in aircraft, rail, bridges; creep life of boilers and turbines |
-| Weibull distribution, bathtub curve, B10 life | Maintenance intervals, warranty, spare-part planning, ceramic design |
-| Fractography: dimples, cleavage, striations, beach marks, mirror–mist–hackle | Identifying the failure mechanism from broken parts |
-| 5-why, fishbone, fault tree, 8D, FMEA | Turning a failure into a design, material or process change |
+| Reflection, refraction, absorption, scattering | Windows, lenses, coatings, solar glazing, sensor covers |
+| Refractive index, Sellmeier dispersion, birefringence | Lens design, achromats, polarizers, stress analysis by photoelasticity |
+| Colour in metals, insulators, semiconductors, pigments | Paints, pigments, glass colourants, gemstones, architectural coatings |
+| Transparency in ceramics and polymers | Transparent armour, IR domes, lamp envelopes, clear packaging, medical devices |
+| Luminescence, phosphors, LEDs, lasers | Lighting, displays, medical scintillators, laser cutting and welding |
+| Optical fibres and waveguides | Telecommunications, fibre-optic strain and temperature sensing, endoscopy |
+| Nonlinear and electro-optic materials | Frequency conversion of lasers, optical modulators for data links |
+| Photonic crystals, metamaterials, metasurfaces | Dielectric mirrors, VCSELs, structural colour, flat lenses, radiative cooling |
 
-**Roadmap.** A common framework (36.1) → degradation in each material class, with concrete as a worked case (36.2) → polymer aging and weathering, with Arrhenius extrapolation (36.3) → wear-out laws and life prediction (36.4) → reliability statistics: Weibull and the bathtub curve (36.5) → failure-analysis methodology, fractography and root cause (36.6) → case studies across industries (36.7).
+**Roadmap.** Light–matter interaction (36.1) → refractive index, its origin and Sellmeier dispersion (36.2) → colour (36.3) → transparency and opacity in ceramics and polymers (36.4) → luminescence, LEDs and lasers (36.5) → fibres and waveguides (36.6) → nonlinear and electro-optic materials (36.7) → photonic crystals and metamaterials (36.8).
 
 ---
 
-## 36.1 A common framework for degradation
+## 36.1 Interaction of light with matter: refraction, dispersion, absorption, scattering
 
-Every degradation process, whatever the material, can be described by the same four questions:
+### Light as a field acting on bound and free charges
 
-1. **Driving force.** What free energy or mechanical energy is being released? Chemical potential differences drive corrosion and oxidation (Chapter 34); stored elastic energy drives crack growth (Chapter 14); interfacial and grain-boundary energy drive coarsening (Chapter 9); photon energy drives photo-oxidation.
-2. **Mechanism and rate-controlling step.** Diffusion, an interfacial reaction, dislocation motion, bond rupture at a crack tip. The slowest step sets the rate, and its dependence on temperature, stress and environment sets the form of the life law.
-3. **Damage variable.** What accumulates: crack length, pit depth, carbonation depth, wall loss, oxidized fraction, molecular weight, inelastic strain.
-4. **End-of-life criterion.** The damage at which the component no longer performs: crack length at which $K=K_{\rm Ic}$, depth at which rebar depassivates, elongation at break falling to 50 % of its initial value, wall thickness at the pressure-design minimum.
+Light is an electromagnetic wave with an electric field oscillating at $10^{14}$–$10^{15}$ Hz in the visible (wavelength 400–700 nm, photon energy 1.8–3.1 eV). In a material, that field drives the same charges whose polarization was discussed in Chapter 26: bound electrons, ions and, in metals and doped semiconductors, free carriers. At optical frequencies only the electrons can follow (ions are too heavy above about $10^{13}$ Hz), so the optical properties are dominated by **electronic polarization** in insulators and **free-electron response** in metals.
 
-Most life laws then take one of a few mathematical forms:
+When light meets a material, its energy is partitioned among reflection $R$, absorption $A$ and transmission $T$, with
 
-| Rate-controlling physics | Typical life law | Examples |
-|---|---|---|
-| Thermally activated reaction | $t\propto\exp(E_a/RT)$ | Polymer oxidation, intermetallic growth, Arrhenius aging |
-| Diffusion through a growing layer | $x\propto\sqrt{t}$ | Carbonation of concrete, parabolic oxidation, case depth |
-| Cyclic damage accumulation | $N\propto(\Delta\sigma)^{-m}$ or $(\Delta\varepsilon_p)^{-1/c}$ | Basquin, Coffin–Manson, Paris |
-| Stress-assisted activated flow | $\dot\varepsilon\propto\sigma^n\exp(-Q/RT)$ | Creep, stress relaxation |
-| Sliding contact | $V\propto Fs/H$ | Archard wear (Chapter 37) |
-| Weakest-link initiation | Weibull distribution of lives | Ceramic strength, dielectric breakdown, bearing fatigue |
+$$
+R+A+T=1
+$$
 
-The power of the framework is diagnostic as much as predictive. If accelerated tests at two temperatures fail by different mechanisms, no extrapolation from one to the other is valid. If a failure shows a mechanism the design never considered, the life model was never the problem; the list of mechanisms was.
+for a slab (scattering counts as a loss from the transmitted beam). The two numbers that describe a homogeneous material are combined in the **complex refractive index**
+
+$$
+\tilde n=n+i\kappa,\qquad \tilde n^2=\varepsilon_r(\omega)
+$$
+
+where $n$ sets the phase velocity $c/n$ and $\kappa$, the **extinction coefficient**, sets the attenuation. The intensity decays as $I=I_0\exp(-\alpha x)$ (**Beer–Lambert law**) with absorption coefficient $\alpha=4\pi\kappa/\lambda$.
+
+> **Status of the principle: Beer–Lambert law**
+> *Approximate.* It assumes linear absorption by a homogeneous medium, with no scattering and intensity low enough that absorbers do not saturate. It fails at laser intensities (two-photon absorption, saturable absorption) and in turbid or scattering media.
+
+### Refraction and reflection
+
+At an interface between media of index $n_1$ and $n_2$, light bends according to **Snell's law**, $n_1\sin\theta_1=n_2\sin\theta_2$. Going from high to low index, beyond the critical angle $\theta_c=\arcsin(n_2/n_1)$ the light is totally internally reflected — the principle of the optical fibre (Section 36.6). Part of the light is always reflected. At normal incidence for a non-absorbing material the **Fresnel reflectance** is
+
+$$
+R=\left(\frac{n_2-n_1}{n_2+n_1}\right)^2
+$$
+
+so glass ($n=1.5$) reflects 4 % per surface, sapphire ($n=1.76$) 7.6 %, diamond ($n=2.42$) 17 %, and silicon ($n\approx3.5$ in the near infrared) 31 %. High reflection is part of diamond's brilliance and a major loss for solar cells and LEDs.
+
+> **Status of the principle: Fresnel equations**
+> *Fundamental.* They follow from Maxwell's equations with the boundary conditions on tangential fields. They assume flat, smooth interfaces; rough surfaces add diffuse scattering.
+
+**Worked example — antireflection coatings.** A thin film of index $n_f$ and thickness $\lambda/(4n_f)$ makes the reflections from its top and bottom surfaces cancel by destructive interference. On glass ($n_s=1.52$) in air, the reflectance at the design wavelength becomes
+
+$$
+R=\left(\frac{n_s-n_f^2}{n_s+n_f^2}\right)^2
+$$
+
+which is zero for $n_f=\sqrt{n_s}=1.23$. No durable solid has an index so low, so the standard choice is MgF$_2$ ($n_f=1.38$): at 550 nm the film is $550/(4\times1.38)=99.6$ nm thick, and $R=[(1.52-1.904)/(1.52+1.904)]^2=1.26$ %, a third of the uncoated 4.3 %. For a silicon solar cell ($n_s\approx3.9$ at 600 nm), the ideal index is about 2.0 — exactly that of PECVD silicon nitride, which at 75 nm thickness reduces reflection at 600 nm to nearly zero and also passivates the surface (Chapter 32). This is why solar cells are dark blue: the coating is optimized near the peak of the solar spectrum and reflects some violet. Multilayer stacks broaden the low-reflection band for camera lenses and spectacles.
+
+### Dispersion
+
+The refractive index depends on wavelength — **dispersion** — because the material's response depends on how close the light frequency is to its electronic and ionic resonances (Section 36.2). In the transparent range of glasses, $n$ falls slowly with increasing wavelength (normal dispersion), so blue light is refracted more than red: the origin of prismatic colour, of chromatic aberration in lenses, and of the spreading of short pulses in fibres.
+
+### Absorption
+
+Absorption occurs wherever photons can be taken up by an excitation of the material:
+
+- **Electronic transitions across a band gap** in semiconductors and insulators — strong absorption ($\alpha\sim10^4$–$10^6$ cm$^{-1}$) for photon energies above $E_g$. This sets the ultraviolet edge of glasses and ceramics and the colour of semiconductors.
+- **Transitions within partly filled d or f shells** of transition-metal and rare-earth ions — weak, narrow or broad bands that give colour to gemstones and glasses (Section 36.3).
+- **Free-carrier absorption** in metals and doped semiconductors.
+- **Lattice vibrations (phonons)** — multi-phonon absorption sets the infrared edge of transparency. Light atoms with strong bonds (Si–O, Al–O) vibrate at high frequency, so oxides become opaque at 3–6 µm; heavy atoms with weak bonds (Zn–Se, Ge, chalcogenides, alkali halides) vibrate slowly, so they transmit to 10–20 µm. This is why thermal-imaging lenses are made of germanium, ZnSe or chalcogenide glass, not silica.
+
+Each material is therefore transparent only within a **window** between its electronic absorption edge in the ultraviolet and its phonon edge in the infrared (Figure 36.1).
+
+<!-- FIGURE 36.1 | figures/ch36/fig-36-1-transmission-windows.png | map | Transparency windows of optical materials: each is bounded by electronic absorption at short wavelengths and lattice absorption at long wavelengths. | Content: horizontal log axis wavelength 0.1 to 30 um; visible band 0.4–0.7 um shaded in spectrum colours; atmospheric windows 3–5 and 8–12 um shaded grey. Horizontal bars: LiF 0.11–7, CaF2 0.13–10, MgF2 0.12–7, fused silica 0.16–3.5 (with OH dip at 2.7), BK7 glass 0.33–2.5, sapphire 0.17–5.5, MgAl2O4 spinel 0.2–5.5, AlON 0.22–5, YAG 0.21–5.5, diamond 0.23–50 (with weak multiphonon band 2.5–6), ZnS multispectral 0.37–12, ZnSe 0.5–20, Si 1.2–7, Ge 2–14, GaAs 0.9–15, chalcogenide glass (As2S3) 0.6–11, PMMA 0.38–1.6, polycarbonate 0.4–1.6. Label which bound is set by band gap and which by phonons. -->
+
+![Figure 36.1 — Transparency windows of optical materials: each is bounded by electronic absorption at short wavelengths and lattice absorption at long wavelengths](../figures/ch36/fig-36-1-transmission-windows.png)
+
+*Figure 36.1 — Transparency windows of optical materials: each is bounded by electronic absorption at short wavelengths and lattice absorption at long wavelengths.*
+
+### Scattering
+
+Light is scattered wherever the refractive index changes over a distance comparable to or smaller than the wavelength: pores, inclusions, second phases, grain boundaries in birefringent crystals, density and composition fluctuations in glass, and crystalline regions in polymers. For particles much smaller than the wavelength, **Rayleigh scattering** scales as $\lambda^{-4}$ and with the square of the particle volume and of the index contrast — why the sky is blue, why fine smoke looks blue against a dark background, and why the attenuation of optical fibres falls steeply with wavelength. For particles comparable to the wavelength, **Mie scattering** is strong and almost wavelength-independent, so clouds, milk, paper, snow and white paint look white. Scattering, not absorption, makes most solids opaque: crushed glass and sand, white marble, porous alumina and polyethylene are made of transparent constituents and are opaque only because they contain many interfaces.
 
 ---
 
-## 36.2 Degradation across material classes
+## 36.2 Refractive index and its origin; Sellmeier
+
+### The Lorentz oscillator
+
+Model each bound electron as a charge on a spring with natural frequency $\omega_0$ and weak damping, driven by the optical field. Below resonance it follows the field in phase and adds to the polarization, so $n>1$; approaching resonance the response grows; above resonance it lags and reduces the polarization. Summing over oscillators with strengths $f_j$ gives
+
+$$
+n^2(\omega)-1=\frac{Ne^2}{\varepsilon_0m}\sum_j\frac{f_j}{\omega_j^2-\omega^2}
+$$
+
+away from the resonances. Two structural conclusions follow. First, the index grows with the **density of polarizable electrons** $N$ and with their polarizability; for a dense medium, the local-field correction gives the **Lorentz–Lorenz relation**, the optical form of the Clausius–Mossotti equation of Chapter 26:
+
+$$
+\frac{n^2-1}{n^2+2}=\frac{N\alpha_e}{3\varepsilon_0}
+$$
+
+Second, the index is higher in materials whose resonances lie at lower frequency, that is, with smaller band gaps. Empirically $n$ rises as $E_g$ falls: fluorides ($E_g>10$ eV, $n\approx1.4$), silica (9 eV, 1.46), alumina (8.8 eV, 1.76), ZnS (3.6 eV, 2.37), TiO$_2$ (3.0 eV, 2.6–2.9), silicon (1.1 eV, 3.5), germanium (0.66 eV, 4.0).
+
+> **Status of the principle: Lorentz–Lorenz relation**
+> *Approximate.* It assumes isotropic, non-interacting polarizable units in a Lorentz local field. It predicts well how the index of a glass or polymer changes with density (useful for estimating porosity and stress-induced index changes), but not absolute values in strongly covalent or anisotropic solids.
+
+| Material | $n_d$ (589 nm) | Abbe number $V_d$ | Notes |
+|---|---|---|---|
+| Aerogel (silica) | 1.01–1.05 | — | Mostly air; Cherenkov detectors, insulation |
+| MgF$_2$ | 1.38 | 106 | Antireflection coatings, UV optics |
+| CaF$_2$ | 1.434 | 95 | Low-dispersion lens elements, UV lithography |
+| Fused silica | 1.458 | 68 | Fibres, UV optics, lithography lenses |
+| PMMA | 1.49 | 57 | Lenses, light guides, POF |
+| N-BK7 crown glass | 1.517 | 64 | General-purpose optical glass |
+| Soda-lime window glass | 1.52 | 59 | Windows, containers |
+| Polycarbonate | 1.586 | 30 | Spectacle and safety lenses |
+| SF11 dense flint glass | 1.785 | 26 | High-index, high-dispersion lens elements |
+| Sapphire (Al$_2$O$_3$, ordinary ray) | 1.768 | 72 | Windows, watch crystals, LED substrates |
+| MgAl$_2$O$_4$ spinel | 1.72 | 60 | Transparent armour, IR domes |
+| Y$_3$Al$_5$O$_{12}$ (YAG) | 1.83 | 53 | Laser hosts, phosphors |
+| Cubic zirconia (Y-stabilized) | 2.15–2.18 | 33 | Gem simulant, high-index optics |
+| Diamond | 2.417 | 55 | Windows, heat spreaders, gems |
+| TiO$_2$ rutile (ordinary / extraordinary) | 2.61 / 2.90 | ≈10 | White pigment, high-index coatings |
+| Si (at 1.55 µm) | 3.48 | — | Silicon photonics, IR optics |
+| Ge (at 10 µm) | 4.00 | — | Thermal-imaging lenses |
+
+*Table 36.1 — Refractive index and dispersion of optical materials at room temperature (typical).*
+
+### Sellmeier dispersion
+
+For practical design the Lorentz form is written with resonances at wavelengths $\lambda_j$ and fitted strengths $B_j$, the **Sellmeier equation**:
+
+$$
+n^2(\lambda)=1+\sum_{j=1}^{3}\frac{B_j\lambda^2}{\lambda^2-C_j},\qquad C_j=\lambda_j^2
+$$
+
+Two terms usually describe ultraviolet electronic resonances and one an infrared lattice resonance; between them, the index falls smoothly with wavelength (Figure 36.2). Glass catalogues list $B_j$ and $C_j$ for every glass, and lens-design software uses nothing else. A compact measure of dispersion in the visible is the **Abbe number**
+
+$$
+V_d=\frac{n_d-1}{n_F-n_C}
+$$
+
+using the helium d (587.6 nm), hydrogen F (486.1 nm) and C (656.3 nm) lines. Crown glasses ($V_d>50$) disperse little; flint glasses, whose lead or titanium oxides add low-lying resonances, have high index and high dispersion ($V_d<50$). An achromatic doublet pairs a crown and a flint so that their dispersions cancel.
+
+> **Status of the principle: Sellmeier equation**
+> *Empirical.* It is the Lorentz oscillator form with fitted resonance positions and strengths. Within a material's transparency window it reproduces the index to $10^{-5}$ or better; it fails near absorption bands, where damping must be included.
+
+**Worked example — dispersion of fused silica.** Malitson's Sellmeier coefficients for fused silica are $B=(0.6961663,\ 0.4079426,\ 0.8974794)$ and resonance wavelengths $\lambda_j=(0.0684043,\ 0.1162414,\ 9.896161)$ µm. At $\lambda=0.5893$ µm,
+
+$$
+n^2=1+\frac{0.69617(0.34728)}{0.34728-0.00468}+\frac{0.40794(0.34728)}{0.34728-0.01351}+\frac{0.89748(0.34728)}{0.34728-97.934}=2.12694
+$$
+
+so $n=1.4584$. The same equation gives $n_F=1.4631$ and $n_C=1.4564$, hence $V_d=(1.4584-1)/(1.4631-1.4564)=67.8$, a low-dispersion glass. In the infrared, $n=1.4468$ at 1.31 µm and $1.4440$ at 1.55 µm. The second derivative of $n(\lambda)$ sets the **material dispersion** that spreads short pulses in a fibre: it passes through zero near 1.27 µm, where the ultraviolet and infrared resonances balance, and at 1.55 µm amounts to about 22 ps per nanometre of source linewidth per kilometre. Silica's two resonances, one electronic and one Si–O vibrational, thus set the two telecom windows of Section 36.6.
+
+<!-- FIGURE 36.2 | figures/ch36/fig-36-2-sellmeier-dispersion.png | plot | Refractive index against wavelength for optical materials: normal dispersion between ultraviolet and infrared resonances. | Content: x-axis wavelength 0.2 to 5 um (log); y-axis refractive index 1.35 to 2.5. Curves from Sellmeier fits: CaF2 (1.434 at 0.589), fused silica (1.458 at 0.589, 1.444 at 1.55, rising steeply below 0.25 um), N-BK7 (1.517, ending near 2.5 um), sapphire ordinary ray (1.768), YAG (1.83), diamond (2.417 at 0.589, about 2.38 at 2 um). Mark the d, F, C lines with vertical ticks; inset: fused silica material dispersion D from 1.0 to 1.7 um crossing zero at 1.27 um and about +22 ps/(nm km) at 1.55 um. -->
+
+![Figure 36.2 — Refractive index against wavelength for optical materials: normal dispersion between ultraviolet and infrared resonances](../figures/ch36/fig-36-2-sellmeier-dispersion.png)
+
+*Figure 36.2 — Refractive index against wavelength for optical materials: normal dispersion between ultraviolet and infrared resonances.*
+
+### Birefringence
+
+In non-cubic crystals the index depends on the polarization and direction of light, the optical counterpart of the tensor properties of Chapter 4. Uniaxial crystals have an ordinary index $n_o$ and an extraordinary index $n_e$; their difference, the **birefringence**, ranges from $-0.008$ in sapphire and $+0.009$ in quartz to $-0.17$ in calcite and $+0.29$ in rutile. Birefringent crystals make wave plates and polarizers, and birefringence enables phase matching in nonlinear optics (Section 36.7). Isotropic materials become birefringent under stress or orientation: **photoelasticity**, the stress-induced birefringence of glass and polymers, reveals residual stress in tempered glass, frozen-in moulding stresses in polycarbonate lenses and polymer parts, and stress fields in transparent models of engineering components. Oriented polymer films (stretched PET, PVA polarizer films) are birefringent by chain alignment.
+
+---
+
+## 36.3 Colour in metals, insulators, semiconductors and pigments
+
+Colour is what remains of white light after the material has absorbed, reflected or scattered parts of the spectrum. Its origin differs in each class of material, and in each case it can be traced to an electronic structure.
 
 ### Metals
 
-Corrosion in all its forms (Chapters 34–35), fatigue, creep (Chapter 14) and wear (Chapter 37) are the dominant mechanisms. Less visible but equally important are **microstructural changes in service**, where the material slowly moves toward equilibrium at its operating temperature:
+Free electrons in a metal respond to fields below the **plasma frequency**
 
-- **Coarsening of strengthening precipitates**: γ′ in nickel superalloy turbine blades coarsens and rafts under stress, lowering creep strength (Chapter 33); precipitation-hardened aluminium over-ages if run warm.
-- **Spheroidization and graphitization** of carbon steel boiler and refinery tubes held for decades near 450–550 °C: lamellar pearlite turns into spheroidal carbides or graphite nodules, lowering strength and creep resistance.
-- **Embrittling precipitation**: temper embrittlement of Cr–Mo steels (impurity segregation to grain boundaries around 350–575 °C); 475 °C embrittlement and sigma-phase formation in ferritic and duplex stainless steels; irradiation hardening and embrittlement of reactor-pressure-vessel steels (Chapter 33).
-- **Hydrogen and liquid-metal embrittlement** (Chapter 35), and strain aging that raises yield strength and lowers toughness after cold forming.
+$$
+\omega_p=\sqrt{\frac{ne^2}{\varepsilon_0m^*}}
+$$
 
-The common consequence of most embrittling processes is a rise in the ductile–brittle transition temperature (Chapter 14), monitored in nuclear plants by surveillance Charpy specimens irradiated alongside the vessel.
+by screening them: below $\omega_p$ the permittivity is negative, light cannot propagate, and the metal reflects almost everything. For aluminium ($n=1.8\times10^{29}$ m$^{-3}$) the free-electron plasma wavelength is about 80 nm, deep in the ultraviolet, so aluminium reflects about 90 % across the whole visible and is the standard mirror coating for telescopes and the reflective layer of food packaging. Silver is the best visible reflector (95–99 %), though its d electrons pull its effective plasma edge to about 320 nm. In **copper and gold**, transitions from filled d bands to the Fermi level begin at about 2.1 eV (590 nm) and 2.4 eV (520 nm) respectively, so blue and green light are absorbed while red and yellow are reflected (Figure 36.3). Alloying shifts these edges: brass is yellower than copper, and gold alloys with silver and copper range from green-yellow to red. Titanium nitride, with a plasma edge in the visible, is gold-coloured and is used as a hard decorative coating on tools and fittings (Chapter 45).
 
-### Ceramics and glasses
+Doped oxides with fewer free carriers have plasma edges in the infrared. Tin-doped indium oxide with $10^{21}$ carriers/cm³ and an effective mass of $0.35m_0$ reflects beyond about 1.2 µm (once its background permittivity of about 4 is included; the bare free-electron formula would put the edge near 0.6 µm) but transmits visible light — the basis of transparent electrodes and of the low-emissivity coatings on energy-saving windows, which reflect thermal infrared back into a building while letting daylight through.
 
-Ceramics do not creep or corrode much at ambient temperature, but they are brittle and therefore sensitive to anything that extends existing flaws.
+<!-- FIGURE 36.3 | figures/ch36/fig-36-3-metal-reflectance.png | plot | Reflectance of metals: free electrons reflect below the plasma frequency, and interband absorption gives copper and gold their colour. | Content: x-axis wavelength 200 to 2000 nm; y-axis normal-incidence reflectance 0 to 100 %. Curves for evaporated films: Ag (rising steeply from 320 nm to 95 % at 450 nm, 98–99 % beyond), Al (90–92 % across 200–2000 nm with dip to about 86 % at 830 nm), Au (about 35–40 % below 500 nm, steep rise 500–600 nm, above 95 % beyond 700 nm), Cu (about 40–50 % below 550 nm, steep rise near 580 nm, 95 % beyond 700 nm). Visible band shaded in spectrum colours; annotate d-band absorption edges for Cu and Au. -->
 
-- **Slow crack growth (static fatigue).** Water molecules react with strained Si–O–Si bonds at a crack tip in silicate glass, breaking them at stresses below the fast-fracture value. Crack velocity follows an empirical power law, $v=v_0(K_{\rm I}/K_{\rm Ic})^{n}$, with $n$ about 15–20 for soda-lime glass in water and 30–60 for alumina and silicon nitride. A large $n$ means strength depends weakly on load duration; a small $n$ means a glass panel under permanent load (aquarium, glass floor, façade under snow) must be designed to a stress well below its short-term strength, typically a third to a half.
-- **Hydrothermal aging of zirconia.** Yttria-stabilized tetragonal zirconia (3Y-TZP) can transform spontaneously to monoclinic at body or room temperature in the presence of water, starting at the surface and spreading inward with a volume increase that roughens and microcracks it. In 2001 a batch of zirconia femoral heads for hip replacements failed in vivo after a change in the sintering process accelerated this aging; zirconia-toughened alumina composites largely replaced monolithic zirconia for that application.
-- **Thermal shock** (Chapter 24), **erosion** by particles, and **chemical attack** of refractories by slags and of glass by alkaline solutions.
+![Figure 36.3 — Reflectance of metals: free electrons reflect below the plasma frequency, and interband absorption gives copper and gold their colour](../figures/ch36/fig-36-3-metal-reflectance.png)
+
+*Figure 36.3 — Reflectance of metals: free electrons reflect below the plasma frequency, and interband absorption gives copper and gold their colour.*
+
+### Insulators: ions, defects and charge transfer
+
+Pure wide-gap insulators (silica, alumina, MgO, diamond) are colourless. Their colour comes from small concentrations of impurities and defects:
+
+- **Transition-metal ions.** The partly filled d shell of an ion such as Cr$^{3+}$ is split by the electric field of its neighbouring anions (the **crystal field**), giving absorption bands in the visible whose positions depend on the host. The same Cr$^{3+}$ ion makes ruby red in Al$_2$O$_3$ (strong crystal field, absorbing green and violet) and emerald green in beryl (weaker field). Glass colourants work the same way: Co$^{2+}$ gives cobalt blue, Fe$^{2+}$ the green of ordinary bottle and window glass, Cr$^{3+}$ green, Mn$^{3+}$ purple. Removing iron to below 0.01 % produces the "low-iron" glass used for solar-panel covers and display glass.
+- **Charge transfer.** An electron jumping between ions — Fe$^{2+}$ to Ti$^{4+}$ in blue sapphire, or from O$^{2-}$ to Fe$^{3+}$ in hematite (Fe$_2$O$_3$, the red of rust and red ochre) — produces strong, broad absorption.
+- **Colour centres.** Point defects that trap electrons or holes, such as F-centres (an electron in an anion vacancy, Chapter 5), colour alkali halides and darken glasses exposed to radiation; deliberately created nitrogen–vacancy centres in diamond are now quantum sensors.
+
+### Semiconductors
+
+A semiconductor absorbs all photons with energy above its band gap and transmits those below (Section 36.1), so its colour is set by $E_g$. Converting energy to wavelength with $\lambda(\mathrm{nm})=1239.8/E(\mathrm{eV})$:
+
+| Material | $E_g$ (eV) | Absorption edge (nm) | Appearance |
+|---|---|---|---|
+| Diamond | 5.47 | 227 | Colourless (absorbs only UV) |
+| GaN, ZnO | 3.4 | 365 | Colourless; transparent |
+| TiO$_2$ (rutile) | 3.0 | 413 | White powder; very slightly yellow crystal |
+| CdS | 2.42 | 512 | Yellow (cadmium yellow) |
+| GaP | 2.26 | 549 | Orange |
+| HgS (vermilion) | 2.0 | 620 | Red |
+| CdSe | 1.74 | 713 | Black-red |
+| Si | 1.12 | 1107 | Opaque, metallic grey (all visible absorbed; reflection gives lustre) |
+
+*Table 36.2 — Band gap and colour of semiconductors (typical).*
+
+Materials whose edge lies in the visible absorb the blue end and look yellow, orange or red; those whose edge lies below 1.8 eV absorb everything and look black or metallic. Alloying tunes the edge continuously, as in the Cd(S,Se) pigments and the GaAsP and AlGaInP red and amber LEDs.
+
+### Pigments, dyes and scattering colour
+
+A **pigment** is an insoluble powder dispersed in a binder; a **dye** is a dissolved molecule. Inorganic pigments use the mechanisms above — Fe$_2$O$_3$ red, Cr$_2$O$_3$ green, cobalt aluminate blue, CdS yellow (now restricted for toxicity), bismuth vanadate yellow. Organic dyes and pigments owe their colour to conjugated π-electron systems whose HOMO–LUMO gap lies in the visible; longer conjugation shifts absorption to longer wavelength. **White** pigments rely on scattering, not absorption: rutile TiO$_2$, with the highest index of any common white material (about 2.7 against about 1.5 for a polymer binder), scatters visible light most strongly when its particles are about 0.2–0.3 µm — half the wavelength of visible light. Some 7 million tonnes are made each year for paints, plastics, paper and sunscreens, and the pigment's band gap at 3.0 eV also makes it a UV absorber and, unless its surface is coated, a photocatalyst that degrades the surrounding binder (Chapter 44). Colour that arises from interference and diffraction in periodic structures — **structural colour** — is discussed in Section 36.8.
+
+---
+
+## 36.4 Transparency and opacity in ceramics and polymers
+
+### What scatters light in a polycrystal
+
+A dense, single-phase solid whose constituents absorb nothing in the visible should be transparent. Most ceramics and many polymers are not, because they scatter. Three microstructural sources dominate:
+
+1. **Porosity.** A pore in a ceramic is an index contrast of 0.5–1.5, the largest possible, and pores of 0.1–1 µm scatter strongly. Transparency requires porosity below about 0.01–0.05 %. Achieving it is a sintering problem (Chapter 46): fine, pure, agglomerate-free powders; sintering aids (MgO in alumina, LiF in spinel) that keep pores attached to grain boundaries so they can be eliminated; and **hot isostatic pressing** to close the last pores.
+2. **Birefringent grains.** In a non-cubic ceramic such as alumina, each grain has a different orientation and therefore a slightly different index for a given ray; every grain boundary is a weak scatterer. Cubic ceramics — spinel (MgAl$_2$O$_4$), YAG, AlON, Y$_2$O$_3$, MgO — have no birefringence and can be made fully transparent at any grain size.
+3. **Second phases and inclusions**, including impurity-rich grain-boundary films.
+
+For birefringent ceramics the scattering depends on the ratio of grain size to wavelength. In the regime where grains are smaller than the wavelength, Apetz and Bruls showed that the **real in-line transmission** — the fraction of light passing straight through, which determines whether an image can be seen — is approximately
+
+$$
+T_{\mathrm{RIT}}=(1-R_s)\exp\!\left(-\frac{3\pi^2\Delta n^2\,r\,d}{\lambda_0^2}\right)
+$$
+
+where $\Delta n$ is the effective birefringence, $r$ the grain radius, $d$ the thickness and $R_s$ the reflection loss from both surfaces.
+
+> **Status of the principle: Apetz–Bruls in-line transmission**
+> *Approximate.* It treats grains as independent Rayleigh–Gans scatterers smaller than the wavelength, with random orientation and no porosity. It captures the strong dependence on grain size; residual porosity of even 0.01 % adds scattering that it omits.
+
+**Worked example — fine-grained transparent alumina.** Take a 0.8 mm alumina disc ($n=1.76$, $\Delta n=0.008$) at $\lambda_0=640$ nm. Each surface reflects $[(1.76-1)/(1.76+1)]^2=7.6$ %, and with multiple reflections the two surfaces lose $R_s=2R/(1+R)=14$ %. For grains 0.3 µm in diameter ($r=0.15$ µm), the exponent is
+
+$$
+\frac{3\pi^2(0.008)^2(0.15\times10^{-6})(0.8\times10^{-3})}{(640\times10^{-9})^2}=0.555
+$$
+
+so $T_{\mathrm{RIT}}=0.86\,e^{-0.555}=0.49$ — half the light passes straight through, close to measured values of 50–60 %. With 1 µm grains the exponent becomes 1.85 and $T_{\mathrm{RIT}}=13.5$ %; with 2 µm grains, 2 %; with the 20 µm grains of conventional alumina, essentially zero. Conventional alumina can still have a high *total* transmission (over 90 % in high-pressure sodium lamp tubes, where only diffuse light is needed) but cannot be seen through. The design rules are therefore: choose a cubic ceramic (spinel, AlON, YAG) when image quality matters at any thickness, or make alumina's grains far smaller than the wavelength, which requires sintering at low temperature with pressure to stop grain growth (Figure 36.4).
+
+<!-- FIGURE 36.4 | figures/ch36/fig-36-4-transparent-ceramic-grain-size.png | plot | Real in-line transmission of polycrystalline ceramics: birefringent alumina becomes transparent only when grains are far smaller than the wavelength, while cubic spinel is limited only by reflection and porosity. | Content: x-axis mean grain size 0.1 to 100 um (log); y-axis real in-line transmission 0 to 90 % at 640 nm, 0.8 mm thickness. Curve: Al2O3 from the Apetz–Bruls equation (Delta n 0.008): 49 % at 0.3 um, 13.5 % at 1 um, 2 % at 2 um, near zero above 5 um; horizontal dashed line at 86 % = 1 - Rs for alumina. Spinel (n 1.72) horizontal band near 84–86 % independent of grain size; second spinel curve for 0.05 % porosity with 0.2 um pores falling to about 30 %. Inset photos-style icons: text read through 0.3 um alumina (clear) and 20 um alumina (translucent). -->
+
+![Figure 36.4 — Real in-line transmission of polycrystalline ceramics: birefringent alumina becomes transparent only when grains are far smaller than the wavelength, while cubic spinel is limited only by reflection and porosity](../figures/ch36/fig-36-4-transparent-ceramic-grain-size.png)
+
+*Figure 36.4 — Real in-line transmission of polycrystalline ceramics: birefringent alumina becomes transparent only when grains are far smaller than the wavelength, while cubic spinel is limited only by reflection and porosity.*
+
+Transparent polycrystalline ceramics serve as armour windows for vehicles and aircraft (spinel and AlON, three to four times as weight-efficient as laminated glass), infrared domes and windows (spinel, ZnS, sapphire), laser gain media (Nd:YAG and Yb:YAG ceramics, which can be made larger and more heavily doped than single crystals), scintillators for medical CT, and envelopes for metal-halide lamps.
+
+**Glass-ceramics** exploit the same physics from the other side. Controlled nucleation (Chapter 9) crystallizes a glass into a dense array of crystals tens of nanometres across, too small to scatter. If the crystal is a near-zero-expansion phase such as β-quartz solid solution, the result — the material of induction-hob cooktops and of telescope mirror blanks such as Zerodur — is transparent, strong and immune to thermal shock.
 
 ### Polymers
 
-Polymers degrade chemically (oxidation, hydrolysis, photolysis), physically (physical aging below $T_g$, plasticizer loss, swelling) and mechanically (creep, crazing, environmental stress cracking). Section 36.3 treats them in detail because their aging is the most strongly temperature- and environment-dependent of all classes.
-
-### Composites
-
-Fibre composites degrade at three length scales (Chapters 22–23):
-
-- **Matrix.** Epoxy matrices absorb 1–6 wt % water at saturation, which plasticizes them and lowers $T_g$, roughly 10–20 °C per percent of absorbed water. The design allowables of aircraft structures are therefore set at "hot/wet" conditions. Ultraviolet light degrades unprotected matrix surfaces, which is why composite surfaces are painted or gel-coated.
-- **Interface.** Water and cyclic loading weaken the fibre–matrix bond; glass fibres themselves suffer stress corrosion in water and acids (the reason for corrosion-resistant E-CR glass in chemical pipes).
-- **Laminate.** Under fatigue, damage progresses through transverse matrix cracking, then delamination between plies, then fibre breakage. Stiffness falls progressively (often by 10–20 % before final failure) rather than staying constant until a single crack runs, which makes stiffness monitoring useful. Low-velocity impact can create **barely visible impact damage** (BVID), internal delaminations that reduce compressive strength by up to half; design allowables assume such damage is present and undetected.
-
-Wind-turbine blades, where root and spar-cap laminates see about $10^8$–$10^9$ load cycles in a 20–25-year life, are the most demanding fatigue application of composites; leading-edge erosion by rain at tip speeds near 90 m/s is their main surface degradation.
-
-### Concrete
-
-Reinforced concrete degrades mainly through its steel. Concrete pore solution has a pH of about 12.5–13.5, which keeps the rebar passive (Chapter 34). Two processes destroy that passivity:
-
-- **Carbonation**: atmospheric CO$_2$ diffuses in and reacts with calcium hydroxide, lowering the pH to about 9. The carbonation front advances approximately as
-
-$$
-x=k\sqrt{t}
-$$
-
-because the rate is controlled by diffusion of CO$_2$ through the already carbonated layer. The coefficient $k$ is typically 2–6 mm/year$^{1/2}$ for structural concretes sheltered from rain, lower for dense, low water–cement-ratio concrete and in permanently wet conditions.
-- **Chloride ingress** from seawater or de-icing salt, described by Fick's second law with an apparent diffusion coefficient of order $10^{-12}$–$10^{-11}$ m$^2$/s. When the chloride content at the rebar exceeds a critical value, commonly taken as about 0.4 % by mass of cement, the passive film breaks down locally, giving pitting of the rebar.
-
-> **Status of the principle: Square-root-of-time carbonation law**
-> *Approximate.* Derived from diffusion through a carbonated layer with a sharp reaction front and constant boundary conditions; real coefficients are fitted to exposure data and vary with moisture, cement type and curing, and the law overestimates penetration where wetting and drying alternate.
-
-Tuutti's model divides the service life of a reinforced-concrete element into an **initiation period**, while the carbonation or chloride front travels through the cover, and a **propagation period**, while the rebar corrodes until cracking, spalling or loss of section reaches an unacceptable level (Figure 36.1). Rust occupies two to six times the volume of the steel it replaces, so only a few tens of micrometres of corrosion are needed to crack the cover.
-
-<!-- FIGURE 36.1 | figures/ch36/fig-36-1-tuutti-concrete-life.png | plot | Tuutti's two-stage service-life model for reinforced concrete, with square-root carbonation fronts for two concretes. | Content: left panel: x-axis time 0–100 years; y-axis carbonation depth 0–50 mm; curves x = k√t for k = 4 and k = 2 mm/yr^0.5; horizontal dashed lines at cover 20 mm and 30 mm; intersections marked at 25 y (k = 4, 20 mm), 56 y (k = 4, 30 mm), 225 y off-scale arrow (k = 2, 30 mm). Right panel: schematic damage (corrosion, cracking) versus time: flat 'initiation' segment until depassivation, then rising 'propagation' line with thresholds 'cracking', 'spalling', 'collapse risk'; CO2 and Cl⁻ labelled as initiation agents, O2 and H2O and temperature as propagation rate factors. -->
-
-**Worked example — cover depth for carbonation.** A bridge pier in a sheltered urban location is made of concrete with a measured carbonation coefficient $k=4$ mm/year$^{1/2}$. How long before the carbonation front reaches the reinforcement for covers of 20 mm and 30 mm, and what does a denser concrete with $k=2$ mm/year$^{1/2}$ achieve?
-
-$$
-t=\left(\frac{c}{k}\right)^{2}:\qquad t_{20}=\left(\frac{20}{4}\right)^2=25\ \text{years},\qquad t_{30}=\left(\frac{30}{4}\right)^2=56\ \text{years}
-$$
-
-With $k=2$ mm/year$^{1/2}$ and 30 mm cover, $t=(30/2)^2=225$ years. Because time scales with the square of the cover and inversely with the square of $k$, a 50 % increase in cover more than doubles the initiation period, and halving $k$ quadruples it. This is why durability codes (EN 206 and EN 1992, ACI 318) specify both minimum cover and maximum water–cement ratio for each exposure class, and why construction tolerance on cover, often ±10 mm, is a durability parameter: a 30 mm nominal cover placed at 20 mm loses more than half its life.
-
-Other concrete degradation mechanisms are chemical attack of the paste: **sulfate attack** (expansive ettringite and gypsum, resisted by low-C$_3$A cements), **alkali–silica reaction** (reactive silica aggregate swelling as an alkali silicate gel, which has cracked dams and bridges worldwide), **freeze–thaw damage** of saturated paste (resisted by 4–7 % entrained air), and acid and seawater attack (Chapter 18).
+Amorphous polymers (PMMA, polycarbonate, polystyrene, cyclic olefin copolymers) are intrinsically transparent, with in-line transmission of 89–92 %, limited by surface reflection. They replace glass in vehicle lamps, glazing, lenses, medical devices and optical discs. **Semicrystalline** polymers (polyethylene, polypropylene, nylon, PTFE) are usually translucent or opaque, because crystalline lamellae and spherulites (Chapter 20), with an index higher than the amorphous regions by 0.02–0.05, form scattering structures several micrometres across. Three routes restore clarity: suppress crystallinity (quenching thin PET film, or copolymerization); make the crystals small, by adding **nucleating clarifiers** to polypropylene so that thousands of times more spherulites form, each too small to scatter (clarified PP food containers and syringes); or orient the crystals by stretching, as in biaxially oriented PET bottles and BOPP film. In fibre-reinforced polymers, a resin whose index matches that of the glass fibres can produce translucent panels. **Haze** — the fraction of transmitted light scattered by more than 2.5° — is the standard quality measure for films and sheets, along with yellowing from UV degradation, which absorbs the blue end of the spectrum (Chapter 44).
 
 ---
 
-## 36.3 Polymer aging and weathering
+## 36.5 Luminescence and phosphors; LEDs and lasers as material systems
 
-### Thermo-oxidation
+### Luminescence
 
-Most polymers in service oxidize. The process is a free-radical chain reaction, **autoxidation**:
+**Luminescence** is the emission of light by a material after it has been excited by something other than heat: photons (photoluminescence), electrons (cathodoluminescence), an electric current (electroluminescence), X-rays or gamma rays (scintillation), or a chemical reaction. Because some energy is lost to lattice vibrations before emission, the emitted light has a longer wavelength than the exciting light — the **Stokes shift**. Emission that stops within microseconds of excitation is fluorescence; long-lived emission (milliseconds to hours) is phosphorescence.
 
-- Initiation: heat, light, residual catalyst or mechanical stress generates a polymer radical, $\mathrm{RH\to R^{\bullet}}$.
-- Propagation: $\mathrm{R^{\bullet}+O_2\to ROO^{\bullet}}$, then $\mathrm{ROO^{\bullet}+RH\to ROOH+R^{\bullet}}$.
-- Branching: hydroperoxides decompose, $\mathrm{ROOH\to RO^{\bullet}+{}^{\bullet}OH}$, each producing two new radicals, so the reaction accelerates after an induction period.
-- Termination: radicals combine.
+Most practical luminescent materials are **phosphors**: a host crystal (oxide, nitride, sulfide, fluoride) doped with an activator ion whose energy levels produce the emission. Rare-earth ions dominate. **Eu$^{3+}$** and **Tb$^{3+}$** emit narrow lines (red at 611 nm and green at 545 nm) from shielded 4f levels, almost independent of the host. **Ce$^{3+}$** and **Eu$^{2+}$** emit broad bands from 5d→4f transitions whose energy depends strongly on the host's crystal field and covalency: the same Ce$^{3+}$ emits in the ultraviolet in a fluoride but yellow in Y$_3$Al$_5$O$_{12}$ (YAG:Ce), and Eu$^{2+}$ emits red in nitride hosts such as CaAlSiN$_3$. Phosphor design is crystal chemistry: choosing the site symmetry, bond covalency and stiffness of the host to place emission at the wanted wavelength and to suppress thermal quenching. Persistent phosphors such as SrAl$_2$O$_4$:Eu,Dy store energy in traps and glow for hours in emergency signage. **Scintillators** convert ionizing radiation to visible light for medical imaging and security scanning: lutetium–yttrium oxyorthosilicate (LYSO:Ce, about 30 000 photons per MeV with a 40 ns decay) in PET scanners, CsI:Tl in X-ray detectors, and transparent ceramic garnets and oxysulfides in CT.
 
-The radicals cause **chain scission** (molecular weight falls, polymer becomes brittle: polypropylene, polyethylene) or **cross-linking** (polymer hardens and cracks: many rubbers), and they create carbonyl groups detectable by infrared spectroscopy (Chapter 42). Polypropylene, with a tertiary hydrogen on every repeat unit, oxidizes much faster than polyethylene and is useless outdoors or hot without stabilization.
+### LEDs
 
-**Stabilizers** interrupt the cycle: primary antioxidants (hindered phenols, aromatic amines) donate hydrogen to peroxy radicals; secondary antioxidants (phosphites, thioesters) decompose hydroperoxides harmlessly. Their consumption defines an **induction period**, during which properties barely change, followed by rapid embrittlement once the stabilizer is depleted. The remaining stabilizer is measured by the **oxidation induction time** (OIT), the time to the onset of the oxidation exotherm in a DSC at, for example, 200 °C in oxygen, a routine test for polyethylene pipes and geomembranes.
+The semiconductor-materials side of LEDs, lasers and photodetectors is treated in Chapter 35; here they are viewed as material systems. A **light-emitting diode** is a p–n junction (Chapter 32) in a direct-gap semiconductor. Forward bias injects electrons and holes into a thin active region, where they recombine radiatively and emit photons of energy close to the band gap. Each element of the device is a materials choice:
 
-### Photo-oxidation and weathering
+- **The active layer** sets the colour. InGaN quantum wells in GaN emit violet to green (405–530 nm) as indium content rises; AlGaInP lattice-matched to GaAs emits red to amber (590–650 nm); AlGaN reaches the ultraviolet (to 210 nm) for disinfection. Between them lies the "green gap", where neither system is efficient: high-indium InGaN suffers strain, phase separation and strong polarization fields, and AlGaInP becomes indirect.
+- **Heterostructure barriers** confine carriers in the wells (Chapter 34), raising the radiative rate.
+- **Defects** compete through non-radiative SRH recombination. That GaN LEDs work at dislocation densities of $10^8$ cm$^{-2}$ is due to carrier localization in indium-rich regions.
+- **Light extraction** is limited by total internal reflection. In a semiconductor with $n=2.5$, the critical angle is $\theta_c=\arcsin(1/2.5)=23.6$°, and only the fraction $(1-\cos\theta_c)/2=4.2$ % of isotropically emitted light can escape through the top surface. Roughened or patterned surfaces, patterned sapphire substrates, and encapsulation in high-index silicones raise extraction to 80 % or more.
 
-Solar ultraviolet radiation between 290 and 400 nm carries 300–410 kJ/mol per photon, comparable to C–C and C–H bond energies. Chromophores (carbonyl groups, catalyst residues, aromatic rings) absorb it and initiate radicals, so photo-oxidation adds to thermo-oxidation at the surface. Outdoor plastics chalk, yellow, lose gloss and develop surface microcracks that act as notches; garden furniture and unprotected polypropylene ropes embrittle in a few summers. Weathering adds moisture, temperature cycling and pollutants.
+**White LEDs** combine a blue InGaN chip (about 450 nm) with a YAG:Ce phosphor that absorbs part of the blue and emits broadband yellow; adding a red nitride phosphor raises colour rendering for warm-white lighting (Figure 36.5). Today's best white LEDs exceed 200 lumens per watt, more than ten times an incandescent lamp, and solid-state lighting has cut global lighting electricity substantially. The phosphor's thermal quenching, the degradation of silicone encapsulants and the efficiency **droop** at high current (partly Auger recombination) are the materials limits on lifetime and brightness.
 
-Protection comes from **UV absorbers** (benzotriazoles, benzophenones), **hindered-amine light stabilizers** (HALS), which scavenge radicals regeneratively and are the most effective for polyolefins, and **pigments**: 2–3 % of well-dispersed carbon black makes polyethylene pipe and cable jacket essentially UV-proof for decades. Accelerated weathering uses xenon-arc or fluorescent UV lamps with water spray (ISO 4892, ASTM G154/G155), but because the lamp spectrum, temperature and wetting differ from sunlight, results rank materials rather than predict outdoor life; reference outdoor sites in Florida (hot, humid) and Arizona (hot, high UV) remain the benchmarks.
+<!-- FIGURE 36.5 | figures/ch36/fig-36-5-white-led-spectrum.png | plot | A phosphor-converted white LED: a blue InGaN chip plus yellow (and optionally red) phosphor emission. | Content: left panel schematic cross-section: sapphire or patterned substrate, n-GaN, InGaN/GaN multiple quantum wells, p-GaN, contacts; phosphor-in-silicone layer on top; arrows for blue photons partly converted to yellow. Right panel: x-axis wavelength 380 to 780 nm; y-axis relative spectral power 0 to 1. Narrow blue peak at 450 nm (FWHM about 20 nm); broad YAG:Ce band peaking near 555 nm (FWHM about 110 nm); optional dashed red nitride phosphor band peaking near 630 nm for warm white. Overlay the photopic eye-sensitivity curve V(lambda) peaking at 555 nm as a thin grey line. -->
 
-### Hydrolysis, environmental stress cracking and physical aging
+![Figure 36.5 — A phosphor-converted white LED: a blue InGaN chip plus yellow (and optionally red) phosphor emission](../figures/ch36/fig-36-5-white-led-spectrum.png)
 
-- **Hydrolysis** breaks ester, amide, carbonate and urethane linkages: PET and polycarbonate lose molecular weight in hot water or steam; polyester polyurethanes crumble in humid tropical climates; polyamides absorb water and some hydrolyse in hot glycol coolants. In biomedical PLA and PLGA, hydrolysis is the designed degradation route (Chapter 31).
-- **Environmental stress cracking (ESC)** is the polymer analogue of SCC: a liquid that does not dissolve the polymer (detergent on polyethylene, alcohols or oils on polycarbonate and ABS, cleaning agents on medical housings) plasticizes the craze fibrils at a stressed surface and allows cracks to grow at stresses far below those needed in air. It is the most common cause of plastic part failures in practice. Slow crack growth of polyethylene pipe under internal pressure is the related long-term mechanism, which is why modern PE100 and PE100-RC pipe resins are rated for resistance to it.
-- **Physical aging** of glassy polymers below $T_g$: the non-equilibrium glass slowly densifies (Chapter 20), raising modulus and yield stress and lowering toughness and creep rate, with no chemical change. It is reversible by heating above $T_g$.
-- **Loss of plasticizer** from flexible PVC (cables, hoses, medical tubing) by evaporation or migration into contacting materials leaves it stiff and cracked.
+*Figure 36.5 — A phosphor-converted white LED: a blue InGaN chip plus yellow (and optionally red) phosphor emission.*
 
-### Arrhenius extrapolation
+### Lasers
 
-Thermal life is estimated by aging specimens in ovens at several elevated temperatures until a property (commonly elongation at break) falls to an end-of-life value, often 50 % of its initial value. If one reaction controls the rate at all test temperatures, the life follows
+A laser amplifies light by **stimulated emission** in a medium with a **population inversion** — more atoms in the upper level of a transition than in the lower — inside an optical resonator. The gain medium is a materials system in which the host and the dopant are chosen together:
 
-$$
-L(T)=L_0\exp\!\left(\frac{E_a}{RT}\right)
-$$
-
-and a plot of $\ln L$ against $1/T$ (Figure 36.2) is a straight line that can be extrapolated to the service temperature. Standards such as IEC 60216 and UL 746B use this procedure to define thermal indices: the temperature at which life reaches a reference value such as 20 000 h. A useful consequence is the rule that life roughly halves for every 10 °C rise near the test temperature; with $E_a=113$ kJ/mol it halves every 6.7 K near 90 °C.
-
-> **Status of the principle: Arrhenius aging extrapolation**
-> *Empirical.* Its form follows from thermally activated reaction kinetics, but applied to the property loss of a real material it is a fit valid only while one mechanism dominates. Extrapolation across a glass transition or melting range, across a change from stabilizer-controlled to oxidation-controlled behaviour, or from diffusion-limited oxidation in thick specimens at high temperature (where oxygen cannot reach the interior fast enough) to homogeneous oxidation at service temperature, is unsafe.
-
-<!-- FIGURE 36.2 | figures/ch36/fig-36-2-arrhenius-polymer-aging.png | plot | Arrhenius plot of oven-aging life of a polyolefin cable jacket with extrapolation to service temperatures, showing the sensitivity to activation energy. | Content: x-axis 1000/T in K⁻¹ from 2.3 to 3.0 with a secondary top axis in °C (160, 150, 135, 120, 100, 90, 70, 60); y-axis time to 50 % retained elongation in hours, log scale 1e2 to 1e7. Three data points: 150 °C 300 h, 135 °C 1000 h, 120 °C 3500 h. Solid fitted line Ea = 113 kJ/mol extrapolated (dashed) to 70 °C giving 5.4e5 h; second dashed line from the 150 °C point with Ea = 80 kJ/mol giving 6.0e4 h at 70 °C. Horizontal reference line at 20 000 h 'thermal index'. Shaded band beyond the data labelled 'extrapolation: mechanism must not change'. -->
-
-**Worked example — service life of a cable jacket from oven aging.** A polyolefin cable jacket compound is aged at three temperatures, and the time for the elongation at break to fall to 50 % of its initial value is recorded:
-
-| Aging temperature | 150 °C (423.15 K) | 135 °C (408.15 K) | 120 °C (393.15 K) |
+| Laser | Gain material | Wavelength | Uses |
 |---|---|---|---|
-| Time to end of life | 300 h | 1000 h | 3500 h |
+| Nd:YAG | Nd$^{3+}$ in Y$_3$Al$_5$O$_{12}$ crystal or ceramic | 1064 nm | Marking, drilling, medical, range-finding |
+| Yb fibre | Yb$^{3+}$ in silica fibre core | 1030–1080 nm | Industrial cutting and welding (to tens of kW), additive manufacturing |
+| Er fibre amplifier | Er$^{3+}$ in silica fibre | 1530–1565 nm | Telecommunications amplification |
+| Ti:sapphire | Ti$^{3+}$ in Al$_2$O$_3$ | 650–1100 nm (tunable) | Ultrafast pulses, research |
+| CO$_2$ | Gas molecule | 10.6 µm | Cutting non-metals, older metal cutting |
+| Semiconductor diode | InGaAs, AlGaAs, InGaN quantum wells | 375 nm–2 µm | Pumps for solid-state lasers, data links, Blu-ray, lidar |
 
-A least-squares fit of $\ln L$ against $1/T$ gives a slope $E_a/R=1.362\times10^4$ K, so $E_a=1.362\times10^4\times8.314=113$ kJ/mol (1.17 eV). The fitted line reproduces the data to within 2 % (302, 986 and 3523 h). Extrapolating from 150 °C:
+*Table 36.3 — Representative laser materials.*
 
-$$
-L(70\ ^\circ\mathrm C)=300\times\exp\!\left[1.362\times10^4\left(\frac{1}{343.15}-\frac{1}{423.15}\right)\right]=300\times\exp(7.50)\approx5.4\times10^{5}\ \mathrm h\approx62\ \text{years}
-$$
-
-At 90 °C the same calculation gives about $6.1\times10^4$ h, roughly 7 years: a 20 K rise in conductor temperature cuts the life ninefold.
-
-The fragility of the extrapolation is the real lesson. Three points spanning 30 K are being projected 50 K beyond the data, across more than two decades of time. If the true activation energy at lower temperatures were 80 kJ/mol rather than 113 kJ/mol (a common situation when a different, lower-barrier process dominates at low temperature), the life at 70 °C would be about $6\times10^4$ h, about 7 years instead of 62. That is why long-life ratings require test temperatures as close to service as practical, at least four temperatures, a check for linearity, and confirmation by OIT or infrared spectroscopy that the same chemistry is occurring at each temperature.
-
----
-
-## 36.4 Wear-out mechanisms and life prediction
-
-### The catalogue of life laws
-
-Wear-out failures are those whose probability rises with age because damage accumulates. The laws that predict them have appeared in earlier chapters; collected here, they form the toolkit of life prediction:
-
-| Mechanism | Life law | Typical parameters | Status |
-|---|---|---|---|
-| High-cycle fatigue | Basquin: $\sigma_a=\sigma_f'(2N_f)^b$ | $b\approx-0.05$ to $-0.12$ | Empirical |
-| Low-cycle fatigue | Coffin–Manson: $\Delta\varepsilon_p/2=\varepsilon_f'(2N_f)^c$ | $c\approx-0.5$ to $-0.7$ | Empirical |
-| Fatigue crack growth | Paris: $da/dN=C(\Delta K)^m$ | $m\approx3$ (steels), 3–4 (Al alloys) | Empirical |
-| Variable-amplitude fatigue | Miner: $\sum n_i/N_i=1$ | failure at sum 0.3–3 in practice | Empirical |
-| Creep rupture | Larson–Miller: $P=T(C+\log_{10}t_r)$ | $C\approx20$ ($t_r$ in h, $T$ in K) | Empirical |
-| Thermally activated aging | Arrhenius: $L\propto\exp(E_a/RT)$ | $E_a$ 50–150 kJ/mol for polymers | Empirical |
-| Humidity-driven corrosion | Peck: $L\propto\mathrm{RH}^{-n}\exp(E_a/kT)$ | $n\approx2.7$, $E_a\approx0.8$ eV | Empirical |
-| Diffusion-controlled ingress | $x=k\sqrt t$ | carbonation $k$ 2–6 mm/year$^{1/2}$ | Approximate |
-| Sliding wear | Archard: $V=KFs/H$ | $K$ from $10^{-8}$ to $10^{-2}$ | Empirical |
-
-The electronic-specific laws (Black's equation for electromigration, TDDB models for dielectrics, Norris–Landzberg for solder joints) are developed in the Materials Core book, Ch 24.
-
-Each law is used in the same way: measure its parameters under accelerated conditions, compute an **acceleration factor** between test and service, and convert test life to service life. Each carries the same caveat: the mechanism must be the same in test and service.
-
-### Damage-tolerant design with the Paris law
-
-For safety-critical structures that cannot be guaranteed crack-free (airframes, rail axles and wheels, pressure vessels, bridges), the design philosophy is **damage tolerance**: assume a crack of the largest size that inspection could miss, calculate how long it takes to grow to a critical size, and inspect at a fraction (typically half or a third) of that interval. With $\Delta K=Y\Delta\sigma\sqrt{\pi a}$ and constant $Y$, integrating the Paris law from initial size $a_0$ to critical size $a_c$ gives, for $m\neq2$,
-
-$$
-N_f=\frac{2}{(m-2)\,C\,(Y\Delta\sigma\sqrt{\pi})^{m}}\left[a_0^{(2-m)/2}-a_c^{(2-m)/2}\right]
-$$
-
-> **Status of the principle: Paris-law crack-growth integration**
-> *Empirical.* The Paris law is a fit to the intermediate (stage II) region of crack-growth data; it ignores the threshold below which cracks do not grow, the acceleration near $K_{\rm Ic}$, load-sequence effects (overload retardation) and short-crack behaviour, so lives computed from it are reliable only for long cracks under roughly constant-amplitude loading.
-
-**Worked example — inspection interval for a cracked steel plate.** A ferrite–pearlite steel plate in a crane girder carries a constant-amplitude stress range $\Delta\sigma=100$ MPa ($R=0$, so $\sigma_{\max}=100$ MPa). Ultrasonic inspection can reliably find edge cracks of 2 mm and larger. Paris constants are $C=6.9\times10^{-12}$ m/cycle and $m=3$ (with $\Delta K$ in MPa√m), $K_{\rm Ic}=100$ MPa√m, and $Y=1.12$.
-
-*Critical crack size:*
-
-$$
-a_c=\frac{1}{\pi}\left(\frac{K_{\rm Ic}}{Y\sigma_{\max}}\right)^2=\frac{1}{\pi}\left(\frac{100}{112}\right)^2=0.254\ \mathrm m
-$$
-
-(in practice the plate width or net-section yielding would limit this first; we keep it to see its influence).
-
-*Cycles from 2 mm to $a_c$:* with $m=3$, the bracket is $a_0^{-1/2}-a_c^{-1/2}=22.36-1.99=20.37$ m$^{-1/2}$, and $(Y\Delta\sigma\sqrt\pi)^3=(112\times1.7725)^3=(198.5)^3=7.82\times10^6$:
-
-$$
-N_f=\frac{2\times20.37}{6.9\times10^{-12}\times7.82\times10^{6}}=7.5\times10^{5}\ \text{cycles}
-$$
-
-Three sensitivities follow directly. Taking $a_c=50$ mm instead of 254 mm reduces $N_f$ only to $6.6\times10^5$ cycles: almost all the life is spent while the crack is small, so the critical size hardly matters. Halving the detectable crack to 1 mm raises $N_f$ to $1.10\times10^6$ cycles: better inspection buys life directly. Raising the stress range by 25 % to 125 MPa cuts $N_f$ to $3.8\times10^5$ cycles (and $a_c$ to 0.16 m), because life scales as $\Delta\sigma^{-3}$. At 300 lifts a day the 2 mm case allows about 7 years of crack growth, so an inspection every two to three years gives two chances to find the crack before it is critical. The Eschede tyre of the opening was an object lesson in the last sensitivity: wear thinned the section, raising the stress range in service beyond what the original assessment had assumed.
-
-### Variable loads and Miner's rule
-
-Real loads vary. **Miner's rule** assumes that each cycle at amplitude $\sigma_i$ consumes a fraction $1/N_i$ of life, where $N_i$ is the constant-amplitude life at that amplitude, and that failure occurs when $\sum n_i/N_i=1$. Load histories are reduced to counts of cycles by rainflow counting. The rule ignores load sequence (a high-low sequence is more damaging than low-high) and the fact that small cycles below the endurance limit become damaging once a crack exists, so design codes often limit the damage sum to 0.5 or less, or extend S–N curves below the endurance limit with a shallower slope.
-
-### Creep life and the Larson–Miller parameter
-
-Creep-rupture data are extrapolated with time–temperature parameters (Chapter 14). With the Larson–Miller parameter, a stress that causes rupture in 1000 h at 650 °C (923.15 K) has $P=923.15\times(20+3)=2.123\times10^4$; at the same stress and 600 °C (873.15 K), $\log_{10}t_r=2.123\times10^4/873.15-20=4.32$, so $t_r\approx2.1\times10^4$ h. A 50 K reduction in temperature buys a factor of 21 in life. Power-plant steam pipes and reformer tubes are managed this way, with remaining-life assessment by replica metallography of creep cavities on the outer surface.
+In solid-state lasers the host must be transparent, optically homogeneous, thermally conductive (to remove waste heat without thermal lensing or fracture) and able to accept the dopant ion on a suitable site; YAG and sapphire excel because they are hard, conductive and isotropic or well-characterized. In fibre lasers, the long thin geometry dissipates heat so well that a single fibre delivers kilowatts, which is why Yb fibre lasers now dominate laser welding, cutting and powder-bed fusion (Chapters 47–48). Diode lasers add a resonator to the LED structure: cleaved crystal facets serve as mirrors, and a double heterostructure confines both carriers (lower gap) and light (higher index) in the active layer. At high power, facets fail by catastrophic optical damage, a materials-degradation problem solved by facet passivation and non-absorbing mirror regions.
 
 ---
 
-## 36.5 Reliability statistics
+## 36.6 Optical fibres and waveguides
 
-### Describing a population of lives
+### Guiding by total internal reflection
 
-Nominally identical components fail at different times, because flaws, loads and environments vary. Reliability engineering describes the population by:
-
-- the cumulative failure probability $F(t)$ and the **reliability** $R(t)=1-F(t)$;
-- the probability density $f(t)=dF/dt$;
-- the **hazard rate** $h(t)=f(t)/R(t)$, the instantaneous failure rate of survivors, which tells whether old components are more or less likely to fail than new ones.
-
-### The Weibull distribution
-
-The most widely used life distribution in mechanical and materials reliability is the two-parameter Weibull:
+Silica-fibre attenuation is also examined, from the semiconductor-materials side, in Chapter 35. An optical fibre has a **core** of slightly higher index than its **cladding**; light launched within the acceptance cone is totally reflected at the boundary and guided. The **numerical aperture**
 
 $$
-F(t)=1-\exp\!\left[-\left(\frac{t}{\eta}\right)^{\beta}\right],\qquad h(t)=\frac{\beta}{\eta}\left(\frac{t}{\eta}\right)^{\beta-1}
+\mathrm{NA}=\sqrt{n_1^2-n_2^2}=\sin\theta_{\max}
 $$
 
-where $\eta$ is the **characteristic life** (63.2 % failed) and $\beta$ the **shape parameter**. Its flexibility comes from $\beta$: $\beta<1$ gives a falling hazard (infant mortality from manufacturing defects), $\beta=1$ a constant hazard (random failures, the exponential distribution), and $\beta>1$ a rising hazard (wear-out; $\beta\approx2$–4 for fatigue and wear, larger for tightly controlled processes). Its physical justification is the weakest-link argument already used for ceramic strength (Chapter 14): a component that fails when its worst element fails follows Weibull statistics. Mean life is $\mathrm{MTTF}=\eta\,\Gamma(1+1/\beta)$. The **B10 life**, the time by which 10 % have failed, is standard for bearings and many mechanical parts:
+measures the acceptance cone. When the core is small enough, only one guided mode propagates; the condition is that the normalized frequency
 
 $$
-t_{B10}=\eta\left[-\ln(0.9)\right]^{1/\beta}
+V=\frac{2\pi a}{\lambda}\,\mathrm{NA}<2.405
 $$
 
-The **lognormal** distribution is an alternative when damage grows multiplicatively (fatigue lives of many metals, electromigration); with limited data the two are hard to distinguish, but they diverge in the low-percentile tail that matters for safety.
+where $a$ is the core radius. Single-mode fibres avoid the spreading of pulses between modes and carry the world's long-distance and data-centre traffic; multimode fibres (core 50–62.5 µm) serve short links and are easier to couple to cheap sources.
 
-> **Status of the principle: Weibull life distribution**
-> *Empirical.* Justified by weakest-link reasoning where failure starts at the worst of many independent flaws, but in reliability practice it is a flexible fit; extrapolation to failure fractions far below those observed is sensitive to the fitted $\beta$, and mixed populations (defective plus sound) need separate distributions.
+> **Status of the principle: Single-mode condition $V<2.405$**
+> *Derived.* It follows from solving Maxwell's equations for a step-index cylindrical guide in the weakly guiding approximation ($n_1-n_2\ll n_1$); 2.405 is the first zero of the Bessel function $J_0$.
 
-### The bathtub curve
-
-Over the life of a product population, the hazard rate typically follows the **bathtub curve** (Figure 36.3): a falling early-failure region (defective units failing; addressed by burn-in, proof testing and process control), a flat region of random failures (overloads, accidents; addressed by margins), and a rising wear-out region (fatigue, wear, aging; addressed by life prediction and preventive replacement). The curve is a composite: each region is a different population or mechanism, and each has its own Weibull $\beta$. Many well-designed mechanical products show little flat region at all, and electronic products often wear out only after obsolescence.
-
-<!-- FIGURE 36.3 | figures/ch36/fig-36-3-bathtub-curve.png | plot | The bathtub curve as the sum of three Weibull hazard populations. | Content: x-axis time (normalized, 0 to 1.2 of design life, linear); y-axis hazard rate h(t) (arbitrary units, linear, 0 to 5). Three dashed component hazards: infant mortality Weibull β = 0.5 decaying; random β = 1 constant at 0.5; wear-out β = 4 rising from about 0.6 of life. Solid total curve as their sum showing the bathtub. Shaded regions labelled 'early failures: burn-in, proof test, process control', 'random failures: design margin', 'wear-out: preventive replacement'. Vertical dashed line at 'design life'. -->
-
-### Fitting data and reading the result
-
-Failure times are ranked, each is assigned an estimated cumulative probability by **median ranks**, $F_i\approx(i-0.3)/(n+0.4)$ (Bernard's approximation), and $\ln[-\ln(1-F)]$ is plotted against $\ln t$. A straight line confirms the Weibull form; its slope is $\beta$ and its intercept gives $\eta$ (Figure 36.4). Maximum-likelihood estimation is preferred for censored data (units still running when the test ends).
-
-**Worked example — Weibull analysis of hydraulic pump seals.** Ten seals from a test rig fail at 410, 620, 780, 900, 1020, 1130, 1260, 1400, 1590 and 1900 h. Median ranks run from $F_1=0.7/10.4=0.067$ to $F_{10}=9.7/10.4=0.933$. A least-squares fit of $\ln[-\ln(1-F_i)]$ on $\ln t_i$ gives
+**Worked example — designing a single-mode fibre.** A germania-doped core of $n_1=1.4500$ in a silica cladding of $n_2=1.4447$ gives
 
 $$
-\beta=2.42,\qquad \eta=1252\ \mathrm h
+\mathrm{NA}=\sqrt{1.4500^2-1.4447^2}=0.124
 $$
 
-The shape parameter well above 1 identifies wear-out. The B10 life is
+an acceptance half-angle of 7.1°. For single-mode operation at 1.31 µm, $a<2.405\lambda/(2\pi\,\mathrm{NA})=2.405(1.31)/(2\pi\times0.124)=4.05$ µm. A core radius of 4.1 µm gives $V=2.44$ at 1.31 µm (just multimode) and $V=2.06$ at 1.55 µm — so standard telecom fibre, with a core diameter of about 8–9 µm, is single-mode at 1.55 µm and only marginally above cutoff at 1.31 µm. The index step of 0.0053 is produced by about 4 mol% GeO$_2$ in the core, deposited by **modified chemical vapour deposition** (MCVD) or outside vapour deposition: SiCl$_4$ and GeCl$_4$ are oxidized to soot inside or around a silica tube, sintered to a transparent preform, and drawn to a 125 µm fibre at about 2000 °C. The vapour route is essential because the chlorides can be distilled to a purity that no melted glass could reach.
 
-$$
-t_{B10}=1252\times(0.1054)^{1/2.42}=1252\times0.395=495\ \mathrm h
-$$
+### Loss: the materials limits
 
-and the mean life is $\mathrm{MTTF}=1252\times\Gamma(1.413)=1252\times0.887=1110$ h (the sample mean is 1101 h). The hazard rate rises from $5.2\times10^{-4}$ per hour at 500 h to $2.5\times10^{-3}$ per hour at 1500 h, nearly fivefold. Because failures are wear-out, preventive replacement pays: replacing seals at 500 h accepts about a 10 % chance of an in-service failure per seal, whereas running to failure would see half of them fail before 1080 h. If instead $\beta$ had come out near 1, preventive replacement would be pointless, since a new seal would be no more reliable than an old one. Ten failures give $\beta$ with a 90 % confidence interval of roughly ±40 %, so a decision that depends on the B1 life rather than the B10 would need more data.
+Fibre attenuation is quoted in decibels per kilometre; a loss of $\alpha$ dB/km over length $L$ leaves a fraction $10^{-\alpha L/10}$ of the power. Silica fibre loss has three materials origins (Figure 36.6):
 
-<!-- FIGURE 36.4 | figures/ch36/fig-36-4-weibull-seals.png | plot | Weibull probability plot of ten pump-seal failures with the fitted line, characteristic life and B10 life. | Content: x-axis time to failure in h, log scale 200–3000; y-axis ln(−ln(1−F)) from −3 to 1.5 with right-hand labels F = 5 %, 10 %, 20 %, 50 %, 63.2 %, 90 %, 95 %. Ten data points at t = 410, 620, 780, 900, 1020, 1130, 1260, 1400, 1590, 1900 h with median ranks (i−0.3)/10.4. Fitted line β = 2.42, η = 1252 h. Horizontal dashed lines at F = 10 % and 63.2 % with vertical drops at 495 h (B10) and 1252 h (η). Text box 'β = 2.42: wear-out'. -->
+- **Rayleigh scattering** from frozen-in density and composition fluctuations of the glass, proportional to $\lambda^{-4}$ and to the fictive temperature at which the glass structure froze (Chapter 17). It dominates in the near infrared.
+- **Infrared absorption** by Si–O vibrational overtones, rising steeply beyond 1.6 µm.
+- **Impurity absorption**, above all by OH groups (overtone at 1.38 µm) and transition metals. A transition-metal content of 1 ppb or an OH content below 1 ppm is required, achieved through vapour-phase chemistry and dehydration with chlorine.
+
+Between Rayleigh scattering and infrared absorption lies a minimum near 1.55 µm, about 0.17–0.2 dB/km in standard fibre and 0.14 dB/km in pure-silica-core fibres — so 100 km of fibre transmits about 1 % of the input, recoverable with an erbium-doped fibre amplifier. At 0.85 µm, Rayleigh scattering is $(1550/850)^4=11$ times stronger, giving losses of about 2 dB/km, and the same 100 km would transmit $10^{-20}$ of the light. This is the answer to the fourth opening question.
+
+<!-- FIGURE 36.6 | figures/ch36/fig-36-6-fibre-attenuation.png | plot | Attenuation of silica optical fibre: Rayleigh scattering and infrared absorption bound a low-loss window at 1.3–1.6 um. | Content: x-axis wavelength 0.7 to 1.8 um; y-axis attenuation 0.1 to 10 dB/km (log). Curves: total measured loss of standard single-mode fibre (about 2.2 at 0.85, 0.33 at 1.31, 0.19 at 1.55 um, low-water-peak version without the OH peak; older fibre with OH peak about 1 dB/km at 1.38 um as a dashed variant); Rayleigh scattering component A/lambda^4 with A about 0.85 dB km^-1 um^4; infrared absorption tail rising from 1.6 um; UV absorption tail at short wavelength. Shade telecom bands O (1260–1360), C (1530–1565), L (1565–1625). Mark 0.14 dB/km record pure-silica-core fibre at 1.56 um. -->
+
+![Figure 36.6 — Attenuation of silica optical fibre: Rayleigh scattering and infrared absorption bound a low-loss window at 1.3–1.6 um](../figures/ch36/fig-36-6-fibre-attenuation.png)
+
+*Figure 36.6 — Attenuation of silica optical fibre: Rayleigh scattering and infrared absorption bound a low-loss window at 1.3–1.6 um.*
+
+### Other fibres and waveguides
+
+**Polymer optical fibre** (PMMA core, fluoropolymer cladding) has high loss (about 150–200 dB/km at 650 nm, from C–H vibrational overtones) but large cores, flexibility and cheap connectors, and serves in-vehicle networks, lighting and short links. **Fluoride and chalcogenide glass fibres** transmit the mid-infrared for spectroscopy and laser delivery. **Fibre sensors** turn the fibre itself into a strain gauge or thermometer: fibre Bragg gratings, written by ultraviolet light into a germanosilicate core, reflect a narrow band whose wavelength shifts with strain (about 1.2 pm per microstrain at 1.55 µm) and temperature, and are embedded in bridges, wind-turbine blades, composite aircraft structures, pipelines and oil wells, where they are immune to electromagnetic interference. Distributed sensing reads Rayleigh, Raman or Brillouin backscatter along tens of kilometres of fibre to locate leaks, fires or ground movement.
+
+On chips, **integrated waveguides** guide light through a high-index core patterned on a low-index substrate: silicon on SiO$_2$ (silicon photonics, an index contrast of 3.48/1.44 that allows bends of a few micrometres), silicon nitride (lower loss, visible-to-infrared), and thin-film lithium niobate for modulators (Section 36.7). Silicon photonic transceivers carry the optical links of data centres.
 
 ---
 
-## 36.6 Failure analysis: methodology, fractography and root cause
+## 36.7 Nonlinear and electro-optic materials
 
-### Principles
+### Nonlinear optics
 
-Failure analysis is the systematic reconstruction of how and why a component failed. Three principles govern it:
+At low intensity, polarization is proportional to the optical field. At laser intensities, the field approaches the inner-atomic fields that bind electrons, and higher-order terms appear:
 
-1. **Preserve evidence.** Fracture surfaces are damaged by fitting broken halves together, by cleaning, by corrosion after the event and by careless sectioning. Every destructive step removes information; proceed from non-destructive to destructive and document each step.
-2. **Collect the history.** Design drawings, material certificates, manufacturing and repair records, operating loads and environment, time in service and similar failures elsewhere. Clustering of failures by production lot, supplier, site or season points directly to a class of causes.
-3. **Distinguish mechanism from root cause.** "Fatigue crack from a weld toe" is a mechanism. The root cause is why the conditions for it existed: a weld detail with a high stress concentration, a change in welding procedure, a load spectrum underestimated in design, an inspection that missed the crack. Only a root cause can be corrected.
+$$
+P=\varepsilon_0\left(\chi^{(1)}E+\chi^{(2)}E^2+\chi^{(3)}E^3+\dots\right)
+$$
 
-### The workflow
+The **second-order** susceptibility $\chi^{(2)}$ mixes frequencies: two photons at $\omega$ combine to one at $2\omega$ (**second-harmonic generation**), as in the green laser pointer, where 1064 nm light from Nd:YVO$_4$ is doubled to 532 nm in a KTP crystal. Sum- and difference-frequency generation and optical parametric oscillation extend the same idea to tunable sources. Symmetry decides which materials qualify: $\chi^{(2)}$ is a third-rank tensor like the piezoelectric coefficient, and vanishes in any centrosymmetric material (Chapter 27). Glass, silicon and cubic centrosymmetric crystals have no bulk second-order response; the useful crystals are non-centrosymmetric — LiNbO$_3$ ($d_{33}\approx25$ pm/V), KTiOPO$_4$ (KTP, about 15), β-BaB$_2$O$_4$ (BBO, about 2, transparent into the deep ultraviolet), LiB$_3$O$_5$ (LBO, about 1, with a high damage threshold).
 
-Figure 36.5 summarizes the standard sequence.
+Efficient conversion requires **phase matching**: the fundamental and harmonic must travel at the same phase velocity, which dispersion prevents. Birefringent crystals solve this by using different polarizations whose indices cross at a particular angle. A materials-processing alternative is **quasi-phase matching**: the ferroelectric domains of LiNbO$_3$ are periodically reversed by applying a high field through patterned electrodes (periodically poled lithium niobate, PPLN), so the sign of $\chi^{(2)}$ flips every coherence length — domain engineering of the kind described in Chapter 27, used here for light.
 
-<!-- FIGURE 36.5 | figures/ch36/fig-36-5-failure-analysis-workflow.png | flowchart | Failure-analysis workflow from the failed part to verified corrective action. | Content: top-to-bottom flowchart: (1) 'Background: service history, loads, environment, drawings, material certificates, similar failures'; (2) 'Preserve and document: photographs, chain of custody, protect fracture surfaces'; (3) 'Non-destructive examination: visual, stereo microscope, dye penetrant, magnetic particle, ultrasonic, eddy current, X-ray CT'; (4) 'Fractography: macro (origin, beach marks, chevrons, shear lips) and SEM (dimples, cleavage, striations, intergranular)'; (5) 'Metallography and testing: sections, hardness, chemistry (OES, EDS), tensile and Charpy, FTIR/DSC for polymers'; (6) 'Mechanism identified'; (7) 'Root cause: 5-why, fishbone, fault tree' with side input 'compare with sound parts and design assumptions'; (8) 'Verify: stress analysis, reproduce failure'; (9) 'Corrective action: design, material, process, inspection; 8D report, FMEA update'. Dashed feedback arrow from 9 to 'design and specifications'. Non-destructive steps green, destructive orange, reasoning steps blue. -->
+The **third-order** susceptibility $\chi^{(3)}$ exists in all materials, including glass. It makes the refractive index depend on intensity, $n=n_0+n_2I$ (the **optical Kerr effect**); for silica $n_2\approx2.6\times10^{-20}$ m²/W, small but significant over the long lengths and small cores of fibres, where it causes self-phase modulation and four-wave mixing that limit high-capacity links and also generate supercontinuum light sources.
 
-Non-destructive examination comes first: visual inspection and stereo microscopy to locate the origin and the sequence of fracture; dye-penetrant and magnetic-particle inspection to find other cracks; ultrasonic, eddy-current and radiographic or CT inspection to find subsurface defects. Then the fracture surfaces are examined macroscopically and in the SEM, sections are cut through the origin for metallography (Chapter 42), hardness and chemical composition are checked against specification, and mechanical tests on material from the failed part confirm or exclude a materials deficiency. For polymers, FTIR, DSC and molecular-weight measurements reveal oxidation, wrong grade or degradation in moulding. Stress analysis, by hand or finite elements, checks whether the loads the evidence implies are consistent with the design.
+> **Status of the principle: Power-series expansion of the polarization**
+> *Approximate.* It holds when the optical field is much smaller than the atomic fields, so successive terms shrink rapidly. It breaks down at intensities near the damage threshold, where multiphoton ionization and plasma formation occur — the regime exploited in femtosecond laser machining.
 
-### Reading fracture surfaces
+### Electro-optic materials
 
-Fractography is the most powerful single tool, because the fracture surface records how the crack grew (Figure 36.6).
+A DC or low-frequency field can also change the refractive index. In non-centrosymmetric crystals the change is linear in field — the **Pockels effect**:
 
-| Feature | Scale | Meaning |
-|---|---|---|
-| Beach marks (clamshell marks) | Macroscopic | Successive positions of a fatigue crack front, from changes in load or environment; they point back to the origin |
-| Ratchet marks | Macroscopic | Steps between multiple fatigue origins; many ratchets indicate high stress or a stress concentration |
-| Chevron (herringbone) marks | Macroscopic | Fast brittle fracture in plate; the chevrons point back toward the origin |
-| Shear lips | Macroscopic | Ductile final fracture under plane stress near free surfaces; small lips mean low toughness or high constraint |
-| Dimples (microvoid coalescence) | SEM, 1–50 µm | Ductile overload; elongated or parabolic dimples indicate shear or tearing |
-| Cleavage facets with river patterns | SEM | Brittle transgranular fracture in BCC metals below the transition temperature |
-| Intergranular facets | SEM | Weak grain boundaries: temper embrittlement, hydrogen, SCC, creep cavitation, sensitization |
-| Fatigue striations | SEM, 0.1–1 µm spacing | One striation per load cycle in ductile metals; spacing gives local crack growth rate |
-| Branched cracks | Section | Stress-corrosion cracking |
-| Mirror, mist and hackle | Glass, ceramics | Smooth mirror around the origin, then misty and rough hackle zones as the crack accelerates and branches |
-| Crazes, stretched fibrils, slow-crack-growth bands | Polymers | Environmental stress cracking or slow crack growth |
+$$
+\Delta n=-\tfrac12n^3rE
+$$
 
-Two quantitative readings are routine. Striation spacing measured at several distances from the origin, compared with the Paris law, estimates the stress range that grew the crack. In glasses and ceramics, the mirror radius $r_m$ is related to the fracture stress by $\sigma_f\sqrt{r_m}=A$, with mirror constant $A\approx2$ MPa√m for soda-lime glass; a mirror of radius 0.5 mm therefore indicates a fracture stress of about $2/\sqrt{5\times10^{-4}}\approx89$ MPa, which tells the analyst whether the pane broke at a normal service load from a damaged edge or under an abnormal load.
+where $r$ is the electro-optic coefficient (pm/V). In centrosymmetric materials only the quadratic **Kerr electro-optic effect** remains. The index change shifts the phase of light travelling through the material; placed in one or both arms of a Mach–Zehnder interferometer, it switches light on and off. The voltage needed to shift the phase by $\pi$ is the **half-wave voltage**
 
-<!-- FIGURE 36.6 | figures/ch36/fig-36-6-fractography-features.png | micrograph-style | Characteristic fracture-surface features used to identify failure mechanisms. | Content: six-panel montage of stylized SEM/macro views, each with a scale bar and label: (a) macro view of a fatigued shaft cross-section with origin at a keyway, beach marks and a final-overload zone (scale 10 mm); (b) fatigue striations, spacing ~0.5 µm (scale 2 µm); (c) equiaxed ductile dimples with inclusions at their bottoms (scale 10 µm); (d) cleavage facets with river patterns converging in the propagation direction (scale 20 µm); (e) intergranular facets showing smooth grain faces (scale 20 µm); (f) glass fracture origin with mirror, mist and hackle zones and the mirror radius r_m marked (scale 0.5 mm). -->
+$$
+V_\pi=\frac{\lambda g}{n^3r\Gamma L}
+$$
 
-> **Status of the principle: Fracture-mirror relation**
-> *Empirical.* The relation $\sigma_f\sqrt{r_m}=A$ follows dimensionally from crack-branching at a critical stress intensity, but $A$ is measured for each material and the relation assumes a sharp origin and nearly uniform stress over the mirror.
+for electrodes with gap $g$, length $L$ and overlap factor $\Gamma$ between the electric and optical fields.
 
-### Root-cause tools
+**Worked example — a lithium niobate modulator.** For light at 1.55 µm polarized along the c-axis of LiNbO$_3$ ($n_e=2.138$, $r_{33}=30.8$ pm/V), with an electrode gap of 15 µm, a length of 2 cm and an overlap of 0.5:
 
-- **5-why analysis**: asking *why* repeatedly until a controllable cause is reached. For a fatigued pump shaft: Why did it break? Fatigue from the keyway. Why? Rotating bending stress above the fatigue strength at the keyway corner. Why? The corner radius was 0.1 mm instead of the drawn 0.5 mm. Why? A worn cutter was used and the radius is not inspected. Why? The inspection plan lists the radius as non-critical. The last answer is actionable.
-- **Ishikawa (fishbone) diagrams**: candidate causes grouped under materials, methods, machines, measurement, environment and people, so none is overlooked.
-- **Fault-tree analysis**: top-down logical decomposition of the failure into AND/OR combinations of basic events, used where several conditions must coincide (SCC needs stress AND environment AND susceptible material).
-- **8D** (eight disciplines): team, problem description, containment, root cause and escape point, corrective action, validation, prevention of recurrence, closure. The materials engineer's work concentrates in root cause and validation.
-- **FMEA**: the forward-looking counterpart, listing for a new design each potential failure mode, its effect, cause and controls, and ranking it before release. The mechanisms of Chapters 34–37 are the vocabulary of a good FMEA, and lessons from failure analysis feed back into it.
+$$
+V_\pi=\frac{(1.55\times10^{-6})(15\times10^{-6})}{(2.138)^3(30.8\times10^{-12})(0.5)(0.02)}=7.7\ \mathrm V
+$$
 
-> **Boundary.** Formal reliability engineering (confidence bounds, accelerated-test planning, system reliability block diagrams) and the statistics behind it belong to The Mathematics Universe and engineering-management courses; the electronic failure mechanisms and their FA techniques (emission microscopy, OBIRCH, decapsulation) are treated in the Materials Core book, Ch 24.
+Driving both arms in push-pull halves this to about 3.9 V, typical of the bulk-crystal modulators that carried long-haul telecom traffic for decades. Because $V_\pi\propto g/L$, a lower voltage requires either longer devices or narrower gaps; thin-film lithium niobate on insulator, which confines light in a waveguide less than a micrometre across, allows gaps of a few micrometres and modulators driven directly by CMOS-level voltages at over 100 GHz. Alternatives include electro-optic polymers ($r_{33}$ above 100 pm/V, but with long-term stability concerns), BaTiO$_3$ films on silicon ($r$ of several hundred pm/V), and silicon itself, which has no Pockels effect and modulates instead by changing carrier density (the free-carrier plasma effect). Liquid crystals, whose large birefringence is reoriented by modest fields, make the slow but cheap electro-optic devices of displays (Chapter 37).
 
 ---
 
-## 36.7 Case studies across industries
+## 36.8 Photonic crystals and metamaterials
 
-The value of case studies is in the pattern. In almost every major materials failure the mechanism was known at the time; what failed was the recognition that the mechanism applied, the estimate of its rate, or the inspection meant to catch it.
+### Photonic crystals
 
-| Case | Industry | Mechanism | Root cause and lesson |
-|---|---|---|---|
-| Liberty ships and T2 tankers (1940s) | Marine | Brittle fracture of welded hulls in cold seas | Steel with high ductile–brittle transition temperature, welded continuous hulls letting cracks run between plates, square hatch corners; led to Charpy toughness requirements and modern fracture mechanics |
-| de Havilland Comet (1954) | Aerospace | Fatigue of pressurized fuselage | Cyclic pressurization stresses at cut-out corners underestimated; led to full-scale fatigue testing and fail-safe design |
-| Silver Bridge, Ohio (1967) | Civil | Brittle fracture of an eyebar from a small crack grown by stress corrosion and corrosion fatigue | Non-redundant eyebar chain, a crack hidden in an uninspectable location; led to US national bridge inspection standards |
-| Aloha Airlines 243 (1988) | Aerospace | Multiple-site fatigue at fuselage lap joints after disbonding and corrosion | High-cycle, humid, salt environment; inspection intervals based on flight hours not cycles; led to aging-aircraft programmes |
-| Space Shuttle Challenger (1986) | Aerospace | Loss of elastomer resilience at low temperature in field-joint O-rings | Seals operated far below qualified temperature; viscoelastic recovery too slow to follow joint opening (Chapter 14) |
-| Eschede ICE (1998) | Rail | Fatigue fracture of a resilient wheel tyre | Cyclic stresses in a thinning tyre underestimated; inspection unable to detect internal cracks |
-| Zirconia femoral heads (2001) | Biomedical | Hydrothermal aging and fracture of 3Y-TZP | Process change in sintering altered microstructure in some batches; showed that a processing change can create a new degradation mechanism |
-| Davis-Besse reactor head (2002) | Energy | Boric-acid wastage of carbon-steel head, after PWSCC of a nozzle let coolant leak | Leak indications missed for years; only the stainless cladding held pressure |
-| Metal-on-metal hip implants (2010 recalls) | Biomedical | Wear and corrosion debris causing tissue reactions | Wear in edge-loading conditions not captured by standard simulator tests (Chapter 37) |
-| Silver-sulfide resistor failures | Electronics | Sulfidation of silver electrodes through termination gaps | Office-environment components used in sulfur-rich industrial air (Materials Core, Ch 24) |
+A material whose refractive index varies periodically on the scale of the wavelength scatters light coherently, just as a crystal lattice diffracts X-rays (Chapter 4). Waves reflected from successive periods add in phase at the Bragg condition, and over a range of frequencies light cannot propagate at all: a **photonic band gap**, the optical analogue of the electronic band gap of Chapter 31.
 
-Three lessons recur.
+The one-dimensional case is the **distributed Bragg reflector** (DBR): alternating quarter-wave layers of high and low index. For TiO$_2$ ($n_H=2.3$) and SiO$_2$ ($n_L=1.45$) on glass, designed for 1064 nm, the layers are 116 nm and 183 nm thick; ten pairs reflect 99.99 % at the design wavelength, over a stop band about 29 % of the centre frequency wide. Such dielectric mirrors absorb far less than metal mirrors and are used in high-power laser optics, in the cavity mirrors of **vertical-cavity surface-emitting lasers** (VCSELs) — epitaxial GaAs/AlGaAs DBRs grown directly on the laser, used for face recognition in phones and short optical links — and in the heat-reflecting coatings of halogen lamps and solar-control glazing.
 
-**First, interactions defeat single-mechanism analysis.** Silver Bridge needed a stress-corrosion crack to start a brittle fracture; Davis-Besse needed SCC to create the leak that drove wastage; Aloha needed disbonding to load the rivets that fatigued. Fault trees with AND gates describe these failures better than any single life law.
+Two- and three-dimensional photonic crystals confine light more completely. **Photonic-crystal fibres**, drawn from stacks of silica capillaries, guide light by a periodic array of air holes; hollow-core versions guide light in air, with lower nonlinearity and latency than solid fibres. Three-dimensional photonic crystals can be made by self-assembly of monodisperse colloidal spheres (synthetic opals, Chapter 37), by lithography, or by direct laser writing. Nature uses them extensively: the iridescence of opal gemstones (ordered silica spheres), butterfly wings, beetle shells and peacock feathers is **structural colour**, which does not fade because no dye is involved, and is being developed for paints and inks without pigments.
 
-**Second, the service condition, not the material, was usually misjudged.** Comet's designers knew about fatigue; they underestimated the stress at the corners. Challenger's O-ring compound was suitable within its qualified temperature range. Eschede's tyre steel was adequate for the stress the design assumed. The engineering response is a materials engineer's insistence on the real environment, real loads and real temperature, measured not assumed.
+### Metamaterials and metasurfaces
 
-**Third, processing changes are silent design changes.** A sintering change made zirconia heads age; a welding procedure change or a new supplier's steel can move a transition temperature. Every process change to a safety-critical part therefore needs the same qualification as the original design.
+A **metamaterial** is an artificial structure whose unit cells are smaller than the wavelength, so that light sees an effective homogeneous medium — but one whose permittivity and permeability are set by the geometry of the cells rather than by their atoms. Arrays of split-ring resonators and wires can give a negative effective permeability and permittivity together, and therefore a **negative refractive index**, demonstrated at microwave frequencies in 2000. Proposed applications include sub-wavelength "superlenses" and electromagnetic cloaks; both work only over narrow bands and are limited by the losses of metallic resonators, especially at optical frequencies.
 
-> **Status of the principle: Case-study lessons**
-> *Empirical.* Generalizations drawn from investigated failures; they are heuristics for where to look, not laws, and each case report should be read in its original investigation for the details that matter.
+More practical are **metasurfaces**: single layers of sub-wavelength nanostructures (TiO$_2$ or amorphous silicon pillars, gold antennas) that impose a designed phase shift on transmitted light at each point. A metasurface can act as a flat lens, polarizer, hologram or beam deflector a fraction of a micrometre thick, and metalenses are entering phone cameras and sensors. **Plasmonics** uses the collective electron oscillations of metal nanoparticles: gold nanoparticles of 20–50 nm absorb green light, giving the red of medieval stained glass, and are used in lateral-flow medical tests and as photothermal agents in cancer therapy (Chapter 39). Engineered emitters also manage heat: **radiative-cooling** films combine high solar reflectance with strong thermal emission in the 8–13 µm atmospheric window, cooling buildings below ambient temperature in direct sunlight without power — a photonic material for energy efficiency.
+
+> **Boundary.** Maxwell's equations, quantum theory of absorption and emission, and laser physics belong to the Engineering Physics book; optoelectronic devices (photodetectors, solar cells, modulators) are treated in Chapter 35.
 
 ---
 
@@ -384,17 +445,15 @@ Three lessons recur.
 
 | Open question | Where it is answered |
 |---|---|
-| Electrochemical thermodynamics and kinetics behind corrosion damage | Chapter 34 |
-| Forms of corrosion, hydrogen embrittlement and corrosion fatigue in detail | Chapter 35 |
-| Fracture mechanics, fatigue laws, creep and Weibull strength of ceramics | Chapter 14 |
-| Composition, curing and durability design of concrete | Chapter 18 |
-| Molecular structure behind polymer oxidation and physical aging | Chapters 19 and 20 |
-| Moisture and fatigue damage in laminates; composite design allowables | Chapters 22 and 23 |
-| Wear, friction and surface fatigue as life-limiting mechanisms | Chapter 37 |
-| Radiation, high-temperature and cryogenic degradation | Chapter 33 |
-| Weld defects and residual stresses as origins of failure | Chapter 39 |
-| Characterization tools used in failure analysis (SEM, EDS, XRD, FTIR, DSC) | Chapter 42 |
-| Choosing materials so that the dominant degradation mechanism is slow enough; lifecycle impact of replacement | Chapters 48 and 49 |
-| Electromigration, dielectric breakdown and solder-joint life in electronics | Materials Core (EEE), Ch 24 |
+| How does the electronic polarization of Section 36.2 relate to dielectric behaviour at lower frequencies, and why is $\chi^{(2)}$ governed by the same symmetry as piezoelectricity? | Chapters 26 and 27 |
+| How do band structure, doping and heterostructures make LED and laser active layers? | Chapters 32, 34 and 35 |
+| How do liquid crystals switch light in displays, and how do colloids self-assemble into photonic structures? | Chapter 37 |
+| How does quantum confinement tune the colour of quantum dots, and what are 2D optical materials? | Chapter 38 |
+| How are photovoltaic absorbers chosen, and how do coatings and textures trap light in solar cells? | Chapter 40 |
+| How do UV light and weathering yellow polymers and degrade pigments? | Chapter 44 |
+| How are lasers used in welding, cutting and additive manufacturing? | Chapters 47 and 48 |
+| How are optical coatings and thin films deposited? | Chapter 49 |
+| How are optical constants, luminescence and Raman spectra measured? | Chapters 52 and 53 |
+| How are optical materials and glasses selected for a given application and cost? | Chapter 58 |
 
-**Next:** Chapter 37 turns to the surface itself, where adhesion, friction and wear are decided, and to the engineering of surfaces that resist them.
+**Next:** Chapter 37 opens Part VIII with smart and soft materials — shape-memory alloys, electroactive polymers, gels, colloids and liquid crystals — whose properties change on command.

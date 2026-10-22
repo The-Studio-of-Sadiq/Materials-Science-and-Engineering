@@ -72,7 +72,11 @@ Real bonds are not freely jointed. Fixed valence angles and the preference for t
 
 <!-- FIGURE 20.1 | figures/ch20/fig-20-1-random-walk-chain.png | schematic | A polyethylene chain as a three-dimensional random walk, with its end-to-end vector, radius of gyration and the equivalent Kuhn chain. | Content: left panel: 2D projection of a simulated random walk of 700 steps (representing 7130 bonds grouped into Kuhn segments of 1.26 nm), coloured from blue (start) to red (end); arrow for end-to-end vector R labelled "√⟨R²⟩ ≈ 34 nm"; dashed circle of radius Rg ≈ 14 nm around the centre of mass. Right panel: short section of the real zig-zag backbone (bond 0.154 nm, angle 109.5°, trans and gauche states marked) overlaid with the straight Kuhn segments of length b. Scale bar 10 nm. Note "contour length 897 nm". -->
 
-**Worked example — size of a polyethylene coil.** A polyethylene chain of $M=100{,}000$ g/mol contains $2M/28.05=7{,}130$ backbone C–C bonds. As a freely jointed chain it would have $\sqrt{\langle R^2\rangle}=\sqrt{7130}\times0.154=13.0$ nm. With $C_\infty=6.7$, $\langle R^2\rangle_0=6.7\times7130\times0.154^2=1133$ nm², so $\sqrt{\langle R^2\rangle_0}=33.7$ nm and $R_g=33.7/\sqrt6=13.7$ nm. The fully extended all-trans zig-zag has contour length $R_{max}=nl\cos(35.25^\circ)=7130\times0.154\times0.817=897$ nm. The Kuhn length is $b=1133/897=1.26$ nm and the chain contains $N_K=897/1.26\approx710$ Kuhn segments. Three conclusions follow. First, the coil is 27 times shorter end to end than the stretched chain, so the molecule can be extended enormously before its bonds are loaded — the basis of the large strains of rubbers and of fibre drawing. Second, the coil occupies a volume of order $R_g^3\approx2.6\times10^3$ nm³, while the chain's own atoms fill only $M/(\rho N_A)\approx195$ nm³ (melt density 0.85 g/cm³); so in a melt the pervaded volume of each coil is shared with roughly a dozen other chains. This interpenetration is what makes entanglement (Chapter 21) unavoidable. Third, the coil size $R_g\approx14$ nm is comparable with the wavelength of X-rays scattered at small angles and of neutrons, which is how such numbers are measured.
+![Figure 20.1 — A polyethylene chain as a three-dimensional random walk, with its end-to-end vector, radius of gyration and the equivalent Kuhn chain](../figures/ch20/fig-20-1-random-walk-chain.png)
+
+*Figure 20.1 — A polyethylene chain as a three-dimensional random walk, with its end-to-end vector, radius of gyration and the equivalent Kuhn chain.*
+
+**Worked example — size of a polyethylene coil.** A polyethylene chain of $M=100{,}000$ g/mol contains $2M/28.05=7{,}130$ backbone C–C bonds. As a freely jointed chain it would have $\sqrt{\langle R^2\rangle}=\sqrt{7130}\times0.154=13.0$ nm. With $C_\infty=6.7$, $\langle R^2\rangle_0=6.7\times7130\times0.154^2=1133$ nm², so $\sqrt{\langle R^2\rangle_0}=33.7$ nm and $R_g=33.7/\sqrt6=13.7$ nm. The fully extended all-trans zig-zag has contour length $R_{max}=nl\cos(35.25^\circ)=7130\times0.154\times0.817=897$ nm. The Kuhn length is $b=1133/897=1.26$ nm and the chain contains $N_K=897/1.26\approx710$ Kuhn segments. Three conclusions follow. First, the coil is 27 times shorter end to end than the stretched chain, so the molecule can be extended enormously before its bonds are loaded — the basis of the large strains of rubbers and of fibre drawing. Second, the coil occupies a volume of order $R_g^3\approx2.6\times10^3$ nm³, while the chain's own atoms fill only $M/(\rho N_A)\approx195$ nm³ (melt density 0.85 g/cm³); so in a melt the pervaded volume of each coil is shared with roughly a dozen other chains. This interpenetration is what makes entanglement (Chapter 21) unavoidable. Third, the coil size $R_g\approx14$ nm is comparable with the length scale $2\pi/q$ probed by X-rays and neutrons scattered at small angles (SAXS, SANS), which is how such numbers are measured.
 
 ### Excluded volume and solvent quality
 
@@ -137,6 +141,10 @@ Measured stress–strain curves of natural rubber (Figure 20.2) follow the Gauss
 > *Empirical.* Phenomenological strain-energy functions with fitted constants; reliable within the strain range and deformation modes used for the fit and unreliable when extrapolated beyond it.
 
 <!-- FIGURE 20.2 | figures/ch20/fig-20-2-rubber-stress-strain.png | plot | Nominal stress versus stretch ratio for a natural-rubber network compared with the Gaussian affine prediction. | Content: x-axis stretch ratio λ from 1 to 7; y-axis nominal stress σ from 0 to 8 MPa. Solid line: Gaussian theory σ = G(λ − 1/λ²) with G = 0.46 MPa (passing 0.80 MPa at λ = 2). Points: representative experimental NR curve (Treloar-type) following theory to λ ≈ 1.5, lying 10–25 % below between λ = 2 and 4, then turning sharply upward beyond λ ≈ 5 to about 7 MPa at λ = 6.5. Annotations: "crosslink fluctuations", "finite extensibility + strain crystallization". Inset: force at fixed λ = 3 versus temperature 0–100 °C, straight line through origin when extrapolated to 0 K (entropic). -->
+
+![Figure 20.2 — Nominal stress versus stretch ratio for a natural-rubber network compared with the Gaussian affine prediction](../figures/ch20/fig-20-2-rubber-stress-strain.png)
+
+*Figure 20.2 — Nominal stress versus stretch ratio for a natural-rubber network compared with the Gaussian affine prediction.*
 
 ---
 
@@ -234,10 +242,14 @@ In a block copolymer the incompatible blocks segregate into domains whose size i
 
 <!-- FIGURE 20.3 | figures/ch20/fig-20-3-block-copolymer-phase-diagram.png | plot | Mean-field phase diagram of a diblock copolymer, segregation strength χN versus volume fraction f, with sketches of the ordered morphologies. | Content: x-axis f_A from 0 to 1; y-axis χN from 0 to 50. Order–disorder boundary with minimum χN = 10.5 at f = 0.5 rising steeply toward f = 0 and 1. Regions labelled: disordered (below), spheres (S, bcc) near the edges, cylinders (C, hex), gyroid (G, narrow wedge), lamellae (L) in the middle; mirror-symmetric about f = 0.5. Small 3D sketches of each morphology beside the plot. Marker: "SBS thermoplastic elastomer, f_PS ≈ 0.2–0.3 → PS spheres/cylinders" and "PS-b-PMMA lithography, f ≈ 0.5 → lamellae, period 25–40 nm". -->
 
+![Figure 20.3 — Mean-field phase diagram of a diblock copolymer, segregation strength χN versus volume fraction f, with sketches of the ordered morphologies](../figures/ch20/fig-20-3-block-copolymer-phase-diagram.png)
+
+*Figure 20.3 — Mean-field phase diagram of a diblock copolymer, segregation strength χN versus volume fraction f, with sketches of the ordered morphologies.*
+
 > **Status of the principle: Mean-field diblock phase diagram**
 > *Approximate.* Self-consistent-field theory reproduces the observed sequence of morphologies and the strong-segregation scaling; near the order–disorder transition composition fluctuations, neglected in mean-field theory, shift the transition to higher $\chi N$ for short chains, and real systems also show kinetically trapped and non-equilibrium structures.
 
-Microphase separation has three major engineering uses. In **thermoplastic elastomers** such as SBS, with 20–30 % polystyrene, glassy PS spheres or cylinders act as physical crosslinks in a rubbery polybutadiene matrix; above 100 °C they soften, and the material can be injection-moulded into shoe soles, grips and bitumen modifiers for road surfacing. In **nanolithography**, block copolymer films are aligned on chemically or topographically patterned substrates to multiply the density of lithographic features (directed self-assembly). In **drug delivery and medicine**, amphiphilic block copolymers (for example PEG-b-PLA) form micelles 20–100 nm across in water, carrying hydrophobic drugs in their cores (Chapter 31).
+Microphase separation has three major engineering uses. In **thermoplastic elastomers** such as SBS, with 20–30 % polystyrene, glassy PS spheres or cylinders act as physical crosslinks in a rubbery polybutadiene matrix; above 100 °C they soften, and the material can be injection-moulded into shoe soles, grips and bitumen modifiers for road surfacing. In **nanolithography**, block copolymer films are aligned on chemically or topographically patterned substrates to multiply the density of lithographic features (directed self-assembly). In **drug delivery and medicine**, amphiphilic block copolymers (for example PEG-b-PLA) form micelles 20–100 nm across in water, carrying hydrophobic drugs in their cores (Chapter 39).
 
 ---
 
@@ -270,6 +282,10 @@ When a semicrystalline polymer crystallizes from the melt without flow, the lame
 
 <!-- FIGURE 20.4 | figures/ch20/fig-20-4-semicrystalline-hierarchy.png | schematic | Structural hierarchy of a melt-crystallized semicrystalline polymer, from unit cell to spherulite. | Content: four linked panels left to right with scale bars. (1) Orthorhombic PE unit cell, a = 0.741 nm, b = 0.494 nm, c = 0.255 nm, zig-zag chains along c. (2) Chain-folded lamella, thickness l ≈ 10–20 nm, with adjacent re-entry folds, loose loops, cilia and a tie molecule crossing the amorphous layer (≈5 nm) to the next lamella; label "long period ≈ 20–30 nm". (3) Radiating, branching lamellar stack (fibrils) with amorphous material between. (4) Spherulite 50 µm across in crossed polarizers showing Maltese cross; neighbouring spherulites impinging along straight boundaries; one boundary labelled "weak plane: impurities, low-M chains". -->
 
+![Figure 20.4 — Structural hierarchy of a melt-crystallized semicrystalline polymer, from unit cell to spherulite](../figures/ch20/fig-20-4-semicrystalline-hierarchy.png)
+
+*Figure 20.4 — Structural hierarchy of a melt-crystallized semicrystalline polymer, from unit cell to spherulite.*
+
 Spherulite size is controlled by nucleation density. Adding **nucleating agents** (sodium benzoate, talc, organophosphates, sorbitol derivatives) raises the number of nuclei by orders of magnitude: spherulites become smaller than the wavelength of light, the part becomes clear, crystallization is faster (shorter moulding cycles) and stiffness and heat-distortion temperature rise. Clarified polypropylene food containers and syringe barrels — like those in the opening case — depend on sorbitol clarifiers. Flow during processing orients chains and produces different morphologies: **shish-kebab** structures (an extended-chain core with folded-chain lamellae overgrown on it) in injection-moulded skins and melt-spun fibres, and highly oriented fibrillar structures in drawn fibres, where gel-spun UHMWPE fibres (Dyneema, Spectra) reach moduli above 100 GPa because nearly all chains are extended and aligned.
 
 ### Degree of crystallinity and its measurement
@@ -277,7 +293,7 @@ Spherulite size is controlled by nucleation density. Adding **nucleating agents*
 The crystallinity of a sample can be obtained from several measurements, which agree only approximately because each sees a different boundary between "crystal" and "amorphous":
 
 - **Density**, using the two-phase model. If $\rho_c$ and $\rho_a$ are the crystal and amorphous densities, the mass fraction crystallinity is $X_c=\rho_c(\rho-\rho_a)/[\rho(\rho_c-\rho_a)]$. A density-gradient column measures $\rho$ to four decimals.
-- **Differential scanning calorimetry**, as the ratio of the measured heat of fusion to that of a 100 % crystalline polymer, $X_c=\Delta H_m/\Delta H_m^0$ (Chapter 42).
+- **Differential scanning calorimetry**, as the ratio of the measured heat of fusion to that of a 100 % crystalline polymer, $X_c=\Delta H_m/\Delta H_m^0$ (Chapter 52).
 - **Wide-angle X-ray diffraction**, as the ratio of crystalline peak area to total scattering.
 - **Spectroscopy** (FTIR, Raman, solid-state NMR) using bands specific to the crystalline conformation.
 
@@ -305,6 +321,10 @@ Crystallinity raises stiffness, yield strength, density, chemical and solvent re
 Cool an amorphous polymer melt and, at a temperature called the **glass-transition temperature** $T_g$, its properties change abruptly: the modulus rises from about 1 MPa (rubbery) to about 1–3 GPa (glassy) over a range of 10–20 K, and the slope of specific volume against temperature drops to roughly half its melt value (Figure 20.5). The heat capacity and thermal-expansion coefficient also step down. No latent heat is released and no structure appears in a diffraction pattern: the liquid simply stops rearranging on the time scale of the experiment. Measured $T_g$ depends on the cooling rate, rising by about 3 K for every tenfold increase in rate. The glass transition is therefore a kinetic phenomenon — the point where the molecular relaxation time exceeds the experimental time scale — not a true thermodynamic phase transition. It is the same phenomenon as in the oxide and metallic glasses of Chapters 9 and 17.
 
 <!-- FIGURE 20.5 | figures/ch20/fig-20-5-glass-transition.png | plot | Specific volume versus temperature for an amorphous polymer cooled at two rates, and the WLF shift factor above Tg. | Content: left panel: x-axis temperature from 20 to 180 °C; y-axis specific volume 0.94 to 1.00 cm³/g (polystyrene-like). Melt line (expansion 5.5×10^-4 cm³ g^-1 K^-1) and two glass lines (2.0×10^-4) branching off at Tg = 100 °C (slow cooling, 1 K/min) and 106 °C (fast cooling, 100 K/min); shaded gap labelled "free volume frozen in"; small arrow labelled "physical aging" pointing down from the fast-cooled glass at 80 °C. Right panel: log10 aT versus T − Tg from 0 to 100 K using C1 = 17.44, C2 = 51.6 K; marked points at T − Tg = 10 (−2.83), 20 (−4.87), 30 (−6.41); dashed Arrhenius line for comparison. -->
+
+![Figure 20.5 — Specific volume versus temperature for an amorphous polymer cooled at two rates, and the WLF shift factor above Tg](../figures/ch20/fig-20-5-glass-transition.png)
+
+*Figure 20.5 — Specific volume versus temperature for an amorphous polymer cooled at two rates, and the WLF shift factor above Tg.*
 
 ### Free-volume theory and the WLF equation
 
@@ -368,14 +388,14 @@ The glass transition separates the service regimes of polymers. An **amorphous**
 
 ### Rods that order
 
-If the chain is not flexible but a stiff rod, a different kind of order becomes possible. Long, rigid rods in a concentrated solution or melt cannot all point randomly without overlapping: above a critical concentration, excluded-volume packing forces them to align along a common direction, the **director**, while their centres remain disordered as in a liquid. This **nematic** liquid-crystalline phase is the polymer analogue of the small-molecule liquid crystals in displays (Chapter 29). Onsager (1949) and Flory (1956) showed that rods with aspect ratio $x$ (length/diameter) form a nematic phase above a volume fraction of roughly $\phi^*\approx(8/x)(1-2/x)$, about 8 % for $x=100$: alignment is driven by packing entropy, not by attractive forces. The degree of alignment is measured by the **order parameter** $S=\langle\tfrac12(3\cos^2\theta-1)\rangle$, where $\theta$ is the angle between a molecule and the director; $S=0$ for an isotropic liquid and $S=1$ for perfect alignment, with typical nematic values of 0.5–0.9.
+If the chain is not flexible but a stiff rod, a different kind of order becomes possible. Long, rigid rods in a concentrated solution or melt cannot all point randomly without overlapping: above a critical concentration, excluded-volume packing forces them to align along a common direction, the **director**, while their centres remain disordered as in a liquid. This **nematic** liquid-crystalline phase is the polymer analogue of the small-molecule liquid crystals in displays (Chapter 37). Onsager (1949) and Flory (1956) showed that rods with aspect ratio $x$ (length/diameter) form a nematic phase above a volume fraction of roughly $\phi^*\approx(8/x)(1-2/x)$, about 8 % for $x=100$: alignment is driven by packing entropy, not by attractive forces. The degree of alignment is measured by the **order parameter** $S=\langle\tfrac12(3\cos^2\theta-1)\rangle$, where $\theta$ is the angle between a molecule and the director; $S=0$ for an isotropic liquid and $S=1$ for perfect alignment, with typical nematic values of 0.5–0.9.
 
 > **Status of the principle: Onsager–Flory rod criterion**
 > *Approximate.* Mean-field excluded-volume theories for monodisperse rigid rods; they predict the right scaling with aspect ratio, but real chains are semiflexible and polydisperse, which shifts the transition.
 
 ### Lyotropic and thermotropic LCPs
 
-**Main-chain** LCPs have mesogenic, rod-like units in the backbone; **side-chain** LCPs have mesogens attached through flexible spacers to a flexible backbone (used in optical and actuator applications, including liquid-crystal elastomers that contract reversibly on heating; Chapter 29).
+**Main-chain** LCPs have mesogenic, rod-like units in the backbone; **side-chain** LCPs have mesogens attached through flexible spacers to a flexible backbone (used in optical and actuator applications, including liquid-crystal elastomers that contract reversibly on heating; Chapter 37).
 
 - **Lyotropic** LCPs form liquid crystals in solution. Poly(p-phenylene terephthalamide) (PPTA; Kevlar, Twaron) cannot be melted below its decomposition temperature, but dissolves at about 20 % in concentrated sulfuric acid to give a nematic dope. Spinning this dope through an air gap into water (dry-jet wet spinning) aligns the domains along the fibre, giving fibres with modulus 70–130 GPa and strength about 3–3.6 GPa at a density of 1.44 g/cm³: specific strength five times that of steel wire. They are used in body armour, helmet shells, tyre cords, fibre-optic cable strength members and composite pressure vessels (Chapter 22). PBO (Zylon) and the gel-spun UHMWPE fibres mentioned earlier reach still higher specific stiffness.
 - **Thermotropic** LCPs form liquid crystals in the melt. Aromatic copolyesters such as Vectra (hydroxybenzoic acid with hydroxynaphthoic acid) have a melting point lowered by the irregular copolymer sequence to 280–330 °C, and their melts are nematic. Under flow the rods align readily, so the melt viscosity is exceptionally low and the moulded part is highly oriented along the flow direction: very thin walls (0.2 mm) can be filled, the shrinkage and thermal expansion along the flow direction are almost zero, and the parts are stiff and chemically resistant. Thermotropic LCPs dominate fine-pitch electronic connectors and are used in minimally invasive surgical instruments and as low-loss, low-moisture substrates for high-frequency circuits.
@@ -383,6 +403,10 @@ If the chain is not flexible but a stiff rod, a different kind of order becomes 
 The price of orientation is anisotropy: strength and stiffness across the flow direction can be a fifth of those along it, weld lines where two flow fronts meet are very weak, and fibres such as Kevlar are weak in compression because the aligned chains buckle into kink bands at about 0.4 GPa. Composite designers must therefore treat aramid fibres differently from carbon (Chapter 22).
 
 <!-- FIGURE 20.6 | figures/ch20/fig-20-6-lcp-order.png | schematic | Isotropic, nematic and oriented-fibre states of a rigid-rod polymer, with the order parameter. | Content: three panels. (1) Isotropic solution: rods of aspect ratio about 100 at random orientations, φ < φ* ≈ 0.08, S = 0. (2) Nematic domain: rods roughly parallel to director n (arrow), S ≈ 0.7; several domains with different directors separated by disclinations. (3) After spinning: all domains aligned along the fibre axis, S > 0.9, labelled "PPTA fibre, E ≈ 70–130 GPa". Inset graph: S versus rod volume fraction, zero until φ* then jumping to about 0.8 (first-order transition). -->
+
+![Figure 20.6 — Isotropic, nematic and oriented-fibre states of a rigid-rod polymer, with the order parameter](../figures/ch20/fig-20-6-lcp-order.png)
+
+*Figure 20.6 — Isotropic, nematic and oriented-fibre states of a rigid-rod polymer, with the order parameter.*
 
 ---
 
@@ -398,9 +422,9 @@ The price of orientation is anisotropy: strength and stiffness across the flow d
 | How do the solution thermodynamics and Gibbs–Thomson effect used here follow from free energy? | Chapter 6 |
 | How do nucleation and Avrami kinetics apply to crystallization in general? | Chapter 9 |
 | How do aramid, carbon and glass fibres combine with polymer matrices in composites? | Chapter 22 |
-| How do small-molecule liquid crystals, gels and self-assembled soft matter work? | Chapter 29 |
-| How are DSC, DMA, X-ray scattering and polarized-light microscopy used to measure Tg and crystallinity? | Chapters 42 and 43 |
-| How are polymer chains simulated with molecular dynamics and coarse-grained Monte Carlo? | Chapter 46 |
-| How does physical and chemical aging change polymer properties in service? | Chapter 36 |
+| How do small-molecule liquid crystals, gels and self-assembled soft matter work? | Chapter 37 |
+| How are DSC, DMA, X-ray scattering and polarized-light microscopy used to measure Tg and crystallinity? | Chapters 52 and 53 |
+| How are polymer chains simulated with molecular dynamics and coarse-grained Monte Carlo? | Chapter 56 |
+| How does physical and chemical aging change polymer properties in service? | Chapter 44 |
 
 **Next:** Chapter 21 sets these chains in motion — in the melt, in the deforming solid and in the processing machine — and follows them through additives, degradation, vulcanization and recycling.

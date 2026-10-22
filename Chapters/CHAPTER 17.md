@@ -80,11 +80,11 @@ Values are typical for dense commercial grades; strengths depend strongly on pro
 
 **Technical** (advanced, engineering) ceramics are made from synthetic, high-purity powders of controlled particle size, formed and sintered to near full density and fine grain size. Four materials account for most structural use.
 
-**Alumina** (Al₂O₃) is the workhorse: cheap, hard, insulating and stable, in purities from 85 % to 99.9 %. Lower grades contain a grain-boundary silicate glass from liquid-phase sintering and are easier to metallize but weaker when hot. Uses include wear parts, seals, armour, substrates, spark-plug insulators and hip-joint bearings (Chapter 31).
+**Alumina** (Al₂O₃) is the workhorse: cheap, hard, insulating and stable, in purities from 85 % to 99.9 %. Lower grades contain a grain-boundary silicate glass from liquid-phase sintering and are easier to metallize but weaker when hot. Uses include wear parts, seals, armour, substrates, spark-plug insulators and hip-joint bearings (Chapter 39).
 
 **Zirconia** (ZrO₂) is monoclinic below about 1170 °C, tetragonal up to about 2370 °C and cubic to its melting point. The tetragonal-to-monoclinic transformation on cooling is martensitic and involves a volume increase of about 4 % that shatters pure zirconia. Dissolving Y₂O₃, MgO or CaO stabilizes the high-temperature forms (Chapter 7). With about 3 mol% Y₂O₃ and a grain size below about 0.5 μm, the tetragonal phase is retained metastably at room temperature (**3Y-TZP**, tetragonal zirconia polycrystal); in **Mg-PSZ** (partially stabilized zirconia) tetragonal precipitates sit inside cubic grains. Near a crack tip, the stress field triggers the transformation, and the expansion of the transformed zone squeezes the crack shut: **transformation toughening**, which raises $K_{IC}$ to 5–12 MPa m$^{1/2}$ (Chapter 14). The same metastability permits slow transformation in warm, moist environments (**low-temperature degradation**, the failure of the opening paragraph), controlled by grain size, yttria distribution and small alumina additions. Zirconia makes dental crowns, fibre-optic ferrules, pump plungers, oxygen sensors and fuel-cell electrolytes (Section 17.9), and turbine-blade thermal barrier coatings (Chapter 16).
 
-**Silicon carbide** (SiC) is made by the Acheson process (carbothermal reduction of silica with coke at about 2500 °C). Dense parts are **solid-state sintered** with B and C at about 2100 °C (SSiC) or **reaction bonded** by infiltrating a SiC–carbon preform with molten silicon (SiSiC, 8–15 % free Si). SiC combines hardness, high conductivity, low expansion and resistance to acids and oxidation (protective SiO₂ to about 1600 °C): seal faces, burner and heat-exchanger tubes, armour, telescope mirrors, SiC/SiC composites (Chapter 23) and power semiconductors (Chapter 26).
+**Silicon carbide** (SiC) is made by the Acheson process (carbothermal reduction of silica with coke at about 2500 °C). Dense parts are **solid-state sintered** with B and C at about 2100 °C (SSiC) or **reaction bonded** by infiltrating a SiC–carbon preform with molten silicon (SiSiC, 8–15 % free Si). SiC combines hardness, high conductivity, low expansion and resistance to acids and oxidation (protective SiO₂ to about 1600 °C): seal faces, burner and heat-exchanger tubes, armour, telescope mirrors, SiC/SiC composites (Chapter 23) and power semiconductors (Chapter 33).
 
 **Silicon nitride** (Si₃N₄) hardly self-diffuses and decomposes before densifying, so it is sintered with 5–10 % Y₂O₃, Al₂O₃ or MgO, which form an oxynitride liquid at 1700–1850 °C under nitrogen. The α powder dissolves and reprecipitates as elongated β-Si₃N₄ grains (aspect ratio 5–10) that deflect and bridge cracks, an **in-situ toughened** ceramic with $K_{IC}$ of 6–8 MPa m$^{1/2}$. With the best strength, toughness and thermal-shock resistance of the monolithic ceramics, it makes bearing balls (light, and non-conductive, so immune to electrical arcing in motors), turbocharger rotors, cutting tools and power-electronics substrates; **SiAlONs** reduce the boundary glass.
 
@@ -107,7 +107,7 @@ A metal can be melted, cast and worked. A ceramic usually cannot: its melting po
 | BaTiO₃ | Solid-state reaction of BaCO₃ + TiO₂, or hydrothermal / oxalate routes | 0.1–0.5 μm for thin-layer capacitors |
 | Glasses and coatings | Sol–gel: hydrolysis and condensation of alkoxides such as Si(OC₂H₅)₄ | Molecular-scale mixing, low processing temperature |
 
-Fine powders sinter faster but agglomerate. Hard agglomerates pack poorly and leave large pores between them that do not close; the best ceramics come from powders that are fine, narrowly distributed and dispersed, often in a liquid with dispersants that control the surface charge (colloidal processing, Chapter 29).
+Fine powders sinter faster but agglomerate. Hard agglomerates pack poorly and leave large pores between them that do not close; the best ceramics come from powders that are fine, narrowly distributed and dispersed, often in a liquid with dispersants that control the surface charge (colloidal processing, Chapter 37).
 
 ### Forming
 
@@ -119,7 +119,7 @@ Fine powders sinter faster but agglomerate. Hard agglomerates pack poorly and le
 | Tape casting | Slurry spread by a doctor blade into thin sheets | Multilayer capacitors, substrates, SOFC electrolytes |
 | Extrusion | Plastic paste forced through a die | Honeycomb catalyst supports, tubes, bricks |
 | Ceramic injection moulding | Powder in thermoplastic binder (~40 vol%) moulded like a polymer | Small complex parts: dental brackets, ferrules, watch cases |
-| Gel casting, additive manufacturing | In-situ polymerization; vat photopolymerization, binder jetting | Complex and customized parts (Chapter 40) |
+| Gel casting, additive manufacturing | In-situ polymerization; vat photopolymerization, binder jetting | Complex and customized parts (Chapter 48) |
 
 The green body typically contains 50–65 % of the theoretical density. Organic binders, plasticizers and dispersants are burned out slowly (at 1–2 K/min through 200–500 °C) before sintering, or their gases will crack the part.
 
@@ -136,6 +136,10 @@ Sintering is described in three geometric stages (Figure 17.1):
 3. **Final stage**: above about 92 % density the pore channels pinch off into isolated pores at grain corners; the last pores close slowly, and grain growth competes with densification.
 
 <!-- FIGURE 17.1 | figures/ch17/fig-17-1-sintering-stages.png | schematic | Stages and mechanisms of solid-state sintering, and relative density versus sintering time for solid-state and liquid-phase sintering. | Content: top row: three panels for initial (two spheres with growing neck, labelled neck radius x and particle radius a), intermediate (polyhedral grains with continuous pore channels along edges), final (isolated pores at grain corners, some trapped inside grains after boundary breakaway). Middle panel: two-particle neck with arrows for six transport paths: (1) surface diffusion, (2) lattice diffusion from surface, (3) evaporation–condensation — labelled "non-densifying, neck grows, no shrinkage"; (4) grain-boundary diffusion, (5) lattice diffusion from grain boundary, (6) plastic/viscous flow — labelled "densifying, centres approach". Bottom: x-axis time 0–4 h at temperature, y-axis relative density 0.55–1.00; solid-state curve rising from 0.55 to ~0.97 with stage boundaries marked at ~0.65 and ~0.92; liquid-phase curve rising rapidly (rearrangement) then solution–precipitation then slowly to 0.99. -->
+
+![Figure 17.1 — Stages and mechanisms of solid-state sintering, and relative density versus sintering time for solid-state and liquid-phase sintering](../figures/ch17/fig-17-1-sintering-stages.png)
+
+*Figure 17.1 — Stages and mechanisms of solid-state sintering, and relative density versus sintering time for solid-state and liquid-phase sintering.*
 
 Matter can move by several paths. **Surface diffusion**, **evaporation–condensation** and **lattice diffusion from the particle surface** move atoms from one part of the pore surface to another; they grow the necks and round the pores but do not bring particle centres together, so they cause no shrinkage. **Grain-boundary diffusion** and **lattice diffusion from the grain boundary** remove atoms from the boundary between particles and deposit them at the neck; particle centres approach, and the compact shrinks and densifies. Viscous flow plays the same densifying role in glasses. Whether a powder densifies or merely coarsens depends on which paths dominate. A high ratio of grain-boundary to surface diffusivity favours densification; fast surface diffusion at low temperature wastes the driving force by coarsening the particles without shrinkage, which is why fast heating rates sometimes give denser products.
 
@@ -158,7 +162,7 @@ The linear shrinkage is 17.5 %, and the green part must be pressed (or machined 
 
 ### Liquid-phase sintering
 
-Many ceramics (and cemented carbides, Chapter 38) are sintered with a small amount of liquid that wets the solid. The liquid speeds sintering in three overlapping stages: **rearrangement**, as capillary forces pull particles into closer packing; **solution–precipitation**, in which small particles and contact points dissolve in the liquid and the material reprecipitates on larger grains, flattening contacts and bringing grain centres together; and **solid-state skeleton** densification once the grains have formed a rigid network. Diffusion through a liquid is orders of magnitude faster than through a solid, so liquid-phase sintering works at lower temperatures and for materials such as Si₃N₄ and SiC that would hardly sinter otherwise. The price is a residual grain-boundary glass that softens at high temperature and reduces creep and slow-crack-growth resistance, as in 96 % alumina and in silicon nitride above about 1200 °C. The dihedral angle and wetting behaviour set by interfacial energies (Chapter 6) decide whether the liquid penetrates the grain boundaries.
+Many ceramics (and cemented carbides, Chapter 46) are sintered with a small amount of liquid that wets the solid. The liquid speeds sintering in three overlapping stages: **rearrangement**, as capillary forces pull particles into closer packing; **solution–precipitation**, in which small particles and contact points dissolve in the liquid and the material reprecipitates on larger grains, flattening contacts and bringing grain centres together; and **solid-state skeleton** densification once the grains have formed a rigid network. Diffusion through a liquid is orders of magnitude faster than through a solid, so liquid-phase sintering works at lower temperatures and for materials such as Si₃N₄ and SiC that would hardly sinter otherwise. The price is a residual grain-boundary glass that softens at high temperature and reduces creep and slow-crack-growth resistance, as in 96 % alumina and in silicon nitride above about 1200 °C. The dihedral angle and wetting behaviour set by interfacial energies (Chapter 6) decide whether the liquid penetrates the grain boundaries.
 
 ### Pressure-assisted sintering
 
@@ -191,6 +195,10 @@ $$
 where $\sigma_0$ is the characteristic strength of the reference volume $V_0$ and $m$ is the **Weibull modulus**. A large $m$ means a narrow strength distribution: $m$ is 5–10 for traditional ceramics and glass as used, 10–20 for good technical ceramics, 20–30 for the best silicon nitride, and 30–100 for metals. Data are plotted as $\ln\ln[1/(1-P_f)]$ against $\ln\sigma$, which gives a straight line of slope $m$ (Figure 17.2). For non-uniform stress fields, such as a bend test, $V$ is replaced by an **effective volume** that weights each element by $(\sigma/\sigma_{\max})^m$; for a three-point bend bar it is only a few percent of the specimen volume.
 
 <!-- FIGURE 17.2 | figures/ch17/fig-17-2-weibull-plot.png | plot | Weibull plot of bend-strength data for two aluminas with Weibull moduli 10 and 20, and the predicted strength reduction for a component with 100 times the effective volume. | Content: x-axis ln(σ / MPa) spanning σ = 150–600 MPa (secondary top axis in MPa); y-axis ln ln(1/(1−Pf)) from −7 to 2, with secondary right axis Pf at 0.001, 0.01, 0.1, 0.5, 0.9, 0.99. Line A: m = 10, σ0 = 400 MPa (passes through ln ln = 0 at σ = 400). Line B: m = 20, σ0 = 400 MPa. ~25 scattered data points around each line. Dashed line parallel to A shifted to lower stress by factor 0.631 labelled "component, 100× effective volume". Mark worked-example points: Pf = 1e-4 (ln ln ≈ −9.2 — show with an arrow off-scale or extend y-axis to −10) at 159 MPa (test volume) and 100 MPa (component). -->
+
+![Figure 17.2 — Weibull plot of bend-strength data for two aluminas with Weibull moduli 10 and 20, and the predicted strength reduction for a component with 100 times the effective volume](../figures/ch17/fig-17-2-weibull-plot.png)
+
+*Figure 17.2 — Weibull plot of bend-strength data for two aluminas with Weibull moduli 10 and 20, and the predicted strength reduction for a component with 100 times the effective volume.*
 
 **Worked example — From test bars to a design stress.** Bend bars of an alumina have a characteristic strength $\sigma_0=400$ MPa (63.2 % failure probability) and $m=10$ for their effective volume. What stress gives a failure probability of $10^{-4}$, first for a part with the same effective volume and then for a part with 100 times the effective volume?
 
@@ -243,6 +251,10 @@ A **glass** is an amorphous solid that shows a glass transition. Any liquid can 
 
 <!-- FIGURE 17.3 | figures/ch17/fig-17-3-volume-temperature.png | plot | Specific volume versus temperature for a glass-forming liquid, showing crystallization at Tm and the glass transition for slow and fast cooling. | Content: x-axis temperature (schematic, labelled Tg,slow, Tg,fast, Tm), y-axis specific volume (arbitrary). Liquid line from top right sloping down; at Tm a vertical drop to the crystal line (lower slope) labelled "crystallization". Supercooled liquid continues past Tm; a fast-cooled glass leaves it at Tg,fast (higher), a slow-cooled glass at Tg,slow (lower); both glass lines parallel to the crystal line. Label fictive temperatures Tf at the intersections of the glass lines extrapolated to the liquid line. Shade the region between Tm and Tg labelled "supercooled liquid". Inset: TTT curve with nose, critical cooling rate tangent line Rc; labels "SiO2: Rc ~ 1e-4 K/s", "soda-lime: ~1e-2 K/s", "metallic glass: 1e2–1e6 K/s". -->
 
+![Figure 17.3 — Specific volume versus temperature for a glass-forming liquid, showing crystallization at Tm and the glass transition for slow and fast cooling](../figures/ch17/fig-17-3-volume-temperature.png)
+
+*Figure 17.3 — Specific volume versus temperature for a glass-forming liquid, showing crystallization at Tm and the glass transition for slow and fast cooling.*
+
 The kinetic criterion is quantified by a time–temperature–transformation curve for crystallization (Chapter 9). The **critical cooling rate** that just misses its nose is of order $10^{-4}$ K/s for silica, so silica glass forms even in massive bodies, $10^{-2}$–$10^{-1}$ K/s for common silicate glasses, and $10^2$–$10^6$ K/s for metallic glasses (Chapter 9). A liquid forms a glass easily when its viscosity at the melting point is high (silica: about $10^{5}$–$10^{6}$ Pa s at 1723 °C, against $10^{-3}$ Pa s for water or liquid metals), when crystallization requires large rearrangements of a connected network, and when the composition is near a deep eutectic, where the liquid is stable to low temperature.
 
 > **Status of the principle: Kinetic criterion for glass formation**
@@ -264,6 +276,10 @@ SiO₂ (SiO₄ tetrahedra), GeO₂, B₂O₃ (BO₃ triangles) and P₂O₅ sati
 
 <!-- FIGURE 17.4 | figures/ch17/fig-17-4-zachariasen-network.png | schematic | Two-dimensional representations of crystalline silica, silica glass (continuous random network) and a sodium silicate glass with non-bridging oxygens. | Content: three panels using the classic 2D analogue with triangles (A2O3-type) for clarity. (a) Crystal: ordered hexagonal rings of corner-sharing triangles. (b) Glass: same triangles, same bond lengths, but rings of 5, 6, 7, 8 members, no periodicity. (c) Modified glass: network broken at several points, non-bridging oxygens (filled small circles, labelled NBO) facing Na+ ions (large open circles labelled Na+) located in holes of the network. Legend: small black dot = network cation (Si/B), open small circle = bridging oxygen, filled = non-bridging oxygen. -->
 
+![Figure 17.4 — Two-dimensional representations of crystalline silica, silica glass (continuous random network) and a sodium silicate glass with non-bridging oxygens](../figures/ch17/fig-17-4-zachariasen-network.png)
+
+*Figure 17.4 — Two-dimensional representations of crystalline silica, silica glass (continuous random network) and a sodium silicate glass with non-bridging oxygens.*
+
 ### Network formers, modifiers and intermediates
 
 Pure silica glass is difficult to make: it must be melted above 2000 °C. Adding alkali and alkaline-earth oxides, the **network modifiers**, breaks Si–O–Si bridges. Each Na₂O contributes an oxygen that converts one bridging oxygen into two **non-bridging oxygens** (NBOs), each charge-balanced by a nearby Na⁺:
@@ -282,7 +298,7 @@ The network is depolymerized: viscosity falls by orders of magnitude, the meltin
 | Alkali aluminosilicate | ~60 SiO₂, 15–20 Al₂O₃, 12–14 Na₂O, 3–5 MgO, K₂O | Open network for fast ion exchange | Phone and display cover glass (chemically strengthened) |
 | E-glass | 54 SiO₂, 14 Al₂O₃, 22 CaO+MgO, 7–10 B₂O₃, < 1 alkali | Low alkali, good electrical insulation | Reinforcing fibres (Chapter 22), circuit-board laminates |
 | Lead crystal | 55–65 SiO₂, ≥ 24 PbO, K₂O | Refractive index ~1.55–1.57, high dispersion | Tableware, decorative and radiation-shielding glass |
-| Non-oxide glasses | Chalcogenides (As–Se, Ge–Sb–Te), fluorides (ZrF₄–BaF₂), metallic glasses | Infrared transparency; phase-change memory; high strength | IR optics, rewritable memory (Chapter 26), springs and casings (Chapter 9) |
+| Non-oxide glasses | Chalcogenides (As–Se, Ge–Sb–Te), fluorides (ZrF₄–BaF₂), metallic glasses | Infrared transparency; phase-change memory; high strength | IR optics, rewritable memory, springs and casings (Chapter 9) |
 
 Boron is an unusual former: alkali first converts BO₃ triangles into BO₄⁻ tetrahedra, strengthening the network, and only beyond a certain alkali/boron ratio creates NBOs (the **boron anomaly**), one reason for the low expansion and durability of borosilicates.
 
@@ -317,6 +333,10 @@ where $A$, $B$ and $T_0$ are fitted constants. For a typical soda-lime glass, wi
 
 <!-- FIGURE 17.5 | figures/ch17/fig-17-5-glass-viscosity.png | plot | Viscosity versus temperature for soda-lime, borosilicate and fused silica glasses with the reference points and forming, annealing and tempering windows. | Content: x-axis temperature 400–1800 °C; y-axis log10 viscosity (Pa s) 0–18. Soda-lime: VFT curve log10 η = −4.57 + 6370/(T − 160), passing through strain 511 °C (13.5), annealing 548 °C (12), softening 726 °C (6.6), working 1005 °C (3). Borosilicate: curve through strain 510, annealing 560, softening 821, working 1252 °C. Fused silica: near-Arrhenius curve through strain ~1000 °C, annealing ~1100 °C, softening ~1600 °C. Horizontal dashed lines at log η = 13.5, 12, 6.6, 3 labelled strain, annealing, softening, working points. Shade bands: "forming (pressing, blowing, float)" between 3 and 6.6; "annealing range" between 12 and 13.5; mark "tempering quench start ~620–650 °C" on the soda-lime curve; mark the worked-example points 500 °C (14.2) and 450 °C (17.4). -->
 
+![Figure 17.5 — Viscosity versus temperature for soda-lime, borosilicate and fused silica glasses with the reference points and forming, annealing and tempering windows](../figures/ch17/fig-17-5-glass-viscosity.png)
+
+*Figure 17.5 — Viscosity versus temperature for soda-lime, borosilicate and fused silica glasses with the reference points and forming, annealing and tempering windows.*
+
 ### Annealing
 
 A formed article cools unevenly, freezing in **residual stresses** that can crack it spontaneously when cut or scratched. **Annealing** removes them: the article is held at the annealing point, where stresses relax by viscous flow, then cooled slowly through the strain point, and faster afterwards.
@@ -332,6 +352,10 @@ Glass fails from surface flaws in tension, so a surface in permanent compression
 Thin glass cannot be thermally tempered, because the temperature difference between surface and centre during a quench is too small. **Chemical strengthening** by ion exchange works for any thickness. The glass is immersed in molten KNO₃ at 380–450 °C for hours; Na⁺ ions in the surface exchange with K⁺ ions from the salt, and because the glass is too cold for the network to relax, the larger K⁺ ions are "stuffed" into sites sized for Na⁺, creating a compressive stress of 600–900 MPa in a layer 10–100 μm deep (the depth of layer, DOL). Alkali aluminosilicate glasses are designed for this process: aluminium opens the network and speeds interdiffusion (Chapter 8). The compression is balanced by a small central tension; for a triangular compressive profile with surface stress CS and depth DOL in a sheet of thickness $t$, force balance gives a central tension of approximately $\mathrm{CS}\cdot\mathrm{DOL}/(t-2\,\mathrm{DOL})$, or about 45 MPa for CS = 700 MPa, DOL = 40 μm and $t=0.7$ mm. The central tension must be kept below a frangibility limit, or the glass shatters violently when penetrated.
 
 <!-- FIGURE 17.6 | figures/ch17/fig-17-6-residual-stress-profiles.png | plot | Residual stress through the thickness of a thermally tempered soda-lime sheet and a chemically strengthened aluminosilicate cover glass. | Content: two panels. (a) Thermally tempered 6 mm sheet: x-axis position z/t from 0 to 1, y-axis stress −120 to +60 MPa (compression negative); parabola with −100 MPa at both surfaces, +50 MPa at mid-plane, zero crossings at z/t = 0.211 and 0.789. (b) Chemically strengthened 0.7 mm cover glass: x-axis depth from surface 0–700 μm, y-axis stress −750 to +100 MPa; linear (triangular) profile from −700 MPa at surface to 0 at 40 μm on each side, constant central tension +45 MPa between. Dashed horizontal line at 0. Annotate a 20 μm surface flaw on each panel with arrows: "flaw inside compressive layer". -->
+
+![Figure 17.6 — Residual stress through the thickness of a thermally tempered soda-lime sheet and a chemically strengthened aluminosilicate cover glass](../figures/ch17/fig-17-6-residual-stress-profiles.png)
+
+*Figure 17.6 — Residual stress through the thickness of a thermally tempered soda-lime sheet and a chemically strengthened aluminosilicate cover glass.*
 
 **Worked example — How much does strengthening help against a scratch?** A cover glass has a surface flaw 20 μm deep. With $K_{IC}=0.75$ MPa m$^{1/2}$ and $Y=1.12$, the annealed glass fails at
 
@@ -357,7 +381,7 @@ If the flaw lies within a thermally tempered layer with about 100 MPa of surface
 | MgO–Al₂O₃–SiO₂ (MAS) | Cordierite | Low dielectric loss, low CTE, high strength | Missile radomes |
 | Li₂O–SiO₂ | Lithium disilicate, interlocking needles | Flexural strength 360–500 MPa, $K_{IC}$ ~2.5–3 MPa m$^{1/2}$, tooth-like translucency | Dental crowns and bridges |
 | K₂O–MgO–Al₂O₃–SiO₂–F | Fluorophlogopite mica plates | Machinable with ordinary tools | Machinable insulators and fixtures |
-| CaO–P₂O₅–SiO₂ | Apatite, wollastonite | Bonds to bone | Bone substitutes (Chapter 31) |
+| CaO–P₂O₅–SiO₂ | Apatite, wollastonite | Bonds to bone | Bone substitutes (Chapter 39) |
 
 The near-zero expansion of LAS glass-ceramics is a structural trick. The β-quartz and β-eucryptite crystals have a *negative* expansion coefficient along their $c$ axis, and the composite of crystals with negative expansion and residual glass with positive expansion can be tuned to zero over a wide temperature range. A cooktop can then be heated locally to 700 °C while the edge stays cold without cracking; a telescope mirror does not change shape as night falls.
 
@@ -398,22 +422,22 @@ The temperature at the interface is $1400-q\,L_1/k_1=1400-2185\times0.153=1065$ 
 
 ## 17.9 Functional ceramics
 
-Much of the economic value of ceramics lies not in their mechanical properties but in their electrical, magnetic, optical and electrochemical functions, which depend on point defects, domain structures and band gaps rather than on flaws. They are treated in Part VI (Chapters 24–28) and in Chapter 32; the table below is a map. Their processing is the powder processing of Section 17.3, often with extreme control of particle size, dopant distribution and layer thickness.
+Much of the economic value of ceramics lies not in their mechanical properties but in their electrical, magnetic, optical and electrochemical functions, which depend on point defects, domain structures and band gaps rather than on flaws. They are treated in Parts VI and VII (Chapters 24–36) and in Chapter 40; the table below is a map. Their processing is the powder processing of Section 17.3, often with extreme control of particle size, dopant distribution and layer thickness.
 
 | Functional ceramic | Function | Key material | Where it is treated |
 |---|---|---|---|
-| Multilayer ceramic capacitors | High permittivity, ferroelectric | BaTiO₃ with dopants, layers ~0.5–1 μm | Chapter 25 |
-| Piezoelectric actuators, sensors, ultrasound | Piezoelectricity | Pb(Zr,Ti)O₃ (PZT), lead-free (K,Na)NbO₃ | Chapters 25 and 29 |
-| Soft and hard ferrites | Ferrimagnetism | MnZn, NiZn ferrites; BaFe₁₂O₁₉, SrFe₁₂O₁₉ | Chapter 27 |
-| Oxygen sensors, SOFC electrolytes | Oxygen-ion conduction | Y- or Sc-stabilized ZrO₂, Gd-doped CeO₂ | Chapters 25 and 32 |
-| Solid-state battery electrolytes | Li-ion conduction | Li₇La₃Zr₂O₁₂ (LLZO), sulfide glasses | Chapter 32 |
+| Multilayer ceramic capacitors | High permittivity, ferroelectric | BaTiO₃ with dopants, layers ~0.5–1 μm | Chapters 26 and 27 |
+| Piezoelectric actuators, sensors, ultrasound | Piezoelectricity | Pb(Zr,Ti)O₃ (PZT), lead-free (K,Na)NbO₃ | Chapters 27 and 37 |
+| Soft and hard ferrites | Ferrimagnetism | MnZn, NiZn ferrites; BaFe₁₂O₁₉, SrFe₁₂O₁₉ | Chapter 29 |
+| Oxygen sensors, SOFC electrolytes | Oxygen-ion conduction | Y- or Sc-stabilized ZrO₂, Gd-doped CeO₂ | Chapters 25 and 40 |
+| Solid-state battery electrolytes | Li-ion conduction | Li₇La₃Zr₂O₁₂ (LLZO), sulfide glasses | Chapter 40 |
 | Varistors and thermistors | Grain-boundary barriers; semiconducting oxides | ZnO–Bi₂O₃; Mn–Ni–Co spinels (NTC); doped BaTiO₃ (PTC) | Chapter 25 |
-| Transparent conductors | Degenerate semiconduction | Sn-doped In₂O₃ (ITO), Al-doped ZnO | Chapters 26 and 28 |
+| Transparent conductors | Degenerate semiconduction | Sn-doped In₂O₃ (ITO), Al-doped ZnO | Chapters 32 and 36 |
 | Substrates and heat spreaders | Insulation with high thermal conductivity | Al₂O₃, AlN, Si₃N₄ | Chapter 24 |
-| Phosphors, laser hosts, transparent armour | Luminescence; transparency | Ce:YAG, Nd:YAG, spinel, AlON | Chapter 28 |
-| Thermal barrier coatings | Low thermal conductivity | 7YSZ, rare-earth zirconates | Chapters 16, 24 and 33 |
+| Phosphors, laser hosts, transparent armour | Luminescence; transparency | Ce:YAG, Nd:YAG, spinel, AlON | Chapter 36 |
+| Thermal barrier coatings | Low thermal conductivity | 7YSZ, rare-earth zirconates | Chapters 16, 24 and 41 |
 
-> **Boundary.** The EEE-specific treatment of dielectric, piezoelectric, magnetic and substrate ceramics, including capacitor and package design, lives in the *Materials Core (EEE)* book.
+> **Boundary.** The EEE-specific treatment of dielectric, piezoelectric, magnetic and substrate ceramics, including capacitor and package design, lives in Chapters 26, 27, 29 and 51.
 
 ---
 
@@ -427,10 +451,10 @@ Much of the economic value of ceramics lies not in their mechanical properties b
 | How is cement, the largest-volume ceramic, made and how does it harden? | Chapter 18 |
 | How do glass fibres and ceramic matrices behave in composites? | Chapters 22–23 |
 | How do thermal conductivity and thermal stress set the performance of TBCs, substrates and refractories? | Chapter 24 |
-| How do dielectric, piezoelectric, magnetic, ionic and optical ceramics work? | Chapters 25–28 and 32 |
-| Which ceramics and bioactive glasses are used in the body? | Chapter 31 |
-| How do ceramics and CMCs behave in turbines, re-entry vehicles and reactors? | Chapter 33 |
-| How are ceramics shaped by additive manufacturing and deposited as coatings? | Chapters 40–41 |
-| How are ceramic microstructures and residual stresses characterized? | Chapters 42–43 |
+| How do dielectric, piezoelectric, magnetic, ionic and optical ceramics work? | Chapters 25–36 and 40 |
+| Which ceramics and bioactive glasses are used in the body? | Chapter 39 |
+| How do ceramics and CMCs behave in turbines, re-entry vehicles and reactors? | Chapter 41 |
+| How are ceramics shaped by additive manufacturing and deposited as coatings? | Chapters 48–49 |
+| How are ceramic microstructures and residual stresses characterized? | Chapters 52–53 |
 
 **Next:** Chapter 18 turns to the materials used in the greatest tonnage of all: Portland cement and concrete, structural steel, timber, asphalt and masonry, and to the question of how a civilization can keep building with them while cutting their carbon footprint.
