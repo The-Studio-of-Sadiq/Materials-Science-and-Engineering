@@ -1,0 +1,22 @@
+{
+  "name": "materials-science-and-engineering",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Materials Science and Engineering: the whole discipline - book sources, figures and PDF builder",
+  "type": "module",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "pdf": "node scripts/build-pdf.mjs",
+    "figures": "python scripts/build-figures.py",
+    "figures:plan": "node scripts/figure-plan.mjs"
+  },
+  "dependencies": {
+    "katex": "^0.19.0",
+    "markdown-it": "^15.0.3",
+    "markdown-it-texmath": "^1.0.0",
+    "puppeteer-core": "^25.15.0"
+  }
+}
